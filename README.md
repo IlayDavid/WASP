@@ -8,5 +8,5 @@ Diagrams:
 
 
 Recommended reading:
-1) git
-	- https://jwiegley.github.io/git-from-the-bottom-up/
+1) git:
+- https://jwiegley.github.io/git-from-the-bottom-up/
