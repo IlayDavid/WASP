@@ -21,12 +21,19 @@ namespace WASP
 
         public static SuperUser CreateSuperUser()
         {
-            if (_initialized)
+            if (!_initialized)
             {
                 _initialized = true;
                 return new SuperUser();
             }
             throw new Exception("Attempted to initialize a second SuperUser");
+        }
+        /// <summary>
+        /// DO NOT USE! USED FOR TEST SUITS ONLY!
+        /// </summary>
+        public static void clear()
+        {
+            _initialized = false;
         }
     }
 }

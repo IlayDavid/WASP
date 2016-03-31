@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClasses\DataBaseManager.cs" />
     <Compile Include="DataClasses\Message.cs" />
     <Compile Include="DataClasses\Post.cs" />
+    <Compile Include="DataClasses\SuperUser.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerAPI.cs" />
     <Compile Include="Program.cs" />
@@ -52,6 +55,7 @@
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\Thread.cs" />
     <Compile Include="DataClasses\User.cs" />
+    <Compile Include="TestSuits\InitializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

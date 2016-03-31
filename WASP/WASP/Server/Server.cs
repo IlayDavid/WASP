@@ -4,7 +4,7 @@ namespace WASP.Server
 {
     class Server : ServerAPI
     {
-        public bool Initialized { private set; get; }
+        private bool _initialized=false;
         public string addModerator(User user, User moderator, Subforum sf, DateTime term)
         {
             throw new NotImplementedException();
@@ -32,14 +32,14 @@ namespace WASP.Server
 
         public string initialize()
         {
-            if (Initialized)
+            if (!_initialized)
             {
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
                 var superUser = SuperUser.CreateSuperUser();
                 superUser.Password = SUPERPASSWORD;
                 superUser.Username = SUPERUSERNAME;
-                Initialized = true;
+                _initialized = true;
                 return "system initialized";
             }
             return "already initialized. action failed.";

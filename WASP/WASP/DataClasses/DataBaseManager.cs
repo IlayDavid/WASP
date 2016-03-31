@@ -32,5 +32,13 @@ namespace WASP.DataClasses
         {
             return _users.First((x) => x.Password.Equals(password) && x.Username.Equals(username));
         }
+
+        /// <summary>
+        /// DO NOT USE! USED FOR TEST SUITS ONLY!
+        /// </summary>
+        public void clear()
+        {
+            _users.Clear();
+        }
     }
 }
