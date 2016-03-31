@@ -1,1 +1,3 @@
 c:\users\rel\documents\visual studio 2015\Projects\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache

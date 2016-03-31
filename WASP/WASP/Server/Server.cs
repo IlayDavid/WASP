@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WASP.Server
 {
     class Server : ServerAPI
     {
+        public bool Initialized { private set; get; }
         public string addModerator(User user, User moderator, Subforum sf, DateTime term)
         {
             throw new NotImplementedException();
@@ -35,7 +32,17 @@ namespace WASP.Server
 
         public string initialize()
         {
-            throw new NotImplementedException();
+            if (Initialized)
+            {
+                const string SUPERUSERNAME = "admin";
+                const string SUPERPASSWORD = "wasp1234Sting";
+                var superUser = SuperUser.CreateSuperUser();
+                superUser.Password = SUPERPASSWORD;
+                superUser.Username = SUPERUSERNAME;
+                Initialized = true;
+                return "system initialized";
+            }
+            return "already initialized. action failed.";
         }
 
         public string login(string password, string username)
