@@ -1,13 +1,16 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WASP.DataClasses;
 
 namespace WASP.Server
 {
     class Server : ServerAPI
     {
+        public bool Initialized { private set; get; }
         public string addModerator(User user, User moderator, Subforum sf, DateTime term)
         {
             throw new NotImplementedException();
@@ -35,7 +38,13 @@ namespace WASP.Server
 
         public string initialize()
         {
-            throw new NotImplementedException();
+            const string SUPERUSERNAME = "admin";
+            const string SUPERPASSWORD = "wasp1234Sting";
+            var superUser = SuperUser.CreateSuperUser();
+            superUser.Password = SUPERPASSWORD;
+            superUser.Username = SUPERUSERNAME;
+            Initialized = true;
+            return "success?";
         }
 
         public string login(string password, string username)
