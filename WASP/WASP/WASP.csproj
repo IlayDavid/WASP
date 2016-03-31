@@ -48,6 +48,9 @@
     <Compile Include="DataClasses\Message.cs" />
     <Compile Include="DataClasses\Post.cs" />
     <Compile Include="DataClasses\SuperUser.cs" />
+    <Compile Include="DataClasses\Forum.cs" />
+    <Compile Include="Domain\BL.cs" />
+    <Compile Include="Domain\IBL.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerAPI.cs" />
     <Compile Include="Program.cs" />
