@@ -1,37 +1,73 @@
 ﻿using System;
+using WASP.Domain;
 
 namespace WASP.Server
 {
     class Server : ServerAPI
     {
         private bool _initialized=false;
-        public string addModerator(User user, User moderator, Subforum sf, DateTime term)
+        private IBL bl = new BL();
+
+        public string addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-            throw new NotImplementedException();
+            return bl.addModerator(user_ID, moderator_ID, sf_ID, term);  
         }
 
-        public string confirmEmail(User user)
+        public string confirmEmail(int user_ID)
         {
-            throw new NotImplementedException();
+            return bl.confirmEmail(user_ID);
+        }
+        
+        public string createForum(int user_ID, Forum forum)
+        {
+            return bl.createForum(forum);
+            return "";
         }
 
-        public string createForum(User user, Forum forum)
+        public string createPost(int user_ID, int thread_ID, Post post)
         {
-            throw new NotImplementedException();
+            return bl.createPost( user_ID,  thread_ID,  post);
+            return "";
         }
 
-        public string createPost(User user, Subforum sf, Thread thread, Post post)
+        public string createSubForum(int user_ID, Subforum sf)
         {
-            throw new NotImplementedException();
+            return bl.createSubForum( user_ID,  sf);
         }
 
-        public string createSubForum(User user, Subforum sf)
+        public string createThread(int user_ID, int sf_ID, Thread thread)
         {
-            throw new NotImplementedException();
+            return bl.createThread( user_ID,  sf_ID,  thread);
+        }
+
+        public string defineForumPolicy(int user_ID, Forum forum)
+        {
+            return bl.defineForumPolicy( user_ID,  forum);
+        }
+
+        public string deletePost(int user_ID, int thread_ID, Post post)
+        {
+            return bl.deletePost( user_ID,  thread_ID,  post);
+        }
+
+        public string getForum(int user_ID, int forum_ID)
+        {
+            return bl.getForum( user_ID,  forum_ID);
+        }
+
+        public string getSubForum(int user_ID, int sf_ID)
+        {
+            return bl.getSubForum( user_ID,  sf_ID);
+        }
+
+        public string getThread(int user_ID, int thread_ID)
+        {
+            return bl.getThread( user_ID,  thread_ID);
         }
 
         public string initialize()
         {
+            return bl.initialize();
             if (!_initialized)
             {
                 const string SUPERUSERNAME = "admin";
@@ -47,22 +83,42 @@ namespace WASP.Server
 
         public string login(string password, string username)
         {
-            throw new NotImplementedException();
+            return login( password,  username);
+        }
+
+        public string sendMessage(int user_ID, Message message)
+        {
+            return sendMessage( user_ID,  message);
         }
 
         public string sendMessage(User user, Message message)
         {
-            throw new NotImplementedException();
+            return sendMessage( user,  message);
+        }
+
+        public string subscribeToForum(User user, int forum_ID)
+        {
+            return subscribeToForum( user,  forum_ID);
         }
 
         public string subscribeToForum(User user, Forum forum)
         {
-            throw new NotImplementedException();
+            return subscribeToForum( user,  forum);
+        }
+
+        public string updateForum(int user_ID, Forum forum)
+        {
+            return updateForum( user_ID,  forum);
         }
 
         public string updateForum(User user, Forum forum)
         {
-            throw new NotImplementedException();
+            return updateForum( user,  forum);
+        }
+
+        public string updateModeratorTerm(int user_ID, User moderator, int sf_ID, DateTime term)
+        {
+            return updateModeratorTerm( user_ID,  moderator,  sf_ID,  term);
         }
     }
 }
