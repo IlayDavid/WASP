@@ -1,6 +1,84 @@
-﻿namespace WASP
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+namespace WASP
 {
     public class Subforum
     {
+        private int id;
+        private String name, description;
+        private Dictionary<int, Tuple<User,DateTime> > moderators;
+        private Dictionary<int, Post> threads;
+
+
+
+        public Subforum (int id, String name,String description)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public Boolean IsModerator (int id)
+        {
+            return moderators.ContainsKey(id);
+        }
+
+        public void AddModerator(User mod,DateTime expr)
+        {
+            Tuple<User, DateTime> tup = new Tuple<User, DateTime>(mod, expr);
+            
+            moderators.Add(mod.Id, tup);
+        }
+      
+        public void AddThread (Post tr)
+        {
+            threads.Add(tr.Id, tr);
+        }
+ 
+       public void RemoveModerator(int id)
+        {
+            moderators.Remove(id);
+        }
+       public void RemoveThread(int id)
+        {
+            threads.Remove(id);
+        }
+
     }
 }
