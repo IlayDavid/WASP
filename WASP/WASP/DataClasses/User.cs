@@ -9,32 +9,73 @@ namespace WASP
 {
     public class User
     {
+        private bool isSuperMan;
+        private String name;
+        private String userName;
+        private String email;
+        private String pass;
 
-        public User()
+        public User(bool isSuperMan, String name, String userName, String email, String pass)
         {
-            DataBaseManager.Instance.AddUser(this);
-        }
-        private Dictionary<Forum, Clearance> _clearances=new Dictionary<Forum, Clearance>();
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public void SetClearance(Forum forum, Clearance clearance)
-        {
-            _clearances[forum] = clearance;
-        }
-
-        public virtual Clearance GetClearance(Forum forum)
-        {
-            return _clearances[forum];
+            this.isSuperMan = isSuperMan;
+            this.name = name;
+            this.userName = userName;
+            this.email = email;
+            this.pass = pass;
         }
 
-        internal void sendMessage(Message message)
+        public String Name
         {
-            throw new NotImplementedException();
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                Name = value;
+            }
         }
-    }
 
-    public enum Clearance
-    {
-        Guest, Normal, Moderator, Administrator, Superuser
+        public String UserName
+        {
+            get
+            {
+                return userName;
+            }
+            set
+            {
+                userName = value;
+            }
+        }
+        public String Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+            }
+        }
+        public bool IsSuperMan
+        {
+            get
+            {
+                return isSuperMan;
+            }
+        }
+
+        public String Password
+        {
+            get
+            {
+                return pass;
+            }
+            set
+            {
+                pass = value;
+            }
+        }
     }
 }
