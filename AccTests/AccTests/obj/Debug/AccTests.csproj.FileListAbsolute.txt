@@ -1,0 +1,9 @@
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\obj\Debug\AccTests.csprojResolveAssemblyReference.cache
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\AccTests.dll
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\AccTests.pdb
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\nunit.framework.dll
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\nunit.framework.xml
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\obj\Debug\AccTests.dll
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\obj\Debug\AccTests.pdb
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\AccTests.dll.CodeAnalysisLog.xml
+D:\תוכנות של האוניברסיטה\WASP\AccTests\AccTests\bin\Debug\AccTests.dll.lastcodeanalysissucceeded
