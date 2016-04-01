@@ -8,5 +8,11 @@ namespace WASP
 {
     public class Message
     {
+        internal int to_ID;
+
+        internal bool isEmpty()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,7 +5,6 @@ namespace WASP.Server
 {
     class Server : ServerAPI
     {
-        private bool _initialized=false;
         private IBL bl = new BL();
 
         public string addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
@@ -21,13 +20,11 @@ namespace WASP.Server
         public string createForum(int user_ID, Forum forum)
         {
             return bl.createForum(forum);
-            return "";
         }
 
         public string createPost(int user_ID, int thread_ID, Post post)
         {
             return bl.createPost( user_ID,  thread_ID,  post);
-            return "";
         }
 
         public string createSubForum(int user_ID, Subforum sf)
@@ -45,7 +42,7 @@ namespace WASP.Server
             return bl.defineForumPolicy( user_ID,  forum);
         }
 
-        public string deletePost(int user_ID, int thread_ID, Post post)
+        public string deletePost(int user_ID, int thread_ID, int post)
         {
             return bl.deletePost( user_ID,  thread_ID,  post);
         }
@@ -68,17 +65,7 @@ namespace WASP.Server
         public string initialize()
         {
             return bl.initialize();
-            if (!_initialized)
-            {
-                const string SUPERUSERNAME = "admin";
-                const string SUPERPASSWORD = "wasp1234Sting";
-                var superUser = SuperUser.CreateSuperUser();
-                superUser.Password = SUPERPASSWORD;
-                superUser.Username = SUPERUSERNAME;
-                _initialized = true;
-                return "system initialized";
-            }
-            return "already initialized. action failed.";
+           
         }
 
         public string login(string password, string username)
@@ -88,37 +75,23 @@ namespace WASP.Server
 
         public string sendMessage(int user_ID, Message message)
         {
-            return sendMessage( user_ID,  message);
+            return bl.sendMessage( user_ID,  message);
         }
 
-        public string sendMessage(User user, Message message)
-        {
-            return sendMessage( user,  message);
-        }
 
         public string subscribeToForum(User user, int forum_ID)
         {
-            return subscribeToForum( user,  forum_ID);
-        }
-
-        public string subscribeToForum(User user, Forum forum)
-        {
-            return subscribeToForum( user,  forum);
+            return bl.subscribeToForum( user,  forum_ID);
         }
 
         public string updateForum(int user_ID, Forum forum)
         {
-            return updateForum( user_ID,  forum);
+            return bl.updateForum( user_ID,  forum);
         }
 
-        public string updateForum(User user, Forum forum)
+        public string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-            return updateForum( user,  forum);
-        }
-
-        public string updateModeratorTerm(int user_ID, User moderator, int sf_ID, DateTime term)
-        {
-            return updateModeratorTerm( user_ID,  moderator,  sf_ID,  term);
+            return bl.updateModeratorTerm( user_ID,  moderator_ID,  sf_ID,  term);
         }
     }
 }

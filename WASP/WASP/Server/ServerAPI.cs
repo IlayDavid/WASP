@@ -118,11 +118,11 @@ namespace WASP
 
         // Delete a post in a sub-forum.
         // Precondition: User must be logged in and a member of the forum.
-        string deletePost(int user_ID, int thread_ID, Post post);
+        string deletePost(int user_ID, int thread_ID, int post);
 
         // Update term of moderator
         // Precondition: User must be logged in and an admin of the forum the subforum resides in.
         // Update term of moderator in sub-forum.
-        string updateModeratorTerm(int user_ID, User moderator, int sf_ID, DateTime term);
+        string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term);
     }
 }

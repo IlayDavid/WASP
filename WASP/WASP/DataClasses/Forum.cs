@@ -11,7 +11,8 @@ namespace WASP
 
         public Forum()
         {
-
+            subforums = new Dictionary<int, Subforum>();
+            //TODO...
         }
 
 
@@ -31,6 +32,21 @@ namespace WASP
         }
 
         internal Thread findThread(int thread_ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void definePolicy(Forum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void subscribe(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void update(Forum forum)
         {
             throw new NotImplementedException();
         }

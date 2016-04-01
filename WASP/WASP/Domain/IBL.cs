@@ -15,10 +15,14 @@ namespace WASP.Domain
         string getThread(int user_ID, int thread_ID);
         string getSubForum(int user_ID, int sf_ID);
         string getForum(int user_ID, int forum_ID);
-        string deletePost(int user_ID, int thread_ID, Post post);
+        string deletePost(int user_ID, int thread_ID, int post);
         string defineForumPolicy(int user_ID, Forum forum);
         string createThread(int user_ID, int sf_ID, Thread thread);
         string createSubForum(int user_ID, Subforum sf);
         string initialize();
+        string sendMessage(int user_ID, Message message);
+        string subscribeToForum(User user, int forum_ID);
+        string updateForum(int user_ID, Forum forum);
+        string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term);
     }
 }

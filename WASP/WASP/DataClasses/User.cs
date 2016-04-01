@@ -26,6 +26,11 @@ namespace WASP
         {
             return _clearances[forum];
         }
+
+        internal void sendMessage(Message message)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum Clearance
