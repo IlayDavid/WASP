@@ -5,9 +5,10 @@ namespace WASP
 {
     public class Forum
     {
-        internal int id;
-        internal Dictionary<int, Subforum> subforums;
-
+        private int id;
+        private Dictionary<int, Subforum> subforums;
+        private Dictionary<int, User> members;
+        private Dictionary<int, User> admins;
 
         public Forum()
         {
@@ -18,17 +19,18 @@ namespace WASP
 
         internal Subforum getSubForum(int sf_ID)
         {
-            throw new NotImplementedException();
+            Subforum tempForum;
+            return subforums.TryGetValue(sf_ID,out tempForum) ? tempForum : null;
         }
 
         internal void addSubForum(Subforum sf)
         {
-            throw new NotImplementedException();
+            subforums.Add(sf.id, sf);
         }
 
-        internal bool isManager(int user_ID)
+        internal bool isAdmin (int user_ID)
         {
-            throw new NotImplementedException();
+            return admins.ContainsKey(user_ID);
         }
 
         internal Thread findThread(int thread_ID)
@@ -43,7 +45,7 @@ namespace WASP
 
         internal void subscribe(User user)
         {
-            throw new NotImplementedException();
+            members.Add(user.id, user);
         }
 
         internal void update(Forum forum)
