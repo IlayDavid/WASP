@@ -80,5 +80,30 @@ namespace WASP
             threads.Remove(id);
         }
 
+
+        public Post[] GetThreads()
+        {
+            Post[] tr = new Post[threads.Values.Count];
+            threads.Values.CopyTo(tr, 0);
+            return tr;
+        }
+        public Tuple<User, DateTime>[] GetModerators()
+        {
+            Tuple<User, DateTime>[] mods = new Tuple<User, DateTime>[moderators.Values.Count];
+            moderators.Values.CopyTo(mods, 0);
+            return mods;
+        }
+        public Post GetThread(int id)
+        {
+            Post theThread;
+            threads.TryGetValue(id, out theThread);
+            return theThread;
+        }
+        public Tuple<User, DateTime> GetModerator(int id)
+        {
+            Tuple<User, DateTime> mod;
+            moderators.TryGetValue(id,out mod);
+            return mod;
+        }
     }
 }
