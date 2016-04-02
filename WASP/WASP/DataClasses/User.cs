@@ -30,7 +30,7 @@ namespace WASP
             }
             else if (hasSuperman && isSuperMan)
             {
-                throw new Exception("attempted to create a new SuperUser");
+                throw new Exception("attempted to create a second SuperUser");
             }
             else
             {
