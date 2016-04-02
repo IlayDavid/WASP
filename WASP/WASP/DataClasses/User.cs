@@ -19,8 +19,9 @@ namespace WASP
         private Dictionary<int, Post> posts;
 
 
-        public User(bool isSuperMan, String name, String userName, String email, String pass)
+        public User(int id,bool isSuperMan, String name, String userName, String email, String pass)
         {
+            this.id = id;
             this.isSuperMan = isSuperMan;
             this.name = name;
             this.userName = userName;

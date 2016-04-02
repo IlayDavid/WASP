@@ -26,7 +26,12 @@ namespace WASP
             Subforum tempForum;
             return subforums.TryGetValue(sf_ID,out tempForum) ? tempForum : null;
         }
-
+        internal User GetMember(int id)
+        {
+            User theMember;
+            members.TryGetValue(id, out theMember);
+            return theMember;
+        }
 
         internal bool IsAdmin (int user_ID)
         {
@@ -117,17 +122,18 @@ namespace WASP
             subforums.Add(sf.Id, sf);
         }
 
-        public void RemoveAdmin (int admin_id)
+        public bool RemoveAdmin (int admin_id)
         {
-            admins.Remove(admin_id);
+           return admins.Remove(admin_id);
         }
-        public void RemoveMember(int member_id)
+        public bool RemoveMember(int member_id)
         {
-            members.Remove(member_id);
+
+           return members.Remove(member_id);
         }
-        public void RemoveSubForum(int sforum_id)
+        public bool RemoveSubForum(int sforum_id)
         {
-            subforums.Remove(sforum_id);
+           return subforums.Remove(sforum_id);
         }
 
 
