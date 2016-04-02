@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -7,91 +8,125 @@ namespace WASP.Server
     {
         private IBL bl = new BL();
 
-        public string addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
+
+        public int addModerator(string userId, string userId1, int sfId, DateTime term)
         {
-            return bl.addModerator(user_ID, moderator_ID, sf_ID, term);  
+            bl.addModerator(userId, userId1, sfId, term);
         }
 
-        public string confirmEmail(int user_ID)
+
+
+        public int deletePost(string userName, int threadId, int postId)
         {
-            return bl.confirmEmail(user_ID);
+            return bl.deletePost(userName, threadId, postId);
+        }
+
+        public int login(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getAdmins(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getMembers(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Subforum> getSubforums(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+        public void confirmEmail(int userId)
+        {
+            bl.confirmEmail(userId);
         }
         
-        public string createForum(int user_ID, Forum forum)
+
+        public void updateForum(int userId, int forumId)
+        {
+            return bl.updateForum(userId, forumId);
+        }
+
+        public void defineForumPolicy(int userId, Forum forum)
+        {
+            return bl.defineForumPolicy(userId, forum);
+        }
+
+
+
+        public Thread getThread(int userId, int threadId)
+        {
+            return bl.getThread(userId, threadId);
+        }
+
+        public Forum getForum(int userId, int forumId)
+        {
+            return bl.getForum(userId, forumId);
+        }
+
+        public Subforum getSubforum(int userId, int subforumId)
+        {
+            return bl.getSubForum(userId, subforumId);
+        }
+
+        public int createThread(string userName, int subforumId, Thread thread)
+        {
+            return bl.createThread(userName, subforumId, thread);
+        }
+
+        public int createForum(string userName, Forum forum)
         {
             return bl.createForum(forum);
         }
 
-        public string createPost(int user_ID, int thread_ID, Post post)
+        public List<User> getModerators(int subforumId)
         {
-            return bl.createPost( user_ID,  thread_ID,  post);
+            throw new NotImplementedException();
         }
 
-        public string createSubForum(int user_ID, Subforum sf)
+        public DateTime getModeratorTermTime(string userName, int subforumId)
         {
-            return bl.createSubForum( user_ID,  sf);
+            throw new NotImplementedException();
         }
 
-        public string createThread(int user_ID, int sf_ID, Thread thread)
+        public int createSubForum(string userName, int forumId, Subforum sf)
         {
-            return bl.createThread( user_ID,  sf_ID,  thread);
+            return bl.createSubForum(userName, sf);
         }
 
-        public string defineForumPolicy(int user_ID, Forum forum)
+        public List<Forum> getAllForums()
         {
-            return bl.defineForumPolicy( user_ID,  forum);
+            throw new NotImplementedException();
         }
 
-        public string deletePost(int user_ID, int thread_ID, int post)
+        public int createPost(string userName, int threadId, Post post)
         {
-            return bl.deletePost( user_ID,  thread_ID,  post);
+            return bl.createPost(userName, threadId, post);
         }
 
-        public string getForum(int user_ID, int forum_ID)
+        public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
         {
-            return bl.getForum( user_ID,  forum_ID);
+            return bl.updateModeratorTerm(userName1, userName2, sfId, term);
         }
 
-        public string getSubForum(int user_ID, int sf_ID)
-        {
-            return bl.getSubForum( user_ID,  sf_ID);
-        }
-
-        public string getThread(int user_ID, int thread_ID)
-        {
-            return bl.getThread( user_ID,  thread_ID);
-        }
-
-        public string initialize()
+        public User initialize()
         {
             return bl.initialize();
-           
         }
-
-        public string login(string password, string username)
-        {
-            return login( password,  username);
-        }
-
-        public string sendMessage(int user_ID, Message message)
-        {
-            return bl.sendMessage( user_ID,  message);
-        }
-
 
         public string subscribeToForum(User user, int forum_ID)
         {
             return bl.subscribeToForum( user,  forum_ID);
         }
 
-        public string updateForum(int user_ID, Forum forum)
+        public void sendMessage(string userSend, string userAcc, Message message)
         {
-            return bl.updateForum( user_ID,  forum);
+            return bl.sendMessage(userSend, message);
         }
 
-        public string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term)
-        {
-            return bl.updateModeratorTerm( user_ID,  moderator_ID,  sf_ID,  term);
-        }
     }
 }
