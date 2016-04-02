@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ namespace WASP
         private String userName;
         private String email;
         private String pass;
+        private int id;
+        private Dictionary<int, Post> posts;
+
 
         public User(bool isSuperMan, String name, String userName, String email, String pass)
         {
@@ -33,6 +37,17 @@ namespace WASP
             set
             {
                 Name = value;
+            }
+        }
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
             }
         }
 
@@ -77,5 +92,29 @@ namespace WASP
                 pass = value;
             }
         }
+
+        public Post[] GetAllPosts()
+        {
+            Post[] postArr = new Post[posts.Values.Count];
+            posts.Values.CopyTo(postArr, 0);
+            return postArr;
+        }
+
+        public Post GetPost(int post_ID)
+        {
+            Post thePost;
+            posts.TryGetValue(post_ID, out thePost);
+            return thePost;
+        }
+        public void DeletePost (int post_ID)
+        {
+            posts.Remove(post_ID);
+        }
+        public void AddPost (Post post)
+        {
+            posts.Add(post.Id, post);
+        }
+
+
     }
 }
