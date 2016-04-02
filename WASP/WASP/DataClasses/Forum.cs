@@ -42,6 +42,11 @@ namespace WASP
         {
             return members.ContainsKey(user_ID);
         }
+        internal bool IsSubForum(int forum_ID)
+        {
+            return subforums.ContainsKey(forum_ID);
+        }
+
 
         internal Thread FindThread(int thread_ID)
         {
@@ -107,6 +112,14 @@ namespace WASP
             members.Values.CopyTo(adminsArr, 0);
             return adminsArr;
         }
+
+        public Subforum[] GetSubForum()
+        {
+            Subforum[] sf = new Subforum[subforums.Values.Count];
+            subforums.Values.CopyTo(sf, 0);
+            return sf;
+        }
+
 
         public void AddAdmin (User admin)
         {
