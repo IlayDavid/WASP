@@ -10,6 +10,7 @@ namespace WASP
 {
     public class User
     {
+        private static bool hasSuperman = false;
         private bool isSuperMan;
         private String name;
         private String userName;
@@ -22,7 +23,19 @@ namespace WASP
         public User(int id,bool isSuperMan, String name, String userName, String email, String pass)
         {
             this.id = id;
-            this.isSuperMan = isSuperMan;
+            if (!hasSuperman && isSuperMan)
+            {
+                this.isSuperMan = true;
+                hasSuperman = true;
+            }
+            else if (hasSuperman && isSuperMan)
+            {
+                throw new Exception("attempted to create a new SuperUser");
+            }
+            else
+            {
+                this.isSuperMan = false;
+            }
             this.name = name;
             this.userName = userName;
             this.email = email;
