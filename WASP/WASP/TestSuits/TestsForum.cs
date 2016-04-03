@@ -36,7 +36,6 @@ namespace WASP.TestSuits
             Assert.AreEqual(member, members[0], "checking if member added successfully");
             Assert.AreEqual(0, membersAfterDelete.Length, "checking if member removed successfully");
             Assert.AreEqual(null, forum.GetMember(member.Id), "checking if member removed successfully");
-            Assert.AreEqual(null, forum.GetMember(member.Id), "checking if member removed successfully");
             Assert.AreEqual(false, succDelete, "Checking if it is possible to remove a non-existent user.");
         }
         [TestMethod]
@@ -50,9 +49,13 @@ namespace WASP.TestSuits
             // act
             forum.AddAdmin(admin);
             isAdmin = forum.IsAdmin(admin.Id);
+            
             // assert
             Assert.AreEqual(true, isAdmin, "checking if admin added successfully");
             Assert.AreEqual(1, forum.GetAdmins().Length, "check if addmin was added");
+            // remove admin
+            forum.RemoveAdmin(admin.Id);
+            Assert.AreEqual(0, forum.GetAdmins().Length, "check if addmin was deleted");
 
         }
 

@@ -36,6 +36,7 @@ namespace WASP.TestSuits
         [TestMethod]
         public void replyTests()
         {
+            //check reply to reply
             // arrange
             User member = new User(0, false, "edan", "userName", "email@email.com", "123");
             Post original = new Post("original", "aa", 0, member, DateTime.Now, null, null, DateTime.Today);
