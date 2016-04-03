@@ -16,8 +16,6 @@ namespace WASP.Domain
 
         public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-            try
-            {
                 User moderator = users[moderator_ID];
                 
                 Subforum sf = findSubForum(sf_ID);
@@ -28,22 +26,8 @@ namespace WASP.Domain
                 }
                 else
                     return -1;
-            }
-            catch { return -1; }
         }
 
-        public int createPost(int user_ID, int thread_ID, Post post)
-        {
-            Thread t = findThread(thread_ID);
-            if (t != null)
-            {
-                t.addPost(post);
-                return 0;
-            }
-            else
-                return -1;
-        }
-        
         public int createSubForum(int user_ID, Subforum sf)
         {
             Forum forum = null;//= sf.forum;
@@ -70,45 +54,15 @@ namespace WASP.Domain
 
         public int defineForumPolicy(int user_ID, Forum forum)
         {
-            try
-            {
                 Forum f = forums[forum.Id];
                 f.DefinePolicy(forum);
                 return 0;
-            }
-            catch (KeyNotFoundException)
-            {
-                return -1; //"forum not found";
-            }
-            catch(Exception)
-            {
-                return -1; //"cannot change policy!";
-            }
-        }
-
-        public int deletePost(int user_ID, int thread_ID, int post_ID)
-        {
-            Thread t = findThread(thread_ID);
-            if (t != null)
-            {
-                t.deletePost(post_ID);
-                return 0;
-            }
-            else
-                return -1;
         }
 
         public Forum getForum(int user_ID, int forum_ID)
         {
-            try
-            {
                 Forum retF = forums[forum_ID];
                 return retF;
-            }
-            catch(KeyNotFoundException)
-            {
-                return null;
-            }
         }
 
         public Subforum getSubforum(int user_ID, int sf_ID)
@@ -147,9 +101,9 @@ namespace WASP.Domain
 
         private Subforum findSubForum(int sf_ID)
         {
-            foreach (KeyValuePair<int, Forum> forum in forums)
+            foreach (Forum forum in forums.Values)
             {
-                Subforum tmp = forum.Value.GetSubForum(sf_ID);
+                Subforum tmp = forum.GetSubForum(sf_ID);
                 if(tmp != null)
                     return tmp;
             }
@@ -168,23 +122,6 @@ namespace WASP.Domain
             return null;
         }
 
-        public string sendMessage(int user_ID, Message message)
-        {
-            try
-            {
-                if (message.isEmpty())
-                    return "message is empty";
-
-                User to = users[message.to_ID];                
-                //to.sendMessage(message);
-                return "message sent";
-            }
-            catch
-            {
-                return "user not found";
-            }
-        }
-
         public string subscribeToForum(User user, int forum_ID)
         {
             try
@@ -196,20 +133,6 @@ namespace WASP.Domain
             catch
             {
                 return "user did not subscribe";
-            }
-        }
-
-        public string updateForum(int user_ID, Forum forum)
-        {
-            try
-            {
-                Forum f = forums[forum.Id];
-                f.Update(forum);
-                return "forum updated";
-            }
-            catch
-            {
-                return "forum did not updated";
             }
         }
 
@@ -248,7 +171,14 @@ namespace WASP.Domain
 
         public int createPost(string userName, int threadId, Post post)
         {
-            throw new NotImplementedException();
+            Thread t = findThread(threadId);
+            if (t != null)
+            {
+                t.addPost(post);
+                return 0;
+            }
+            else
+                return -1;
         }
 
         public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
@@ -263,12 +193,19 @@ namespace WASP.Domain
 
         public int updateForum(int userId, int forumId)
         {
-            throw new NotImplementedException();
+                Forum f = forums[forumId];
+                f.Update();
+                return 1;
         }
 
         public int sendMessage(string userSend, string userAcc, Message message)
         {
-            throw new NotImplementedException();
+                if (message.isEmpty())
+                    return -1;
+
+                User to = users[message.to_ID];
+                to.sendMessage(message);
+                return 1;
         }
 
         public int addModerator(string userId, string userId1, int sfId, DateTime term)
@@ -278,17 +215,31 @@ namespace WASP.Domain
 
         public void confirmEmail(int userId)
         {
-            throw new NotImplementedException();
+            users[userId].confirmEmail();
         }
 
         public int deletePost(string userName, int threadId, int postId)
         {
-            throw new NotImplementedException();
+            Thread t = findThread(threadId);
+            if (t != null)
+            {
+                t.deletePost(postId);
+                return 0;
+            }
+            else
+                return -1;
         }
 
         public int login(string userName, string password)
         {
-            throw new NotImplementedException();
+            foreach (var user in users.Values)
+            {
+                if (user.UserName.Equals(userName) && user.Password.Equals(password))
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            return -1;
         }
 
         public List<User> getAdmins(int forumId)
