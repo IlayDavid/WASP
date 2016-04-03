@@ -11,14 +11,14 @@ namespace WASP.Server
     // server_forum has explicit forum methods
     partial class Server : ServerAPI
     {
-        private IBL bl = new BL();
+        private IBL _bl = new BL();
 
         
         public int deletePost(string userName, int threadId, int postId)
         {
             try
             {
-                return bl.deletePost(userName, threadId, postId);
+                return _bl.deletePost(userName, threadId, postId);
             }
             catch (Exception)
             {
@@ -30,7 +30,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.getThread(userId, threadId);
+                return _bl.getThread(userId, threadId);
 
             }
             catch (Exception)
@@ -45,7 +45,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.createThread(userName, subforumId, thread);
+                return _bl.createThread(userName, subforumId, thread);
 
             }
             catch (Exception)
@@ -62,7 +62,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.createPost(userName, threadId, post);
+                return _bl.createPost(userName, threadId, post);
             }
             catch (Exception)
             {
@@ -75,7 +75,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.initialize();
+                return _bl.initialize();
             }
             catch (Exception)
             {

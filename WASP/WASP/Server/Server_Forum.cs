@@ -12,11 +12,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
+                return _bl.getAdmins(forumId);
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return null;
             }
         }
@@ -24,7 +23,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.getForum(userId, forumId);
+                return _bl.getForum(userId, forumId);
             }
             catch (Exception)
             {
@@ -35,7 +34,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.createForum(userName, forum);
+                return _bl.createForum(userName, forum);
             }
             catch (Exception)
             {
@@ -47,12 +46,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
-
+                return _bl.getAllForums();
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return null;
             }
         }
@@ -61,12 +58,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
-
+                return _bl.getModerators(subforumId);
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return null;
             }
         }
@@ -74,7 +69,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.getSubforum(userId, subforumId);
+                return _bl.getSubforum(userId, subforumId);
             }
             catch (Exception)
             {
@@ -85,11 +80,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
+                return _bl.getMembers(forumId);
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return null;
             }
         }
@@ -99,11 +93,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
+                return _bl.getSubforums(forumId);
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return null;
             }
         }
@@ -113,8 +106,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.updateForum(userId, forumId);
-
+                return _bl.updateForum(userId, forumId);
             }
             catch (Exception)
             {
@@ -126,7 +118,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.defineForumPolicy(userId, forum);
+                return _bl.defineForumPolicy(userId, forum);
             }
             catch (Exception)
             {
@@ -137,7 +129,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.createSubForum(userName, forumId, sf);
+                return _bl.createSubForum(userName, forumId, sf);
             }
             catch (Exception)
             {

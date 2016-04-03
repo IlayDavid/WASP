@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WASP.Domain
 {
+    //TODO: change every instance of number '-1' to a correct number
+    //TODO: decide if we look at/for users by name (string) or by id (int). shouldn't be mixed!
     class BL : IBL
     {
         private bool _initialized = false;
-        SuperUser supervisor = null;
+        User supervisor = null;
         Dictionary<int, User> users;
         Dictionary<int, Forum> forums;
 
@@ -27,17 +30,6 @@ namespace WASP.Domain
                     return -1;
             }
             catch { return -1; }
-        }
-
-        public string confirmEmail(int user_ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int createForum(Forum forum)
-        {
-            forums.Add(forum.id, forum);
-            return 0;
         }
 
         public int createPost(int user_ID, int thread_ID, Post post)
@@ -76,21 +68,21 @@ namespace WASP.Domain
                 return -1;
         }
 
-        public void defineForumPolicy(int user_ID, Forum forum)
+        public int defineForumPolicy(int user_ID, Forum forum)
         {
             try
             {
                 Forum f = forums[forum.Id];
                 f.DefinePolicy(forum);
-                //return 0;
+                return 0;
             }
             catch (KeyNotFoundException)
             {
-                //return -1; //"forum not found";
+                return -1; //"forum not found";
             }
             catch(Exception)
             {
-                //return -1; //"cannot change policy!";
+                return -1; //"cannot change policy!";
             }
         }
 
@@ -119,9 +111,14 @@ namespace WASP.Domain
             }
         }
 
-        public Subforum getSubForum(int user_ID, int sf_ID)
+        public Subforum getSubforum(int user_ID, int sf_ID)
         {
             return findSubForum(sf_ID);
+        }
+
+        public int createThread(string userName, int subforumId, Thread thread)
+        {
+            return createThread(-1, subforumId, thread);
         }
 
         public Thread getThread(int user_ID, int thread_ID)
@@ -138,9 +135,7 @@ namespace WASP.Domain
 
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = SuperUser.CreateSuperUser();
-                supervisor.Password = SUPERPASSWORD;
-                supervisor.Username = SUPERUSERNAME;
+                supervisor = new User(1,true,"",SUPERUSERNAME,"",SUPERPASSWORD);
                 _initialized = true;
                 return supervisor;
             }
@@ -218,27 +213,6 @@ namespace WASP.Domain
             }
         }
 
-        public string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term)
-        {
-            Subforum sf = findSubForum(sf_ID);
-            if (sf != null)
-            {
-                sf.updateModeratorTerm(moderator_ID, term);
-                return "moderator term updated";
-            }
-            else
-                return "sub forum not found";
-        }
-
-        public Subforum getSubforum(int userId, int subforumId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int createThread(string userName, int subforumId, Thread thread)
-        {
-            throw new NotImplementedException();
-        }
 
         public int createForum(string userName, Forum forum)
         {
@@ -247,22 +221,29 @@ namespace WASP.Domain
 
         public List<User> getModerators(int subforumId)
         {
-            throw new NotImplementedException();
+            var tuples= getSubforum(-1, subforumId).GetModerators();
+            List<User> mods=new List<User>();
+            foreach (var tuple in tuples)
+            {
+                mods.Add(tuple.Item1);
+            }
+            return mods;
         }
 
         public DateTime getModeratorTermTime(string userName, int subforumId)
         {
-            throw new NotImplementedException();
+            return getSubforum(-1, subforumId).GetModerator(userName).Item2;
         }
 
         public int createSubForum(string userName, int forumId, Subforum sf)
         {
-            throw new NotImplementedException();
+            getForum(-1, forumId).AddSubForum(sf);
+            return 1;
         }
 
         public List<Forum> getAllForums()
         {
-            throw new NotImplementedException();
+            return forums.Values.ToList();
         }
 
         public int createPost(string userName, int threadId, Post post)
@@ -272,15 +253,15 @@ namespace WASP.Domain
 
         public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
         {
-            throw new NotImplementedException();
+            var sf = getSubforum(-1, sfId);
+            if (sf == null)
+                return -1;
+            sf.RemoveModerator(userName2);
+            sf.AddModerator(userName2,term);
+            return 1;
         }
 
         public int updateForum(int userId, int forumId)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IBL.defineForumPolicy(int userId, Forum forum)
         {
             throw new NotImplementedException();
         }
@@ -292,10 +273,10 @@ namespace WASP.Domain
 
         public int addModerator(string userId, string userId1, int sfId, DateTime term)
         {
-            throw new NotImplementedException();
+            return getSubforum(-1,sfId).AddModerator(users[userId1],term);
         }
 
-        void IBL.confirmEmail(int userId)
+        public void confirmEmail(int userId)
         {
             throw new NotImplementedException();
         }
@@ -312,17 +293,17 @@ namespace WASP.Domain
 
         public List<User> getAdmins(int forumId)
         {
-            throw new NotImplementedException();
+            return forums[forumId].GetAdmins().ToList();
         }
 
         public List<User> getMembers(int forumId)
         {
-            throw new NotImplementedException();
+            return forums[forumId].GetMembers().ToList();
         }
 
         public List<Subforum> getSubforums(int forumId)
         {
-            throw new NotImplementedException();
+            return forums[forumId].GetSubForum().ToList();
         }
     }
 }

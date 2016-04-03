@@ -12,11 +12,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
+                return _bl.getModeratorTermTime(userName, subforumId);
             }
             catch (Exception)
             {
-                throw new NotImplementedException();
                 return new DateTime();
             }
         }
@@ -24,7 +23,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.addModerator(userId, userId1, sfId, term);
+                return _bl.addModerator(userId, userId1, sfId, term);
             }
             catch (Exception)
             {
@@ -36,12 +35,10 @@ namespace WASP.Server
         {
             try
             {
-                throw new NotImplementedException();
-
+                return _bl.login(userName, password);
             }
             catch (Exception)
             {
-            throw new NotImplementedException();
                 return -1;
             }
         }
@@ -49,7 +46,7 @@ namespace WASP.Server
         {
             try
             {
-                bl.confirmEmail(userId);
+                _bl.confirmEmail(userId);
             }
             catch (Exception exception)
             {
@@ -60,7 +57,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.updateModeratorTerm(userName1, userName2, sfId, term);
+                return _bl.updateModeratorTerm(userName1, userName2, sfId, term);
             }
             catch (Exception)
             {
@@ -71,7 +68,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.subscribeToForum(user, forum_ID);
+                return _bl.subscribeToForum(user, forum_ID);
 
             }
             catch (Exception e)
@@ -84,7 +81,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.sendMessage(userSend, userAcc, message);
+                return _bl.sendMessage(userSend, userAcc, message);
             }
             catch (Exception)
             {
