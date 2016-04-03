@@ -1,142 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WASP.Domain
 {
+    //TODO: change every instance of number '-1' to a correct number
+    //TODO: decide if we look at/for users by name (string) or by id (int). shouldn't be mixed!
     class BL : IBL
     {
         private bool _initialized = false;
-        SuperUser supervisor = null;
+        User supervisor = null;
         Dictionary<int, User> users;
         Dictionary<int, Forum> forums;
 
 
-        public string addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
+        public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-            User moderator = users[moderator_ID];
-            if (moderator == null)
-                return "user not found";
+                User moderator = users[moderator_ID];
+                
+                Subforum sf = findSubForum(sf_ID);
+                if (sf != null)
+                {
+                    sf.AddModerator(moderator, term);
+                    return 0;
+                }
+                else
+                    return -1;
+        }
 
-            Subforum sf = findSubForum(sf_ID);
-            if(sf != null)
+        public int createSubForum(int user_ID, Subforum sf)
+        {
+            Forum forum = null;//= sf.forum;
+            if (forum.IsAdmin(user_ID))
             {
-                sf.addModerator(moderator);
-                return "moderator added!";
-            }
-            else
-                return "moderator not found";
-        }
-
-        public string confirmEmail(int user_ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string createForum(Forum forum)
-        {
-            forums.Add(forum.id, forum);
-            return "";
-        }
-
-        public string createPost(int user_ID, int thread_ID, Post post)
-        {
-            Thread t = findThread(thread_ID);
-            if (t != null)
-            {
-                t.addPost(post);
-                return "Post created successfully!";
-            }
-            else
-                return "thread not found";
-        }
-        
-        public string createSubForum(int user_ID, Subforum sf)
-        {
-            Forum forum = sf.forum;
-            if (forum.isManager(user_ID))
-            {
-                forum.addSubForum(sf);
-                return "sub forum added successfully!";
+                forum.AddSubForum(sf);
+                return 0;
             }        
             else
-                return "Only forum manager can add suc forum";
+                return -1;
         }
 
-        public string createThread(int user_ID, int sf_ID, Thread thread)
+        public int createThread(int user_ID, int sf_ID, Thread thread)
         {
             Subforum sf = findSubForum(sf_ID);
             if (sf != null)
             {
-                sf.addThread(thread);
-                return "Thread added to subforum";
+                //sf.AddThread(thread);
+                return 0;
             }
             else
-                return "subforum not found";
+                return -1;
         }
 
-        public string defineForumPolicy(int user_ID, Forum forum)
+        public int defineForumPolicy(int user_ID, Forum forum)
         {
-            try
-            {
-                Forum f = forums[forum.id];
-                f.definePolicy(forum);
-                return "forum Policy has been defined";
-            }
-            catch (KeyNotFoundException)
-            {
-                return "forum not found";
-            }
-            catch(Exception)
-            {
-                return "cannot change policy!";
-            }
+                Forum f = forums[forum.Id];
+                f.DefinePolicy(forum);
+                return 0;
         }
 
-        public string deletePost(int user_ID, int thread_ID, int post_ID)
+        public Forum getForum(int user_ID, int forum_ID)
         {
-            Thread t = findThread(thread_ID);
-            if (t != null)
-            {
-                t.deletePost(post_ID);
-                return "post deleted!";
-            }
-            else
-                return "post not found";
-        }
-
-        public string getForum(int user_ID, int forum_ID)
-        {
-            try
-            {
                 Forum retF = forums[forum_ID];
-                return "forum found - dont know what to return in the string";
-            }
-            catch(KeyNotFoundException)
-            {
-                return "forum not found";
-            }
-
+                return retF;
         }
 
-        public string getSubForum(int user_ID, int sf_ID)
+        public Subforum getSubforum(int user_ID, int sf_ID)
         {
-            Subforum sf = findSubForum(sf_ID);
-            if (sf != null)
-                return "sub forum found";
-            else
-                return "sub forum not found";
+            return findSubForum(sf_ID);
         }
 
-        public string getThread(int user_ID, int thread_ID)
+        public int createThread(string userName, int subforumId, Thread thread)
         {
-            Thread t = findThread(thread_ID);
-            if(t != null)
-                return "thread found";
-            else
-                return "thread not found";
+            return createThread(-1, subforumId, thread);
         }
 
-        public string initialize()
+        public Thread getThread(int user_ID, int thread_ID)
+        {
+            return findThread(thread_ID);
+        }
+
+        public User initialize()
         {
             if (!_initialized)
             {
@@ -145,13 +89,11 @@ namespace WASP.Domain
 
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = SuperUser.CreateSuperUser();
-                supervisor.Password = SUPERPASSWORD;
-                supervisor.Username = SUPERUSERNAME;
+                supervisor = new User(1,true,"",SUPERUSERNAME,"",SUPERPASSWORD);
                 _initialized = true;
-                return "system initialized";
+                return supervisor;
             }
-            return "already initialized. action failed.";
+            return null;
         }
 
 
@@ -159,9 +101,9 @@ namespace WASP.Domain
 
         private Subforum findSubForum(int sf_ID)
         {
-            foreach (KeyValuePair<int, Forum> forum in forums)
+            foreach (Forum forum in forums.Values)
             {
-                Subforum tmp = forum.Value.getSubForum(sf_ID);
+                Subforum tmp = forum.GetSubForum(sf_ID);
                 if(tmp != null)
                     return tmp;
             }
@@ -173,28 +115,11 @@ namespace WASP.Domain
             //get the forum in which the thread belong.
             foreach (KeyValuePair<int, Forum> forum in forums)
             {
-                Thread tmp = forum.Value.findThread(thread_ID);
+                Thread tmp = forum.Value.FindThread(thread_ID);
                 if (tmp != null)
                     return tmp;
             }
             return null;
-        }
-
-        public string sendMessage(int user_ID, Message message)
-        {
-            try
-            {
-                if (message.isEmpty())
-                    return "message is empty";
-
-                User to = users[message.to_ID];                
-                to.sendMessage(message);
-                return "message sent";
-            }
-            catch
-            {
-                return "user not found";
-            }
         }
 
         public string subscribeToForum(User user, int forum_ID)
@@ -202,7 +127,7 @@ namespace WASP.Domain
             try
             {
                 Forum f = forums[forum_ID];
-                f.subscribe(user);
+                f.AddMember(user);
                 return "user subscribe";
             }
             catch
@@ -211,30 +136,125 @@ namespace WASP.Domain
             }
         }
 
-        public string updateForum(int user_ID, Forum forum)
+
+        public int createForum(string userName, Forum forum)
         {
-            try
-            {
-                Forum f = forums[forum.id];
-                f.update(forum);
-                return "forum updated";
-            }
-            catch
-            {
-                return "forum did not updated";
-            }
+            throw new NotImplementedException();
         }
 
-        public string updateModeratorTerm(int user_ID, int moderator_ID, int sf_ID, DateTime term)
+        public List<User> getModerators(int subforumId)
         {
-            Subforum sf = findSubForum(sf_ID);
-            if (sf != null)
+            var tuples= getSubforum(-1, subforumId).GetModerators();
+            List<User> mods=new List<User>();
+            foreach (var tuple in tuples)
             {
-                sf.updateModeratorTerm(moderator_ID, term);
-                return "moderator term updated";
+                mods.Add(tuple.Item1);
+            }
+            return mods;
+        }
+
+        public DateTime getModeratorTermTime(string userName, int subforumId)
+        {
+            return getSubforum(-1, subforumId).GetModerator(userName).Item2;
+        }
+
+        public int createSubForum(string userName, int forumId, Subforum sf)
+        {
+            getForum(-1, forumId).AddSubForum(sf);
+            return 1;
+        }
+
+        public List<Forum> getAllForums()
+        {
+            return forums.Values.ToList();
+        }
+
+        public int createPost(string userName, int threadId, Post post)
+        {
+            Thread t = findThread(threadId);
+            if (t != null)
+            {
+                t.addPost(post);
+                return 0;
             }
             else
-                return "sub forum not found";
+                return -1;
+        }
+
+        public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
+        {
+            var sf = getSubforum(-1, sfId);
+            if (sf == null)
+                return -1;
+            sf.RemoveModerator(userName2);
+            sf.AddModerator(userName2,term);
+            return 1;
+        }
+
+        public int updateForum(int userId, int forumId)
+        {
+                Forum f = forums[forumId];
+                f.Update();
+                return 1;
+        }
+
+        public int sendMessage(string userSend, string userAcc, Message message)
+        {
+                if (message.isEmpty())
+                    return -1;
+
+                User to = users[message.to_ID];
+                to.sendMessage(message);
+                return 1;
+        }
+
+        public int addModerator(string userId, string userId1, int sfId, DateTime term)
+        {
+            return getSubforum(-1,sfId).AddModerator(users[userId1],term);
+        }
+
+        public void confirmEmail(int userId)
+        {
+            users[userId].confirmEmail();
+        }
+
+        public int deletePost(string userName, int threadId, int postId)
+        {
+            Thread t = findThread(threadId);
+            if (t != null)
+            {
+                t.deletePost(postId);
+                return 0;
+            }
+            else
+                return -1;
+        }
+
+        public int login(string userName, string password)
+        {
+            foreach (var user in users.Values)
+            {
+                if (user.UserName.Equals(userName) && user.Password.Equals(password))
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            return -1;
+        }
+
+        public List<User> getAdmins(int forumId)
+        {
+            return forums[forumId].GetAdmins().ToList();
+        }
+
+        public List<User> getMembers(int forumId)
+        {
+            return forums[forumId].GetMembers().ToList();
+        }
+
+        public List<Subforum> getSubforums(int forumId)
+        {
+            return forums[forumId].GetSubForum().ToList();
         }
     }
 }
