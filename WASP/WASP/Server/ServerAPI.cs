@@ -94,7 +94,7 @@ namespace WASP
          * Pre-conditions: user is loged-in 
          * Porpose: update the forum
          */
-        void updateForum(int userId, int forumId);
+        int updateForum(int userId, int forumId);
 
         //---------------------------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ namespace WASP
  * Porpose: set a policy for specific forum
  * Checking: if user is supervisor, else nothing
  */
-        void defineForumPolicy(int userId, Forum forum);  //------------------------ policy object??
+        int defineForumPolicy(int userId, Forum forum);  //------------------------ policy object??
 
         /*
          * Porpose: subscribe "user" to "forum"
@@ -115,7 +115,7 @@ namespace WASP
          * Porpose: send a private message
          * Checking: if message.user exists 
          */
-        void sendMessage(string userSend, string userAcc, Message message);
+        int sendMessage(string userSend, string userAcc, Message message);
 
         /*
          * Pre-conditions: user is loged-in 

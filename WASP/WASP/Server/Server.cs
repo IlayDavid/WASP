@@ -11,10 +11,8 @@ namespace WASP.Server
 
         public int addModerator(string userId, string userId1, int sfId, DateTime term)
         {
-            bl.addModerator(userId, userId1, sfId, term);
+            return bl.addModerator(userId, userId1, sfId, term);
         }
-
-
 
         public int deletePost(string userName, int threadId, int postId)
         {
@@ -44,14 +42,14 @@ namespace WASP.Server
         {
             bl.confirmEmail(userId);
         }
-        
 
-        public void updateForum(int userId, int forumId)
+
+        public int updateForum(int userId, int forumId)
         {
             return bl.updateForum(userId, forumId);
         }
 
-        public void defineForumPolicy(int userId, Forum forum)
+        public int defineForumPolicy(int userId, Forum forum)
         {
             return bl.defineForumPolicy(userId, forum);
         }
@@ -70,7 +68,7 @@ namespace WASP.Server
 
         public Subforum getSubforum(int userId, int subforumId)
         {
-            return bl.getSubForum(userId, subforumId);
+            return bl.getSubforum(userId, subforumId);
         }
 
         public int createThread(string userName, int subforumId, Thread thread)
@@ -80,7 +78,7 @@ namespace WASP.Server
 
         public int createForum(string userName, Forum forum)
         {
-            return bl.createForum(forum);
+            return bl.createForum(userName, forum);
         }
 
         public List<User> getModerators(int subforumId)
@@ -95,7 +93,7 @@ namespace WASP.Server
 
         public int createSubForum(string userName, int forumId, Subforum sf)
         {
-            return bl.createSubForum(userName, sf);
+            return bl.createSubForum(userName, forumId, sf);
         }
 
         public List<Forum> getAllForums()
@@ -123,9 +121,9 @@ namespace WASP.Server
             return bl.subscribeToForum( user,  forum_ID);
         }
 
-        public void sendMessage(string userSend, string userAcc, Message message)
+        public int sendMessage(string userSend, string userAcc, Message message)
         {
-            return bl.sendMessage(userSend, message);
+            return bl.sendMessage(userSend, userAcc, message);
         }
 
     }

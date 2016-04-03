@@ -11,20 +11,22 @@ namespace WASP.Domain
         Dictionary<int, Forum> forums;
 
 
-        public string addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
+        public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-            User moderator = users[moderator_ID];
-            if (moderator == null)
-                return "user not found";
-
-            Subforum sf = findSubForum(sf_ID);
-            if(sf != null)
+            try
             {
-                sf.addModerator(moderator);
-                return "moderator added!";
+                User moderator = users[moderator_ID];
+                
+                Subforum sf = findSubForum(sf_ID);
+                if (sf != null)
+                {
+                    sf.AddModerator(moderator, term);
+                    return 0;
+                }
+                else
+                    return -1;
             }
-            else
-                return "moderator not found";
+            catch { return -1; }
         }
 
         public string confirmEmail(int user_ID)
@@ -32,111 +34,102 @@ namespace WASP.Domain
             throw new NotImplementedException();
         }
 
-        public string createForum(Forum forum)
+        public int createForum(Forum forum)
         {
             forums.Add(forum.id, forum);
-            return "";
+            return 0;
         }
 
-        public string createPost(int user_ID, int thread_ID, Post post)
+        public int createPost(int user_ID, int thread_ID, Post post)
         {
             Thread t = findThread(thread_ID);
             if (t != null)
             {
                 t.addPost(post);
-                return "Post created successfully!";
+                return 0;
             }
             else
-                return "thread not found";
+                return -1;
         }
         
-        public string createSubForum(int user_ID, Subforum sf)
+        public int createSubForum(int user_ID, Subforum sf)
         {
-            Forum forum = sf.forum;
-            if (forum.isManager(user_ID))
+            Forum forum = null;//= sf.forum;
+            if (forum.IsAdmin(user_ID))
             {
-                forum.addSubForum(sf);
-                return "sub forum added successfully!";
+                forum.AddSubForum(sf);
+                return 0;
             }        
             else
-                return "Only forum manager can add suc forum";
+                return -1;
         }
 
-        public string createThread(int user_ID, int sf_ID, Thread thread)
+        public int createThread(int user_ID, int sf_ID, Thread thread)
         {
             Subforum sf = findSubForum(sf_ID);
             if (sf != null)
             {
-                sf.addThread(thread);
-                return "Thread added to subforum";
+                //sf.AddThread(thread);
+                return 0;
             }
             else
-                return "subforum not found";
+                return -1;
         }
 
-        public string defineForumPolicy(int user_ID, Forum forum)
+        public void defineForumPolicy(int user_ID, Forum forum)
         {
             try
             {
-                Forum f = forums[forum.id];
-                f.definePolicy(forum);
-                return "forum Policy has been defined";
+                Forum f = forums[forum.Id];
+                f.DefinePolicy(forum);
+                //return 0;
             }
             catch (KeyNotFoundException)
             {
-                return "forum not found";
+                //return -1; //"forum not found";
             }
             catch(Exception)
             {
-                return "cannot change policy!";
+                //return -1; //"cannot change policy!";
             }
         }
 
-        public string deletePost(int user_ID, int thread_ID, int post_ID)
+        public int deletePost(int user_ID, int thread_ID, int post_ID)
         {
             Thread t = findThread(thread_ID);
             if (t != null)
             {
                 t.deletePost(post_ID);
-                return "post deleted!";
+                return 0;
             }
             else
-                return "post not found";
+                return -1;
         }
 
-        public string getForum(int user_ID, int forum_ID)
+        public Forum getForum(int user_ID, int forum_ID)
         {
             try
             {
                 Forum retF = forums[forum_ID];
-                return "forum found - dont know what to return in the string";
+                return retF;
             }
             catch(KeyNotFoundException)
             {
-                return "forum not found";
+                return null;
             }
-
         }
 
-        public string getSubForum(int user_ID, int sf_ID)
+        public Subforum getSubForum(int user_ID, int sf_ID)
         {
-            Subforum sf = findSubForum(sf_ID);
-            if (sf != null)
-                return "sub forum found";
-            else
-                return "sub forum not found";
+            return findSubForum(sf_ID);
         }
 
-        public string getThread(int user_ID, int thread_ID)
+        public Thread getThread(int user_ID, int thread_ID)
         {
-            Thread t = findThread(thread_ID);
-            if(t != null)
-                return "thread found";
-            else
-                return "thread not found";
+            return findThread(thread_ID);
         }
 
-        public string initialize()
+        public User initialize()
         {
             if (!_initialized)
             {
@@ -149,9 +142,9 @@ namespace WASP.Domain
                 supervisor.Password = SUPERPASSWORD;
                 supervisor.Username = SUPERUSERNAME;
                 _initialized = true;
-                return "system initialized";
+                return supervisor;
             }
-            return "already initialized. action failed.";
+            return null;
         }
 
 
@@ -161,7 +154,7 @@ namespace WASP.Domain
         {
             foreach (KeyValuePair<int, Forum> forum in forums)
             {
-                Subforum tmp = forum.Value.getSubForum(sf_ID);
+                Subforum tmp = forum.Value.GetSubForum(sf_ID);
                 if(tmp != null)
                     return tmp;
             }
@@ -173,7 +166,7 @@ namespace WASP.Domain
             //get the forum in which the thread belong.
             foreach (KeyValuePair<int, Forum> forum in forums)
             {
-                Thread tmp = forum.Value.findThread(thread_ID);
+                Thread tmp = forum.Value.FindThread(thread_ID);
                 if (tmp != null)
                     return tmp;
             }
@@ -188,7 +181,7 @@ namespace WASP.Domain
                     return "message is empty";
 
                 User to = users[message.to_ID];                
-                to.sendMessage(message);
+                //to.sendMessage(message);
                 return "message sent";
             }
             catch
@@ -202,7 +195,7 @@ namespace WASP.Domain
             try
             {
                 Forum f = forums[forum_ID];
-                f.subscribe(user);
+                f.AddMember(user);
                 return "user subscribe";
             }
             catch
@@ -215,8 +208,8 @@ namespace WASP.Domain
         {
             try
             {
-                Forum f = forums[forum.id];
-                f.update(forum);
+                Forum f = forums[forum.Id];
+                f.Update(forum);
                 return "forum updated";
             }
             catch
@@ -235,6 +228,101 @@ namespace WASP.Domain
             }
             else
                 return "sub forum not found";
+        }
+
+        public Subforum getSubforum(int userId, int subforumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int createThread(string userName, int subforumId, Thread thread)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int createForum(string userName, Forum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getModerators(int subforumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime getModeratorTermTime(string userName, int subforumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int createSubForum(string userName, int forumId, Subforum sf)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Forum> getAllForums()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int createPost(string userName, int threadId, Post post)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int updateForum(int userId, int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IBL.defineForumPolicy(int userId, Forum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int sendMessage(string userSend, string userAcc, Message message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int addModerator(string userId, string userId1, int sfId, DateTime term)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IBL.confirmEmail(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int deletePost(string userName, int threadId, int postId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int login(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getAdmins(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> getMembers(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Subforum> getSubforums(int forumId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
