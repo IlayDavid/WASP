@@ -99,6 +99,18 @@ namespace WASP
                 container = value;
             }
         }
+
+        public Post InReplyTo
+        {
+            get
+            {
+                return inReplyTo;
+            }
+            set
+            {
+                inReplyTo = value;
+            }
+        }
         public bool IsOriginal()
         {
             return inReplyTo == null;
@@ -123,6 +135,8 @@ namespace WASP
             replies.TryGetValue(id, out reply);
             return reply;
         }
+       
+
 
 
 
