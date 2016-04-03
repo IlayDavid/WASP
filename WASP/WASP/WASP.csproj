@@ -58,6 +58,8 @@
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\Thread.cs" />
     <Compile Include="DataClasses\User.cs" />
+    <Compile Include="Server\Server_Forum.cs" />
+    <Compile Include="Server\Server_User.cs" />
     <Compile Include="TestSuits\InitializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
