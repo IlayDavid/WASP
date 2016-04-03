@@ -8,7 +8,7 @@ namespace WASP.Server
 {
     partial class Server
     {
-        public List<User> getAdmins(int forumId)
+        public List<Member> getAdmins(int forumId)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace WASP.Server
             }
         }
 
-        public List<User> getModerators(int subforumId)
+        public List<Member> getModerators(int subforumId)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace WASP.Server
                 return null;
             }
         }
-        public List<User> getMembers(int forumId)
+        public List<Member> getMembers(int forumId)
         {
             try
             {

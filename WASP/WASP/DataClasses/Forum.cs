@@ -1,54 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace WASP
 {
     public class Forum
     {
-        private int id;
-        private String name, description;
-        private Dictionary<int, Subforum> subforums;
-        private Dictionary<int, User> members;
-        private Dictionary<int, User> admins;
-
-        public Forum(int id,String name, String description)
+        private static int _idCounter=0;
+        private int _id;
+        private String _name, _description;
+        private List<Subforum> subforums = new List<Subforum>();
+        private List<Member> members=new List<Member>();
+        private List<Member> admins=new List<Member>();
+        public Forum(String name, String description, Member admin)
         {
-            subforums = new Dictionary<int, Subforum>();
-            this.id = id;
-            this.name = name;
-            this.description = description;
+            _id=_idCounter;
+            _idCounter++;
+            _name = name;
+            _description = description;
+            admins.Add(admin);
         }
 
 
-        internal Subforum GetSubForum(int sf_ID)
+        internal Subforum GetSubForum(int subforumId)
         {
-            Subforum tempForum;
-            return subforums.TryGetValue(sf_ID,out tempForum) ? tempForum : null;
-        }
-        internal User GetMember(int id)
-        {
-            User theMember;
-            members.TryGetValue(id, out theMember);
-            return theMember;
+            return subforums.First((x) => x.Id == subforumId);
         }
 
-        internal bool IsAdmin (int user_ID)
+        internal bool IsAdmin (Member member)
         {
-            return admins.ContainsKey(user_ID);
+            return admins.Contains(member);
         }
 
-        internal bool IsMember(int user_ID)
+        internal bool IsMember(Member member)
         {
-            return members.ContainsKey(user_ID);
+            return members.Contains(member);
         }
-        internal bool IsSubForum(int forum_ID)
+        internal bool IsSubForum(int subforumId)
         {
-            return subforums.ContainsKey(forum_ID);
+            return subforums.First((x) => x.Id == subforumId)!=null;
         }
 
 
-        internal Thread FindThread(int thread_ID)
+        internal Thread FindThread(int threadId)
         {
             throw new NotImplementedException();
         }
@@ -67,11 +62,7 @@ namespace WASP
         {
             get
             {
-                return id;
-            }
-            set
-            {
-                id = value;
+                return _id;
             }
         }
 
@@ -79,11 +70,11 @@ namespace WASP
         {
             get
             {
-                return name;
+                return _name;
             }
             set
             {
-                name = value;
+                _name = value;
             }
         }
 
@@ -91,62 +82,54 @@ namespace WASP
         {
             get
             {
-                return description;
+                return _description;
             }
             set
             {
-                description = value;
+                _description = value;
             }
         }
 
-        public User[] GetMembers ()
+        public List<Member> GetMembers ()
         {
-            User[] users = new User[members.Values.Count];
-            members.Values.CopyTo(users, 0);
-            return users;         
+            return members;
         }
 
-        public User[] GetAdmins()
+        public List<Member> GetAdmins()
         {
-            User[] adminsArr = new User[admins.Values.Count];
-            members.Values.CopyTo(adminsArr, 0);
-            return adminsArr;
+            return admins;
         }
 
-        public Subforum[] GetSubForum()
+        public List<Subforum> GetSubForum()
         {
-            Subforum[] sf = new Subforum[subforums.Values.Count];
-            subforums.Values.CopyTo(sf, 0);
-            return sf;
+            return subforums;
         }
 
-
-        public void AddAdmin (User admin)
+        public void AddAdmin (Member admin)
         {
-            admins.Add(admin.Id, admin);
+            admins.Add(admin);
         }
 
-        public void AddMember(User member)
+        public void AddMember(Member member)
         {
-            members.Add(member.Id, member);
+            members.Add(member);
         }
-        internal void AddSubForum(Subforum sf)
+        internal void AddSubForum(Subforum subforum)
         {
-            subforums.Add(sf.Id, sf);
+            subforums.Add(subforum);
         }
 
-        public bool RemoveAdmin (int admin_id)
+        public bool RemoveAdmin (Member member)
         {
-           return admins.Remove(admin_id);
+           return admins.Remove(member);
         }
-        public bool RemoveMember(int member_id)
+        public bool RemoveMember(Member member)
         {
-
-           return members.Remove(member_id);
+           return members.Remove(member);
         }
-        public bool RemoveSubForum(int sforum_id)
+        public bool RemoveSubForum(Subforum subforum)
         {
-           return subforums.Remove(sforum_id);
+           return subforums.Remove(subforum);
         }
 
 

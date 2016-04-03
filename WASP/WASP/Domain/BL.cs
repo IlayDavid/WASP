@@ -9,14 +9,14 @@ namespace WASP.Domain
     class BL : IBL
     {
         private bool _initialized = false;
-        User supervisor = null;
-        Dictionary<int, User> users;
+        Member supervisor = null;
+        Dictionary<int, Member> users;
         Dictionary<int, Forum> forums;
 
 
         public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
         {
-                User moderator = users[moderator_ID];
+                Member moderator = users[moderator_ID];
                 
                 Subforum sf = findSubForum(sf_ID);
                 if (sf != null)
@@ -80,16 +80,16 @@ namespace WASP.Domain
             return findThread(thread_ID);
         }
 
-        public User initialize()
+        public Member initialize()
         {
             if (!_initialized)
             {
-                users = new Dictionary<int, User>();
+                users = new Dictionary<int, Member>();
                 forums = new Dictionary<int, Forum>();
 
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = new User(1,true,"",SUPERUSERNAME,"",SUPERPASSWORD);
+                supervisor = new Member(1,true,"",SUPERUSERNAME,"",SUPERPASSWORD);
                 _initialized = true;
                 return supervisor;
             }
@@ -122,17 +122,17 @@ namespace WASP.Domain
             return null;
         }
 
-        public string subscribeToForum(User user, int forum_ID)
+        public string subscribeToForum(Member member, int forum_ID)
         {
             try
             {
                 Forum f = forums[forum_ID];
-                f.AddMember(user);
-                return "user subscribe";
+                f.AddMember(member);
+                return "Member subscribe";
             }
             catch
             {
-                return "user did not subscribe";
+                return "Member did not subscribe";
             }
         }
 
@@ -142,10 +142,10 @@ namespace WASP.Domain
             throw new NotImplementedException();
         }
 
-        public List<User> getModerators(int subforumId)
+        public List<Member> getModerators(int subforumId)
         {
             var tuples= getSubforum(-1, subforumId).GetModerators();
-            List<User> mods=new List<User>();
+            List<Member> mods=new List<Member>();
             foreach (var tuple in tuples)
             {
                 mods.Add(tuple.Item1);
@@ -203,7 +203,7 @@ namespace WASP.Domain
                 if (message.isEmpty())
                     return -1;
 
-                User to = users[message.to_ID];
+                Member to = users[message.to_ID];
                 to.sendMessage(message);
                 return 1;
         }
@@ -242,12 +242,12 @@ namespace WASP.Domain
             return -1;
         }
 
-        public List<User> getAdmins(int forumId)
+        public List<Member> getAdmins(int forumId)
         {
             return forums[forumId].GetAdmins().ToList();
         }
 
-        public List<User> getMembers(int forumId)
+        public List<Member> getMembers(int forumId)
         {
             return forums[forumId].GetMembers().ToList();
         }

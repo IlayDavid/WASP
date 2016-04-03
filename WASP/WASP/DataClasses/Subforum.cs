@@ -1,109 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+
 namespace WASP
 {
     public class Subforum
     {
-        private int id;
-        private String name, description;
-        private Dictionary<int, Tuple<User,DateTime> > moderators;
-        private Dictionary<int, Post> threads;
+        private static int _idCounter = 0;
+        private readonly List<Tuple<Member,DateTime> > _moderators=new List<Tuple<Member, DateTime>>();
+        private readonly List<Post> _threads=new List<Post>();
 
-
-
-        public Subforum (int id, String name,String description)
+        public Subforum (String name,String description)
         {
-            this.id = id;
-            this.name = name;
-            this.description = description;
+            Id = _idCounter;
+            _idCounter++;
+            Name = name;
+            Description = description;
         }
 
-        public string Name
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int Id { get; set; }
+
+        public bool IsModerator (Member moderator)
         {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-        public string Description
-        {
-            get
-            {
-                return description;
-            }
-            set
-            {
-                description = value;
-            }
+            return _moderators.First((x) => x.Item1 == moderator)!=null;
         }
 
-        public int Id
+        public void AddModerator(Member mod,DateTime expr)
         {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
-        }
-
-        public Boolean IsModerator (int id)
-        {
-            return moderators.ContainsKey(id);
-        }
-
-        public void AddModerator(User mod,DateTime expr)
-        {
-            Tuple<User, DateTime> tup = new Tuple<User, DateTime>(mod, expr);
+            Tuple<Member, DateTime> tup = new Tuple<Member, DateTime>(mod, expr);
             
-            moderators.Add(mod.Id, tup);
+            _moderators.Add(tup);
         }
       
         public void AddThread (Post tr)
         {
-            threads.Add(tr.Id, tr);
+            _threads.Add( tr);
         }
  
-       public void RemoveModerator(int id)
+       public void RemoveModerator(Member moderator)
         {
-            moderators.Remove(id);
+            _moderators.Remove(_moderators.First((x) => x.Item1 == moderator));
         }
-       public void RemoveThread(int id)
+       public void RemoveThread(Post post)
         {
-            threads.Remove(id);
+            _threads.Remove(post);
         }
 
 
-        public Post[] GetThreads()
+        public List<Post> GetThreads()
         {
-            Post[] tr = new Post[threads.Values.Count];
-            threads.Values.CopyTo(tr, 0);
-            return tr;
+            return _threads;
         }
-        public Tuple<User, DateTime>[] GetModerators()
+        public List<Tuple<Member, DateTime>> GetModerators()
         {
-            Tuple<User, DateTime>[] mods = new Tuple<User, DateTime>[moderators.Values.Count];
-            moderators.Values.CopyTo(mods, 0);
-            return mods;
+            return _moderators;
         }
         public Post GetThread(int id)
         {
-            Post theThread;
-            threads.TryGetValue(id, out theThread);
-            return theThread;
+            
+            return _threads.First((x)=>x.Id==id);
         }
-        public Tuple<User, DateTime> GetModerator(int id)
+        public Tuple<Member, DateTime> GetModerator(Member moderator)
         {
-            Tuple<User, DateTime> mod;
-            moderators.TryGetValue(id,out mod);
-            return mod;
+            return _moderators.First((x) => x.Item1 == moderator);
         }
     }
 }

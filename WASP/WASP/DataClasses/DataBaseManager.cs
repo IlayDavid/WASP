@@ -13,7 +13,7 @@ namespace WASP.DataClasses
     /// </summary>
     public class DataBaseManager
     {
-        private List<User> _users=new List<User>();
+        private List<Member> _users=new List<Member>();
         private static DataBaseManager _dataBaseManager=new DataBaseManager();
         private DataBaseManager()
         {
@@ -23,12 +23,12 @@ namespace WASP.DataClasses
         {
             get { return _dataBaseManager; }
         }
-        public void AddUser(User user)
+        public void AddUser(Member member)
         {
-            _users.Add(user);
+            _users.Add(member);
         }
 
-        public User GetUser(string password, string username)
+        public Member GetUser(string password, string username)
         {
             return _users.First((x) => x.Password.Equals(password) && x.Username.Equals(username));
         }

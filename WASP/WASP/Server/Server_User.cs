@@ -64,11 +64,11 @@ namespace WASP.Server
                 return -1;
             }
         }
-        public string subscribeToForum(User user, int forum_ID)
+        public string subscribeToForum(Member member, int forum_ID)
         {
             try
             {
-                return _bl.subscribeToForum(user, forum_ID);
+                return _bl.subscribeToForum(member, forum_ID);
 
             }
             catch (Exception e)

@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WASP
 {
     public class Post
     {
-        private String title, content;
-        private User author;
-        private DateTime publishedAt, editAt;
-        private int id;
-        private Subforum container;
-        private Post inReplyTo;
-        private Dictionary<int, Post> replies;
+        private String _title, _content;
+        private Member _author;
+        private DateTime _publishedAt, _editAt;
+        private static int _idCounter=0; 
+        private int _id;
+        private Subforum _container;
+        private Post _inReplyTo;
+        private List<Post> _replies=new List<Post>();
 
-        public Post (String title, String content,int id, User author, DateTime now,Post inReplyTo,Subforum container,DateTime editAt)
+        public Post (String title, String content, Member author, DateTime now,Post inReplyTo,Subforum container,DateTime editAt)
         {
-            this.title = title;
-            this.content = content;
-            this.id = id;
-            this.publishedAt = now;
-            this.inReplyTo = inReplyTo;
-            this.author = author;
-            this.container = container;
-            this.editAt = editAt;
+            _title = title;
+            _content = content;
+            _id=_idCounter;
+            _idCounter++;
+            _publishedAt = now;
+            _inReplyTo = inReplyTo;
+            _author = author;
+            _container = container;
+            _editAt = editAt;
 
         }
 
@@ -32,40 +35,40 @@ namespace WASP
         {
             get
             {
-                return id;
+                return _id;
             }
             set
             {
-                id = value;
+                _id = value;
             }
         }
         public String Title
         {
             get
             {
-                return title;
+                return _title;
             }
             set
             {
-                title = value;
+                _title = value;
             }
         }
         public String Content
         {
             get
             {
-                return content;
+                return _content;
             }
             set
             {
-                content = value;
+                _content = value;
             }
         }
         public DateTime PublishedAt
         {
             get
             {
-                return publishedAt;
+                return _publishedAt;
             }
            
         }
@@ -73,18 +76,18 @@ namespace WASP
         {
             get
             {
-                return editAt;
+                return _editAt;
             }
             set
             {
-                editAt = value;
+                _editAt = value;
             }
         }
-        public User GetAuthor
+        public Member GetAuthor
         {
             get
             {
-                return author;
+                return _author;
             }
             
         }
@@ -92,11 +95,11 @@ namespace WASP
         {
             get
             {
-                return container;
+                return _container;
             }
             set
             {
-                container = value;
+                _container = value;
             }
         }
 
@@ -104,36 +107,32 @@ namespace WASP
         {
             get
             {
-                return inReplyTo;
+                return _inReplyTo;
             }
             set
             {
-                inReplyTo = value;
+                _inReplyTo = value;
             }
         }
         public bool IsOriginal()
         {
-            return inReplyTo == null;
+            return _inReplyTo == null;
         }
-        public void RemoveReply (int id)
+        public void RemoveReply (Post post)
         {
-            replies.Remove(id);
+            _replies.Remove(post);
         }
         public void AddReply(Post reply)
         {
-            replies.Add(reply.Id, reply);
+            _replies.Add(reply);
         }
-        public Post [] GetAllReplies()
+        public List<Post> GetAllReplies()
         {
-            Post[] replyArr = new Post[replies.Values.Count];
-            replies.Values.CopyTo(replyArr, 0);
-            return replyArr;
+            return _replies;
         }
         public Post GetReply (int id)
         {
-            Post reply;
-            replies.TryGetValue(id, out reply);
-            return reply;
+            return _replies.First((x)=>x.Id==id);
         }
        
 

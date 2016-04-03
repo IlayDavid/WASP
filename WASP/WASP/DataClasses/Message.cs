@@ -8,11 +8,17 @@ namespace WASP
 {
     public class Message
     {
-        internal int to_ID;
+        private string _content;
+        private string _title;
 
+        public Message(string content, string title)
+        {
+            _content = content;
+            _title = title;
+        }
         internal bool isEmpty()
         {
-            throw new NotImplementedException();
+            return (_content.Equals("") || _title.Equals(""));
         }
     }
 }

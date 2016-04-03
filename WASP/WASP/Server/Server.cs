@@ -71,7 +71,7 @@ namespace WASP.Server
         }
 
         
-        public User initialize()
+        public Member initialize()
         {
             try
             {
