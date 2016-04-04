@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -11,11 +10,12 @@ namespace WASP.Server
     // server_forum has explicit forum methods
     partial class Server : ServerAPI
     {
-        private IBL _bl = new BL();
+        Dictionary<Forum, IBL> forumsBL = new Dictionary<Forum, IBL>();
 
-        
-        public int deletePost(string userName, int threadId, int postId)
+        public int deletePost(Member member, Post post)
         {
+            IBL bl = null;
+            forumsBL.TryGetValue(member.MemberForum, out bl);
             try
             {
                 return _bl.deletePost(userName, threadId, postId);
@@ -26,7 +26,7 @@ namespace WASP.Server
             }
         }
 
-        public Thread getThread(int userId, int threadId)
+        public Post getThread(Member member, int threadId)
         {
             try
             {
@@ -39,9 +39,8 @@ namespace WASP.Server
             }
         }
 
-   
-
-        public int createThread(string userName, int subforumId, Thread thread)
+        public Post createThread(Member author, String title, String content, 
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
         {
             try
             {
@@ -54,11 +53,8 @@ namespace WASP.Server
             }
         }
 
-        
-
-        
-        
-        public int createPost(string userName, int threadId, Post post)
+        public Post createReplyPost(Member Author, String title, String content, 
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
         {
             try
             {
@@ -70,8 +66,7 @@ namespace WASP.Server
             }
         }
 
-        
-        public Member initialize()
+        public SuperUser initialize(String name, String userName, String email, String pass)
         {
             try
             {

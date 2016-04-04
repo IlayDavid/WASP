@@ -47,7 +47,7 @@ namespace WASP
          * Return: created forum        
          */
 
-        Forum createForum(SuperUser creator, String name, String description, Member admin);
+        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass);
 
         /// <summary>
         /// </summary>

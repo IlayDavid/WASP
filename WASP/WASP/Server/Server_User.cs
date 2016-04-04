@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WASP.Server
 {
     partial class Server
     {
-        public DateTime getModeratorTermTime(string userName, int subforumId)
+        public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
         {
             try
             {
@@ -19,7 +15,7 @@ namespace WASP.Server
                 return new DateTime();
             }
         }
-        public int addModerator(string userId, string userId1, int sfId, DateTime term)
+        public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             try
             {
@@ -31,7 +27,7 @@ namespace WASP.Server
             }
         }
 
-        public int login(string userName, string password)
+        public Member login(string userName, string password, Forum forum)
         {
             try
             {
@@ -42,7 +38,7 @@ namespace WASP.Server
                 return -1;
             }
         }
-        public void confirmEmail(int userId)
+        public int confirmEmail(Member member)
         {
             try
             {
@@ -53,7 +49,7 @@ namespace WASP.Server
                 throw;
             }
         }
-        public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
+        public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             try
             {
@@ -64,7 +60,7 @@ namespace WASP.Server
                 return -1;
             }
         }
-        public string subscribeToForum(Member member, int forum_ID)
+        public Member subscribeToForum(String userName, String name, String email, String pass, Forum targetForum)
         {
             try
             {
@@ -77,7 +73,7 @@ namespace WASP.Server
             }
         }
 
-        public int sendMessage(string userSend, string userAcc, Message message)
+        public int sendMessage(Member member, Member targetMember, Message message)
         {
             try
             {
