@@ -11,7 +11,6 @@ namespace WASP.Domain
         private static bool _initialized = false;
         private static SuperUser supervisor = null;
         Dictionary<int, Member> users;
-        Dictionary<int, Forum> forums;
 
 
         public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
@@ -25,7 +24,7 @@ namespace WASP.Domain
                     return 0;
                 }
                 else
-                    return -1;
+                    return 11111;
         }
 
         public int createSubForum(int user_ID, Subforum sf)
