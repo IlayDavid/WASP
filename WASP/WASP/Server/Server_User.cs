@@ -32,6 +32,8 @@ namespace WASP.Server
 
         public Member login(string userName, string password, Forum forum)
         {
+            if (userName.Equals("") || password.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(forum);
@@ -68,6 +70,9 @@ namespace WASP.Server
         }
         public Member subscribeToForum(String userName, String name, String email, String pass, Forum targetForum)
         {
+            if (userName.Equals("") || name.Equals("") || !email.Contains("@") || !email.Contains(".") ||
+                pass.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(targetForum);

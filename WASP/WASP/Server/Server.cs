@@ -38,12 +38,14 @@ namespace WASP.Server
         }
 
         public Post createThread(Member author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+            DateTime now, Subforum container)
         {
+            if (title.Equals("") && content.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createThread(author, title, content, now, inReplyTo, container, editAt);
+                return forum_bl.createThread(author, title, content, now, container);
             }
             catch (Exception)
             {
@@ -52,12 +54,14 @@ namespace WASP.Server
         }
 
         public Post createReplyPost(Member author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+            DateTime now, Post inReplyTo, Subforum container)
         {
+            if (title.Equals("") && content.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
+                return forum_bl.createReplyPost(author, title, content, now, inReplyTo, container);
             }
             catch (Exception)
             {
@@ -67,6 +71,9 @@ namespace WASP.Server
 
         public SuperUser initialize(String name, String userName, String email, String pass)
         {
+            if (name.Equals("") || userName.Equals("") || !email.Contains("@") || !email.Contains(".") ||
+                pass.Equals(""))
+                return null;
             try
             {
                 return bl.initialize(name, userName, email, pass);

@@ -15,8 +15,10 @@ namespace WASP
         private Post _inReplyTo;
         private List<Post> _replies=new List<Post>();
 
-        public Post (String title, String content, Member author, DateTime now,Post inReplyTo,Subforum container,DateTime editAt)
+        public Post (String title, String content, Member author, DateTime now,Post inReplyTo,Subforum container)
         {
+            
+            _editAt = now;
             _title = title;
             _content = content;
             _id=_idCounter;
@@ -25,10 +27,20 @@ namespace WASP
             _inReplyTo = inReplyTo;
             _author = author;
             _container = container;
-            _editAt = editAt;
 
         }
+        public Post(String title, String content, Member author, DateTime now, Subforum container)
+        {
+            _editAt = now;
+            _title = title;
+            _content = content;
+            _id = _idCounter;
+            _idCounter++;
+            _publishedAt = now;
+            _author = author;
+            _container = container;
 
+        }
 
 
         public int Id

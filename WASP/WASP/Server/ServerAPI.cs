@@ -37,7 +37,7 @@ namespace WASP
         * Checking: if there is threadId in sf
         * Return: the created thread
         */
-        Post createThread(Member author,String title, String content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+        Post createThread(Member author,String title, String content, DateTime now, Subforum container);
 
         /*
          * Pre-conditions: Member is loged-in 
@@ -80,7 +80,7 @@ namespace WASP
         * Checking: if there is threadId in sf
         * Return: number > 0, if success
         */
-        Post createReplyPost(Member Author, String title, String content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+        Post createReplyPost(Member Author, String title, String content, DateTime now, Post inReplyTo, Subforum container);
 
 
         //----------------------------------------------------------------------------------------------------

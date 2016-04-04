@@ -39,12 +39,10 @@ namespace WASP.Domain
         {
             return member.MemberForum.GetSubForum(subforumId);
         }
-
-        //TODO: check api. is "inreplyto" required?
-        //TODO: doublecheck current implementation
-        public Post createThread(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        
+        public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
         {
-            return new Post(title, content, author, now, inReplyTo, container, editAt);
+            return new Post(title, content, author, now, container);
         }
 
         public List<Member> getModerators(Member member, Subforum subforum)
@@ -63,9 +61,9 @@ namespace WASP.Domain
             return new Subforum(name, description);
         }
 
-        public Post createReplyPost(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        public Post createReplyPost(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container)
         {
-            return new Post(title, content, author, now, inReplyTo, container, editAt);
+            return new Post(title, content, author, now, inReplyTo, container);
         }
 
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)

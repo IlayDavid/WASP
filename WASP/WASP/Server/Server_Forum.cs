@@ -33,6 +33,9 @@ namespace WASP.Server
         }
         public Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass)
         {
+            if (forumName.Equals("") || description.Equals("") || userName.Equals("") || adminName.Equals("") ||
+                pass.Equals("") || !email.Contains("@") || !email.Contains("."))
+                return null;
             try
             {
                 return bl.createForum(creator, forumName, description, userName, adminName, email, pass);
@@ -84,7 +87,7 @@ namespace WASP.Server
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getMembers(member, forum);
+                return forum_bl.getMembers(member);
             }
             catch (Exception)
             {
@@ -119,6 +122,8 @@ namespace WASP.Server
         }
         public Subforum createSubForum(Member member, String name, String description)
         {
+            if (name.Equals("") || description.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
