@@ -13,19 +13,7 @@ namespace WASP.TestSuits
 
         [TestMethod]
 
-        public void superManTest()
-        {
-            // arrange
-            User user1 = new User(0, false, "edan", "habler", "email", "123");
-            User superMan = new User(1, true, "admin", "admin", "admin", "123");
-
-            // act
-            
-            // assert
-            Assert.AreEqual(false, user1.IsSuperMan, "checking if user1 not admin");
-            Assert.AreEqual(1, superMan.IsSuperMan, "check if superman is admin");
-
-        }
+        
 
         public void UserReplies()
         {
