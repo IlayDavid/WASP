@@ -43,11 +43,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Driver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyBridge.cs" />
+    <Compile Include="RealBridge.cs" />
+    <Compile Include="Tests\AddModeratorTests.cs" />
+    <Compile Include="Tests\CreateForumTests.cs" />
+    <Compile Include="Tests\CreateSubForumTests.cs" />
+    <Compile Include="Tests\DeletePostTests.cs" />
+    <Compile Include="Tests\InitializeTests.cs" />
+    <Compile Include="Tests\OpenThreadTests.cs" />
+    <Compile Include="Tests\PostMsgTests.cs" />
+    <Compile Include="Tests\SendPrivateMsgTests.cs" />
+    <Compile Include="Tests\SubscribeForumTests.cs" />
+    <Compile Include="WASPBridge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WASP\WASP.csproj">
+      <Project>{49a2c0d6-aa65-409a-a7f6-44b56d1e4735}</Project>
+      <Name>WASP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
