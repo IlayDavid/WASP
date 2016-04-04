@@ -8,12 +8,12 @@ namespace WASP.Server
     partial class Server
     {
         
-        public List<Member> getAdmins(User member, Forum forum)
+        public List<Member> getAdmins(User user, Forum forum)
         {
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(forum);
-                return forum_bl.getAdmins(forum.Id);
+                return forum_bl.getAdmins(user);
             }
             catch (Exception)
             {
