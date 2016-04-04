@@ -52,8 +52,9 @@ namespace WASP
             {
                 _title = value;
             }
-        }
-        public String Content
+        } 
+
+        public string Content
         {
             get
             {

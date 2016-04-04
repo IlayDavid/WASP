@@ -13,13 +13,13 @@ namespace WASP
         private List<Subforum> subforums = new List<Subforum>();
         private List<Member> members=new List<Member>();
         private List<Member> admins=new List<Member>();
-        public Forum(String name, String description, Member admin)
+        public Forum(String name, String description)
         {
             _id=_idCounter;
             _idCounter++;
             _name = name;
             _description = description;
-            admins.Add(admin);
+           
         }
 
 
