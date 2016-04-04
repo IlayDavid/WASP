@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WASP.DataClasses;
+using WASP.Domain;
 
 namespace WASP.Server
 {
     partial class Server
     {
-        public List<Member> getAdmins(int forumId)
+        public List<Member> getAdmins(User member, Forum forum)
         {
             try
             {
-                return _bl.getAdmins(forumId);
+                return _bl.getAdmins(forum);
             }
             catch (Exception)
             {
                 return null;
             }
         }
-        public Forum getForum(int userId, int forumId)
+        public Forum getForum(Member member, int forumId)
         {
             try
             {
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
                 return _bl.getForum(userId, forumId);
             }
             catch (Exception)
@@ -30,7 +32,7 @@ namespace WASP.Server
                 return null;
             }
         }
-        public int createForum(string userName, Forum forum)
+        public Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass)
         {
             try
             {
@@ -42,7 +44,7 @@ namespace WASP.Server
             }
         }
 
-        public List<Forum> getAllForums()
+        public List<Forum> getAllForums(User member)
         {
             try
             {
@@ -54,46 +56,42 @@ namespace WASP.Server
             }
         }
 
-        public List<Member> getModerators(int subforumId)
+        public List<Member> getModerators(Member member, Subforum subforum)
         {
             try
             {
-                return _bl.getModerators(subforumId);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        public Subforum getSubforum(int userId, int subforumId)
-        {
-            try
-            {
-                return _bl.getSubforum(userId, subforumId);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        public List<Member> getMembers(int forumId)
-        {
-            try
-            {
-                return _bl.getMembers(forumId);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
 
-
-        public List<Subforum> getSubforums(int forumId)
+                return bl.getModerators(member, subforum);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public Subforum getSubforum(Member member, int subforumId)
         {
             try
             {
-                return _bl.getSubforums(forumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforum(member, subforumId);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public List<Member> getMembers(Member member, Forum forum)
+        {
+            try
+            {
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getMembers(member, forum);
             }
             catch (Exception)
             {
@@ -102,19 +100,22 @@ namespace WASP.Server
         }
 
 
-        public int updateForum(int userId, int forumId)
+        public List<Subforum> getSubforums(Member member, Forum forum)
         {
             try
             {
-                return _bl.updateForum(userId, forumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforums(member);
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
 
-        public int defineForumPolicy(int userId, Forum forum)
+        public int defineForumPolicy(SuperUser member, Forum forum)
         {
             try
             {
@@ -125,15 +126,18 @@ namespace WASP.Server
                 return -1;       
             }
         }
-        public int createSubForum(string userName, int forumId, Subforum sf)
+        public Subforum createSubForum(Member member, String name, String description)
         {
             try
             {
-                return _bl.createSubForum(userName, forumId, sf);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.createSubForum(member, name, description);
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
 
