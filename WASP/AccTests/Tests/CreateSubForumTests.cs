@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using WASP;
+using WASP.DataClasses;
 
 
 namespace AccTests.Tests
@@ -13,9 +15,8 @@ namespace AccTests.Tests
 
 
         private WASPBridge _proj;
-        private User _supervisor;
-        private User _admin;
-        private int _forumId;
+        private SuperUser _supervisor;
+        private Forum _forum;
         private Subforum _subforum;
 
         [TestFixtureSetUp]
@@ -27,10 +28,8 @@ namespace AccTests.Tests
         [SetUp]
         public void setUp()
         {
-            _supervisor = _proj.initialize();
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            _forumId = _proj.createForum(_supervisor._userName, forum);
+            _supervisor = Functions.InitialSystem(_proj);
+            _forum = Functions.CreateSpecForum(_proj, _supervisor);
             _subforum = new Subforum("Calander-Start-Up",
                 new User ("mod1","123456","mod1","mod1@post.bgu.ac.il"));
         }

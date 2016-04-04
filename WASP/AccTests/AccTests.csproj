@@ -55,6 +55,7 @@
     <Compile Include="Tests\CreateForumTests.cs" />
     <Compile Include="Tests\CreateSubForumTests.cs" />
     <Compile Include="Tests\DeletePostTests.cs" />
+    <Compile Include="Tests\Functions.cs" />
     <Compile Include="Tests\InitializeTests.cs" />
     <Compile Include="Tests\OpenThreadTests.cs" />
     <Compile Include="Tests\PostMsgTests.cs" />
