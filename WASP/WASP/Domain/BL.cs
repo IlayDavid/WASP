@@ -12,7 +12,7 @@ namespace WASP.Domain
 
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
         {
-            Forum newForum = new Forum(forumName, description, null);
+            Forum newForum = new Forum(forumName, description);
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
 

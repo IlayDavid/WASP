@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WASP.DataClasses;
 
 namespace WASP.Domain
 {
@@ -20,7 +21,6 @@ namespace WASP.Domain
         Post createReplyPost(Member author, String title, String content,
             DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
         int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term);
-        int updateForum(int userId, int forumId);
         Forum getForum();
         int defineForumPolicy(SuperUser member, Forum forum);  //------------------------ policy object??
         Member subscribeToForum(String userName, String name, String email, String pass);
@@ -29,8 +29,8 @@ namespace WASP.Domain
         int confirmEmail(Member member);
         int deletePost(Member member, Post post);
         Member login(string userName, string password);
-        List<Member> getAdmins(int forumId);
-        List<Member> getMembers(Member member, Forum forum);
+        List<Member> getAdmins(User user);
+        List<Member> getMembers(Member member);
         List<Subforum> getSubforums(Member member);
     }
 }
