@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,7 +52,6 @@
     <Compile Include="Tests\CreateForumTests.cs" />
     <Compile Include="Tests\CreateSubForumTests.cs" />
     <Compile Include="Tests\DeletePostTests.cs" />
-    <Compile Include="Tests\Functions.cs" />
     <Compile Include="Tests\InitializeTests.cs" />
     <Compile Include="Tests\OpenThreadTests.cs" />
     <Compile Include="Tests\PostMsgTests.cs" />
@@ -65,16 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WASP\WASP.csproj">
       <Project>{49a2c0d6-aa65-409a-a7f6-44b56d1e4735}</Project>
       <Name>WASP</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
