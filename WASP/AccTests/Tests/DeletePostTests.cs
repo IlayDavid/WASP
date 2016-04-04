@@ -2,7 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
-
+using WASP;
+using WASP.DataClasses;
 namespace AccTests.Tests
 {
     /// <summary>
@@ -13,13 +14,13 @@ namespace AccTests.Tests
     {
 
         private WASPBridge _proj;
-        private int _forumId;
-        private int _subforumId;
-        private User _supervisor;
-        private User _admin;
-        private int _threadId;
+        private Forum _forum;
+        private Subforum _subforum;
+        private SuperUser _supervisor;
+        private Member _admin;
+        private Post _openPost;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -28,12 +29,17 @@ namespace AccTests.Tests
         [SetUp]     //before each Test
         public void SetUp()
         {
-            _supervisor = _proj.initialize();
-
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            Subforum subforum = new Subforum("Calander-Start-Up", new User ("mod1","1234","mod1","mod1@post.bgu.ac.il"));
-            Post openPost = new Post("Someone know a good web service for Calander?");
+            _supervisor = Functions.InitialSystem(_proj);
+            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
+            _forum = forumAndMember.Item1;
+            _admin = forumAndMember.Item2;
+            Member moderator = _proj.subscribeToForum("admin", "moshe", "admin@post.bgu.ac.il", 
+                                     "admin123", _forum);
+            Subforum subforum = _proj.createSubForum(_admin, "Calander-Start-Up", "blah", moderator);
+            Post openPost = _proj.createThread(moderator,"calander web servic", "Someone know a good web service for Calander?",
+                DateTime.Now, null, subforum,
+                        )
+            Post openPost = new Po
             UserThread thread = new UserThread("webService for calander", openPost);
             _forumId = _proj.createForum(_supervisor._userName, forum);
             _subforumId = _proj.createSubForum(_supervisor._userName, _forumId, subforum);

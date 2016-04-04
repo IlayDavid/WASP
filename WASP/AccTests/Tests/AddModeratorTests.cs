@@ -2,7 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
-
+using WASP;
+using WASP.DataClasses;
 
 namespace AccTests.Tests
 {
@@ -16,12 +17,14 @@ namespace AccTests.Tests
 
 
         private WASPBridge _proj;
-        private User _supervisor;
-        private User _admin;
-        private int _forumId;
-        private int _subforumId;
+        private SuperUser _supervisor;
+        private Member _admin;
+        private Forum _forum;
+        private Subforum _subforum;
+        private Member _moderator;
+        private Member _member1;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
 
         public void SystemSetUp()
         {
@@ -31,68 +34,109 @@ namespace AccTests.Tests
 
         public void setUp()
         {
-            _supervisor = _proj.initialize();
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            _forumId = _proj.createForum(_supervisor._userName, forum);
-            Subforum subforum = new Subforum("Calander-Start-Up", new User("moder", "123456", "moder", "moderator@post.bgu.ac.il"));
-            _subforumId = _proj.createSubForum(_supervisor._userName, _forumId, subforum);
+            _supervisor = Functions.InitialSystem(_proj);
+
+            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj,_supervisor);
+            _forum = forumAndAdmin.Item1;
+            _admin = forumAndAdmin.Item2;
+
+            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            _subforum = subforumAndModerator.Item1;
+            _moderator = subforumAndModerator.Item2;
+
+            _member1 = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum);
+
         }
 
         /// <summary>
-        /// Positive Test:  checks that supervisor can add a moderator to subforum
+        /// Positive Test:  checks that modirator can add a moderator to subforum
         ///                 checks that the term's update is succeed
         /// </summary>
         [Test]
-        public void addModeratorTest1()
+        public void addModeratorAndUpdateTermTest1()
         {
-            User user = new User("amitaySH", "123456", "amitay", "amitaySH@post.bgu.ac.il");
-            Assert.Greater(_proj.addModerator(_supervisor._userName,user._userName, _subforumId, new DateTime(2017,1,1)), 0);
-            Assert.Equals(_proj.getModerators(_subforumId).Count, 2);
-            Assert.Greater(_proj.updateModeratorTerm(_supervisor._userName, user._userName, _subforumId, DateTime.Now.AddDays(10)), 0);
-            Assert.Equals(_proj.getModeratorTermTime(user._userName, _subforumId), DateTime.Now.AddDays(10));
+            int isModerator = _proj.addModerator(_moderator, _member1, _subforum, DateTime.Now.AddDays(200));
+            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.Equals(_proj.getModerators(_admin,_subforum).Count, 2);
+
+            int isModified = _proj.updateModeratorTerm(_moderator,_member1,_subforum, DateTime.Now.AddDays(100));
+            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.Equals(_proj.getModeratorTermTime(_moderator, _member1, _subforum), DateTime.Now.AddDays(100));
         }
+
 
         /// <summary>
         /// Positive Test:  checks that admin of a forum can add a moderator to the forum's subforum
         ///                 checks that the term's update is succeed
         /// </summary>
         [Test]
-        public void addModeratorTest2()
+        public void addModeratorAndUpdateTermTest2()
         {
-            User user = new User("amitaySH", "123456", "amitay", "amitaySH@post.bgu.ac.il"); 
-            Assert.Greater(_proj.addModerator(_admin._userName, user._userName, _subforumId, DateTime.Now.AddDays(20)), 0);
-            Assert.Equals(_proj.getModerators(_subforumId).Count, 2);
-            Assert.Greater(_proj.updateModeratorTerm(_admin._userName, user._userName, _subforumId, DateTime.Now.AddDays(10)), 0);
-            Assert.Equals(_proj.getModeratorTermTime(user._userName, _subforumId), DateTime.Now.AddDays(10));
-        }
-        /// <summary>
-        /// Nagative Test - NF secure test:
-        ///     checks that the term time is not updated by unauthorized user
-        /// </summary>
+            int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
+            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 2);
 
-        public void addModeratorTest3()
-        {
-            User user = new User("amitaySH", "123456", "amitay", "amitaySH@post.bgu.ac.il");
-            Assert.Greater(_proj.addModerator(_admin._userName, user._userName, _subforumId, DateTime.Now.AddDays(20)), 0);
-            Assert.LessOrEqual(_proj.updateModeratorTerm("unauthorizedUser", user._userName, _subforumId, DateTime.Now.AddDays(10)), 0);
-            Assert.Equals(_proj.getModeratorTermTime(user._userName, _subforumId), DateTime.Now.AddDays(20));
+            int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(100));
+            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(100));
         }
+       
 
         /// <summary>
         /// Nagative Test - NF secure test:
         ///     checks that another forum's admin cannot term a moderator for another subforum
         /// </summary>
-        public void addModeratorTest4()
+        public void addModeratorAndUpdateTermTest3()
         {
-            // creates another forum with his admin
-            User admin = new User("NoamB", "123456", "Noam", "NoamB@post.bgu.ac.il");
-            Forum forum = new Forum("Philosophia", admin);
-            int forumId = _proj.createForum(_supervisor._userName, forum);
+
+            Forum forum = _proj.createForum(_supervisor, "forum1", "blah", "haaronB",
+                                            "haaron", "haaronB@post.bgu.ac.il", "haaron123");
+            Member admin = _proj.getAdmin(_supervisor, forum, "haaronB");
 
             //another admin tries to add a moderator
-            User user = new User("amitaySH", "123456", "amitay", "amitaySH@post.bgu.ac.il");
-            Assert.LessOrEqual(_proj.addModerator(admin._userName, user._userName, _subforumId, DateTime.Now.AddDays(20)), 0);
+            int isModerator = _proj.addModerator(admin, _member1, _subforum, DateTime.Now.AddDays(200));
+            Assert.Less(isModerator, 0);
+
+            isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
+            Assert.GreaterOrEqual(isModerator, 0);
+
+            int isModified = _proj.updateModeratorTerm(admin, _member1, _subforum, DateTime.Now.AddDays(100));
+            Assert.Less(isModified, 0);
+
+        }
+          
+/* edit name + RTM*/
+        
+            
+            /// <summary>
+        /// Nagative Test: invalid date time
+        /// </summary>
+        public void addModeratorAndUpdateTermTest4()
+        {
+            int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(-10));
+            Assert.Less(isModerator, 0);
+            Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 1);
+
+            isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
+            int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(-1));
+            Assert.Less(isModerator, 0);
+            Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(200));
+        }
+      
+        
+        /// <summary>
+        /// Nagative Test: lack of information
+        /// </summary>
+        public void addModeratorAndUpdateTermTest5()
+        {
+            int isModerator = _proj.addModerator(_admin, _member1, null, DateTime.Now);
+            Assert.Less(isModerator, 0);
+
+            isModerator = _proj.addModerator(null, _member1, _subforum, DateTime.Now);
+            Assert.Less(isModerator, 0);
+
+            isModerator = _proj.addModerator(_admin, null, _subforum, DateTime.Now);
+            Assert.Less(isModerator, 0);
         }
     }
 }

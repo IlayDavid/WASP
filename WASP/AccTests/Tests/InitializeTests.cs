@@ -2,6 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
+using WASP;
+using WASP.DataClasses;
 
 namespace AccTests
 {
@@ -11,39 +13,36 @@ namespace AccTests
     {
         private WASPBridge _proj;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
-        public void SetUp()
-        {
-        }
-
-        [TearDown]     //before each Test
-        public void TearDown()
-        {
-
-        }
+        
         /// <summary>
-        /// checks that the initialization return a vaild supervisor
+        /// Positive Test: checks that the initialization return a vaild supervisor
         /// </summary>
         [Test]
         public void initTest1()
         {
-            Assert.Equals(_proj.initialize(), null);
+            SuperUser supervisor = _proj.initialize("Moshe", "SuperUser", "moshe@post.bgu.ac.il", "moshe123");
+            Assert.Equals(supervisor.Name, "Moshe");
+            Assert.Equals(supervisor.UserName , "SuperUser");
+            Assert.Equals(supervisor.Email, "moshe@post.bgu.ac.il");
+            Assert.Equals(supervisor.Password, "moshe123");
         }
 
         /// <summary>
-        /// check that the supervior which return from the initialization, sign-in system
+        /// Nagative Test: lack of information
         /// </summary>
         [Test]
         public void initTest2()
         {
-            User supervisor = _proj.initialize();
-            Assert.AreEqual(_proj.login(supervisor._userName, supervisor._password), 1);
+            Assert.IsNull(_proj.initialize("", "SuperUser", "moshe@post.bgu.ac.il", "moshe123"));
+            Assert.IsNull(_proj.initialize("Moshe", "", "moshe@post.bgu.ac.il", "moshe123"));
+            Assert.IsNull(_proj.initialize("Moshe", "SuperUser", "", "moshe123"));
+            Assert.IsNull(_proj.initialize("Moshe", "SuperUser", "moshe@post.bgu.ac.il", ""));
         }
 
     }
