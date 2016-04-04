@@ -7,13 +7,11 @@ namespace WASP.Server
 {
     partial class Server
     {
-        
         public List<Member> getAdmins(User member, Forum forum)
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(forum);
-                return forum_bl.getAdmins(forum.Id);
+                return _bl.getAdmins(forum);
             }
             catch (Exception)
             {
@@ -24,7 +22,10 @@ namespace WASP.Server
         {
             try
             {
-                return bl.getForum(member, forumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return _bl.getForum(userId, forumId);
             }
             catch (Exception)
             {
@@ -35,11 +36,11 @@ namespace WASP.Server
         {
             try
             {
-                return bl.createForum(creator, forumName, description, userName, adminName, email, pass);
+                return _bl.createForum(userName, forum);
             }
             catch (Exception)
             {
-                return null;
+                return -1;
             }
         }
 
@@ -47,7 +48,7 @@ namespace WASP.Server
         {
             try
             {
-                return bl.getAllForums();
+                return _bl.getAllForums();
             }
             catch (Exception)
             {
@@ -59,8 +60,10 @@ namespace WASP.Server
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getModerators(member, subforum);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getModerators(member, subforum);
             }
             catch (Exception)
             {
@@ -71,8 +74,10 @@ namespace WASP.Server
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getSubforum(member, subforumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforum(member, subforumId);
             }
             catch (Exception)
             {
@@ -83,8 +88,10 @@ namespace WASP.Server
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getMembers(member, forum);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getMembers(member, forum);
             }
             catch (Exception)
             {
@@ -92,12 +99,15 @@ namespace WASP.Server
             }
         }
 
+
         public List<Subforum> getSubforums(Member member, Forum forum)
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getSubforums(member);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforums(member);
             }
             catch (Exception)
             {
@@ -109,8 +119,7 @@ namespace WASP.Server
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(forum);
-                return forum_bl.defineForumPolicy(member, forum);
+                return _bl.defineForumPolicy(userId, forum);
             }
             catch (Exception)
             {
@@ -121,13 +130,16 @@ namespace WASP.Server
         {
             try
             {
-                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.createSubForum(member, name, description);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.createSubForum(member, name, description);
             }
             catch (Exception)
             {
                 return null;
             }
         }
+
     }
 }
