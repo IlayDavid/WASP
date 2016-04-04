@@ -32,7 +32,7 @@ namespace AccTests.Tests
 
             _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
             Forum forum = new Forum("Start-Up", _admin);
-            Subforum subforum = new Subforum("Calander-Start-Up");
+            Subforum subforum = new Subforum("Calander-Start-Up", new User ("mod1","1234","mod1","mod1@post.bgu.ac.il"));
             Post openPost = new Post("Someone know a good web service for Calander?");
             UserThread thread = new UserThread("webService for calander", openPost);
             _forumId = _proj.createForum(_supervisor._userName, forum);

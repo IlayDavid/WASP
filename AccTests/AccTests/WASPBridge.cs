@@ -48,7 +48,21 @@ namespace AccTests
          *                  forum = forum details
          * Return: forum id > 0        
          */
+
         int createForum(string userName, Forum forum);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="_subforumId"></param>
+        /// <returns> subforum's moderatores </returns>
+        List<User> getModerators(int _subforumId);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="_userName"> moderator userName</param>
+        /// <param name="_subforumId"> which of subforum we talk about</param>
+        /// <returns> date of moderator's term time</returns>
+        DateTime getModeratorTermTime(string _userName, int _subforumId);
 
         /* 
          * Pre-conditions: user is loged-in 
@@ -57,7 +71,11 @@ namespace AccTests
          * Return: subforumId > 0               
          */
         int createSubForum(string userName,int forumId, Subforum sf);
-
+        /// <summary>
+        /// </summary>
+        /// <returns> all system's forums</returns>
+        List<Forum> getAllForums();
+        
         /*
         * Porpose: to  a post at thread in  a thread "user" to "forum", if doesnt exist returns NULL
         * Checking: if there is threadId in sf
