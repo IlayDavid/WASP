@@ -8,6 +8,8 @@ namespace WASP
 {
     public class Message
     {
+        private static int _idCounter = 0;
+        private int _id;
         private string _content;
         private string _title;
 
@@ -18,6 +20,8 @@ namespace WASP
         }
         internal bool isEmpty()
         {
+            _id = _idCounter;
+            _idCounter++;
             return (_content.Equals("") || _title.Equals(""));
         }
     }
