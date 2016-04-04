@@ -7,16 +7,16 @@ namespace WASP
     public interface ServerAPI
     {
         /*
-      * Purpose: initialize the system and logs the superuser in
-      * Return: a Member with Admin Premissions
-      */
+        * Purpose: initialize the system and logs the superuser in
+        * Return: a Member with Admin Premissions
+        */
         SuperUser initialize(String name, String userName, String email, String pass);
 
         /*
- * Porpose: returns a thread "Member" to "forum", if doesnt exist returns NULL
- * Checking: if there is threadId in sf
- * post condition: result is an opening post
- */
+         * Porpose: returns a thread "Member" to "forum", if doesnt exist returns NULL
+         * Checking: if there is threadId in sf
+         * post condition: result is an opening post
+         */
         Post getThread(Member member, int threadId);
 
         /*
@@ -33,10 +33,10 @@ namespace WASP
         //----------------------------------------------------------------------------------------------------
 
         /*
- * Porpose: create thread
- * Checking: if there is threadId in sf
- * Return: the created thread
- */
+        * Porpose: create thread
+        * Checking: if there is threadId in sf
+        * Return: the created thread
+        */
         Post createThread(Member author,String title, String content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
 
         /*
@@ -47,7 +47,7 @@ namespace WASP
          * Return: created forum        
          */
 
-        Forum createForum(SuperUser creator, String name, String description, Member admin);
+        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass);
 
         /// <summary>
         /// </summary>

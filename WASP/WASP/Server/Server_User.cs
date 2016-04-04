@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WASP.Domain;
 
 namespace WASP.Server
 {
     partial class Server
     {
-        public DateTime getModeratorTermTime(string userName, int subforumId)
+        public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
         {
             try
             {
-                return _bl.getModeratorTermTime(userName, subforumId);
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.getModeratorTermTime(member, moderator, subforum);
             }
             catch (Exception)
             {
                 return new DateTime();
             }
         }
-        public int addModerator(string userId, string userId1, int sfId, DateTime term)
+        public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             try
             {
-                return _bl.addModerator(userId, userId1, sfId, term);
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.addModerator(member, moderator, subforum, term);
             }
             catch (Exception)
             {
@@ -31,57 +30,61 @@ namespace WASP.Server
             }
         }
 
-        public int login(string userName, string password)
+        public Member login(string userName, string password, Forum forum)
         {
             try
             {
-                return _bl.login(userName, password);
+                ForumIBL forum_bl = bl.getForumIBL(forum);
+                return forum_bl.login(userName, password);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public int confirmEmail(Member member)
+        {
+            try
+            {
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.confirmEmail(member);
             }
             catch (Exception)
             {
                 return -1;
             }
         }
-        public void confirmEmail(int userId)
+        public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             try
             {
-                _bl.confirmEmail(userId);
-            }
-            catch (Exception exception)
-            {
-                throw;
-            }
-        }
-        public int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term)
-        {
-            try
-            {
-                return _bl.updateModeratorTerm(userName1, userName2, sfId, term);
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.updateModeratorTerm(member, moderator, subforum, term);
             }
             catch (Exception)
             {
                 return -1;
             }
         }
-        public string subscribeToForum(Member member, int forum_ID)
+        public Member subscribeToForum(String userName, String name, String email, String pass, Forum targetForum)
         {
             try
             {
-                return _bl.subscribeToForum(member, forum_ID);
-
+                ForumIBL forum_bl = bl.getForumIBL(targetForum);
+                return forum_bl.subscribeToForum(userName, name, email, pass);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return e.Message;
+                return null;
             }
         }
 
-        public int sendMessage(string userSend, string userAcc, Message message)
+        public int sendMessage(Member member, Member targetMember, Message message)
         {
             try
             {
-                return _bl.sendMessage(userSend, userAcc, message);
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.sendMessage(member, targetMember, message);
             }
             catch (Exception)
             {
