@@ -2,7 +2,9 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
-
+using WASP;
+using WASP.DataClasses;
+using AccTests.Tests;
 
 namespace AccTests.Tests
 {
@@ -13,13 +15,11 @@ namespace AccTests.Tests
     public class AddModeratorTests
     {
 
-
-
         private WASPBridge _proj;
-        private User _supervisor;
-        private User _admin;
-        private int _forumId;
+        private SuperUser _supervisor;
+        private Member _admin;
         private int _subforumId;
+        private Forum _forum;
 
         [TestFixtureSetUp]
 
@@ -31,10 +31,12 @@ namespace AccTests.Tests
 
         public void setUp()
         {
-            _supervisor = _proj.initialize();
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            _forumId = _proj.createForum(_supervisor._userName, forum);
+            _supervisor = Functions.InitialSystem(_proj);
+
+            //String userName, String name, String email, String pass, Forum memberForum
+            _admin = new Member("matansar","matan", "matansar@post.bgu.ac.il", "matan123", null);
+            _forum = _proj.createForum(_supervisor, "start-up", "ideas", "admin",
+                                            "david", "david@post.bgu.ac.il", "david123");
             Subforum subforum = new Subforum("Calander-Start-Up", new User("moder", "123456", "moder", "moderator@post.bgu.ac.il"));
             _subforumId = _proj.createSubForum(_supervisor._userName, _forumId, subforum);
         }
