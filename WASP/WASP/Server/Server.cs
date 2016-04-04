@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -10,16 +9,14 @@ namespace WASP.Server
     // server_forum has explicit forum methods
     partial class Server : ServerAPI
     {
-        Dictionary<Forum, IBL> forumsBL = new Dictionary<Forum, IBL>();
+        IBL bl = new BL();
 
         public int deletePost(Member member, Post post)
         {
             try
             {
-                IBL bl = null;
-                forumsBL.TryGetValue(member.MemberForum, out bl);
-
-                return bl.deletePost(member, post);
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.deletePost(member, post);
             }
             catch (Exception)
             {
@@ -31,11 +28,8 @@ namespace WASP.Server
         {
             try
             {
-                IBL bl = null;
-                forumsBL.TryGetValue(member.MemberForum, out bl);
-
-                return bl.getThread(member, threadId);
-
+                ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
+                return forum_bl.getThread(member, threadId);
             }
             catch (Exception)
             {
@@ -48,10 +42,8 @@ namespace WASP.Server
         {
             try
             {
-                IBL bl = null;
-                forumsBL.TryGetValue(member.MemberForum, out bl);
-
-                return bl.createThread(author, title, content, now, inReplyTo, container, editAt);
+                ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
+                return forum_bl.createThread(author, title, content, now, inReplyTo, container, editAt);
             }
             catch (Exception)
             {
@@ -64,10 +56,8 @@ namespace WASP.Server
         {
             try
             {
-                IBL bl = null;
-                forumsBL.TryGetValue(member.MemberForum, out bl);
-
-                return bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
+                ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
+                return forum_bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
             }
             catch (Exception)
             {
@@ -79,7 +69,7 @@ namespace WASP.Server
         {
             try
             {
-                return BL.initialize();
+                return bl.initialize(name, userName, email, pass);
             }
             catch (Exception)
             {

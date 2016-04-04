@@ -13,6 +13,13 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
+C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+=======
 D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\bin\Debug\WASP.exe.config
 D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\obj\Debug\WASP.exe
 D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\obj\Debug\WASP.pdb
+>>>>>>> 953a6c98bd41a29fbb2b49d234aac490e3ea421b
