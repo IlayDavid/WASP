@@ -2,6 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
+using WASP;
+using WASP.DataClasses;
 
 namespace AccTests.Tests
 {
@@ -13,9 +15,10 @@ namespace AccTests.Tests
     {
 
         private WASPBridge _proj;
-        private int _forumId;
+        private Forum _forum;
+        private Member _admin;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -24,35 +27,46 @@ namespace AccTests.Tests
         [SetUp]     //before each Test
         public void SetUp()
         {
-            User supervisor = _proj.initialize();
-            
-            User admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", admin);
-            _forumId = _proj.createForum(supervisor._userName, forum);
+            SuperUser supervisor = Functions.InitialSystem(_proj);
+            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
+            _forum = forumAndMember.Item1;
+            _admin = forumAndMember.Item2;
         }
 
         /*
-         * checks that there is one member
+         * Positive Test: checks that there is one member
          */ 
         [Test]
         public void subscribeToForumTest1()
         {
-            User member = new User("amitayaSh", "123456", "amitay", "amitayaSh@post.bgu.ac.il");
-            _proj.subscribeToForum(member,_forumId);
-            List<User> members = _proj.getMembers(_forumId);
+
+            Member isMem = _proj.subscribeToForum("mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
+            List<Member> members = _proj.getMembers(_admin, _forum);
+
+            Assert.NotNull(isMem);
             Assert.Equals(members.Count, 1);
+            Assert.IsTrue(members.Contains(isMem));
+            Assert.NotNull(_proj.login("mosheB", "moshe123", _forum).UserName);
         }
 
         /*
-         * checks that the user who should be added, is it
+         * Negative Test: lack of information
          */
         [Test]
         public void subscribeToForumTest2()
         {
-            User member = new User("amitayaSh", "123456", "amitay", "amitayaSh@post.bgu.ac.il");
-            _proj.subscribeToForum(member, _forumId);
-            List<User> members = _proj.getMembers(_forumId);
-            Assert.IsTrue(members.Contains(member));
+            Member isMem;
+            isMem = _proj.subscribeToForum("", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
+            Assert.IsNull(isMem);
+
+            isMem = _proj.subscribeToForum("mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
+            Assert.IsNull(isMem);
+
+            isMem = _proj.subscribeToForum("mosheB", "moshe", "", "moshe123", _forum);
+            Assert.IsNull(isMem);
+
+            isMem = _proj.subscribeToForum("mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", null);
+            Assert.IsNull(isMem);
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="RealBridge.cs" />
     <Compile Include="Tests\AddModeratorTests.cs" />
     <Compile Include="Tests\CreateForumTests.cs" />
+    <Compile Include="Tests\LogInTests.cs" />
     <Compile Include="Tests\CreateSubForumTests.cs" />
     <Compile Include="Tests\DeletePostTests.cs" />
     <Compile Include="Tests\Functions.cs" />

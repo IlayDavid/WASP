@@ -1,9 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
+using System;
+
 namespace AccTests.Tests
 {
     /// <summary>
@@ -16,7 +15,7 @@ namespace AccTests.Tests
         private WASPBridge _proj;
         private SuperUser _supervisor;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -35,7 +34,7 @@ namespace AccTests.Tests
         [Test]
         public void CreateForumTest1()
         {
-            Forum forum = Functions.CreateSpecForum(_proj, _supervisor);
+            Forum forum = Functions.CreateSpecForum(_proj, _supervisor).Item1;
             Assert.NotNull(forum); //checks that a forum is created
             List<Member> admins = _proj.getAdmins(_supervisor, forum);
 
@@ -52,12 +51,16 @@ namespace AccTests.Tests
         [Test]
         public void CreateForumTest2()
         {
-            Forum forum = Functions.CreateSpecForum(_proj, _supervisor);
+            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
+            Forum forum = forumAndMember.Item1;
+            Member admin = forumAndMember.Item2;
             Assert.NotNull(forum); //checks that a forum is created
             
-            List<Member> admins = _proj.getAdmins(_supervisor,forum);
-            Member temp = forum.GetAdmins()[0];
-            Assert.Equals(admins.Contains(temp), true); // checks that the user added as admin         
+            Assert.Equals(admin.Email, "david@post.bgu.ac.il");
+            Assert.Equals(admin.UserName, "admin");
+            Assert.Equals(admin.Password, "david123");
+            Assert.Equals(admin.Name, "david");
+
         }
 
         /// <summary>

@@ -1,84 +1,120 @@
 ﻿using System;
+using System.Collections.Generic;
+using WASP;
+using WASP.DataClasses;
 
 namespace AccTests
 {
     class ProxyBridge : WASPBridge
     {
-        public RealBridge proj;
-
-        public void addModerator(int userId, int userId1, int sfId, DateTime term)
+        public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
+            throw new NotImplementedException();
         }
 
-        public void confirmEmail(int userId)
-        { 
-        }
-
-        public int createForum(int userId, Forum forum)
+        public int confirmEmail(Member member)
         {
-            return -1;
+            throw new NotImplementedException();
         }
 
-        public void createPost(int userId, int threadId, Post post)
-        {      
-        }
-
-        public Subforum createSubForum(int userId, Subforum sf)
+        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public void createThread(int userId, int sfId, UserThread thread)
+        public Post createReplyPost(Member Author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
         {
+            throw new NotImplementedException();
         }
 
-        public void defineForumPolicy(int userId, Forum forum)
+        public Subforum createSubForum(Member member, string name, string description)
         {
+            throw new NotImplementedException();
         }
 
-        public void deletePost(int userId1, int threadId, int postId)
+        public Post createThread(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
         {
+            throw new NotImplementedException();
         }
 
-        public Forum getForum(int userId, int forumId)
+        public int defineForumPolicy(SuperUser member, Forum forum)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public Subforum getSubforum(int userId, int subforumId)
+        public int deletePost(Member member, Post post)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public UserThread getThread(int userId, int threadId)
+        public List<Member> getAdmins(User member, Forum forum)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public User initialize()
+        public List<Forum> getAllForums(User member)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public int login(string userName, string password)
+        public Forum getForum(Member member, int forumId)
         {
-            return -1;
+            throw new NotImplementedException();
         }
 
-        public void sendMessage(int userId, Message message)
+        public List<Member> getMembers(Member member, Forum forum)
         {
+            throw new NotImplementedException();
         }
 
-        public void subscribeToForum(int userId, int forumId)
+        public List<Member> getModerators(Member member, Subforum subforum)
         {
+            throw new NotImplementedException();
         }
 
-        public void updateForum(int userId, int forumId)
+        public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
         {
+            throw new NotImplementedException();
         }
 
-        public void updateModeratorTerm(int userId, int userId1, int sfId, DateTime term)
+        public Subforum getSubforum(Member member, int subforumId)
         {
+            throw new NotImplementedException();
+        }
+
+        public List<Subforum> getSubforums(Member member, Forum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post getThread(Member member, int threadId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SuperUser initialize(string name, string userName, string email, string pass)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Member login(string userName, string password, Forum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int sendMessage(Member member, Member targetMember, Message message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Member subscribeToForum(string userName, string name, string email, string pass, Forum targetForum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
+        {
+            throw new NotImplementedException();
         }
     }
 }
