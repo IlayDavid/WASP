@@ -14,11 +14,12 @@ namespace WASP.Server
 
         public int deletePost(Member member, Post post)
         {
-            IBL bl = null;
-            forumsBL.TryGetValue(member.MemberForum, out bl);
             try
             {
-                return _bl.deletePost(userName, threadId, postId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.deletePost(member, post);
             }
             catch (Exception)
             {
@@ -30,7 +31,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getThread(userId, threadId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getThread(member, threadId);
 
             }
             catch (Exception)
@@ -44,33 +48,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.createThread(userName, subforumId, thread);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
 
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        public Post createReplyPost(Member Author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
-        {
-            try
-            {
-                return _bl.createPost(userName, threadId, post);
-            }
-            catch (Exception)
-            {
-                return -1;                
-            }
-        }
-
-        public SuperUser initialize(String name, String userName, String email, String pass)
-        {
-            try
-            {
-                return _bl.initialize();
+                return bl.createThread(author, title, content, now, inReplyTo, container, editAt);
             }
             catch (Exception)
             {
@@ -78,6 +59,32 @@ namespace WASP.Server
             }
         }
 
-        
+        public Post createReplyPost(Member author, String title, String content, 
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        {
+            try
+            {
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
+            }
+            catch (Exception)
+            {
+                return null;                
+            }
+        }
+
+        public SuperUser initialize(String name, String userName, String email, String pass)
+        {
+            try
+            {
+                return BL.initialize();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

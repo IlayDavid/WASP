@@ -1,4 +1,5 @@
 ﻿using System;
+using WASP.Domain;
 
 namespace WASP.Server
 {
@@ -8,7 +9,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getModeratorTermTime(userName, subforumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getModeratorTermTime(member, moderator, subforum);
             }
             catch (Exception)
             {
@@ -19,7 +23,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.addModerator(userId, userId1, sfId, term);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.addModerator(member, moderator, subforum, term);
             }
             catch (Exception)
             {
@@ -31,29 +38,38 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.login(userName, password);
+                IBL bl = null;
+                forumsBL.TryGetValue(forum, out bl);
+
+                return bl.login(userName, password);
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
         public int confirmEmail(Member member)
         {
             try
             {
-                _bl.confirmEmail(userId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.confirmEmail(member);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw;
+                return -1;
             }
         }
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             try
             {
-                return _bl.updateModeratorTerm(userName1, userName2, sfId, term);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.updateModeratorTerm(member, moderator, subforum, term);
             }
             catch (Exception)
             {
@@ -64,12 +80,14 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.subscribeToForum(member, forum_ID);
+                IBL bl = null;
+                forumsBL.TryGetValue(targetForum, out bl);
 
+                return bl.subscribeToForum(userName, name, email, pass);
             }
             catch (Exception e)
             {
-                return e.Message;
+                return null;
             }
         }
 
@@ -77,7 +95,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.sendMessage(userSend, userAcc, message);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.sendMessage(member, targetMember, message);
             }
             catch (Exception)
             {

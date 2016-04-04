@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using WASP.Domain;
 
 namespace WASP.Server
 {
@@ -10,7 +11,7 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getAdmins(forumId);
+                return _bl.getAdmins(forum);
             }
             catch (Exception)
             {
@@ -21,6 +22,9 @@ namespace WASP.Server
         {
             try
             {
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
                 return _bl.getForum(userId, forumId);
             }
             catch (Exception)
@@ -56,7 +60,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getModerators(subforumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getModerators(member, subforum);
             }
             catch (Exception)
             {
@@ -67,7 +74,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getSubforum(userId, subforumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforum(member, subforumId);
             }
             catch (Exception)
             {
@@ -78,7 +88,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getMembers(forumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getMembers(member, forum);
             }
             catch (Exception)
             {
@@ -91,7 +104,10 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.getSubforums(forumId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getSubforums(member);
             }
             catch (Exception)
             {
@@ -114,11 +130,14 @@ namespace WASP.Server
         {
             try
             {
-                return _bl.createSubForum(userName, forumId, sf);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.createSubForum(member, name, description);
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
 
