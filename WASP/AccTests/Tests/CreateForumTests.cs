@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
+using WASP;
+using System;
 
 namespace AccTests.Tests
 {
@@ -13,11 +13,9 @@ namespace AccTests.Tests
     {
 
         private WASPBridge _proj;
-        private User _supervisor;
-        private User _admin;
-        private Forum _forum;
+        private SuperUser _supervisor;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -26,9 +24,7 @@ namespace AccTests.Tests
         [SetUp]
         public void setUp()
         {
-            _supervisor = _proj.initialize();
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            _forum = new Forum("Start-Up", _admin);
+            _supervisor = Functions.InitialSystem(_proj);
         }
 
         /// <summary>
@@ -38,11 +34,13 @@ namespace AccTests.Tests
         [Test]
         public void CreateForumTest1()
         {
-            int forumId = _proj.createForum(_supervisor._userName, _forum);
-            Assert.Greater( forumId, 0); //checks that a forum is created
-            List<User> admins = _proj.getAdmins(forumId);
-            Assert.Equals(admins.Count, 1); // checks that there is only one admin
-            
+            Forum forum = Functions.CreateSpecForum(_proj, _supervisor).Item1;
+            Assert.NotNull(forum); //checks that a forum is created
+            List<Member> admins = _proj.getAdmins(_supervisor, forum);
+
+            // checks that there is only one admin
+            Assert.Equals(admins.Count, 1); 
+            Assert.Equals(forum.GetAdmins().Count, 1);
         }
 
 
@@ -53,10 +51,16 @@ namespace AccTests.Tests
         [Test]
         public void CreateForumTest2()
         {
-            int forumId = _proj.createForum(_supervisor._userName, _forum);
-            Assert.Greater(forumId, 0); //checks that a forum is created
-            List<User> admins = _proj.getAdmins(forumId);
-            Assert.Equals(admins.Contains(_admin), true); // checks that the user added as admin         
+            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
+            Forum forum = forumAndMember.Item1;
+            Member admin = forumAndMember.Item2;
+            Assert.NotNull(forum); //checks that a forum is created
+            
+            Assert.Equals(admin.Email, "david@post.bgu.ac.il");
+            Assert.Equals(admin.UserName, "admin");
+            Assert.Equals(admin.Password, "david123");
+            Assert.Equals(admin.Name, "david");
+
         }
 
         /// <summary>
@@ -67,13 +71,12 @@ namespace AccTests.Tests
             int N = 500;
             for (int i = 1; i <= N; i++)
             {
-                User admin = new User("user" + i.ToString(), "123456",
-                                      "user" + i.ToString(),
-                                      "user" + i.ToString() +"@post.bgu.ac.il");
-                Forum forum = new Forum("Start-Up", admin);
-                _proj.createForum(_supervisor._userName, forum);
+                _proj.createForum(_supervisor, "subject" + i.ToString(),
+                   "----", "admin" + i.ToString(), "admin" + i.ToString(),
+                   "admin" + i.ToString() + "@post.bgu.ac.il", "admin" + i.ToString()); 
+                   
             }
-            Assert.Equals(_proj.getAllForums().Count, N);
+            Assert.Equals(_proj.getAllForums(_supervisor).Count, N);
         }
 
         /// <summary>
@@ -81,8 +84,9 @@ namespace AccTests.Tests
         /// </summary>
         public void CreateForumTest4()
         {
-            int forumId = _proj.createForum("UnauthorizedUser", _forum);
-            Assert.LessOrEqual(forumId, 0);
+            Forum forum = _proj.createForum(null, "subject",
+                   "----", "admin", "admin", "admin@post.bgu.ac.il", "admin"); 
+            Assert.Null(forum);
         }
 
     }

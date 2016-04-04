@@ -23,3 +23,6 @@ D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\bin\Debug\WASP.exe.co
 D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\obj\Debug\WASP.exe
 D:\תוכנות של האוניברסיטה\WASP\WASP\WASP\obj\Debug\WASP.pdb
 >>>>>>> 953a6c98bd41a29fbb2b49d234aac490e3ea421b
+D:\prgUni\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+D:\prgUni\WASP\WASP\WASP\obj\Debug\WASP.exe
+D:\prgUni\WASP\WASP\WASP\obj\Debug\WASP.pdb
