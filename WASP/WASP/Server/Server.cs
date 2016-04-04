@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -11,14 +10,16 @@ namespace WASP.Server
     // server_forum has explicit forum methods
     partial class Server : ServerAPI
     {
-        private IBL _bl = new BL();
+        Dictionary<Forum, IBL> forumsBL = new Dictionary<Forum, IBL>();
 
-        
-        public int deletePost(string userName, int threadId, int postId)
+        public int deletePost(Member member, Post post)
         {
             try
             {
-                return _bl.deletePost(userName, threadId, postId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.deletePost(member, post);
             }
             catch (Exception)
             {
@@ -26,11 +27,14 @@ namespace WASP.Server
             }
         }
 
-        public Thread getThread(int userId, int threadId)
+        public Post getThread(Member member, int threadId)
         {
             try
             {
-                return _bl.getThread(userId, threadId);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.getThread(member, threadId);
 
             }
             catch (Exception)
@@ -39,43 +43,15 @@ namespace WASP.Server
             }
         }
 
-   
-
-        public int createThread(string userName, int subforumId, Thread thread)
+        public Post createThread(Member author, String title, String content, 
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
         {
             try
             {
-                return _bl.createThread(userName, subforumId, thread);
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
 
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        
-
-        
-        
-        public int createPost(string userName, int threadId, Post post)
-        {
-            try
-            {
-                return _bl.createPost(userName, threadId, post);
-            }
-            catch (Exception)
-            {
-                return -1;                
-            }
-        }
-
-        
-        public Member initialize()
-        {
-            try
-            {
-                return _bl.initialize();
+                return bl.createThread(author, title, content, now, inReplyTo, container, editAt);
             }
             catch (Exception)
             {
@@ -83,6 +59,32 @@ namespace WASP.Server
             }
         }
 
-        
+        public Post createReplyPost(Member author, String title, String content, 
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        {
+            try
+            {
+                IBL bl = null;
+                forumsBL.TryGetValue(member.MemberForum, out bl);
+
+                return bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
+            }
+            catch (Exception)
+            {
+                return null;                
+            }
+        }
+
+        public SuperUser initialize(String name, String userName, String email, String pass)
+        {
+            try
+            {
+                return BL.initialize();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

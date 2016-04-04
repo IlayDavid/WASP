@@ -8,28 +8,31 @@ namespace WASP.Domain
 {
     interface IBL
     {
-        Member initialize();
-        Thread getThread(int userId, int threadId);
+        SuperUser initialize();
+        Post getThread(Member member, int threadId);
         Forum getForum(int userId, int forumId);
-        Subforum getSubforum(int userId, int subforumId);
-        int createThread(string userName, int subforumId, Thread thread);
+        Subforum getSubforum(Member member, int subforumId);
+        Post createThread(Member author, String title, String content,
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+
         int createForum(string userName, Forum forum);
-        List<Member> getModerators(int subforumId);
-        DateTime getModeratorTermTime(string userName, int subforumId);
-        int createSubForum(string userName, int forumId, Subforum sf);
+        List<Member> getModerators(Member member, Subforum subforum);
+        DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);
+        Subforum createSubForum(Member member, String name, String description);
         List<Forum> getAllForums();
-        int createPost(string userName, int threadId, Post post);
-        int updateModeratorTerm(string userName1, string userName2, int sfId, DateTime term);
+        Post createReplyPost(Member author, String title, String content,
+            DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+        int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term);
         int updateForum(int userId, int forumId);
         int defineForumPolicy(int userId, Forum forum);  //------------------------ policy object??
-        string subscribeToForum(Member member, int forumId);
-        int sendMessage(string userSend, string userAcc, Message message);
-        int addModerator(string userId, string userId1, int sfId, DateTime term);
-        void confirmEmail(int userId);
-        int deletePost(string userName, int threadId, int postId);        
-        int login(string userName, string password);
-        List<Member> getAdmins(int forumId);        
-        List<Member> getMembers(int forumId);       
-        List<Subforum> getSubforums(int forumId);
+        Member subscribeToForum(String userName, String name, String email, String pass);
+        int sendMessage(Member member, Member targetMember, Message message);
+        int addModerator(Member member, Member moderator, Subforum subforum, DateTime term);
+        int confirmEmail(Member member);
+        int deletePost(Member member, Post post);
+        Member login(string userName, string password);
+        List<Member> getAdmins(int forumId);
+        List<Member> getMembers(Member member, Forum forum);
+        List<Subforum> getSubforums(Member member);
     }
 }

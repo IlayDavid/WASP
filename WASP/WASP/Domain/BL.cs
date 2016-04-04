@@ -8,10 +8,9 @@ namespace WASP.Domain
     //TODO: decide if we look at/for users by name (string) or by id (int). shouldn't be mixed!
     class BL : IBL
     {
-        private bool _initialized = false;
-        Member supervisor = null;
+        private static bool _initialized = false;
+        private static SuperUser supervisor = null;
         Dictionary<int, Member> users;
-        Dictionary<int, Forum> forums;
 
 
         public int addModerator(int user_ID, int moderator_ID, int sf_ID, DateTime term)
@@ -25,7 +24,7 @@ namespace WASP.Domain
                     return 0;
                 }
                 else
-                    return -1;
+                    return 11111;
         }
 
         public int createSubForum(int user_ID, Subforum sf)
@@ -80,16 +79,13 @@ namespace WASP.Domain
             return findThread(thread_ID);
         }
 
-        public Member initialize()
+        public static SuperUser initialize()
         {
             if (!_initialized)
             {
-                users = new Dictionary<int, Member>();
-                forums = new Dictionary<int, Forum>();
-
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = new Member(1,true,"",SUPERUSERNAME,"",SUPERPASSWORD);
+                supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
                 _initialized = true;
                 return supervisor;
             }
