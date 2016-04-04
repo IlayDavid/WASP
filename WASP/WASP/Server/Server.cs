@@ -6,7 +6,7 @@ namespace WASP.Server
     // partial class of Server.
     // in charge of posts and other functions
     // server_user has explicit user methods
-    // server_forum has explicit forum methods
+    // server_forum has explicit Forum methods
     partial class Server : ServerAPI
     {
         IBL bl = new BL();

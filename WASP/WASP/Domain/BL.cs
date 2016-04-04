@@ -7,7 +7,7 @@ namespace WASP.Domain
     public class BL : IBL
     {
         private bool _initialized = false;
-        private SuperUser supervisor = null;
+        private SuperUser _supervisor = null;
         Dictionary<int, ForumIBL> forumsIBL = new Dictionary<int, ForumIBL>();
 
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
@@ -25,12 +25,7 @@ namespace WASP.Domain
 
         public List<Forum> getAllForums()
         {
-            List<Forum> retForums = new List<Forum>();
-            foreach(ForumIBL forumBL in forumsIBL.Values.ToList())
-            {
-                retForums.Add(forumBL.getForum());
-            }
-            return retForums;
+            return forumsIBL.Values.ToList().Select(forumBL => forumBL.getForum()).ToList();
         }
 
         public Forum getForum(Member member, int forumId)
@@ -52,11 +47,10 @@ namespace WASP.Domain
         {
             if (!_initialized)
             {
-                const string SUPERUSERNAME = "admin";
-                const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
+                var superuser=new SuperUser(userName,name, email, pass);
+                _supervisor = superuser;
                 _initialized = true;
-                return supervisor;
+                return superuser;
             }
             return null;
         }

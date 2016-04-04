@@ -11,7 +11,7 @@ namespace WASP
     {
         private static bool _initialized=false;
 
-        public SuperUser(string userName, String name, String email, String pass)
+        public SuperUser(string userName, string name, String email, String pass)
         {
             UserName = userName;
             Name = name;

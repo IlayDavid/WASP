@@ -13,15 +13,15 @@ namespace WASP
         SuperUser initialize(String name, String userName, String email, String pass);
 
         /*
-         * Porpose: returns a thread "Member" to "forum", if doesnt exist returns NULL
+         * Porpose: returns a thread "Member" to "Forum", if doesnt exist returns NULL
          * Checking: if there is threadId in sf
          * post condition: result is an opening post
          */
         Post getThread(Member member, int threadId);
 
         /*
-         * Porpose: returns a forum with forumId, if doesnt exist returns NULL
-         * Checking: suitable to forum policy
+         * Porpose: returns a Forum with forumId, if doesnt exist returns NULL
+         * Checking: suitable to Forum policy
          */
         Forum getForum(Member member, int forumId);
 
@@ -41,10 +41,10 @@ namespace WASP
 
         /*
          * Pre-conditions: Member is loged-in 
-         * Purpose: create new forum which:
+         * Purpose: create new Forum which:
          *                  supervisor = Member
-         *                  forum = forum details
-         * Return: created forum        
+         *                  Forum = Forum details
+         * Return: created Forum        
          */
 
         Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass);
@@ -65,7 +65,7 @@ namespace WASP
 
         /* 
          * Pre-conditions: Member is loged-in 
-         * Purpose: create new subforum in the Member's forum
+         * Purpose: create new subforum in the Member's Forum
          * Checking: if Member is manager, else nothing
          * Return: subforumId > 0               
          */
@@ -96,13 +96,13 @@ namespace WASP
         //---------------------------------------------------------------------------------------------------
 
         /*
- * Porpose: set a policy for specific forum
+ * Porpose: set a policy for specific Forum
  * Checking: if Member is supervisor, else nothing
  */
         int defineForumPolicy(SuperUser member, Forum forum);  //------------------------ policy object??
 
         /*
-         * Porpose: creates a Member in the forum, logs him in, and return the Member
+         * Porpose: creates a Member in the Forum, logs him in, and return the Member
          * Return: 
          */
         Member subscribeToForum(String userName, String name,  String email, String pass, Forum targetForum);
@@ -123,7 +123,7 @@ namespace WASP
         int addModerator(Member member, Member moderator, Subforum subforum, DateTime term);
 
         /*
-         * Porpose: Confirms Member's email and adds him to the forum as a member.
+         * Porpose: Confirms Member's email and adds him to the Forum as a member.
          * return: number>=0 if success
          */
         int confirmEmail(Member member);
@@ -137,24 +137,24 @@ namespace WASP
         int deletePost(Member member, Post post);
 
         /*
-         * Porpose: log-in: return the Member, logged in, to the specified forum.
+         * Porpose: log-in: return the Member, logged in, to the specified Forum.
          */
         Member login(string userName, string password, Forum forum);
 
 
 
         /*
-         * Porpose: return forum's admins
+         * Porpose: return Forum's admins
          */
         List<Member> getAdmins(User member, Forum forum);
 
         /*
-         * Porpose: return forum's members
+         * Porpose: return Forum's members
          */
         List<Member> getMembers(Member member, Forum forum);
 
         /// <summary>
-        /// returns subforum of specific forum
+        /// returns subforum of specific Forum
         /// </summary>
         /// <param name="forumId"></param>
         /// <returns></returns>
