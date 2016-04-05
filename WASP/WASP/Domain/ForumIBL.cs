@@ -12,14 +12,13 @@ namespace WASP.Domain
         Post getThread(Member member, int threadId);
         //Forum getForum(int userId, int forumId);
         Subforum getSubforum(Member member, int subforumId);
-        Post createThread(Member author, String title, String content,
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+        Post createThread(Member author, string title, string content, DateTime now, Subforum container);
 
         List<Member> getModerators(Member member, Subforum subforum);
         DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);
         Subforum createSubForum(Member member, String name, String description);
-        Post createReplyPost(Member author, String title, String content,
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt);
+        Post createReplyPost(Member author, String content,
+            DateTime now, Post inReplyTo);
         int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term);
         Forum getForum();
         int defineForumPolicy(SuperUser member, Forum forum);  //------------------------ policy object??

@@ -6,7 +6,7 @@ namespace WASP.Server
     // partial class of Server.
     // in charge of posts and other functions
     // server_user has explicit user methods
-    // server_forum has explicit forum methods
+    // server_forum has explicit Forum methods
     partial class Server : ServerAPI
     {
         IBL bl = new BL();
@@ -38,12 +38,14 @@ namespace WASP.Server
         }
 
         public Post createThread(Member author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+            DateTime now, Subforum subforum)
         {
+            if (content.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createThread(author, title, content, now, inReplyTo, container, editAt);
+                return forum_bl.createThread(author,title, content, now, subforum);
             }
             catch (Exception)
             {
@@ -51,13 +53,15 @@ namespace WASP.Server
             }
         }
 
-        public Post createReplyPost(Member author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        public Post createReplyPost(Member author, String content, 
+            DateTime now, Post inReplyTo)
         {
+            if (content.Equals(""))
+                return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createReplyPost(author, title, content, now, inReplyTo, container, editAt);
+                return forum_bl.createReplyPost(author, content, now, inReplyTo);
             }
             catch (Exception)
             {
@@ -67,9 +71,26 @@ namespace WASP.Server
 
         public SuperUser initialize(String name, String userName, String email, String pass)
         {
+            if (name.Equals("") || userName.Equals("") || !email.Contains("@") || !email.Contains(".") ||
+                pass.Equals(""))
+                return null;
             try
             {
                 return bl.initialize(name, userName, email, pass);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        //TODO: in next revision, move from memory to DAL
+        public SuperUser login(string userName, string password)
+        {
+            if (userName.Equals("") || password.Equals(""))
+                return null;
+            try
+            {
+                return bl.login(userName, password);
             }
             catch (Exception)
             {

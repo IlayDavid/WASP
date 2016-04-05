@@ -1,82 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WASP.DataAccess;
 using WASP.DataClasses;
 
 namespace WASP.Domain
 {
-    //TODO: change every instance of number '-1' to a correct number
-    //TODO: decide if we look at/for users by name (string) or by id (int). shouldn't be mixed!
     class ForumBL : ForumIBL
     {
-        public Forum forum { get; set; }
+        private IDAL _dal;
+        public Forum Forum { get; set; }
         
         public ForumBL(Forum newForum)
         {
-            this.forum = newForum;
+            Forum = newForum;
         }
-
 
         public List<Member> getAdmins(User user)
         {
-            return forum.GetAdmins().ToList();
+            return Forum.GetAdmins().ToList();
         }
 
-        public List<Member> getMembers()
+        public List<Member> getMembers(Member member)
         {
-            return forum.GetMembers().ToList();
+            return Forum.GetMembers().ToList();
         }
 
         public List<Subforum> getSubforums(int forumId)
         {
-            return forum.GetSubForum().ToList();
+            return Forum.GetSubForum().ToList();
         }
 
         public Post getThread(Member member, int threadId)
         {
-            throw new NotImplementedException();
+            return _dal.GetPost(threadId);
         }
-
+        //TODO: rename the function Forum.getsubforum() to Forum.getsubforums()
         public Subforum getSubforum(Member member, int subforumId)
         {
-            throw new NotImplementedException();
+            return _dal.GetSubforum(subforumId);
         }
-
-        public Post createThread(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        
+        public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
         {
-            throw new NotImplementedException();
+            var post= new Post(title, content, author, now, container);
+            _dal.AddPost(post);
+            return post;
         }
 
         public List<Member> getModerators(Member member, Subforum subforum)
         {
-            throw new NotImplementedException();
+            var tuples = subforum.GetModerators();
+            return tuples.Select(tuple => tuple.Item1).ToList();
         }
 
         public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
         {
-            throw new NotImplementedException();
+            return subforum.GetModerator(moderator).Item2;
         }
 
         public Subforum createSubForum(Member member, string name, string description)
         {
-            throw new NotImplementedException();
+            //TODO: policy
+            var subforum=new Subforum(name, description);
+            _dal.AddSubforum(subforum);
+            return subforum;
         }
 
-        public Post createReplyPost(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container, DateTime editAt)
+        public Post createReplyPost(Member author, string content, DateTime now, Post inReplyTo)
         {
-            throw new NotImplementedException();
+            var post=new Post(content, author, now, inReplyTo);
+            _dal.AddPost(post);
+            return post;
         }
 
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
-            throw new NotImplementedException();
+            subforum.RemoveModerator(moderator);            
+            subforum.AddModerator(moderator, term);
+            return 1;
         }
 
         public Forum getForum()
         {
-            throw new NotImplementedException();
+            return Forum;
         }
 
+        //TODO: implement according to Eden's impelementation
         public int defineForumPolicy(SuperUser member, Forum forum)
         {
             throw new NotImplementedException();
@@ -84,9 +94,10 @@ namespace WASP.Domain
 
         public Member subscribeToForum(string userName, string name, string email, string pass)
         {
-            throw new NotImplementedException();
+            return new Member(userName,name,email, pass, Forum);
         }
 
+        //TODO: fix the entity to support messages
         public int sendMessage(Member member, Member targetMember, Message message)
         {
             throw new NotImplementedException();
@@ -94,32 +105,44 @@ namespace WASP.Domain
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
-            throw new NotImplementedException();
+            subforum.AddModerator(moderator,term);
+            return 1;
         }
 
         public int confirmEmail(Member member)
         {
-            throw new NotImplementedException();
+            member.confirmMail();
+            return 1;
         }
 
         public int deletePost(Member member, Post post)
         {
-            throw new NotImplementedException();
+            foreach (var reply in post.GetAllReplies())
+            {
+                deletePost(member, reply);
+            }
+            _dal.DeletePost(post.Id);
+            return 1;
         }
 
         public Member login(string userName, string password)
         {
-            throw new NotImplementedException();
+            var user=_dal.GetUser(userName);
+            if (user.Password.Equals(password))
+            {
+                return (Member)user;
+            }
+            return null;
         }
 
         public List<Member> getMembers(Member member, Forum forum)
         {
-            throw new NotImplementedException();
+            return forum.GetMembers();
         }
 
         public List<Subforum> getSubforums(Member member)
         {
-            throw new NotImplementedException();
+            return Forum.GetSubForum();
         }
     }
 }

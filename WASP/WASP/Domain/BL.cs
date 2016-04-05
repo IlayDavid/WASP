@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WASP.DataAccess;
 
 namespace WASP.Domain
 {
@@ -9,7 +10,7 @@ namespace WASP.Domain
         private bool _initialized = false;
         private SuperUser supervisor = null;
         Dictionary<int, ForumIBL> forumsIBL = new Dictionary<int, ForumIBL>();
-
+        private IDAL _dal;
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
         {
             Forum newForum = new Forum(forumName, description);
@@ -57,6 +58,15 @@ namespace WASP.Domain
                 supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
                 _initialized = true;
                 return supervisor;
+            }
+            return null;
+        }
+
+        public SuperUser login(string username, string password)
+        {
+            if (_supervisor.UserName.Equals(username) && _supervisor.Password.Equals(password))
+            {
+                return _supervisor;
             }
             return null;
         }
