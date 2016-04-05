@@ -32,7 +32,6 @@ namespace WASP
 
         public Post(String content, Member author, DateTime now, Post inReplyTo)
         {
-            InReplyTo.AddReply(this);
             _title = inReplyTo._title;
             _content = content;
             _id = _idCounter;
