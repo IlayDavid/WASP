@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
 
 namespace AccTests.Tests
 {
@@ -35,6 +32,9 @@ namespace AccTests.Tests
             _forum = forumAndMember.Item1;
             _member1 = _proj.subscribeToForum("amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum);
             _member2 = _proj.subscribeToForum("edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum);
+
+            _proj.login(_member1.UserName, _member1.Password, _forum);
+            _proj.login(_member2.UserName, _member2.Password, _forum);
         }
 
         /*
@@ -68,6 +68,21 @@ namespace AccTests.Tests
 
             Assert.Less(feedback1, 0);
             Assert.Less(feedback1, 0);
+        }
+
+
+        /// <summary>
+        /// Negative Test: lack of information
+        /// </summary>
+        public void sendPrivateMsgTest3()
+        {
+            Message msg = new Message("first message", "Hi");
+            int feedback1 = _proj.sendMessage(_member2, _member1, null);
+            int feedback2 = _proj.sendMessage(_member1, null, msg);
+            int feedback3 = _proj.sendMessage(null, _member1, msg);
+            Assert.Less(feedback1, 0);
+            Assert.Less(feedback2, 0);
+            Assert.Less(feedback3, 0);
         }
 
     }

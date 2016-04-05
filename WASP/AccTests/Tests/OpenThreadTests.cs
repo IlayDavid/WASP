@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using NUnit.Framework;
+using WASP;
 
 namespace AccTests.Tests
 {
@@ -13,13 +12,13 @@ namespace AccTests.Tests
     {
 
         private WASPBridge _proj;
-        private int _forumId;
-        private int _subforumId;
-        private User _supervisor;
-        private UserThread _thread;
-        private User _admin;
+        private Forum _forum;
+        private Subforum _subforum;
+        private SuperUser _supervisor;
+        private Member _admin;
+        private Member _moderator;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -28,46 +27,94 @@ namespace AccTests.Tests
         [SetUp]     //before each Test
         public void SetUp()
         {
-            _supervisor = _proj.initialize();
+            _supervisor = Functions.InitialSystem(_proj);
 
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            Subforum subforum = new Subforum("Calander-Start-Up");
-            Post openPost = new Post("Someone know a good web service for Calander?"); 
-            _thread = new UserThread("webService for calander", openPost);
-            
-            _forumId = _proj.createForum(_supervisor._userName, forum);
-            _subforumId = _proj.createSubForum(_supervisor._userName, _forumId, subforum);
+            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            _forum = forumAndAdmin.Item1;
+            _admin = forumAndAdmin.Item2;
+            _proj.login(_admin.UserName, _admin.Password, _forum);
+
+            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            _subforum = subforumAndModerator.Item1;
+            _moderator = subforumAndModerator.Item2;
+            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+           
+
         }
 
 
         /// <summary>
-        /// checks that supervisor can add a thread
+        /// Positive Test: checks that member can add a thread
         /// </summary>
         [Test]
         public void OpenThreadTest1()
         {
-            Assert.Greater(_proj.createThread(_supervisor._userName, _subforumId, _thread), 0);
+            Member member = Functions.SubscribeSpecMember(_proj, _forum);
+            _proj.login(member.UserName, member.Password, _forum);
+            Post isOpenPost = _proj.createThread(member, "webService for calander", "Someone know a good web service for Calander?",
+                                   DateTime.Now, _subforum);
+            Assert.NotNull(isOpenPost);
         }
 
         /// <summary>
-        /// checks that admin can add a thread
+        /// Positive Test: checks that admin can add a thread
         /// </summary>
         [Test]
         public void OpenThreadTest2()
         {
-            Assert.Greater(_proj.createThread(_admin._userName, _subforumId, _thread), 0);
+            Post isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
+                                   DateTime.Now, _subforum);
+            Assert.NotNull(isOpenPost);
         }
 
         /// <summary>
-        /// checks that member can add a thread
+        /// Nagative Test: lack of information
         /// </summary>
         [Test]
         public void OpenThreadTest3()
         {
-            User member = new User("amitayaSh", "123456", "amitay", "amitayaSh@post.bgu.ac.il");
-            _proj.subscribeToForum(member, _forumId);
-            Assert.Greater(_proj.createThread(member._userName, _subforumId, _thread), 0);
+            Post isOpenPost = _proj.createThread(_moderator, "", "Someone know a good web service for Calander?",
+                                   DateTime.Now, _subforum);
+            Assert.IsNull(isOpenPost);
+
+            isOpenPost = _proj.createThread(_moderator, "webService for calander", "", DateTime.Now, _subforum);
+            Assert.IsNull(isOpenPost);
+
+            isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
+                       DateTime.Now, _subforum);
+            Assert.IsNull(isOpenPost);
+
+            isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
+                       DateTime.Now.AddDays(-10), _subforum);
+            Assert.IsNull(isOpenPost);
+
+            isOpenPost = _proj.createThread(null, "webService for calander", "Someone know a good web service for Calander?",
+                       DateTime.Now, _subforum);
+            Assert.IsNull(isOpenPost);
+        }
+
+        /// <summary>
+        /// Negative Test: secure NF: member that doent not sign in this forum, try to post
+        /// </summary>
+        public void OpenThreadTest4()
+        {
+            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            Forum forum = forumAndAdmin.Item1;
+            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            Subforum subforum = subforumAndModerator.Item1;
+            Member moderator = subforumAndModerator.Item2;
+            _proj.login(moderator.UserName, moderator.Password, _forum);
+
+            Member member = Functions.SubscribeSpecMember2(_proj, forum);
+            _proj.login(member.UserName, member.Password, forum);
+
+            Post isOpenPost = _proj.createThread(member, "webService for calander", "Someone know a good web service for Calander?",
+                                   DateTime.Now, subforum);
+            Assert.IsNull(isOpenPost);
+
+            isOpenPost = _proj.createThread(moderator, "webService for calander", "Someone know a good web service for Calander?",
+                       DateTime.Now, subforum);
+            Assert.IsNull(isOpenPost);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using WASP;
-using WAsp
+
 
 namespace AccTests.Tests
 {
@@ -29,5 +29,35 @@ namespace AccTests.Tests
 
             return new Tuple<Subforum, Member>(subforum, moderator);
         }
+
+        public static Member SubscribeSpecMember(WASPBridge proj, Forum forum)
+        {
+            return proj.subscribeToForum("arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum);
+        }
+
+        public static Tuple<Forum, Member> CreateSpecForum2(WASPBridge proj, SuperUser supervisor)
+        {
+            string userName = "admin1";
+            Forum forum = proj.createForum(supervisor, "start-up", "ideas", userName,
+                                            "ronen", "ronen@post.bgu.ac.il", "ronen123");
+            Member admin = proj.getAdmin(supervisor, forum, userName);
+
+            return new Tuple<Forum, Member>(forum, admin);
+        }
+
+        public static Tuple<Subforum, Member> CreateSpecSubForum2(WASPBridge proj, Member admin, Forum forum)
+        {
+            Member moderator = proj.subscribeToForum("amitB", "amit", "amitB@post.bgu.ac.il",
+                                        "amit123", forum);
+            Subforum subforum = proj.createSubForum(admin, "subbbbb2", "blah", moderator);
+
+            return new Tuple<Subforum, Member>(subforum, moderator);
+        }
+
+        public static Member SubscribeSpecMember2(WASPBridge proj, Forum forum)
+        {
+            return proj.subscribeToForum("shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum);
+        }
+
     }
 }
