@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
@@ -6,7 +8,7 @@ namespace WASP.TestSuits
     [TestClass]
     public class ServerInitializationTests
     {
-        private ServerAPI server = new Server.Server();
+        private ServerAPI server = new Server.Server.Server();
         private SuperUser _supervisor = null;
         private Forum forum = null;
         private int _subforumId = 0;
@@ -43,21 +45,6 @@ namespace WASP.TestSuits
         }
 
         [TestMethod]
-        public void superuserLogin()
-        {
-            //asserts the we get the superuser on login with good input
-            var check = server.login("a", "b");
-            Assert.Equals(check, _supervisor);
-        }
-        [TestMethod]
-        public void superuserLogin2()
-        {
-            //asserts the we don't get the superuser on login with bad input
-            var check = server.login("b", "b");
-            Assert.AreNotEqual(check, _supervisor);
-        }
-
-        [TestMethod]
         public void createForum1()
         {
             //asserts that we cannot give empty strings
@@ -89,6 +76,26 @@ namespace WASP.TestSuits
             //asserts that we cannot create two exact same forum
             var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin", new PasswordPolicy());
             Assert.IsNull(check);
+        }
+
+        [TestMethod]
+        public void testGetAllForums()
+        {
+            //setup
+            var server = new Server.Server();
+            var super=server.initialize("super", "super", "s.a@b", "super");
+            var forums=new List<Forum>();
+            //populate forums
+            for (int i = 0; i < 10; i++)
+            {
+                var s = i.ToString();
+                var forum = server.createForum(super, s, s, s, s, "a.b@c", s, new PasswordPolicy());
+                forums.Add(forum);
+            }
+            //asserts that the list of forums we get from the server is the same as the one we created
+            var serverForums = server.getAllForums(super);
+            Assert.IsTrue(Enumerable.SequenceEqual(forums.OrderBy(fList => fList),
+                         serverForums.OrderBy(sList => sList)));
         }
     }
 }
