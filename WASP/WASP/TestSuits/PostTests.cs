@@ -5,7 +5,7 @@ using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     [TestClass]
-    public class PostTestscs
+    public class PostTests
     {
         [TestMethod]
         public void repliesTests()
@@ -13,7 +13,8 @@ namespace WASP.TestSuits
             // arrange
             Forum forum = new Forum("stackforum", "someDesc", new PasswordPolicy());
             Member member = new Member("edan", "userName", "email@email.com", "123",forum);
-            Post original = new Post("original", "original post", member, DateTime.Now, null);
+            Subforum sf = new Subforum("sf", "sf", member, DateTime.Now);
+            Post original = new Post("original", "original post", member, DateTime.Now, sf);
             Post reply = new Post("reply", member, DateTime.Now, original);
             Post reply2 = new Post("reply2", member, DateTime.Now, original);
             // act
