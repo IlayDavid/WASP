@@ -21,8 +21,8 @@ namespace WASP.TestSuits
             sf.RemoveThread(tempPost2); // check if remove works
             sf.AddThread(post);
             // assert
-            Assert.AreEqual(1, sf.GetThreads().Count, "check if subforum was added");
-            Assert.AreEqual(sf, sf.GetThread(sf.Id), "check if subforum has right key ");
+            Assert.AreEqual(post, sf.GetThread(post.Id), "check if thread was added");
+            Assert.AreEqual(1, sf.GetThreads().Count, "check if thread was removed.");
         }
         [TestMethod]
         public void moderatorTest()
@@ -36,13 +36,12 @@ namespace WASP.TestSuits
             DateTime future = DateTime.Today;
             Member tempUser = new Member( "userForDelete", "ToRemove", "mail@mail.com", "123",forum);
             // act
-            sf.AddModerator(author, future);
             sf.AddModerator(tempUser, dateNow);
-            sf.RemoveModerator(tempUser);
+            sf.RemoveModerator(author);
             // assert
             Assert.AreEqual(1, sf.GetModerators().Count, "checking if moderator added successfully");
             // *to check why getModerator recives author**//
-            Assert.AreEqual(author, sf.GetModerator(author), "check if right moderaitor deleted");
+            Assert.AreEqual(tempUser, sf.GetModerator(tempUser).Item1, "check if right moderator deleted");
         }
     }
 }
