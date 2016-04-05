@@ -15,18 +15,18 @@ namespace WASP
         private Post _inReplyTo;
         private List<Post> _replies=new List<Post>();
 
-        public Post (String title, String content, Member author, DateTime now,Post inReplyTo,Subforum container)
+        public Post (String content, Member author, DateTime now,Post inReplyTo)
         {
-            
             _editAt = now;
-            _title = title;
+            _title = inReplyTo.Title;
             _content = content;
             _id=_idCounter;
             _idCounter++;
             _publishedAt = now;
             _inReplyTo = inReplyTo;
             _author = author;
-            _container = container;
+            _container = inReplyTo.Container;
+            InReplyTo.AddReply(this);
 
         }
         public Post(String title, String content, Member author, DateTime now, Subforum container)

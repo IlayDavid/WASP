@@ -12,8 +12,7 @@ namespace WASP.Domain
         Post getThread(Member member, int threadId);
         //Forum getForum(int userId, int forumId);
         Subforum getSubforum(Member member, int subforumId);
-        Post createThread(Member author, String title, String content,
-            DateTime now, Subforum container);
+        Post createThread(Member author, String content, DateTime now);
 
         List<Member> getModerators(Member member, Subforum subforum);
         DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);

@@ -80,7 +80,7 @@ namespace WASP
         * Checking: if there is threadId in sf
         * Return: number > 0, if success
         */
-        Post createReplyPost(Member Author, String title, String content, DateTime now, Post inReplyTo, Subforum container);
+        Post createReplyPost(Member Author, String content, DateTime now, Post inReplyTo);
 
 
         //----------------------------------------------------------------------------------------------------
