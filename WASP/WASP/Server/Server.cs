@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 using WASP.Domain;
 
 namespace WASP.Server

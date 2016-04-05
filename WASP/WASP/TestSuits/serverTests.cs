@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     [TestClass]
@@ -18,7 +19,7 @@ namespace WASP.TestSuits
         public void initializeTests()
         {
             _supervisor=server.initialize("super", "super", "super@user.man", "super");
-            forum = server.createForum(_supervisor, "forum", "the forum", "admin", "admin", "e@mail.com", "admin");
+            forum = server.createForum(_supervisor, "forum", "the forum", "admin", "admin", "e@mail.com", "admin", new PasswordPolicy());
         }
 
         [TestMethod]

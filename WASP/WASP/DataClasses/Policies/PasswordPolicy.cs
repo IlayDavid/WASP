@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.Policies
 {
-    class PasswordPolicy : Policy
+    public class PasswordPolicy : Policy
     {
         Policy nextPolicy;
         bool diverse;

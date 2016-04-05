@@ -7,7 +7,7 @@ using WASP.DataClasses;
 
 namespace WASP.DataAccess
 {
-    interface IDAL
+    public interface IDAL
     {
         //add data classes to data base
         int AddForum(Forum f);

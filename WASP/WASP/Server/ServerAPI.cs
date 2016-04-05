@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 
 namespace WASP
 {
@@ -47,7 +48,7 @@ namespace WASP
          * Return: created forum        
          */
 
-        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass);
+        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass, Policy policy);
 
         /// <summary>
         /// </summary>

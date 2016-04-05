@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using WASP.DataAccess;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
+
 namespace WASP.Domain
 {
     public class BL : IBL
@@ -17,10 +19,10 @@ namespace WASP.Domain
             _dal = dal;
         }
 
-        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
+        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
         {
             //create new forum with admin
-            Forum newForum = new Forum(forumName, description, null);
+            Forum newForum = new Forum(forumName, description, policy);
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
             //create the business logic for the new forum.

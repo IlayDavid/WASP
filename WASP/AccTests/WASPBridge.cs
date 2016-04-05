@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WASP;
 using WASP.DataClasses;
-
+using WASP.DataClasses.Policies;
 namespace AccTests
 {
     public interface WASPBridge
@@ -59,7 +58,7 @@ namespace AccTests
          * Return: created forum        
          */
 
-        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass);
+        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass, Policy policy);
 
         /// <summary>
         /// </summary>

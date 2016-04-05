@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     [TestClass]
@@ -60,7 +61,7 @@ namespace WASP.TestSuits
         public void createForum1()
         {
             //asserts that we cannot give empty strings
-            var check = server.createForum(_supervisor, "", "", "", "", "", "");
+            var check = server.createForum(_supervisor, "", "", "", "", "", "", new PasswordPolicy());
             Assert.IsNull(check);
         }
 
@@ -68,7 +69,7 @@ namespace WASP.TestSuits
         public void createForum2()
         {
             //asserts that we cannot give an e-mail without '.' and '@'
-            var check = server.createForum(_supervisor, "a", "a", "a", "a", "a", "a");
+            var check = server.createForum(_supervisor, "a", "a", "a", "a", "a", "a", new PasswordPolicy());
             Assert.IsNull(check);
         }
 
@@ -76,7 +77,7 @@ namespace WASP.TestSuits
         public void createForum3()
         {
             //asserts that we can create a forum
-            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin");
+            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin", new PasswordPolicy());
             forum = check;
             Assert.IsNotNull(check);
         }
@@ -86,7 +87,7 @@ namespace WASP.TestSuits
         public void createForum4()
         {
             //asserts that we cannot create two exact same forum
-            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin");
+            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin", new PasswordPolicy());
             Assert.IsNull(check);
         }
     }

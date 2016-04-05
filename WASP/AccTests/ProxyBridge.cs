@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WASP;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 
 namespace AccTests
 {
@@ -19,7 +19,7 @@ namespace AccTests
             return -1;
         }
 
-        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
+        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
         {
             return null;
         }

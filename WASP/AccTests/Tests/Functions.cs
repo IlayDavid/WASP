@@ -1,6 +1,6 @@
 ﻿using System;
 using WASP.DataClasses;
-
+using WASP.DataClasses.Policies;
 
 namespace AccTests.Tests
 {
@@ -15,7 +15,7 @@ namespace AccTests.Tests
         {
             string userName = "admin";
             Forum forum = proj.createForum(supervisor, "start-up", "ideas", userName,
-                                            "david", "david@post.bgu.ac.il", "david123");
+                                            "david", "david@post.bgu.ac.il", "david123", new PasswordPolicy());
             Member admin = proj.getAdmin(supervisor, forum, userName);
 
             return new Tuple<Forum, Member>(forum, admin);
@@ -39,7 +39,7 @@ namespace AccTests.Tests
         {
             string userName = "admin1";
             Forum forum = proj.createForum(supervisor, "start-up", "ideas", userName,
-                                            "ronen", "ronen@post.bgu.ac.il", "ronen123");
+                                            "ronen", "ronen@post.bgu.ac.il", "ronen123", new PasswordPolicy());
             Member admin = proj.getAdmin(supervisor, forum, userName);
 
             return new Tuple<Forum, Member>(forum, admin);

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using WASP.DataClasses;
 using System;
+using WASP.DataClasses.Policies;
 
 namespace AccTests.Tests
 {
@@ -73,7 +74,7 @@ namespace AccTests.Tests
             {
                 _proj.createForum(_supervisor, "subject" + i.ToString(),
                    "----", "admin" + i.ToString(), "admin" + i.ToString(),
-                   "admin" + i.ToString() + "@post.bgu.ac.il", "admin" + i.ToString()); 
+                   "admin" + i.ToString() + "@post.bgu.ac.il", "admin" + i.ToString(), new PasswordPolicy()); 
                    
             }
             Assert.Equals(_proj.getAllForums(_supervisor).Count, N);
@@ -85,7 +86,7 @@ namespace AccTests.Tests
         public void CreateForumTest4()
         {
             Forum forum = _proj.createForum(null, "subject",
-                   "----", "admin", "admin", "admin@post.bgu.ac.il", "admin"); 
+                   "----", "admin", "admin", "admin@post.bgu.ac.il", "admin", new PasswordPolicy()); 
             Assert.Null(forum);
         }
 

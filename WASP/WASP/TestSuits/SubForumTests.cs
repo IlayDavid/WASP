@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     class SubForumTests
@@ -14,7 +14,7 @@ namespace WASP.TestSuits
         {
 
             // arrange
-            Forum forum = new Forum("stack", "desc");
+            Forum forum = new Forum("stack", "desc", new PasswordPolicy());
             Member author = new Member("edan", "habler", "mail@mail.com", "123",forum);
             Subforum sf = new Subforum("subForum", "someDescription",author, DateTime.Now);
             Post post = new Post("title", "content", author, DateTime.Now, sf);
@@ -36,7 +36,7 @@ namespace WASP.TestSuits
         {
 
             // arrange
-            Forum forum = new Forum("stack", "desc");
+            Forum forum = new Forum("stack", "desc", new PasswordPolicy());
             Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
             Subforum sf = new Subforum("subForum", "someDescription",author,DateTime.Now);
             forum.AddSubForum(sf);

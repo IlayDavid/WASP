@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -31,11 +32,11 @@ namespace WASP.Server
                 return null;
             }
         }
-        public Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass)
+        public Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass, Policy policy)
         {
             try
             {
-                return bl.createForum(creator, forumName, description, userName, adminName, email, pass);
+                return bl.createForum(creator, forumName, description, userName, adminName, email, pass, policy);
             }
             catch (Exception)
             {

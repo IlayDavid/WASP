@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
 using WASP.DataClasses;
-
+using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     class PostTestscs
@@ -11,7 +10,7 @@ namespace WASP.TestSuits
         public void repliesTests()
         {
             // arrange
-            Forum forum = new Forum("stackforum", "someDesc");
+            Forum forum = new Forum("stackforum", "someDesc", new PasswordPolicy());
 
             Member member = new Member("edan", "userName", "email@email.com", "123",forum);
             Post original = new Post("original", "original post", member, DateTime.Now, null);
@@ -38,7 +37,7 @@ namespace WASP.TestSuits
         {
             //check reply to reply
             // arrange
-            Forum forum = new Forum("stackforum", "someDesc");
+            Forum forum = new Forum("stackforum", "someDesc", new PasswordPolicy());
 
             Member member = new Member("username", "edan", "email", "pass", forum);
             Post original = new Post("title", "content", member, DateTime.Now, null);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WASP;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 using WASP.Server;
 
 namespace AccTests
@@ -20,9 +21,9 @@ namespace AccTests
             return _serverAPI.confirmEmail(member);
         }
 
-        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
+        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
         {
-            return _serverAPI.createForum(creator, forumName, description, userName, adminName, email, pass);
+            return _serverAPI.createForum(creator, forumName, description, userName, adminName, email, pass, policy);
         }
 
         public Post createReplyPost(Member Author, string content, DateTime now, Post inReplyTo)

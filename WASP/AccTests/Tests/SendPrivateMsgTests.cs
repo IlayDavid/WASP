@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 
 namespace AccTests.Tests
 {
@@ -59,7 +60,7 @@ namespace AccTests.Tests
         {
             string userName = "odedb";
             Forum forum = _proj.createForum(_supervisor, "subject12", "blah", userName, "oded",
-                            "odedb@post.bgu.ac.il", "odded123");
+                            "odedb@post.bgu.ac.il", "odded123", new PasswordPolicy());
             Member member = _proj.getAdmin(_supervisor, forum, userName);
 
             Message msg = new Message("first message", "Hi");

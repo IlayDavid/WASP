@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
+using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     class TestsForum
@@ -13,7 +13,7 @@ namespace WASP.TestSuits
         {
 
             // arrange
-            Forum forum = new Forum("name", "desc");
+            Forum forum = new Forum("name", "desc", new PasswordPolicy());
             Member member = new Member("edan", "userName", "email@email.com", "123", forum);
             List<Member> members;
             List<Member> membersAfterDelete;
@@ -41,7 +41,7 @@ namespace WASP.TestSuits
         public void adminTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description");
+            Forum forum = new Forum("stackOverFlow", "description", new PasswordPolicy());
             Member admin = new Member( "edan", "userName", "email@email.com", "123",forum);
             bool isAdmin;
             // act
@@ -63,7 +63,7 @@ namespace WASP.TestSuits
         public void subForumTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description");
+            Forum forum = new Forum("stackOverFlow", "description", new PasswordPolicy());
             Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
             Subforum sf = new Subforum("subForum", "someDescription",author,DateTime.Now);
 
