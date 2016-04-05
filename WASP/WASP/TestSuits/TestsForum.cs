@@ -65,8 +65,10 @@ namespace WASP.TestSuits
         public void subForumTest()
         {
             // arrange
-            Subforum sf = new Subforum("subForum", "someDescription");
             Forum forum = new Forum("stackOverFlow", "description");
+            Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
+            Subforum sf = new Subforum("subForum", "someDescription",author,DateTime.Now);
+
             bool isSf = false;
             // act
             forum.AddSubForum(sf);

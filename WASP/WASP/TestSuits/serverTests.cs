@@ -17,83 +17,11 @@ namespace WASP.TestSuits
         private int _threadId = 0;
 
 
-        [TestMethod]
-        public void initializeTest1()
+        [ClassInitialize]
+        public void initializeTests()
         {
-            //asserts that we cannot receive empty inputs
-            var chek=server.initialize("", "", "", "");
-            Assert.IsNull(chek);
-        }
-        [TestMethod]
-        public void initializeTest2()
-        {
-            //assert that email requires '.' and '@'
-            var chek = server.initialize("a", "b", "c", "d");
-            Assert.IsNull(chek);
-        }
-        [TestMethod]
-        public void initializeTest3()
-        {
-            //asserts that we managed to initialize the system propperly
-            var chek = server.initialize("a", "b", "a.b@g.c", "e");
-            _supervisor = null;
-            Assert.IsNotNull(chek);
-        }
-        [TestMethod]
-        public void initializeTest4()
-        {
-            //asserts that we fail to create a second superuser
-            var chek = server.initialize("abc", "def", "gef@bad.com", "sda");
-            Assert.IsNull(chek);
-        }
-
-        [TestMethod]
-        public void superuserLogin()
-        {
-            //asserts the we get the superuser on login with good input
-            var check=server.login("a", "b");
-            Assert.Equals(check, _supervisor);
-        }
-        [TestMethod]
-        public void superuserLogin2()
-        {
-            //asserts the we don't get the superuser on login with bad input
-            var check = server.login("b", "b");
-            Assert.AreNotEqual(check, _supervisor);
-        }
-
-        [TestMethod]
-        public void createForum1()
-        {
-            //asserts that we cannot give empty strings
-            var check=server.createForum(_supervisor, "", "", "", "", "", "");
-            Assert.IsNull(check);
-        }
-
-        [TestMethod]
-        public void createForum2()
-        {
-            //asserts that we cannot give an e-mail without '.' and '@'
-            var check = server.createForum(_supervisor, "a", "a", "a", "a", "a", "a");
-            Assert.IsNull(check);
-        }
-
-        [TestMethod]
-        public void createForum3()
-        {
-            //asserts that we can create a forum
-            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin");
-            forum = check;
-            Assert.IsNotNull(check);
-        }
-
-        //TODO: check if this requirement is really required
-        [TestMethod]
-        public void createForum4()
-        {
-            //asserts that we cannot create two exact same forum
-            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin");
-            Assert.IsNull(check);
+            _supervisor=server.initialize("super", "super", "super@user.man", "super");
+            forum = server.createForum(_supervisor, "forum", "the forum", "admin", "admin", "e@mail.com", "admin");
         }
 
         [TestMethod]
@@ -131,7 +59,7 @@ namespace WASP.TestSuits
         {
             //assert we cannot create a subforum with no description or name
             var admin = server.login("admin", "admin", forum);
-            var subforum= server.createSubForum(admin, "", "", admin);
+            var subforum= server.createSubForum(admin, "", "", admin, DateTime.Now);
             Assert.IsNotNull(subforum);
         }
 
@@ -140,7 +68,7 @@ namespace WASP.TestSuits
         {
             //assert an admin can create a subforum with himself as moderator
             var admin = server.login("admin", "admin", forum);
-            var subforum=server.createSubForum(admin, "sub", "forum", admin);
+            var subforum=server.createSubForum(admin, "sub", "forum", admin, DateTime.Now);
             Assert.IsNotNull(subforum);
         }
         [TestMethod]
@@ -148,7 +76,7 @@ namespace WASP.TestSuits
         {
             //assert an admin can not create a second identicle subforum
             var admin = server.login("admin", "admin", forum);
-            var subforum= server.createSubForum(admin, "sub", "forum", admin);
+            var subforum= server.createSubForum(admin, "sub", "forum", admin, DateTime.Now);
             Assert.IsNull(subforum);
         }
         [TestMethod]
@@ -156,7 +84,7 @@ namespace WASP.TestSuits
         {
             //assert an admin can create a subforum with user as the moderator
             var admin = server.login("admin", "admin", forum);
-            var subforum=server.createSubForum(admin, "sub2", "forum2", server.login("user","user",forum));
+            var subforum=server.createSubForum(admin, "sub2", "forum2", server.login("user","user",forum), DateTime.Now);
             _subforumId = subforum.Id;
             Assert.IsNotNull(subforum);
         }
@@ -164,7 +92,7 @@ namespace WASP.TestSuits
         public void checkGetSubforum()
         {
             var admin = server.login("admin", "admin", forum);
-            var subforum = server.createSubForum(admin, "sub", "forum", admin);
+            var subforum = server.createSubForum(admin, "sub", "forum", admin, DateTime.Now);
             var inserverSubforum = server.getSubforum(admin, subforum.Id);
             Assert.IsTrue(subforum==inserverSubforum);
         }
