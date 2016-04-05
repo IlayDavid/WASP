@@ -64,7 +64,6 @@
     <Compile Include="Tests\PostMsgTests.cs" />
     <Compile Include="Tests\SendPrivateMsgTests.cs" />
     <Compile Include="Tests\SubscribeForumTests.cs" />
-    <Compile Include="Tests\Testtttt.cs" />
     <Compile Include="WASPBridge.cs" />
   </ItemGroup>
   <ItemGroup>

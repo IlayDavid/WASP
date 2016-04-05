@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 namespace AccTests.Tests
@@ -7,7 +7,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class AddModeratorTests
     {
         private WASPBridge _proj;
@@ -18,13 +18,13 @@ namespace AccTests.Tests
         private Member _moderator;
         private Member _member1;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
 
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
-        [SetUp]
+        [ClassInitialize]
 
         public void setUp()
         {
@@ -54,15 +54,15 @@ namespace AccTests.Tests
         /// Positive Test:  checks that modirator can add a moderator to subforum
         ///                 checks that the term's update is succeed
         /// </summary>
-        [Test]
+        [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
             int isModerator = _proj.addModerator(_moderator, _member1, _subforum, DateTime.Now.AddDays(200));
-            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.IsTrue(isModerator >= 0);
             Assert.Equals(_proj.getModerators(_admin,_subforum).Count, 2);
 
             int isModified = _proj.updateModeratorTerm(_moderator,_member1,_subforum, DateTime.Now.AddDays(100));
-            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.IsTrue(isModerator >= 0);
             Assert.Equals(_proj.getModeratorTermTime(_moderator, _member1, _subforum), DateTime.Now.AddDays(100));
         }
 
@@ -71,23 +71,24 @@ namespace AccTests.Tests
         /// Positive Test:  checks that admin of a forum can add a moderator to the forum's subforum
         ///                 checks that the term's update is succeed
         /// </summary>
-        [Test]
+        [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
             int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
-            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.IsTrue(isModerator >= 0);
             Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 2);
 
             int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(100));
-            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.IsTrue(isModerator >= 0);
             Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(100));
         }
-       
+
 
         /// <summary>
         /// Nagative Test - NF secure test:
         ///     checks that another forum's admin cannot term a moderator for another subforum
         /// </summary>
+        [TestMethod]
         public void addModeratorAndUpdateTermTest3()
         {
 
@@ -98,48 +99,50 @@ namespace AccTests.Tests
 
             //another admin tries to add a moderator
             int isModerator = _proj.addModerator(admin, _member1, _subforum, DateTime.Now.AddDays(200));
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
 
             isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
-            Assert.GreaterOrEqual(isModerator, 0);
+            Assert.IsTrue(isModerator >= 0);
 
             int isModified = _proj.updateModeratorTerm(admin, _member1, _subforum, DateTime.Now.AddDays(100));
-            Assert.Less(isModified, 0);
+            Assert.IsTrue(isModified < 0);
 
         }
-          
-/* edit name + RTM*/
-        
-            
-            /// <summary>
+
+        /* edit name + RTM*/
+
+
+        /// <summary>
         /// Nagative Test: invalid date time
         /// </summary>
+        [TestMethod]
         public void addModeratorAndUpdateTermTest4()
         {
             int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(-10));
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
             Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 1);
 
             isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
             int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(-1));
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
             Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(200));
         }
-      
-        
+
+
         /// <summary>
         /// Nagative Test: lack of information
         /// </summary>
+        [TestMethod]
         public void addModeratorAndUpdateTermTest5()
         {
             int isModerator = _proj.addModerator(_admin, _member1, null, DateTime.Now);
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
 
             isModerator = _proj.addModerator(null, _member1, _subforum, DateTime.Now);
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
 
             isModerator = _proj.addModerator(_admin, null, _subforum, DateTime.Now);
-            Assert.Less(isModerator, 0);
+            Assert.IsTrue(isModerator < 0);
         }
     }
 }

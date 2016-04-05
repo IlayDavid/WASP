@@ -1,25 +1,24 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 namespace AccTests
 {
 
-    [TestFixture]
+    [TestClass]
     public class InitializeTests
     {
         private WASPBridge _proj;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
-
         
         /// <summary>
         /// Positive Test: checks that the initialization return a vaild supervisor
         /// </summary>
-        [Test]
+        [TestMethod]
         public void initTest1()
         {
             SuperUser supervisor = _proj.initialize("Moshe", "SuperUser", "moshe@post.bgu.ac.il", "moshe123");
@@ -32,7 +31,7 @@ namespace AccTests
         /// <summary>
         /// Nagative Test: lack of information
         /// </summary>
-        [Test]
+        [TestMethod]
         public void initTest2()
         {
             Assert.IsNull(_proj.initialize("", "SuperUser", "moshe@post.bgu.ac.il", "moshe123"));

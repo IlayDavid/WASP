@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 
@@ -8,7 +8,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class LogInTests
     {
 
@@ -21,14 +21,14 @@ namespace AccTests.Tests
 
         //private Subforum _subforum;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
             
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -46,17 +46,18 @@ namespace AccTests.Tests
         /// <summary>
         /// Positive Test: log-in of member in forum
         /// </summary>
-        [Test]
+        [TestMethod]
         public void logInTest1()
         {
-            Assert.NotNull(_proj.login("amitayaSh", "123456", _forum));
-            Assert.NotNull(_proj.login("edanHb", "123456", _forum));
-            Assert.NotNull(_admin.UserName, _admin.Password, _admin.MemberForum);
+            Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum));
+            Assert.IsNotNull(_proj.login("edanHb", "123456", _forum));
+            Assert.IsNotNull(_admin.UserName, _admin.Password, _admin.MemberForum);
         }
 
         /// <summary>
         /// Negative Test: lack of information
         /// </summary>
+        [TestMethod]
         public void logInTest2()
         {
             Assert.IsNull(_proj.login("", "123456", _forum));
@@ -66,15 +67,12 @@ namespace AccTests.Tests
         /// <summary>
         /// Negative Test: incorrent information
         /// </summary>
+        [TestMethod]
         public void logInTest3()
         {
             Assert.IsNull(_proj.login("blah", "123456", _forum));
             Assert.IsNull(_proj.login("", "123456", _forum));
             Assert.IsNull(_proj.login("blah", "", _forum));
         }
-
-
-
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 
@@ -8,7 +8,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class CreateSubForumTests
     {
 
@@ -19,13 +19,13 @@ namespace AccTests.Tests
 
         //private Subforum _subforum;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -38,13 +38,13 @@ namespace AccTests.Tests
         /// <summary>
         /// checks that a admin can open a sub forum
         /// </summary>
-        [Test]
+        [TestMethod]
         public void CreatesubforumTest1()
         {
             Member moderator = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
             Subforum subforum = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
-            Assert.NotNull(subforum);
+            Assert.IsNotNull(subforum);
             Assert.Equals(_proj.getModerators(_admin, subforum).Count, 1);
             Assert.Equals(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
             Assert.Equals(_proj.getModerators(_admin, subforum)[0].Name, moderator.Name);
@@ -56,6 +56,7 @@ namespace AccTests.Tests
         /// <summary>
         /// checks that can create more then one subforum in the same forum
         /// </summary>
+        [TestMethod]
         public void CreatesubforumTest2()
         {
             Member moderator1 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
@@ -63,15 +64,15 @@ namespace AccTests.Tests
             Subforum subforum1 = _proj.createSubForum(_admin, "subject1", "blah blah blah", moderator1, DateTime.Now.AddDays(100));
             Subforum subforum2 = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator2, DateTime.Now.AddDays(100));
 
-            Assert.NotNull(subforum1);
-            Assert.NotNull(subforum2);
+            Assert.IsNotNull(subforum1);
+            Assert.IsNotNull(subforum2);
             Assert.Equals(_proj.getSubforums(_admin, _forum).Count, 2);
         }
 
         /// <summary>
         /// Positive test - NF load test
         /// </summary>
-        [Test]
+        [TestMethod]
         public void CreatesubforumTest3()
         {
             int N = 500;
@@ -84,7 +85,7 @@ namespace AccTests.Tests
                 Subforum subforum = _proj.createSubForum(_admin, "subject" + i.ToString(), 
                         "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
-                Assert.NotNull(subforum);
+                Assert.IsNotNull(subforum);
                 Assert.Equals(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
                 Assert.Equals(_proj.getModerators(_admin,subforum).Count, 1);
             }
@@ -95,7 +96,7 @@ namespace AccTests.Tests
         /// <summary>
         /// Nagative test - NF secure test: admin which is not responsible 
         /// </summary>
-        [Test]
+        [TestMethod]
         public void CreatesubforumTest4()
         {
             Tuple<Forum,Member> forumAndModerator = Functions.CreateSpecForum2(_proj, _supervisor);
@@ -120,7 +121,5 @@ namespace AccTests.Tests
             Assert.IsNull(subforum3);
             Assert.IsNull(subforum4);
         }
-
-
     }
 }

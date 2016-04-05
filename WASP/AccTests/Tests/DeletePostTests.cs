@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 
@@ -8,7 +8,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class DeletePostTests
     {
 
@@ -23,13 +23,13 @@ namespace AccTests.Tests
         private Post _threadModerator;
         private Post _threadMember;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
+        [ClassInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -60,57 +60,60 @@ namespace AccTests.Tests
         /// <summary>
         /// Positive Test: checks that moderator and member can delete their own thread
         /// </summary>
-        [Test]
+        [TestMethod]
         public void deletePostTest1()
         {
             int isDelete = _proj.deletePost(_member, _threadMember);
-            Assert.GreaterOrEqual(isDelete, 0);
+            Assert.IsTrue(isDelete >= 0);
             isDelete = _proj.deletePost(_moderator, _threadModerator);
-            Assert.GreaterOrEqual(isDelete, 0);
+            Assert.IsTrue(isDelete >= 0);
         }
 
         /// <summary>
         /// 
         /// </summary>
+        [TestMethod]
         public void deletePostTest2()
         {
             Post p1 = _proj.createReplyPost(_moderator, "Hi", DateTime.Now, _threadMember);
             Post p2 = _proj.createReplyPost(_member, "Hi", DateTime.Now, _threadModerator);
-            Assert.NotNull(p2);
-            Assert.NotNull(p1);
+            Assert.IsNotNull(p2);
+            Assert.IsNotNull(p1);
             
 
             int isDelete = _proj.deletePost(_member, p2);
-            Assert.GreaterOrEqual(isDelete, 0);
+            Assert.IsTrue(isDelete >= 0);
             isDelete = _proj.deletePost(_moderator, p1);
-            Assert.GreaterOrEqual(isDelete, 0);
+            Assert.IsTrue(isDelete >= 0);
         }
 
         /// <summary>
         /// Negative Test: secure NF: user cant delete thread which is not own
         /// </summary>
+        [TestMethod]
         public void deletePostTest3()
         {
             int isDelete = _proj.deletePost(_moderator, _threadMember);
-            Assert.Less(isDelete, 0);
+            Assert.IsTrue(isDelete < 0);
             isDelete = _proj.deletePost(_member, _threadModerator);
-            Assert.Less(isDelete, 0);
+            Assert.IsTrue(isDelete < 0);
         }
 
         /// <summary>
         /// Negative Test: secure NF: user cant delete post which is not own
         /// </summary>
+        [TestMethod]
         public void deletePostTest4()
         {
             Post p1 = _proj.createReplyPost(_moderator, "Hi", DateTime.Now, _threadMember);
             Post p2 = _proj.createReplyPost(_member, "Hi", DateTime.Now, _threadModerator);
-            Assert.NotNull(p2);
-            Assert.NotNull(p1);
+            Assert.IsNotNull(p2);
+            Assert.IsNotNull(p1);
 
             int isDelete = _proj.deletePost(_moderator, p2);
-            Assert.Less(isDelete, 0);
+            Assert.IsTrue(isDelete < 0);
             isDelete = _proj.deletePost(_member, p1);
-            Assert.Less(isDelete, 0);
+            Assert.IsTrue(isDelete< 0);
         }
     }
 }

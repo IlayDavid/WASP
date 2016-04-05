@@ -1,14 +1,14 @@
 ﻿using System;
-using NUnit.Framework;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AccTests.Tests
 {
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class SendPrivateMsgTests
     {
 
@@ -18,13 +18,13 @@ namespace AccTests.Tests
         private Member _member1;
         private Member _member2;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
+        [ClassInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -40,22 +40,22 @@ namespace AccTests.Tests
 
         /*
          * Positive Test: checks that there is one member
-         */ 
-        [Test]
+         */
+        [TestMethod]
         public void sendPrivateMsgTest1()
         {
             Message msg = new Message("first message", "Hi");
             int feedback1 = _proj.sendMessage(_member2, _member1, msg);
             int feedback2 = _proj.sendMessage(_member1, _member2, msg);
 
-            Assert.GreaterOrEqual(feedback1, 0);
-            Assert.GreaterOrEqual(feedback1, 0);
+            Assert.IsTrue(feedback1 >= 0);
+            Assert.IsTrue(feedback1 >= 0);
         }
 
         /*
          * Nagative Test: members in diffrent forums cannot be in touch
          */
-        [Test]
+        [TestMethod]
         public void sendPrivateMsgTest2()
         {
             string userName = "odedb";
@@ -67,23 +67,24 @@ namespace AccTests.Tests
             int feedback1 = _proj.sendMessage(member, _member1, msg);
             int feedback2 = _proj.sendMessage(_member1, member, msg);
 
-            Assert.Less(feedback1, 0);
-            Assert.Less(feedback1, 0);
+            Assert.IsTrue(feedback1 < 0);
+            Assert.IsTrue(feedback1 < 0);
         }
 
 
         /// <summary>
         /// Negative Test: lack of information
         /// </summary>
+        [TestMethod]
         public void sendPrivateMsgTest3()
         {
             Message msg = new Message("first message", "Hi");
             int feedback1 = _proj.sendMessage(_member2, _member1, null);
             int feedback2 = _proj.sendMessage(_member1, null, msg);
             int feedback3 = _proj.sendMessage(null, _member1, msg);
-            Assert.Less(feedback1, 0);
-            Assert.Less(feedback2, 0);
-            Assert.Less(feedback3, 0);
+            Assert.IsTrue(feedback1 < 0);
+            Assert.IsTrue(feedback2 < 0);
+            Assert.IsTrue(feedback3 < 0);
         }
 
     }

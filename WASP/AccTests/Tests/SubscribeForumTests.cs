@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 namespace AccTests.Tests
@@ -8,7 +8,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class SubscribeForumTests
     {
 
@@ -16,13 +16,13 @@ namespace AccTests.Tests
         private Forum _forum;
         private Member _admin;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
+        [ClassInitialize]     //before each Test
         public void SetUp()
         {
             SuperUser supervisor = Functions.InitialSystem(_proj);
@@ -36,23 +36,23 @@ namespace AccTests.Tests
         /*
          * Positive Test: checks that there is one member
          */ 
-        [Test]
+        [TestMethod]
         public void subscribeToForumTest1()
         {
 
             Member isMem = _proj.subscribeToForum("mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
             List<Member> members = _proj.getMembers(_admin, _forum);
 
-            Assert.NotNull(isMem);
+            Assert.IsNotNull(isMem);
             Assert.Equals(members.Count, 1);
             Assert.IsTrue(members.Contains(isMem));
-            Assert.NotNull(_proj.login("mosheB", "moshe123", _forum).UserName);
+            Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum).UserName);
         }
 
         /*
          * Negative Test: lack of information
          */
-        [Test]
+        [TestMethod]
         public void subscribeToForumTest2()
         {
             Member isMem;

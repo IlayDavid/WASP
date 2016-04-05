@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 namespace AccTests.Tests
@@ -7,7 +7,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class PostMsgTests
     {
 
@@ -19,13 +19,13 @@ namespace AccTests.Tests
         private Member _moderator;
         private Post _thread;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
+        [ClassInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -48,29 +48,29 @@ namespace AccTests.Tests
         /// <summary>
         /// Positive Test: checks that member can add a post
         /// </summary>
-        [Test]
+        [TestMethod]
         public void PostMsgTest1()
         {
             Member member = Functions.SubscribeSpecMember(_proj, _forum);
             _proj.login(member.UserName, member.Password, _forum);
             Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
-            Assert.NotNull(isPost);
+            Assert.IsNotNull(isPost);
         }
 
         /// <summary>
         /// Positive Test: checks that moderator can add a post
         /// </summary>
-        [Test]
+        [TestMethod]
         public void PostMsgTest2()
         {
             Post isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, _thread);
-            Assert.NotNull(isPost);
+            Assert.IsNotNull(isPost);
         }
 
         /// <summary>
         /// Negative Test: lack of information
         /// </summary>
-        [Test]
+        [TestMethod]
         public void PostMsgTest3()
         {
             Post isPost = _proj.createReplyPost(null , "sereach at google", DateTime.Now, _thread);
@@ -86,6 +86,7 @@ namespace AccTests.Tests
         /// <summary>
         /// Negative Test: secure NF: member that doent not sign in this forum, try to reply post
         /// </summary>
+        [TestMethod]
         public void PostMsgTest4()
         {
             Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
@@ -95,9 +96,7 @@ namespace AccTests.Tests
             Member member = Functions.SubscribeSpecMember2(_proj, forum);
             _proj.login(member.UserName, member.Password, forum);
             Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
-            Assert.Null(isPost);
-
-
+            Assert.IsNull(isPost);
         }
 
     }

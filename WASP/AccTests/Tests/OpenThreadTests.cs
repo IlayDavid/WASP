@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
 namespace AccTests.Tests
@@ -7,7 +7,7 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class OpenThreadTests
     {
 
@@ -18,13 +18,13 @@ namespace AccTests.Tests
         private Member _admin;
         private Member _moderator;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]     //before each Test
+        [ClassInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -46,31 +46,31 @@ namespace AccTests.Tests
         /// <summary>
         /// Positive Test: checks that member can add a thread
         /// </summary>
-        [Test]
+        [TestMethod]
         public void OpenThreadTest1()
         {
             Member member = Functions.SubscribeSpecMember(_proj, _forum);
             _proj.login(member.UserName, member.Password, _forum);
             Post isOpenPost = _proj.createThread(member, "webService for calander", "Someone know a good web service for Calander?",
                                    DateTime.Now, _subforum);
-            Assert.NotNull(isOpenPost);
+            Assert.IsNotNull(isOpenPost);
         }
 
         /// <summary>
         /// Positive Test: checks that admin can add a thread
         /// </summary>
-        [Test]
+        [TestMethod]
         public void OpenThreadTest2()
         {
             Post isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
                                    DateTime.Now, _subforum);
-            Assert.NotNull(isOpenPost);
+            Assert.IsNotNull(isOpenPost);
         }
 
         /// <summary>
         /// Nagative Test: lack of information
         /// </summary>
-        [Test]
+        [TestMethod]
         public void OpenThreadTest3()
         {
             Post isOpenPost = _proj.createThread(_moderator, "", "Someone know a good web service for Calander?",
@@ -96,6 +96,7 @@ namespace AccTests.Tests
         /// <summary>
         /// Negative Test: secure NF: member that doent not sign in this forum, try to post
         /// </summary>
+        [TestMethod]
         public void OpenThreadTest4()
         {
             Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);

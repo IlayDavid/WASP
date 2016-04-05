@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 using System;
 using WASP.DataClasses.Policies;
@@ -9,20 +9,20 @@ namespace AccTests.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class CreateForumTests
     {
 
         private WASPBridge _proj;
         private SuperUser _supervisor;
 
-        [OneTimeSetUp]
+        [AssemblyInitialize]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -32,11 +32,11 @@ namespace AccTests.Tests
         /// Positive Test:  checks that a forum is created
         ///                 checks that there is only one admin
         /// </summary>
-        [Test]
+        [TestMethod]
         public void CreateForumTest1()
         {
             Forum forum = Functions.CreateSpecForum(_proj, _supervisor).Item1;
-            Assert.NotNull(forum); //checks that a forum is created
+            Assert.IsNotNull(forum); //checks that a forum is created
             List<Member> admins = _proj.getAdmins(_supervisor, forum);
 
             // checks that there is only one admin
@@ -49,13 +49,13 @@ namespace AccTests.Tests
         /// Positive Test:  checks that a forum is created
         ///                 checks that the user which should be a admin, is it
         /// </summary>
-        [Test]
+        [TestMethod]
         public void CreateForumTest2()
         {
             Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
             Forum forum = forumAndMember.Item1;
             Member admin = forumAndMember.Item2;
-            Assert.NotNull(forum); //checks that a forum is created
+            Assert.IsNotNull(forum); //checks that a forum is created
             
             Assert.Equals(admin.Email, "david@post.bgu.ac.il");
             Assert.Equals(admin.UserName, "admin");
@@ -67,6 +67,7 @@ namespace AccTests.Tests
         /// <summary>
         /// Positive Test, NF - load Test
         /// </summary>
+        [TestMethod]
         public void CreateForumTest3()
         {
             int N = 500;
@@ -83,11 +84,12 @@ namespace AccTests.Tests
         /// <summary>
         /// Nagative Test, NF - secure Test
         /// </summary>
+        [TestMethod]
         public void CreateForumTest4()
         {
             Forum forum = _proj.createForum(null, "subject",
                    "----", "admin", "admin", "admin@post.bgu.ac.il", "admin", new PasswordPolicy()); 
-            Assert.Null(forum);
+            Assert.IsNull(forum);
         }
 
     }
