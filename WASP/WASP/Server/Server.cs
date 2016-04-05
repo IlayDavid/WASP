@@ -37,15 +37,15 @@ namespace WASP.Server
             }
         }
 
-        public Post createThread(Member author, String content, 
-            DateTime now)
+        public Post createThread(Member author, String title, String content, 
+            DateTime now, Subforum subforum)
         {
             if (content.Equals(""))
                 return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createThread(author, content, now);
+                return forum_bl.createThread(author,title, content, now, subforum);
             }
             catch (Exception)
             {
@@ -53,15 +53,15 @@ namespace WASP.Server
             }
         }
 
-        public Post createReplyPost(Member author, String title, String content, 
-            DateTime now, Post inReplyTo, Subforum container)
+        public Post createReplyPost(Member author, String content, 
+            DateTime now, Post inReplyTo)
         {
-            if (title.Equals("") && content.Equals(""))
+            if (content.Equals(""))
                 return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createReplyPost(author, title, content, now, inReplyTo, container);
+                return forum_bl.createReplyPost(author, content, now, inReplyTo);
             }
             catch (Exception)
             {
@@ -77,6 +77,20 @@ namespace WASP.Server
             try
             {
                 return bl.initialize(name, userName, email, pass);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        //TODO: in next revision, move from memory to DAL
+        public SuperUser login(string userName, string password)
+        {
+            if (userName.Equals("") || password.Equals(""))
+                return null;
+            try
+            {
+                return bl.login(userName, password);
             }
             catch (Exception)
             {

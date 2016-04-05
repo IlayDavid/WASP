@@ -142,7 +142,7 @@ namespace WASP
         Member login(string userName, string password, Forum forum);
 
 
-
+        SuperUser login(string userName, string password);
         /*
          * Porpose: return Forum's admins
          */

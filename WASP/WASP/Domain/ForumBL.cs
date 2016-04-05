@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WASP.DataAccess;
 using WASP.DataClasses;
 
 namespace WASP.Domain
 {
     class ForumBL : ForumIBL
     {
+        private IDAL _dal;
         public Forum Forum { get; set; }
         
         public ForumBL(Forum newForum)
@@ -31,18 +33,19 @@ namespace WASP.Domain
 
         public Post getThread(Member member, int threadId)
         {
-            //goes over the forums, and returns the first post whose id=threadid, or null
-            return member.MemberForum.GetSubForum().Select(forum => forum.GetThreads().First((x) => x.Id == threadId)).FirstOrDefault(post => post != null);
+            return _dal.GetPost(threadId);
         }
         //TODO: rename the function Forum.getsubforum() to Forum.getsubforums()
         public Subforum getSubforum(Member member, int subforumId)
         {
-            return member.MemberForum.GetSubForum(subforumId);
+            return _dal.GetSubforum(subforumId);
         }
         
         public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
         {
-            return new Post(title, content, author, now, container);
+            var post= new Post(title, content, author, now, container);
+            _dal.AddPost(post);
+            return post;
         }
 
         public List<Member> getModerators(Member member, Subforum subforum)
@@ -58,12 +61,17 @@ namespace WASP.Domain
 
         public Subforum createSubForum(Member member, string name, string description)
         {
-            return new Subforum(name, description);
+            //TODO: policy
+            var subforum=new Subforum(name, description);
+            _dal.AddSubforum(subforum);
+            return subforum;
         }
 
         public Post createReplyPost(Member author, string content, DateTime now, Post inReplyTo)
         {
-            return new Post(content, author, now, inReplyTo);
+            var post=new Post(content, author, now, inReplyTo);
+            _dal.AddPost(post);
+            return post;
         }
 
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
@@ -109,20 +117,22 @@ namespace WASP.Domain
 
         public int deletePost(Member member, Post post)
         {
-            if (post.IsOriginal())
+            foreach (var reply in post.GetAllReplies())
             {
-                post.InReplyTo.RemoveReply(post);
+                deletePost(member, reply);
             }
-            else
-            {
-                post.Container.RemoveThread(post);
-            }
+            _dal.DeletePost(post.Id);
             return 1;
         }
 
         public Member login(string userName, string password)
         {
-            return Forum.GetMembers().First((x) => x.UserName.Equals(userName) && x.Password.Equals(password));
+            var user=_dal.GetUser(userName);
+            if (user.Password.Equals(password))
+            {
+                return (Member)user;
+            }
+            return null;
         }
 
         public List<Member> getMembers(Member member, Forum forum)
