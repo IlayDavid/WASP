@@ -42,7 +42,7 @@ namespace AccTests.Tests
         public void CreatesubforumTest1()
         {
             Member moderator = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
-            Subforum subforum = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator);
+            Subforum subforum = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
             Assert.NotNull(subforum);
             Assert.Equals(_proj.getModerators(_admin, subforum).Count, 1);
@@ -60,8 +60,8 @@ namespace AccTests.Tests
         {
             Member moderator1 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
             Member moderator2 = _proj.subscribeToForum("yaelp", "yael", "yaelp@post.bgu.ac.il", "yaelp123", _forum);
-            Subforum subforum1 = _proj.createSubForum(_admin, "subject1", "blah blah blah", moderator1);
-            Subforum subforum2 = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator2);
+            Subforum subforum1 = _proj.createSubForum(_admin, "subject1", "blah blah blah", moderator1, DateTime.Now.AddDays(100));
+            Subforum subforum2 = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator2, DateTime.Now.AddDays(100));
 
             Assert.NotNull(subforum1);
             Assert.NotNull(subforum2);
@@ -82,7 +82,7 @@ namespace AccTests.Tests
                         "moderator", "moderator"+i.ToString()+"@post.bgu.ac.il", 
                         "moderator".ToString(), _forum);
                 Subforum subforum = _proj.createSubForum(_admin, "subject" + i.ToString(), 
-                        "blah blah blah", moderator);
+                        "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
                 Assert.NotNull(subforum);
                 Assert.Equals(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
@@ -107,13 +107,13 @@ namespace AccTests.Tests
             _proj.login(moderator1.UserName, moderator1.Password, _forum);
             _proj.login(moderator2.UserName, moderator2.Password, _forum);
             // lacking of informations
-            Subforum subforum1 = _proj.createSubForum(_admin, "", "blah", moderator1);
-            Subforum subforum2 = _proj.createSubForum(_admin, "blah", "", moderator1);
+            Subforum subforum1 = _proj.createSubForum(_admin, "", "blah", moderator1, DateTime.Now.AddDays(100));
+            Subforum subforum2 = _proj.createSubForum(_admin, "blah", "", moderator1, DateTime.Now.AddDays(100));
 
             // fails because moderator2 is not member at _admin's forum
-            Subforum subforum3 = _proj.createSubForum(_admin, "blah", "", moderator2);
+            Subforum subforum3 = _proj.createSubForum(_admin, "blah", "", moderator2, DateTime.Now.AddDays(100));
 
-            Subforum subforum4 = _proj.createSubForum(admin, "blah", "blah", moderator1);
+            Subforum subforum4 = _proj.createSubForum(admin, "blah", "blah", moderator1, DateTime.Now.AddDays(100));
 
             Assert.IsNull(subforum1);
             Assert.IsNull(subforum2);

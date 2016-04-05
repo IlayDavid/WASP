@@ -30,9 +30,9 @@ namespace AccTests
             return _serverAPI.createReplyPost(Author, content, now, inReplyTo);
         }
 
-        public Subforum createSubForum(Member member, string name, string description, Member moderator)
+        public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
         {
-            return _serverAPI.createSubForum(member, name, description, moderator);
+            return _serverAPI.createSubForum(member, name, description, moderator, term);
         }
 
         public Post createThread(Member author, string title, string content, DateTime now, Subforum container)

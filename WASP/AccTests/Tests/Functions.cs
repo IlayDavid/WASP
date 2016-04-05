@@ -25,7 +25,7 @@ namespace AccTests.Tests
         {
             Member moderator = proj.subscribeToForum("ilanB", "ilan", "ilanB@post.bgu.ac.il",
                                         "ilan123", forum);
-            Subforum subforum =  proj.createSubForum(admin, "sub1", "blah", moderator);
+            Subforum subforum =  proj.createSubForum(admin, "sub1", "blah", moderator, DateTime.Now.AddDays(100));
 
             return new Tuple<Subforum, Member>(subforum, moderator);
         }
@@ -49,7 +49,7 @@ namespace AccTests.Tests
         {
             Member moderator = proj.subscribeToForum("amitB", "amit", "amitB@post.bgu.ac.il",
                                         "amit123", forum);
-            Subforum subforum = proj.createSubForum(admin, "subbbbb2", "blah", moderator);
+            Subforum subforum = proj.createSubForum(admin, "subbbbb2", "blah", moderator, DateTime.Now.AddDays(100));
 
             return new Tuple<Subforum, Member>(subforum, moderator);
         }

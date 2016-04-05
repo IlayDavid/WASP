@@ -8,7 +8,7 @@ namespace WASP.Domain
     public class BL : IBL
     {
         private bool _initialized = false;
-        private SuperUser supervisor = null;
+        private SuperUser _supervisor = null;
         Dictionary<int, ForumIBL> forumsIBL = new Dictionary<int, ForumIBL>();
         private IDAL _dal;
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
@@ -55,9 +55,9 @@ namespace WASP.Domain
             {
                 const string SUPERUSERNAME = "admin";
                 const string SUPERPASSWORD = "wasp1234Sting";
-                supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
+                _supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
                 _initialized = true;
-                return supervisor;
+                return _supervisor;
             }
             return null;
         }

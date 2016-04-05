@@ -61,10 +61,10 @@ namespace WASP.Domain
             return subforum.GetModerator(moderator).Item2;
         }
 
-        public Subforum createSubForum(Member member, string name, string description)
+        public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
         {
             //TODO: policy
-            var subforum=new Subforum(name, description);
+            var subforum=new Subforum(name, description, moderator, term);
             _dal.AddSubforum(subforum);
             return subforum;
         }

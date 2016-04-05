@@ -81,7 +81,7 @@ namespace AccTests
          * Checking: if Member is manager, else nothing
          * Return: subforumId > 0               
          */
-        Subforum createSubForum(Member member, String name, String description, Member moderator);
+        Subforum createSubForum(Member member, String name, String description, Member moderator, DateTime term);
         /// <summary>
         /// </summary>
         /// <returns> all system's forums</returns>

@@ -16,7 +16,7 @@ namespace WASP.Domain
 
         List<Member> getModerators(Member member, Subforum subforum);
         DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);
-        Subforum createSubForum(Member member, String name, String description);
+        Subforum createSubForum(Member member, String name, String description, Member moderator, DateTime term);
         Post createReplyPost(Member author, String content,
             DateTime now, Post inReplyTo);
         int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term);

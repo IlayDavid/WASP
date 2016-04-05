@@ -84,7 +84,7 @@ namespace WASP.Server
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.getMembers(member, forum);
+                return forum_bl.getMembers(member);
             }
             catch (Exception)
             {
@@ -117,12 +117,12 @@ namespace WASP.Server
                 return -1;       
             }
         }
-        public Subforum createSubForum(Member member, String name, String description, Member moderator)
+        public Subforum createSubForum(Member member, String name, String description, Member moderator, DateTime term)
         {
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.createSubForum(member, name, description, moderator);
+                return forum_bl.createSubForum(member, name, description, moderator, term);
             }
             catch (Exception)
             {

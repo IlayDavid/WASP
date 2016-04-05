@@ -11,12 +11,13 @@ namespace WASP
         private readonly List<Tuple<Member,DateTime> > _moderators=new List<Tuple<Member, DateTime>>();
         private readonly List<Post> _threads=new List<Post>();
 
-        public Subforum (String name,String description)
+        public Subforum (String name,String description, Member moderator, DateTime term)
         {
             Id = _idCounter;
             _idCounter++;
             Name = name;
             Description = description;
+            AddModerator(moderator, term);
         }
 
         public string Name { get; set; }
