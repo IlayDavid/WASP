@@ -20,8 +20,8 @@ namespace WASP.TestSuits
             Forum forum = new Forum("stack", "desc");
             Subforum sf = new Subforum("subForum", "someDescription");
             Member author = new Member("edan", "habler", "mail@mail.com", "123",forum);
-            Post post = new Post("title", "content", author, DateTime.Now,null, sf, DateTime.Today);
-            Post tempPost2 = new Post("title", "content",author, DateTime.Today, null, sf, DateTime.Today);
+            Post post = new Post("title", "content", author, DateTime.Now, sf);
+            Post tempPost2 = new Post("title", "content",author, DateTime.Today, sf);
 
             // act
             sf.AddThread(tempPost2);
