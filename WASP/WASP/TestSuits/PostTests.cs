@@ -12,7 +12,7 @@ namespace WASP.TestSuits
         {
             // arrange
             Forum forum = new Forum("stackforum", "someDesc", new PasswordPolicy());
-            Member member = new Member("edan", "userName", "email@email.com", "123",forum);
+            Member member = new Member("edan", "userName", "email@email.com", "123", forum);
             Subforum sf = new Subforum("sf", "sf", member, DateTime.Now);
             Post original = new Post("original", "original post", member, DateTime.Now, sf);
             Post reply = new Post("reply", member, DateTime.Now, original);
