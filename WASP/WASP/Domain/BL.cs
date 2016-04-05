@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WASP.DataAccess;
-
+using WASP.DataClasses;
 namespace WASP.Domain
 {
     public class BL : IBL
@@ -20,7 +20,7 @@ namespace WASP.Domain
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
         {
             //create new forum with admin
-            Forum newForum = new Forum(forumName, description);
+            Forum newForum = new Forum(forumName, description, null);
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
             //create the business logic for the new forum.

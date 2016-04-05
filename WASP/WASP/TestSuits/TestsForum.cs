@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using WASP.DataClasses;
 namespace WASP.TestSuits
 {
     class TestsForum
@@ -65,8 +63,10 @@ namespace WASP.TestSuits
         public void subForumTest()
         {
             // arrange
-            Subforum sf = new Subforum("subForum", "someDescription");
             Forum forum = new Forum("stackOverFlow", "description");
+            Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
+            Subforum sf = new Subforum("subForum", "someDescription",author,DateTime.Now);
+
             bool isSf = false;
             // act
             forum.AddSubForum(sf);

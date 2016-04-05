@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using WASP;
+using WASP.DataClasses;
 
 namespace AccTests.Tests
 {

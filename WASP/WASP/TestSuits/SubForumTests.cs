@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using WASP.DataClasses;
 namespace WASP.TestSuits
 {
     class SubForumTests
@@ -18,8 +15,8 @@ namespace WASP.TestSuits
 
             // arrange
             Forum forum = new Forum("stack", "desc");
-            Subforum sf = new Subforum("subForum", "someDescription");
             Member author = new Member("edan", "habler", "mail@mail.com", "123",forum);
+            Subforum sf = new Subforum("subForum", "someDescription",author, DateTime.Now);
             Post post = new Post("title", "content", author, DateTime.Now, sf);
             Post tempPost2 = new Post("title", "content",author, DateTime.Today, sf);
 
@@ -40,12 +37,12 @@ namespace WASP.TestSuits
 
             // arrange
             Forum forum = new Forum("stack", "desc");
-            Subforum sf = new Subforum("subForum", "someDescription");
+            Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
+            Subforum sf = new Subforum("subForum", "someDescription",author,DateTime.Now);
             forum.AddSubForum(sf);
             DateTime dateNow = DateTime.Now;
             DateTime future = DateTime.Today;
          
-            Member author = new Member( "edan", "habler", "mail@mail.com", "123",forum);
             Member tempUser = new Member( "userForDelete", "ToRemove", "mail@mail.com", "123",forum);
 
          

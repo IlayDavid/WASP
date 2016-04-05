@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WASP.DataClasses;
 
-namespace WASP
+namespace WASP.DataClasses
 {
     public class SuperUser : User
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WASP
+namespace WASP.DataClasses
 {
     public class Post
     {
@@ -32,6 +32,7 @@ namespace WASP
 
         public Post(String content, Member author, DateTime now, Post inReplyTo)
         {
+            InReplyTo.AddReply(this);
             _title = inReplyTo._title;
             _content = content;
             _id = _idCounter;

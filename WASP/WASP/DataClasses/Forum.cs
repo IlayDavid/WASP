@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using WASP.DataClasses.Policies;
 
-namespace WASP
+namespace WASP.DataClasses
 {
     public class Forum
     {
         private static int _idCounter=0;
         private int _id;
         private String _name, _description;
-        private List<Subforum> subforums = new List<Subforum>();
-        private List<Member> members=new List<Member>();
-        private List<Member> admins=new List<Member>();
-        public Forum(String name, String description)
+        private List<Subforum> subforums;
+        private List<Member> members;
+        private List<Member> admins;
+        private Policy policy;
+        public Forum(String name, String description, Policy policy)
         {
             _id=_idCounter;
             _idCounter++;
             _name = name;
             _description = description;
+            this.subforums = new List<Subforum>();
+            this.members = new List<Member>();
+            this.admins = new List<Member>();
+            this.policy = policy;
         }
 
+        void CheckMemberPolicy(User user)
+        {
+
+        }
 
         internal Subforum GetSubForum(int subforumId)
         {
