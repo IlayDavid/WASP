@@ -61,9 +61,9 @@ namespace WASP.Domain
             return new Subforum(name, description);
         }
 
-        public Post createReplyPost(Member author, string title, string content, DateTime now, Post inReplyTo, Subforum container)
+        public Post createReplyPost(Member author, string content, DateTime now, Post inReplyTo)
         {
-            return new Post(title, content, author, now, inReplyTo, container);
+            return new Post(content, author, now, inReplyTo);
         }
 
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)

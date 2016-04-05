@@ -14,7 +14,7 @@ namespace WASP.TestSuits
         {
             // arrange
             Member user1 = new Member("edan", "habler", "email", "123",null);
-            Post post1 = new Post("title", "content", user1, DateTime.Now, null, null, DateTime.Now);
+            Post post1 = new Post("title", "content", user1, DateTime.Now, null);
             int id = post1.Id;
             // act
             user1.AddPost(post1);

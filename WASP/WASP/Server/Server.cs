@@ -37,15 +37,15 @@ namespace WASP.Server
             }
         }
 
-        public Post createThread(Member author, String title, String content, 
-            DateTime now, Subforum container)
+        public Post createThread(Member author, String content, 
+            DateTime now)
         {
-            if (title.Equals("") && content.Equals(""))
+            if (content.Equals(""))
                 return null;
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(author.MemberForum);
-                return forum_bl.createThread(author, title, content, now, container);
+                return forum_bl.createThread(author, content, now);
             }
             catch (Exception)
             {

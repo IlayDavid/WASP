@@ -16,9 +16,9 @@ namespace WASP.TestSuits
             Forum forum = new Forum("stackforum", "someDesc");
 
             Member member = new Member("edan", "userName", "email@email.com", "123",forum);
-            Post original = new Post("original", "aa", member, DateTime.Now, null, null, DateTime.Today);
-            Post reply = new Post("reply", "aa", member, DateTime.Now, original, null, DateTime.Today);
-            Post reply2 = new Post("reply2", "aa", member, DateTime.Now, original, null, DateTime.Today);
+            Post original = new Post("original", "content", member, DateTime.Now, null);
+            Post reply = new Post("reply", member, DateTime.Now, original);
+            Post reply2 = new Post("reply2", member, DateTime.Now, original);
 
             
             // act
@@ -43,9 +43,9 @@ namespace WASP.TestSuits
             Forum forum = new Forum("stackforum", "someDesc");
 
             Member member = new Member("username", "edan", "email", "pass", forum);
-            Post original = new Post("title", "content", member, DateTime.Now, null, null, DateTime.Today);
-            Post reply = new Post("reply", "aa", member, DateTime.Now, original, null, DateTime.Today);
-            Post reply2reply = new Post("reply2", "aa", member, DateTime.Now, reply, null, DateTime.Today);
+            Post original = new Post("title", "content", member, DateTime.Now, null);
+            Post reply = new Post("reply", member, DateTime.Now, original);
+            Post reply2reply = new Post("reply2reply", member, DateTime.Now, reply);
 
 
             // act
