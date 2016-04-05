@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
     public class SuperUser : User
     {
-        private static bool _initialized=false;
+        private static bool _initialized = false;
 
         public SuperUser(string userName, String name, String email, String pass)
         {

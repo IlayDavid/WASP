@@ -69,7 +69,7 @@
     <Compile Include="DataClasses\Member.cs" />
     <Compile Include="Server\ServerForum.cs" />
     <Compile Include="Server\ServerUser.cs" />
-    <Compile Include="TestSuits\PostTestscs.cs" />
+    <Compile Include="TestSuits\PostTests.cs" />
     <Compile Include="TestSuits\ServerInitializationTests.cs" />
     <Compile Include="TestSuits\serverTests.cs" />
     <Compile Include="TestSuits\SubForumTests.cs" />

@@ -5,18 +5,22 @@ namespace WASP.DataClasses
 {
     public class Member : User
     {
-        private bool _isActive=false;
-        private List<Post> posts= new List<Post>();
-        private List<Message> messages = new List<Message>();
-        public Forum MemberForum { get; private set; }
+        private bool _isActive;
+        private List<Post> posts;
+        private List<Message> messages;
         public Member(String userName, String name, String email, String pass, Forum memberForum)
         {
+            _isActive = false;
+            posts = new List<Post>();
+            messages = new List<Message>();
             Name = name;
             UserName = userName;
             Email = email;
             Password = pass;
             MemberForum = memberForum;
         }
+
+        public Forum MemberForum { get; private set; }
 
         public void confirmMail()
         {
@@ -37,11 +41,11 @@ namespace WASP.DataClasses
         {
             return posts.First((x) => x.Id == postId);
         }
-        public void DeletePost (Post post)
+        public void DeletePost(Post post)
         {
             posts.Remove(post);
         }
-        public void AddPost (Post post)
+        public void AddPost(Post post)
         {
             posts.Add(post);
         }

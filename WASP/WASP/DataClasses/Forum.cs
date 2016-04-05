@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using WASP.DataClasses.Policies;
 
@@ -8,7 +7,7 @@ namespace WASP.DataClasses
 {
     public class Forum
     {
-        private static int _idCounter=0;
+        private static int _idCounter = 0;
         private int _id;
         private String _name, _description;
         private List<Subforum> subforums;
@@ -17,8 +16,7 @@ namespace WASP.DataClasses
         private Policy policy;
         public Forum(String name, String description, Policy policy)
         {
-            _id=_idCounter;
-            _idCounter++;
+            _id = _idCounter++;
             _name = name;
             _description = description;
             this.subforums = new List<Subforum>();
@@ -27,9 +25,15 @@ namespace WASP.DataClasses
             this.policy = policy;
         }
 
+        public void AddPolicy(Policy policy)
+        {
+            policy.Next = this.policy;
+            this.policy = policy;
+        }
+
         void CheckMemberPolicy(User user)
         {
-
+            this.policy.Validate(user);
         }
 
         internal Subforum GetSubForum(int subforumId)
@@ -37,7 +41,7 @@ namespace WASP.DataClasses
             return subforums.First((x) => x.Id == subforumId);
         }
 
-        internal bool IsAdmin (Member member)
+        internal bool IsAdmin(Member member)
         {
             return admins.Contains(member);
         }
@@ -48,7 +52,7 @@ namespace WASP.DataClasses
         }
         internal bool IsSubForum(int subforumId)
         {
-            return subforums.First((x) => x.Id == subforumId)!=null;
+            return subforums.First((x) => x.Id == subforumId) != null;
         }
 
         internal void DefinePolicy(Forum forum)
@@ -98,7 +102,7 @@ namespace WASP.DataClasses
             }
         }
 
-        public List<Member> GetMembers ()
+        public List<Member> GetMembers()
         {
             return members;
         }
@@ -113,7 +117,7 @@ namespace WASP.DataClasses
             return subforums;
         }
 
-        public void AddAdmin (Member admin)
+        public void AddAdmin(Member admin)
         {
             admins.Add(admin);
         }
@@ -127,21 +131,17 @@ namespace WASP.DataClasses
             subforums.Add(subforum);
         }
 
-        public bool RemoveAdmin (Member member)
+        public bool RemoveAdmin(Member member)
         {
-           return admins.Remove(member);
+            return admins.Remove(member);
         }
         public bool RemoveMember(Member member)
         {
-           return members.Remove(member);
+            return members.Remove(member);
         }
         public bool RemoveSubForum(Subforum subforum)
         {
-           return subforums.Remove(subforum);
+            return subforums.Remove(subforum);
         }
-
-
-
-
     }
 }

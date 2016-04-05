@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WASP.DataClasses
+﻿namespace WASP.DataClasses
 {
     public class Message
     {
@@ -15,13 +9,12 @@ namespace WASP.DataClasses
 
         public Message(string content, string title)
         {
+            Id = _idCounter++;
             _content = content;
             _title = title;
         }
         internal bool isEmpty()
         {
-            Id = _idCounter;
-            _idCounter++;
             return (_content.Equals("") || _title.Equals(""));
         }
     }

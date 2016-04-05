@@ -8,17 +8,16 @@ namespace WASP.DataClasses.Policies
 {
     public class PasswordPolicy : Policy
     {
-        Policy nextPolicy;
         bool diverse;
         int length;
         public PasswordPolicy(Policy next = null, bool diverse = false,  int length = 0)
         {
-            this.nextPolicy = next;
+            this.Next = next;
             this.diverse = diverse;
             this.length = length;
         }
 
-        public void Validate(User user)
+        public override void Validate(User user)
         {
             if (this.length > 0 && user.Password.Length >= this.length)
                 throw new Exception("Password must be at least " + this.length + " characters long.");
@@ -31,8 +30,8 @@ namespace WASP.DataClasses.Policies
                 if (!user.Password.Any(c => char.IsLetter(c)))
                     throw new Exception("Password must contain at least one letter.");
             }
-            if (nextPolicy != null)
-                this.nextPolicy.Validate(user);
+            if (Next != null)
+                this.Next.Validate(user);
         }
     }
 }

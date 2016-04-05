@@ -6,18 +6,18 @@ namespace WASP.DataClasses
 {
     public class Post
     {
+        private static int _idCounter = 0;
         private String _title, _content;
         private Member _author;
         private DateTime _publishedAt, _editAt;
-        private static int _idCounter=0; 
         private int _id;
         private Subforum _container;
         private Post _inReplyTo;
-        private List<Post> _replies=new List<Post>();
+        private List<Post> _replies;
 
         public Post (String title, String content, Member author, DateTime now ,Subforum container)
         {
-            container.AddThread(this);
+            // container.AddThread(this);
             _title = title;
             _content = content;
             _id=_idCounter;
@@ -27,12 +27,13 @@ namespace WASP.DataClasses
             _author = author;
             _container = container;
             _editAt = now;
+            _replies = new List<Post>();
 
         }
 
         public Post(String content, Member author, DateTime now, Post inReplyTo)
         {
-            InReplyTo.AddReply(this);
+            // InReplyTo.AddReply(this);
             _title = inReplyTo._title;
             _content = content;
             _id = _idCounter;
@@ -42,7 +43,7 @@ namespace WASP.DataClasses
             _author = author;
             _container = inReplyTo.Container;
             _editAt = now;
-
+            _replies = new List<Post>();
         }
 
         public int Id
