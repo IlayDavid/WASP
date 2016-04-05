@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AccTests.Tests
 {
     [TestClass]
-    class Testtttt
+    public class Testtttt
     {
         [TestMethod]
         public void ssssssssss()

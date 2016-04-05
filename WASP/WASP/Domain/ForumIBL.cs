@@ -13,7 +13,6 @@ namespace WASP.Domain
         //Forum getForum(int userId, int forumId);
         Subforum getSubforum(Member member, int subforumId);
         Post createThread(Member author, string title, string content, DateTime now, Subforum container);
-
         List<Member> getModerators(Member member, Subforum subforum);
         DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);
         Subforum createSubForum(Member member, String name, String description, Member moderator, DateTime term);

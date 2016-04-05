@@ -10,9 +10,6 @@ namespace AccTests.Tests
     [TestFixture]
     public class AddModeratorTests
     {
-
-
-
         private WASPBridge _proj;
         private SuperUser _supervisor;
         private Member _admin;

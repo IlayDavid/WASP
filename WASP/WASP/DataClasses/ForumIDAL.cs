@@ -26,7 +26,6 @@ namespace WASP.DataClasses
         Member GetUser(string username);
         Message GetMessage(Member member, int messageID);
         Post GetThread(int postID, Subforum sf);
-        Post GetPost(int postID, Subforum sf);
         Subforum GetSubforum(int subforumID);
     }
 }
