@@ -117,12 +117,12 @@ namespace WASP.Server
                 return -1;       
             }
         }
-        public Subforum createSubForum(Member member, String name, String description)
+        public Subforum createSubForum(Member member, String name, String description, Member moderator)
         {
             try
             {
                 ForumIBL forum_bl = bl.getForumIBL(member.MemberForum);
-                return forum_bl.createSubForum(member, name, description);
+                return forum_bl.createSubForum(member, name, description, moderator);
             }
             catch (Exception)
             {

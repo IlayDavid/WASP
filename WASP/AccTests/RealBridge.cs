@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using WASP;
 using WASP.DataClasses;
+using WASP.Server;
 
 namespace AccTests
 {
     class RealBridge : WASPBridge
     {
-        private ServerAPI _serverAPI;
-
-        public RealBridge()
-        {
-            // need to find out..
-        }
+        private ServerAPI _serverAPI=new Server();
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
@@ -31,17 +27,17 @@ namespace AccTests
 
         public Post createReplyPost(Member Author, string content, DateTime now, Post inReplyTo)
         {
-            return null; //ServerAPI.createReplyPost(Author, content, now, inReplyTo);
+            return _serverAPI.createReplyPost(Author, content, now, inReplyTo);
         }
 
         public Subforum createSubForum(Member member, string name, string description, Member moderator)
         {
-            return null;  //_serverAPI.createSubForum(member, name, description, moderator);
+            return _serverAPI.createSubForum(member, name, description, moderator);
         }
 
         public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
         {
-            return null; // _serverAPI.createThread(author, title, content, now, container);
+            return _serverAPI.createThread(author, title, content, now, container);
         }
 
         public int defineForumPolicy(SuperUser member, Forum forum)
@@ -56,7 +52,7 @@ namespace AccTests
 
         public Member getAdmin(User user, Forum forum, string userName)
         {
-            return null; // _serverAPI.getAdmin(user, forum, userName);
+            return  _serverAPI.getAdmin(user, forum, userName);
         }
 
         public List<Member> getAdmins(User member, Forum forum)
