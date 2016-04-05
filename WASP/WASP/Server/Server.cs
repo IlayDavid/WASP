@@ -11,7 +11,7 @@ namespace WASP.Server
     // server_forum has explicit Forum methods
     public partial class Server : ServerAPI
     {
-        IBL bl = new BL();
+        IBL bl = new BL(null);
 
         public int deletePost(Member member, Post post)
         {

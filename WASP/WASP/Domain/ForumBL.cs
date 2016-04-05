@@ -8,13 +8,12 @@ namespace WASP.Domain
 {
     class ForumBL : ForumIBL
     {
-        private IDAL _dal = null;
+        private ForumIDAL _dal = null;
         public int ForumID { get; set; }
         
-        public ForumBL(Forum newForum, IDAL dal)
+        public ForumBL(Forum newForum, ForumIDAL dal)
         {
             _dal = dal;
-            _dal.AddForum(newForum);
             ForumID = newForum.Id;
         }
 
@@ -35,7 +34,7 @@ namespace WASP.Domain
 
         public Post getThread(Member member, int threadId)
         {
-            return _dal.GetPost(threadId);
+            return _dal.GetThread(threadId);
         }
         //TODO: rename the function Forum.getsubforum() to Forum.getsubforums()
         public Subforum getSubforum(Member member, int subforumId)
@@ -58,6 +57,7 @@ namespace WASP.Domain
 
         public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
         {
+            //shouldn't know the excect implamantation of subforum(tuple...)
             return subforum.GetModerator(moderator).Item2;
         }
 
@@ -78,6 +78,7 @@ namespace WASP.Domain
 
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
+            //need to fix in the future.
             subforum.RemoveModerator(moderator);            
             subforum.AddModerator(moderator, term);
             return 1;
@@ -85,7 +86,7 @@ namespace WASP.Domain
 
         public Forum getForum()
         {
-            return _dal.GetForum(ForumID);
+            return _dal.GetForum();
         }
 
         //TODO: implement according to Eden's impelementation
@@ -96,13 +97,15 @@ namespace WASP.Domain
 
         public Member subscribeToForum(string userName, string name, string email, string pass)
         {
-            return new Member(userName,name,email, pass, this.getForum());
+            Member newMember = new Member(userName, name, email, pass, this.getForum());
+            getForum().AddMember(newMember);
+            return newMember;
         }
 
         //TODO: fix the entity to support messages
         public int sendMessage(Member member, Member targetMember, Message message)
         {
-            throw new NotImplementedException();
+            return _dal.AddMessage(message, targetMember);
         }
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
@@ -119,12 +122,7 @@ namespace WASP.Domain
 
         public int deletePost(Member member, Post post)
         {
-            foreach (var reply in post.GetAllReplies())
-            {
-                deletePost(member, reply);
-            }
-            _dal.DeletePost(post.Id);
-            return 1;
+            return _dal.DeletePost(post.Id);
         }
 
         public Member login(string userName, string password)

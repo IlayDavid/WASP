@@ -10,36 +10,36 @@ namespace WASP.Domain
         private bool _initialized = false;
         private SuperUser _supervisor = null;
         Dictionary<int, ForumIBL> forumsIBL = new Dictionary<int, ForumIBL>();
-        private IDAL _dal;
+        private IDAL _dal = null;
+
+        public BL(IDAL dal)
+        {
+            _dal = dal;
+        }
+
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass)
         {
+            //create new forum with admin
             Forum newForum = new Forum(forumName, description);
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
-
+            //create the business logic for the new forum.
             ForumIBL newForumBL = new ForumBL(newForum, null);
-
+            //add to dictionary
             forumsIBL.Add(newForumBL.getForum().Id, newForumBL);
+            _dal.AddForum(newForum);
 
             return newForum;
         }
 
         public List<Forum> getAllForums()
         {
-            List<Forum> retForums = new List<Forum>();
-            foreach(ForumIBL forumBL in forumsIBL.Values.ToList())
-            {
-                retForums.Add(forumBL.getForum());
-            }
-            return retForums;
+            return forumsIBL.Values.Select(forumBL => forumBL.getForum()).ToList();
         }
 
         public Forum getForum(Member member, int forumId)
         {
-            ForumIBL ret;
-            forumsIBL.TryGetValue(forumId, out ret);
-
-            return ret.getForum();
+            return _dal.GetForum(forumId);
         }
 
         public ForumIBL getForumIBL(Forum forum)

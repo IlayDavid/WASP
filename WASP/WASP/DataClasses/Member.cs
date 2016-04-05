@@ -27,6 +27,11 @@ namespace WASP
         {
             _isActive = true;
         }
+
+        public bool IsActive()
+        {
+            return _isActive;
+        }
         
 
         public List<Post> GetAllPosts()

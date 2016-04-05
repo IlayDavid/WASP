@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClasses\ForumIDAL.cs" />
     <Compile Include="DataClasses\IDAL.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="DataClasses\Message.cs" />
