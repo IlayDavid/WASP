@@ -4,12 +4,10 @@ using WASP.DataClasses;
 
 namespace WASP.TestSuits
 {
-    class UserTests
+    [TestClass]
+    public class UserTests
     {
-
-
         [TestMethod]
-
         public void UserReplies()
         {
             // arrange
@@ -21,11 +19,6 @@ namespace WASP.TestSuits
             // assert
             Assert.AreEqual(post1, user1.GetPost(post1.Id), "checking if user1 added post1 to his posts");
             Assert.AreEqual(1, user1.GetAllPosts().Count, "check if added post1 to his list of posts");
-
         }
-
-
-
-
     }
 }

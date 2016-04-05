@@ -51,7 +51,6 @@ namespace WASP.TestSuits
             _admin = admin;
             Assert.IsNotNull(admin);
         }
-
         [TestMethod]
         public void subscribeUser1()
         {
@@ -60,7 +59,6 @@ namespace WASP.TestSuits
             var badmail = server.subscribeToForum("a", "a", "a", "a", forum);
             Assert.IsTrue(nothin == null && badmail == null);
         }
-
         [TestMethod]
         public void subscribeUser2()
         {
@@ -76,7 +74,6 @@ namespace WASP.TestSuits
             var subforum= server.createSubForum(_admin, "", "", _admin, DateTime.Now);
             Assert.IsNotNull(subforum);
         }
-
         [TestMethod]
         public void createSubForum2()
         {
@@ -114,7 +111,6 @@ namespace WASP.TestSuits
 
             Assert.IsNull(thread);
         }
-
         [TestMethod]
         public void createThread2()
         {
@@ -123,7 +119,6 @@ namespace WASP.TestSuits
             _threadId = thread.Id;
             Assert.IsNotNull(thread);
         }
-
         [TestMethod]
         public void createReply1()
         {
@@ -131,7 +126,6 @@ namespace WASP.TestSuits
             var reply = server.createReplyPost(_member, "", DateTime.Now, server.getThread(_member, _threadId));
             Assert.IsNull(reply);
         }
-
         [TestMethod]
         public void createReply2()
         {
@@ -140,7 +134,6 @@ namespace WASP.TestSuits
                 server.getThread(_member, _threadId));
             Assert.IsNotNull(reply);
         }
-
         [TestMethod]
         public void createReply3()
         {
@@ -149,7 +142,6 @@ namespace WASP.TestSuits
                 server.getThread(_member, _threadId).GetAllReplies().First((x)=>true));
             Assert.IsNotNull(reply);
         }
-
         [TestMethod]
         public void addModerator()
         {
