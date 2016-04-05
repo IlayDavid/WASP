@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\IDAL.cs" />
+    <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
+    <Compile Include="DataClasses\Policies\Policy.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="DataClasses\Message.cs" />
     <Compile Include="DataClasses\Post.cs" />

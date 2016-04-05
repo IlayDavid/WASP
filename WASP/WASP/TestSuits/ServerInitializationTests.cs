@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using WASP.DataClasses;
 namespace WASP.TestSuits
 {
     [TestClass]

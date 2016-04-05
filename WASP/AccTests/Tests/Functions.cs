@@ -1,5 +1,5 @@
 ﻿using System;
-using WASP;
+using WASP.DataClasses;
 
 
 namespace AccTests.Tests
