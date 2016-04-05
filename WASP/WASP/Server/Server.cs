@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using WASP.DataClasses;
 using WASP.Domain;
 
 namespace WASP.Server
@@ -96,6 +98,11 @@ namespace WASP.Server
             {
                 return null;
             }
+        }
+
+        public Member getAdmin(User user, Forum forum, string userName)
+        {
+            return getAdmins(user, forum).First((x) => user.UserName.Equals(userName));
         }
     }
 }
