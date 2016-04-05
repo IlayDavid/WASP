@@ -9,7 +9,7 @@ namespace WASP.DataClasses
     public class Message
     {
         private static int _idCounter = 0;
-        private int _id;
+        public int Id { get; set; }
         private string _content;
         private string _title;
 
@@ -20,7 +20,7 @@ namespace WASP.DataClasses
         }
         internal bool isEmpty()
         {
-            _id = _idCounter;
+            Id = _idCounter;
             _idCounter++;
             return (_content.Equals("") || _title.Equals(""));
         }

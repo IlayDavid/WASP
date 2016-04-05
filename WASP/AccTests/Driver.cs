@@ -12,7 +12,7 @@ namespace AccTests
         {
             ProxyBridge bridge = new ProxyBridge();
             // add when real bridge is ready
-                //bridge.proj = new RealBridge();
+            bridge.proj = new RealBridge();
             return bridge;
         }
     }

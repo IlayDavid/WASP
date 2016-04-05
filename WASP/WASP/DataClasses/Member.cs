@@ -5,9 +5,9 @@ namespace WASP.DataClasses
 {
     public class Member : User
     {
-        
         private bool _isActive=false;
         private List<Post> posts= new List<Post>();
+        private List<Message> messages = new List<Message>();
         public Forum MemberForum { get; private set; }
         public Member(String userName, String name, String email, String pass, Forum memberForum)
         {
@@ -27,7 +27,6 @@ namespace WASP.DataClasses
         {
             return _isActive;
         }
-        
 
         public List<Post> GetAllPosts()
         {
@@ -45,6 +44,20 @@ namespace WASP.DataClasses
         public void AddPost (Post post)
         {
             posts.Add(post);
+        }
+
+        public void AddMessage(Message message)
+        {
+            messages.Add(message);
+        }
+        public void DeleteMessage(int messageID)
+        {
+            messages.Remove(messages.First(message => message.Id == messageID));
+        }
+
+        internal Message GetMessage(int messageID)
+        {
+            return messages.First((x) => x.Id == messageID);
         }
     }
 }

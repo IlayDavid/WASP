@@ -34,7 +34,7 @@ namespace WASP.Domain
 
         public Post getThread(Member member, int threadId)
         {
-            return _dal.GetThread(threadId);
+            return _dal.GetThread(threadId, null);
         }
         //TODO: rename the function Forum.getsubforum() to Forum.getsubforums()
         public Subforum getSubforum(Member member, int subforumId)
@@ -122,7 +122,7 @@ namespace WASP.Domain
 
         public int deletePost(Member member, Post post)
         {
-            return _dal.DeletePost(post.Id);
+            return _dal.DeletePost(post.Id, post.Container);
         }
 
         public Member login(string userName, string password)

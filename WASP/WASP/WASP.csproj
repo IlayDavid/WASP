@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DAL.cs" />
+    <Compile Include="DataClasses\DAL.cs" />
+    <Compile Include="DataClasses\ForumDAL.cs" />
     <Compile Include="DataClasses\ForumIDAL.cs" />
     <Compile Include="DataClasses\IDAL.cs" />
     <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />

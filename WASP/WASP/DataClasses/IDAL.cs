@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WASP.DataClasses;
 
-namespace WASP.DataAccess
+namespace WASP.DataClasses
 {
     public interface IDAL
     {

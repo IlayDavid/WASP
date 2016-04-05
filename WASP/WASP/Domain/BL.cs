@@ -26,7 +26,7 @@ namespace WASP.Domain
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
             //create the business logic for the new forum.
-            ForumIBL newForumBL = new ForumBL(newForum, null);
+            ForumIBL newForumBL = new ForumBL(newForum, new ForumDAL(newForum));
             //add to dictionary
             forumsIBL.Add(newForumBL.getForum().Id, newForumBL);
             _dal.AddForum(newForum);

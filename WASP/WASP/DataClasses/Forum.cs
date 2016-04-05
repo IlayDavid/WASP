@@ -56,6 +56,11 @@ namespace WASP.DataClasses
             throw new NotImplementedException();
         }
 
+        internal Member GetMember(string username)
+        {
+            return members.First(member => member.UserName.Equals(username));
+        }
+
         internal void Update(Forum forum)
         {
             throw new NotImplementedException();

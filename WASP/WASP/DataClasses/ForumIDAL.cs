@@ -10,7 +10,7 @@ namespace WASP.DataClasses
     {
         //add data classes to data base
         Forum GetForum();
-        int AddUser(User u);
+        int AddMember(Member m);
         int AddMessage(Message m);
         int AddMessage(Message m, Member member);
         int AddPost(Post p);
@@ -18,15 +18,15 @@ namespace WASP.DataClasses
 
         //delete data classes from data base
         int DeleteUser(string username);
-        int DeleteMessage(int messageID);
-        int DeletePost(int postID);
+        int DeleteMessage(Member member, int messageID);
+        int DeletePost(int postID, Subforum sf);
         int DeleteSubforum(int subforumID);
 
         //get data classes from data base
-        User GetUser(string username);
-        Message GetMessage(int messageID);
-        Post GetThread(int postID);
-        Post GetPost(int postID);
+        Member GetUser(string username);
+        Message GetMessage(Member member, int messageID);
+        Post GetThread(int postID, Subforum sf);
+        Post GetPost(int postID, Subforum sf);
         Subforum GetSubforum(int subforumID);
     }
 }

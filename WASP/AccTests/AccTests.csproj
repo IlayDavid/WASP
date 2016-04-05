@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -62,6 +63,7 @@
     <Compile Include="Tests\PostMsgTests.cs" />
     <Compile Include="Tests\SendPrivateMsgTests.cs" />
     <Compile Include="Tests\SubscribeForumTests.cs" />
+    <Compile Include="Tests\Testtttt.cs" />
     <Compile Include="WASPBridge.cs" />
   </ItemGroup>
   <ItemGroup>
