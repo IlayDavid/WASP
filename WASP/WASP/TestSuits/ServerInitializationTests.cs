@@ -8,7 +8,7 @@ namespace WASP.TestSuits
     [TestClass]
     public class ServerInitializationTests
     {
-        private ServerAPI server = new Server.Server.Server();
+        private ServerAPI server = new Server.Server();
         private SuperUser _supervisor = null;
         private Forum forum = null;
         private int _subforumId = 0;
