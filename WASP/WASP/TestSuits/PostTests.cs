@@ -40,9 +40,11 @@ namespace WASP.TestSuits
             // act
             original.AddReply(reply);
             reply.AddReply(reply2reply);
+            original.AddReply(reply2reply);
+            original.RemoveReply(reply2reply);
             // assert
-            Assert.AreEqual(reply, original.InReplyTo, "checking if reply added to original");
-            Assert.AreEqual(reply2reply, reply.InReplyTo, "checking if reply2reply added to reply2");
+            Assert.AreEqual(reply, original.GetReply(reply.Id), "checking if reply added to original");
+            Assert.AreEqual(reply2reply, reply.GetReply(reply2reply.Id), "checking if reply2reply added to reply2");
             Assert.AreEqual(1, original.GetAllReplies().Count, "checking if reply added and removed successfully");
         }
     }
