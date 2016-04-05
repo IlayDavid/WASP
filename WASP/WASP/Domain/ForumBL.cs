@@ -8,27 +8,29 @@ namespace WASP.Domain
 {
     class ForumBL : ForumIBL
     {
-        private IDAL _dal;
-        public Forum Forum { get; set; }
+        private IDAL _dal = null;
+        public int ForumID { get; set; }
         
-        public ForumBL(Forum newForum)
+        public ForumBL(Forum newForum, IDAL dal)
         {
-            Forum = newForum;
+            _dal = dal;
+            _dal.AddForum(newForum);
+            ForumID = newForum.Id;
         }
 
         public List<Member> getAdmins(User user)
         {
-            return Forum.GetAdmins().ToList();
+            return getForum().GetAdmins().ToList();
         }
 
         public List<Member> getMembers(Member member)
         {
-            return Forum.GetMembers().ToList();
+            return getForum().GetMembers().ToList();
         }
 
         public List<Subforum> getSubforums(int forumId)
         {
-            return Forum.GetSubForum().ToList();
+            return getForum().GetSubForum().ToList();
         }
 
         public Post getThread(Member member, int threadId)
@@ -83,7 +85,7 @@ namespace WASP.Domain
 
         public Forum getForum()
         {
-            return Forum;
+            return _dal.GetForum(ForumID);
         }
 
         //TODO: implement according to Eden's impelementation
@@ -94,7 +96,7 @@ namespace WASP.Domain
 
         public Member subscribeToForum(string userName, string name, string email, string pass)
         {
-            return new Member(userName,name,email, pass, Forum);
+            return new Member(userName,name,email, pass, this.getForum());
         }
 
         //TODO: fix the entity to support messages
@@ -142,7 +144,7 @@ namespace WASP.Domain
 
         public List<Subforum> getSubforums(Member member)
         {
-            return Forum.GetSubForum();
+            return getForum().GetSubForum();
         }
     }
 }

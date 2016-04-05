@@ -42,8 +42,5 @@ namespace WASP.DataAccess
 
         Subforum GetSubforum(int subforumID);
 
-
-
-
     }
 }
