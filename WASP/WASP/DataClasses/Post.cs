@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WASP
+namespace WASP.DataClasses
 {
     public class Post
     {

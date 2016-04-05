@@ -1,6 +1,6 @@
 ﻿using System;
 using WASP.Domain;
-
+using WASP.DataClasses;
 namespace WASP.Server
 {
     partial class Server
