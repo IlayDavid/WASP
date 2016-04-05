@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using NUnit.Framework;
+using WASP;
 
 namespace AccTests.Tests
 {
@@ -13,13 +12,14 @@ namespace AccTests.Tests
     {
 
         private WASPBridge _proj;
-        private int _forumId;
-        private int _subforumId;
-        private User _supervisor;
-        private User _admin;
-        private int _threadId;
+        private Forum _forum;
+        private Subforum _subforum;
+        private SuperUser _supervisor;
+        private Member _admin;
+        private Member _moderator;
+        private Post _thread;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SystemSetUp()
         {
             _proj = Driver.getBridge();
@@ -28,49 +28,77 @@ namespace AccTests.Tests
         [SetUp]     //before each Test
         public void SetUp()
         {
-            _supervisor = _proj.initialize();
+            _supervisor = Functions.InitialSystem(_proj);
 
-            _admin = new User("matansar", "123456", "matan", "matansar@post.bgu.ac.il");
-            Forum forum = new Forum("Start-Up", _admin);
-            Subforum subforum = new Subforum("Calander-Start-Up");
-            Post openPost = new Post("Someone know a good web service for Calander?");
-            UserThread thread = new UserThread("webService for calander", openPost);
-            _forumId = _proj.createForum(_supervisor._userName, forum);
-            _subforumId = _proj.createSubForum(_supervisor._userName, _forumId, subforum);
-            _threadId = _proj.createThread(_supervisor._userName, _subforumId, thread);
+            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            _forum = forumAndAdmin.Item1;
+            _admin = forumAndAdmin.Item2;
+            _proj.login(_admin.UserName, _admin.Password, _forum);
+
+            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            _subforum = subforumAndModerator.Item1;
+            _moderator = subforumAndModerator.Item2;
+            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+
+            _thread  = _proj.createThread(_moderator, "webService for calander",
+                                    "Someone know a good web service for Calander?", DateTime.Now, _subforum);
         }
 
 
         /// <summary>
-        /// checks that supervisor can add a post
+        /// Positive Test: checks that member can add a post
         /// </summary>
         [Test]
-        public void OpenThreadTest1()
+        public void PostMsgTest1()
         {
-            Post replayPost = new Post("seach at google");
-            Assert.Greater(_proj.createPost(_supervisor._userName, _threadId, replayPost) , 0);
+            Member member = Functions.SubscribeSpecMember(_proj, _forum);
+            _proj.login(member.UserName, member.Password, _forum);
+            Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
+            Assert.NotNull(isPost);
         }
 
         /// <summary>
-        /// checks that admin can add a post
+        /// Positive Test: checks that moderator can add a post
         /// </summary>
         [Test]
-        public void OpenThreadTest2()
+        public void PostMsgTest2()
         {
-            Post replayPost = new Post("seach at google");
-            Assert.Greater(_proj.createPost(_admin._userName, _threadId, replayPost), 0);
+            Post isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, _thread);
+            Assert.NotNull(isPost);
         }
 
         /// <summary>
-        /// checks that member can a post
+        /// Negative Test: lack of information
         /// </summary>
         [Test]
-        public void OpenThreadTest3()
+        public void PostMsgTest3()
         {
-            User member = new User("amitayaSh", "123456", "amitay", "amitayaSh@post.bgu.ac.il");
-            _proj.subscribeToForum(member, _forumId);
-            Post replayPost = new Post("seach at google");
-            Assert.Greater(_proj.createPost(member._userName, _threadId, replayPost), 0);
+            Post isPost = _proj.createReplyPost(null , "sereach at google", DateTime.Now, _thread);
+            Assert.IsNull(isPost);
+
+            isPost = _proj.createReplyPost(_moderator, "", DateTime.Now.AddDays(10), _thread);
+            Assert.IsNull(isPost);
+
+            isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, null);
+            Assert.IsNull(isPost);
         }
+
+        /// <summary>
+        /// Negative Test: secure NF: member that doent not sign in this forum, try to reply post
+        /// </summary>
+        public void PostMsgTest4()
+        {
+            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            Forum forum = forumAndAdmin.Item1;
+            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            Subforum subforum = subforumAndModerator.Item1;
+            Member member = Functions.SubscribeSpecMember2(_proj, forum);
+            _proj.login(member.UserName, member.Password, forum);
+            Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
+            Assert.Null(isPost);
+
+
+        }
+
     }
 }

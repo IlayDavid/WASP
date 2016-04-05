@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
 
 
 namespace AccTests.Tests
@@ -33,6 +32,7 @@ namespace AccTests.Tests
             Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
+            _proj.login(_admin.UserName, _admin.Password, _forum);
         }
 
         /// <summary>
@@ -98,13 +98,14 @@ namespace AccTests.Tests
         [Test]
         public void CreatesubforumTest4()
         {
-            string userName = "danih";
-            Forum forum = _proj.createForum(_supervisor, "philosophia", "blah blah", userName, "dani",
-                            "danih@post.bgu.ac.il", "dani123");
+            Tuple<Forum,Member> forumAndModerator = Functions.CreateSpecForum2(_proj, _supervisor);
+            Forum forum = forumAndModerator.Item1;
+            Member admin = forumAndModerator.Item2;
 
             Member moderator1 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
             Member moderator2 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum);
-
+            _proj.login(moderator1.UserName, moderator1.Password, _forum);
+            _proj.login(moderator2.UserName, moderator2.Password, _forum);
             // lacking of informations
             Subforum subforum1 = _proj.createSubForum(_admin, "", "blah", moderator1);
             Subforum subforum2 = _proj.createSubForum(_admin, "blah", "", moderator1);
@@ -112,9 +113,12 @@ namespace AccTests.Tests
             // fails because moderator2 is not member at _admin's forum
             Subforum subforum3 = _proj.createSubForum(_admin, "blah", "", moderator2);
 
+            Subforum subforum4 = _proj.createSubForum(admin, "blah", "blah", moderator1);
+
             Assert.IsNull(subforum1);
             Assert.IsNull(subforum2);
             Assert.IsNull(subforum3);
+            Assert.IsNull(subforum4);
         }
 
 

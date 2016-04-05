@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
 
 
 namespace AccTests.Tests
@@ -38,6 +37,10 @@ namespace AccTests.Tests
             _admin = forumAndAdmin.Item2;
             _member1 = _proj.subscribeToForum("amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum);
             _member2 = _proj.subscribeToForum("edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum);
+
+            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_member1.UserName, _member1.Password, _forum);
+            _proj.login(_member2.UserName, _member2.Password, _forum);
         }
 
         /// <summary>

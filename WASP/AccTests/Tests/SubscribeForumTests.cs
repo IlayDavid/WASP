@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
 
 namespace AccTests.Tests
 {
@@ -31,6 +29,8 @@ namespace AccTests.Tests
             Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
             _forum = forumAndMember.Item1;
             _admin = forumAndMember.Item2;
+
+            _proj.login(_admin.UserName, _admin.Password, _forum);
         }
 
         /*

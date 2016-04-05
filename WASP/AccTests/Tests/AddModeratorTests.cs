@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using NUnit.Framework;
 using WASP;
-using WASP.DataClasses;
 
 namespace AccTests.Tests
 {
@@ -39,12 +36,20 @@ namespace AccTests.Tests
             Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj,_supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
+            _proj.login(_admin.UserName, _admin.Password, _forum);
+
 
             Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
+            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+
 
             _member1 = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum);
+            _proj.login(_member1.UserName, _member1.Password, _forum);
+
+
+
 
         }
 
@@ -92,6 +97,7 @@ namespace AccTests.Tests
             Forum forum = _proj.createForum(_supervisor, "forum1", "blah", "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123");
             Member admin = _proj.getAdmin(_supervisor, forum, "haaronB");
+            _proj.login(admin.UserName, admin.Password, _forum);
 
             //another admin tries to add a moderator
             int isModerator = _proj.addModerator(admin, _member1, _subforum, DateTime.Now.AddDays(200));
