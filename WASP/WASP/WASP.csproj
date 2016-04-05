@@ -63,6 +63,7 @@
     <Compile Include="Server\Server_Forum.cs" />
     <Compile Include="Server\Server_User.cs" />
     <Compile Include="TestSuits\PostTestscs.cs" />
+    <Compile Include="TestSuits\serverTests.cs" />
     <Compile Include="TestSuits\SubForumTests.cs" />
     <Compile Include="TestSuits\TestsForum.cs" />
     <Compile Include="TestSuits\UserTests.cs" />
