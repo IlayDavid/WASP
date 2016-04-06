@@ -6,20 +6,10 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.Policies
 {
-    public abstract class Policy
+    public interface Policy
     {
-        Policy next;
-        public abstract void Validate(User user);
-        public Policy Next
-        {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
-        }
+        Policy Next { get; set; }
+
+        void Validate(User user);
     }
 }

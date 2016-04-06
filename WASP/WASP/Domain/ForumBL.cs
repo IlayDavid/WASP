@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WASP.DataAccess;
 using WASP.DataClasses;
 
 namespace WASP.Domain
