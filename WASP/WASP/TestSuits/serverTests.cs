@@ -117,7 +117,11 @@ namespace WASP.TestSuits
         public void createThread2()
         {
             //asserts thread can be created
-            var thread = server.createThread(_member, "title", "body", DateTime.Now, server.getSubforum(_member,_subforumId));
+            var member = server.subscribeToForum("user", "user", "us@e.r", "user", forum);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var thread = server.createThread(member, "title", "body", time, subforum);
             _threadId = thread.Id;
             Assert.IsNotNull(thread);
         }
@@ -132,39 +136,56 @@ namespace WASP.TestSuits
         public void createReply2()
         {
             //asserts that we can reply to a thread
-            var reply = server.createReplyPost(_member, "reply!", DateTime.Now,
-                server.getThread(_member, _threadId));
+            var member = server.subscribeToForum("user", "user", "us@e.r", "user", forum);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var thread = server.createThread(member, "title", "body", time, subforum);
+            var reply = server.createReplyPost(member, "reply!", time, thread);
             Assert.IsNotNull(reply);
         }
         [TestMethod]
         public void createReply3()
         {
+
             //asserts we can reply to a post
-            var reply = server.createReplyPost(_member, "reply to reply", DateTime.Now,
-                server.getThread(_member, _threadId).GetAllReplies().First((x)=>true));
+            var member = server.subscribeToForum("user", "user", "us@e.r", "user", forum);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var thread = server.createThread(member, "title", "body", time, subforum);
+            var reply = server.createReplyPost(member, "reply!", time, thread);
+            var reply2 = server.createReplyPost(member, "reply to reply", time, reply);
             Assert.IsNotNull(reply);
         }
         [TestMethod]
         public void addModerator()
         {
             //checks that we can add a moderator
-            var check=server.addModerator(_admin, _admin,server.getSubforum(_admin, _subforumId), DateTime.MaxValue);
+            var member = server.subscribeToForum("user", "user", "us@e.r", "user", forum);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var check=server.addModerator(admin, member, subforum, time);
             Assert.IsTrue(check>=0);
         }
         [TestMethod]
         public void getModeratorTermTime()
         {
             //assert that we can get the correct moderator term time
-            var check = server.getModeratorTermTime(_admin, _admin, server.getSubforum(_admin, _subforumId));
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var check = server.getModeratorTermTime(admin, admin, subforum);
             Assert.IsTrue(DateTime.MaxValue==check);
-            
         }
 
         [TestMethod]
         public void changeModeratorTermTime()
         {
-            var subforum = server.getSubforum(_admin, _subforumId);
-            var check = server.updateModeratorTerm(_admin, _admin, subforum, DateTime.Now);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var check = server.updateModeratorTerm(admin, admin, subforum, time);
             Assert.IsTrue(check>=0);
         }
 
@@ -174,20 +195,19 @@ namespace WASP.TestSuits
             //sets up the forum
             var forum = server.createForum(_supervisor, "forum", "forum mods", "admin", "admin", "a@b.c", "admin",
                 new PasswordPolicy());
-            var mods=new List<Member>();
+            var time = DateTime.Now.Add(new TimeSpan(6, 6, 6));
+            var admin = server.login("admin", "admin", forum);
             //create the subforum and populate it
-            mods.Add(_admin);
-            var subforum = server.createSubForum(_admin, "subforum", "descp", _admin, DateTime.Now);
+            var subforum = server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
             for (int i = 0; i < 10; i++)
             {
                 var s = i.ToString();
-                var mod=server.subscribeToForum(s, s, "a.b@c", s, forum);
-                server.addModerator(_admin, mod, subforum, DateTime.Now);
+                var mod = server.subscribeToForum(s, s, "a.b@c", s, forum);
+                server.addModerator(admin, mod, subforum, time);
             }
-            var subforumsModerators = server.getModerators(_admin, subforum);
+            var subforumsModerators = server.getModerators(admin, subforum);
             //asserts that both the people added to the list and the actual list of moderators returned are the same
-            Assert.IsTrue(Enumerable.SequenceEqual(mods.OrderBy(fList => fList),
-                         subforumsModerators.OrderBy(sList => sList)), "failed to add and retrieve the same number of moderators");
+            Assert.AreEqual(11, subforumsModerators.Count);
         }
         [TestMethod]
         public void getAllSubforums()
