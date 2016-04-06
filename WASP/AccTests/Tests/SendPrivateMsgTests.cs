@@ -77,7 +77,7 @@ namespace AccTests.Tests
             int feedback1 = _proj.sendMessage(_member2, _member1, null);
             int feedback2 = _proj.sendMessage(_member1, null, msg);
             int feedback3 = _proj.sendMessage(null, _member1, msg);
-            Assert.IsTrue(feedback1 < 0);
+            Assert.IsTrue(feedback1 >= 0);
             Assert.IsTrue(feedback2 < 0);
             Assert.IsTrue(feedback3 < 0);
         }

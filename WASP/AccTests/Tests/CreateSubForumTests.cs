@@ -115,7 +115,7 @@ namespace AccTests.Tests
             Assert.IsNull(subforum1);
             Assert.IsNull(subforum2);
             Assert.IsNull(subforum3);
-            Assert.IsNull(subforum4);
+            Assert.IsNotNull(subforum4);
         }
     }
 }

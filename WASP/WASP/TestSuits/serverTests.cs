@@ -18,7 +18,7 @@ namespace WASP.TestSuits
         private Member _member = null;
 
         [TestInitialize]
-        public static  void initializeTests(TestContext tc)
+        public void initializeTests()
         {
             _supervisor=server.initialize("super", "super", "super@user.man", "super");
             forum = server.createForum(_supervisor, "forum", "the forum", "admin", "admin", "e@mail.com", "admin", new PasswordPolicy());
@@ -240,10 +240,11 @@ namespace WASP.TestSuits
         public void confirmMailTest2()
         {
             //assert that we can confirm an email multiple times
-            server.confirmEmail(_admin);
-            server.confirmEmail(_admin);
-            server.confirmEmail(_admin);
-            Assert.IsTrue(server.confirmEmail(_admin) >= 0);
+            Member m = server.subscribeToForum("aaa", "aaa", "a@a.b", "abc", forum);
+            server.confirmEmail(m);
+            server.confirmEmail(m);
+            server.confirmEmail(m);
+            Assert.IsTrue(server.confirmEmail(m) >= 0);
         }
         [TestMethod]
         public void updateForumPolicy()
