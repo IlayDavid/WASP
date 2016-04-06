@@ -65,7 +65,7 @@ namespace WASP.Domain
         public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
         {
             //TODO: policy
-            if (!(Subforum.isValid(name, description, moderator, term)))
+            if (!(Subforum.isValid(name, description, moderator, term) && member.MemberForum == getForum()))
                 return null;
             var subforum=new Subforum(name, description, moderator, term);
             _dal.AddSubforum(subforum);
@@ -119,7 +119,7 @@ namespace WASP.Domain
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
-            if (!Helper.isTermValid(term))
+            if (!(Helper.isTermValid(term) && (subforum.IsModerator(member) || getForum().IsAdmin(member))))
                 return -1;
             subforum.AddModerator(moderator,term);
             return 1;
@@ -133,6 +133,8 @@ namespace WASP.Domain
 
         public int deletePost(Member member, Post post)
         {
+            if (!(post.GetAuthor == member || getForum().IsAdmin(member) || post.Container.IsModerator(member)))
+                return -1;
             return _dal.DeletePost(post.Id, post.Container);
         }
 

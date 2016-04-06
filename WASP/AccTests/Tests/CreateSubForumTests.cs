@@ -41,12 +41,12 @@ namespace AccTests.Tests
             Subforum subforum = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
             Assert.IsNotNull(subforum);
-            Assert.Equals(_proj.getModerators(_admin, subforum).Count, 1);
-            Assert.Equals(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
-            Assert.Equals(_proj.getModerators(_admin, subforum)[0].Name, moderator.Name);
-            Assert.Equals(_proj.getModerators(_admin, subforum)[0].Password, moderator.Password);
-            Assert.Equals(_proj.getModerators(_admin, subforum)[0].Email, moderator.Email);
-            Assert.Equals(_proj.getModerators(_admin, subforum)[0].MemberForum, moderator.MemberForum);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum).Count, 1);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Name, moderator.Name);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Password, moderator.Password);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Email, moderator.Email);
+            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].MemberForum, moderator.MemberForum);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace AccTests.Tests
 
             Assert.IsNotNull(subforum1);
             Assert.IsNotNull(subforum2);
-            Assert.Equals(_proj.getSubforums(_admin, _forum).Count, 2);
+            Assert.AreEqual(_proj.getSubforums(_admin, _forum).Count, 2);
         }
 
         /// <summary>
@@ -82,11 +82,11 @@ namespace AccTests.Tests
                         "blah blah blah", moderator, DateTime.Now.AddDays(100));
 
                 Assert.IsNotNull(subforum);
-                Assert.Equals(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
-                Assert.Equals(_proj.getModerators(_admin,subforum).Count, 1);
+                Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
+                Assert.AreEqual(_proj.getModerators(_admin,subforum).Count, 1);
             }
 
-            Assert.Equals(_proj.getSubforums(_admin, _forum).Count, N);
+            Assert.AreEqual(_proj.getSubforums(_admin, _forum).Count, N);
         }
 
         /// <summary>
