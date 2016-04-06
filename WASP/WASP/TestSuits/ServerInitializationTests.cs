@@ -40,7 +40,8 @@ namespace WASP.TestSuits
         public void initializeTest4()
         {
             //asserts that we fail to create a second superuser
-            var chek = server.initialize("abc", "def", "gef@bad.com", "sda");
+            var chek1 = server.initialize("abc", "def", "gef@bad.com", "sda");
+            var chek = server.initialize("aa", "bb", "ab.b@g.c", "be");
             Assert.IsNull(chek);
         }
 

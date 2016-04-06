@@ -17,7 +17,7 @@ namespace WASP.TestSuits
         private Member _admin = null;
         private Member _member = null;
 
-        [ClassInitialize]
+        [TestInitialize]
         public static  void initializeTests(TestContext tc)
         {
             _supervisor=server.initialize("super", "super", "super@user.man", "super");
@@ -213,6 +213,7 @@ namespace WASP.TestSuits
         public void confirmMailTest1()
         {
             //assert that we can confirm an email
+            _admin = forum.GetAdmins()[0];
             Assert.IsTrue(server.confirmEmail(_admin)>=0);
         }
         [TestMethod]

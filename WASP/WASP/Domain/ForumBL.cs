@@ -114,6 +114,8 @@ namespace WASP.Domain
         //TODO: fix the entity to support messages
         public int sendMessage(Member member, Member targetMember, Message message)
         {
+            if (!(member != null && targetMember != null && member.MemberForum == targetMember.MemberForum))
+                return -1;
             return _dal.AddMessage(message, targetMember);
         }
 

@@ -39,7 +39,7 @@ namespace AccTests.Tests
             List<Member> members = _proj.getMembers(_admin, _forum);
 
             Assert.IsNotNull(isMem);
-            Assert.Equals(members.Count, 1);
+            Assert.AreEqual(members.Count, 2);
             Assert.IsTrue(members.Contains(isMem));
             Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum).UserName);
         }
