@@ -21,10 +21,13 @@ namespace WASP.Domain
 
         public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
         {
+            if (creator == null)
+                return null;
             //create new forum with admin
             Forum newForum = new Forum(forumName, description, policy);
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
+            newForum.AddMember(theAdmin);
             //create the business logic for the new forum.
             ForumIBL newForumBL = new ForumBL(newForum, new ForumDAL(newForum));
             //add to dictionary
@@ -55,9 +58,7 @@ namespace WASP.Domain
         {
             if (!_initialized)
             {
-                const string SUPERUSERNAME = "admin";
-                const string SUPERPASSWORD = "wasp1234Sting";
-                _supervisor = new SuperUser(SUPERUSERNAME, "", "", SUPERPASSWORD);
+                _supervisor = new SuperUser(userName, name, email, pass);
                 _initialized = true;
                 return _supervisor;
             }
