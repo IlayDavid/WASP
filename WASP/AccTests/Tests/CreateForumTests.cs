@@ -12,7 +12,7 @@ namespace AccTests.Tests
     [TestClass]
     public class CreateForumTests
     {
-        private static WASPBridge _proj;
+        private WASPBridge _proj;
         private SuperUser _supervisor;
         
         

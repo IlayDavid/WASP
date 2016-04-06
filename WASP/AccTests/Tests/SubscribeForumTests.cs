@@ -12,13 +12,14 @@ namespace AccTests.Tests
     public class SubscribeForumTests
     {
 
-        private WASPBridge _proj = Driver.getBridge();
+        private WASPBridge _proj;
         private Forum _forum;
         private Member _admin;
 
         [TestInitialize]     //before each Test
         public void SetUp()
         {
+            _proj = Driver.getBridge();
             SuperUser supervisor = Functions.InitialSystem(_proj);
             Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
             _forum = forumAndMember.Item1;

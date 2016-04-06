@@ -12,9 +12,8 @@ D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cach
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.exe
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb

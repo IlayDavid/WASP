@@ -11,7 +11,7 @@ namespace AccTests.Tests
     public class PostMsgTests
     {
 
-        private static WASPBridge _proj = Driver.getBridge();
+        private WASPBridge _proj;
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
@@ -23,6 +23,7 @@ namespace AccTests.Tests
         [TestInitialize]     //before each Test
         public void SetUp()
         {
+            _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
 
             Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);

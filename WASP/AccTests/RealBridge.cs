@@ -9,8 +9,12 @@ namespace AccTests
 {
     class RealBridge : WASPBridge
     {
-        private ServerAPI _serverAPI=new Server();
+        private ServerAPI _serverAPI;
 
+        public RealBridge()
+        {
+            _serverAPI = new Server();
+        }
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             return _serverAPI.addModerator(member, moderator, subforum, term);

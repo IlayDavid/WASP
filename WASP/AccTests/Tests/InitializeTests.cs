@@ -7,7 +7,7 @@ namespace AccTests
     [TestClass]
     public class InitializeTests
     {
-        private static WASPBridge _proj = Driver.getBridge();
+        private WASPBridge _proj = Driver.getBridge();
 
         
         /// <summary>
