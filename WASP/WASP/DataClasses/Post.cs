@@ -30,7 +30,11 @@ namespace WASP.DataClasses
             _replies = new List<Post>();
 
         }
-
+        public static bool isValidOpening(String title, String content, Member author, DateTime now, Subforum container)
+        {
+            return !(Helper.isEmptyString(title) || Helper.isEmptyString(content)
+                || author == null || now == null || container == null);
+        }
         public Post(String content, Member author, DateTime now, Post inReplyTo)
         {
             // InReplyTo.AddReply(this);
@@ -44,6 +48,11 @@ namespace WASP.DataClasses
             _container = inReplyTo.Container;
             _editAt = now;
             _replies = new List<Post>();
+        }
+        public static bool isValidReply(String content, Member author, DateTime now, Post inReplyTo)
+        {
+            return !( Helper.isEmptyString(content) || author == null
+                || now == null || inReplyTo == null);
         }
 
         public int Id

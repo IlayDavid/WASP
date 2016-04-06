@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WASP.DataClasses
 {
     public class User
-    {
+    { 
         public string Name { get; set; }
 
         public String UserName { get; set; }
@@ -15,5 +15,7 @@ namespace WASP.DataClasses
         public String Email { get; set; }
 
         public String Password { get; set; }
+
+        
     }
 }

@@ -19,6 +19,12 @@ namespace WASP.DataClasses
             Password = pass;
             MemberForum = memberForum;
         }
+        public static bool isValid(String userName, String name, String email, String pass, Forum memberForum)
+        {
+            return !(Helper.isEmptyString(userName) || Helper.isEmptyString(name)
+                || Helper.isEmptyString(email) || Helper.isEmptyString(pass) ||
+                memberForum == null);
+        }
 
         public Forum MemberForum { get; private set; }
 

@@ -21,5 +21,11 @@ namespace WASP.DataClasses
                 _initialized = true;
             }
         }
+
+        public static bool isValid(string userName, String name, String email, String pass)
+        {
+            return !(Helper.isEmptyString(userName) || Helper.isEmptyString(name) 
+                || Helper.isEmptyString(email) || Helper.isEmptyString(pass));
+        }
     }
 }

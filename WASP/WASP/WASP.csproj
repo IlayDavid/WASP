@@ -48,6 +48,7 @@
     <Compile Include="DataClasses\Forum.cs" />
     <Compile Include="DataClasses\ForumDAL.cs" />
     <Compile Include="DataClasses\ForumIDAL.cs" />
+    <Compile Include="DataClasses\Helper.cs" />
     <Compile Include="DataClasses\IDAL.cs" />
     <Compile Include="DataClasses\Member.cs" />
     <Compile Include="DataClasses\Message.cs" />

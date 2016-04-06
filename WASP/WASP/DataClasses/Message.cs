@@ -13,6 +13,10 @@
             _content = content;
             _title = title;
         }
+        public static bool isValid(string content, string title)
+        {
+            return !(Helper.isEmptyString(content) || Helper.isEmptyString(title));
+        }
         internal bool isEmpty()
         {
             return (_content.Equals("") || _title.Equals(""));

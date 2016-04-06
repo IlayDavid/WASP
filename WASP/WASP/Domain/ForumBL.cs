@@ -43,6 +43,8 @@ namespace WASP.Domain
         
         public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
         {
+            if (!(Post.isValidOpening(title, content, author, now, container)))
+                return null;
             var post= new Post(title, content, author, now, container);
             _dal.AddPost(post);
             return post;
@@ -63,6 +65,8 @@ namespace WASP.Domain
         public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
         {
             //TODO: policy
+            if (!(Subforum.isValid(name, description, moderator, term)))
+                return null;
             var subforum=new Subforum(name, description, moderator, term);
             _dal.AddSubforum(subforum);
             return subforum;
@@ -70,6 +74,8 @@ namespace WASP.Domain
 
         public Post createReplyPost(Member author, string content, DateTime now, Post inReplyTo)
         {
+            if (!(Post.isValidReply(content, author, now, inReplyTo)))
+                return null;
             var post=new Post(content, author, now, inReplyTo);
             _dal.AddPost(post);
             return post;
@@ -96,6 +102,8 @@ namespace WASP.Domain
 
         public Member subscribeToForum(string userName, string name, string email, string pass)
         {
+            if (!(Member.isValid(userName, name, email, pass, this.getForum())))
+                return null;
             Member newMember = new Member(userName, name, email, pass, this.getForum());
             getForum().AddMember(newMember);
             return newMember;

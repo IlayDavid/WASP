@@ -4,3 +4,10 @@ C:\Users\amitay140\Documents\test\WASP\WASP\bin\Debug\WASP.pdb
 C:\Users\amitay140\Documents\test\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\amitay140\Documents\test\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\amitay140\Documents\test\WASP\WASP\obj\Debug\WASP.pdb
+D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\WASP.exe
+D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\WASP.pdb
+D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.exe
+D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.pdb

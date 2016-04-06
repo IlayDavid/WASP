@@ -30,6 +30,12 @@ namespace WASP.DataClasses
             AddModerator(moderator, term);
         }
 
+        public static bool isValid(String name, String description, Member moderator, DateTime term)
+        {
+            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
+                || (moderator == null) || (term==null));
+        }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

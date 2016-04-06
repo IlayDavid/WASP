@@ -22,8 +22,12 @@ namespace WASP.Domain
         {
             if (creator == null)
                 return null;
+            if (!(Forum.isValid(forumName, description, policy) ))
+                return null;
             //create new forum with admin
             Forum newForum = new Forum(forumName, description, policy);
+            if (!(Member.isValid(userName, adminName, email, pass, newForum)))
+                return null;
             Member theAdmin = new Member(userName, adminName, email, pass, newForum);
             newForum.AddAdmin(theAdmin);
             newForum.AddMember(theAdmin);
@@ -57,6 +61,8 @@ namespace WASP.Domain
         {
             if (!_initialized)
             {
+                if (!(SuperUser.isValid(userName, name, email, pass)))
+                    return null;
                 _supervisor = new SuperUser(userName, name, email, pass);
                 _initialized = true;
                 return _supervisor;

@@ -49,11 +49,11 @@ namespace AccTests.Tests
         {
             int isModerator = _proj.addModerator(_moderator, _member1, _subforum, DateTime.Now.AddDays(200));
             Assert.IsTrue(isModerator >= 0);
-            Assert.Equals(_proj.getModerators(_admin,_subforum).Count, 2);
+            Assert.IsTrue(_proj.getModerators(_admin,_subforum).Count == 2);
 
             int isModified = _proj.updateModeratorTerm(_moderator,_member1,_subforum, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModerator >= 0);
-            Assert.Equals(_proj.getModeratorTermTime(_moderator, _member1, _subforum), DateTime.Now.AddDays(100));
+            Assert.AreEqual(_proj.getModeratorTermTime(_moderator, _member1, _subforum).Date, DateTime.Now.AddDays(100).Date);
         }
 
 
@@ -66,11 +66,11 @@ namespace AccTests.Tests
         {
             int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
             Assert.IsTrue(isModerator >= 0);
-            Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 2);
+            Assert.IsTrue(_proj.getModerators(_admin, _subforum).Count == 2);
 
             int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModerator >= 0);
-            Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(100));
+            Assert.AreEqual(_proj.getModeratorTermTime(_admin, _member1, _subforum).Date, DateTime.Now.AddDays(100).Date);
         }
 
 
@@ -110,12 +110,12 @@ namespace AccTests.Tests
         {
             int isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(-10));
             Assert.IsTrue(isModerator < 0);
-            Assert.Equals(_proj.getModerators(_admin, _subforum).Count, 1);
+            Assert.IsTrue(_proj.getModerators(_admin, _subforum).Count== 1);
 
             isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
             int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(-1));
             Assert.IsTrue(isModerator < 0);
-            Assert.Equals(_proj.getModeratorTermTime(_admin, _member1, _subforum), DateTime.Now.AddDays(200));
+            Assert.AreEqual(_proj.getModeratorTermTime(_admin, _member1, _subforum).Date, DateTime.Now.AddDays(200).Date);
         }
 
 

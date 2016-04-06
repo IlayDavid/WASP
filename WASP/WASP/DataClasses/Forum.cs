@@ -25,6 +25,12 @@ namespace WASP.DataClasses
             this.policy = policy;
         }
 
+        public static bool isValid(String name, String description, Policy policy)
+        {
+            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
+                || policy == null);
+        }
+
         public void AddPolicy(Policy policy)
         {
             policy.Next = this.policy;
