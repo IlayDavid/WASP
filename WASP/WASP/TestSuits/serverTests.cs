@@ -77,7 +77,8 @@ namespace WASP.TestSuits
         public void createSubForum2()
         {
             //assert an admin can create a subforum with himself as moderator
-            var subforum=server.createSubForum(_admin, "sub", "forum", _admin, DateTime.Now);
+            var admin = server.login("admin", "admin", forum);
+            var subforum=server.createSubForum(admin, "sub", "forum", admin, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
         }
         [TestMethod]
@@ -91,15 +92,17 @@ namespace WASP.TestSuits
         public void createSubForum4()
         {
             //assert an admin can create a subforum with user as the moderator
-            var subforum=server.createSubForum(_admin, "sub2", "forum2", _member, DateTime.Now);
+            var admin = server.login("admin", "admin", forum);
+            var subforum=server.createSubForum(admin, "sub2", "forum2", admin, DateTime.MaxValue);
             _subforumId = subforum.Id;
             Assert.IsNotNull(subforum);
         }
         [TestMethod]
         public void checkGetSubforum()
         {
-            var subforum = server.createSubForum(_admin, "sub", "forum", _admin, DateTime.Now);
-            var inserverSubforum = server.getSubforum(_admin, subforum.Id);
+            var admin = server.login("admin", "admin", forum);
+            var subforum = server.createSubForum(admin, "sub", "forum", admin, DateTime.MaxValue);
+            var inserverSubforum = server.getSubforum(admin, subforum.Id);
             Assert.IsTrue(subforum==inserverSubforum);
         }
         [TestMethod]
