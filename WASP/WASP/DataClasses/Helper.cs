@@ -12,5 +12,10 @@ namespace WASP.DataClasses
         {
             return (str == null || str.Equals(""));
         }
+
+        public static bool isTermValid(DateTime term)
+        {
+            return term != null && (term.CompareTo(DateTime.Now) > 0);
+        }
     }
 }

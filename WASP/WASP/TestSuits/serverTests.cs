@@ -28,7 +28,7 @@ namespace WASP.TestSuits
         {
             //asserts the we get the superuser on login with good input
             var check = server.login("super", "super");
-            Assert.Equals(check, _supervisor);
+            Assert.AreEqual(check, _supervisor);
         }
         [TestMethod]
         public void superuserLogin2()
@@ -54,10 +54,9 @@ namespace WASP.TestSuits
         [TestMethod]
         public void subscribeUser1()
         {
-            //assert that subscribed user requires an input, and requires mail to contain '.' and '@'
+            //assert that subscribed user requires an input.
             var nothin = server.subscribeToForum("", "", "", "", forum);
-            var badmail = server.subscribeToForum("a", "a", "a", "a", forum);
-            Assert.IsTrue(nothin == null && badmail == null);
+            Assert.IsTrue(nothin == null);
         }
         [TestMethod]
         public void subscribeUser2()
@@ -72,7 +71,7 @@ namespace WASP.TestSuits
         {
             //assert we cannot create a subforum with no description or name
             var subforum= server.createSubForum(_admin, "", "", _admin, DateTime.Now);
-            Assert.IsNotNull(subforum);
+            Assert.IsNull(subforum);
         }
         [TestMethod]
         public void createSubForum2()

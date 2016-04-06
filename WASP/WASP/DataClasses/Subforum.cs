@@ -33,7 +33,7 @@ namespace WASP.DataClasses
         public static bool isValid(String name, String description, Member moderator, DateTime term)
         {
             return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || (moderator == null) || (term==null));
+                || (moderator == null) || !Helper.isTermValid(term));
         }
 
         public string Name { get; set; }
@@ -53,6 +53,7 @@ namespace WASP.DataClasses
 
             _moderators.Add(tup);
         }
+        
 
         public void AddThread(Post tr)
         {

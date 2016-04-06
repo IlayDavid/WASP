@@ -84,6 +84,8 @@ namespace WASP.Domain
         public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
         {
             //need to fix in the future.
+            if (!Helper.isTermValid(term))
+                return -1;
             subforum.RemoveModerator(moderator);            
             subforum.AddModerator(moderator, term);
             return 1;
@@ -117,6 +119,8 @@ namespace WASP.Domain
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
+            if (!Helper.isTermValid(term))
+                return -1;
             subforum.AddModerator(moderator,term);
             return 1;
         }

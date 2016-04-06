@@ -33,7 +33,7 @@ namespace WASP.DataClasses
         public static bool isValidOpening(String title, String content, Member author, DateTime now, Subforum container)
         {
             return !(Helper.isEmptyString(title) || Helper.isEmptyString(content)
-                || author == null || now == null || container == null);
+                || author == null || !Helper.isTermValid(now) || container == null);
         }
         public Post(String content, Member author, DateTime now, Post inReplyTo)
         {
@@ -52,7 +52,7 @@ namespace WASP.DataClasses
         public static bool isValidReply(String content, Member author, DateTime now, Post inReplyTo)
         {
             return !( Helper.isEmptyString(content) || author == null
-                || now == null || inReplyTo == null);
+                || !Helper.isTermValid(now) || inReplyTo == null);
         }
 
         public int Id

@@ -97,7 +97,6 @@ namespace AccTests.Tests
 
             int isModified = _proj.updateModeratorTerm(admin, _member1, _subforum, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModified < 0);
-
         }
 
         /* edit name + RTM*/
