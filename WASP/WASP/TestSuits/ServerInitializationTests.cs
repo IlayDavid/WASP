@@ -61,15 +61,6 @@ namespace WASP.TestSuits
             Assert.IsNull(check);
         }
 
-        [TestMethod]
-        public void createForum3()
-        {
-            //asserts that we can create a forum
-            var check = server.createForum(_supervisor, "forum", "description", "admin", "admin", "e-mail@e.mail", "admin", new PasswordPolicy());
-            forum = check;
-            Assert.IsNotNull(check);
-        }
-
         //TODO: check if this requirement is really required
         [TestMethod]
         public void createForum4()
@@ -84,8 +75,8 @@ namespace WASP.TestSuits
         {
             //setup
             var server = new Server.Server();
-            var super=server.initialize("super", "super", "s.a@b", "super");
-            var forums=new List<Forum>();
+            var super = server.initialize("super", "super", "s.a@b", "super");
+            var forums = new List<Forum>();
             //populate forums
             for (int i = 0; i < 10; i++)
             {
@@ -95,8 +86,10 @@ namespace WASP.TestSuits
             }
             //asserts that the list of forums we get from the server is the same as the one we created
             var serverForums = server.getAllForums(super);
-            Assert.IsTrue(Enumerable.SequenceEqual(forums.OrderBy(fList => fList),
-                         serverForums.OrderBy(sList => sList)));
+            foreach (Forum fr in forums)
+            {
+                Assert.IsTrue(serverForums.Contains(fr));
+            }
         }
     }
 }
