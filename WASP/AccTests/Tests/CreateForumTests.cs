@@ -12,7 +12,6 @@ namespace AccTests.Tests
     [TestClass]
     public class CreateForumTests
     {
-
         private static WASPBridge _proj = Driver.getBridge();
         private SuperUser _supervisor;
 
@@ -34,8 +33,8 @@ namespace AccTests.Tests
             List<Member> admins = _proj.getAdmins(_supervisor, forum);
 
             // checks that there is only one admin
-            Assert.Equals(admins.Count, 1); 
-            Assert.Equals(forum.GetAdmins().Count, 1);
+            Assert.IsTrue(admins.Count == 1); 
+            Assert.IsTrue(forum.GetAdmins().Count == 1);
         }
 
 
@@ -51,10 +50,10 @@ namespace AccTests.Tests
             Member admin = forumAndMember.Item2;
             Assert.IsNotNull(forum); //checks that a forum is created
             
-            Assert.Equals(admin.Email, "david@post.bgu.ac.il");
-            Assert.Equals(admin.UserName, "admin");
-            Assert.Equals(admin.Password, "david123");
-            Assert.Equals(admin.Name, "david");
+            Assert.IsTrue(admin.Email.Equals("david@post.bgu.ac.il"));
+            Assert.IsTrue(admin.UserName.Equals("admin"));
+            Assert.IsTrue(admin.Password.Equals("david123"));
+            Assert.IsTrue(admin.Name.Equals("david"));
 
         }
 
@@ -72,7 +71,7 @@ namespace AccTests.Tests
                    "admin" + i.ToString() + "@post.bgu.ac.il", "admin" + i.ToString(), new PasswordPolicy()); 
                    
             }
-            Assert.Equals(_proj.getAllForums(_supervisor).Count, N);
+            Assert.IsTrue(_proj.getAllForums(_supervisor).Count == N);
         }
 
         /// <summary>
