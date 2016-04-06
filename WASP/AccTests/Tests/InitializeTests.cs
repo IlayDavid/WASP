@@ -7,13 +7,8 @@ namespace AccTests
     [TestClass]
     public class InitializeTests
     {
-        private WASPBridge _proj;
+        private static WASPBridge _proj = Driver.getBridge();
 
-        [AssemblyInitialize]
-        public void SystemSetUp()
-        {
-            _proj = Driver.getBridge();
-        }
         
         /// <summary>
         /// Positive Test: checks that the initialization return a vaild supervisor

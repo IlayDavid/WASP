@@ -13,18 +13,12 @@ namespace AccTests.Tests
     {
 
         private SuperUser _supervisor;
-        private WASPBridge _proj;
+        private static WASPBridge _proj = Driver.getBridge();
         private Forum _forum;
         private Member _member1;
         private Member _member2;
 
-        [AssemblyInitialize]
-        public void SystemSetUp()
-        {
-            _proj = Driver.getBridge();
-        }
-
-        [ClassInitialize]     //before each Test
+        [TestInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);

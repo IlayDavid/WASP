@@ -10,7 +10,7 @@ namespace AccTests.Tests
     [TestClass]
     public class AddModeratorTests
     {
-        private WASPBridge _proj;
+        private static WASPBridge _proj = Driver.getBridge();
         private SuperUser _supervisor;
         private Member _admin;
         private Forum _forum;
@@ -18,14 +18,8 @@ namespace AccTests.Tests
         private Member _moderator;
         private Member _member1;
 
-        [AssemblyInitialize]
-
-        public void SystemSetUp()
-        {
-            _proj = Driver.getBridge();
-        }
-        [ClassInitialize]
-
+    
+        [TestInitialize]
         public void setUp()
         {
             _supervisor = Functions.InitialSystem(_proj);
@@ -44,10 +38,6 @@ namespace AccTests.Tests
 
             _member1 = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum);
             _proj.login(_member1.UserName, _member1.Password, _forum);
-
-
-
-
         }
 
         /// <summary>

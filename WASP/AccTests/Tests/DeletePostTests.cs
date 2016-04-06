@@ -12,7 +12,7 @@ namespace AccTests.Tests
     public class DeletePostTests
     {
 
-        private WASPBridge _proj;
+        private static WASPBridge _proj = Driver.getBridge();
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
@@ -23,13 +23,8 @@ namespace AccTests.Tests
         private Post _threadModerator;
         private Post _threadMember;
 
-        [AssemblyInitialize]
-        public void SystemSetUp()
-        {
-            _proj = Driver.getBridge();
-        }
-
-        [ClassInitialize]     //before each Test
+       
+        [TestInitialize]     //before each Test
         public void SetUp()
         {
             _supervisor = Functions.InitialSystem(_proj);

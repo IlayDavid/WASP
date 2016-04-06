@@ -103,7 +103,7 @@ namespace WASP.Server
 
         public Member getAdmin(User user, Forum forum, string userName)
         {
-            return getAdmins(user, forum).First((x) => user.UserName.Equals(userName));
+            return getAdmins(user, forum).First((x) => x.UserName.Equals(userName));
         }
     }
 }
