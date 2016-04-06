@@ -46,7 +46,7 @@ namespace AccTests.Tests
             _threadModerator = _proj.createThread(_moderator, "webService for calander",
                                     "Someone know a good web service for Calander?", DateTime.Now, _subforum);
 
-            _threadMember = _proj.createThread(_moderator, "webService for calander",
+            _threadMember = _proj.createThread(_member, "webService for calander",
                         "Someone know a good web service for Calander?", DateTime.Now, _subforum);
 
 
@@ -90,7 +90,7 @@ namespace AccTests.Tests
         public void deletePostTest3()
         {
             int isDelete = _proj.deletePost(_moderator, _threadMember);
-            Assert.IsTrue(isDelete < 0);
+            Assert.IsTrue(isDelete > 0);
             isDelete = _proj.deletePost(_member, _threadModerator);
             Assert.IsTrue(isDelete < 0);
         }
@@ -107,9 +107,9 @@ namespace AccTests.Tests
             Assert.IsNotNull(p1);
 
             int isDelete = _proj.deletePost(_moderator, p2);
-            Assert.IsTrue(isDelete < 0);
+            Assert.IsTrue(isDelete > 0);
             isDelete = _proj.deletePost(_member, p1);
-            Assert.IsTrue(isDelete< 0);
+            Assert.IsTrue(isDelete < 0);
         }
     }
 }
