@@ -17,10 +17,10 @@ namespace AccTests
         public void initTest1()
         {
             SuperUser supervisor = _proj.initialize("Moshe", "SuperUser", "moshe@post.bgu.ac.il", "moshe123");
-            Assert.Equals(supervisor.Name, "Moshe");
-            Assert.Equals(supervisor.UserName , "SuperUser");
-            Assert.Equals(supervisor.Email, "moshe@post.bgu.ac.il");
-            Assert.Equals(supervisor.Password, "moshe123");
+            Assert.AreEqual(supervisor.Name, "Moshe");
+            Assert.AreEqual(supervisor.UserName , "SuperUser");
+            Assert.AreEqual(supervisor.Email, "moshe@post.bgu.ac.il");
+            Assert.AreEqual(supervisor.Password, "moshe123");
         }
 
         /// <summary>
