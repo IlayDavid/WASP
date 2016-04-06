@@ -44,7 +44,14 @@ namespace WASP.DataClasses
 
         public bool IsModerator(Member moderator)
         {
-            return _moderators.First((x) => x.Item1 == moderator) != null;
+            foreach(Tuple<Member, DateTime> tup in _moderators)
+            {
+                if(tup.Item1 == moderator)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void AddModerator(Member mod, DateTime expr)

@@ -90,13 +90,13 @@ namespace AccTests.Tests
 
             //another admin tries to add a moderator
             int isModerator = _proj.addModerator(admin, _member1, _subforum, DateTime.Now.AddDays(200));
-            Assert.IsTrue(isModerator < 0);
+            Assert.IsTrue(isModerator > 0);
 
             isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
             Assert.IsTrue(isModerator >= 0);
 
             int isModified = _proj.updateModeratorTerm(admin, _member1, _subforum, DateTime.Now.AddDays(100));
-            Assert.IsTrue(isModified < 0);
+            Assert.IsTrue(isModified > 0);
         }
 
         /* edit name + RTM*/
@@ -114,7 +114,7 @@ namespace AccTests.Tests
 
             isModerator = _proj.addModerator(_admin, _member1, _subforum, DateTime.Now.AddDays(200));
             int isModified = _proj.updateModeratorTerm(_admin, _member1, _subforum, DateTime.Now.AddDays(-1));
-            Assert.IsTrue(isModerator < 0);
+            Assert.IsTrue(isModified < 0);
             Assert.AreEqual(_proj.getModeratorTermTime(_admin, _member1, _subforum).Date, DateTime.Now.AddDays(200).Date);
         }
 
