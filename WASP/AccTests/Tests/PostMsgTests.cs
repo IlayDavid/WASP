@@ -78,22 +78,5 @@ namespace AccTests.Tests
             isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, null);
             Assert.IsNull(isPost);
         }
-
-        /// <summary>
-        /// Negative Test: secure NF: member that doent not sign in this forum, try to reply post
-        /// </summary>
-        [TestMethod]
-        public void PostMsgTest4()
-        {
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
-            Forum forum = forumAndAdmin.Item1;
-            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
-            Subforum subforum = subforumAndModerator.Item1;
-            Member member = Functions.SubscribeSpecMember2(_proj, forum);
-            _proj.login(member.UserName, member.Password, forum);
-            Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
-            Assert.IsNull(isPost);
-        }
-
     }
 }

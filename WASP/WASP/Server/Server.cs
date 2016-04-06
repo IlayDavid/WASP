@@ -43,7 +43,13 @@ namespace WASP.Server
         public Post createThread(Member author, String title, String content, 
             DateTime now, Subforum subforum)
         {
-            if (content.Equals(""))
+            if (author == null)
+                return null;
+            if (subforum == null)
+                return null;
+            if (now == null)
+                return null;
+            if (content.Equals("") && title.Equals(""))
                 return null;
             try
             {

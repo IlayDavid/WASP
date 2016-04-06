@@ -77,40 +77,11 @@ namespace AccTests.Tests
             Assert.IsNull(isOpenPost);
 
             isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
-                       DateTime.Now, _subforum);
-            Assert.IsNull(isOpenPost);
-
-            isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
-                       DateTime.Now.AddDays(-10), _subforum);
+                       DateTime.Now, null);
             Assert.IsNull(isOpenPost);
 
             isOpenPost = _proj.createThread(null, "webService for calander", "Someone know a good web service for Calander?",
                        DateTime.Now, _subforum);
-            Assert.IsNull(isOpenPost);
-        }
-
-        /// <summary>
-        /// Negative Test: secure NF: member that doent not sign in this forum, try to post
-        /// </summary>
-        [TestMethod]
-        public void OpenThreadTest4()
-        {
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
-            Forum forum = forumAndAdmin.Item1;
-            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
-            Subforum subforum = subforumAndModerator.Item1;
-            Member moderator = subforumAndModerator.Item2;
-            _proj.login(moderator.UserName, moderator.Password, _forum);
-
-            Member member = Functions.SubscribeSpecMember2(_proj, forum);
-            _proj.login(member.UserName, member.Password, forum);
-
-            Post isOpenPost = _proj.createThread(member, "webService for calander", "Someone know a good web service for Calander?",
-                                   DateTime.Now, subforum);
-            Assert.IsNull(isOpenPost);
-
-            isOpenPost = _proj.createThread(moderator, "webService for calander", "Someone know a good web service for Calander?",
-                       DateTime.Now, subforum);
             Assert.IsNull(isOpenPost);
         }
     }
