@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E59B55F0-0014-4B59-A11E-FBF1F5E66ADC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WASP</RootNamespace>
+    <AssemblyName>WASP</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataClasses\DAL.cs" />
+    <Compile Include="DataClasses\Forum.cs" />
+    <Compile Include="DataClasses\ForumDAL.cs" />
+    <Compile Include="DataClasses\ForumIDAL.cs" />
+    <Compile Include="DataClasses\Helper.cs" />
+    <Compile Include="DataClasses\IDAL.cs" />
+    <Compile Include="DataClasses\Member.cs" />
+    <Compile Include="DataClasses\Message.cs" />
+    <Compile Include="DataClasses\Notifications.cs" />
+    <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
+    <Compile Include="DataClasses\Policies\Policy.cs" />
+    <Compile Include="DataClasses\Post.cs" />
+    <Compile Include="DataClasses\Subforum.cs" />
+    <Compile Include="DataClasses\SuperUser.cs" />
+    <Compile Include="DataClasses\User.cs" />
+    <Compile Include="Domain\BL.cs" />
+    <Compile Include="Domain\ForumBL.cs" />
+    <Compile Include="Domain\ForumIBL.cs" />
+    <Compile Include="Domain\IBL.cs" />
+    <Compile Include="Logger\Logger.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Server.cs" />
+    <Compile Include="Server\ServerAPI.cs" />
+    <Compile Include="Server\ServerForum.cs" />
+    <Compile Include="Server\ServerUser.cs" />
+    <Compile Include="TestSuits\PostTests.cs" />
+    <Compile Include="TestSuits\ServerInitializationTests.cs" />
+    <Compile Include="TestSuits\serverTests.cs" />
+    <Compile Include="TestSuits\SubForumTests.cs" />
+    <Compile Include="TestSuits\TestsForum.cs" />
+    <Compile Include="TestSuits\UserTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
