@@ -8,6 +8,8 @@ namespace WASP.DataClasses
         private bool _isActive;
         private List<Post> posts;
         private List<Message> messages;
+        public Forum MemberForum { get; private set; }
+
         public Member(String userName, String name, String email, String pass, Forum memberForum)
         {
             _isActive = false;
@@ -26,8 +28,7 @@ namespace WASP.DataClasses
                 memberForum == null);
         }
 
-        public Forum MemberForum { get; private set; }
-
+        
         public void confirmMail()
         {
             _isActive = true;

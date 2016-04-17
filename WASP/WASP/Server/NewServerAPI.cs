@@ -14,25 +14,37 @@ namespace WASP.Server
        * Purpose: initialize the system and logs the superuser in
        * Return: a Member with Admin Premissions
        */
-        SuperUser initialize(String name, String userName, String email, String pass);
+        SuperUser initialize(string name, string userName, string email, string pass);
 
         /*
          * Porpose: returns a thread "Member" to "forum", if doesnt exist returns NULL
          * Checking: if there is threadId in sf
          * post condition: result is an opening post
          */
-        Post getThread(Member member, int threadId);
+        Post getThread(int userID, int forumID, int threadId);
 
         /*
-         * Porpose: returns a forum with forumId, if doesnt exist returns NULL
+         * Porpose: returns a forum with forumId for userID, if doesnt exist returns NULL
          * Checking: suitable to forum policy
          */
-        Forum getForum(Member member, int forumId);
+        Forum getForum(int userID, int forumID);
+
 
         /*
-         * Porpose: returns a subforum with forumId, if doesnt exist returns NULL
+        * Porpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL
+        * Checking: suitable to forum policy
+        */
+        Forum getForum(int forumID);
+
+        /*
+         * Porpose: returns a subforum with forumId for userID, if doesnt exist returns NULL
          */
-        Subforum getSubforum(Member member, int subforumId);
+        Subforum getSubforum(int userID, int forumID, int subforumId);
+
+        /*
+         * Porpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL
+         */
+        Subforum getSubforum(int forumID, int subforumId);
 
         //----------------------------------------------------------------------------------------------------
 
@@ -41,7 +53,7 @@ namespace WASP.Server
         * Checking: if there is threadId in sf
         * Return: the created thread
         */
-        Post createThread(Member author, String title, String content, DateTime now, Subforum container);
+        Post createThread(int userID, int forumID, string title, string content, DateTime now, int subForumID);
 
         /*
          * Pre-conditions: Member is loged-in 
@@ -51,13 +63,13 @@ namespace WASP.Server
          * Return: created forum        
          */
 
-        Forum createForum(SuperUser creator, String forumName, String description, String userName, String adminName, String email, String pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /// <summary>
         /// </summary>
         /// <param name="subforumId"></param>
         /// <returns> subforum's moderatores </returns>
-        List<Member> getModerators(Member member, Subforum subforum);
+        List<Member> getModerators(int userID, int forumID, int subForumID);
 
         /// <summary>
         /// </summary>
@@ -65,7 +77,7 @@ namespace WASP.Server
         /// <param name="moderator"> the moderator we request the information about</param>
         /// <param name="subforumId"> which of subforum we talk about</param>
         /// <returns> date of moderator's term time</returns>
-        DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum);
+        DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
 
         /* 
          * Pre-conditions: Member is loged-in 
@@ -73,29 +85,28 @@ namespace WASP.Server
          * Checking: if Member is manager, else nothing
          * Return: subforumId > 0               
          */
-        Subforum createSubForum(Member member, String name, String description, Member moderator, DateTime term);
-        /// <summary>
-        /// </summary>
-        /// <returns> all system's forums</returns>
-        List<Forum> getAllForums(User member);
+        Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term);
+
+        
+        // <returns> all system's forums</returns>
+        List<Forum> getAllForums();
 
         /*
         * Porpose: to create a post to reply on an existing post (identified by postId)
         * Checking: if there is threadId in sf
         * Return: number > 0, if success
         */
-        Post createReplyPost(Member Author, String content, DateTime now, Post inReplyTo);
-
+        Post createReplyPost(int userID, int forumID, string content, DateTime now, int replyToPost_ID);
 
         //----------------------------------------------------------------------------------------------------
 
         /*
-* Pre-conditions: Member is loged-in, user1 is a moderator of sf
-* Porpose: Member updates moderator's term (new term=term)
-* Return: number > 0 if success
-* Checking: if Member is manager, else nothing
-*/
-        int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term);
+        * Pre-conditions: Member is loged-in, user1 is a moderator of sf
+        * Porpose: Member updates moderator's term (new term=term)
+        * Return: number > 0 if success
+        * Checking: if Member is manager, else nothing
+        */
+        int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term);
 
         //---------------------------------------------------------------------------------------------------
 
@@ -103,20 +114,20 @@ namespace WASP.Server
  * Porpose: set a policy for specific forum
  * Checking: if Member is supervisor, else nothing
  */
-        int defineForumPolicy(SuperUser member, Forum forum);  //------------------------ policy object??
+        int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
 
         /*
          * Porpose: creates a Member in the forum, logs him in, and return the Member
          * Return: 
          */
-        Member subscribeToForum(String userName, String name, String email, String pass, Forum targetForum);
+        Member subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
 
         /*
          * Pre-conditions: Member is loged-in 
          * Porpose: send a private message
          * Checking: if message.Member exists 
          */
-        int sendMessage(Member member, Member targetMember, Message message);
+        int sendMessage(int userID, int forumID, string targetUserNameID, string message);
 
         /*
          * Pre-conditions: Member is loged-in 
@@ -124,13 +135,13 @@ namespace WASP.Server
          * Return: number >= 0 if success
          * Checking: if Member is manager, else nothing
          */
-        int addModerator(Member member, Member moderator, Subforum subforum, DateTime term);
+        int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
 
         /*
          * Porpose: Confirms Member's email and adds him to the forum as a member.
          * return: number>=0 if success
          */
-        int confirmEmail(Member member);
+        int confirmEmail(int userID, int forumID);
 
         /*
          * Pre-conditions: Member is loged-in
@@ -138,32 +149,34 @@ namespace WASP.Server
          * Return: number >= 0 id success
          * Checking: if Member is manager, else nothing
          */
-        int deletePost(Member member, Post post);
+        int deletePost(int userID, int forumID, int postID);
 
         /*
          * Porpose: log-in: return the Member, logged in, to the specified forum.
          */
-        Member login(string userName, string password, Forum forum);
+        Member login(string userName, string password, int forumID);
 
-
-        SuperUser login(string userName, string password);
+        /*
+         * Porpose: log-in only for super user. 
+         */
+        SuperUser loginSU(string userName, string password);
         /*
          * Porpose: return forum's admins
          */
-        List<Member> getAdmins(User member, Forum forum);
+        List<Member> getAdmins(int userID, int forumID);
 
         /*
          * Porpose: return forum's members
          */
-        List<Member> getMembers(Member member, Forum forum);
+        List<Member> getMembers(int userID, int forumID);
 
         /// <summary>
         /// returns subforum of specific forum
         /// </summary>
         /// <param name="forumId"></param>
         /// <returns></returns>
-        List<Subforum> getSubforums(Member member, Forum forum);
+        List<Subforum> getSubforums(int userID, int forumID);
 
-        Member getAdmin(User user, Forum forum, string userName);
+        Member getAdmin(User user, int forumID, int userID);
     }
 }
