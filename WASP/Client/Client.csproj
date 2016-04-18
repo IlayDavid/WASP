@@ -72,6 +72,8 @@
     <Compile Include="CommunicationLayer\CL_UseCases_V3.cs" />
     <Compile Include="CommunicationLayer\ICL_UseCases_V3.cs" />
     <Compile Include="CommunicationLayer\ICL_General.cs" />
+    <Compile Include="DataClasses\Message.cs" />
+    <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Policy.cs" />
     <Compile Include="DataClasses\Post.cs" />
     <Compile Include="DataClasses\Subforum.cs" />

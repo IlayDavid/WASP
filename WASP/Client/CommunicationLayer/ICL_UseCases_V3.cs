@@ -25,7 +25,7 @@ namespace Client.CommunicationLayer
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
 
-        //-----------Admin Reports---------------
+                    //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
         int subForumTotalMessages(int userID, int forumID, int subForumID);
