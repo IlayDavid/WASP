@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 
@@ -10,173 +7,206 @@ namespace WASP.Server
 {
     public interface NewServerAPI
     {
-        /*
-       * Purpose: initialize the system and logs the superuser in
-       * Return: a Member with Admin Premissions
-       */
-        SuperUser initialize(string name, string userName, string email, string pass);
-
-        /*
-         * Porpose: returns a thread "Member" to "forum", if doesnt exist returns NULL
-         * Checking: if there is threadId in sf
-         * post condition: result is an opening post
-         */
-        Post getThread(int userID, int forumID, int threadId);
-
-        /*
-         * Porpose: returns a forum with forumId for userID, if doesnt exist returns NULL
-         * Checking: suitable to forum policy
-         */
-        Forum getForum(int userID, int forumID);
-
-
-        /*
-        * Porpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL
-        * Checking: suitable to forum policy
+        /* 
+        * Pre-conditions: member is subscribe to the forum.
+        * Purpose: logged in, to the specified forum.
+        * Return: return the Member, if success, NULL otherwise.
         */
-        Forum getForum(int forumID);
+        Member login(string userName, string password, int forumID);
 
         /*
-         * Porpose: returns a subforum with forumId for userID, if doesnt exist returns NULL
-         */
-        Subforum getSubforum(int userID, int forumID, int subforumId);
-
-        /*
-         * Porpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL
-         */
-        Subforum getSubforum(int forumID, int subforumId);
-
-        //----------------------------------------------------------------------------------------------------
-
-        /*
-        * Porpose: create thread
-        * Checking: if there is threadId in sf
-        * Return: the created thread
+        * Pre-conditions: member is super user.
+        * Purpose: logged in as super user, to the the Forums system.
+        * Return: return the Member, if success, NULL otherwise.
         */
-        Post createThread(int userID, int forumID, string title, string content, DateTime now, int subForumID);
+        SuperUser loginSU(string userName, string password);
+
+        //---------------------------Version 1 Use Cases Start------------------------------------
+
+
 
         /*
-         * Pre-conditions: Member is loged-in 
-         * Purpose: create new forum which:
-         *                  supervisor = Member
-         *                  forum = forum details
-         * Return: created forum        
-         */
+        * Pre-conditions: none.
+        * Purpose: initialize the system and logs the superuser in
+        * Return: super user details.
+        */
+        SuperUser initialize(string name, string userName, int ID, string email, string pass);
 
+        /*
+        * Purpose: check if the system is already initialize, should be called before initialize.
+        * Return: 0 - if not initialize, 1 - otherwise.
+        */
+        int isInitialize(string name, string userName, string email, string pass);
+
+        /*
+         * Pre-conditions: super user is loged-in 
+         * Purpose: create new forum which, with details of the admin.
+         * Return: forum - on succsess, NULL - in fail.
+         */
         Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="subforumId"></param>
-        /// <returns> subforum's moderatores </returns>
-        List<Member> getModerators(int userID, int forumID, int subForumID);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="member"> the Member requesting the information</param>
-        /// <param name="moderator"> the moderator we request the information about</param>
-        /// <param name="subforumId"> which of subforum we talk about</param>
-        /// <returns> date of moderator's term time</returns>
-        DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
-
-        /* 
-         * Pre-conditions: Member is loged-in 
-         * Purpose: create new subforum in the Member's forum
-         * Checking: if Member is manager, else nothing
-         * Return: subforumId > 0               
+        /*
+         * Pre-conditions: superuser is loged-in 
+         * Purpose: set a policy for specific forum.
+         * Return: 0 - on succsess, negative - in fail.        
          */
-        Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term);
-
-        
-        // <returns> all system's forums</returns>
-        List<Forum> getAllForums();
-
-        /*
-        * Porpose: to create a post to reply on an existing post (identified by postId)
-        * Checking: if there is threadId in sf
-        * Return: number > 0, if success
-        */
-        Post createReplyPost(int userID, int forumID, string content, DateTime now, int replyToPost_ID);
-
-        //----------------------------------------------------------------------------------------------------
-
-        /*
-        * Pre-conditions: Member is loged-in, user1 is a moderator of sf
-        * Porpose: Member updates moderator's term (new term=term)
-        * Return: number > 0 if success
-        * Checking: if Member is manager, else nothing
-        */
-        int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term);
-
-        //---------------------------------------------------------------------------------------------------
-
-        /*
- * Porpose: set a policy for specific forum
- * Checking: if Member is supervisor, else nothing
- */
         int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
 
         /*
-         * Porpose: creates a Member in the forum, logs him in, and return the Member
-         * Return: 
+         * Pre-conditions: none
+         * Purpose: creates a Member in the forum, and return the Member.
+         * Checking: forum policy on user details.
+         * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
         Member subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
 
         /*
-         * Pre-conditions: Member is loged-in 
-         * Porpose: send a private message
-         * Checking: if message.Member exists 
+         * Pre-conditions: member is loged-in 
+         * Purpose: create thread in forum.
+         * Checking: forum policy on thread details.
+         * Return: thread - on succsess, NULL - in fail.        
+         */
+        Post createThread(int userID, int forumID, string title, string content, int subForumID);
+
+        /*
+        * Pre-conditions: member is loged-in, and replypost exist.
+        * Purpose: create a post to reply on an existing post (identified by postId).
+        * Return: post - on succsess, NULL - in fail.
+        */
+        Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID);
+
+        /* 
+        * Pre-conditions: Member is loged-in and he is admin of the forum. 
+        * Purpose: create new subforum in the Member's forum
+        * Return: subforum - on succsess, NULL - in fail.
+        */
+        Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term);
+        //---------------------------Version 1 Use Cases End------------------------------------
+
+
+
+        //---------------------------Version 2 Use Cases Start------------------------------------
+        /*
+         * Pre-conditions: Member is loged-in, second member is exists. 
+         * Purpose: send a private message.
          */
         int sendMessage(int userID, int forumID, string targetUserNameID, string message);
 
         /*
-         * Pre-conditions: Member is loged-in 
-         * Porpose: Member rank user1 as moderator
-         * Return: number >= 0 if success
-         * Checking: if Member is manager, else nothing
+         * Pre-conditions: Member is loged-in and is admin of the forum, moderator is member of the forum.
+         * Purpose: appoint moderator to the subforum.
+         * Return: number >= 0 if success.
          */
         int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
 
         /*
-         * Porpose: Confirms Member's email and adds him to the forum as a member.
-         * return: number>=0 if success
-         */
+        * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.
+        * Purpose: Member updates moderator's term (new term=term)
+        * Return: number > 0 if success
+        */
+        int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term);
+
+        /*
+        * Purpose: Confirms Member's email and adds him to the forum as an active member.
+        * return: number>=0 if success
+        */
         int confirmEmail(int userID, int forumID);
 
         /*
-         * Pre-conditions: Member is loged-in
-         * Porpose: deletes the post
-         * Return: number >= 0 id success
-         * Checking: if Member is manager, else nothing
-         */
+        * Pre-conditions: Member is loged-in, and own the post. (or manager, depend on policy)
+        * Purpose: deletes the post
+        * Return: number >= 0 id success
+        */
         int deletePost(int userID, int forumID, int postID);
 
-        /*
-         * Porpose: log-in: return the Member, logged in, to the specified forum.
-         */
-        Member login(string userName, string password, int forumID);
+        //---------------------------Version 2 Use Cases End------------------------------------
+
+
+
+        //---------------------------Version 3 Use Cases Start------------------------------------
+
+        /* 
+        * Pre-conditions: Member is loged-in, and own the post.  
+        * Purpose: edit post (by id) written by member with id userID 
+        * Return: number >= 0 id success        
+        */
+        int editPost(int userID, int forumID, int postID, string content);
+
+        /*  
+        * Pre-conditions: Member is loged-in, and is admin of the forum.
+        * Purpose: delete moderator from subforum, 
+        * Return: number >= 0 id success        
+        */
+        int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
+
+                //-----------Admin Reports---------------
+        /* Pre-conditions: Member is loged-in, and is admin of the forum
+         * Purpose: return the total number of messages posted in the entire forum. */
+        int subForumTotalMessages(int userID, int forumID, int subForumID);
+
+        /* Pre-conditions: Member is loged-in, and is admin of the forum
+         * Purpose: return the total number of messages written by member. */
+        int memberTotalMessages(int userID, int forumID);
+
+        /* Pre-conditions: Member is loged-in, and is admin of the forum
+         * Purpose: return details about moderators in all subforums,
+         *          for each moderator who appoint him, when, 
+         *          which subforum he belongs to, and what the messages they posted. */
+        ModeratorReport moderatorReport(int userID, int forumID);
+
+        //-----------Super User Reports---------------
+        /* Pre-conditions: Member is loged-in, and is superuser.
+         * Purpose: return number of the forums in the system.*/
+        int totalForums(int userID);
+
+
+        /* Pre-conditions: Member is loged-in, and is superuser.
+         * Purpose: return members that subscribe to more than one forum.*/
+        List<Member> membersInDifferentForums(int userID);
+
+        //---------------------------Version 3 Use Cases End------------------------------------
+
+
+            
+        //---------------------------------Getters----------------------------------------------
 
         /*
-         * Porpose: log-in only for super user. 
+         * Purpose: returns a thread by id, if doesnt exist returns NULL
+         * post condition: result is an opening post
          */
-        SuperUser loginSU(string userName, string password);
-        /*
-         * Porpose: return forum's admins
-         */
+        Post getThread(int userID, int forumID, int threadId);
+
+        /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
+        Forum getForum(int userID, int forumID);
+
+        /* Purpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL */
+        Forum getForum(int forumID);
+
+        /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
+        Subforum getSubforum(int userID, int forumID, int subforumId);
+
+        /* Purpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL */
+        Subforum getSubforum(int forumID, int subforumId);
+
+        /* Purpose: returns modrators of subforum. */
+        List<Member> getModerators(int userID, int forumID, int subForumID);
+
+        /* Purpose: return the date of moderator's term time. */
+        DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
+
+        /* Purpose: return information about all the existing forums. */
+        List<Forum> getAllForums();
+
+        /* Purpose: return forum's admins information. */
         List<Member> getAdmins(int userID, int forumID);
 
-        /*
-         * Porpose: return forum's members
-         */
+        /* Purpose: return forum's members information. */
         List<Member> getMembers(int userID, int forumID);
 
-        /// <summary>
-        /// returns subforum of specific forum
-        /// </summary>
-        /// <param name="forumId"></param>
-        /// <returns></returns>
+        /* Purpose: return forum's subForums information. */
         List<Subforum> getSubforums(int userID, int forumID);
 
+        /* Purpose: return forum's Admin information. */
         Member getAdmin(User user, int forumID, int userID);
     }
 }
