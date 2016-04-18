@@ -12,3 +12,10 @@ C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.Properties.Resou
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.exe
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\MainWindow.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\App.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client_MarkupCompile.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client_MarkupCompile.lref
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.exe
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
