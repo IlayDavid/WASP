@@ -7,21 +7,80 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="800" Margin="1,0,0,0" Background="White">
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="697,0,0,0" Width="93"><Run Text="Welcome, guest!"/>
-                <InlineUIContainer>
-        			<Button x:Name="button" Content="Login" Width="50"/>
-        		</InlineUIContainer></TextBlock>
+        <Grid  x:Name="subforumGrid" HorizontalAlignment="Left" Height="230" VerticalAlignment="Top" Width="130" Margin="830,38,-168,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="postThreadButton" Content="Post Thread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="0"/>
+            <Button x:Name="addModeratorButton" Content="Add Moderator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="1"/>
+            <Button x:Name="viewModeratorsButton" Content="View Moderators" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
+            <Button x:Name="editSubforumSettingsButton" Content="Change Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="3"/>
+        </Grid>
+
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="689,5,0,0" Width="93" Text="Welcome, guest!"/>
+        <Button x:Name="loginButton" Content="Login" Width="50" Margin="732,21,10,525" />
+        <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
+        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0"/>
+        <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
+        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood"/>
+        <Button x:Name="backButton" Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0"/>
+        <Button x:Name="registerButton" Content="register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="652,23,0,0"/>
+        <Label Content="Subforum Controls" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="820,0,-143,0" Background="White" Height="33" Width="115"/>
+        <Label Content="Forum Controls" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="960,0,-283,0" Background="White" Height="33" Width="115"/>
+        <Label Content="Thread Controls" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1110,0,-433,0" Background="White" Height="33" Width="115"/>
+        <Label Content="Intro Controls" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1265,0,-588,0" Background="White" Height="33" Width="115"/>
+        <Grid x:Name="forumGrid"  HorizontalAlignment="Left" Height="230" VerticalAlignment="Top" Width="130" Margin="960,45,-298,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="addSubforumButton" Content="Add Subforum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="0"/>
+            <Button x:Name="addAdministratorButton" Content="Add Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="1"/>
+            <Button x:Name="viewAdministratorsButton" Content="View Administrators" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
+            <Button x:Name="editForumSettingsButton" Content="Change Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="3"/>
+        </Grid>
+        <Grid x:Name="threadGrid"  HorizontalAlignment="Left" Height="230" VerticalAlignment="Top" Width="130" Margin="1110,45,-448,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid x:Name="introGrid"  HorizontalAlignment="Left" Height="230" VerticalAlignment="Top" Width="130" Margin="1265,45,-603,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="addForumButton" Content="Add Forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="0"/>
+        </Grid>
+        <Grid x:Name="postGrid" HorizontalAlignment="Left" Height="290" Margin="845,345,-463,-65" VerticalAlignment="Top" Width="410" Background="Aqua">
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="240" Background="White" Width="390" Margin="10,10,0,0"/>
+            <Button x:Name="replyButton" Content="Reply" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="325,258,0,0"/>
+            <Button x:Name="deletePostButton" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="225,258,0,0"/>
 
         </Grid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-        <ComboBoxItem Margin="1,0,-1,0">Forum Selection</ComboBoxItem>
-        <Button x:Name="button1" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
-        <Button x:Name="button2" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="700,530,0,0"/>
-        <Label x:Name="label" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
-        <Button x:Name="button3" Content="Post Thread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,94,0,0"/>
-        <Button x:Name="button4" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="691,45,0,0"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood"/>
+        <Label Content="Post control" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="845,307,-168,0" Background="White" Height="33" Width="115"/>
 
     </Grid>
 </Window>
