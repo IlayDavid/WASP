@@ -1,0 +1,23 @@
+﻿<Window x:Class="Client.PostWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="PostWindow" Height="600" Width="800">
+    <Grid>
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="689,5,0,0" Width="93" Text="Welcome, guest!"/>
+        <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
+        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
+        <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
+        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
+        <Button x:Name="backButton" Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0" Click="backButton_Click"/>
+        <Button x:Name="registerButton" Content="register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="652,23,0,0"/>
+
+
+        <Grid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood">
+            <TreeView x:Name="postMesssages" HorizontalAlignment="Left" Height="366" Margin="116,58,0,0" VerticalAlignment="Top" Width="407" Background="AntiqueWhite"/>
+        </Grid>
+    </Grid>
+</Window>
