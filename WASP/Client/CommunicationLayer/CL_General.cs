@@ -13,7 +13,7 @@ namespace Client.CommunicationLayer
         {
             
         }
-        public Member login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID)
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Member> getModerators(int userID, int forumID, int subForumID)
+        public List<Moderator> getModerators(int userID, int forumID, int subForumID)
         {
             throw new NotImplementedException();
         }
@@ -65,12 +65,12 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Member> getAdmins(int userID, int forumID)
+        public List<Admin> getAdmins(int userID, int forumID)
         {
             throw new NotImplementedException();
         }
 
-        public List<Member> getMembers(int userID, int forumID)
+        public List<User> getMembers(int userID, int forumID)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Member getAdmin(User user, int forumID, int userID)
+        public Admin getAdmin(User user, int forumID, int userID)
         {
             throw new NotImplementedException();
         }

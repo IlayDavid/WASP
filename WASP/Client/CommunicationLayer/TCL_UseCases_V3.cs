@@ -42,7 +42,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Member> membersInDifferentForums(int userID)
+        public List<User> membersInDifferentForums(int userID)
         {
             throw new NotImplementedException();
         }

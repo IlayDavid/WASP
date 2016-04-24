@@ -17,9 +17,15 @@ namespace Client.CommunicationLayer
             users = new Dictionary<int, User>();
             forums = new Dictionary<int, Forum>();
         }
-        public Member login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Dictionary<string, User> members = forums[forumID].members;
+
+            }
+            catch (Exception) { }
+            return null;
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -54,7 +60,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Member> getModerators(int userID, int forumID, int subForumID)
+        public List<Moderator> getModerators(int userID, int forumID, int subForumID)
         {
             throw new NotImplementedException();
         }
@@ -69,12 +75,12 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Member> getAdmins(int userID, int forumID)
+        public List<Admin> getAdmins(int userID, int forumID)
         {
             throw new NotImplementedException();
         }
 
-        public List<Member> getMembers(int userID, int forumID)
+        public List<User> getMembers(int userID, int forumID)
         {
             throw new NotImplementedException();
         }
@@ -84,7 +90,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Member getAdmin(User user, int forumID, int userID)
+        public Admin getAdmin(User user, int forumID, int userID)
         {
             throw new NotImplementedException();
         }

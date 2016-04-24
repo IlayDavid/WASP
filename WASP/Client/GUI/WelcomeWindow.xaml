@@ -1,17 +1,23 @@
-﻿<Window x:Class="Client.GUI.WelcomeWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI"
+        xmlns:DataClasses="clr-namespace:Client.DataClasses" x:Class="Client.GUI.WelcomeWindow"
         mc:Ignorable="d"
         Title="Welcome" Height="441.95" Width="534.4"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="318" Width="395" Margin="10,84,0,0" SelectionChanged="dataGrid_SelectionChanged"/>
+        <DataGrid x:Name="dgForums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="318" Width="395" Margin="10,84,0,0" SelectionChanged="dataGrid_SelectionChanged">
+            <DataGrid.DataContext>
+                <DataClasses:Forum/>
+            </DataGrid.DataContext>
+        </DataGrid>
+
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system. &#xA;Below you can choose the forum you want" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="49" Width="251"/>
-        <Button x:Name="btnLoginSU" Content="login as &#xD;&#xA;SuperUser" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Margin="414,10,0,0" Height="59" Click="btnLoginSU_Click"/>
-        <Button x:Name="button" Content="Go To Forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="431,359,0,0" Height="32"/>
+        <Button x:Name="btnLoginSU" Content="login as &#xA;SuperUser" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Margin="414,10,0,0" Height="59" Click="btnLoginSU_Click"/>
+        <Button x:Name="btnEnterForum" Content="Enter Forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="431,359,0,0" Height="32" Click="btnEnterForum_Click"/>
 
     </Grid>
 </Window>

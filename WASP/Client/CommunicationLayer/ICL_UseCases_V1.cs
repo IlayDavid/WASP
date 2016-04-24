@@ -46,7 +46,7 @@ namespace Client.CommunicationLayer
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        Member subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
 
         /*
          * Pre-conditions: member is loged-in 

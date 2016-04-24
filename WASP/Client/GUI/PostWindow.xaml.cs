@@ -30,7 +30,7 @@ namespace Client
             this.sf = subf;
             this.f = fo;
             //testing
-            Member mem = new Member();
+            User mem = new User();
             mem.name = "noam";
             p._author = mem;
             p._publishedAt = new DateTime();
@@ -38,7 +38,7 @@ namespace Client
             p._editAt = new DateTime();
 
             Post rep = new Post();
-            Member mem2 = new Member();
+            User mem2 = new User();
             mem2.name = "edan";
             rep._author = mem2;
             rep._publishedAt = new DateTime();

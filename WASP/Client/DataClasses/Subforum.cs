@@ -11,7 +11,7 @@ namespace Client.DataClasses
 
         //should be null at first request
         public List<int> _threadsIDs { get; set; }
-        public List<Tuple<Member, DateTime>> _moderators { get; set; }
+        public List<Moderator> _moderators { get; set; }
         public List<Post> _threads { get; set; }
         
     }

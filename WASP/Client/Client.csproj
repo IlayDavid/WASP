@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommunicationLayer\Admin.cs" />
     <Compile Include="CommunicationLayer\TCL_General.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V1.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />

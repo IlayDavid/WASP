@@ -7,7 +7,7 @@ namespace Client.DataClasses
     {
         public string _title{ get; set; }
         public string _content{ get; set; }
-        public Member _author{ get; set; }
+        public User _author{ get; set; }
         public DateTime _publishedAt { get; set; }
         public DateTime _editAt { get; set; }
         public int _id{ get; set; }

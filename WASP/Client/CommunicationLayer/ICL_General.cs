@@ -14,7 +14,7 @@ namespace Client.CommunicationLayer
        * Purpose: logged in, to the specified forum.
        * Return: return the Member, if success, NULL otherwise.
        */
-        Member login(string userName, string password, int forumID);
+        User login(string userName, string password, int forumID);
 
         /*
         * Pre-conditions: member is super user.
@@ -44,7 +44,7 @@ namespace Client.CommunicationLayer
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
-        List<Member> getModerators(int userID, int forumID, int subForumID);
+        List<Moderator> getModerators(int userID, int forumID, int subForumID);
 
         /* Purpose: return the date of moderator's term time. */
         DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
@@ -53,15 +53,15 @@ namespace Client.CommunicationLayer
         List<Forum> getAllForums();
 
         /* Purpose: return forum's admins information. */
-        List<Member> getAdmins(int userID, int forumID);
+        List<Admin> getAdmins(int userID, int forumID);
 
         /* Purpose: return forum's members information. */
-        List<Member> getMembers(int userID, int forumID);
+        List<User> getMembers(int userID, int forumID);
 
         /* Purpose: return forum's subForums information. */
         List<Subforum> getSubforums(int userID, int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Member getAdmin(User user, int forumID, int userID);
+        Admin getAdmin(User user, int forumID, int userID);
     }
 }

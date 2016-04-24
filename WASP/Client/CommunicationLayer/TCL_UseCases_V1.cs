@@ -31,7 +31,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }  //------------------------ policy object??
 
-        public Member subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
         {
             throw new NotImplementedException();
         }

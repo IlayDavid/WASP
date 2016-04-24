@@ -48,7 +48,7 @@ namespace Client.CommunicationLayer
 
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/
-        List<Member> membersInDifferentForums(int userID);
+        List<User> membersInDifferentForums(int userID);
 
         //---------------------------Version 3 Use Cases End------------------------------------
     }
