@@ -7,58 +7,62 @@ namespace WASP.DataClasses
 {
     public class Forum
     {
-        private static int _idCounter = 0;
         private int _id;
-        private String _name, _description;
-        private List<Subforum> subforums;
-        private List<Member> members;
-        private List<Member> admins;
-        private Policy policy;
-        public Forum(String name, String description, Policy policy)
+        private String name, description;
+        private Dictionary<int, Subforum> subforums;
+        private Dictionary<int, User> members;
+        private Dictionary<int, Admin> admins;
+        private Dictionary<int, Policy> policy;
+        public Forum(String name, String description, Dictionary<int, Policy> policy)
         {
-            _id = _idCounter++;
-            _name = name;
-            _description = description;
-            this.subforums = new List<Subforum>();
-            this.members = new List<Member>();
-            this.admins = new List<Member>();
+            this.name = name;
+            this.description = description;
             this.policy = policy;
+            this.members = new Dictionary<int, User>();
+            this.admins = new Dictionary<int, Admin>();
+
         }
 
-        public static bool isValid(String name, String description, Policy policy)
-        {
-            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || policy == null);
-        }
+        
 
         public void AddPolicy(Policy policy)
         {
-            policy.Next = this.policy;
-            this.policy = policy;
+            this.policy.Add(policy.Id, policy);
         }
 
-        void CheckMemberPolicy(User user)
+
+
+
+        public Subforum[] GetAllSubForums()
         {
-            this.policy.Validate(user);
+            Subforum[] sfArr = new Subforum[subforums.Values.Count];
+            subforums.Values.CopyTo(sfArr, 0);
+            return sfArr;
         }
 
-        internal Subforum GetSubForum(int subforumId)
+        public Subforum GetSubForum(int sfId)
         {
-            return subforums.First((x) => x.Id == subforumId);
+            Subforum sf;
+            subforums.TryGetValue(sfId, out sf);
+            return sf;
         }
 
-        internal bool IsAdmin(Member member)
+
+
+
+
+        internal bool IsAdmin(int adminid)
         {
-            return admins.Contains(member);
+            return admins.ContainsKey(adminid);
         }
 
-        internal bool IsMember(Member member)
+        internal bool IsMember(int memberid)
         {
-            return members.Contains(member);
+            return members.ContainsKey(memberid);
         }
-        internal bool IsSubForum(int subforumId)
+        internal bool IsSubForum(int sfid)
         {
-            return subforums.First((x) => x.Id == subforumId) != null;
+            return subforums.ContainsKey(sfid);
         }
 
         internal void DefinePolicy(Forum forum)
@@ -68,7 +72,7 @@ namespace WASP.DataClasses
 
         internal Member GetMember(string username)
         {
-            return members.First(member => member.UserName.Equals(username));
+     
         }
 
         internal void Update(Forum forum)
@@ -88,7 +92,7 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _name;
+                return name;
             }
             set
             {
