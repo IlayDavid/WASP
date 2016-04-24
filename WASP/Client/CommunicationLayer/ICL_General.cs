@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.CommunicationLayer
 {
-    partial interface ICL
+    public partial interface ICL
     {
         /* 
        * Pre-conditions: member is subscribe to the forum.

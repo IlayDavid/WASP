@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class TCL : ICL
     {
-        public CL()
+        Dictionary<int, User> users; 
+        Dictionary<int, Forum> forums;
+
+        public TCL()
         {
-            
+            users = new Dictionary<int, User>();
+            forums = new Dictionary<int, Forum>();
         }
         public Member login(string userName, string password, int forumID)
         {

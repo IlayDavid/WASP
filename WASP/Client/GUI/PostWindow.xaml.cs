@@ -31,7 +31,7 @@ namespace Client
             this.f = fo;
             //testing
             Member mem = new Member();
-            mem.Name = "noam";
+            mem.name = "noam";
             p._author = mem;
             p._publishedAt = new DateTime();
             p._content = "this is a post";
@@ -39,7 +39,7 @@ namespace Client
 
             Post rep = new Post();
             Member mem2 = new Member();
-            mem2.Name = "edan";
+            mem2.name = "edan";
             rep._author = mem2;
             rep._publishedAt = new DateTime();
             rep._content = "this is a reply post";
@@ -50,17 +50,17 @@ namespace Client
             p._replies.Add(rep);
             //end 
             TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Header = "Title: " + p._title + " Author: " + p._author.Name + " Date: " + p._publishedAt.Date;
+            treeItem.Header = "Title: " + p._title + " Author: " + p._author.name + " Date: " + p._publishedAt.Date;
             treeItem.Items.Add(new TreeViewItem() { Header = p._content });
             treeItem.Items.Add(new TreeViewItem() { Header = p._editAt.Date });
             postMesssages.Items.Add(treeItem);
             foreach (Post post in p._replies)
             {
                 TreeViewItem treeItem2 = new TreeViewItem();
-                treeItem2.Header = "Title: " + post._title + " Author: " + post._author.Name + " Date: " +post._publishedAt.Date;
+                treeItem2.Header = "Title: " + post._title + " Author: " + post._author.name + " Date: " +post._publishedAt.Date;
                 treeItem2.Items.Add(new TreeViewItem() { Header = post._content });
                 treeItem2.Items.Add(new TreeViewItem() { Header = post._editAt.Date });
-                treeItem2.Items.Add(new TreeViewItem() { Header =post._inReplyTo._author.Name });
+                treeItem2.Items.Add(new TreeViewItem() { Header =post._inReplyTo._author.name });
                 postMesssages.Items.Add(treeItem2);
             }
         }

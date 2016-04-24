@@ -24,7 +24,7 @@ namespace Client.CommunicationLayer
         * Purpose: check if the system is already initialize, should be called before initialize.
         * Return: 0 - if not initialize, 1 - otherwise.
         */
-        int isInitialize(string name, string userName, string email, string pass);
+        int isInitialize();
 
         /*
          * Pre-conditions: super user is loged-in 

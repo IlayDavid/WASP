@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class TCL : ICL
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)

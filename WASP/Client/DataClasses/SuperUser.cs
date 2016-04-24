@@ -1,6 +1,6 @@
 ﻿namespace Client.DataClasses
 {
-    public class SuperUser
+    public class SuperUser : User
     {
     }
 }
