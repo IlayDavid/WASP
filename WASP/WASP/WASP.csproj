@@ -53,6 +53,9 @@
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\DALSQL.cs" />
     <Compile Include="DataClasses\Forum.cs" />
+    <Compile Include="DataClasses\ForumSystem.cs">
+      <DependentUpon>ForumSystem.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataClasses\ForumSystem.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
