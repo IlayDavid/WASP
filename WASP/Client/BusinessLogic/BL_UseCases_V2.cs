@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.CommunicationLayer
+namespace Client.BusinessLogic
 {
-    public partial class CL : ICL
+    public partial class BL : IBL
     {
-        //---------------------------Version 2 Use Cases Start------------------------------------
         public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
             throw new NotImplementedException();
@@ -34,7 +33,5 @@ namespace Client.CommunicationLayer
         {
             throw new NotImplementedException();
         }
-
-        //---------------------------Version 2 Use Cases Start------------------------------------
     }
 }

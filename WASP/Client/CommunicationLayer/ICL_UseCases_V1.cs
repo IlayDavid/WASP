@@ -10,9 +10,6 @@ namespace Client.CommunicationLayer
     partial interface ICL
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
-
-
-
         /*
         * Pre-conditions: none.
         * Purpose: initialize the system and logs the superuser in

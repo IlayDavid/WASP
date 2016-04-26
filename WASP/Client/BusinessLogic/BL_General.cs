@@ -5,25 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.CommunicationLayer
+namespace Client.BusinessLogic
 {
-    public partial class TCL : ICL
+    public partial class BL : IBL
     {
-        Dictionary<int, Forum> forums;
-
-        public TCL()
+        public BL()
         {
-            forums = new Dictionary<int, Forum>();
+            
         }
         public User login(string userName, string password, int forumID)
         {
-            try
-            {
-                Dictionary<string, User> members = forums[forumID].members;
-
-            }
-            catch (Exception) { }
-            return null;
+            throw new NotImplementedException();
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -70,9 +62,6 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {
-            List<Forum> ret = new List<Forum>();
-            ret.Add(new Forum() {ID=1, Name = "Sport", Description = "This forum is about sport games" });
-            return ret;
             throw new NotImplementedException();
         }
 

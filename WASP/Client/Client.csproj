@@ -57,11 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommunicationLayer\Admin.cs" />
+    <Compile Include="BusinessLogic\CL_General.cs" />
+    <Compile Include="BusinessLogic\CL_UseCases_V1.cs" />
+    <Compile Include="BusinessLogic\CL_UseCases_V2.cs" />
+    <Compile Include="BusinessLogic\CL_UseCases_V3.cs" />
+    <Compile Include="BusinessLogic\IBL.cs" />
+    <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="CommunicationLayer\TCL_General.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V1.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V3.cs" />
+    <Compile Include="DataClasses\ClassView.cs" />
     <Compile Include="GUI\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
     </Compile>
@@ -100,7 +106,6 @@
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\SuperUser.cs" />
     <Compile Include="DataClasses\User.cs" />
-    <Compile Include="DataClasses\Member.cs" />
     <Compile Include="DataClasses\ModeratorReport.cs" />
     <Compile Include="GUI\ForumWindow.xaml.cs">
       <DependentUpon>ForumWindow.xaml</DependentUpon>

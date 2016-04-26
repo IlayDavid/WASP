@@ -9,11 +9,7 @@
         Title="Welcome" Height="441.95" Width="534.4"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="dgForums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="318" Width="395" Margin="10,84,0,0" SelectionChanged="dataGrid_SelectionChanged">
-            <DataGrid.DataContext>
-                <DataClasses:Forum/>
-            </DataGrid.DataContext>
-        </DataGrid>
+        <DataGrid x:Name="dgForums" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Height="318" Width="395" Margin="10,84,0,0"/>
 
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system. &#xA;Below you can choose the forum you want" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="49" Width="251"/>
         <Button x:Name="btnLoginSU" Content="login as &#xA;SuperUser" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Margin="414,10,0,0" Height="59" Click="btnLoginSU_Click"/>

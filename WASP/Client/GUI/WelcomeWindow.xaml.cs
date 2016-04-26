@@ -2,6 +2,7 @@
 using Client.DataClasses;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,27 +22,23 @@ namespace Client.GUI
     /// </summary>
     public partial class WelcomeWindow : Window
     {
+        
         ICL _cl;
         User user;
+        List<Forum> forums;
         public WelcomeWindow()
         {
+            InitializeComponent();
             _cl = new TCL();
             if (_cl.isInitialize() == 0)
             {
                 CreateAdmin cAdmin = new CreateAdmin(_cl);
                 cAdmin.ShowDialog();
             }
-
-            List<Forum> forums = new List<Forum>();//_cl.getAllForums();
-            forums.Add(new Forum() { Name = "aaa", Description = "bbb" });
-            dgForums.ItemsSource = forums;
-            //todo: show forums
-            InitializeComponent();
-        }
-
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            forums = _cl.getAllForums();
+            var forumsView = ForumView.getView(forums);
+            forumsView.Add(new ForumView() { ID = 2, Name = "aaa", Description = "bbb" });
+            dgForums.ItemsSource = forumsView;
         }
 
         private void btnLoginSU_Click(object sender, RoutedEventArgs e)
@@ -54,6 +51,12 @@ namespace Client.GUI
 
         private void btnEnterForum_Click(object sender, RoutedEventArgs e)
         {
+            if (dgForums.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please choose Forum");
+                return;
+            }
+            int id = ((ForumView) dgForums.Items.GetItemAt(dgForums.SelectedIndex)).ID;
 
         }
     }
