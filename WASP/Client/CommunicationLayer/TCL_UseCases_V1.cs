@@ -9,21 +9,30 @@ namespace Client.CommunicationLayer
 {
     public partial class TCL : ICL
     {
+        private bool _isInitialize = false;
+        private SuperUser _su = null;
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            return null;
-            throw new NotImplementedException();
+            _su = new SuperUser(name, userName, ID, email, pass);
+            _isInitialize = true;
+            return _su;
         }
         public int isInitialize()
         {
-            return 0;
-            throw new NotImplementedException();
+            return _isInitialize ? 1 : 0;
         }
 
         public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
-            throw new NotImplementedException();
+            if (userID != _su.id)
+                throw new Exception("User with id - "+userID+" cannot add forum");
+            User user = new User() { userName = adminUserName, name = adminName, email = email, password = pass };
+            List<User> admins = new List<User>();
+            admins.Add(user);
+            Forum forum = new Forum() { Name = forumName, Description = description, admins = admins };
+            forums.Add(forum.ID, forum);
+            return forum;
         }
 
         public int defineForumPolicy(int userID, int forumID)

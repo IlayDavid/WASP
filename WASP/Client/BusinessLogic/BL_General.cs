@@ -1,4 +1,5 @@
-﻿using Client.DataClasses;
+﻿using Client.CommunicationLayer;
+using Client.DataClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
+        private ICL _cl;
         public BL()
         {
-            
+            _cl = new TCL();
         }
         public User login(string userName, string password, int forumID)
         {
@@ -20,7 +22,10 @@ namespace Client.BusinessLogic
 
         public SuperUser loginSU(string userName, string password)
         {
-            throw new NotImplementedException();
+            if (IsStrValid(userName) && IsPasswordValid(password))
+                return _cl.loginSU(userName, password);
+            else
+                throw new Exception("ERROR: user name or password are illegal");
         }
 
         //---------------------------------Getters----------------------------------------------
@@ -37,7 +42,7 @@ namespace Client.BusinessLogic
 
         public Forum getForum(int forumID)
         {
-            throw new NotImplementedException();
+            return _cl.getForum(forumID);
         }
 
         public Subforum getSubforum(int userID, int forumID, int subforumId)
@@ -62,12 +67,15 @@ namespace Client.BusinessLogic
 
         public List<Forum> getAllForums()
         {
-            throw new NotImplementedException();
+            return _cl.getAllForums();
         }
 
         public List<Admin> getAdmins(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            if (userID >= 0 && forumID >= 0)
+                return _cl.getAdmins(userID, forumID);
+            else
+                throw new Exception("ERROR: id is negative.");
         }
 
         public List<User> getMembers(int userID, int forumID)

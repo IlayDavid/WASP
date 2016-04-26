@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.BusinessLogic
 {
-    interface IBL
+    public interface IBL
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
 

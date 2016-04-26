@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Client.CommunicationLayer
 {
@@ -28,7 +29,15 @@ namespace Client.CommunicationLayer
 
         public SuperUser loginSU(string userName, string password)
         {
-            throw new NotImplementedException();
+            if (_isInitialize)
+            {
+                if (_su.userName.Equals(userName) && _su.password.Equals(password))
+                    return _su;
+                else
+                    throw new Exception("ERROR: user name or password did not match!");
+            }
+            else
+                throw new Exception("ERROR: system is not initialized");
         }
 
         //---------------------------------Getters----------------------------------------------
@@ -45,7 +54,7 @@ namespace Client.CommunicationLayer
 
         public Forum getForum(int forumID)
         {
-            throw new NotImplementedException();
+            return forums[forumID];
         }
 
         public Subforum getSubforum(int userID, int forumID, int subforumId)

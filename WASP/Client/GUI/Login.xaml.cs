@@ -1,4 +1,5 @@
-﻿using Client.CommunicationLayer;
+﻿using Client.BusinessLogic;
+using Client.CommunicationLayer;
 using Client.DataClasses;
 using System;
 using System.Collections.Generic;
@@ -21,48 +22,39 @@ namespace Client
     /// </summary>
     public partial class Login : Window
     {
-        ICL _cl;
+        IBL _bl;
         int _forumID;
-        User user;
-        private static readonly int ALL_FORUMS = -1;
+        User _user;
+        public static readonly int ALL_FORUMS = -1;
 
-        public Login(ICL cl, int forum_id)
+        public Login(IBL bl, int loginTo)
         {
-            _cl = cl;
-            _forumID = forum_id;
+            _bl = bl;
+            _forumID = loginTo;
             InitializeComponent();
         }
-
-        //for super user.
-        public Login(ICL cl)
-        {
-            _cl = cl;
-            _forumID = ALL_FORUMS;
-            InitializeComponent();
-        }
+        
         public User getUser()
         {
-            return user;
-        }
-        private void exitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            string pass = txtPassword.Text;
-            string username = txtUsername.Text;
-
-            if (_forumID == ALL_FORUMS)
-                user = _cl.loginSU(username, pass);
-            else
-                user = _cl.login(username, pass, _forumID);    
+            return _user;
         }
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                string username = txtUsername.Text;
+                string password = passPassword.Password;
+                if (_forumID == ALL_FORUMS)
+                    _user = _bl.loginSU(username, password);
+                else
+                    _user = _bl.login(username, password, _forumID);
+                this.Close();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
     }
 }

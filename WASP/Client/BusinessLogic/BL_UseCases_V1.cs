@@ -1,4 +1,5 @@
-﻿using Client.DataClasses;
+﻿using Client.CommunicationLayer;
+using Client.DataClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,59 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
+        
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            return null;
-            throw new NotImplementedException();
+            string validStr = isUserValid(name, userName, ID, email, pass);
+            if (validStr == null)
+                return _cl.initialize(name, userName, ID, email, pass);
+            else
+                throw new Exception(validStr);
         }
+
+        private string isUserValid(string name, string userName, int iD, string email, string pass)
+        {
+            if (!IsStrValid(name)) return "ERROR: name is illegal!";
+            if (!IsStrValid(userName)) return "ERROR: userName is illegal!";
+            if (!IsEmailValid(email)) return "ERROR: email format is illegal!";
+            if (!IsPasswordValid(pass)) return "ERROR: password is illegal!";
+            if (iD < 0) return "ERROR: id is illegal!";
+
+            return null;
+        }
+
+        private bool IsEmailValid(string email)
+        {
+            return true;
+        }
+
+        private bool IsPasswordValid(string email)
+        {
+            return true;
+        }
+
+        private bool IsStrValid(string str){ return (str != null && !str.Equals("")); }
+
         public int isInitialize()
         {
-            return 0;
-            throw new NotImplementedException();
+            return _cl.isInitialize();
         }
 
         public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
-            throw new NotImplementedException();
+            string validStr = isUserValid(adminName, adminUserName, 1, email, pass);
+            if (validStr == null) {
+                if (!IsStrValid(forumName))
+                    validStr = "ERROR: Forum name is empty";
+                if (!IsStrValid(description))
+                    validStr = "ERROR: Forum description is empty";
+            }
+
+            if (validStr == null)
+                return _cl.createForum(userID, forumName, description, adminUserName, adminName, email, pass, policy);
+            else
+                throw new Exception(validStr);
         }
 
         public int defineForumPolicy(int userID, int forumID)

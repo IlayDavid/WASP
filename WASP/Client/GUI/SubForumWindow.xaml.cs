@@ -70,10 +70,10 @@ namespace Client
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            ForumWindow fwin = new ForumWindow();
-            fwin.setForum(this.f);
-            fwin.Show();
-            this.Close();
+            //ForumWindow fwin = new ForumWindow();
+            //fwin.setForum(this.f);
+            //fwin.Show();
+            //this.Close();
         }
     }
 }

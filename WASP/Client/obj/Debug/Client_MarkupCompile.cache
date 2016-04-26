@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\App.xaml
-7-519590835
+7-1400586542
 
-39-1821310391
+39620257356
 15767094614
-GUI\ForumWindow.xaml;GUI\Login.xaml;GUI\MainWindow.xaml;GUI\PostWindow.xaml;GUI\SubForumWindow.xaml;GUI\CreateAdmin.xaml;GUI\WelcomeWindow.xaml;
+GUI\AddForum.xaml;GUI\ForumWindow.xaml;GUI\Login.xaml;GUI\PostWindow.xaml;GUI\SubForumWindow.xaml;GUI\CreateAdmin.xaml;GUI\MainWindow.xaml;
 
 False
 

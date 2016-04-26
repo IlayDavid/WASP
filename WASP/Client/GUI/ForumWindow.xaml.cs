@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Client.DataClasses;
+using Client.BusinessLogic;
 
 namespace Client
 {
@@ -21,11 +22,14 @@ namespace Client
     public partial class ForumWindow : Window
     {
         //the forum that presented in the window, should be set by method
-        private Forum forum;
-        public ForumWindow()
+        private IBL _bl;
+        private User _user;
+        private Forum _forum;
+        public ForumWindow(User user, Forum forum, IBL bl)
         {
             InitializeComponent();
-            //this.forum = f;
+
+            
             //testing the presentation on window
             forum = new Forum();
             forum.subforums = new List<Subforum>();
@@ -55,14 +59,14 @@ namespace Client
 
         public void setForum(Forum f)
         {
-            this.forum = f;
+            this._forum = f;
         }
 
         private void SubForums_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBoxItem i = (ListBoxItem)SubForums.SelectedItem;
             Subforum sf = (Subforum)i.DataContext;
-            SubForumWindow sfWin = new SubForumWindow(sf, this.forum);
+            SubForumWindow sfWin = new SubForumWindow(sf, this._forum);
             sfWin.Show();
             this.Close();
         }

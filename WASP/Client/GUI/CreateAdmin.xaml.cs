@@ -1,4 +1,5 @@
-﻿using Client.CommunicationLayer;
+﻿using Client.BusinessLogic;
+using Client.CommunicationLayer;
 using Client.DataClasses;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,14 @@ namespace Client
     /// </summary>
     public partial class CreateAdmin : Window
     {
-        private ICL _cl;
+        private IBL _bl;
         private SuperUser _su;
-        public CreateAdmin(ICL cl)
+        private bool createFinish = false;
+        public CreateAdmin(IBL bl)
         {
-            _cl = cl;
             InitializeComponent();
+            _bl = bl;
+            _su = null;
         }
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
@@ -34,14 +37,29 @@ namespace Client
             string userName = txtUsername.Text;
             string name = txtName.Text;
             string mail = txtmail.Text;
-            string pass = txtPassword.Text;
-            int id = int.Parse(txtID.Text);
-
-            _su = _cl.initialize(name, userName, id, mail, pass);
+            string pass = passPassword.Password;
+            int id = 0;
+            try
+            {
+                id = int.Parse(txtID.Text);
+            }
+            catch
+            {
+                MessageBox.Show("ERROR: id is illegal"); return;
+            }
+            try
+            {
+                _su = _bl.initialize(name, userName, id, mail, pass);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); return;
+            }
             if (_su != null)
                 MessageBox.Show("Your registration is complete!\nyou can log in now as an admin.");
             else
-                MessageBox.Show("Your registration could not be completed.\n Admin has been already registered.");
+                MessageBox.Show("Your registration could not be completed.\nAdmin has been already registered.");
+            createFinish = true;
             this.Close();
         }
 
@@ -49,15 +67,9 @@ namespace Client
         {
             return _su;
         }
-
-        private void chkShowChar_Checked(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
-        }
-
-        private void chkShowChar_UnChecked(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            e.Cancel = !createFinish;
         }
     }
 }

@@ -57,10 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BusinessLogic\CL_General.cs" />
-    <Compile Include="BusinessLogic\CL_UseCases_V1.cs" />
-    <Compile Include="BusinessLogic\CL_UseCases_V2.cs" />
-    <Compile Include="BusinessLogic\CL_UseCases_V3.cs" />
+    <Compile Include="BusinessLogic\BL_General.cs" />
+    <Compile Include="BusinessLogic\BL_UseCases_V1.cs" />
+    <Compile Include="BusinessLogic\BL_UseCases_V2.cs" />
+    <Compile Include="BusinessLogic\BL_UseCases_V3.cs" />
     <Compile Include="BusinessLogic\IBL.cs" />
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="CommunicationLayer\TCL_General.cs" />
@@ -68,21 +68,24 @@
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V3.cs" />
     <Compile Include="DataClasses\ClassView.cs" />
+    <Compile Include="GUI\AddForum.xaml.cs">
+      <DependentUpon>AddForum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\CreateAdmin.xaml.cs">
       <DependentUpon>CreateAdmin.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\AddForum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\ForumWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GUI\Login.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GUI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -113,10 +116,6 @@
     <Compile Include="GUI\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="GUI\PostWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -129,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\WelcomeWindow.xaml">
+    <Page Include="GUI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,8 +137,8 @@
     <Compile Include="GUI\PostWindow.xaml.cs">
       <DependentUpon>PostWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\WelcomeWindow.xaml.cs">
-      <DependentUpon>WelcomeWindow.xaml</DependentUpon>
+    <Compile Include="GUI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

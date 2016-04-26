@@ -16,7 +16,6 @@
                 <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,8,0,0"/>
                 <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,39,0,0"/>
                 <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="74,11,0,0"/>
-                <TextBox Visibility="Hidden" x:Name="txtPassword" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="74,42,0,0"/>
                 <PasswordBox x:Name="passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,42,0,0" Width="120" Height="23"/>
             </Grid>
         </Grid>
