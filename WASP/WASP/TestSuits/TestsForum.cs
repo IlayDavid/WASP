@@ -12,7 +12,7 @@ namespace WASP.TestSuits
         public void memberTests()
         {
             // arrange
-            Forum forum = new Forum("name", "desc",null,null);
+            Forum forum = new Forum(0,"name", "desc",null,null);
             User member = new User(0,"edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(member);
             int numbOfMembers, numOfMembersAfterDelete;
@@ -41,7 +41,7 @@ namespace WASP.TestSuits
         public void adminTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description",null,null);
+            Forum forum = new Forum(0,"stackOverFlow", "description",null,null);
             User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
             Admin admin = new Admin(user, forum, null);
             bool isAdmin;
@@ -59,7 +59,7 @@ namespace WASP.TestSuits
         public void subForumTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description", null, null);
+            Forum forum = new Forum(0,"stackOverFlow", "description", null, null);
             User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
             forum.AddMember(user);
             Subforum sf = new Subforum(0,"subForum", "someDescription",null,forum);

@@ -12,7 +12,7 @@ namespace WASP.TestSuits
         {
             // arrange
 
-            Forum forum = new Forum("stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
             User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(author);
             Subforum sf = new Subforum(0, "sf", "sf", null, forum);
@@ -32,7 +32,7 @@ namespace WASP.TestSuits
         {
             // arrange
 
-            Forum forum = new Forum("stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
             User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(author);
             Subforum sf = new Subforum(0, "sf", "sf", null, forum);
@@ -55,24 +55,3 @@ namespace WASP.TestSuits
 }
 
 
-
-
-public static void Main (string [] args)
-{
-    int[,] arr = new int[2, 15];
-    int num;
-    int count;
-    for (int i = 0; i < 15; i++)
-    {
-        Console.WriteLine("enter num");
-        count = 1;
-        num = int.Parse(Console.ReadLine());
-        arr[0, i] = num;
-        while (num != 0)
-        {
-            count++;
-            num = int.Parse(Console.ReadLine());
-        }
-        arr[1, i] = count;
-    }
-}

@@ -7,14 +7,14 @@ namespace WASP.DataClasses
 {
     public class Forum
     {
-        private int _id;
+        private int id;
         private String name, description;
         private Dictionary<int, Subforum> subforums;
         private Dictionary<int, User> members;
         private Dictionary<int, Admin> admins;
         private Dictionary<int, Policy> policy;
         private DAL dal;
-        public Forum(String name, String description, Dictionary<int, Policy> policy,DAL dal)
+        public Forum(int id, String name, String description, Dictionary<int, Policy> policy,DAL dal)
         {
             this.name = name;
             this.description = description;
@@ -22,6 +22,7 @@ namespace WASP.DataClasses
             this.members = new Dictionary<int, User>();
             this.admins = new Dictionary<int, Admin>();
             this.dal = dal;
+            this.id = id;
 
         }
 
@@ -88,7 +89,7 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _id;
+                return id;
             }
         }
 

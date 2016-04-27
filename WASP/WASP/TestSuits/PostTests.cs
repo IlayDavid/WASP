@@ -11,7 +11,7 @@ namespace WASP.TestSuits
         public void repliesTests()
         {
             // arrange
-            Forum forum = new Forum("stackforum", "someDesc", null,null);
+            Forum forum = new Forum(0,"stackforum", "someDesc", null,null);
             User author = new User(0,"edan", "userName", "email@email.com", "123",forum);
             forum.AddMember(author);
             Subforum sf = new Subforum(0,"sf", "sf", null, forum);
@@ -33,7 +33,7 @@ namespace WASP.TestSuits
         {
             //check reply to reply
             // arrange
-            Forum forum = new Forum("stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
             User member = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(member);
             Subforum sf = new Subforum(0, "sf", "sf", null, forum);

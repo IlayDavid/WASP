@@ -17,7 +17,7 @@ namespace WASP.DataClasses
         //forumsId == null -> get all forums. else get all forums in the collection.
          Forum[] GetForums(Collection<int> forumsIds);
         // 
-        Forum getForum(int id);
+        Forum GetForum(int id);
 
         //subForum.id == -1
          Subforum CreateSubForum(Subforum sf);
@@ -58,7 +58,7 @@ namespace WASP.DataClasses
         Admin GetAdmin(int adminId,int forumId);
 
 
-        Post CreatPost(Post post);
+        Post CreatePost(Post post);
         //subForum.id > -1
         Post UpdatePost (Post post);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
