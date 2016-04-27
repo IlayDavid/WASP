@@ -17,7 +17,10 @@ namespace Client.BusinessLogic
         }
         public User login(string userName, string password, int forumID)
         {
-            throw new NotImplementedException();
+            if (!IsStrValid(userName)) throw new Exception("ERROR: username is empty or iilegal");
+            if (!IsStrValid(password)) throw new Exception("ERROR: password is empty or iilegal");
+            if (forumID < 0) throw new Exception("ERROR: forum id is iilegal");
+            return _cl.login(userName, password, forumID);
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -83,9 +86,12 @@ namespace Client.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public List<Subforum> getSubforums(int userID, int forumID)
+        public List<Subforum> getSubforums(int forumID)
         {
-            throw new NotImplementedException();
+            if (forumID >= 0)
+                return _cl.getSubforums(forumID);
+            else
+                throw new Exception("ERROR: illegal id");
         }
 
         public Admin getAdmin(User user, int forumID, int userID)

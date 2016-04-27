@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="ForumWindow"  Height="600" Width="800">
+        Title="ForumWindow"  Height="600" Width="829.6"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="689,5,0,0" Width="93" Text="Welcome, guest!"/>
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="589,15,0,0" Width="93" Text="Welcome, guest!"/>
         <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
         <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
-        <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
-        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
-        <Button x:Name="backButton" Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0"/>
-        <Button x:Name="registerButton" Content="register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="652,23,0,0"/>
-
+        <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,10,0,0"/>
+        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="707,174,0,0" ToolTip="number of notifications is 0" Click="notificationsButton_Click" Height="38" />
+        <Button x:Name="backButton" Content="back" Click="backButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0"/>
+        
 
         <Grid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood">
             <Grid.RowDefinitions>
@@ -26,11 +26,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="301" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="addSubforumButton" Content="Add Subforum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50" FontSize="20" Grid.Row="0" />
-            <Button x:Name="addAdministratorButton" Content="Add Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50" FontSize="20" Grid.Row="1" />
-            <Button x:Name="viewAdministratorsButton" Content="View Administrators" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50" FontSize="20" Grid.Row="2" />
-            <Button x:Name="editForumSettingsButton" Content="Change Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50" FontSize="20" Grid.Row="3"   />
-            <ListBox x:Name="SubForums" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" SelectionChanged="SubForums_SelectionChanged"/>
+            <Button x:Name="btnViewAdministrators" Content="View Administrators" Click="btnViewAdministrators_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,0,0,0" />
+            <Button x:Name="btnAddAdministrator" Content="Add Administrator" Visibility="Hidden" Click="btnAddAdministrator_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,71,0,0" Grid.RowSpan="2" />
+            <Button x:Name="btnAddSubforum" Content="Add Subforum" Visibility="Hidden" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="1" Margin="10,70.8,0,0" Grid.RowSpan="2" />
+            <Button x:Name="btnEditForumPolicy" Content="Change Policy" Visibility="Hidden" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="3" Margin="10,0.4,0,0"   />
+            <ListBox x:Name="SubForums" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForums_MouseDoubleClick"/>
         </Grid>
+        <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
     </Grid>
 </Window>

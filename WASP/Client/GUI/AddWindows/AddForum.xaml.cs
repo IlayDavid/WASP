@@ -21,22 +21,19 @@ namespace Client.GUI
     /// </summary>
     public partial class AddForum : Window
     {
-        IBL _bl;
         Forum _forum = null;
-        SuperUser _su;
-        public AddForum(IBL bl, SuperUser su)
+        public AddForum()
         {
             InitializeComponent();
-            _bl = bl;
-            _su = su;
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                _forum = _bl.createForum(_su.id, txtForumName.Text, txtForumDesc.Text, txtAdminUserName.Text,
-                    txtAdminName.Text, txtEmail.Text, passPass.Password, null);
+                if (Session.user is SuperUser)
+                    _forum = Session.bl.createForum(Session.user.id, txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
+                    txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, null);
 
                 this.Close();
             }

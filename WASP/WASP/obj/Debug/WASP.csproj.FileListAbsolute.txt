@@ -20,4 +20,3 @@ C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\Client\GUI\MainWindow.g.cs
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\Client\GUI\App.g.cs
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache

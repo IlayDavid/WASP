@@ -2,13 +2,8 @@
 {
     public class SuperUser : User
     {
-        public SuperUser(string name, string userName, int ID, string email, string pass)
+        public SuperUser(string name, string userName, int ID, string email, string pass) : base(ID, name, userName, email, pass)
         {
-            this.name = name;
-            this.userName = userName;
-            this.id = ID;
-            this.email = email;
-            this.password = pass;
         }
     }
 }

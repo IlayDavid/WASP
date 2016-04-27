@@ -59,7 +59,7 @@ namespace Client.CommunicationLayer
         List<User> getMembers(int userID, int forumID);
 
         /* Purpose: return forum's subForums information. */
-        List<Subforum> getSubforums(int userID, int forumID);
+        List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
         Admin getAdmin(User user, int forumID, int userID);

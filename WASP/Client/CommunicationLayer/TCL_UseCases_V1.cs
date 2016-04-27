@@ -9,8 +9,7 @@ namespace Client.CommunicationLayer
 {
     public partial class TCL : ICL
     {
-        private bool _isInitialize = false;
-        private SuperUser _su = null;
+        
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
@@ -23,14 +22,13 @@ namespace Client.CommunicationLayer
             return _isInitialize ? 1 : 0;
         }
 
-        public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminId, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             if (userID != _su.id)
                 throw new Exception("User with id - "+userID+" cannot add forum");
-            User user = new User() { userName = adminUserName, name = adminName, email = email, password = pass };
-            List<User> admins = new List<User>();
-            admins.Add(user);
-            Forum forum = new Forum() { Name = forumName, Description = description, admins = admins };
+            User admin = new User(adminId, adminName, adminUserName, email, pass);
+            Forum forum = new Forum(forumName, description, admin);
+            forum.members.Add(admin.id,admin);
             forums.Add(forum.ID, forum);
             return forum;
         }
@@ -40,9 +38,11 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }  //------------------------ policy object??
 
-        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            throw new NotImplementedException();
+            User newUser = new User(id, name, userName, email, pass);
+            forums[targetForumID].members.Add(newUser.id, newUser);
+            return newUser;
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
@@ -57,7 +57,9 @@ namespace Client.CommunicationLayer
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            throw new NotImplementedException();
+            Subforum newSf = new Subforum(name, description, moderatorID, term);
+            forums[forumID].subforums.Add(newSf);
+            return newSf;
         }
         //---------------------------Version 1 Use Cases End------------------------------------
     }

@@ -1,6 +1,7 @@
 ﻿using Client.BusinessLogic;
 using Client.CommunicationLayer;
 using Client.DataClasses;
+using Client.GUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,12 @@ namespace Client
     /// </summary>
     public partial class Login : Window
     {
-        IBL _bl;
         int _forumID;
         User _user;
         public static readonly int ALL_FORUMS = -1;
 
-        public Login(IBL bl, int loginTo)
+        public Login(int loginTo)
         {
-            _bl = bl;
             _forumID = loginTo;
             InitializeComponent();
         }
@@ -46,9 +45,9 @@ namespace Client
                 string username = txtUsername.Text;
                 string password = passPassword.Password;
                 if (_forumID == ALL_FORUMS)
-                    _user = _bl.loginSU(username, password);
+                    _user = Session.bl.loginSU(username, password);
                 else
-                    _user = _bl.login(username, password, _forumID);
+                    _user = Session.bl.login(username, password, _forumID);
                 this.Close();
             }
             catch (Exception ee)

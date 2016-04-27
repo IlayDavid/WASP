@@ -28,7 +28,7 @@ namespace Client.CommunicationLayer
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, int id, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
          * Pre-conditions: superuser is loged-in 
@@ -43,7 +43,7 @@ namespace Client.CommunicationLayer
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
 
         /*
          * Pre-conditions: member is loged-in 

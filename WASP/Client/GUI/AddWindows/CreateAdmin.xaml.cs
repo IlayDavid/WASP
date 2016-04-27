@@ -1,6 +1,7 @@
 ﻿using Client.BusinessLogic;
 using Client.CommunicationLayer;
 using Client.DataClasses;
+using Client.GUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,11 @@ namespace Client
     /// </summary>
     public partial class CreateAdmin : Window
     {
-        private IBL _bl;
         private SuperUser _su;
         private bool createFinish = false;
-        public CreateAdmin(IBL bl)
+        public CreateAdmin()
         {
             InitializeComponent();
-            _bl = bl;
             _su = null;
         }
 
@@ -49,7 +48,7 @@ namespace Client
             }
             try
             {
-                _su = _bl.initialize(name, userName, id, mail, pass);
+                _su = Session.bl.initialize(name, userName, id, mail, pass);
             }
             catch (Exception ex)
             {

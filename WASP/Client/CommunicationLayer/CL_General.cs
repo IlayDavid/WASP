@@ -75,7 +75,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Subforum> getSubforums(int userID, int forumID)
+        public List<Subforum> getSubforums(int forumID)
         {
             throw new NotImplementedException();
         }

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Client.DataClasses;
 using Client.BusinessLogic;
+using Client.GUI;
+using Client.GUI.AddWindows;
 
 namespace Client
 {
@@ -22,27 +24,27 @@ namespace Client
     public partial class ForumWindow : Window
     {
         //the forum that presented in the window, should be set by method
-        private IBL _bl;
-        private User _user;
-        private Forum _forum;
-        public ForumWindow(User user, Forum forum, IBL bl)
+        public ForumWindow()
         {
             InitializeComponent();
 
             
+            if(Session.user != null && Session.user is SuperUser)
+            {
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                ChangeVisibilitySU();
+            }
+            Session.forum.subforums = Session.bl.getSubforums(Session.forum.ID);
             //testing the presentation on window
-            forum = new Forum();
-            forum.subforums = new List<Subforum>();
-            Subforum sf1 = new Subforum();
-            sf1.Name = "sf1";
-            Subforum sf2 = new Subforum();
-            sf2.Name = "sf2";
-            forum.subforums.Add(sf1);
-            forum.subforums.Add(sf2);
+            Session.forum.subforums = new List<Subforum>();
+            Subforum sf1 = new Subforum("sf1", "", 0, DateTime.Now);
+            Subforum sf2 = new Subforum("sf1", "", 0, DateTime.Now);
+            Session.forum.subforums.Add(sf1);
+            Session.forum.subforums.Add(sf2);
             //testing end
 
             //presenting the subforums list 
-            List<Subforum> subfs = forum.subforums;
+            List<Subforum> subfs = Session.forum.subforums;
             foreach (Subforum sf in subfs)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -52,6 +54,25 @@ namespace Client
             }
         }
 
+        private void ChangeVisibilitySU()
+        {
+            reverseVisibility(btnAddAdministrator);
+            reverseVisibility(btnAddSubforum);
+            reverseVisibility(btnEditForumPolicy);
+
+            ChangeVisibilityUser();
+        }
+        private void ChangeVisibilityUser()
+        {
+            reverseVisibility(btnRegister);
+            reverseVisibility(btnLogin);
+            reverseVisibility(btnLogout);
+        }
+        private void reverseVisibility(Button btn)
+        {
+            btn.Visibility = (btn.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+        }
+
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -59,16 +80,100 @@ namespace Client
 
         public void setForum(Forum f)
         {
-            this._forum = f;
+            Session.forum = f;
+        }
+        
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();         
         }
 
-        private void SubForums_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnViewAdministrators_Click(object sender, RoutedEventArgs e)
+        {
+            Window adminView = new Window();
+            DataGrid dg = new DataGrid();
+            dg.ItemsSource = UserView.getView(Session.forum.admins);
+            dg.IsReadOnly = true;
+            adminView.Content = dg;
+            adminView.SizeToContent = SizeToContent.WidthAndHeight;
+            adminView.Title = "Administators";
+            adminView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            adminView.ShowDialog();
+        }
+
+        private void btnAddAdministrator_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("It not require yet!");
+        }
+
+        private void btnAddSubforum_Click(object sender, RoutedEventArgs e)
+        {
+            AddSubForum addSf = new AddSubForum();
+            //this.Hide();
+            addSf.ShowDialog();
+            Subforum newSf = addSf.getSubForum();
+            if (newSf != null)
+            {
+                ListBoxItem newItem = new ListBoxItem();
+                newItem.Content = newSf.Name;
+                newItem.DataContext = newSf;
+                SubForums.Items.Add(newItem);
+            }
+            //this.Show();
+        }
+
+        private void btnEditForumPolicy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SubForums_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBoxItem i = (ListBoxItem)SubForums.SelectedItem;
             Subforum sf = (Subforum)i.DataContext;
-            SubForumWindow sfWin = new SubForumWindow(sf, this._forum);
+            SubForumWindow sfWin = new SubForumWindow(sf, Session.forum);
+            //this.Hide();
             sfWin.Show();
-            this.Close();
+        }
+
+        
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            AddMember addM = new AddMember();
+            addM.ShowDialog();
+            Session.user = addM.getUser();
+            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+            ChangeVisibilityUser();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login(Session.forum.ID);
+            login.ShowDialog();
+            Session.user = login.getUser();
+            if (Session.user == null)
+                return;
+            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+            ChangeVisibilityUser();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (Session.user is SuperUser)
+            {
+                MessageBox.Show("Super user should log out only in the main window!");
+                return;
+            }
+            var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (ans == MessageBoxResult.Yes)
+            {
+                ChangeVisibilityUser();
+                Session.user = null;
+            }
+        }
+        private void notificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

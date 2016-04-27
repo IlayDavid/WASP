@@ -21,7 +21,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             throw new NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }  //------------------------ policy object??
 
-        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
             throw new NotImplementedException();
         }

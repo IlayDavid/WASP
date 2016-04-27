@@ -11,20 +11,30 @@ namespace Client.CommunicationLayer
     public partial class TCL : ICL
     {
         Dictionary<int, Forum> forums;
-
+        private bool _isInitialize = false;
+        private SuperUser _su = null;
         public TCL()
         {
             forums = new Dictionary<int, Forum>();
+            initForTesting();
         }
+
+        private void initForTesting()
+        {
+            initialize("amitay", "a", 205857121, "amitay140@gmail.com", "a");
+
+            createForum(_su.id, "forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", null);
+            createForum(_su.id, "Sport", "This forum is about sport games", 333, "bb", "moshe", "moshe@gmail.com", "1", null);
+        }
+
         public User login(string userName, string password, int forumID)
         {
-            try
-            {
-                Dictionary<string, User> members = forums[forumID].members;
-
-            }
-            catch (Exception) { }
-            return null;
+            Dictionary<int, User> members = forums[forumID].members;
+            User user = members.Values.First(x => x.userName == userName);
+            if (user.password.Equals(password))
+                return user;
+            else
+                throw new Exception("ERROR: Password did not match");
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -79,10 +89,7 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {
-            List<Forum> ret = new List<Forum>();
-            ret.Add(new Forum() {ID=1, Name = "Sport", Description = "This forum is about sport games" });
-            return ret;
-            throw new NotImplementedException();
+            return forums.Values.ToList();
         }
 
         public List<Admin> getAdmins(int userID, int forumID)
@@ -95,9 +102,9 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Subforum> getSubforums(int userID, int forumID)
+        public List<Subforum> getSubforums(int forumID)
         {
-            throw new NotImplementedException();
+            return forums[forumID].subforums;
         }
 
         public Admin getAdmin(User user, int forumID, int userID)

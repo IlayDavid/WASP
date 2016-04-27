@@ -15,9 +15,10 @@
         <Label x:Name="headlineLabel" Content="           Welcome to the WASP system. " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="25" Width="251"/>
         <Button x:Name="btnLoginSU" Content="  login as &#xA;SuperUser" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,10,0,0" Height="39" Click="btnLoginSU_Click"/>
         <Button x:Name="btnLogOut" Content="   log out &#xA;(SuperUser)" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="78" Margin="304,10,0,0" Height="39" Click="btnLogOutSU_Click"/>
-        <Button x:Name="btnEnterForum" Content="Enter Forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,229,0,0" Height="32" Click="btnEnterForum_Click" ToolTip="Press to enter selescted forum."/>
+        <Button x:Name="btnEnterForum" Content="Enter Forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,179,0,0" Height="32" Click="btnEnterForum_Click" ToolTip="Press to enter selescted forum."/>
         <Button x:Name="btnNewForum" Content="New Forum" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,74,0,0" Height="31" Click="btnNewForum_Click" ToolTip="Press to add new Forum" />
         <Button x:Name="btnDelete" Content="Delete" Visibility="Hidden"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,110,0,0" Height="31" Click="btnDelete_Click" ToolTip="Press to delete selected forum"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="304,229,0,0" Height="32" Click="btnExit_Click" ToolTip="Press to enter selescted forum."/>
 
     </Grid>
 </Window>

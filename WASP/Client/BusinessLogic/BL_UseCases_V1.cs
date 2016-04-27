@@ -49,9 +49,9 @@ namespace Client.BusinessLogic
             return _cl.isInitialize();
         }
 
-        public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
-            string validStr = isUserValid(adminName, adminUserName, 1, email, pass);
+            string validStr = isUserValid(adminName, adminUserName, adminID, email, pass);
             if (validStr == null) {
                 if (!IsStrValid(forumName))
                     validStr = "ERROR: Forum name is empty";
@@ -60,7 +60,7 @@ namespace Client.BusinessLogic
             }
 
             if (validStr == null)
-                return _cl.createForum(userID, forumName, description, adminUserName, adminName, email, pass, policy);
+                return _cl.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
             else
                 throw new Exception(validStr);
         }
@@ -70,9 +70,13 @@ namespace Client.BusinessLogic
             throw new NotImplementedException();
         }  //------------------------ policy object??
 
-        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            throw new NotImplementedException();
+            string errorMsg = isUserValid(name, userName, id, email, pass);
+            if (targetForumID < 0) errorMsg = "ERROR: ID is illegal";
+            if (errorMsg == null)
+                return _cl.subscribeToForum(id, userName, name, email, pass, targetForumID);
+            throw new Exception(errorMsg);
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
@@ -87,7 +91,12 @@ namespace Client.BusinessLogic
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || moderatorID < 0) throw new Exception("ERROR: ID is illegal");
+            if (!IsStrValid(name)) throw new Exception("ERROR: name is empty or illegal");
+            if (!IsStrValid(description)) throw new Exception("ERROR: description is empty or illegal");
+            if (term.Date.CompareTo(DateTime.Now.Date) <= 0)throw new Exception("ERROR: Date should be after: "+ DateTime.Now.Date.ToShortDateString());
+
+            return _cl.createSubForum(userID, forumID, name, description, moderatorID, term);
         }
         //---------------------------Version 1 Use Cases End------------------------------------
     }

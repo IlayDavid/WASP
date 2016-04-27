@@ -23,34 +23,31 @@ namespace Client.GUI
     /// </summary>
     public partial class WelcomeWindow : Window
     {
-
-        private IBL _bl;
-        private User _user = null;
         private List<Forum> _forums;
         private List<ForumView> _fView;
         public WelcomeWindow()
         {
             InitializeComponent();
-            _bl = new BL();
-            if (_bl.isInitialize() == 0)
+            Session.bl = new BL();
+            if (Session.bl.isInitialize() == 0)
             {
-                CreateAdmin cAdmin = new CreateAdmin(_bl);
+                CreateAdmin cAdmin = new CreateAdmin();
                 cAdmin.ShowDialog();
             }
-            _forums = _bl.getAllForums();
+            _forums = Session.bl.getAllForums();
             _fView = ForumView.getView(_forums);
-            _fView.Add(new ForumView() { ID = 2, Name = "aaa", Description = "bbb" });
             dgForums.ItemsSource = _fView;
         }
 
         private void btnLoginSU_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login(_bl, Login.ALL_FORUMS);
+            Login login = new Login(Login.ALL_FORUMS);
             login.Title = "Login as SU";
             login.ShowDialog();
-            _user = login.getUser();
+            Session.user = login.getUser();
 
-            ChangeVisibilitySU();
+            if (Session.user != null)
+                ChangeVisibilitySU();
         }
         private void btnLogOutSU_Click(object sender, RoutedEventArgs e)
         {
@@ -58,7 +55,7 @@ namespace Client.GUI
             if (ans == MessageBoxResult.Yes)
             {
                 ChangeVisibilitySU();
-                _user = null;
+                Session.user = null;
             }
         }
 
@@ -86,10 +83,12 @@ namespace Client.GUI
 
             try
             {
-                Forum forum = null;// _bl.getForum(id);
-                ForumWindow fWin = new ForumWindow(_user, forum, _bl);
+                Session.forum = Session.bl.getForum(id);
+                ForumWindow fWin = new ForumWindow();
+                fWin.Title = Session.forum.Name;
                 this.Hide();
                 fWin.ShowDialog();
+                this.Show();
             }
             catch (Exception ee)
             {
@@ -99,7 +98,7 @@ namespace Client.GUI
 
         private void btnNewForum_Click(object sender, RoutedEventArgs e)
         {
-            AddForum addF = new AddForum(_bl, (SuperUser)_user);
+            AddForum addF = new AddForum();
             addF.ShowDialog();
             Forum tmpF = addF.getForum();
             if (tmpF != null)
@@ -108,7 +107,6 @@ namespace Client.GUI
                 _fView.Add(new ForumView() { ID = tmpF.ID, Name = tmpF.Name, Description = tmpF.Description });
                 dgForums.ItemsSource = null;
                 dgForums.ItemsSource = _fView;
-
             }
         }
 
@@ -122,6 +120,11 @@ namespace Client.GUI
             int id = ((ForumView)dgForums.Items.GetItemAt(dgForums.SelectedIndex)).ID;
 
             MessageBox.Show("Did not require in use cases");
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

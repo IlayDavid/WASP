@@ -29,7 +29,7 @@ namespace Client.BusinessLogic
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
          * Pre-conditions: superuser is loged-in 
@@ -44,7 +44,7 @@ namespace Client.BusinessLogic
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
 
         /*
          * Pre-conditions: member is loged-in 
@@ -204,7 +204,7 @@ namespace Client.BusinessLogic
         List<User> getMembers(int userID, int forumID);
 
         /* Purpose: return forum's subForums information. */
-        List<Subforum> getSubforums(int userID, int forumID);
+        List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
         Admin getAdmin(User user, int forumID, int userID);

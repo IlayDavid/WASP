@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -68,16 +69,24 @@
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V3.cs" />
     <Compile Include="DataClasses\ClassView.cs" />
-    <Compile Include="GUI\AddForum.xaml.cs">
+    <Compile Include="GUI\AddWindows\AddForum.xaml.cs">
       <DependentUpon>AddForum.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\AddWindows\AddMember.xaml.cs">
+      <DependentUpon>AddMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Session.cs" />
     <Compile Include="GUI\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\CreateAdmin.xaml.cs">
+    <Compile Include="GUI\AddWindows\CreateAdmin.xaml.cs">
       <DependentUpon>CreateAdmin.xaml</DependentUpon>
     </Compile>
-    <Page Include="GUI\AddForum.xaml">
+    <Page Include="GUI\AddWindows\AddForum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\AddWindows\AddMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,11 +133,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GUI\CreateAdmin.xaml">
+    <Page Include="GUI\AddWindows\CreateAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\AddWindows\AddSubForum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,6 +152,9 @@
     </Compile>
     <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\AddWindows\AddSubForum.xaml.cs">
+      <DependentUpon>AddSubForum.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
