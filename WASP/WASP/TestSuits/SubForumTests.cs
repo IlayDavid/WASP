@@ -53,3 +53,26 @@ namespace WASP.TestSuits
         }
     }
 }
+
+
+
+
+public static void Main (string [] args)
+{
+    int[,] arr = new int[2, 15];
+    int num;
+    int count;
+    for (int i = 0; i < 15; i++)
+    {
+        Console.WriteLine("enter num");
+        count = 1;
+        num = int.Parse(Console.ReadLine());
+        arr[0, i] = num;
+        while (num != 0)
+        {
+            count++;
+            num = int.Parse(Console.ReadLine());
+        }
+        arr[1, i] = count;
+    }
+}

@@ -9,7 +9,7 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> moderators;
         private Dictionary<int, Post> threads;
         private DAL dal;
-        private Forum forum
+        private Forum forum;
 
         public Subforum(int id, String name, String description,DAL dal,Forum forum)
         {

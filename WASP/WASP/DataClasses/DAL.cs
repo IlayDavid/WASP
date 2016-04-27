@@ -16,6 +16,8 @@ namespace WASP.DataClasses
          Forum UpdateForum(Forum forum);
         //forumsId == null -> get all forums. else get all forums in the collection.
          Forum[] GetForums(Collection<int> forumsIds);
+        // 
+        Forum getForum(int id);
 
         //subForum.id == -1
          Subforum CreateSubForum(Subforum sf);
@@ -23,6 +25,8 @@ namespace WASP.DataClasses
          Subforum UpdateSubForum(Subforum sf);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
          Subforum[] GetSubForums(Collection<int> subForumIds, Forum forum);
+        //
+        Subforum GetSubForum(int sfId, int forumId);
 
         //user.id == -1
          User CreateUser(User user);
@@ -30,6 +34,8 @@ namespace WASP.DataClasses
          User updateUser(User user);
         //userIds == null -> get all users. else get all users in the forum
          User[] GetUseres(Collection<int> userIds, Forum forum);
+        //
+        User GetUser(int id, int forumId);
 
 
         //moderator.id == -1
@@ -38,6 +44,8 @@ namespace WASP.DataClasses
          Moderator updateModerator(Moderator mod);
         //moderatorIds == null -> get all mods. else get all mods in the forum
          Moderator[] GetModerators(Collection<int> moderatorIds, Forum forum);
+        //
+        Moderator GetModerator(int id, int sfId);
 
 
         //Admins.id == -1
@@ -46,6 +54,8 @@ namespace WASP.DataClasses
          Admin UpdateAdmin(Admin admin);
         //AdminIds == null -> get all admins
          Admin[] GetAdmins(Collection<int> adminsIds);
+        //
+        Admin GetAdmin(int adminId);
 
 
 

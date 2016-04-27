@@ -43,7 +43,7 @@ namespace WASP.TestSuits
             // arrange
             Forum forum = new Forum("stackOverFlow", "description",null,null);
             User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
-            Admin admin = new Admin(user, forum, null,0);
+            Admin admin = new Admin(user, forum, null);
             bool isAdmin;
             // act
             forum.AddAdmin(admin);

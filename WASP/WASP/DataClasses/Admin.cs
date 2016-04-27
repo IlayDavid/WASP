@@ -14,13 +14,13 @@ namespace WASP.DataClasses
         private Forum myForum;
         private int id;
 
-        public Admin(User user, Forum myForum,DAL myDal,int id)
+        public Admin(User user, Forum myForum,DAL myDal)
         {
             this.user = user;
             this.myForum = myForum;
             this.appointedMods = new Dictionary<int, Moderator>();
             this.myDal = myDal;
-            this.id = id;
+            this.id = user.Id;
 
         }
 
@@ -43,10 +43,7 @@ namespace WASP.DataClasses
             {
                 return id;
             }
-            set
-            {
-                id = value;
-            }
+         
         }
 
 
