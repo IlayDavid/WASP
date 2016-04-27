@@ -11,11 +11,13 @@ namespace WASP.DataClasses
         public String Email { get; set; }
         public String Password { get; set; }
         public int Id { get; set; }
+        public Forum forum { get; set; }
         public Dictionary<int, Post> posts;
         public Queue<Notification> newNotifications;
         public List<Notification> notifications;
+        
 
-        public User(int id, string name, string username,string email,string password)
+        public User(int id, string name, string username,string email,string password,Forum forum)
         {
             this.Id = id;
             this.Name = name;
@@ -23,6 +25,8 @@ namespace WASP.DataClasses
             this.Email = email;
             this.Password = password;
             this.posts = new Dictionary<int, Post>();
+            this.forum = forum;
+            
         }
 
 

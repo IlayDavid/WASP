@@ -13,13 +13,15 @@ namespace WASP.DataClasses
         private Dictionary<int, User> members;
         private Dictionary<int, Admin> admins;
         private Dictionary<int, Policy> policy;
-        public Forum(String name, String description, Dictionary<int, Policy> policy)
+        private DAL dal;
+        public Forum(String name, String description, Dictionary<int, Policy> policy,DAL dal)
         {
             this.name = name;
             this.description = description;
             this.policy = policy;
             this.members = new Dictionary<int, User>();
             this.admins = new Dictionary<int, Admin>();
+            this.dal = dal;
 
         }
 
@@ -70,9 +72,11 @@ namespace WASP.DataClasses
             throw new NotImplementedException();
         }
 
-        internal Member GetMember(string username)
+        internal User GetMember(int id)
         {
-     
+            User mem;
+            members.TryGetValue(id, out mem);
+            return mem;
         }
 
         internal void Update(Forum forum)
@@ -96,7 +100,7 @@ namespace WASP.DataClasses
             }
             set
             {
-                _name = value;
+                name = value;
             }
         }
 
@@ -104,54 +108,74 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _description;
+                return description;
             }
             set
             {
-                _description = value;
+                description = value;
             }
         }
 
-        public List<Member> GetMembers()
+
+
+
+
+
+        public User[] GetMembers()
         {
-            return members;
+            User[] userArr = new User[members.Values.Count];
+            members.Values.CopyTo(userArr, 0);
+            return userArr;
         }
 
-        public List<Member> GetAdmins()
+        public Admin[] GetAdmins()
         {
-            return admins;
+            Admin[] adminArr = new Admin [admins.Values.Count];
+            admins.Values.CopyTo(adminArr, 0);
+            return adminArr;
         }
 
-        public List<Subforum> GetSubForum()
+      
+      
+
+        public Subforum[] GetSubForum()
         {
-            return subforums;
+            Subforum[] subArr = new Subforum[subforums.Values.Count];
+            subforums.Values.CopyTo(subArr, 0);
+            return subArr;
         }
 
-        public void AddAdmin(Member admin)
+       
+
+
+ 
+
+
+        public void AddAdmin(Admin admin)
         {
-            admins.Add(admin);
+            admins.Add(admin.Id, admin) ;
         }
 
-        public void AddMember(Member member)
+        public void AddMember(User member)
         {
-            members.Add(member);
+            members.Add(member.Id,member);
         }
         internal void AddSubForum(Subforum subforum)
         {
-            subforums.Add(subforum);
+            subforums.Add(subforum.Id,subforum);
         }
 
-        public bool RemoveAdmin(Member member)
+        public bool RemoveAdmin(Admin admin)
         {
-            return admins.Remove(member);
+            return admins.Remove(admin.Id);
         }
-        public bool RemoveMember(Member member)
+        public bool RemoveMember(User member)
         {
-            return members.Remove(member);
+            return members.Remove(member.Id);
         }
         public bool RemoveSubForum(Subforum subforum)
         {
-            return subforums.Remove(subforum);
+            return subforums.Remove(subforum.Id);
         }
     }
 }

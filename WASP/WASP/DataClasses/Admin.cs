@@ -9,29 +9,43 @@ namespace WASP.DataClasses
     public class Admin
     {
         private DAL myDal;
-        private Moderator modMe;
+        private User user;
         private Dictionary<int, Moderator> appointedMods;
         private Forum myForum;
+        private int id;
 
-
-        public Admin(Moderator mod, Forum myForum,DAL myDal)
+        public Admin(User user, Forum myForum,DAL myDal,int id)
         {
-            this.modMe = mod;
+            this.user = user;
             this.myForum = myForum;
             this.appointedMods = new Dictionary<int, Moderator>();
             this.myDal = myDal;
+            this.id = id;
+
         }
 
 
-        public Moderator InnerMod
+        public User InnerUser
         {
             get
             {
-                return modMe;
+                return user;
             }
             set
             {
-                modMe = value;
+                user = value;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
             }
         }
 

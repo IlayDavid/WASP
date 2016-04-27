@@ -9,13 +9,16 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> moderators;
         private Dictionary<int, Post> threads;
         private DAL dal;
+        private Forum forum
 
-        public Subforum(int id, String name, String description,DAL dal)
+        public Subforum(int id, String name, String description,DAL dal,Forum forum)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.dal = dal;
+            this.forum = forum;
+
         }
 
         public string Name
@@ -27,6 +30,18 @@ namespace WASP.DataClasses
             set
             {
                 name = value;
+            }
+        }
+
+        public Forum Forum
+        {
+            get
+            {
+                return forum;
+            }
+            set
+            {
+                forum = value;
             }
         }
         public string Description
