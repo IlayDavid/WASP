@@ -55,7 +55,7 @@ namespace WASP.DataClasses
         //AdminIds == null -> get all admins
          Admin[] GetAdmins(Collection<int> adminsIds);
         //
-        Admin GetAdmin(int adminId);
+        Admin GetAdmin(int adminId,int forumId);
 
 
 
