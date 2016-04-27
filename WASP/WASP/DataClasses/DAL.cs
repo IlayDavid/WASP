@@ -58,7 +58,13 @@ namespace WASP.DataClasses
         Admin GetAdmin(int adminId,int forumId);
 
 
-
+        Post CreatPost(Post post);
+        //subForum.id > -1
+        Post UpdatePost (Post post);
+        //subForumIds == null -> get all subForums. else, get all subForums in the forum.
+        Post[] GetPosts(Collection<int> Posts);
+        //
+        Post GetPost(int postId);
 
 
 
