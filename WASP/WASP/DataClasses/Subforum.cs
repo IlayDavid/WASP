@@ -1,98 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 namespace WASP.DataClasses
 {
     public class Subforum
     {
-        private static int _idCounter = 0;
-        private readonly List<Tuple<Member, DateTime>> _moderators;
-        private readonly List<Post> _threads;
+        private int id;
+        private String name, description;
+        private Dictionary<int, Moderator> moderators;
+        private Dictionary<int, Post> threads;
+        private DAL dal;
+        private Forum forum;
 
-        public Subforum(String name, String description, Member moderator, DateTime term)
+        public Subforum(int id, String name, String description,DAL dal,Forum forum)
         {
-            Id = _idCounter++;
-            Name = name;
-            Description = description;
-            _moderators = new List<Tuple<Member, DateTime>>();
-            _threads = new List<Post>();
-            AddModerator(moderator, term);
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.dal = dal;
+            this.forum = forum;
+
         }
 
-        public Subforum(int id, String name, String description, Member moderator, DateTime term)
+        public string Name
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            _moderators = new List<Tuple<Member, DateTime>>();
-            _threads = new List<Post>();
-            AddModerator(moderator, term);
-        }
-
-        public static bool isValid(String name, String description, Member moderator, DateTime term)
-        {
-            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || (moderator == null) || !Helper.isTermValid(term));
-        }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public int Id { get; set; }
-
-        public bool IsModerator(Member moderator)
-        {
-            foreach(Tuple<Member, DateTime> tup in _moderators)
+            get
             {
-                if(tup.Item1 == moderator)
-                {
-                    return true;
-                }
+                return name;
             }
-            return false;
+            set
+            {
+                name = value;
+            }
         }
 
-        public void AddModerator(Member mod, DateTime expr)
+        public Forum Forum
         {
-            Tuple<Member, DateTime> tup = new Tuple<Member, DateTime>(mod, expr);
-
-            _moderators.Add(tup);
+            get
+            {
+                return forum;
+            }
+            set
+            {
+                forum = value;
+            }
         }
-        
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public Boolean IsModerator(int id)
+        {
+            return moderators.ContainsKey(id);
+        }
+
+        public void AddModerator(Moderator mod)
+        {
+            moderators.Add(mod.Id, mod);
+        }
 
         public void AddThread(Post tr)
         {
-            _threads.Add(tr);
+            threads.Add(tr.Id, tr);
         }
 
-        public void RemoveModerator(Member moderator)
+        public void RemoveModerator(int id)
         {
-            _moderators.Remove(_moderators.First((x) => x.Item1 == moderator));
+            moderators.Remove(id);
         }
-        public void RemoveThread(Post post)
+        public void RemoveThread(int id)
         {
-            _threads.Remove(post);
+            threads.Remove(id);
         }
 
 
-        public List<Post> GetThreads()
+        public Post[] GetThreads()
         {
-            return _threads;
+            Post[] tr = new Post[threads.Values.Count];
+            threads.Values.CopyTo(tr, 0);
+            return tr;
         }
-        public List<Tuple<Member, DateTime>> GetModerators()
+        public Moderator[] GetAllModerators()
         {
-            return _moderators;
+             Moderator[] mods= new Moderator[moderators.Values.Count];
+            moderators.Values.CopyTo(mods, 0);
+            return mods;
         }
+
+        
         public Post GetThread(int id)
         {
-
-            return _threads.First((x) => x.Id == id);
+            Post theThread;
+            threads.TryGetValue(id, out theThread);
+            return theThread;
         }
-        public Tuple<Member, DateTime> GetModerator(Member moderator)
+        public Moderator GetModerator(int id)
         {
-            return _moderators.First((x) => x.Item1 == moderator);
+            Moderator mod;
+            moderators.TryGetValue(id, out mod);
+            return mod;
+        }
+
+        public void Delete()
+        {
+            throw new NotImplementedException("Not a requirement as of yet.");
         }
     }
 }

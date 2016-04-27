@@ -12,56 +12,64 @@ namespace WASP.TestSuits
         public void memberTests()
         {
             // arrange
-            Forum forum = new Forum("name", "desc", new PasswordPolicy());
-            Member member = new Member("edan", "userName", "email@email.com", "123", forum);
+            Forum forum = new Forum(0,"name", "desc",null,null);
+            User member = new User(0,"edan", "userName", "email@email.com", "123", forum);
+            forum.AddMember(member);
             int numbOfMembers, numOfMembersAfterDelete;
-            Member fake = new Member("user", "name", "email", "pass", null);
+            User fake = new User(1,"user", "name", "email", "pass", null);
             bool succDelete;
             // act
             forum.AddMember(member);
-            numbOfMembers = forum.GetMembers().Count;
+            numbOfMembers = forum.GetMembers().Length;
             // assert
             Assert.AreEqual(1, numbOfMembers, "checking if member added successfully");
-            Assert.AreEqual(member, forum.GetMember(member.UserName), "checking if member added successfully");
+            Assert.AreEqual(member, forum.GetMember(member.Id), "checking if member added successfully");
             // act
             forum.RemoveMember(member);
-            numOfMembersAfterDelete = forum.GetMembers().Count;
+            numOfMembersAfterDelete = forum.GetMembers().Length;
             succDelete = forum.RemoveMember(fake);
             // assert
             Assert.AreEqual(0, numOfMembersAfterDelete, "checking if member removed successfully");
             Assert.AreEqual(false, succDelete, "Checking if it is possible to remove a non-existent user.");
+            //act
+            forum.AddMember(fake);
+            succDelete = forum.RemoveMember(fake);
+            Assert.AreEqual(true, succDelete, "checking if fake was delted after inserting him to forum.");
+            
         }
         [TestMethod]
         public void adminTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description", new PasswordPolicy());
-            Member admin = new Member("edan", "userName", "email@email.com", "123", forum);
+            Forum forum = new Forum(0,"stackOverFlow", "description",null,null);
+            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
+            Admin admin = new Admin(user, forum, null);
             bool isAdmin;
             // act
             forum.AddAdmin(admin);
-            isAdmin = forum.IsAdmin(admin);
+            isAdmin = forum.IsAdmin(admin.Id);
             // assert
             Assert.AreEqual(true, isAdmin, "checking if admin added successfully");
-            Assert.AreEqual(1, forum.GetAdmins().Count, "check if addmin was added");
+            Assert.AreEqual(1, forum.GetAdmins().Length, "check if addmin was added");
             // remove admin
             forum.RemoveAdmin(admin);
-            Assert.AreEqual(0, forum.GetAdmins().Count, "check if addmin was deleted");
+            Assert.AreEqual(0, forum.GetAdmins().Length, "check if addmin was deleted");
         }
         [TestMethod]
         public void subForumTest()
         {
             // arrange
-            Forum forum = new Forum("stackOverFlow", "description", new PasswordPolicy());
-            Member author = new Member("edan", "habler", "mail@mail.com", "123", forum);
-            Subforum sf = new Subforum("subForum", "someDescription", author, DateTime.Now);
+            Forum forum = new Forum(0,"stackOverFlow", "description", null, null);
+            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
+            forum.AddMember(user);
+            Subforum sf = new Subforum(0,"subForum", "someDescription",null,forum);
             bool isSf = false;
             // act
             forum.AddSubForum(sf);
             isSf = forum.IsSubForum(sf.Id);
             // assert
             Assert.AreEqual(true, isSf, "checking if subForum added successfully");
-            Assert.AreEqual(1, forum.GetSubForum().Count, "check if subforum was added");
+            Assert.AreEqual(1, forum.GetSubForum().Length, "check if subforum was added");
         }
     }
 }

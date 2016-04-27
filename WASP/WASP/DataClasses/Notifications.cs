@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    class Notifications
+    public class Notification
     {
         private String message;
         private bool isNew;
         private User source;
         private User target;
-        public Notifications(String message, bool isNew,User source, User target)
+        public Notification(String message, bool isNew,User source, User target)
         {
             this.message = message;
             this.isNew = isNew;
@@ -46,6 +46,11 @@ namespace WASP.DataClasses
             }
         }
 
+        public String Message
+        {
+            get;
+            set;
+        }
 
 
 

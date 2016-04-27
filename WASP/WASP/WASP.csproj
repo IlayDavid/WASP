@@ -48,14 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\Forum.cs" />
-    <Compile Include="DataClasses\ForumDAL.cs" />
-    <Compile Include="DataClasses\ForumIDAL.cs" />
-    <Compile Include="DataClasses\Helper.cs" />
-    <Compile Include="DataClasses\IDAL.cs" />
     <Compile Include="DataClasses\Member.cs" />
-    <Compile Include="DataClasses\Message.cs" />
+    <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Notifications.cs" />
     <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
     <Compile Include="DataClasses\Policies\Policy.cs" />

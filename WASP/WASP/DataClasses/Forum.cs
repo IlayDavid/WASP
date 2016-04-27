@@ -7,58 +7,65 @@ namespace WASP.DataClasses
 {
     public class Forum
     {
-        private static int _idCounter = 0;
-        private int _id;
-        private String _name, _description;
-        private List<Subforum> subforums;
-        private List<Member> members;
-        private List<Member> admins;
-        private Policy policy;
-        public Forum(String name, String description, Policy policy)
+        private int id;
+        private String name, description;
+        private Dictionary<int, Subforum> subforums;
+        private Dictionary<int, User> members;
+        private Dictionary<int, Admin> admins;
+        private Dictionary<int, Policy> policy;
+        private DAL dal;
+        public Forum(int id, String name, String description, Dictionary<int, Policy> policy,DAL dal)
         {
-            _id = _idCounter++;
-            _name = name;
-            _description = description;
-            this.subforums = new List<Subforum>();
-            this.members = new List<Member>();
-            this.admins = new List<Member>();
+            this.name = name;
+            this.description = description;
             this.policy = policy;
+            this.members = new Dictionary<int, User>();
+            this.admins = new Dictionary<int, Admin>();
+            this.dal = dal;
+            this.id = id;
+
         }
 
-        public static bool isValid(String name, String description, Policy policy)
-        {
-            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || policy == null);
-        }
+        
 
         public void AddPolicy(Policy policy)
         {
-            policy.Next = this.policy;
-            this.policy = policy;
+            this.policy.Add(policy.Id, policy);
         }
 
-        void CheckMemberPolicy(User user)
+
+
+
+        public Subforum[] GetAllSubForums()
         {
-            this.policy.Validate(user);
+            Subforum[] sfArr = new Subforum[subforums.Values.Count];
+            subforums.Values.CopyTo(sfArr, 0);
+            return sfArr;
         }
 
-        internal Subforum GetSubForum(int subforumId)
+        public Subforum GetSubForum(int sfId)
         {
-            return subforums.First((x) => x.Id == subforumId);
+            Subforum sf;
+            subforums.TryGetValue(sfId, out sf);
+            return sf;
         }
 
-        internal bool IsAdmin(Member member)
+
+
+
+
+        internal bool IsAdmin(int adminid)
         {
-            return admins.Contains(member);
+            return admins.ContainsKey(adminid);
         }
 
-        internal bool IsMember(Member member)
+        internal bool IsMember(int memberid)
         {
-            return members.Contains(member);
+            return members.ContainsKey(memberid);
         }
-        internal bool IsSubForum(int subforumId)
+        internal bool IsSubForum(int sfid)
         {
-            return subforums.First((x) => x.Id == subforumId) != null;
+            return subforums.ContainsKey(sfid);
         }
 
         internal void DefinePolicy(Forum forum)
@@ -66,9 +73,11 @@ namespace WASP.DataClasses
             throw new NotImplementedException();
         }
 
-        internal Member GetMember(string username)
+        internal User GetMember(int id)
         {
-            return members.First(member => member.UserName.Equals(username));
+            User mem;
+            members.TryGetValue(id, out mem);
+            return mem;
         }
 
         internal void Update(Forum forum)
@@ -80,7 +89,7 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _id;
+                return id;
             }
         }
 
@@ -88,11 +97,11 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _name;
+                return name;
             }
             set
             {
-                _name = value;
+                name = value;
             }
         }
 
@@ -100,54 +109,74 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _description;
+                return description;
             }
             set
             {
-                _description = value;
+                description = value;
             }
         }
 
-        public List<Member> GetMembers()
+
+
+
+
+
+        public User[] GetMembers()
         {
-            return members;
+            User[] userArr = new User[members.Values.Count];
+            members.Values.CopyTo(userArr, 0);
+            return userArr;
         }
 
-        public List<Member> GetAdmins()
+        public Admin[] GetAdmins()
         {
-            return admins;
+            Admin[] adminArr = new Admin [admins.Values.Count];
+            admins.Values.CopyTo(adminArr, 0);
+            return adminArr;
         }
 
-        public List<Subforum> GetSubForum()
+      
+      
+
+        public Subforum[] GetSubForum()
         {
-            return subforums;
+            Subforum[] subArr = new Subforum[subforums.Values.Count];
+            subforums.Values.CopyTo(subArr, 0);
+            return subArr;
         }
 
-        public void AddAdmin(Member admin)
+       
+
+
+ 
+
+
+        public void AddAdmin(Admin admin)
         {
-            admins.Add(admin);
+            admins.Add(admin.Id, admin) ;
         }
 
-        public void AddMember(Member member)
+        public void AddMember(User member)
         {
-            members.Add(member);
+            members.Add(member.Id,member);
         }
         internal void AddSubForum(Subforum subforum)
         {
-            subforums.Add(subforum);
+            subforums.Add(subforum.Id,subforum);
         }
 
-        public bool RemoveAdmin(Member member)
+        public bool RemoveAdmin(Admin admin)
         {
-            return admins.Remove(member);
+            return admins.Remove(admin.Id);
         }
-        public bool RemoveMember(Member member)
+        public bool RemoveMember(User member)
         {
-            return members.Remove(member);
+            return members.Remove(member.Id);
         }
         public bool RemoveSubForum(Subforum subforum)
         {
-            return subforums.Remove(subforum);
+            return subforums.Remove(subforum.Id);
         }
     }
 }

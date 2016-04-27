@@ -1,129 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace WASP.DataClasses
 {
     public class Post
     {
-        private static int _idCounter = 0;
-        private String _title, _content;
-        private Member _author;
-        private DateTime _publishedAt, _editAt;
-        private int _id;
-        private Subforum _container;
-        private Post _inReplyTo;
-        private List<Post> _replies;
+        private String title, content;
+        private User author;
+        private DateTime publishedAt, editAt;
+        private int id;
+        private Subforum container;
+        private Post inReplyTo;
+        private Dictionary<int, Post> replies;
+        private DAL dal;
 
-        public Post (String title, String content, Member author, DateTime now ,Subforum container)
+        public Post(String title, String content, int id, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
         {
-            // container.AddThread(this);
-            _title = title;
-            _content = content;
-            _id=_idCounter;
-            _idCounter++;
-            _publishedAt = now;
-            _inReplyTo = null;
-            _author = author;
-            _container = container;
-            _editAt = now;
-            _replies = new List<Post>();
+            this.title = title;
+            this.content = content;
+            this.id = id;
+            this.publishedAt = now;
+            this.inReplyTo = inReplyTo;
+            this.author = author;
+            this.container = container;
+            this.editAt = editAt;
+            this.dal = myDal;
+        }
 
-        }
-        public static bool isValidOpening(String title, String content, Member author, DateTime now, Subforum container)
-        {
-            return !(Helper.isEmptyString(title) || Helper.isEmptyString(content)
-                || author == null || container == null);
-        }
-        public Post(String content, Member author, DateTime now, Post inReplyTo)
-        {
-            // InReplyTo.AddReply(this);
-            _title = inReplyTo._title;
-            _content = content;
-            _id = _idCounter;
-            _idCounter++;
-            _publishedAt = now;
-            _inReplyTo = inReplyTo;
-            _author = author;
-            _container = inReplyTo.Container;
-            _editAt = now;
-            _replies = new List<Post>();
-        }
-        public static bool isValidReply(String content, Member author, DateTime now, Post inReplyTo)
-        {
-            return !( Helper.isEmptyString(content) || author == null
-                || inReplyTo == null);
-        }
+
 
         public int Id
         {
             get
             {
-                return _id;
+                return id;
             }
             set
             {
-                _id = value;
+                id = value;
             }
         }
         public String Title
         {
             get
             {
-                return _title;
+                return title;
             }
             set
             {
-                _title = value;
+                title = value;
             }
         }
         public String Content
         {
             get
             {
-                return _content;
+                return content;
             }
             set
             {
-                _content = value;
+                content = value;
             }
         }
         public DateTime PublishedAt
         {
             get
             {
-                return _publishedAt;
+                return publishedAt;
             }
-           
+
         }
         public DateTime EditAt
         {
             get
             {
-                return _editAt;
+                return editAt;
             }
             set
             {
-                _editAt = value;
+                editAt = value;
             }
         }
-        public Member GetAuthor
+        public User GetAuthor
         {
             get
             {
-                return _author;
+                return author;
             }
-            
+
         }
         public Subforum Container
         {
             get
             {
-                return _container;
+                return container;
             }
             set
             {
-                _container = value;
+                container = value;
             }
         }
 
@@ -131,52 +105,60 @@ namespace WASP.DataClasses
         {
             get
             {
-                return _inReplyTo;
+                return inReplyTo;
             }
             set
             {
-                _inReplyTo = value;
+                inReplyTo = value;
             }
         }
         public bool IsOriginal()
         {
-            return _inReplyTo == null;
+            return inReplyTo == null;
         }
-        public void RemoveReply (Post post)
+        public void RemoveReply(int id)
         {
-            _replies.Remove(post);
+            replies.Remove(id);
         }
         public void AddReply(Post reply)
         {
-            _replies.Add(reply);
+            replies.Add(reply.Id, reply);
         }
-        public List<Post> GetAllReplies()
+        public Post[] GetAllReplies()
         {
-            return _replies;
+            Post[] replyArr = new Post[replies.Values.Count];
+            replies.Values.CopyTo(replyArr, 0);
+            return replyArr;
         }
-        public Post GetReply (int id)
+        public Post GetReply(int id)
         {
-            return _replies.First((x)=>x.Id==id);
+            Post reply;
+            replies.TryGetValue(id, out reply);
+            return reply;
         }
-       
+        public void Delete()
+        {
+            string notificationMessage = String.Format("Post {0} deleted.", Id);
+            NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
+            Post[] replies = GetAllReplies();
+            foreach (Post reply in replies)
+            {
+                reply.Delete();
+                RemoveReply(reply.Id);
+            }
+            this.author.RemovePost(this.id);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public void NotifyRepliers(Notification notification)
+        {
+            foreach (Post reply in GetAllReplies())
+            {
+                User target = reply.GetAuthor;
+                target.NewNotification(new Notification(notification.Message, notification.IsNew, 
+                    notification.Source, target));
+            }
+        }
     }
-    
-
 }
+
+
