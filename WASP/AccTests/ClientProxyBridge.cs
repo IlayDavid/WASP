@@ -31,21 +31,24 @@ namespace AccTests
             return proj.isInitialize();
         }
 
-        public Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email,
-            string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName,
+            string email, string pass, Policy policy)
         {
-            return proj.createForum(userID, forumName, description, adminUserName, adminName,email, pass, policy);
+            return proj.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass,
+                policy);
         }
+
 
         public int defineForumPolicy(int userID, int forumID)
         {
             return proj.defineForumPolicy(userID, forumID);
         }
 
-        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            return proj.subscribeToForum(userName, name, email, pass, targetForumID);
+            return proj.subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
+
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
@@ -182,14 +185,15 @@ namespace AccTests
             return proj.getMembers(userID, forumID);
         }
 
-        public List<Subforum> getSubforums(int userID, int forumID)
+        public List<Subforum> getSubforums(int forumID)
         {
-            return proj.getSubforums(userID, forumID);
+            return proj.getSubforums(forumID);
         }
 
-        public Admin getAdmin(User user, int forumID, int userID)
+        public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            return proj.getAdmin(user, forumID, userID);
+            return proj.getAdmin(userID, forumID, AdminID);
         }
+
     }
 }

@@ -22,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bridges\General\ClientSide\Driver.cs" />
-    <Compile Include="Bridges\General\ClientSide\ProxyBridge.cs" />
-    <Compile Include="Bridges\General\ClientSide\RealBridge.cs" />
-    <Compile Include="Bridges\General\ClientSide\WASPBridge.cs" />
+    <Compile Include="ClientDriver.cs" />
+    <Compile Include="ClientProxyBridge.cs" />
+    <Compile Include="ClientRealBridge.cs" />
+    <Compile Include="WASPClientBridge.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +70,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{44CF4DA3-32B1-4007-8DD8-E23A39B50CD5}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WASP\WASP.csproj">
       <Project>{e59b55f0-0014-4b59-a11e-fbf1f5e66adc}</Project>
       <Name>WASP</Name>
@@ -80,13 +83,14 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bridges\General\ServerSide\" />
-    <Folder Include="Bridges\UC1\ClientSide\" />
-    <Folder Include="Bridges\UC1\ServerSide\" />
-    <Folder Include="Bridges\UC2\ClientSide\" />
-    <Folder Include="Bridges\UC2\ServerSide\" />
-    <Folder Include="Bridges\UC3\ClientSide\" />
-    <Folder Include="Bridges\UC3\ServerSide\" />
+    <Folder Include="Tests\General\ClientSide\" />
+    <Folder Include="Tests\General\ServerSide\" />
+    <Folder Include="Tests\UC1\ClientSide\" />
+    <Folder Include="Tests\UC1\ServerSide\" />
+    <Folder Include="Tests\UC2\ClientSide\" />
+    <Folder Include="Tests\UC2\ServerSide\" />
+    <Folder Include="Tests\UC3\ClientSide\" />
+    <Folder Include="Tests\UC3\ServerSide\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

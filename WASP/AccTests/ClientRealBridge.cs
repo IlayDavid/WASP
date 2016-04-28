@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Client.BusinessLogic;
 using Client.DataClasses;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AccTests
 {
@@ -28,14 +29,20 @@ namespace AccTests
             return _clientAPI.isInitialize();
         }
 
-        public Forum createForum(int userId, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName,
+            string email, string pass, Policy policy)
         {
-            return _clientAPI.createForum(userId, forumName, description, userName, adminName, email, pass, policy);
+            return _clientAPI.createForum(userID, forumName, description,adminID, adminUserName,adminName, email, pass, policy);
         }
-
+        
         public int defineForumPolicy(int userID, int forumID)
         {
             return _clientAPI.defineForumPolicy(userID, forumID);
+        }
+
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        {
+            return _clientAPI.subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
         public Post createReplyPost(int userId, int forumId, string content, int inReplyToId)
@@ -93,11 +100,7 @@ namespace AccTests
         {
             return _clientAPI.membersInDifferentForums(userID);
         }
-
-        public Admin getAdmin(User user, int forumId, int userId)
-        {
-            return  _clientAPI.getAdmin(user, forumId, userId);
-        }
+        
 
         public List<Admin> getAdmins(int userId, int forumId)
         {
@@ -124,6 +127,16 @@ namespace AccTests
             return _clientAPI.getMembers(userId, forumId);
         }
 
+        public List<Subforum> getSubforums(int forumID)
+        {
+            return _clientAPI.getSubforums(forumID);
+        }
+
+        public Admin getAdmin(int userID, int forumID, int AdminID)
+        {
+            return _clientAPI.getAdmin(userID, forumID, AdminID);
+        }
+
         public List<Moderator> getModerators(int userId, int forumId, int subforumId)
         {
             return _clientAPI.getModerators(userId,forumId, subforumId);
@@ -143,10 +156,6 @@ namespace AccTests
         {
             return _clientAPI.getSubforum(forumId, subforumId);
             
-        }
-        public List<Subforum> getSubforums(int userId, int forumId)
-        {
-            return _clientAPI.getSubforums(userId,forumId);
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -172,11 +181,6 @@ namespace AccTests
         public int sendMessage(int userId, int forumId, string targetMemberId, string message)
         {
             return _clientAPI.sendMessage(userId,forumId, targetMemberId, message);
-        }
-
-        public User subscribeToForum(string userName, string name, string email, string pass, int targetForumId)
-        {
-            return _clientAPI.subscribeToForum(userName, name, email, pass, targetForumId);
         }
 
         public int updateModeratorTerm(int userId, int forumId, int moderatorId, int subforumId, DateTime term)
