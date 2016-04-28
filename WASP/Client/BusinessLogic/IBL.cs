@@ -144,7 +144,6 @@ namespace Client.BusinessLogic
          * Purpose: return number of the forums in the system.*/
         int totalForums(int userID);
 
-
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/
         List<User> membersInDifferentForums(int userID);
@@ -207,6 +206,6 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(User user, int forumID, int userID);
+        Admin getAdmin(int userID, int forumID, int AdminID);
     }
 }

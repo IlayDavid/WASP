@@ -94,7 +94,7 @@ namespace Client.BusinessLogic
                 throw new Exception("ERROR: illegal id");
         }
 
-        public Admin getAdmin(User user, int forumID, int userID)
+        public Admin getAdmin(int userID, int forumID, int adminID)
         {
             throw new NotImplementedException();
         }

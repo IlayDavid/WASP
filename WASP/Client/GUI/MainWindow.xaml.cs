@@ -126,5 +126,10 @@ namespace Client.GUI
         {
             this.Close();
         }
+
+        private void btnReports_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
