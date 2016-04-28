@@ -10,9 +10,7 @@ namespace AccTests
     {
         public static WASPBridge getBridge()
         {
-            ProxyBridge bridge = new ProxyBridge();
-            // add when real bridge is ready
-            bridge.proj = new RealBridge();
+            ProxyBridge bridge = new ProxyBridge(new RealBridge());
             return bridge;
         }
     }

@@ -47,7 +47,7 @@ namespace AccTests
 
         public int defineForumPolicy(SuperUser member, Forum forum)
         {
-            throw new NotImplementedException();
+            return _serverAPI.defineForumPolicy(member, forum);
         }
 
         public int deletePost(Member member, Post post)
@@ -58,6 +58,11 @@ namespace AccTests
         public Member getAdmin(User user, Forum forum, string userName)
         {
             return  _serverAPI.getAdmin(user, forum, userName);
+        }
+
+        public SuperUser login(string userName, string password)
+        {
+            return _serverAPI.login(userName, password);
         }
 
         public List<Member> getAdmins(User member, Forum forum)

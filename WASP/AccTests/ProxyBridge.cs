@@ -7,7 +7,12 @@ namespace AccTests
 {
     class ProxyBridge : WASPBridge
     {
-        public RealBridge proj;
+        private RealBridge proj;
+
+        public ProxyBridge(RealBridge bridge)
+        {
+            proj = bridge;
+        }
 
         public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
         {
@@ -70,6 +75,11 @@ namespace AccTests
             if (proj != null)
                 return proj.getAdmin(user, forum, userName);
             return null;
+        }
+
+        public SuperUser login(string userName, string password)
+        {
+            return proj.login(userName, password);
         }
 
         public List<Member> getAdmins(User member, Forum forum)
