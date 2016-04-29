@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    class Notifications
+    public class Notifications
     {
         private String message;
         private bool isNew;

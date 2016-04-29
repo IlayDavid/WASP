@@ -162,5 +162,27 @@ namespace WASP
         List<Subforum> getSubforums(Member member, Forum forum);
 
         Member getAdmin(User user, Forum forum, string userName);
+
+        //methods to be implemented for the new assignment:
+        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
+        List<Notifications> getAllNotificationses(Member member);
+
+        List<Notifications> getNewNotificationses(Member member);
+
+        //2.a: remove a moderator.
+        int fireModerator(Member admin, Member moderator);
+        
+        //2.b: info recieved by admin
+        int getNumberOfPosts(Member admin, Forum forum);
+
+        List<Post> postsByMember(Member admin, Forum forum, Member user);
+        
+        //A list of all modertors, who appointed them, when, to which subforum, and their posts
+        List<Tuple<Member, Member, DateTime, Subforum, List<Post>>> getModeratorsInfo(Member admin, Forum forum);
+        
+        //3: info recieved by SuperUser
+        int numberOfForums(SuperUser superUser);
+        
+        int numberOfSameMember(SuperUser superUser, Member member);
     }
 }
