@@ -91,6 +91,10 @@ namespace WASP.DataClasses
             {
                 return id;
             }
+            set
+            {
+                id = value;
+            }
         }
 
         public string Name
