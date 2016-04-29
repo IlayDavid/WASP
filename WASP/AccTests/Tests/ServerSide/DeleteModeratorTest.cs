@@ -48,8 +48,12 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator1()
         {
-            Assert.IsTrue(false);
-
+            var check=_proj.fireModerator(_admin, _moderator);
+            Assert.IsTrue(check>=0);
+            var numMods = _proj.getModerators(_admin, _subforum);
+            Assert.IsTrue(numMods.Count==1);
+            var firedMod = _proj.login(_moderator.UserName, _moderator.Password, _forum);
+            Assert.IsNotNull(firedMod);
         }
 
 
@@ -59,30 +63,33 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator2()
         {
-            Assert.IsTrue(false);
+            var newAdmin = _proj.subscribeToForum("admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum);
+            _proj.addAdmin(_supervisor, newAdmin);
+                var check = _proj.fireModerator(newAdmin, _moderator);
+                Assert.IsTrue(check<0);
+            
         }
 
 
         /// <summary>
-        /// Nagative Test - NF secure test:
-        ///     checks that another forum's admin cannot term a moderator for another subforum
+        /// Nagative Test: checks that you cannot delete the last moderator
         /// </summary>
         [TestMethod]
         public void deleteModerator3()
         {
-
-            Assert.IsTrue(false);
+            var check = _proj.fireModerator(_admin, _moderator);
+            Assert.IsTrue(check >= 0);
+            check = _proj.fireModerator(_admin, _moderator2);
+            Assert.IsTrue(check < 0);
+            var numMods = _proj.getModerators(_admin, _subforum);
+            Assert.IsTrue(numMods.Count == 1);
+            var firedMod = _proj.login(_moderator.UserName, _moderator.Password, _forum);
+            Assert.IsNotNull(firedMod);
+            var mod = _proj.login(_moderator2.UserName, _moderator2.Password, _forum);
+            Assert.IsNotNull(mod);
+            Assert.IsTrue(_proj.getModerators(_admin, _subforum).Any((x) => x.Name == _moderator2.Name));
         }
 
-
-        /// <summary>
-        /// Nagative Test: attempts to delete last moderator in a subforum
-        /// </summary>
-        [TestMethod]
-        public void deleteModerator4()
-        {
-            Assert.IsTrue(false);
-        }
 
     }
 }

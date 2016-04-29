@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.Policies
 {
-    class DeletePostPolicy
+    class DeletePostPolicy : Policy
     {
     }
 }

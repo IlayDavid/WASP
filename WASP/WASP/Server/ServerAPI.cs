@@ -184,5 +184,8 @@ namespace WASP
         int numberOfForums(SuperUser superUser);
         
         int numberOfSameMember(SuperUser superUser, Member member);
+
+        //this function comes from the requirement that a moderator can't be deleted by an admin that didn't appoint him
+        Member addAdmin(User admin, Member newAdmin);
     }
 }

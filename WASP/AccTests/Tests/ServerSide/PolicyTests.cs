@@ -28,11 +28,27 @@ namespace AccTests.Tests.ServerSide
             _supervisor = Functions.InitialSystem(_proj);
             _supervisor = _proj.login(_supervisor.UserName, _supervisor.Password);
         }
+        /// <summary>
+        /// password test
+        /// Positive Test: tests that policy doesn't fail a good registery 
+        /// </summary>
         [TestMethod]
-        public void PasswordPolicy()
+        public void PasswordPolicy1()
         {
             var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy());
-            var admin = _proj.login("admin", "admin1234", forum);
+            var mem=_proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem123", forum);
+            Assert.IsNotNull(mem);
+        }
+        /// <summary>
+        /// password test
+        /// Negative Test: tests that the policy fails a bad registery (lack of number in password)
+        /// </summary>
+        [TestMethod]
+        public void PasswordPolicy2()
+        {
+            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy());
+            var mem = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem", forum);
+            Assert.IsNull(mem);
         }
     }
 }
