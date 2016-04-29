@@ -88,7 +88,6 @@ namespace WASP.Domain
                 return original;
             }
             return null;
-
         }
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
@@ -101,8 +100,6 @@ namespace WASP.Domain
                 {
                     Post reply = new Post(null, content, -1, author, DateTime.Now, post, post.Container, DateTime.Now, dal);
                     return dal.CreatePost(reply);
-                    
-
                 }
             }
             return null;
@@ -127,6 +124,7 @@ namespace WASP.Domain
        * Purpose: send a private message.
        */
         int sendMessage(int userID, int forumID, string targetUserNameID, string message);
+
         public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
             
@@ -135,7 +133,7 @@ namespace WASP.Domain
             Admin admin = dal.GetAdmin(userID);
             if(forum != null && sf != null )
             {
-                if (forum.IsAdmin(userID)&& forum.IsMember(moderatorID)) // checks if admin do that action, and if mod is mem of forum
+                if (forum.IsAdmin(userID) && forum.IsMember(moderatorID)) // checks if admin do that action, and if mod is mem of forum
                 { 
                     Moderator mod = new Moderator(forum.GetMember(moderatorID),term,sf,admin,-1, dal);
                     sf.AddModerator(mod);
