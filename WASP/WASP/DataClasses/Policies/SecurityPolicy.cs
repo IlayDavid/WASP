@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.Policies
 {
-    class SecurityPolicy : Policy
+    public class SecurityPolicy : Policy
     {
+        public SecurityPolicy(Policy next = null, double passwordDuration = Double.MaxValue)
+        {
+            
+        }
     }
 }

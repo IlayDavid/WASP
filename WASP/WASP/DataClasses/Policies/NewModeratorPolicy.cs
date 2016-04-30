@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.Policies
 {
-    class NewModeratorPolicy :Policy
+    public class NewModeratorPolicy :Policy
     {
+        public NewModeratorPolicy(Policy next=null, double minimumMembership=0)
+        {
+            
+        }
     }
 }

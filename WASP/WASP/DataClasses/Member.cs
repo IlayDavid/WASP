@@ -8,6 +8,8 @@ namespace WASP.DataClasses
         private bool _isActive;
         private List<Post> posts;
         private List<Message> messages;
+        private DateTime joined { get; }
+        private DateTime passwordSetTime { get; }
         public Member(String userName, String name, String email, String pass, Forum memberForum)
         {
             _isActive = false;
@@ -18,6 +20,8 @@ namespace WASP.DataClasses
             Email = email;
             Password = pass;
             MemberForum = memberForum;
+            joined=DateTime.Now;
+            passwordSetTime = DateTime.Now;
         }
         public static bool isValid(String userName, String name, String email, String pass, Forum memberForum)
         {

@@ -8,5 +8,9 @@ namespace WASP.DataClasses.Policies
 {
     class DeletePostPolicy : Policy
     {
+        public DeletePostPolicy(Policy next = null, bool user=true, bool moderator=false, bool admin=false)
+        {
+            
+        }
     }
 }
