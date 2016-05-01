@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
+using Client.GUI.DeleteWindows;
 
 namespace Client
 {
@@ -48,14 +49,14 @@ namespace Client
         }
         private void ChangeVisibilitySU()
         {
-            reverseVisibility(btnAddModerator);
-            reverseVisibility(btnEditSubforumSettings);
-
-            ChangeVisibilityUser();
+            reverseVisibility(btnRemoveModerator);
+            ChangeVisibilityModerator();
         }
         private void ChangeVisibilityModerator()
         {
-            ChangeVisibilitySU();
+            reverseVisibility(btnAddModerator);
+            reverseVisibility(btnEditSubforumSettings);
+            ChangeVisibilityUser();
         }
 
         private void ChangeVisibilityUser()
@@ -147,8 +148,8 @@ namespace Client
             {
                 Window moderatorView = new Window();
                 DataGrid dg = new DataGrid();
-                Session.subForum.setModerators(Session.bl.getModerators(Session.user.id, Session.forum.ID, Session.subForum.Id));
-                dg.ItemsSource = ModeratorView.getView(Session.subForum._moderators.Values.ToList());
+                List<Moderator> mods = Session.bl.getModerators(Session.user.id, Session.forum.ID, Session.subForum.Id);
+                dg.ItemsSource = ModeratorView.getView(mods);
                 dg.IsReadOnly = true;
                 moderatorView.Content = dg;
                 moderatorView.SizeToContent = SizeToContent.WidthAndHeight;
@@ -174,10 +175,24 @@ namespace Client
                 MessageBox.Show(ee.Message);
             }
         }
+        private void btnRemoveModerator_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DeleteModerator deleteM = new DeleteModerator();
+                deleteM.ShowDialog();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
 
         private void btnEditSubforumSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        
     }
 }

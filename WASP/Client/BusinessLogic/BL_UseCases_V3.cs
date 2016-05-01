@@ -17,7 +17,9 @@ namespace Client.BusinessLogic
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || subForumID < 0 || moderatorID < 0) throw new Exception("ERROR: ID is illegal");
+
+            return _cl.deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
         //-----------Admin Reports---------------

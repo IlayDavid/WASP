@@ -81,6 +81,9 @@
     <Compile Include="GUI\AddWindows\AddPost.xaml.cs">
       <DependentUpon>AddPost.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\DeleteWindows\DeleteModerator.xaml.cs">
+      <DependentUpon>DeleteModerator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\INotificable.cs" />
     <Compile Include="GUI\Session.cs" />
     <Compile Include="GUI\SubForumWindow.xaml.cs">
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\AddWindows\AddPost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\DeleteWindows\DeleteModerator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

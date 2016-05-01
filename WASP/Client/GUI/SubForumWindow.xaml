@@ -12,7 +12,7 @@
         <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
         <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
         <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
-        
+
         <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
         <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
@@ -25,14 +25,16 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnPostThread" Content="Post Thread" Visibility="Hidden" Click="btnPostThread_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="0" Margin="10,0,0,0"/>
+            <Button x:Name="btnPostThread" Content="Add Thread" Visibility="Hidden" Click="btnPostThread_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="0" Margin="10,0,0,0"/>
             <Button x:Name="btnViewModerators" Content="View Moderators" Click="btnViewModerators_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Margin="10,71,0,0" Grid.RowSpan="2"/>
             <Button x:Name="btnAddModerator" Visibility="Hidden" Content="Add Moderator" Click="btnAddModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="1" Margin="10,70.8,0,0" Grid.RowSpan="2"/>
-            <Button x:Name="btnEditSubforumSettings" Visibility="Hidden" Content="Change Policy"  Click="btnEditSubforumSettings_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="3" Margin="10,0.4,0,0"/>
+            <Button x:Name="btnRemoveModerator" Visibility="Hidden" Content="Remove Moderator" Click="btnRemoveModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="3" Margin="10,0.4,0,0"/>
+            <Button x:Name="btnEditSubforumSettings" Visibility="Hidden" Content="Change Policy"  Click="btnEditSubforumSettings_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="4" Margin="10,0.2,0,0"/>
             <ListBox x:Name="SubForumsThreads" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForumsThreads_MouseDoubleClick"/>
         </Grid>
     </Grid>

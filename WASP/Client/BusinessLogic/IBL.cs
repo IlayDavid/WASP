@@ -120,7 +120,7 @@ namespace Client.BusinessLogic
         /*  
         * Pre-conditions: Member is loged-in, and is admin of the forum.
         * Purpose: delete moderator from subforum, 
-        * Return: number >= 0 id success        
+        * Return: number >= 0 if success        
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
 

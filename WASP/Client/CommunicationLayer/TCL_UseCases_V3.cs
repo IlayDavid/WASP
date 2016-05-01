@@ -17,7 +17,14 @@ namespace Client.CommunicationLayer
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            throw new NotImplementedException();
+            Dictionary<int, Moderator> mods = forums[forumID].subforums[subForumID]._moderators;
+            if (mods.Count > 1)
+                if (mods.Remove(moderatorID))
+                    return 1;
+                else
+                    throw new Exception("ERROR: Moderator not found");
+            else
+                throw new Exception("ERROR: Only one moderator left, can not removing him.");
         }
 
         //-----------Admin Reports---------------

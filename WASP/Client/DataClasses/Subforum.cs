@@ -31,17 +31,6 @@ namespace Client.DataClasses
         public Dictionary<int, Moderator> _moderators { get; set; }
         public List<Post> _threads { get; set; }
 
-        internal void setModerators(List<Moderator> list)
-        {
-            _moderators = new Dictionary<int, Moderator>();
-            _moderatorIDs = new List<int>();
-            foreach(Moderator m in list)
-            {
-                _moderators.Add(m.user.id, m);
-                _moderatorIDs.Add(m.user.id);
-            }
-        }
-
         internal static Dictionary<int, Subforum> ListToDictionary(List<Subforum> list)
         {
             Dictionary<int, Subforum> ret = new Dictionary<int, Subforum>();

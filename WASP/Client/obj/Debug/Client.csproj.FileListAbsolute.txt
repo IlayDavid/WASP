@@ -12,14 +12,14 @@ C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.Properties.Resou
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.exe
 C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe.config
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe.config
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddForum.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddMember.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddModerator.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddPost.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\DeleteWindows\DeleteModerator.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumWindow.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\Login.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\PostWindow.g.cs
@@ -34,6 +34,7 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\Ad
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddMember.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddModerator.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddPost.baml
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\DeleteWindows\DeleteModerator.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumWindow.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\Login.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\PostWindow.baml
