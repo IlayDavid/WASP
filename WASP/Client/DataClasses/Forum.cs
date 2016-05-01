@@ -21,11 +21,7 @@ namespace Client.DataClasses
         public string Name{ get; set; }
         public string Description{ get; set; }
         public Policy policy { get; set; }
-        public List<int> subforumsIDs { get; set; }
-
-        //should be null at first request.
-        public List<int> membersIDs { get; set; }
-        public List<int> adminsIDs { get; set; }
+        
         public Dictionary<int,User> members { get; set; }
         public Dictionary<int, User> admins { get; set; }
 

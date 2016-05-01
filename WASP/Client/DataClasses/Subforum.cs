@@ -19,8 +19,6 @@ namespace Client.DataClasses
             _moderators = new Dictionary<int, Moderator>();
             _moderators.Add(moderator.user.id, moderator);
 
-            _moderatorIDs = new List<int>();
-            _moderatorIDs.Add(moderator.user.id);
             _threads = new List<Post>();
             this.term = term;
         }
@@ -30,8 +28,6 @@ namespace Client.DataClasses
         public string Description { get; set; }
 
         //should be null at first request
-        public List<int> _threadsIDs { get; set; }
-        public List<int> _moderatorIDs { get; set; }
         public Dictionary<int, Moderator> _moderators { get; set; }
         public List<Post> _threads { get; set; }
 

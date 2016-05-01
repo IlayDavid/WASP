@@ -18,7 +18,6 @@ namespace Client.DataClasses
             _editAt = _publishedAt;
             _containerID = container;
 
-            _repliesIDs = new List<int>();
             _replies = new List<Post>();
 
             _inReplyTo = inReplyTo;
@@ -32,8 +31,7 @@ namespace Client.DataClasses
         public int _id{ get; set; }
         public int _containerID{ get; set; }
         public Post _inReplyTo{ get; set; }
-        public List<int> _repliesIDs { get; set; }
-
+        
         //should be null at first request
         public List<Post> _replies { get; set; }
 }
