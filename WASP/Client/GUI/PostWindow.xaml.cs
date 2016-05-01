@@ -12,43 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Client.DataClasses;
+using Client.GUI;
 
 namespace Client
 {
     /// <summary>
     /// Interaction logic for PostWindow.xaml
     /// </summary>
-    public partial class PostWindow : Window
+    public partial class PostWindow : Window, INotificable
     {
-        Post p;
-        Subforum sf;
-        Forum f;
-        public PostWindow(Post po, Subforum subf, Forum fo)
+        public PostWindow()
         {
             InitializeComponent();
-            this.p = po;
-            this.sf = subf;
-            this.f = fo;
-            //testing
-            User mem = new User(123, "noam", "noam1", "", "123");
-            mem.name = "noam";
-            p._author = mem;
-            p._publishedAt = new DateTime();
-            p._content = "this is a post";
-            p._editAt = new DateTime();
 
-            Post rep = new Post();
-            User mem2 = new User(124, "edan", "edan1", "", "123");
-            mem2.name = "edan";
-            rep._author = mem2;
-            rep._publishedAt = new DateTime();
-            rep._content = "this is a reply post";
-            rep._editAt = new DateTime();
-            rep._inReplyTo = p;
-
-            p._replies = new List<Post>();
-            p._replies.Add(rep);
-            //end 
+            Post p = Session.post;
+            Post rep = new Post("Thread 1", "this is a reply post 1", Session.user, Session.subForum.Id, Session.post);
+            
             TreeViewItem treeItem = new TreeViewItem();
             treeItem.Header = "Title: " + p._title + " Author: " + p._author.name + " Date: " + p._publishedAt.Date;
             treeItem.Items.Add(new TreeViewItem() { Header = p._content });
@@ -72,7 +51,7 @@ namespace Client
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            SubForumWindow subWin = new SubForumWindow(sf, f);
+            SubForumWindow subWin = new SubForumWindow();
             subWin.Show();
             this.Close();
         }

@@ -75,6 +75,13 @@
     <Compile Include="GUI\AddWindows\AddMember.xaml.cs">
       <DependentUpon>AddMember.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\AddWindows\AddModerator.xaml.cs">
+      <DependentUpon>AddModerator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\AddWindows\AddPost.xaml.cs">
+      <DependentUpon>AddPost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\INotificable.cs" />
     <Compile Include="GUI\Session.cs" />
     <Compile Include="GUI\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
@@ -87,6 +94,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\AddWindows\AddMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\AddWindows\AddModerator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\AddWindows\AddPost.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

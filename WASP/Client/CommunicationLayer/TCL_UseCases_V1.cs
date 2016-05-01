@@ -28,7 +28,6 @@ namespace Client.CommunicationLayer
                 throw new Exception("User with id - "+userID+" cannot add forum");
             User admin = new User(adminId, adminName, adminUserName, email, pass);
             Forum forum = new Forum(forumName, description, admin);
-            forum.members.Add(admin.id,admin);
             forums.Add(forum.ID, forum);
             return forum;
         }
@@ -47,18 +46,41 @@ namespace Client.CommunicationLayer
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
-            throw new NotImplementedException();
+            Post newPost = new Post(title, content, forums[forumID].members[userID], subForumID, null);
+            forums[forumID].subforums[subForumID]._threads.Add(newPost);
+            return newPost;
         }
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            throw new NotImplementedException();
+            Forum forum = forums[forumID];
+
+            Post inReply = forum.posts[replyToPost_ID];
+            Post newPost = new Post("", content, forums[forumID].members[userID], inReply._containerID, inReply);
+            forum.posts.Add(newPost._id, newPost);
+            inReply._replies.Add(newPost);
+            return newPost;
         }
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            Subforum newSf = new Subforum(name, description, moderatorID, term);
-            forums[forumID].subforums.Add(newSf);
+            User user = forums[forumID].members[moderatorID];
+            User admin = null;
+            try
+            {
+                admin = forums[forumID].admins[userID];
+            }
+            catch(Exception)
+            {
+                if (_su.id == userID)
+                    admin = _su;
+            }
+
+
+            Moderator m = new Moderator(user, term, admin);
+
+            Subforum newSf = new Subforum(name, description, m, term);
+            forums[forumID].subforums.Add(newSf.Id, newSf);
             return newSf;
         }
         //---------------------------Version 1 Use Cases End------------------------------------

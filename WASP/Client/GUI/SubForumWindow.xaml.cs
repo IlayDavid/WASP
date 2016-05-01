@@ -12,33 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Client.DataClasses;
+using Client.GUI;
+using Client.GUI.AddWindows;
 
 namespace Client
 {
     /// <summary>
     /// Interaction logic for SubForumWindow.xaml
     /// </summary>
-    public partial class SubForumWindow : Window
+    public partial class SubForumWindow : Window, INotificable
     {
-        private Subforum sf;
-        private Forum f;
-        public SubForumWindow(Subforum Subf, Forum fo)
+        public SubForumWindow()
         {
             InitializeComponent();
-            this.sf = Subf;
-            this.f = fo;
-            //testing the presentation on window
-            sf._threads = new List<Post>();
-            Post p1 = new Post();
-            p1._title = "post no 1";
-            Post p2 = new Post();
-            p2._title = "post no 2";
-            sf._threads.Add(p1);
-            sf._threads.Add(p2);
-            //testing end
+            if (Session.user != null)
+            {
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.subForum._moderators.ContainsKey(Session.user.id))
+                    ChangeVisibilityModerator();
+                else
+                    ChangeVisibilityUser();
+            }
 
             //presenting the subforums list 
-            List<Post> posts = sf._threads;
+            List<Post> posts = Session.bl.getThreads(Session.forum.ID, Session.subForum.Id, 0, 20);
             foreach (Post p in posts)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -47,33 +46,138 @@ namespace Client
                 SubForumsThreads.Items.Add(newItem);
             }
         }
+        private void ChangeVisibilitySU()
+        {
+            reverseVisibility(btnAddModerator);
+            reverseVisibility(btnEditSubforumSettings);
+
+            ChangeVisibilityUser();
+        }
+        private void ChangeVisibilityModerator()
+        {
+            ChangeVisibilitySU();
+        }
+
+        private void ChangeVisibilityUser()
+        {
+            reverseVisibility(btnPostThread);
+            reverseVisibility(btnRegister);
+            reverseVisibility(btnLogin);
+            reverseVisibility(btnLogout);
+        }
+        private void reverseVisibility(Button btn)
+        {
+            btn.Visibility = (btn.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+        }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        public void setSubForum(Subforum subf)
-        {
-            this.sf= subf;
-        }
-
-        private void SubForumsThreads_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SubForumsThreads_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBoxItem i = (ListBoxItem)SubForumsThreads.SelectedItem;
-            Post p =(Post)i.DataContext;
-            PostWindow pwin = new PostWindow(p, sf, f);
+            Post p = (Post)i.DataContext;
+            Session.post = p;
+            PostWindow pwin = new PostWindow();
+            this.Hide();
             pwin.Show();
-            this.Close();
-
+            this.Show();
+            Session.post = null;
         }
+
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            //ForumWindow fwin = new ForumWindow();
-            //fwin.setForum(this.f);
-            //fwin.Show();
-            //this.Close();
+            this.Close();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login(Session.forum.ID);
+            login.ShowDialog();
+            if (Session.user == null)
+                return;
+            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+            ChangeVisibilityUser();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (Session.user is SuperUser)
+            {
+                MessageBox.Show("Super user should log out only in the main window!");
+                return;
+            }
+            var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (ans == MessageBoxResult.Yes)
+            {
+                ChangeVisibilityUser();
+                Session.user = null;
+            }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            AddMember addM = new AddMember();
+            addM.ShowDialog();
+            Session.user = addM.getUser();
+            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+            ChangeVisibilityUser();
+        }
+
+        private void btnPostThread_Click(object sender, RoutedEventArgs e)
+        {
+            AddPost addPost = new AddPost(true);
+            addPost.ShowDialog();
+            Post newPost = addPost.getPost();
+
+            if (newPost != null)
+            {
+                ListBoxItem newItem = new ListBoxItem();
+                newItem.Content = newPost._title;
+                newItem.DataContext = newPost;
+                SubForumsThreads.Items.Add(newItem);
+            }
+        }
+
+        private void btnViewModerators_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Window moderatorView = new Window();
+                DataGrid dg = new DataGrid();
+                Session.subForum.setModerators(Session.bl.getModerators(Session.user.id, Session.forum.ID, Session.subForum.Id));
+                dg.ItemsSource = ModeratorView.getView(Session.subForum._moderators.Values.ToList());
+                dg.IsReadOnly = true;
+                moderatorView.Content = dg;
+                moderatorView.SizeToContent = SizeToContent.WidthAndHeight;
+                moderatorView.Title = "Moderators";
+                moderatorView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                moderatorView.ShowDialog();
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void btnAddModerator_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddModerator addModerator = new AddModerator();
+                addModerator.ShowDialog();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void btnEditSubforumSettings_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

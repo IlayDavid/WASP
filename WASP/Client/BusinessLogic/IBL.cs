@@ -37,7 +37,7 @@ namespace Client.BusinessLogic
          * Return: 0 - on succsess, negative - in fail.        
          */
         int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
-
+        
         /*
          * Pre-conditions: none
          * Purpose: creates a Member in the forum, and return the Member.
@@ -81,7 +81,7 @@ namespace Client.BusinessLogic
          * Purpose: appoint moderator to the subforum.
          * Return: number >= 0 if success.
          */
-        int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
+        Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
 
         /*
         * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.
@@ -174,6 +174,11 @@ namespace Client.BusinessLogic
          * post condition: result is an opening post
          */
         Post getThread(int userID, int forumID, int threadId);
+
+        /*
+        * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
+        */
+        List<Post> getThreads(int forumID, int subForumID, int from, int amount);
 
         /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
         Forum getForum(int userID, int forumID);

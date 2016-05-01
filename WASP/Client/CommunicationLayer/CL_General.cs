@@ -1,11 +1,9 @@
 ﻿using Client.DataClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Text;  // for class Encoding
+
+//using System.Net;
+//using System.Text;  // for class Encoding
 
 namespace Client.CommunicationLayer
 {
@@ -26,8 +24,11 @@ namespace Client.CommunicationLayer
         }
 
         //---------------------------------Getters----------------------------------------------
-
-        public Post getThread(int userID, int forumID, int threadId)
+        public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
+        {
+            throw new NotImplementedException();
+        }
+        public Post getThread(int forumID, int threadId)
         {
             throw new NotImplementedException();
         }

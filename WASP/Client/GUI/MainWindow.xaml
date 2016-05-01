@@ -9,7 +9,7 @@
         Title="Forum System" Height="320.2" Width="411.2"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-    <Grid VerticalAlignment="Top" Height="289" Margin="0,0,-17.8,0">
+    <Grid VerticalAlignment="Top" Height="289" Margin="0,0,3.8,0">
         <DataGrid x:Name="dgForums" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Height="187" Width="285" Margin="10,74,0,0"/>
 
         <Label x:Name="headlineLabel" Content="           Welcome to the WASP system. " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="25" Width="251"/>

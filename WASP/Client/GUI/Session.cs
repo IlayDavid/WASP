@@ -15,5 +15,6 @@ namespace Client.GUI
         public static Forum forum = null;
         public static Subforum subForum = null;
         public static Post post = null;
+        public static INotificable currentWindow = null;
     }
 }

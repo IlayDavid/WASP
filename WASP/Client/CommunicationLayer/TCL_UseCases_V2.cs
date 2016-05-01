@@ -9,9 +9,14 @@ namespace Client.CommunicationLayer
 {
     public partial class TCL : ICL
     {
-        public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            throw new NotImplementedException();
+            Subforum sf = forums[forumID].subforums[subForumID];
+            User admin = forums[forumID].members[userID];
+            User moderator = forums[forumID].members[moderatorID];
+            Moderator m = new Moderator(moderator, term, admin);
+            sf._moderators.Add(m.user.id, m);
+            return m;
         }
 
         public int confirmEmail(int userID, int forumID)

@@ -3,6 +3,7 @@ namespace Client.DataClasses
 {
     public class User
     {
+        public User() { }
         public User(int id, string name, string userName, string email, string pass)
         {
             this.id = id;

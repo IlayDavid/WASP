@@ -38,6 +38,37 @@ namespace Client.DataClasses
             }
             return ret;
         }
+        public static List<UserView> getView(Dictionary<int, User> users)
+        {
+            List<UserView> ret = new List<UserView>();
+            foreach (User u in users.Values)
+            {
+                ret.Add(new UserView() { ID = u.id, Name = u.name, UserName = u.userName, Email = u.email });
+            }
+            return ret;
+        }
+    }
+
+    public class ModeratorView
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public DateTime Term { get; set; }
+        public string AppointBy { get; set; }
+
+        public static List<ModeratorView> getView(List<Moderator> moderators)
+        {
+            List<ModeratorView> ret = new List<ModeratorView>();
+            foreach (Moderator m in moderators)
+            {
+                ret.Add(new ModeratorView() { ID = m.user.id, Name = m.user.name,
+                    UserName = m.user.userName, Email = m.user.email,
+                    Term = m.term, AppointBy = m.appointBy.userName});
+            }
+            return ret;
+        }
     }
 
     public class SubForumView

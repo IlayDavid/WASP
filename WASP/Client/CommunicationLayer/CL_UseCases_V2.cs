@@ -10,7 +10,7 @@ namespace Client.CommunicationLayer
     public partial class CL : ICL
     {
         //---------------------------Version 2 Use Cases Start------------------------------------
-        public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
             throw new NotImplementedException();
         }

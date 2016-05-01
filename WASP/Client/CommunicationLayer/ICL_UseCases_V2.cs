@@ -21,7 +21,7 @@ namespace Client.CommunicationLayer
          * Purpose: appoint moderator to the subforum.
          * Return: number >= 0 if success.
          */
-        int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
+        Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
 
         /*
         * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.

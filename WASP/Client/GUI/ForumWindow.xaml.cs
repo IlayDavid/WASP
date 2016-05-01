@@ -21,31 +21,21 @@ namespace Client
     /// <summary>
     /// Interaction logic for ForumWindow.xaml
     /// </summary>
-    public partial class ForumWindow : Window
+    public partial class ForumWindow : Window, INotificable
     {
         //the forum that presented in the window, should be set by method
         public ForumWindow()
         {
             InitializeComponent();
-
             
             if(Session.user != null && Session.user is SuperUser)
             {
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 ChangeVisibilitySU();
             }
-            Session.forum.subforums = Session.bl.getSubforums(Session.forum.ID);
-            //testing the presentation on window
-            Session.forum.subforums = new List<Subforum>();
-            Subforum sf1 = new Subforum("sf1", "", 0, DateTime.Now);
-            Subforum sf2 = new Subforum("sf1", "", 0, DateTime.Now);
-            Session.forum.subforums.Add(sf1);
-            Session.forum.subforums.Add(sf2);
-            //testing end
-
+            Session.forum.subforums = Subforum.ListToDictionary(Session.bl.getSubforums(Session.forum.ID));
             //presenting the subforums list 
-            List<Subforum> subfs = Session.forum.subforums;
-            foreach (Subforum sf in subfs)
+            foreach (Subforum sf in Session.forum.subforums.Values)
             {
                 ListBoxItem newItem = new ListBoxItem();
                 newItem.Content = sf.Name;
@@ -77,7 +67,6 @@ namespace Client
         {
             this.Close();
         }
-
         public void setForum(Forum f)
         {
             Session.forum = f;
@@ -109,7 +98,6 @@ namespace Client
         private void btnAddSubforum_Click(object sender, RoutedEventArgs e)
         {
             AddSubForum addSf = new AddSubForum();
-            //this.Hide();
             addSf.ShowDialog();
             Subforum newSf = addSf.getSubForum();
             if (newSf != null)
@@ -119,7 +107,6 @@ namespace Client
                 newItem.DataContext = newSf;
                 SubForums.Items.Add(newItem);
             }
-            //this.Show();
         }
 
         private void btnEditForumPolicy_Click(object sender, RoutedEventArgs e)
@@ -131,8 +118,11 @@ namespace Client
         {
             ListBoxItem i = (ListBoxItem)SubForums.SelectedItem;
             Subforum sf = (Subforum)i.DataContext;
-            SubForumWindow sfWin = new SubForumWindow(sf, Session.forum);
-            //this.Hide();
+            Session.subForum = sf;
+            SubForumWindow sfWin = new SubForumWindow();
+            Session.currentWindow = sfWin;
+            this.Hide();
+            Session.currentWindow = this;
             sfWin.Show();
         }
 
@@ -149,8 +139,7 @@ namespace Client
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login(Session.forum.ID);
-            login.ShowDialog();
-            Session.user = login.getUser();
+            login.ShowDialog(); //should update session.
             if (Session.user == null)
                 return;
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;

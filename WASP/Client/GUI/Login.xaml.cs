@@ -33,11 +33,6 @@ namespace Client
             InitializeComponent();
         }
         
-        public User getUser()
-        {
-            return _user;
-        }
-
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -48,6 +43,7 @@ namespace Client
                     _user = Session.bl.loginSU(username, password);
                 else
                     _user = Session.bl.login(username, password, _forumID);
+                Session.user = _user;
                 this.Close();
             }
             catch (Exception ee)

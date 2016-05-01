@@ -32,6 +32,15 @@ namespace Client.BusinessLogic
         }
 
         //---------------------------------Getters----------------------------------------------
+        public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
+        {
+
+            if (subForumID < 0) throw new Exception("ERROR: id is illegal");
+            if (from < 0) throw new Exception("ERROR: illegal index");
+            if (amount < 0) throw new Exception("ERROR: illegal amount");
+            return _cl.getThreads(forumID, subForumID, from, amount);
+        }
+
 
         public Post getThread(int userID, int forumID, int threadId)
         {
@@ -60,7 +69,9 @@ namespace Client.BusinessLogic
 
         public List<Moderator> getModerators(int userID, int forumID, int subForumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || subForumID < 0 ) throw new Exception("ERROR: id is illegal");
+
+            return _cl.getModerators(userID, forumID, subForumID);
         }
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)

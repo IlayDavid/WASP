@@ -29,7 +29,8 @@ namespace Client.CommunicationLayer
          * Purpose: returns a thread by id, if doesnt exist returns NULL
          * post condition: result is an opening post
          */
-        Post getThread(int userID, int forumID, int threadId);
+        Post getThread(int forumID, int threadId);
+        List<Post> getThreads(int forumID, int subForumID, int from, int amount);
 
         /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
         Forum getForum(int userID, int forumID);
@@ -39,6 +40,7 @@ namespace Client.CommunicationLayer
 
         /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
         Subforum getSubforum(int userID, int forumID, int subforumId);
+
 
         /* Purpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL */
         Subforum getSubforum(int forumID, int subforumId);

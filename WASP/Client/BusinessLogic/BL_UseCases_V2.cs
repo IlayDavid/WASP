@@ -9,9 +9,13 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
-        public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || moderatorID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            DateTime now = DateTime.Now.Date;
+            if (term.Date.CompareTo(now) <= 0) throw new Exception("ERROR: Term should be after " + now);
+
+            return _cl.addModerator(userID, forumID, moderatorID, subForumID, term);
         }
 
         public int confirmEmail(int userID, int forumID)

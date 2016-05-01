@@ -44,10 +44,14 @@ namespace Client.GUI
             Login login = new Login(Login.ALL_FORUMS);
             login.Title = "Login as SU";
             login.ShowDialog();
-            Session.user = login.getUser();
 
             if (Session.user != null)
+            {
                 ChangeVisibilitySU();
+                MessageBox.Show("You are login as super user, you can log out only in this window.");
+            }
+               
+            
         }
         private void btnLogOutSU_Click(object sender, RoutedEventArgs e)
         {
@@ -86,8 +90,11 @@ namespace Client.GUI
                 Session.forum = Session.bl.getForum(id);
                 ForumWindow fWin = new ForumWindow();
                 fWin.Title = Session.forum.Name;
+                
+                Session.currentWindow = fWin;
                 this.Hide();
                 fWin.ShowDialog();
+                Session.currentWindow = null;
                 this.Show();
             }
             catch (Exception ee)

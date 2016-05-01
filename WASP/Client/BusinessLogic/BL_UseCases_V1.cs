@@ -52,17 +52,13 @@ namespace Client.BusinessLogic
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             string validStr = isUserValid(adminName, adminUserName, adminID, email, pass);
-            if (validStr == null) {
-                if (!IsStrValid(forumName))
-                    validStr = "ERROR: Forum name is empty";
-                if (!IsStrValid(description))
-                    validStr = "ERROR: Forum description is empty";
-            }
+            if (validStr != null) throw new Exception(validStr);
+            if (userID < 0) throw new Exception("ERROR: ID is illegal");
+            if (!IsStrValid(forumName)) throw new Exception("ERROR: Forum name is empty");
+            if (!IsStrValid(description)) throw new Exception("ERROR: Forum description is empty");
 
-            if (validStr == null)
-                return _cl.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
-            else
-                throw new Exception(validStr);
+            return _cl.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
+
         }
 
         public int defineForumPolicy(int userID, int forumID)
@@ -73,20 +69,27 @@ namespace Client.BusinessLogic
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
             string errorMsg = isUserValid(name, userName, id, email, pass);
-            if (targetForumID < 0) errorMsg = "ERROR: ID is illegal";
-            if (errorMsg == null)
-                return _cl.subscribeToForum(id, userName, name, email, pass, targetForumID);
-            throw new Exception(errorMsg);
+            if (targetForumID < 0) throw new Exception("ERROR: ID is illegal");
+            if (errorMsg != null) throw new Exception(errorMsg);
+
+            return _cl.subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            if (!IsStrValid(title)) throw new Exception("ERROR: Post title is empty");
+            if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
+
+            return _cl.createThread(userID, forumID, title, content, subForumID);
         }
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || replyToPost_ID < 0) throw new Exception("ERROR: ID is illegal");
+            if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
+
+            return _cl.createReplyPost(userID, forumID, content, replyToPost_ID);
         }
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
