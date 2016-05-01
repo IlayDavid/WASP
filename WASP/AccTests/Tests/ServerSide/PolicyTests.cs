@@ -17,6 +17,7 @@ namespace AccTests.Tests.ServerSide
         private WASPBridge _proj;
         private SuperUser _supervisor;
         private Forum _forum;
+        private Member _admin;
         private Subforum _subforum;
         private Member _moderator;
         private Member _member1;
@@ -220,6 +221,103 @@ namespace AccTests.Tests.ServerSide
             Assert.IsNull(mem);
              admin = _proj.login("admin", "admin1234", forum);
             Assert.IsNull(admin);
+        }
+        /// <summary>
+        /// positive Test: creates a number of users, and checks that they can create posts and read them correctly
+        /// </summary>
+        [TestMethod]
+        public void StressTest1()
+        {
+            _forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _admin = _proj.login("admin", "admin1234", _forum);
+            _subforum = _proj.createSubForum(_admin, "name", "description", _admin, DateTime.MaxValue);
+            Assert.IsNotNull(_subforum);
+
+            Thread[] threads = new Thread[500];
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(postsLoopSuccess);
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Start();
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Join();
+            }
+            
+        }
+        /// <summary>
+        /// Negative Test: creates a too many users and checks that some of them drop
+        /// </summary>
+        [TestMethod]
+        public void StressTest2()
+        {
+            _forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _admin = _proj.login("admin", "admin1234", _forum);
+            _subforum = _proj.createSubForum(_admin, "name", "description", _admin, DateTime.MaxValue);
+            Assert.IsNotNull(_subforum);
+
+            Thread[] threads = new Thread[500];
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(postsLoopSuccess);
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Start();
+            }
+            Thread[] badThreads= new Thread[500];
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                badThreads[i] = new Thread(postsLoopFail);
+            }
+
+            foreach (Thread thread in badThreads)
+            {
+                thread.Start();
+            }
+
+            foreach (Thread thread in badThreads)
+            {
+                thread.Join();
+            }
+            foreach (Thread thread in threads)
+            {
+                thread.Join();
+            }
+
+        }
+        private async void postsLoopSuccess()
+        {
+            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", _forum);
+            mem = _proj.login(mem.UserName, mem.Password, _forum);
+            Assert.IsNotNull(mem);
+            var rnd=new Random();
+            var post = _proj.createThread(mem, "title" + rnd.Next(), ""+rnd.Next(), DateTime.Now, _subforum);
+            var prevPost = post;
+            for (int i = 0; i < 60; i++)
+            {
+                prevPost = post;
+                post = _proj.createReplyPost(mem, "" + rnd.Next(), DateTime.Now, prevPost);
+                Assert.IsTrue(post.InReplyTo.Content.Equals(prevPost.Content));
+                await wait(1); //wait 1 second to simulate a person waiting
+            }
+        }
+
+        private async void postsLoopFail()
+        {
+            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", _forum);
+            Assert.IsNotNull(mem);//register shouldn't fail, only login (change return value?)
+            mem = _proj.login(mem.UserName, mem.Password, _forum);
+            Assert.IsNull(mem);
         }
 
         private static async Task<int> wait(int duration)
