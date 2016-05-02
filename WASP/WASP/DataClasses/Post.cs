@@ -14,11 +14,11 @@ namespace WASP.DataClasses
         private Dictionary<int, Post> replies;
         private DAL dal;
 
-        public Post(String title, String content, int id, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
         {
+            this.id = id;
             this.title = title;
             this.content = content;
-            this.id = id;
             this.publishedAt = now;
             this.inReplyTo = inReplyTo;
             this.author = author;

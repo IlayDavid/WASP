@@ -9,8 +9,6 @@ namespace WASP.Domain
     {
         private DAL dal;
 
-
-
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             throw new NotImplementedException();
@@ -50,24 +48,29 @@ namespace WASP.Domain
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            //TODO: check if user info fine with policy
+            // Should throw exception if forum no found.
             Forum forum = dal.GetForum(targetForumID);
-            if (forum != null)
-            {
-                //TODO : check user info with policy.
-                User user = new User(id, name, userName, email, pass, forum);
-                dal.CreateUser(user);
-                forum.AddMember(user);
-                return user;
-            }
-            return null;
-            //TODO: if forum is null, maybe need to throw exception ?
+            
+            // Attempt to add user.
+            User user = new User(id, name, userName, email, pass, forum);
+            // If user doesn't follow forum policy will throw exception.
+            forum.AddMember(user);
+
+            // Will throw exception if unable to create user.
+            dal.CreateUser(user);
+            
+            return user;
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
+            // Should throw exception if user no found.
             User author = dal.GetUser(userID, forumID);
+            // Should throw exception if subforum no found.
             Subforum sfContainer = dal.GetSubForum(subForumID);
+
+            Post originalPost = new Post(title, content, -1, author, DateTime.Now, null, sfContainer, DateTime.Now, dal);
+
             if (author != null && sfContainer != null)
             {
                 // TODO: check post info with policy (title and content)

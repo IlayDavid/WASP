@@ -12,12 +12,20 @@ namespace WASP.DataClasses
         private bool isNew;
         private User source;
         private User target;
-        public Notification(String message, bool isNew,User source, User target)
+        private int id;
+        public Notification(int id, String message, bool isNew, User source, User target)
         {
+            this.id = id;
             this.message = message;
             this.isNew = isNew;
             this.source = source;
             this.target = target;
+        }
+
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
         }
 
         public bool IsNew
