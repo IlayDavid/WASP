@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using WASP.Exceptions;
 
 
 namespace WASP.Domain
@@ -21,24 +22,20 @@ namespace WASP.Domain
 
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass)
         {
-            {
-                // TODO: check if forum name and desc are fine with policy
+            //create new forum with admin in it, create user for admin
+            Forum newForum = new Forum(-1, forumName, description, null, dal);
+            User user = new User(-1, adminName, adminUserName, email, pass, newForum);
+            // TODO: need to check if user and forum are fine with policy
+            Admin admin = new Admin(user, newForum, dal);
+            newForum.AddMember(user);
+            newForum.AddAdmin(admin);
 
-                //create new forum with admin in it, create user for admin
-                Forum newForum = new Forum(-1, forumName, description, null, dal);
-                User user = new User(-1, adminName, adminUserName, email, pass, newForum);
-                // TODO: need to check if user and forum are fine with policy
-                Admin admin = new Admin(user, newForum, dal);
-                newForum.AddAdmin(admin);
-                newForum.AddMember(user);
+            // DANGER: Need to provide atomicity for this... This is a dangerous spot.
+            newForum = dal.CreateForum(newForum);
+            dal.CreateUser(user);
+            dal.CreateAdmin(admin);
 
-                //TODO: add to DB at addAdmin,addMember and constructors ?
-                dal.CreateForum(newForum);
-                dal.CreateUser(user);
-                dal.CreateAdmin(admin);
-
-                return newForum;
-            }
+            return newForum;
         }
 
         public int defineForumPolicy(int userID, int forumID)
@@ -50,16 +47,14 @@ namespace WASP.Domain
         {
             // Should throw exception if forum no found.
             Forum forum = dal.GetForum(targetForumID);
-            
+
             // Attempt to add user.
             User user = new User(id, name, userName, email, pass, forum);
             // If user doesn't follow forum policy will throw exception.
             forum.AddMember(user);
 
             // Will throw exception if unable to create user.
-            dal.CreateUser(user);
-            
-            return user;
+            return dal.CreateUser(user);
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
@@ -69,44 +64,35 @@ namespace WASP.Domain
             // Should throw exception if subforum no found.
             Subforum sfContainer = dal.GetSubForum(subForumID);
 
-            Post originalPost = new Post(title, content, -1, author, DateTime.Now, null, sfContainer, DateTime.Now, dal);
+            Post originalPost = new Post(-1, title, content, author, DateTime.Now, null, sfContainer, DateTime.Now, dal);
+            // Should throw exception if post doesn't follow forum policy.
+            sfContainer.AddThread(originalPost);
+            author.AddPost(originalPost);
 
-            if (author != null && sfContainer != null)
-            {
-                // TODO: check post info with policy (title and content)
-                Post original = new Post(title, content, -1, author, DateTime.Now, null, sfContainer, DateTime.Now, dal);
-                return original;
-            }
-            return null;
+            return dal.CreatePost(originalPost);
         }
 
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
             User author = dal.GetUser(userID, forumID);
-            if (author != null)
-            {
-                Post post = dal.GetPost(replyToPost_ID);
-                if (post != null)
-                {
-                    Post reply = new Post(null, content, -1, author, DateTime.Now, post, post.Container, DateTime.Now, dal);
-                    return dal.CreatePost(reply);
-                }
-            }
-            return null;
+            Post post = dal.GetPost(replyToPost_ID);
+            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Container, DateTime.Now, dal);
+
+            post.AddReply(reply);
+            author.AddPost(reply);
+
+            return dal.CreatePost(reply);
         }
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
             Forum forum = dal.GetForum(forumID);
-            if (forum != null)
-            {
-                //TODO: check name and description with policy 
-                Subforum sf = new Subforum(-1, name, description, dal, forum);
-                return dal.CreateSubForum(sf);
+            Subforum sf = new Subforum(-1, name, description, forum, dal);
 
-            }
-            return null;
+            forum.AddSubForum(sf);
+
+            return dal.CreateSubForum(sf);
         }
 
         public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
@@ -119,31 +105,25 @@ namespace WASP.Domain
             Forum forum = dal.GetForum(forumID);
             Subforum sf = dal.GetSubForum(subForumID);
             Admin admin = dal.GetAdmin(userID, forumID);
-            if (forum != null && sf != null)
-            {
-                if (forum.IsAdmin(userID) && forum.IsMember(moderatorID)) // checks if admin do that action, and if mod is mem of forum
-                {
-                    Moderator mod = new Moderator(forum.GetMember(moderatorID), term, sf, admin, dal);
-                    sf.AddModerator(mod);
-                    dal.CreateModerator(mod);
-                    return mod;
-                }
-            }
-            return null;
+
+            Moderator mod = new Moderator(forum.GetMember(moderatorID), term, sf, admin, dal);
+            sf.AddModerator(mod);
+
+            return dal.CreateModerator(mod);
         }
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
             Moderator mod = dal.GetModerator(moderatorID, subforumID);
             Admin admin = dal.GetAdmin(userID, forumID);
-            if (mod != null && mod.Appointer.Id == admin.Id)
-            {
-                mod.TermExp = term;
-                dal.updateModerator(mod);
-                return 1;
-            }
-            return -1;
-            //TODO: take care of exceptions ? 
+            if (mod.Appointer.Id != admin.Id)
+                throw new UnauthorizedEditModTerm(userID, moderatorID, subforumID);
+
+            mod.TermExp = term;
+            mod.SubForum.AddModerator(mod);
+            dal.updateModerator(mod);
+
+            return 1;
         }
 
         public int confirmEmail(int userID, int forumID)
@@ -153,7 +133,11 @@ namespace WASP.Domain
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            throw new NotImplementedException();
+            Post post = dal.GetPost(postID);
+
+            post.Delete();
+
+            return 1;
         }
 
         public int editPost(int userID, int forumID, int postID, string content)

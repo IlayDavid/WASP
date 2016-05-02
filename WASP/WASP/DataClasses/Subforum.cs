@@ -11,7 +11,7 @@ namespace WASP.DataClasses
         private DAL dal;
         private Forum forum;
 
-        public Subforum(int id, String name, String description,DAL dal,Forum forum)
+        public Subforum(int id, String name, String description, Forum forum, DAL dal)
         {
             this.id = id;
             this.name = name;

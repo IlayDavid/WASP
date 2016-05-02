@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.Exceptions
 {
-    class UnauthorizedException
+    class UnauthorizedException : WaspException
     {
     }
 }
