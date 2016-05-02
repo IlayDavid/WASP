@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WASP.Exceptions
 {
-    class UNauthorizedDeleteSubForum : UnauthorizedException
+    class UnauthorizedDeleteSubForum : UnauthorizedException
     {
-        public UNauthorizedDeleteSubForum(int userID) 
+        public UnauthorizedDeleteSubForum(int userID) 
             : base(userID, "deleteSubForum")
         {
         }

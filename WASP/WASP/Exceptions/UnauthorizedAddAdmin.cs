@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WASP.Exceptions
 {
-    class UnautorizedAddAdmin : UnauthorizedException
+    class UnauthorizedAddAdmin : UnauthorizedException
     {
-        public UnautorizedAddAdmin(int userID, int forumID) 
+        public UnauthorizedAddAdmin(int userID, int forumID) 
             : base(userID, String.Format("add Admin at subForum: {0}", forumID))
         {
         }
