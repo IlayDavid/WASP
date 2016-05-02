@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="PostWindow" Height="600" Width="800">
+        Title="PostWindow" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="689,5,0,0" Width="93" Text="Welcome, guest!"/>
         <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>

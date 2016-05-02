@@ -41,12 +41,12 @@ namespace Client.BusinessLogic
         //-----------Super User Reports---------------
         public int totalForums(int userID)
         {
-            throw new NotImplementedException();
+            return _cl.totalForums(userID);
         }
 
         public List<User> membersInDifferentForums(int userID)
         {
-            throw new NotImplementedException();
+            return _cl.membersInDifferentForums(userID);
         }
         //---------------------------Version 3 Use Cases End------------------------------------
     }

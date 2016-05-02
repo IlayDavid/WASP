@@ -120,10 +120,13 @@ namespace Client
             Subforum sf = (Subforum)i.DataContext;
             Session.subForum = sf;
             SubForumWindow sfWin = new SubForumWindow();
+            sfWin.Title = sf.Name;
             Session.currentWindow = sfWin;
             this.Hide();
+            sfWin.ShowDialog();
+            this.ShowDialog();
+            Session.subForum = null;
             Session.currentWindow = this;
-            sfWin.Show();
         }
 
         

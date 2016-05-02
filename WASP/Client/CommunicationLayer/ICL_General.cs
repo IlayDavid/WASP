@@ -46,7 +46,7 @@ namespace Client.CommunicationLayer
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
-        List<Moderator> getModerators(int userID, int forumID, int subForumID);
+        List<Moderator> getModerators(int forumID, int subForumID);
 
         /* Purpose: return the date of moderator's term time. */
         DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);

@@ -81,9 +81,12 @@ namespace Client
             Post p = (Post)i.DataContext;
             Session.post = p;
             PostWindow pwin = new PostWindow();
+
+            Session.currentWindow = pwin;
             this.Hide();
-            pwin.Show();
-            this.Show();
+            pwin.ShowDialog();
+            Session.currentWindow = this;
+            this.ShowDialog();
             Session.post = null;
         }
 
@@ -148,7 +151,7 @@ namespace Client
             {
                 Window moderatorView = new Window();
                 DataGrid dg = new DataGrid();
-                List<Moderator> mods = Session.bl.getModerators(Session.user.id, Session.forum.ID, Session.subForum.Id);
+                List<Moderator> mods = Session.bl.getModerators(Session.forum.ID, Session.subForum.Id);
                 dg.ItemsSource = ModeratorView.getView(mods);
                 dg.IsReadOnly = true;
                 moderatorView.Content = dg;

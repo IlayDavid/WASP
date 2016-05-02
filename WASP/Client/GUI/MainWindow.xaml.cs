@@ -69,6 +69,7 @@ namespace Client.GUI
             reverseVisibility(btnLogOut);
             reverseVisibility(btnNewForum);
             reverseVisibility(btnDelete);
+            reverseVisibility(btnReports);
         }
 
         private void reverseVisibility(Button btn)
@@ -94,8 +95,9 @@ namespace Client.GUI
                 Session.currentWindow = fWin;
                 this.Hide();
                 fWin.ShowDialog();
-                Session.currentWindow = null;
-                this.Show();
+                Session.currentWindow = null; //do not need notifications.
+                Session.forum = null;
+                this.ShowDialog();
             }
             catch (Exception ee)
             {
@@ -136,7 +138,27 @@ namespace Client.GUI
 
         private void btnReports_Click(object sender, RoutedEventArgs e)
         {
+            int totalf = Session.bl.totalForums(Session.user.id);
             
+
+            Window reportView = new Window();
+            DataGrid dg = new DataGrid();
+            //todo
+            var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
+            stackPanel.Children.Add(new Label { Content = "Total Forums: " + totalf + "\n"});
+            stackPanel.Children.Add(new Label { Content = "Members that exist in the same forums: "});
+
+            //List<UserView> l = new List<UserView>();
+            //l.Add(new UserView() { ID = 12345, Email="a", Name="b", UserName="c"});
+            //dg.ItemsSource = l;
+            dg.ItemsSource = UserView.getView(Session.bl.membersInDifferentForums(Session.user.id));
+            dg.IsReadOnly = true;
+            stackPanel.Children.Add(dg);
+            reportView.Content = stackPanel;
+            reportView.SizeToContent = SizeToContent.WidthAndHeight;
+            reportView.Title = "SU Reports";
+            reportView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            reportView.ShowDialog();
         }
     }
 }

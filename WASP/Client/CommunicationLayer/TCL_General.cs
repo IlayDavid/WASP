@@ -110,7 +110,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Moderator> getModerators(int userID, int forumID, int subForumID)
+        public List<Moderator> getModerators(int forumID, int subForumID)
         {
             return forums[forumID].subforums[subForumID]._moderators.Values.ToList();
         }

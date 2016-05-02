@@ -51,8 +51,6 @@ namespace Client
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            SubForumWindow subWin = new SubForumWindow();
-            subWin.Show();
             this.Close();
         }
     }
