@@ -21,8 +21,8 @@ namespace WASP.DataClasses
         //subForum.id > -1
         Subforum UpdateSubForum(Subforum sf);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
-        Subforum[] GetSubForums(Collection<int> subForumIds, Forum forum);
-        Subforum GetSubForum(int sfId, int forumId);
+        Subforum[] GetSubForums(Collection<int> subForumIds);
+        Subforum GetSubForum(int sfId);
         //user.id == -1
         User CreateUser(User user);
         //user.id >-1

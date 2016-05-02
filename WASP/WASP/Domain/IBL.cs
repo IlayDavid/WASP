@@ -31,7 +31,7 @@ namespace WASP.Domain
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass);
 
         /*
          * Pre-conditions: superuser is loged-in 
