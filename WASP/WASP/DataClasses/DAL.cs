@@ -51,5 +51,8 @@ namespace WASP.DataClasses
         Post[] GetPosts(Collection<int> Posts);
         Post GetPost(int postId);
         bool DeletePost(int postId);
+
+        Moderator[] GetModeratorsInSubForum(int subForumID);
+       Forum[] GetForumsUserID(int userId);
     }
 }

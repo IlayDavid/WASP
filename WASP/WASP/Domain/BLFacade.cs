@@ -194,12 +194,21 @@ namespace WASP.Domain
 
         public int totalForums(int userID)
         {
-            throw new NotImplementedException();
+            List<User> usersInDiffForums = membersInDifferentForums(userID);
+            return usersInDiffForums.Count;
         }
 
         public List<User> membersInDifferentForums(int userID)
         {
-            throw new NotImplementedException();
+            List<User> userList = new List<User>();
+            Forum[] forums = dal.GetForumsUserID(userID);
+            foreach (Forum forum in forums)
+                
+            {
+                User user = forum.GetMember(userID);
+                userList.Add(user);
+            }
+            return userList;
         }
 
         public User login(string userName, string password, int forumID)
@@ -214,7 +223,8 @@ namespace WASP.Domain
 
         public Post getThread(int userID, int forumID, int threadId)
         {
-            throw new NotImplementedException();
+            Post post = dal.GetPost(threadId);
+            return post;
         }
 
         public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
@@ -224,32 +234,39 @@ namespace WASP.Domain
 
         public Forum getForum(int userID, int forumID)
         {
-            throw new NotImplementedException();
+
         }
 
         public Forum getForum(int forumID)
         {
-            throw new NotImplementedException();
+            return dal.GetForum(forumID);
         }
 
         public Subforum getSubforum(int userID, int forumID, int subforumId)
         {
-            throw new NotImplementedException();
         }
 
         public Subforum getSubforum(int forumID, int subforumId)
         {
-            throw new NotImplementedException();
+            return dal.GetSubForum(subforumId);
         }
 
         public List<Moderator> getModerators(int forumID, int subForumID)
         {
-            throw new NotImplementedException();
+
+            Moderator [] mods = dal.GetModeratorsInSubForum(subForumID);
+            List<Moderator> modsList = new List<Moderator>();
+            foreach (Moderator mod in mods)
+            {
+                modsList.Add(mod);
+            }
+            return modsList;
         }
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {
-            throw new NotImplementedException();
+            Moderator mod = dal.GetModerator(ModeratorID, subforumID);
+            return mod.TermExp;
         }
 
         public List<Forum> getAllForums()
