@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\
+C:\Users\REL\Documents\GitHub\WASP\WASP\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\App.xaml
+C:\Users\REL\Documents\GitHub\WASP\WASP\Client\App.xaml
 12288034625
 
-50-501128215
+50-1698768325
 15767094614
 GUI\AddWindows\AddForum.xaml;GUI\AddWindows\AddMember.xaml;GUI\AddWindows\AddModerator.xaml;GUI\AddWindows\AddPost.xaml;GUI\DeleteWindows\DeleteModerator.xaml;GUI\ForumWindow.xaml;GUI\Login.xaml;GUI\PostWindow.xaml;GUI\SubForumWindow.xaml;GUI\AddWindows\CreateAdmin.xaml;GUI\MainWindow.xaml;GUI\AddWindows\AddSubForum.xaml;
 
-False
+True
 

@@ -212,5 +212,31 @@ namespace Client.BusinessLogic
 
         /* Purpose: return forum's Admin information. */
         Admin getAdmin(int userID, int forumID, int AdminID);
+
+
+        //methods to be implemented for the new assignment:
+        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
+        List<Message> getAllNotificationses(int userID, int forumID);
+
+        List<Message> getNewNotificationses(int userID, int forumID);
+
+        //2.a: remove a moderator.
+        int fireModerator(int adminID, int forumID, int moderatorID);
+
+        //2.b: info recieved by admin
+        int getNumberOfPosts(int adminID, int forumID);
+
+        List<Post> postsByMember(int adminID, int forumID, int userID);
+
+        //A list of all modertors, who appointed them, when, to which subforum, and their posts
+        List<Tuple<Moderator, Admin, DateTime, Subforum, List<Post>>> getModeratorsInfo(int adminID, int forumID);
+
+        //3: info recieved by SuperUser
+        int numberOfForums(int superUserID);
+        //assumes that we go by ID to diffrentiate between same user
+        int numberOfSameMember(int superUserID, int userID);
+
+        //this function comes from the requirement that a moderator can't be deleted by an admin that didn't appoint him
+        Admin addAdmin(int adminID, int forumID, int newAdminID);
     }
 }
