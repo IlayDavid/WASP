@@ -35,14 +35,14 @@ namespace WASP.DataClasses
         //moderator.id >-1
         Moderator updateModerator(Moderator mod);
         //moderatorIds == null -> get all mods. else get all mods in the forum
-        Moderator[] GetModerators(Collection<int> moderatorIds, Forum forum);
+        Moderator[] GetModerators(Collection<int> moderatorIds, Subforum sf);
         Moderator GetModerator(int id, int sfId);
         //Admins.id == -1
         Admin CreateAdmin(Admin admin);
         //Admins.id >-1
         Admin UpdateAdmin(Admin admin);
         //AdminIds == null -> get all admins
-        Admin[] GetAdmins(Collection<int> adminsIds);
+        Admin[] GetAdmins(Collection<int> adminsIds,Forum forum);
         Admin GetAdmin(int adminId,int forumId);
         Post CreatePost(Post post);
         //subForum.id > -1

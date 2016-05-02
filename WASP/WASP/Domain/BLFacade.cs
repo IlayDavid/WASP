@@ -142,22 +142,49 @@ namespace WASP.Domain
 
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            throw new NotImplementedException();
+            User user = dal.GetUser(userID, forumID);
+            Post post = dal.GetPost(postID);
+            Forum forum = dal.GetForum(forumID);
+            if (user.Id!= post.GetAuthor.Id && forum.IsAdmin(userID))
+                throw new UnauthorizedEditPost (userID, postID, post.Container.Id);
+            post.Content = content;
+            dal.UpdatePost(post);
+
+            return 1;
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            throw new NotImplementedException();
-        }
+            Admin admin = dal.GetAdmin(userID, forumID);
+            Moderator mod = dal.GetModerator(moderatorID,subForumID);
+            if (mod.Appointer.Id != admin.Id)
+                throw new UnauthorizedDeleteModerator(userID, moderatorID);
+            dal.deleteModerator(mod);
+            return 1;
+=        }
 
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            throw new NotImplementedException();
+            int counter = 0;
+            Subforum sf = dal.GetSubForum(subForumID);
+            Post[] threads = sf.GetThreads();
+            foreach (Post post in threads)
+            {
+                if (post.GetAuthor.Id == userID)
+                    counter++;
+            }
+            return counter;
         }
-
         public int memberTotalMessages(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            int counter = 0;
+            Forum forum = dal.GetForum(forumID);
+            Subforum [] sfArr = forum.GetAllSubForums();
+            foreach (Subforum sf in sfArr)
+            {
+                counter += subForumTotalMessages(userID, forumID, sf.Id);
+            }
+            return counter;
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
