@@ -21,7 +21,6 @@ namespace WASP.DataClasses
             this.appointedMods = new Dictionary<int, Moderator>();
             this.myDal = myDal;
             this.id = user.Id;
-
         }
 
 

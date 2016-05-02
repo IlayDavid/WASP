@@ -15,9 +15,9 @@ namespace WASP.DataClasses
         private int id;
         private DAL dal;
 
-        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, int id,DAL dal)
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DAL dal)
         {
-            this.id = id;
+            this.id = user.Id;
             this.me = user;
             this.termExpiration = termExpiration;
             this.subForum = sf;

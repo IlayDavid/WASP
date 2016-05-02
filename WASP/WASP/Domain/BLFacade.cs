@@ -5,7 +5,7 @@ using WASP.DataClasses;
 
 namespace WASP.Domain
 {
-    class BL2 : IBL
+    class BLFacade : IBL
 
     {
         private DAL dal;
@@ -80,7 +80,7 @@ namespace WASP.Domain
         Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
             User author = dal.GetUser(userID);
-            Subforum sfContainer = dal.GetSubForum(subForumID,forumID);
+            Subforum sfContainer = dal.GetSubForum(subForumID);
             if (author != null && sfContainer != null)
             {
                 // TODO: check post info with policy (title and content)
@@ -119,7 +119,7 @@ namespace WASP.Domain
             }
             return null;
         }
-        /*
+      /*
        * Pre-conditions: Member is loged-in, second member is exists. 
        * Purpose: send a private message.
        */

@@ -9,71 +9,47 @@ namespace WASP.DataClasses
 {
     public interface DAL
     {
-
         //forum.Id == -1
-         Forum CreateForum(Forum forum);
+        Forum CreateForum(Forum forum);
         //forum.Id > -1
-         Forum UpdateForum(Forum forum);
+        Forum UpdateForum(Forum forum);
         //forumsId == null -> get all forums. else get all forums in the collection.
-         Forum[] GetForums(Collection<int> forumsIds);
-        // 
+        Forum[] GetForums(Collection<int> forumsIds);
         Forum GetForum(int id);
-
         //subForum.id == -1
-         Subforum CreateSubForum(Subforum sf);
+        Subforum CreateSubForum(Subforum sf);
         //subForum.id > -1
-         Subforum UpdateSubForum(Subforum sf);
+        Subforum UpdateSubForum(Subforum sf);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
-         Subforum[] GetSubForums(Collection<int> subForumIds, Forum forum);
-        //
+        Subforum[] GetSubForums(Collection<int> subForumIds, Forum forum);
         Subforum GetSubForum(int sfId, int forumId);
-
         //user.id == -1
-         User CreateUser(User user);
+        User CreateUser(User user);
         //user.id >-1
-         User updateUser(User user);
+        User updateUser(User user);
         //userIds == null -> get all users. else get all users in the forum
-         User[] GetUseres(Collection<int> userIds, Forum forum);
-        //
+        User[] GetUseres(Collection<int> userIds, Forum forum);
         User GetUser(int id, int forumId);
-
-
         //moderator.id == -1
-         Moderator CreateModerator(Moderator mod);
+        Moderator CreateModerator(Moderator mod);
         //moderator.id >-1
-         Moderator updateModerator(Moderator mod);
+        Moderator updateModerator(Moderator mod);
         //moderatorIds == null -> get all mods. else get all mods in the forum
-         Moderator[] GetModerators(Collection<int> moderatorIds, Forum forum);
-        //
+        Moderator[] GetModerators(Collection<int> moderatorIds, Forum forum);
         Moderator GetModerator(int id, int sfId);
-
-
         //Admins.id == -1
-         Admin CreateAdmin(Admin admin);
+        Admin CreateAdmin(Admin admin);
         //Admins.id >-1
-         Admin UpdateAdmin(Admin admin);
+        Admin UpdateAdmin(Admin admin);
         //AdminIds == null -> get all admins
-         Admin[] GetAdmins(Collection<int> adminsIds);
-        //
+        Admin[] GetAdmins(Collection<int> adminsIds);
         Admin GetAdmin(int adminId,int forumId);
-
-
         Post CreatePost(Post post);
         //subForum.id > -1
         Post UpdatePost (Post post);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
         Post[] GetPosts(Collection<int> Posts);
-        //
         Post GetPost(int postId);
-        //
         bool DeletePost(int postId);
-
-
-
-
-
-
-
-
     }
 }

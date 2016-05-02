@@ -21,3 +21,4 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveA
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\El\wasp\WASP\WASP\bin\Debug\WASP.exe.config

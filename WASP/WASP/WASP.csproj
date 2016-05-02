@@ -51,7 +51,6 @@
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\Forum.cs" />
-    <Compile Include="DataClasses\Member.cs" />
     <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Notifications.cs" />
     <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
@@ -60,10 +59,7 @@
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\SuperUser.cs" />
     <Compile Include="DataClasses\User.cs" />
-    <Compile Include="Domain\BL.cs" />
-    <Compile Include="Domain\BL2.cs" />
-    <Compile Include="Domain\ForumBL.cs" />
-    <Compile Include="Domain\ForumIBL.cs" />
+    <Compile Include="Domain\BLFacade.cs" />
     <Compile Include="Domain\IBL.cs" />
     <Compile Include="Exceptions\UnauthorizedEditModTerm.cs" />
     <Compile Include="Exceptions\UnauthorizedAddModerator.cs" />

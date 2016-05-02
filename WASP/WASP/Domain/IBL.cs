@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WASP.DataClasses;
 
+
 namespace WASP.Domain
 {
     public interface IBL
@@ -30,7 +31,7 @@ namespace WASP.Domain
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
          * Pre-conditions: superuser is loged-in 
@@ -45,7 +46,7 @@ namespace WASP.Domain
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
 
         /*
          * Pre-conditions: member is loged-in 
@@ -82,7 +83,7 @@ namespace WASP.Domain
          * Purpose: appoint moderator to the subforum.
          * Return: number >= 0 if success.
          */
-        int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
+        Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
 
         /*
         * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.
@@ -121,7 +122,7 @@ namespace WASP.Domain
         /*  
         * Pre-conditions: Member is loged-in, and is admin of the forum.
         * Purpose: delete moderator from subforum, 
-        * Return: number >= 0 id success        
+        * Return: number >= 0 if success        
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
 
@@ -144,7 +145,6 @@ namespace WASP.Domain
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return number of the forums in the system.*/
         int totalForums(int userID);
-
 
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/
@@ -177,6 +177,11 @@ namespace WASP.Domain
          */
         Post getThread(int userID, int forumID, int threadId);
 
+        /*
+        * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
+        */
+        List<Post> getThreads(int forumID, int subForumID, int from, int amount);
+
         /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
         Forum getForum(int userID, int forumID);
 
@@ -190,7 +195,7 @@ namespace WASP.Domain
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
-        List<Moderator> getModerators(int userID, int forumID, int subForumID);
+        List<Moderator> getModerators(int forumID, int subForumID);
 
         /* Purpose: return the date of moderator's term time. */
         DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
@@ -205,9 +210,9 @@ namespace WASP.Domain
         List<User> getMembers(int userID, int forumID);
 
         /* Purpose: return forum's subForums information. */
-        List<Subforum> getSubforums(int userID, int forumID);
+        List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(User user, int forumID, int userID);
+        Admin getAdmin(int userID, int forumID, int AdminID);
     }
 }
