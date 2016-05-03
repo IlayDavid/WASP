@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Client.CommunicationLayer
 {
@@ -53,7 +50,6 @@ namespace Client.CommunicationLayer
 
             Post p21 = createThread(u21.id, forum2.id, "Thread number 1", "this is the opening thread test 1", sf21.id);
             Post p22 = createThread(u21.id, forum2.id, "Thread number 2", "this is the opening thread test 2", sf22.id);
-
         }
 
         public User login(string userName, string password, int forumID)
@@ -109,34 +105,29 @@ namespace Client.CommunicationLayer
         }
         public List<Moderator> getModerators(int forumID, int subForumID)
         {
-            return forums[forumID].subforums[subForumID].moderators.Values.ToList();
+            return subforums[subForumID].moderators.Values.ToList();
         }
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {
             throw new NotImplementedException();
         }
-
         public List<Forum> getAllForums()
         {
             return forums.Values.ToList();
         }
-
         public List<Admin> getAdmins(int userID, int forumID)
         {
             throw new NotImplementedException();
             //return forums[forumID].admins.Values.ToList();
         }
-
         public List<User> getMembers(int userID, int forumID)
         {
             return forums[forumID].members.Values.ToList();
         }
-
         public List<Subforum> getSubforums(int forumID)
         {
             return forums[forumID].subforums.Values.ToList();
         }
-
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
             //return forums[forumID].admins[AdminID];

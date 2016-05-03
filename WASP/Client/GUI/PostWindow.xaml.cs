@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
+using System;
+using Client.GUI.EditWindows;
 
 namespace Client
 {
@@ -37,21 +28,35 @@ namespace Client
             }
 
             Post p = Session.post;
-            Post rep = new Post("Thread 1", "this is a reply post 1", Session.user, Session.subForum.id, Session.post);
-            
             TreeViewItem treeItem = new TreeViewItem();
             treeItem.Header = "Title: " + p.title + " Author: " + p.author.name + " Date: " + p.publishedAt.Date;
+            treeItem.DataContext = p;
             treeItem.Items.Add(new TreeViewItem() { Header = p.content });
-            treeItem.Items.Add(new TreeViewItem() { Header = p.editAt.Date });
+            treeItem.Items.Add(new TreeViewItem() { Header = "Last Edit: " + p.editAt.Date });
             postMesssages.Items.Add(treeItem);
             foreach (Post post in p.replies)
             {
-                TreeViewItem treeItem2 = new TreeViewItem();
-                treeItem2.Header = "Title: " + post.title + " Author: " + post.author.name + " Date: " +post.publishedAt.Date;
-                treeItem2.Items.Add(new TreeViewItem() { Header = post.content });
-                treeItem2.Items.Add(new TreeViewItem() { Header = post.editAt.Date });
-                treeItem2.Items.Add(new TreeViewItem() { Header =post.inReplyTo.author.name });
-                postMesssages.Items.Add(treeItem2);
+                treeItem = new TreeViewItem();
+                treeItem.Header = "Title: " + post.title + " Author: " + post.author.name + " Date: " +post.publishedAt.Date;
+                treeItem.DataContext = post;
+                treeItem.Items.Add(new TreeViewItem() { Header = post.content});
+                treeItem.Items.Add(new TreeViewItem() { Header = "Last Edit: " + post.editAt.Date });
+                treeItem.Items.Add(new TreeViewItem() { Header = "by " + post.inReplyTo.author.name });
+                postMesssages.Items.Add(treeItem);
+            }
+        }
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                Session.setModerators();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
+                    ChangeVisibilityModerator();
+                else
+                    ChangeVisibilityUser();
             }
         }
         private void ChangeVisibilitySU()
@@ -94,12 +99,35 @@ namespace Client
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
+                Post p = (Post)selected.DataContext;
+                if (p == null)
+                    p = (Post)((TreeViewItem)selected.Parent).DataContext;
+                Session.bl.deletePost(Session.user.id, Session.forum.id, p.id);
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
+                Post p = (Post)selected.DataContext;
+                if (p == null)
+                    p = (Post)((TreeViewItem)selected.Parent).DataContext;
+                EditContent editC = new EditContent(p);
+                editC.ShowDialog();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -109,7 +137,7 @@ namespace Client
             if (Session.user == null)
                 return;
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
+            setVisibility();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -122,7 +150,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                ChangeVisibilityUser();
+                setVisibility();
                 Session.user = null;
             }
         }
@@ -133,7 +161,7 @@ namespace Client
             addM.ShowDialog();
             Session.user = addM.getUser();
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
+            setVisibility();
         }
     }
 }

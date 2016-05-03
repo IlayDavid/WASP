@@ -1,10 +1,7 @@
 ﻿using Client.BusinessLogic;
 using Client.DataClasses;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.GUI
 {
@@ -46,6 +43,27 @@ namespace Client.GUI
                 posts.Add(p.id, p);
             }
         }
+
+        public static void setModerators()
+        {
+            List<Moderator> list = bl.getModerators(0, subForum.id);
+            subForum.moderators = new Dictionary<int, Moderator>();
+            foreach (Moderator mod in list)
+            {
+                subForum.moderators.Add(mod.user.id, mod);
+            }
+        }
+
+        internal static void setAdmins()
+        {
+            List<User> list = bl.getAdmins(user.id, forum.id).Select(x => x.user).ToList();
+            forum.admins = new Dictionary<int, User>();
+            foreach (User admin in list)
+            {
+                forum.admins.Add(admin.id, admin);
+            }
+        }
+
         public static void CloseAllWindows()
         {
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)

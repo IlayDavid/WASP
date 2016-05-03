@@ -9,8 +9,8 @@ namespace Client.DataClasses
         public Forum(string name, string description, User admin)
         {
             subforums = new Dictionary<int, Subforum>();
-            this.name = name;
-            this.description = description;
+            Name = name;
+            Description = description;
             id = countId++;
             admins = new Dictionary<int, User>();
             admins.Add(admin.id, admin);
@@ -18,8 +18,8 @@ namespace Client.DataClasses
             members.Add(admin.id, admin);
         }
         public int id { get; set; }
-        public string name{ get; set; }
-        public string description{ get; set; }
+        public string Name{ get; set; }
+        public string Description{ get; set; }
         public Policy policy { get; set; }
         
         public Dictionary<int,User> members { get; set; }

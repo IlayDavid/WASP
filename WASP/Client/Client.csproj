@@ -84,6 +84,9 @@
     <Compile Include="GUI\DeleteWindows\DeleteModerator.xaml.cs">
       <DependentUpon>DeleteModerator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\EditWindows\EditContent.xaml.cs">
+      <DependentUpon>EditContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\EditWindows\EditTerm.xaml.cs">
       <DependentUpon>EditTerm.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\DeleteWindows\DeleteModerator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\EditWindows\EditContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,10 +181,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\PostWindow.xaml.cs">
@@ -188,9 +191,6 @@
     </Compile>
     <Compile Include="GUI\AddWindows\AddSubForum.xaml.cs">
       <DependentUpon>AddSubForum.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

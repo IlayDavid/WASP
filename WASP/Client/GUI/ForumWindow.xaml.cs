@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Client.DataClasses;
-using Client.BusinessLogic;
 using Client.GUI;
 using Client.GUI.AddWindows;
 
@@ -43,15 +32,38 @@ namespace Client
                 SubForums.Items.Add(newItem);
             }
         }
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                Session.setAdmins();
+                if (Session.user != null )
+                {
+                    welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                    if (Session.user is SuperUser)
+                        ChangeVisibilitySU();
+                    else if (Session.forum.admins.ContainsKey(Session.user.id))
+                        ChangeVisibilityAdmin();
+                    else
+                        ChangeVisibilityUser();
 
+                }
+            }
+        }
         private void ChangeVisibilitySU()
         {
             reverseVisibility(btnAddAdministrator);
             reverseVisibility(btnAddSubforum);
             reverseVisibility(btnEditForumPolicy);
 
+            ChangeVisibilityAdmin();
+        }
+
+        private void ChangeVisibilityAdmin()
+        {
             ChangeVisibilityUser();
         }
+
         private void ChangeVisibilityUser()
         {
             reverseVisibility(btnRegister);
@@ -129,24 +141,15 @@ namespace Client
             Session.currentWindow = this;
         }
 
-        
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            AddMember addM = new AddMember();
-            addM.ShowDialog();
-            Session.user = addM.getUser();
-            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
-        }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login(Session.forum.id);
-            login.ShowDialog(); //should update session.
+            login.ShowDialog();
             if (Session.user == null)
                 return;
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
+            setVisibility();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -159,9 +162,18 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                ChangeVisibilityUser();
+                setVisibility();
                 Session.user = null;
             }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            AddMember addM = new AddMember();
+            addM.ShowDialog();
+            Session.user = addM.getUser();
+            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+            setVisibility();
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {

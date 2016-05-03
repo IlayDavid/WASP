@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
@@ -44,6 +36,7 @@ namespace Client
         {
             if (Session.user != null)
             {
+                Session.setModerators();
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
@@ -111,7 +104,7 @@ namespace Client
             if (Session.user == null)
                 return;
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
+            setVisibility();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -124,7 +117,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                ChangeVisibilityUser();
+                setVisibility();
                 Session.user = null;
             }
         }
@@ -135,7 +128,7 @@ namespace Client
             addM.ShowDialog();
             Session.user = addM.getUser();
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            ChangeVisibilityUser();
+            setVisibility();
         }
 
         private void btnPostThread_Click(object sender, RoutedEventArgs e)
