@@ -51,7 +51,7 @@ namespace WASP.DataClasses
         Post[] GetPosts(Collection<int> Posts);
         Post GetPost(int postId);
         bool DeletePost(int postId);
-        bool DeleteModerater(int modId, int subForumId);
+        bool DeleteModerator(int modId, int subForumId);
 
         Moderator[] GetModeratorsInSubForum(int subForumID);
 

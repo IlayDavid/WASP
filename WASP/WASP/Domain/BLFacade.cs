@@ -159,7 +159,7 @@ namespace WASP.Domain
             Moderator mod = dal.GetModerator(moderatorID, subForumID);
             if (mod.Appointer.Id != admin.Id)
                 throw new UnauthorizedDeleteModerator(userID, moderatorID);
-            dal.DeleteModerater(mod.Id, subForumID);
+            dal.DeleteModerator(mod.Id, subForumID);
             return 1;
         }
     
@@ -249,6 +249,8 @@ namespace WASP.Domain
         public Subforum getSubforum(int userID, int forumID, int subforumId)
         {
             //TODO: amitay needs to delete this
+            throw new NotImplementedException();
+
         }
 
         public Subforum getSubforum(int forumID, int subforumId)
