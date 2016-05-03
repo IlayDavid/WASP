@@ -70,6 +70,7 @@
     <Compile Include="Exceptions\UnauthorizedDeleteForum.cs" />
     <Compile Include="Exceptions\UnauthorizedDeleteModerator.cs" />
     <Compile Include="Exceptions\UnauthorizedDeleteSubForum.cs" />
+    <Compile Include="Exceptions\UnauthorizedEditPost.cs" />
     <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Exceptions\UnauthorizedAddAdmin.cs" />
     <Compile Include="Exceptions\UnauthorizedDeletePost.cs" />

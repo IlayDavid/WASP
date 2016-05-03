@@ -145,8 +145,8 @@ namespace WASP.Domain
             User user = dal.GetUser(userID, forumID);
             Post post = dal.GetPost(postID);
             Forum forum = dal.GetForum(forumID);
-            if (user.Id!= post.GetAuthor.Id && forum.IsAdmin(userID))
-                throw new UnauthorizedEditPost (userID, postID, post.Container.Id);
+            if (user.Id != post.GetAuthor.Id && forum.IsAdmin(userID))
+                throw new UnauthorizedEditPost(userID, postID, post.Container.Id);
             post.Content = content;
             dal.UpdatePost(post);
 
@@ -156,12 +156,14 @@ namespace WASP.Domain
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
             Admin admin = dal.GetAdmin(userID, forumID);
-            Moderator mod = dal.GetModerator(moderatorID,subForumID);
+            Moderator mod = dal.GetModerator(moderatorID, subForumID);
             if (mod.Appointer.Id != admin.Id)
                 throw new UnauthorizedDeleteModerator(userID, moderatorID);
-            dal.deleteModerator(mod);
+            dal.DeleteModerater(mod.Id, subForumID);
             return 1;
-=        }
+        }
+    
+    
 
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
@@ -230,11 +232,13 @@ namespace WASP.Domain
         public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
         {
             throw new NotImplementedException();
+            //TODO : amitay needs to delete this
         }
 
         public Forum getForum(int userID, int forumID)
         {
-
+            throw new NotImplementedException();
+            // TODO: amitay needs to delete this
         }
 
         public Forum getForum(int forumID)
@@ -244,6 +248,7 @@ namespace WASP.Domain
 
         public Subforum getSubforum(int userID, int forumID, int subforumId)
         {
+            //TODO: amitay needs to delete this
         }
 
         public Subforum getSubforum(int forumID, int subforumId)
@@ -265,33 +270,62 @@ namespace WASP.Domain
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {
-            Moderator mod = dal.GetModerator(ModeratorID, subforumID);
+            Moderator mod = dal.GetModerator(moderatorID, subforumID);
             return mod.TermExp;
         }
 
         public List<Forum> getAllForums()
         {
-            throw new NotImplementedException();
+            List<Forum> forumsList = new List<Forum>();
+            Forum[] forums = dal.GetForums(null);
+            foreach(Forum forum in forums)
+            {
+                forumsList.Add(forum);
+            }
+            return forumsList;
         }
 
         public List<Admin> getAdmins(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            Forum forum = dal.GetForum(forumID);
+            List<Admin> adminsList = new List<Admin>();
+            Admin[] admins = dal.GetAdmins(null, forum); 
+            foreach (Admin admin in admins)
+            {
+                adminsList.Add(admin);
+            }
+            return adminsList;
         }
 
         public List<User> getMembers(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            Forum forum = dal.GetForum(forumID);
+            List<User> membersList = new List<User>();
+            User[] members = dal.GetUseres(null, forum);
+            foreach (User member in members)
+            {
+                membersList.Add(member);
+            }
+            return membersList;
         }
 
         public List<Subforum> getSubforums(int forumID)
         {
-            throw new NotImplementedException();
+            List<Subforum> sfList = new List<Subforum>();
+            Forum forum = dal.GetForum(forumID);
+            Subforum[] sfArr = forum.GetAllSubForums();
+            foreach(Subforum sf in sfArr)
+            {
+                sfList.Add(sf);
+            }
+            return sfList;
         }
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            throw new NotImplementedException();
+            // TODO : amitay wants to check with policy if user is a member, if so, show admins otherwise don't show admins.
+            Admin admin = dal.GetAdmin(AdminID, forumID);
+            return admin;
         }
     }
 }
