@@ -44,7 +44,7 @@ namespace Client.CommunicationLayer
 
         public User login(string userName, string password, int forumID)
         {
-            string json = "\"user\":{\"username\":" + userName + "," + "\"password\":" + password + "," + "\"forumID\":" + forumID + "}";
+            string json = "\"User\":{\"userName\":" + userName + "," + "\"password\":" + password + "," + "\"forumID\":" + forumID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToUser(res);
         }
@@ -56,7 +56,7 @@ namespace Client.CommunicationLayer
 
         public SuperUser loginSU(string userName, string password)
         {
-            string json = "\"superuser\":{\"username\":" + userName + "," + "\"password\":" + password + "}";
+            string json = "\"SuperUser\":{\"userName\":" + userName + "," + "\"password\":" + password + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToSuperUser(res);
         }
@@ -70,7 +70,7 @@ namespace Client.CommunicationLayer
 
         public Post getThread(int forumID, int threadId)
         {
-            string json = ""; // "\"thread\":{\"userid\":" + userID + "," + "\"threadID\":" + threadId + "," + "\"forumID\":" + forumID + "}";
+            string json =  "\"Post\":{\"threadId\":" + threadId + "," + "\"forumID\":" + forumID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToPost(res);
         }
@@ -90,14 +90,14 @@ namespace Client.CommunicationLayer
 
         public Forum getForum(int userID, int forumID)
         {
-            string json = "\"forum\":{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
+            string json = "\"Forum\":{\"userID\":" + userID + "," + "\"forumID\":" + forumID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToForum(res);
         }
 
         public Forum getForum(int forumID)
         {
-            string json = "\"forum\":{\"forumid\":" + forumID + "}";
+            string json = "\"Forum\":{\"forumID\":" + forumID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToForum(res);
         }
@@ -109,7 +109,7 @@ namespace Client.CommunicationLayer
 
         public Subforum getSubforum(int forumID, int subforumId)
         {
-            string json = "\"subforum\":{\"forumID\":" + forumID + "," + "\"subforumID\":" + subforumId + "}";
+            string json = "\"Subforum\":{\"forumID\":" + forumID + "," + "\"subforumId\":" + subforumId + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToSubforum(res);
         }
@@ -132,7 +132,7 @@ namespace Client.CommunicationLayer
 
         private Moderator getModerator(int userID, int forumID, int subForumID, int moderatorID)
         {
-            string json = "\"moderator\":{\"userid\":" + userID + "," + "\"forumID\":" + forumID + "," + "\"subforumID\":" + subForumID + "," + "\"moderatorID\":" + moderatorID + "}";
+            string json = "\"Moderator\":{\"userID\":" + userID + "," + "\"forumID\":" + forumID + "," + "\"subForumID\":" + subForumID + "," + "\"moderatorID\":" + moderatorID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToModerator(res);
         }
@@ -152,7 +152,7 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {
-            string json = "\"allForum\"}";
+            string json = "\"allForums\"}";
             string res = httpReq(json, "GET", _url);
             return parseStringToForums(res);
         }
@@ -194,9 +194,7 @@ namespace Client.CommunicationLayer
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            string json = "";// "\"admin\":{\"forumID\":" + forumID + "," + "\"userID\":" + userID +
-                       //   "\"user\":{\"username\":" + user.name + "," + "\"userID\":" + user.id + "," + "\"password\":" + user.password + "}" +
-                     //       "}";
+            string json = "\"Admin\":{\"forumID\":" + forumID + "," + "\"userID\":" + userID + "," + "\"AdminID\":" + AdminID + "}";
             string res = httpReq(json, "GET", _url);
             return parseStringToAdmin(res);
         }
