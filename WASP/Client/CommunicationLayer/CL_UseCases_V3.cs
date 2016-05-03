@@ -28,6 +28,11 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
+        public Admin addAdmin(int adminID, int forumID, int newAdminID)
+        {
+            throw new NotImplementedException();
+        }
+
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {

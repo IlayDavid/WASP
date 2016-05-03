@@ -29,6 +29,8 @@ namespace Client.CommunicationLayer
         List<Message> getAllNotificationses(int userID, int forumID);
         List<Message> getNewNotificationses(int userID, int forumID);
 
+        Admin addAdmin(int adminID, int forumID, int newAdminID);
+
         //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */

@@ -79,7 +79,7 @@ namespace Client.CommunicationLayer
         {
             throw new NotImplementedException();
         }
-        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        public List<Post> getRplays(int forumID, int subForumID, int postID)
         {
             throw new NotImplementedException();
         }

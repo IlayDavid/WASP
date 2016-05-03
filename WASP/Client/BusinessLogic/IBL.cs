@@ -187,7 +187,7 @@ namespace Client.BusinessLogic
         /*
         * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
         */
-        List<Post> getReplays(int forumID, int subForumID, int postID);
+        List<Post> getReplys(int forumID, int subForumID, int postID);
 
         /* Purpose: returns a forum with forumId, if doesnt exist returns NULL */
         Forum getForum(int forumID);

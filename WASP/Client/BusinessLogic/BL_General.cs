@@ -40,9 +40,10 @@ namespace Client.BusinessLogic
             if (amount < 0) throw new Exception("ERROR: illegal amount");
             return _cl.getThreads(forumID, subForumID, from, amount);
         }
-        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        public List<Post> getReplys(int forumID, int subForumID, int postID)
         {
-            throw new NotImplementedException();
+            if (forumID < 0 || subForumID < 0 || postID < 0) throw new Exception("ERROR: id is illegal");
+            return _cl.getRplays(0, 0, postID);
         }
 
         public Post getThread(int forumID, int threadId)

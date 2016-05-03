@@ -12,12 +12,17 @@ namespace Client.BusinessLogic
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || postID < 0) throw new Exception("ERROR: ID is illegal");
+            if(!IsStrValid(content)) throw new Exception("ERROR: content is empty");
+
+            return _cl.editPost(userID, 0, postID, content);
         }
 
         public Admin addAdmin(int adminID, int forumID, int newAdminID)
         {
-            throw new NotImplementedException();
+            if (adminID < 0 || forumID < 0 || newAdminID < 0) throw new Exception("ERROR: ID is illegal");
+
+            return _cl.addAdmin(adminID, forumID, newAdminID);
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
@@ -38,17 +43,21 @@ namespace Client.BusinessLogic
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            return _cl.subForumTotalMessages(userID, forumID, subForumID);
         }
 
         public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            throw new NotImplementedException();
+            if (adminID < 0 || forumID < 0 || userID < 0) throw new Exception("ERROR: ID is illegal");
+
+            return _cl.postsByMember(adminID, forumID, userID);
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0) throw new Exception("ERROR: ID is illegal");
+            return _cl.moderatorReport(userID, forumID);
         }
 
         //-----------Super User Reports---------------

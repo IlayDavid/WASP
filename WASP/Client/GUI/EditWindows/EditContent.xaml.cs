@@ -20,7 +20,9 @@ namespace Client.GUI.EditWindows
     /// </summary>
     public partial class EditContent : Window
     {
-        Post curPost;
+        private Post curPost;
+        private string postContent;
+
         public EditContent(Post p)
         {
             InitializeComponent();
@@ -31,13 +33,18 @@ namespace Client.GUI.EditWindows
         {
             try
             {
-                Session.bl.editPost(Session.user.id, Session.forum.id, curPost.id, txtContent.Text);
+                postContent = txtContent.Text;
+                Session.bl.editPost(Session.user.id, Session.forum.id, curPost.id, postContent);
                 this.Close();
             }
             catch(Exception ee)
             {
                 MessageBox.Show(ee.Message);
             }
+        }
+        public string getPostContent()
+        {
+            return postContent;
         }
     }
 }

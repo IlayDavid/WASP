@@ -5,6 +5,7 @@ using Client.GUI;
 using Client.GUI.AddWindows;
 using System;
 using Client.GUI.EditWindows;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -13,6 +14,10 @@ namespace Client
     /// </summary>
     public partial class PostWindow : Window, INotificable
     {
+        private readonly int CONTENT_IND = 0;
+        private readonly int EDIT_AT_IND = 0;
+        private readonly int BY_IND = 0;
+
         public PostWindow()
         {
             InitializeComponent();
@@ -28,23 +33,26 @@ namespace Client
             }
 
             Post p = Session.post;
-            TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Header = "Title: " + p.title + " Author: " + p.author.name + " Date: " + p.publishedAt.Date;
-            treeItem.DataContext = p;
-            treeItem.Items.Add(new TreeViewItem() { Header = p.content });
-            treeItem.Items.Add(new TreeViewItem() { Header = "Last Edit: " + p.editAt.Date });
+            TreeViewItem treeItem = makePostTree(p);
             postMesssages.Items.Add(treeItem);
             foreach (Post post in p.replies)
             {
-                treeItem = new TreeViewItem();
-                treeItem.Header = "Title: " + post.title + " Author: " + post.author.name + " Date: " +post.publishedAt.Date;
-                treeItem.DataContext = post;
-                treeItem.Items.Add(new TreeViewItem() { Header = post.content});
-                treeItem.Items.Add(new TreeViewItem() { Header = "Last Edit: " + post.editAt.Date });
-                treeItem.Items.Add(new TreeViewItem() { Header = "by " + post.inReplyTo.author.name });
-                postMesssages.Items.Add(treeItem);
+                treeItem = makePostTree(post);
+                ((TreeViewItem) postMesssages.Items[0]).Items.Add(treeItem);
             }
         }
+
+        private TreeViewItem makePostTree(Post post)
+        {
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = "Title: " + post.title + " Author: " + post.author.name + " Date: " + post.publishedAt.ToShortDateString();
+            treeItem.DataContext = post;
+            treeItem.Items.Add(new TreeViewItem() { Header = post.content, IsEnabled = false});
+            treeItem.Items.Add(new TreeViewItem() { Header = "Last Edit: " + post.editAt.ToShortDateString(), IsEnabled = false });
+            treeItem.Items.Add(new TreeViewItem() { Header = "by " + post.author.name, IsEnabled = false });
+            return treeItem;
+        }
+
         private void setVisibility()
         {
             if (Session.user != null)
@@ -103,9 +111,9 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post p = (Post)selected.DataContext;
-                if (p == null)
-                    p = (Post)((TreeViewItem)selected.Parent).DataContext;
-                Session.bl.deletePost(Session.user.id, Session.forum.id, p.id);
+                int isSuc = Session.bl.deletePost(Session.user.id, Session.forum.id, p.id);
+                if (isSuc > 0)
+                    postMesssages.Items.Remove(selected);
             }
             catch (Exception ee)
             {
@@ -119,10 +127,9 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post p = (Post)selected.DataContext;
-                if (p == null)
-                    p = (Post)((TreeViewItem)selected.Parent).DataContext;
                 EditContent editC = new EditContent(p);
                 editC.ShowDialog();
+                ((TreeViewItem)selected.Items[CONTENT_IND]).Header = editC.getPostContent();
             }
             catch (Exception ee)
             {
@@ -162,6 +169,24 @@ namespace Client
             Session.user = addM.getUser();
             welcomeTextBlock.Text = "Welcome, " + Session.user.name;
             setVisibility();
+        }
+
+        private void postMesssages_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
+                Post post = (Post)selected.DataContext;
+                List<Post> replys = Session.bl.getReplys(0, 0, post.id);
+                foreach(Post p in replys)
+                {
+                    selected.Items.Add(makePostTree(p));
+                }
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
     }
 }
