@@ -33,12 +33,12 @@ namespace Client
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 ChangeVisibilitySU();
             }
-            Session.forum.subforums = Subforum.ListToDictionary(Session.bl.getSubforums(Session.forum.ID));
+            Session.forum.subforums = Subforum.ListToDictionary(Session.bl.getSubforums(Session.forum.id));
             //presenting the subforums list 
             foreach (Subforum sf in Session.forum.subforums.Values)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.Content = sf.Name;
+                newItem.Content = sf.name;
                 newItem.DataContext = sf;
                 SubForums.Items.Add(newItem);
             }
@@ -103,7 +103,7 @@ namespace Client
             if (newSf != null)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.Content = newSf.Name;
+                newItem.Content = newSf.name;
                 newItem.DataContext = newSf;
                 SubForums.Items.Add(newItem);
             }
@@ -120,7 +120,7 @@ namespace Client
             Subforum sf = (Subforum)i.DataContext;
             Session.subForum = sf;
             SubForumWindow sfWin = new SubForumWindow();
-            sfWin.Title = sf.Name;
+            sfWin.Title = sf.name;
             Session.currentWindow = sfWin;
             this.Hide();
             sfWin.ShowDialog();
@@ -141,7 +141,7 @@ namespace Client
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login(Session.forum.ID);
+            Login login = new Login(Session.forum.id);
             login.ShowDialog(); //should update session.
             if (Session.user == null)
                 return;

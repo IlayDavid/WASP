@@ -17,7 +17,7 @@ namespace Client.DataClasses
             List<ForumView> ret = new List<ForumView>();
             foreach (Forum f in forums)
             {
-                ret.Add(new ForumView() { ID = f.ID, Name = f.Name, Description = f.Description });
+                ret.Add(new ForumView() { ID = f.id, Name = f.name, Description = f.description });
             }
             return ret;
         }

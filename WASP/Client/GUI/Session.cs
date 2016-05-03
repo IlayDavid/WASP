@@ -26,7 +26,7 @@ namespace Client.GUI
                 forums = new Dictionary<int, Forum>();
             foreach (Forum f in fList)
             {
-                forums.Add(f.ID, f);
+                forums.Add(f.id, f);
             }
         }
         public static void AddSubForums(List<Subforum> sfList)
@@ -35,7 +35,7 @@ namespace Client.GUI
                 subforums = new Dictionary<int, Subforum>();
             foreach (Subforum sf in sfList)
             {
-                subforums.Add(sf.Id, sf);
+                subforums.Add(sf.id, sf);
             }
         }
         public static void AddPosts(List<Post> pList)
@@ -43,7 +43,7 @@ namespace Client.GUI
             posts = new Dictionary<int, Post>();
             foreach (Post p in pList)
             {
-                posts.Add(p._id, p);
+                posts.Add(p.id, p);
             }
         }
         public static void CloseAllWindows()

@@ -23,7 +23,7 @@ namespace Client.GUI.DeleteWindows
         public DeleteModerator()
         {
             InitializeComponent();
-            foreach (Moderator moder in Session.subForum._moderators.Values)
+            foreach (Moderator moder in Session.subForum.moderators.Values)
             {
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = moder.user.userName;
@@ -43,8 +43,8 @@ namespace Client.GUI.DeleteWindows
             int moderatorID = ((Moderator)selectedItem.DataContext).user.id;
             try
             {
-                int isDelete = Session.bl.deleteModerator(Session.user.id, Session.forum.ID,
-                    moderatorID, Session.subForum.Id);
+                int isDelete = Session.bl.deleteModerator(Session.user.id, Session.forum.id,
+                    moderatorID, Session.subForum.id);
                 this.Close();
             }
             catch (Exception ee)

@@ -28,31 +28,31 @@ namespace Client.CommunicationLayer
             initialize("amitay", "a", 205857121, "amitay140@gmail.com", "a");
 
             Forum forum1 = createForum(_su.id, "forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", null);
-            User u11 = subscribeToForum(1234, "amitay140", "amitay", "amitay140@gmail.com", "1", forum1.ID);
-            User u12 = subscribeToForum(1235, "moshe12", "moshe", "moshe@gmail.com", "1", forum1.ID);
-            User u13 = subscribeToForum(1236, "kobi90", "kobi", "kobi@gmail.com", "1", forum1.ID);
+            User u11 = subscribeToForum(1234, "amitay140", "amitay", "amitay140@gmail.com", "1", forum1.id);
+            User u12 = subscribeToForum(1235, "moshe12", "moshe", "moshe@gmail.com", "1", forum1.id);
+            User u13 = subscribeToForum(1236, "kobi90", "kobi", "kobi@gmail.com", "1", forum1.id);
 
             Forum forum2 = createForum(_su.id, "Sport", "This forum is about sport games", 333, "bb", "moshe", "moshe@gmail.com", "1", null);
-            User u21 = subscribeToForum(1234, "amitay141", "amitay", "amitay141@gmail.com", "1", forum2.ID);
-            User u22 = subscribeToForum(1235, "moshe13", "moshe", "moshe1@gmail.com", "1", forum2.ID);
-            User u23 = subscribeToForum(1236, "kobi91", "kobi", "kobi1@gmail.com", "1", forum2.ID);
+            User u21 = subscribeToForum(1234, "amitay141", "amitay", "amitay141@gmail.com", "1", forum2.id);
+            User u22 = subscribeToForum(1235, "moshe13", "moshe", "moshe1@gmail.com", "1", forum2.id);
+            User u23 = subscribeToForum(1236, "kobi91", "kobi", "kobi1@gmail.com", "1", forum2.id);
 
-            Subforum sf11 = createSubForum(_su.id, forum1.ID, "Sub - forum 1", "this is SF 1", u11.id, DateTime.Now.AddDays(3));
-            Subforum sf12 = createSubForum(_su.id, forum1.ID, "Sub - forum 2", "this is SF 2", u12.id, DateTime.Now.AddDays(3));
-            Subforum sf13 = createSubForum(_su.id, forum1.ID, "Sub - forum 3", "this is SF 3", u13.id, DateTime.Now.AddDays(3));
+            Subforum sf11 = createSubForum(_su.id, forum1.id, "Sub - forum 1", "this is SF 1", u11.id, DateTime.Now.AddDays(3));
+            Subforum sf12 = createSubForum(_su.id, forum1.id, "Sub - forum 2", "this is SF 2", u12.id, DateTime.Now.AddDays(3));
+            Subforum sf13 = createSubForum(_su.id, forum1.id, "Sub - forum 3", "this is SF 3", u13.id, DateTime.Now.AddDays(3));
             
-            Subforum sf21 = createSubForum(_su.id, forum2.ID, "Sub - forum 1", "this is SF 1", u21.id, DateTime.Now.AddDays(3));
-            Subforum sf22 = createSubForum(_su.id, forum2.ID, "Sub - forum 2", "this is SF 2", u21.id, DateTime.Now.AddDays(3));
+            Subforum sf21 = createSubForum(_su.id, forum2.id, "Sub - forum 1", "this is SF 1", u21.id, DateTime.Now.AddDays(3));
+            Subforum sf22 = createSubForum(_su.id, forum2.id, "Sub - forum 2", "this is SF 2", u21.id, DateTime.Now.AddDays(3));
 
-            Post p111 = createThread(u11.id, forum1.ID, "Thread number 1", "this is the opening thread test 1", sf11.Id);
-            Post p112 = createThread(u11.id, forum1.ID, "Thread number 2", "this is the opening thread test 2", sf11.Id);
-            Post p113 = createThread(u11.id, forum1.ID, "Thread number 3", "this is the opening thread test 3", sf11.Id);
+            Post p111 = createThread(u11.id, forum1.id, "Thread number 1", "this is the opening thread test 1", sf11.id);
+            Post p112 = createThread(u11.id, forum1.id, "Thread number 2", "this is the opening thread test 2", sf11.id);
+            Post p113 = createThread(u11.id, forum1.id, "Thread number 3", "this is the opening thread test 3", sf11.id);
 
-            Post p12 = createThread(u12.id, forum1.ID, "Thread number 2", "this is the opening thread test 2", sf12.Id);
-            Post p13 = createThread(u13.id, forum1.ID, "Thread number 3", "this is the opening thread test 3", sf13.Id);
+            Post p12 = createThread(u12.id, forum1.id, "Thread number 2", "this is the opening thread test 2", sf12.id);
+            Post p13 = createThread(u13.id, forum1.id, "Thread number 3", "this is the opening thread test 3", sf13.id);
 
-            Post p21 = createThread(u21.id, forum2.ID, "Thread number 1", "this is the opening thread test 1", sf21.Id);
-            Post p22 = createThread(u21.id, forum2.ID, "Thread number 2", "this is the opening thread test 2", sf22.Id);
+            Post p21 = createThread(u21.id, forum2.id, "Thread number 1", "this is the opening thread test 1", sf21.id);
+            Post p22 = createThread(u21.id, forum2.id, "Thread number 2", "this is the opening thread test 2", sf22.id);
 
         }
 
@@ -82,7 +82,7 @@ namespace Client.CommunicationLayer
         //---------------------------------Getters----------------------------------------------
         public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
         {
-            List<Post> ts = forums[forumID].subforums[subForumID]._threads;
+            List<Post> ts = forums[forumID].subforums[subForumID].threads;
             int min = amount;
             if (ts.Count()-from < min)
                 min = ts.Count();
@@ -96,7 +96,7 @@ namespace Client.CommunicationLayer
 
         public List<Post> getReplays(int forumID, int subForumID, int postID)
         {
-            return posts[postID]._replies;
+            return posts[postID].replies;
         }
 
         public Forum getForum(int forumID)
@@ -109,7 +109,7 @@ namespace Client.CommunicationLayer
         }
         public List<Moderator> getModerators(int forumID, int subForumID)
         {
-            return forums[forumID].subforums[subForumID]._moderators.Values.ToList();
+            return forums[forumID].subforums[subForumID].moderators.Values.ToList();
         }
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {

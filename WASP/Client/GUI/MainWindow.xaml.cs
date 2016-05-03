@@ -88,9 +88,9 @@ namespace Client.GUI
 
             try
             {
-                Session.forum = Session.bl.getAllForums().First(x => x.ID == id);
+                Session.forum = Session.bl.getAllForums().First(x => x.id == id);
                 ForumWindow fWin = new ForumWindow();
-                fWin.Title = Session.forum.Name;
+                fWin.Title = Session.forum.name;
                 
                 Session.currentWindow = fWin;
                 this.Hide();
@@ -113,7 +113,7 @@ namespace Client.GUI
             if (tmpF != null)
             {
                 _forums.Add(tmpF);
-                _fView.Add(new ForumView() { ID = tmpF.ID, Name = tmpF.Name, Description = tmpF.Description });
+                _fView.Add(new ForumView() { ID = tmpF.id, Name = tmpF.name, Description = tmpF.description });
                 dgForums.ItemsSource = null;
                 dgForums.ItemsSource = _fView;
             }

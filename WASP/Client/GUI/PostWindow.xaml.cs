@@ -30,27 +30,27 @@ namespace Client
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
-                else if (Session.subForum._moderators.ContainsKey(Session.user.id))
+                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
                     ChangeVisibilityModerator();
                 else
                     ChangeVisibilityUser();
             }
 
             Post p = Session.post;
-            Post rep = new Post("Thread 1", "this is a reply post 1", Session.user, Session.subForum.Id, Session.post);
+            Post rep = new Post("Thread 1", "this is a reply post 1", Session.user, Session.subForum.id, Session.post);
             
             TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Header = "Title: " + p._title + " Author: " + p._author.name + " Date: " + p._publishedAt.Date;
-            treeItem.Items.Add(new TreeViewItem() { Header = p._content });
-            treeItem.Items.Add(new TreeViewItem() { Header = p._editAt.Date });
+            treeItem.Header = "Title: " + p.title + " Author: " + p.author.name + " Date: " + p.publishedAt.Date;
+            treeItem.Items.Add(new TreeViewItem() { Header = p.content });
+            treeItem.Items.Add(new TreeViewItem() { Header = p.editAt.Date });
             postMesssages.Items.Add(treeItem);
-            foreach (Post post in p._replies)
+            foreach (Post post in p.replies)
             {
                 TreeViewItem treeItem2 = new TreeViewItem();
-                treeItem2.Header = "Title: " + post._title + " Author: " + post._author.name + " Date: " +post._publishedAt.Date;
-                treeItem2.Items.Add(new TreeViewItem() { Header = post._content });
-                treeItem2.Items.Add(new TreeViewItem() { Header = post._editAt.Date });
-                treeItem2.Items.Add(new TreeViewItem() { Header =post._inReplyTo._author.name });
+                treeItem2.Header = "Title: " + post.title + " Author: " + post.author.name + " Date: " +post.publishedAt.Date;
+                treeItem2.Items.Add(new TreeViewItem() { Header = post.content });
+                treeItem2.Items.Add(new TreeViewItem() { Header = post.editAt.Date });
+                treeItem2.Items.Add(new TreeViewItem() { Header =post.inReplyTo.author.name });
                 postMesssages.Items.Add(treeItem2);
             }
         }
@@ -104,7 +104,7 @@ namespace Client
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login(Session.forum.ID);
+            Login login = new Login(Session.forum.id);
             login.ShowDialog();
             if (Session.user == null)
                 return;

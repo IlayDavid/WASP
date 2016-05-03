@@ -31,7 +31,7 @@ namespace Client.GUI.AddWindows
             try
             {
                 _user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
-                    txtmail.Text, passPassword.Password, Session.forum.ID);
+                    txtmail.Text, passPassword.Password, Session.forum.id);
                 this.Close();
             }
             catch (Exception ee)

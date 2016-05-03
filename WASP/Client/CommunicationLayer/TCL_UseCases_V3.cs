@@ -17,7 +17,7 @@ namespace Client.CommunicationLayer
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            Dictionary<int, Moderator> mods = forums[forumID].subforums[subForumID]._moderators;
+            Dictionary<int, Moderator> mods = forums[forumID].subforums[subForumID].moderators;
             if (mods.Count > 1)
                 if (mods.Remove(moderatorID))
                     return 1;

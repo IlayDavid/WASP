@@ -23,7 +23,7 @@ namespace Client.GUI.EditWindows
         public EditTerm()
         {
             InitializeComponent();
-            foreach (Moderator moder in Session.subForum._moderators.Values)
+            foreach (Moderator moder in Session.subForum.moderators.Values)
             {
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = moder.user.userName;
@@ -43,8 +43,8 @@ namespace Client.GUI.EditWindows
             int moderatorID = ((Moderator)selectedItem.DataContext).user.id;
             try
             {
-                int isChange = Session.bl.updateModeratorTerm(Session.user.id, Session.forum.ID,
-                    moderatorID, Session.subForum.Id, calTerm.SelectedDate.Value);
+                int isChange = Session.bl.updateModeratorTerm(Session.user.id, Session.forum.id,
+                    moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
                 this.Close();
             }
             catch (Exception ee)

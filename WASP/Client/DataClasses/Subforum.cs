@@ -12,31 +12,31 @@ namespace Client.DataClasses
         public Subforum() { }
         public Subforum(string name, string description, Moderator moderator, DateTime term)
         {
-            Id = countId++;
-            Name = name;
-            Description = description;
+            id = countId++;
+            this.name = name;
+            this.description = description;
 
-            _moderators = new Dictionary<int, Moderator>();
-            _moderators.Add(moderator.user.id, moderator);
+            moderators = new Dictionary<int, Moderator>();
+            moderators.Add(moderator.user.id, moderator);
 
-            _threads = new List<Post>();
+            threads = new List<Post>();
             this.term = term;
         }
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
 
        
-        public Dictionary<int, Moderator> _moderators { get; set; }
-        public List<Post> _threads { get; set; }
+        public Dictionary<int, Moderator> moderators { get; set; }
+        public List<Post> threads { get; set; }
 
         internal static Dictionary<int, Subforum> ListToDictionary(List<Subforum> list)
         {
             Dictionary<int, Subforum> ret = new Dictionary<int, Subforum>();
             foreach(Subforum sf in list)
             {
-                ret.Add(sf.Id, sf);
+                ret.Add(sf.id, sf);
             }
             return ret;
         }

@@ -15,7 +15,7 @@ namespace Client.CommunicationLayer
             User admin = forums[forumID].members[userID];
             User moderator = forums[forumID].members[moderatorID];
             Moderator m = new Moderator(moderator, term, admin);
-            sf._moderators.Add(m.user.id, m);
+            sf.moderators.Add(m.user.id, m);
             return m;
         }
 

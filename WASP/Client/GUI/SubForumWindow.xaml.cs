@@ -30,11 +30,11 @@ namespace Client
             setVisibility();
 
             //presenting the subforums list 
-            List<Post> posts = Session.bl.getThreads(Session.forum.ID, Session.subForum.Id, 0, 20);
+            List<Post> posts = Session.bl.getThreads(Session.forum.id, Session.subForum.id, 0, 20);
             foreach (Post p in posts)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.Content = p._title;
+                newItem.Content = p.title;
                 newItem.DataContext = p;
                 SubForumsThreads.Items.Add(newItem);
             }
@@ -47,7 +47,7 @@ namespace Client
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
-                else if (Session.subForum._moderators.ContainsKey(Session.user.id))
+                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
                     ChangeVisibilityModerator();
                 else
                     ChangeVisibilityUser();
@@ -88,7 +88,7 @@ namespace Client
             Post p = (Post)i.DataContext;
             Session.post = p;
             PostWindow pwin = new PostWindow();
-            pwin.Title = p._title;
+            pwin.Title = p.title;
 
             Session.currentWindow = pwin;
             this.Hide();
@@ -106,7 +106,7 @@ namespace Client
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login(Session.forum.ID);
+            Login login = new Login(Session.forum.id);
             login.ShowDialog();
             if (Session.user == null)
                 return;
@@ -147,7 +147,7 @@ namespace Client
             if (newPost != null)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.Content = newPost._title;
+                newItem.Content = newPost.title;
                 newItem.DataContext = newPost;
                 SubForumsThreads.Items.Add(newItem);
             }
@@ -159,7 +159,7 @@ namespace Client
             {
                 Window moderatorView = new Window();
                 DataGrid dg = new DataGrid();
-                List<Moderator> mods = Session.bl.getModerators(Session.forum.ID, Session.subForum.Id);
+                List<Moderator> mods = Session.bl.getModerators(Session.forum.id, Session.subForum.id);
                 dg.ItemsSource = ModeratorView.getView(mods);
                 dg.IsReadOnly = true;
                 moderatorView.Content = dg;

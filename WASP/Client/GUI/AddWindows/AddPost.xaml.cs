@@ -39,9 +39,9 @@ namespace Client.GUI.AddWindows
             try
             {
                 if (_isOpening)
-                    _post = Session.bl.createThread(Session.user.id, Session.forum.ID, txtTitle.Text, txtContent.Text, Session.subForum.Id);
+                    _post = Session.bl.createThread(Session.user.id, Session.forum.id, txtTitle.Text, txtContent.Text, Session.subForum.id);
                 else
-                    _post = Session.bl.createReplyPost(Session.user.id, Session.forum.ID, txtContent.Text, Session.post._id);
+                    _post = Session.bl.createReplyPost(Session.user.id, Session.forum.id, txtContent.Text, Session.post.id);
                 this.Close();
             }
             catch(Exception ee)

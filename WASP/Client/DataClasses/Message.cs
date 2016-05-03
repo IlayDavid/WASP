@@ -2,8 +2,8 @@
 {
     public class Message
     {
-        public int Id { get; set; }
-        public string _content { get; set; }
-        public string _title { get; set; }
+        public int id { get; set; }
+        public string content { get; set; }
+        public string title { get; set; }
     }
 }

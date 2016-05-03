@@ -122,7 +122,7 @@ namespace Client.CommunicationLayer
         public List<Moderator> getModerators(int forumID, int subForumID)
         {
             List<Moderator> mods = new List<Moderator>();
-            Dictionary<int, Moderator> modID = getSubforum(forumID, subForumID)._moderators;
+            Dictionary<int, Moderator> modID = getSubforum(forumID, subForumID).moderators;
             foreach (KeyValuePair<int, Moderator> entry in modID)
             {
                 mods.Add(entry.Value);

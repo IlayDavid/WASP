@@ -27,7 +27,7 @@ namespace Client.GUI.AddWindows
             InitializeComponent();
             foreach (User user in Session.forum.members.Values)
             {
-                if (Session.subForum._moderators.ContainsKey(user.id))
+                if (Session.subForum.moderators.ContainsKey(user.id))
                     continue;
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = user.userName;
@@ -47,8 +47,8 @@ namespace Client.GUI.AddWindows
             int moderatorID = ((User)selectedItem.DataContext).id;
             try
             {
-                moderator = Session.bl.addModerator(Session.user.id, Session.forum.ID, 
-                    moderatorID, Session.subForum.Id, calTerm.SelectedDate.Value);
+                moderator = Session.bl.addModerator(Session.user.id, Session.forum.id, 
+                    moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
                 this.Close();
             }
             catch (Exception ee)
