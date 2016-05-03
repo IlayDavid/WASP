@@ -88,7 +88,7 @@ namespace Client.GUI
 
             try
             {
-                Session.forum = Session.bl.getForum(id);
+                Session.forum = Session.bl.getAllForums().First(x => x.ID == id);
                 ForumWindow fWin = new ForumWindow();
                 fWin.Title = Session.forum.Name;
                 

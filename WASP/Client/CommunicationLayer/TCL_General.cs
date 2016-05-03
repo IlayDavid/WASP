@@ -90,6 +90,11 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
+        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Forum getForum(int userID, int forumID)
         {
             throw new NotImplementedException();
@@ -140,7 +145,7 @@ namespace Client.CommunicationLayer
             return forums[forumID].subforums.Values.ToList();
         }
 
-        public Admin getAdmin(User user, int forumID, int userID)
+        public Admin getAdmin(int userID, int forumID, int AdminID)
         {
             throw new NotImplementedException();
         }

@@ -21,18 +21,22 @@ namespace Client.CommunicationLayer
         /*  
         * Pre-conditions: Member is loged-in, and is admin of the forum.
         * Purpose: delete moderator from subforum, 
-        * Return: number >= 0 id success        
+        * Return: number >= 0 if success        
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
 
-                    //-----------Admin Reports---------------
+        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
+        List<Message> getAllNotificationses(int userID, int forumID);
+        List<Message> getNewNotificationses(int userID, int forumID);
+
+        //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
         int subForumTotalMessages(int userID, int forumID, int subForumID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
-         * Purpose: return the total number of messages written by member. */
-        int memberTotalMessages(int userID, int forumID);
+         * Purpose: return the total messages written by member. */
+        List<Post> postsByMember(int adminID, int forumID, int userID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return details about moderators in all subforums,
@@ -44,7 +48,6 @@ namespace Client.CommunicationLayer
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return number of the forums in the system.*/
         int totalForums(int userID);
-
 
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/

@@ -19,6 +19,14 @@ namespace Client.CommunicationLayer
         {
             throw new NotImplementedException();
         }
+        public List<Message> getAllNotificationses(int userID, int forumID)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Message> getNewNotificationses(int userID, int forumID)
+        {
+            throw new NotImplementedException();
+        }
 
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
@@ -26,7 +34,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public int memberTotalMessages(int userID, int forumID)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
             throw new NotImplementedException();
         }

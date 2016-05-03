@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace Client.CommunicationLayer
 {
     public partial interface ICL
-    {
-        /* 
-       * Pre-conditions: member is subscribe to the forum.
-       * Purpose: logged in, to the specified forum.
-       * Return: return the Member, if success, NULL otherwise.
-       */
+    {/* 
+        * Pre-conditions: member is subscribe to the forum.
+        * Purpose: logged in, to the specified forum.
+        * Return: return the Member, if success, NULL otherwise.
+        */
         User login(string userName, string password, int forumID);
 
         /*
@@ -30,19 +29,21 @@ namespace Client.CommunicationLayer
          * post condition: result is an opening post
          */
         Post getThread(int forumID, int threadId);
+
+        /*
+        * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
+        */
         List<Post> getThreads(int forumID, int subForumID, int from, int amount);
 
-        /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
-        Forum getForum(int userID, int forumID);
+        /*
+        * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
+        */
+        List<Post> getReplays(int forumID, int subForumID, int postID);
 
-        /* Purpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL */
+        /* Purpose: returns a forum with forumId, if doesnt exist returns NULL */
         Forum getForum(int forumID);
 
-        /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
-        Subforum getSubforum(int userID, int forumID, int subforumId);
-
-
-        /* Purpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL */
+        /* Purpose: returns a subforum with forumId, if doesnt exist returns NULL */
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
@@ -64,6 +65,7 @@ namespace Client.CommunicationLayer
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(User user, int forumID, int userID);
+        Admin getAdmin(int userID, int forumID, int AdminID);
+
     }
 }

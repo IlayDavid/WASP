@@ -27,13 +27,22 @@ namespace Client.CommunicationLayer
                 throw new Exception("ERROR: Only one moderator left, can not removing him.");
         }
 
+        public List<Message> getAllNotificationses(int userID, int forumID)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Message> getNewNotificationses(int userID, int forumID)
+        {
+            throw new NotImplementedException();
+        }
+
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
             throw new NotImplementedException();
         }
 
-        public int memberTotalMessages(int userID, int forumID)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
             throw new NotImplementedException();
         }

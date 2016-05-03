@@ -10,6 +10,7 @@ namespace Client.CommunicationLayer
     partial interface ICL
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
+
         /*
         * Pre-conditions: none.
         * Purpose: initialize the system and logs the superuser in
@@ -28,7 +29,7 @@ namespace Client.CommunicationLayer
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, int id, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
          * Pre-conditions: superuser is loged-in 
