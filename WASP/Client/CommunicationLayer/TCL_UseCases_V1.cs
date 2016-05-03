@@ -48,6 +48,7 @@ namespace Client.CommunicationLayer
         {
             Post newPost = new Post(title, content, forums[forumID].members[userID], subForumID, null);
             forums[forumID].subforums[subForumID]._threads.Add(newPost);
+            posts.Add(newPost._id, newPost);
             return newPost;
         }
 
@@ -59,6 +60,8 @@ namespace Client.CommunicationLayer
             Post newPost = new Post("", content, forums[forumID].members[userID], inReply._containerID, inReply);
             forum.posts.Add(newPost._id, newPost);
             inReply._replies.Add(newPost);
+
+            posts.Add(newPost._id, newPost);
             return newPost;
         }
 
@@ -80,6 +83,7 @@ namespace Client.CommunicationLayer
             Moderator m = new Moderator(user, term, admin);
 
             Subforum newSf = new Subforum(name, description, m, term);
+            subforums.Add(newSf.Id, newSf);
             forums[forumID].subforums.Add(newSf.Id, newSf);
             return newSf;
         }

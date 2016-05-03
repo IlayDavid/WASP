@@ -47,3 +47,8 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.Properties
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.exe
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\EditWindows\EditTerm.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\Window1.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\EditWindows\EditTerm.baml
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\Window1.baml

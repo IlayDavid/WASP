@@ -27,7 +27,7 @@ namespace Client.DataClasses
         public string Name { get; set; }
         public string Description { get; set; }
 
-        //should be null at first request
+       
         public Dictionary<int, Moderator> _moderators { get; set; }
         public List<Post> _threads { get; set; }
 

@@ -15,6 +15,7 @@ using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
 using Client.GUI.DeleteWindows;
+using Client.GUI.EditWindows;
 
 namespace Client
 {
@@ -26,16 +27,7 @@ namespace Client
         public SubForumWindow()
         {
             InitializeComponent();
-            if (Session.user != null)
-            {
-                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                if (Session.user is SuperUser)
-                    ChangeVisibilitySU();
-                else if (Session.subForum._moderators.ContainsKey(Session.user.id))
-                    ChangeVisibilityModerator();
-                else
-                    ChangeVisibilityUser();
-            }
+            setVisibility();
 
             //presenting the subforums list 
             List<Post> posts = Session.bl.getThreads(Session.forum.ID, Session.subForum.Id, 0, 20);
@@ -47,6 +39,21 @@ namespace Client
                 SubForumsThreads.Items.Add(newItem);
             }
         }
+
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.subForum._moderators.ContainsKey(Session.user.id))
+                    ChangeVisibilityModerator();
+                else
+                    ChangeVisibilityUser();
+            }
+        }
+
         private void ChangeVisibilitySU()
         {
             reverseVisibility(btnRemoveModerator);
@@ -73,7 +80,7 @@ namespace Client
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Session.CloseAllWindows();
         }
         private void SubForumsThreads_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -81,6 +88,7 @@ namespace Client
             Post p = (Post)i.DataContext;
             Session.post = p;
             PostWindow pwin = new PostWindow();
+            pwin.Title = p._title;
 
             Session.currentWindow = pwin;
             this.Hide();
@@ -190,12 +198,14 @@ namespace Client
                 MessageBox.Show(ee.Message);
             }
         }
-
+        private void btnEditModeratorTerm_Click(object sender, RoutedEventArgs e)
+        {
+            EditTerm editT = new EditTerm();
+            editT.ShowDialog();
+        }
         private void btnEditSubforumSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
-        
     }
 }

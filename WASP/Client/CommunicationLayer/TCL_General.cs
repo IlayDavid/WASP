@@ -11,11 +11,15 @@ namespace Client.CommunicationLayer
     public partial class TCL : ICL
     {
         Dictionary<int, Forum> forums;
+        Dictionary<int, Subforum> subforums;
+        Dictionary<int, Post> posts;
         private bool _isInitialize = false;
         private SuperUser _su = null;
         public TCL()
         {
             forums = new Dictionary<int, Forum>();
+            subforums = new Dictionary<int, Subforum>();
+            posts = new Dictionary<int, Post>();
             initForTesting();
         }
 
@@ -87,39 +91,26 @@ namespace Client.CommunicationLayer
 
         public Post getThread(int forumID, int threadId)
         {
-            throw new NotImplementedException();
+            return posts[threadId];
         }
 
         public List<Post> getReplays(int forumID, int subForumID, int postID)
         {
-            throw new NotImplementedException();
-        }
-
-        public Forum getForum(int userID, int forumID)
-        {
-            throw new NotImplementedException();
+            return posts[postID]._replies;
         }
 
         public Forum getForum(int forumID)
         {
             return forums[forumID];
         }
-
-        public Subforum getSubforum(int userID, int forumID, int subforumId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Subforum getSubforum(int forumID, int subforumId)
         {
-            throw new NotImplementedException();
+            return subforums[subforumId];
         }
-
         public List<Moderator> getModerators(int forumID, int subForumID)
         {
             return forums[forumID].subforums[subForumID]._moderators.Values.ToList();
         }
-
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {
             throw new NotImplementedException();
@@ -133,11 +124,12 @@ namespace Client.CommunicationLayer
         public List<Admin> getAdmins(int userID, int forumID)
         {
             throw new NotImplementedException();
+            //return forums[forumID].admins.Values.ToList();
         }
 
         public List<User> getMembers(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            return forums[forumID].members.Values.ToList();
         }
 
         public List<Subforum> getSubforums(int forumID)
@@ -147,6 +139,7 @@ namespace Client.CommunicationLayer
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
+            //return forums[forumID].admins[AdminID];
             throw new NotImplementedException();
         }
     }

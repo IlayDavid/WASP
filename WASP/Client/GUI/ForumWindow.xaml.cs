@@ -65,7 +65,7 @@ namespace Client
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Session.CloseAllWindows();
         }
         public void setForum(Forum f)
         {

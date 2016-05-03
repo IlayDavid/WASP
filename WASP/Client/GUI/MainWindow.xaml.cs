@@ -133,7 +133,7 @@ namespace Client.GUI
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Session.CloseAllWindows();
         }
 
         private void btnReports_Click(object sender, RoutedEventArgs e)
