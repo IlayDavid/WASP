@@ -124,14 +124,18 @@ namespace Client.BusinessLogic
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
 
+        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
+        List<Message> getAllNotificationses(int userID, int forumID);
+        List<Message> getNewNotificationses(int userID, int forumID);
+
         //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
         int subForumTotalMessages(int userID, int forumID, int subForumID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
-         * Purpose: return the total number of messages written by member. */
-        int memberTotalMessages(int userID, int forumID);
+         * Purpose: return the total messages written by member. */
+        List<Post> postsByMember(int adminID, int forumID, int userID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return details about moderators in all subforums,
@@ -154,10 +158,10 @@ namespace Client.BusinessLogic
 
 
         /* 
-     * Pre-conditions: member is subscribe to the forum.
-     * Purpose: logged in, to the specified forum.
-     * Return: return the Member, if success, NULL otherwise.
-     */
+        * Pre-conditions: member is subscribe to the forum.
+        * Purpose: logged in, to the specified forum.
+        * Return: return the Member, if success, NULL otherwise.
+        */
         User login(string userName, string password, int forumID);
 
         /*
@@ -173,23 +177,22 @@ namespace Client.BusinessLogic
          * Purpose: returns a thread by id, if doesnt exist returns NULL
          * post condition: result is an opening post
          */
-        Post getThread(int userID, int forumID, int threadId);
+        Post getThread(int forumID, int threadId);
 
         /*
         * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
         */
         List<Post> getThreads(int forumID, int subForumID, int from, int amount);
 
-        /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
-        Forum getForum(int userID, int forumID);
+        /*
+        * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
+        */
+        List<Post> getReplays(int forumID, int subForumID, int postID);
 
-        /* Purpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL */
+        /* Purpose: returns a forum with forumId, if doesnt exist returns NULL */
         Forum getForum(int forumID);
 
-        /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
-        Subforum getSubforum(int userID, int forumID, int subforumId);
-
-        /* Purpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL */
+        /* Purpose: returns a subforum with forumId, if doesnt exist returns NULL */
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
@@ -211,32 +214,6 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int userID, int forumID, int AdminID);
-
-
-        //methods to be implemented for the new assignment:
-        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
-        List<Message> getAllNotificationses(int userID, int forumID);
-
-        List<Message> getNewNotificationses(int userID, int forumID);
-
-        //2.a: remove a moderator.
-        int fireModerator(int adminID, int forumID, int moderatorID);
-
-        //2.b: info recieved by admin
-        int getNumberOfPosts(int adminID, int forumID);
-
-        List<Post> postsByMember(int adminID, int forumID, int userID);
-
-        //A list of all modertors, who appointed them, when, to which subforum, and their posts
-        List<Tuple<Moderator, Admin, DateTime, Subforum, List<Post>>> getModeratorsInfo(int adminID, int forumID);
-
-        //3: info recieved by SuperUser
-        int numberOfForums(int superUserID);
-        //assumes that we go by ID to diffrentiate between same user
-        int numberOfSameMember(int superUserID, int userID);
-
-        //this function comes from the requirement that a moderator can't be deleted by an admin that didn't appoint him
-        Admin addAdmin(int adminID, int forumID, int newAdminID);
+        Admin getAdmin(int userID, int forumID, int AdminID);  
     }
 }
