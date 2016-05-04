@@ -15,9 +15,9 @@ namespace AccTests.Tests
         private static WASPBridge _proj;
         private SuperUser _supervisor;
         private Forum _forum;
-        private Member _admin;
-        private Member _member1;
-        private Member _member2;
+        private Admin _admin;
+        private User _member1;
+        private User _member2;
 
         //private Subforum _subforum;
 
@@ -27,15 +27,15 @@ namespace AccTests.Tests
         {
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _member1 = _proj.subscribeToForum("amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum);
-            _member2 = _proj.subscribeToForum("edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum);
+            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.Id);
+            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id);
 
-            _proj.login(_admin.UserName, _admin.Password, _forum);
-            _proj.login(_member1.UserName, _member1.Password, _forum);
-            _proj.login(_member2.UserName, _member2.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
+            _proj.login(_member1.userName, _member1.password, _forum.Id);
+            _proj.login(_member2.userName, _member2.password, _forum.Id);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest1()
         {
-            Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum));
-            Assert.IsNotNull(_proj.login("edanHb", "123456", _forum));
-            Assert.IsNotNull(_admin.UserName, _admin.Password, _admin.MemberForum);
+            Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum.Id));
+            Assert.IsNotNull(_proj.login("edanHb", "123456", _forum.Id));
+            Assert.IsNotNull(_proj.login(_admin.user.userName, _admin.user.password, _forum.Id));
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest2()
         {
-            Assert.IsNull(_proj.login("", "123456", _forum));
-            Assert.IsNull(_proj.login("amitayaSh", "", _forum));
+            Assert.IsNull(_proj.login("", "123456", _forum.Id));
+            Assert.IsNull(_proj.login("amitayaSh", "", _forum.Id));
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest3()
         {
-            Assert.IsNull(_proj.login("blah", "123456", _forum));
-            Assert.IsNull(_proj.login("", "123456", _forum));
-            Assert.IsNull(_proj.login("blah", "", _forum));
+            Assert.IsNull(_proj.login("blah", "123456", _forum.Id));
+            Assert.IsNull(_proj.login("", "123456", _forum.Id));
+            Assert.IsNull(_proj.login("blah", "", _forum.Id));
         }
     }
 }

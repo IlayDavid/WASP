@@ -15,7 +15,7 @@ namespace AccTests.Tests
         private WASPBridge _proj;
         private SuperUser _supervisor;
         private Forum _forum;
-        private Member _admin;
+        private Admin _admin;
 
         //private Subforum _subforum;
 
@@ -25,10 +25,10 @@ namespace AccTests.Tests
         {
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            Tuple<Forum, Admin> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
         }
 
         /// <summary>
@@ -37,16 +37,16 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest1()
         {
-            Member moderator = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
-            Subforum subforum = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator, DateTime.Now.AddDays(100));
+            var moderator = _proj.subscribeToForum(11,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
+            Subforum subforum = _proj.createSubForum(_admin.user.id,_forum.Id, "subject2", "blah blah blah", moderator.id, DateTime.Now.AddDays(100));
 
             Assert.IsNotNull(subforum);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum).Count, 1);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Name, moderator.Name);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Password, moderator.Password);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].Email, moderator.Email);
-            Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].MemberForum, moderator.MemberForum);
+            Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id).Count, 1);
+            Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].user.userName, moderator.userName);
+            Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].user.name, moderator.name);
+            Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].user.password, moderator.password);
+            Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].user.email, moderator.email);
+            //Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].MemberForum, moderator.MemberForum);
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest2()
         {
-            Member moderator1 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
-            Member moderator2 = _proj.subscribeToForum("yaelp", "yael", "yaelp@post.bgu.ac.il", "yaelp123", _forum);
-            Subforum subforum1 = _proj.createSubForum(_admin, "subject1", "blah blah blah", moderator1, DateTime.Now.AddDays(100));
-            Subforum subforum2 = _proj.createSubForum(_admin, "subject2", "blah blah blah", moderator2, DateTime.Now.AddDays(100));
+            var moderator1 = _proj.subscribeToForum(12,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
+            var moderator2 = _proj.subscribeToForum(13,"yaelp", "yael", "yaelp@post.bgu.ac.il", "yaelp123", _forum.Id);
+            Subforum subforum1 = _proj.createSubForum(_admin.user.id, _forum.Id, "subject1", "blah blah blah", moderator1.id, DateTime.Now.AddDays(100));
+            Subforum subforum2 = _proj.createSubForum(_admin.user.id, _forum.Id, "subject2", "blah blah blah", moderator2.id, DateTime.Now.AddDays(100));
 
             Assert.IsNotNull(subforum1);
             Assert.IsNotNull(subforum2);
-            Assert.AreEqual(_proj.getSubforums(_admin, _forum).Count, 2);
+            Assert.AreEqual(_proj.getSubforums(_forum.Id).Count, 2);
         }
 
         /// <summary>
@@ -75,18 +75,18 @@ namespace AccTests.Tests
             for (int i = 1; i <= N; i++)
             {
 
-                Member moderator = _proj.subscribeToForum("moderator"+i.ToString(),
+                var moderator = _proj.subscribeToForum(500+i,"moderator"+i.ToString(),
                         "moderator", "moderator"+i.ToString()+"@post.bgu.ac.il", 
-                        "moderator".ToString(), _forum);
-                Subforum subforum = _proj.createSubForum(_admin, "subject" + i.ToString(), 
-                        "blah blah blah", moderator, DateTime.Now.AddDays(100));
+                        "moderator".ToString(), _forum.Id);
+                Subforum subforum = _proj.createSubForum(_admin.user.id, _forum.Id, "subject" + i.ToString(), 
+                        "blah blah blah", moderator.id, DateTime.Now.AddDays(100));
 
                 Assert.IsNotNull(subforum);
-                Assert.AreEqual(_proj.getModerators(_admin, subforum)[0].UserName, moderator.UserName);
-                Assert.AreEqual(_proj.getModerators(_admin,subforum).Count, 1);
+                Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.Id)[0].user.userName, moderator.userName);
+                Assert.AreEqual(_proj.getModerators(_admin.user.id,subforum.Id).Count, 1);
             }
 
-            Assert.AreEqual(_proj.getSubforums(_admin, _forum).Count, N);
+            Assert.AreEqual(_proj.getSubforums( _forum.Id).Count, N);
         }
 
         /// <summary>
@@ -95,22 +95,22 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest4()
         {
-            Tuple<Forum,Member> forumAndModerator = Functions.CreateSpecForum2(_proj, _supervisor);
+            var forumAndModerator = Functions.CreateSpecForum2(_proj, _supervisor);
             Forum forum = forumAndModerator.Item1;
-            Member admin = forumAndModerator.Item2;
+            var admin = forumAndModerator.Item2;
 
-            Member moderator1 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum);
-            Member moderator2 = _proj.subscribeToForum("maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum);
-            _proj.login(moderator1.UserName, moderator1.Password, _forum);
-            _proj.login(moderator2.UserName, moderator2.Password, _forum);
+            var moderator1 = _proj.subscribeToForum(15,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
+            var moderator2 = _proj.subscribeToForum(16,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.Id);
+            _proj.login(moderator1.userName, moderator1.password, _forum.Id);
+            _proj.login(moderator2.userName, moderator2.password, _forum.Id);
             // lacking of informations
-            Subforum subforum1 = _proj.createSubForum(_admin, "", "blah", moderator1, DateTime.Now.AddDays(100));
-            Subforum subforum2 = _proj.createSubForum(_admin, "blah", "", moderator1, DateTime.Now.AddDays(100));
+            Subforum subforum1 = _proj.createSubForum(_admin.user.id, _forum.Id, "", "blah", moderator1.id, DateTime.Now.AddDays(100));
+            Subforum subforum2 = _proj.createSubForum(_admin.user.id, _forum.Id,"blah", "", moderator1.id, DateTime.Now.AddDays(100));
 
             // fails because moderator2 is not member at _admin's forum
-            Subforum subforum3 = _proj.createSubForum(_admin, "blah", "", moderator2, DateTime.Now.AddDays(100));
+            Subforum subforum3 = _proj.createSubForum(_admin.user.id, _forum.Id, "blah", "", moderator2.id, DateTime.Now.AddDays(100));
 
-            Subforum subforum4 = _proj.createSubForum(admin, "blah", "blah", moderator1, DateTime.Now.AddDays(100));
+            Subforum subforum4 = _proj.createSubForum(admin.user.id, forum.Id, "blah", "blah", moderator1.id, DateTime.Now.AddDays(100));
 
             Assert.IsNull(subforum1);
             Assert.IsNull(subforum2);

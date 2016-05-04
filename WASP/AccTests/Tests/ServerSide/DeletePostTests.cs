@@ -16,10 +16,10 @@ namespace AccTests.Tests
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
-        private Member _admin;
-        private Member _moderator;
+        private Admin _admin;
+        private User _moderator;
         private Post _thread;
-        private Member _member;
+        private User _member;
         private Post _threadModerator;
         private Post _threadMember;
 
@@ -30,24 +30,24 @@ namespace AccTests.Tests
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
 
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
 
-            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            var subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+            _proj.login(_moderator.userName, _moderator.password, _forum.Id);
 
             _member = Functions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(_member.UserName, _member.Password, _forum);
+            _proj.login(_member.userName, _member.password, _forum.Id);
 
-            _threadModerator = _proj.createThread(_moderator, "webService for calander",
-                                    "Someone know a good web service for Calander?", DateTime.Now, _subforum);
+            _threadModerator = _proj.createThread(_moderator.id,_forum.Id, "webService for calander",
+                                    "Someone know a good web service for Calander?",  _subforum.Id);
 
-            _threadMember = _proj.createThread(_member, "webService for calander",
-                        "Someone know a good web service for Calander?", DateTime.Now, _subforum);
+            _threadMember = _proj.createThread(_member.id,_forum.Id, "webService for calander",
+                        "Someone know a good web service for Calander?",  _subforum.Id);
 
 
 
@@ -59,9 +59,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest1()
         {
-            int isDelete = _proj.deletePost(_member, _threadMember);
+            int isDelete = _proj.deletePost(_member.id,_forum.Id, _threadMember.Id);
             Assert.IsTrue(isDelete >= 0);
-            isDelete = _proj.deletePost(_moderator, _threadModerator);
+            isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadModerator.Id);
             Assert.IsTrue(isDelete >= 0);
         }
 
@@ -71,15 +71,15 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest2()
         {
-            Post p1 = _proj.createReplyPost(_moderator, "Hi", DateTime.Now, _threadMember);
-            Post p2 = _proj.createReplyPost(_member, "Hi", DateTime.Now, _threadModerator);
+            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi", _threadMember.Id);
+            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.Id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
             
 
-            int isDelete = _proj.deletePost(_member, p2);
+            int isDelete = _proj.deletePost(_member.id, _forum.Id, p2.Id);
             Assert.IsTrue(isDelete >= 0);
-            isDelete = _proj.deletePost(_moderator, p1);
+            isDelete = _proj.deletePost(_moderator.id, _forum.Id, p1.Id);
             Assert.IsTrue(isDelete >= 0);
         }
 
@@ -89,9 +89,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest3()
         {
-            int isDelete = _proj.deletePost(_moderator, _threadMember);
+            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadMember.Id);
             Assert.IsTrue(isDelete > 0);
-            isDelete = _proj.deletePost(_member, _threadModerator);
+            isDelete = _proj.deletePost(_member.id, _forum.Id, _threadModerator.Id);
             Assert.IsTrue(isDelete < 0);
         }
 
@@ -101,14 +101,14 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest4()
         {
-            Post p1 = _proj.createReplyPost(_moderator, "Hi", DateTime.Now, _threadMember);
-            Post p2 = _proj.createReplyPost(_member, "Hi", DateTime.Now, _threadModerator);
+            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi",  _threadMember.Id);
+            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.Id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
 
-            int isDelete = _proj.deletePost(_moderator, p2);
+            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, p2.Id);
             Assert.IsTrue(isDelete > 0);
-            isDelete = _proj.deletePost(_member, p1);
+            isDelete = _proj.deletePost(_member.id, _forum.Id, p1.Id);
             Assert.IsTrue(isDelete < 0);
         }
     }

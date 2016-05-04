@@ -15,124 +15,187 @@ namespace AccTests
         {
             _serverAPI = new Server();
         }
-        public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
+
+
+        public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            return _serverAPI.addModerator(member, moderator, subforum, term);
+            return _serverAPI.initialize(name, userName, ID, email, pass);
         }
 
-        public int confirmEmail(Member member)
+        public int isInitialize()
         {
-            return _serverAPI.confirmEmail(member);
+            return _serverAPI.isInitialize();
         }
 
-        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName,
+            string email, string pass, Policy policy)
         {
-            return _serverAPI.createForum(creator, forumName, description, userName, adminName, email, pass, policy);
+            return _serverAPI.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
         }
 
-        public Post createReplyPost(Member Author, string content, DateTime now, Post inReplyTo)
+        public int defineForumPolicy(int userID, int forumID)
         {
-            return _serverAPI.createReplyPost(Author, content, now, inReplyTo);
+            return _serverAPI.defineForumPolicy(userID, forumID);
         }
 
-        public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            return _serverAPI.createSubForum(member, name, description, moderator, term);
+            return _serverAPI.subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
-        public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
+        public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
-            return _serverAPI.createThread(author, title, content, now, container);
+            return _serverAPI.createThread(userID, forumID, title, content, subForumID);
         }
 
-        public int defineForumPolicy(SuperUser member, Forum forum)
+        public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            return _serverAPI.defineForumPolicy(member, forum);
+            return _serverAPI.createReplyPost(userID, forumID, content, replyToPost_ID);
         }
 
-        public int deletePost(Member member, Post post)
+        public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            return _serverAPI.deletePost(member, post);
+            return _serverAPI.createSubForum(userID, forumID, name, description, moderatorID, term);
         }
 
-        public Member getAdmin(User user, Forum forum, string userName)
+        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
         {
-            return  _serverAPI.getAdmin(user, forum, userName);
+            return _serverAPI.sendMessage(userID, forumID, targetUserNameID, message);
         }
 
-        public SuperUser login(string userName, string password)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            return _serverAPI.login(userName, password);
+            return _serverAPI.addModerator(userID, forumID, moderatorID, subForumID, term);
         }
 
-        public List<Member> getAdmins(User member, Forum forum)
+        public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            return _serverAPI.getAdmins(member, forum);
+            return _serverAPI.updateModeratorTerm(userID, forumID, moderatorID, subforumID, term);
         }
 
-        public List<Forum> getAllForums(User member)
+        public int confirmEmail(int userID, int forumID)
         {
-            return _serverAPI.getAllForums(member);
+            return _serverAPI.confirmEmail(userID, forumID);
         }
 
-        public Forum getForum(Member member, int forumId)
+        public int deletePost(int userID, int forumID, int postID)
         {
-            return _serverAPI.getForum(member, forumId);
+            return _serverAPI.deletePost(userID, forumID, postID);
         }
 
-        public List<Member> getMembers(Member member, Forum forum)
+        public int editPost(int userID, int forumID, int postID, string content)
         {
-            return _serverAPI.getMembers(member, forum);
+            return _serverAPI.editPost(userID, forumID, postID, content);
         }
 
-        public List<Member> getModerators(Member member, Subforum subforum)
+        public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            return _serverAPI.getModerators(member, subforum);
+            return _serverAPI.deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
-        public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
+        public List<Message> getAllNotificationses(int userID, int forumID)
         {
-            return _serverAPI.getModeratorTermTime(member, moderator, subforum);
+            return _serverAPI.getAllNotificationses(userID, forumID);
         }
 
-        public Subforum getSubforum(Member member, int subforumId)
+        public List<Message> getNewNotificationses(int userID, int forumID)
         {
-            return _serverAPI.getSubforum(member, subforumId);
+            return _serverAPI.getNewNotificationses(userID, forumID);
         }
 
-        public List<Subforum> getSubforums(Member member, Forum forum)
+        public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            return _serverAPI.getSubforums(member, forum);
+            return _serverAPI.subForumTotalMessages(userID, forumID, subForumID);
         }
 
-        public Post getThread(Member member, int threadId)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            return _serverAPI.getThread(member, threadId);
+            return _serverAPI.postsByMember(adminID, forumID, userID);
         }
 
-        public SuperUser initialize(string name, string userName, string email, string pass)
+        public ModeratorReport moderatorReport(int userID, int forumID)
         {
-            return _serverAPI.initialize(name, userName, email, pass);
+            return _serverAPI.moderatorReport(userID, forumID);
         }
 
-        public Member login(string userName, string password, Forum forum)
+        public int totalForums(int userID)
         {
-            return _serverAPI.login(userName, password, forum);
+            return _serverAPI.totalForums(userID);
         }
 
-        public int sendMessage(Member member, Member targetMember, Message message)
+        public List<User> membersInDifferentForums(int userID)
         {
-            return _serverAPI.sendMessage(member, targetMember, message);
+            return _serverAPI.membersInDifferentForums(userID);
         }
 
-        public Member subscribeToForum(string userName, string name, string email, string pass, Forum targetForum)
+        public User login(string userName, string password, int forumID)
         {
-            return _serverAPI.subscribeToForum(userName, name, email, pass, targetForum);
+            return _serverAPI.login(userName, password, forumID);
         }
 
-        public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
+        public SuperUser loginSU(string userName, string password)
         {
-            return _serverAPI.updateModeratorTerm(member, moderator, subforum, term);
+            return _serverAPI.loginSU(userName, password);
+        }
+
+        public Post getThread(int forumID, int threadId)
+        {
+            return _serverAPI.getThread(forumID, threadId);
+        }
+
+        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
+        {
+            return _serverAPI.getThreads(forumID, subForumID, @from, amount);
+        }
+
+        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        {
+            return _serverAPI.getReplays(forumID, subForumID, postID);
+        }
+
+        public Forum getForum(int forumID)
+        {
+            return _serverAPI.getForum(forumID);
+        }
+
+        public Subforum getSubforum(int forumID, int subforumId)
+        {
+            return _serverAPI.getSubforum(forumID, subforumId);
+        }
+
+        public List<Moderator> getModerators(int forumID, int subForumID)
+        {
+            return _serverAPI.getModerators(forumID, subForumID);
+        }
+
+        public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
+        {
+            return _serverAPI.getModeratorTermTime(userID, forumID, moderatorID, subforumID);
+        }
+
+        public List<Forum> getAllForums()
+        {
+            return _serverAPI.getAllForums();
+        }
+
+        public List<Admin> getAdmins(int userID, int forumID)
+        {
+            return _serverAPI.getAdmins(userID, forumID);
+        }
+
+        public List<User> getMembers(int userID, int forumID)
+        {
+            return _serverAPI.getMembers(userID, forumID);
+        }
+
+        public List<Subforum> getSubforums(int forumID)
+        {
+            return _serverAPI.getSubforums(forumID);
+        }
+
+        public Admin getAdmin(int userID, int forumID, int AdminID)
+        {
+            return _serverAPI.getAdmin(userID, forumID, AdminID);
         }
     }
 }

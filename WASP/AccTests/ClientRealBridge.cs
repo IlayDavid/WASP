@@ -14,7 +14,7 @@ namespace AccTests
         {
             _clientAPI = new BL();
         }
-        public int addModerator(int userId,int forumId, int moderatorId, int subforumId, DateTime term)
+        public Moderator addModerator(int userId,int forumId, int moderatorId, int subforumId, DateTime term)
         {
             return _clientAPI.addModerator(userId,forumId, moderatorId, subforumId, term);
         }
@@ -76,15 +76,26 @@ namespace AccTests
             return _clientAPI.deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
+        public List<Message> getAllNotificationses(int userID, int forumID)
+        {
+            return _clientAPI.getAllNotificationses(userID, forumID);
+        }
+
+        public List<Message> getNewNotificationses(int userID, int forumID)
+        {
+            return _clientAPI.getNewNotificationses(userID, forumID);
+        }
+
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
             return _clientAPI.subForumTotalMessages(userID, forumID, subForumID);
         }
 
-        public int memberTotalMessages(int userID, int forumID)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            return _clientAPI.memberTotalMessages(userID, forumID);
+            return _clientAPI.postsByMember(adminID, forumID, userID);
         }
+
 
         public ModeratorReport moderatorReport(int userID, int forumID)
         {
@@ -112,14 +123,14 @@ namespace AccTests
             return _clientAPI.getAllForums();
         }
 
-        public Forum getForum(int userId, int forumId)
+        public List<Post> getReplays(int forumID, int subForumID, int postID)
         {
-            return _clientAPI.getForum(userId, forumId);
+            return _clientAPI.getReplays(forumID, subForumID, postID);
         }
 
-        public Forum getForum(int forumID)
+        public Forum getForum(int forumId)
         {
-            return _clientAPI.getForum(forumID);
+            return _clientAPI.getForum( forumId);
         }
 
         public List<User> getMembers(int userId, int forumId)
@@ -137,9 +148,9 @@ namespace AccTests
             return _clientAPI.getAdmin(userID, forumID, AdminID);
         }
 
-        public List<Moderator> getModerators(int userId, int forumId, int subforumId)
+        public List<Moderator> getModerators(int forumId, int subforumId)
         {
-            return _clientAPI.getModerators(userId,forumId, subforumId);
+            return _clientAPI.getModerators(forumId, subforumId);
         }
 
         public DateTime getModeratorTermTime(int userId, int forumId, int moderatorId, int subforumId)
@@ -147,11 +158,6 @@ namespace AccTests
             return _clientAPI.getModeratorTermTime(userId,forumId, moderatorId, subforumId);
         }
 
-        public Subforum getSubforum(int userId, int forumId, int subforumId)
-        {
-            return _clientAPI.getSubforum(userId,forumId, subforumId);
-            
-        }
         public Subforum getSubforum(int forumId, int subforumId)
         {
             return _clientAPI.getSubforum(forumId, subforumId);
@@ -163,9 +169,14 @@ namespace AccTests
             return _clientAPI.loginSU(userName, password);
         }
 
-        public Post getThread(int userId, int forumId, int threadId)
+        public Post getThread(int forumId, int threadId)
         {
-            return _clientAPI.getThread(userId,forumId, threadId);
+            return _clientAPI.getThread(forumId, threadId);
+        }
+
+        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
+        {
+            return _clientAPI.getThreads(forumID, subForumID, @from, amount);
         }
 
         public SuperUser initialize(string name, string userName,int id, string email, string pass)

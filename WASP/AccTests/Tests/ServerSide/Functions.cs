@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using WASP;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 
@@ -6,57 +8,57 @@ namespace AccTests.Tests
 {
     public class Functions
     {
+        
         public static SuperUser InitialSystem(WASPBridge proj)
         {
-            return proj.initialize("Moshe", "SuperUser", "moshe@post.bgu.ac.il", "moshe123");
+            return proj.initialize("Moshe", "SuperUser",0, "moshe@post.bgu.ac.il", "moshe123");
         }
 
-        public static Tuple<Forum,Member> CreateSpecForum(WASPBridge proj, SuperUser supervisor)
+        public static Tuple<Forum,Admin> CreateSpecForum(WASPBridge proj, SuperUser supervisor)
         {
             string userName = "admin";
-            Forum forum = proj.createForum(supervisor, "start-up", "ideas", userName,
-                                            "david", "david@post.bgu.ac.il", "david123", new PasswordPolicy());
-            Member admin = proj.getAdmin(supervisor, forum, userName);
+            Forum forum = proj.createForum(0, "start-up", "ideas", 1,"david","david", "david@post.bgu.ac.il", "david123", new PasswordPolicy());
+            var admin = proj.getAdmin(0, forum.Id, 1);
 
-            return new Tuple<Forum, Member>(forum, admin);
+            return new Tuple<Forum, Admin>(forum, admin);
         }
 
-        public static Tuple<Subforum, Member> CreateSpecSubForum(WASPBridge proj, Member admin, Forum forum)
+        public static Tuple<Subforum, User> CreateSpecSubForum(WASPBridge proj, Admin admin, Forum forum)
         {
-            Member moderator = proj.subscribeToForum("ilanB", "ilan", "ilanB@post.bgu.ac.il",
-                                        "ilan123", forum);
-            Subforum subforum =  proj.createSubForum(admin, "sub1", "blah", moderator, DateTime.Now.AddDays(100));
-
-            return new Tuple<Subforum, Member>(subforum, moderator);
+            var user = proj.subscribeToForum(2,"ilanB", "ilan", "ilanB@post.bgu.ac.il",
+                                        "ilan123",forum.Id);
+            Subforum subforum =  proj.createSubForum(1, forum.Id, "sub1", "blah", 2, DateTime.Now.AddDays(100));
+            var moderator = proj.login(user.userName, user.password, forum.Id);
+            return new Tuple<Subforum, User>(subforum, moderator);
         }
 
-        public static Member SubscribeSpecMember(WASPBridge proj, Forum forum)
+        public static User SubscribeSpecMember(WASPBridge proj, Forum forum)
         {
-            return proj.subscribeToForum("arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum);
+            return proj.subscribeToForum(3,"arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum.Id);
         }
 
-        public static Tuple<Forum, Member> CreateSpecForum2(WASPBridge proj, SuperUser supervisor)
+        public static Tuple<Forum, Admin> CreateSpecForum2(WASPBridge proj, SuperUser supervisor)
         {
             string userName = "admin1";
-            Forum forum = proj.createForum(supervisor, "start-up", "ideas", userName,
-                                            "ronen", "ronen@post.bgu.ac.il", "ronen123", new PasswordPolicy());
-            Member admin = proj.getAdmin(supervisor, forum, userName);
+            Forum forum = proj.createForum(0, "start-up", "ideas", 4,
+                                            "ronen","ronen", "ronen@post.bgu.ac.il", "ronen123", new PasswordPolicy());
+            Admin admin = proj.getAdmin(0, forum.Id,4);
 
-            return new Tuple<Forum, Member>(forum, admin);
+            return new Tuple<Forum, Admin>(forum, admin);
         }
 
-        public static Tuple<Subforum, Member> CreateSpecSubForum2(WASPBridge proj, Member admin, Forum forum)
+        public static Tuple<Subforum, User> CreateSpecSubForum2(WASPBridge proj, Member admin, Forum forum)
         {
-            Member moderator = proj.subscribeToForum("amitB", "amit", "amitB@post.bgu.ac.il",
-                                        "amit123", forum);
-            Subforum subforum = proj.createSubForum(admin, "subbbbb2", "blah", moderator, DateTime.Now.AddDays(100));
-
-            return new Tuple<Subforum, Member>(subforum, moderator);
+            var user= proj.subscribeToForum(5,"amitB", "amit", "amitB@post.bgu.ac.il",
+                                        "amit123", forum.Id);
+            Subforum subforum = proj.createSubForum(4,forum.Id, "subbbbb2", "blah", 5, DateTime.Now.AddDays(100));
+            var moderator = proj.login(user.userName, user.password, forum.Id);
+            return new Tuple<Subforum, User>(subforum, moderator);
         }
 
-        public static Member SubscribeSpecMember2(WASPBridge proj, Forum forum)
+        public static User SubscribeSpecMember2(WASPBridge proj, Forum forum)
         {
-            return proj.subscribeToForum("shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum);
+            return proj.subscribeToForum(6,"shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum.Id);
         }
 
     }

@@ -15,8 +15,8 @@ namespace AccTests.Tests
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
-        private Member _admin;
-        private Member _moderator;
+        private Admin _admin;
+        private User _moderator;
 
       
         [TestInitialize]     //before each Test
@@ -25,15 +25,15 @@ namespace AccTests.Tests
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
 
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+            var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
 
-            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            var subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+            _proj.login(_moderator.userName, _moderator.password, _forum.Id);
            
 
         }
@@ -45,10 +45,10 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest1()
         {
-            Member member = Functions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(member.UserName, member.Password, _forum);
-            Post isOpenPost = _proj.createThread(member, "webService for calander", "Someone know a good web service for Calander?",
-                                   DateTime.Now, _subforum);
+            User member = Functions.SubscribeSpecMember(_proj, _forum);
+            _proj.login(member.userName, member.password, _forum.Id);
+            Post isOpenPost = _proj.createThread(member.id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+                                   _subforum.Id);
             Assert.IsNotNull(isOpenPost);
         }
 
@@ -58,8 +58,8 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest2()
         {
-            Post isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
-                                   DateTime.Now, _subforum);
+            Post isOpenPost = _proj.createThread(_moderator.id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+                                   _subforum.Id);
             Assert.IsNotNull(isOpenPost);
         }
 
@@ -69,19 +69,19 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest3()
         {
-            Post isOpenPost = _proj.createThread(_moderator, "", "Someone know a good web service for Calander?",
-                                   DateTime.Now, _subforum);
+            Post isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "", "Someone know a good web service for Calander?",
+                                   _subforum.Id);
             Assert.IsNull(isOpenPost);
 
-            isOpenPost = _proj.createThread(_moderator, "webService for calander", "", DateTime.Now, _subforum);
+            isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "webService for calander", "", _subforum.Id);
             Assert.IsNull(isOpenPost);
 
-            isOpenPost = _proj.createThread(_moderator, "webService for calander", "Someone know a good web service for Calander?",
-                       DateTime.Now, null);
+            isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+                       -1);
             Assert.IsNull(isOpenPost);
 
-            isOpenPost = _proj.createThread(null, "webService for calander", "Someone know a good web service for Calander?",
-                       DateTime.Now, _subforum);
+            isOpenPost = _proj.createThread(-1, _forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+                       _subforum.Id);
             Assert.IsNull(isOpenPost);
         }
     }

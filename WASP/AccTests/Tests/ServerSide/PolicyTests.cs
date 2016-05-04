@@ -16,17 +16,12 @@ namespace AccTests.Tests.ServerSide
     {
         private WASPBridge _proj;
         private SuperUser _supervisor;
-        private Forum _forum;
-        private Member _admin;
-        private Subforum _subforum;
-        private Member _moderator;
-        private Member _member1;
         [TestInitialize]
         public void setUp()
         {
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
-            _supervisor = _proj.login(_supervisor.UserName, _supervisor.Password);
+            _supervisor = _proj.loginSU(_supervisor.userName, _supervisor.password);
 
         }
         /// <summary>
@@ -36,8 +31,8 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void PasswordPolicy1()
         {
-            var forum = _proj.createForum(_supervisor, "forum1", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
-            var mem=_proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem123", forum);
+            var forum = _proj.createForum(_supervisor.id, "forum1", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
+            var mem=_proj.subscribeToForum(23,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", forum.Id);
             Assert.IsNotNull(mem);
         }
         /// <summary>
@@ -47,8 +42,8 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void PasswordPolicy2()
         {
-            var forum = _proj.createForum(_supervisor, "forum2", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
-            var mem = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "member", forum);
+            var forum = _proj.createForum(_supervisor.id, "forum2", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
+            var mem = _proj.subscribeToForum(23,"mem1", "mem", "mem1@post.bgu.ac.il", "member", forum.Id);
             Assert.IsNull(mem);
         }
         /// <summary>
@@ -58,8 +53,8 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void PasswordPolicy3()
         {
-            var forum = _proj.createForum(_supervisor, "forum3", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
-            var mem = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem1", forum);
+            var forum = _proj.createForum(_supervisor.id, "forum3", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
+            var mem = _proj.subscribeToForum(23,"mem1", "mem", "mem1@post.bgu.ac.il", "mem1", forum.Id);
             Assert.IsNull(mem);
         }
         /// <summary>
@@ -69,8 +64,8 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void PasswordPolicy4()
         {
-            var forum = _proj.createForum(_supervisor, "forum4", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
-            var mem = _proj.subscribeToForum("mem1", "mem", "mem1@post.bgu.ac.il", "mem", forum);
+            var forum = _proj.createForum(_supervisor.id, "forum4", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
+            var mem = _proj.subscribeToForum(23,"mem1", "mem", "mem1@post.bgu.ac.il", "mem", forum.Id);
             Assert.IsNull(mem);
         }
         /// <summary>
@@ -80,7 +75,7 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void PasswordPolicy5()
         {
-            var forum = _proj.createForum(_supervisor, "forum5", "forum", "admin", "admin", "admin@gmail.com", "admi", new PasswordPolicy(null, true, 5));
+            var forum = _proj.createForum(_supervisor.id, "forum5", "forum",22, "admin", "admin", "admin@gmail.com", "admi", new PasswordPolicy(null, true, 5));
             Assert.IsNull(forum);
         }
         /// <summary>
@@ -90,10 +85,10 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void ChangePolicy()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
-            _forum.AddPolicy(new PasswordPolicy());
-            _proj.defineForumPolicy(_supervisor, forum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new PasswordPolicy(null, true, 5));
+            forum.AddPolicy(new PasswordPolicy());
+            _proj.defineForumPolicy(_supervisor.id, forum.Id);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
             Assert.IsNotNull(mem);
         }
         /// <summary>
@@ -103,13 +98,13 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void NewModeratorPolicy1()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy());
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum=_proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy());
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum=_proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check=_proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check>=0);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check=_proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
         /// <summary>
         /// adding moderator policy tests
@@ -119,13 +114,13 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void NewModeratorPolicy2()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, 1000));
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, 1000));
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check < 0);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
 
         /// <summary>
@@ -136,13 +131,13 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void NewModeratorPolicy3()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, -5));
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, -5));
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check >= 0);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
 
 
@@ -153,14 +148,14 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public async void NewModeratorPolicy4()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, 1));
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new NewModeratorPolicy(null, 1));
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
             await wait(2); //wait for seniority
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check >= 0);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
 
 
@@ -172,14 +167,14 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void SecurityPolicy1()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com",
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com",
                 "admin1234", new SecurityPolicy());
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check >= 0);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
 
 
@@ -190,14 +185,14 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void SecurityPolicy2()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com",
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com",
                 "admin1234", new SecurityPolicy(null, -5));
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check >= 0);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
         }
         /// <summary>
         /// security policy tests
@@ -206,31 +201,37 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public async void SecurityPolicy3()
         {
-            var forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new SecurityPolicy(null, 1));
-            var admin = _proj.login("admin", "admin1234", forum);
-            var subforum = _proj.createSubForum(admin, "name", "description", admin, DateTime.MaxValue);
+            var forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new SecurityPolicy(null, 1));
+            var admin = _proj.login("admin", "admin1234", forum.Id);
+            var subforum = _proj.createSubForum(admin.id,forum.Id, "name", "description", admin.id, DateTime.MaxValue);
             Assert.IsNotNull(subforum);
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", forum);
-            var check = _proj.addModerator(admin, mem, subforum, DateTime.MaxValue);
-            Assert.IsTrue(check >= 0);
-            mem = _proj.login(mem.UserName, mem.Password, forum);
+            var mem = _proj.subscribeToForum(23,"a", "a", "a.b@c.d", "a", forum.Id);
+            var check = _proj.addModerator(admin.id,forum.Id, mem.id, subforum.Id, DateTime.MaxValue);
+            Assert.IsNotNull(check);
+            mem = _proj.login(mem.userName, mem.password, forum.Id);
             Assert.IsNotNull(mem);
 
             await wait(2); //wait for password to expire
-            mem = _proj.login(mem.UserName, mem.Password, forum);
+            mem = _proj.login(mem.userName, mem.password, forum.Id);
             Assert.IsNull(mem);
-             admin = _proj.login("admin", "admin1234", forum);
+             admin = _proj.login("admin", "admin1234", forum.Id);
             Assert.IsNull(admin);
         }
+
         /// <summary>
         /// positive Test: creates a number of users, and checks that they can create posts and read them correctly
         /// </summary>
+
+        private Forum _forum;
+        private User _admin;
+        private Subforum _subforum;
+        private int counter = 25;
         [TestMethod]
         public void StressTest1()
         {
-            _forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
-            _admin = _proj.login("admin", "admin1234", _forum);
-            _subforum = _proj.createSubForum(_admin, "name", "description", _admin, DateTime.MaxValue);
+            _forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _admin = _proj.login("admin", "admin1234", _forum.Id);
+            _subforum = _proj.createSubForum(_admin.id,_forum.Id, "name", "description", _admin.id, DateTime.MaxValue);
             Assert.IsNotNull(_subforum);
 
             Thread[] threads = new Thread[500];
@@ -257,9 +258,9 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void StressTest2()
         {
-            _forum = _proj.createForum(_supervisor, "forum", "forum", "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
-            _admin = _proj.login("admin", "admin1234", _forum);
-            _subforum = _proj.createSubForum(_admin, "name", "description", _admin, DateTime.MaxValue);
+            _forum = _proj.createForum(_supervisor.id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _admin = _proj.login("admin", "admin1234", _forum.Id);
+            _subforum = _proj.createSubForum(_admin.id,_forum.Id, "name", "description", _admin.id, DateTime.MaxValue);
             Assert.IsNotNull(_subforum);
 
             Thread[] threads = new Thread[500];
@@ -297,16 +298,16 @@ namespace AccTests.Tests.ServerSide
         }
         private async void postsLoopSuccess()
         {
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", _forum);
-            mem = _proj.login(mem.UserName, mem.Password, _forum);
+            var mem = _proj.subscribeToForum(counter++,"a", "a", "a.b@c.d", "a", _forum.Id);
+            mem = _proj.login(mem.userName, mem.password, _forum.Id);
             Assert.IsNotNull(mem);
             var rnd=new Random();
-            var post = _proj.createThread(mem, "title" + rnd.Next(), ""+rnd.Next(), DateTime.Now, _subforum);
+            var post = _proj.createThread(mem.id,_forum.Id, "title" + rnd.Next(), ""+rnd.Next(), _subforum.Id);
             var prevPost = post;
             for (int i = 0; i < 60; i++)
             {
                 prevPost = post;
-                post = _proj.createReplyPost(mem, "" + rnd.Next(), DateTime.Now, prevPost);
+                post = _proj.createReplyPost(mem.id,_forum.Id, "" + rnd.Next(), prevPost.Id);
                 Assert.IsTrue(post.InReplyTo.Content.Equals(prevPost.Content));
                 await wait(1); //wait 1 second to simulate a person waiting
             }
@@ -314,9 +315,9 @@ namespace AccTests.Tests.ServerSide
 
         private async void postsLoopFail()
         {
-            var mem = _proj.subscribeToForum("a", "a", "a.b@c.d", "a", _forum);
+            var mem = _proj.subscribeToForum(counter++,"a", "a", "a.b@c.d", "a", _forum.Id);
             Assert.IsNotNull(mem);//register shouldn't fail, only login (change return value?)
-            mem = _proj.login(mem.UserName, mem.Password, _forum);
+            mem = _proj.login(mem.userName, mem.password, _forum.Id);
             Assert.IsNull(mem);
         }
 

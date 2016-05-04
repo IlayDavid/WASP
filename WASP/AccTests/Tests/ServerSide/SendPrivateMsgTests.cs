@@ -15,22 +15,22 @@ namespace AccTests.Tests
         private SuperUser _supervisor;
         private WASPBridge _proj;
         private Forum _forum;
-        private Member _member1;
-        private Member _member2;
+        private User _member1;
+        private User _member2;
 
         [TestInitialize]     //before each Test
         public void SetUp()
         {
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
-            Tuple<Forum,Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
+            var forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
 
             _forum = forumAndMember.Item1;
-            _member1 = _proj.subscribeToForum("amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum);
-            _member2 = _proj.subscribeToForum("edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum);
+            _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.Id);
+            _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id);
 
-            _proj.login(_member1.UserName, _member1.Password, _forum);
-            _proj.login(_member2.UserName, _member2.Password, _forum);
+            _proj.login(_member1.userName, _member1.password, _forum.Id);
+            _proj.login(_member2.userName, _member2.password, _forum.Id);
         }
 
         /*
@@ -39,12 +39,12 @@ namespace AccTests.Tests
         [TestMethod]
         public void sendPrivateMsgTest1()
         {
-            Message msg = new Message("first message", "Hi");
-            int feedback1 = _proj.sendMessage(_member2, _member1, msg);
-            int feedback2 = _proj.sendMessage(_member1, _member2, msg);
+            var msg = "first message";
+            int feedback1 = _proj.sendMessage(_member2.id,_forum.Id, _member1.id.ToString(), msg);
+            int feedback2 = _proj.sendMessage(_member1.id,_forum.Id, _member2.id.ToString(), msg);
 
             Assert.IsTrue(feedback1 >= 0);
-            Assert.IsTrue(feedback1 >= 0);
+            Assert.IsTrue(feedback2 >= 0);
         }
 
         /*
@@ -54,16 +54,16 @@ namespace AccTests.Tests
         public void sendPrivateMsgTest2()
         {
             string userName = "odedb";
-            Forum forum = _proj.createForum(_supervisor, "subject12", "blah", userName, "oded",
+            Forum forum = _proj.createForum(_supervisor.id, "subject12", "blah",52, userName, "oded",
                             "odedb@post.bgu.ac.il", "odded123", new PasswordPolicy());
-            Member member = _proj.getAdmin(_supervisor, forum, userName);
+            var member = _proj.getAdmin(_supervisor.id, forum.Id, 52);
 
-            Message msg = new Message("first message", "Hi");
-            int feedback1 = _proj.sendMessage(member, _member1, msg);
-            int feedback2 = _proj.sendMessage(_member1, member, msg);
+            var msg = "first message";
+            int feedback1 = _proj.sendMessage(member.user.id,forum.Id, _member1.id.ToString(), msg);
+            int feedback2 = _proj.sendMessage(_member1.id,_forum.Id, member.user.id.ToString(), msg);
 
             Assert.IsTrue(feedback1 < 0);
-            Assert.IsTrue(feedback1 < 0);
+            Assert.IsTrue(feedback2 < 0);
         }
 
 
@@ -73,10 +73,10 @@ namespace AccTests.Tests
         [TestMethod]
         public void sendPrivateMsgTest3()
         {
-            Message msg = new Message("first message", "Hi");
-            int feedback1 = _proj.sendMessage(_member2, _member1, null);
-            int feedback2 = _proj.sendMessage(_member1, null, msg);
-            int feedback3 = _proj.sendMessage(null, _member1, msg);
+            var msg = "first message";
+            int feedback1 = _proj.sendMessage(_member2.id,_forum.Id, _member1.id.ToString(), null);
+            int feedback2 = _proj.sendMessage(_member1.id,_forum.Id, null, msg);
+            int feedback3 = _proj.sendMessage(-1,_forum.Id, _member1.id.ToString(), msg);
             Assert.IsTrue(feedback1 >= 0);
             Assert.IsTrue(feedback2 < 0);
             Assert.IsTrue(feedback3 < 0);

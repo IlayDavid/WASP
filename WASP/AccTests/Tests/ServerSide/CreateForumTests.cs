@@ -32,7 +32,7 @@ namespace AccTests.Tests
         {
             Forum forum = Functions.CreateSpecForum(_proj, _supervisor).Item1;
             Assert.IsNotNull(forum); //checks that a forum is created
-            List<Member> admins = _proj.getAdmins(_supervisor, forum);
+            List<Admin> admins = _proj.getAdmins(_supervisor.id, forum.Id);
 
             // checks that there is only one admin
             Assert.IsTrue(admins.Count == 1); 
@@ -47,15 +47,15 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreateForumTest2()
         {
-            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
+            Tuple<Forum, Admin> forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
             Forum forum = forumAndMember.Item1;
-            Member admin = forumAndMember.Item2;
+            Admin admin = forumAndMember.Item2;
             Assert.IsNotNull(forum); //checks that a forum is created
             
-            Assert.IsTrue(admin.Email.Equals("david@post.bgu.ac.il"));
-            Assert.IsTrue(admin.UserName.Equals("admin"));
-            Assert.IsTrue(admin.Password.Equals("david123"));
-            Assert.IsTrue(admin.Name.Equals("david"));
+            Assert.IsTrue(admin.user.email.Equals("david@post.bgu.ac.il"));
+            Assert.IsTrue(admin.user.userName.Equals("admin"));
+            Assert.IsTrue(admin.user.password.Equals("david123"));
+            Assert.IsTrue(admin.user.name.Equals("david"));
 
         }
 
@@ -68,12 +68,12 @@ namespace AccTests.Tests
             int N = 500;
             for (int i = 1; i <= N; i++)
             {
-                _proj.createForum(_supervisor, "subject" + i.ToString(),
-                   "----", "admin" + i.ToString(), "admin" + i.ToString(),
+                _proj.createForum(_supervisor.id, "subject" + i.ToString(),
+                   "----", 9,"admin" + i.ToString(), "admin" + i.ToString(),
                    "admin" + i.ToString() + "@post.bgu.ac.il", "admin" + i.ToString(), new PasswordPolicy()); 
                    
             }
-            Assert.IsTrue(_proj.getAllForums(_supervisor).Count == N);
+            Assert.IsTrue(_proj.getAllForums().Count == N);
         }
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreateForumTest4()
         {
-            Forum forum = _proj.createForum(null, "subject",
-                   "----", "admin", "admin", "admin@post.bgu.ac.il", "admin", new PasswordPolicy()); 
+            Forum forum = _proj.createForum(-1, "subject",
+                   "----",10, "admin", "admin", "admin@post.bgu.ac.il", "admin", new PasswordPolicy()); 
             Assert.IsNull(forum);
         }
 

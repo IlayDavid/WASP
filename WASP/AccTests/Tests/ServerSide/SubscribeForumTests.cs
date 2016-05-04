@@ -14,18 +14,18 @@ namespace AccTests.Tests
 
         private WASPBridge _proj;
         private Forum _forum;
-        private Member _admin;
+        private Admin _admin;
 
         [TestInitialize]     //before each Test
         public void SetUp()
         {
             _proj = Driver.getBridge();
             SuperUser supervisor = Functions.InitialSystem(_proj);
-            Tuple<Forum, Member> forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
+            var forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
             _forum = forumAndMember.Item1;
             _admin = forumAndMember.Item2;
 
-            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
         }
 
         /*
@@ -35,13 +35,13 @@ namespace AccTests.Tests
         public void subscribeToForumTest1()
         {
 
-            Member isMem = _proj.subscribeToForum("mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
-            List<Member> members = _proj.getMembers(_admin, _forum);
+            var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
+            var members = _proj.getMembers(_admin.user.id, _forum.Id);
 
             Assert.IsNotNull(isMem);
             Assert.AreEqual(members.Count, 2);
             Assert.IsTrue(members.Contains(isMem));
-            Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum).UserName);
+            Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.Id));
         }
 
         /*
@@ -50,17 +50,16 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest2()
         {
-            Member isMem;
-            isMem = _proj.subscribeToForum("", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
+            var isMem = _proj.subscribeToForum(57,"", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum("mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum);
+            isMem = _proj.subscribeToForum(58,"mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum("mosheB", "moshe", "", "moshe123", _forum);
+            isMem = _proj.subscribeToForum(59,"mosheB", "moshe", "", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum("mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", null);
+            isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1);
             Assert.IsNull(isMem);
         }
     }

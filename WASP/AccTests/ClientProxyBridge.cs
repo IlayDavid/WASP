@@ -4,6 +4,7 @@ using Client.DataClasses;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 using Forum = Client.DataClasses.Forum;
+using Message = Client.DataClasses.Message;
 using Policy = Client.DataClasses.Policy;
 using Post = Client.DataClasses.Post;
 using Subforum = Client.DataClasses.Subforum;
@@ -70,10 +71,11 @@ namespace AccTests
             return proj.sendMessage(userID, forumID, targetUserNameID, message);
         }
 
-        public int addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            return proj.addModerator(userID, forumID, moderatorID, subForumID, term);
+            return ((Client.BusinessLogic.IBL) proj).addModerator(userID, forumID, moderatorID, subForumID, term);
         }
+
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
@@ -100,15 +102,26 @@ namespace AccTests
             return proj.deleteModerator(userID, subForumID,moderatorID,subForumID);
         }
 
+        public List<Message> getAllNotificationses(int userID, int forumID)
+        {
+            return ((Client.BusinessLogic.IBL) proj).getAllNotificationses(userID, forumID);
+        }
+
+        public List<Message> getNewNotificationses(int userID, int forumID)
+        {
+            return ((Client.BusinessLogic.IBL) proj).getNewNotificationses(userID, forumID);
+        }
+
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
             return proj.subForumTotalMessages(userID,forumID,subForumID);
         }
 
-        public int memberTotalMessages(int userID, int forumID)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            return proj.memberTotalMessages(userID, forumID);
+            return ((Client.BusinessLogic.IBL) proj).postsByMember(adminID, forumID, userID);
         }
+
 
         public ModeratorReport moderatorReport(int userID, int forumID)
         {
@@ -135,34 +148,36 @@ namespace AccTests
             return proj.loginSU(userName, password);
         }
 
-        public Post getThread(int userID, int forumID, int threadId)
+        public Post getThread(int forumID, int threadId)
         {
-            return proj.getThread(userID, forumID, threadId);
+            return ((Client.BusinessLogic.IBL) proj).getThread(forumID, threadId);
         }
 
-        public Forum getForum(int userID, int forumID)
+        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
         {
-            return proj.getForum(userID, forumID);
+            return ((Client.BusinessLogic.IBL) proj).getThreads(forumID, subForumID, @from, amount);
         }
+
+        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        {
+            return ((Client.BusinessLogic.IBL) proj).getReplays(forumID, subForumID, postID);
+        }
+
 
         public Forum getForum(int forumID)
         {
             return proj.getForum(forumID);
         }
 
-        public Subforum getSubforum(int userID, int forumID, int subforumId)
-        {
-            return proj.getSubforum(userID, forumID, subforumId);
-        }
 
         public Subforum getSubforum(int forumID, int subforumId)
         {
             return proj.getSubforum(forumID, subforumId);
         }
 
-        public List<Moderator> getModerators(int userID, int forumID, int subForumID)
+        public List<Moderator> getModerators(int forumID, int subForumID)
         {
-            return proj.getModerators(userID, forumID, subForumID);
+            return ((Client.BusinessLogic.IBL) proj).getModerators(forumID, subForumID);
         }
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)

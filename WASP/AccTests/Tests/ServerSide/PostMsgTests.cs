@@ -15,8 +15,8 @@ namespace AccTests.Tests
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
-        private Member _admin;
-        private Member _moderator;
+        private Admin _admin;
+        private User _moderator;
         private Post _thread;
 
        
@@ -26,18 +26,18 @@ namespace AccTests.Tests
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
 
-            Tuple<Forum, Member> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
+           var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.UserName, _admin.Password, _forum);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
 
-            Tuple<Subforum, Member> subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
+            var subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.UserName, _moderator.Password, _forum);
+            _proj.login(_moderator.userName, _moderator.password, _forum.Id);
 
-            _thread  = _proj.createThread(_moderator, "webService for calander",
-                                    "Someone know a good web service for Calander?", DateTime.Now, _subforum);
+            _thread  = _proj.createThread(_moderator.id,_forum.Id, "webService for calander",
+                                    "Someone know a good web service for Calander?", _subforum.Id);
         }
 
 
@@ -47,9 +47,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void PostMsgTest1()
         {
-            Member member = Functions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(member.UserName, member.Password, _forum);
-            Post isPost = _proj.createReplyPost(member, "sereach at google", DateTime.Now, _thread);
+            var member = Functions.SubscribeSpecMember(_proj, _forum);
+            _proj.login(member.userName, member.password, _forum.Id);
+            Post isPost = _proj.createReplyPost(member.id,_forum.Id, "sereach at google",_thread.Id);
             Assert.IsNotNull(isPost);
         }
 
@@ -59,7 +59,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void PostMsgTest2()
         {
-            Post isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, _thread);
+            Post isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "sereach at google", _thread.Id);
             Assert.IsNotNull(isPost);
         }
 
@@ -69,13 +69,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void PostMsgTest3()
         {
-            Post isPost = _proj.createReplyPost(null , "sereach at google", DateTime.Now, _thread);
+            Post isPost = _proj.createReplyPost(-1,_forum.Id , "sereach at google", _thread.Id);
             Assert.IsNull(isPost);
 
-            isPost = _proj.createReplyPost(_moderator, "", DateTime.Now.AddDays(10), _thread);
+            isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "",  _thread.Id);
             Assert.IsNull(isPost);
 
-            isPost = _proj.createReplyPost(_moderator, "sereach at google", DateTime.Now, null);
+            isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "sereach at google", -1);
             Assert.IsNull(isPost);
         }
     }

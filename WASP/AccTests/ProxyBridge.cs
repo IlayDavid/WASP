@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using WASP;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 
 namespace AccTests
 {
-    class ProxyBridge : WASPBridge
+    internal class ProxyBridge : WASPBridge
     {
         private RealBridge proj;
 
@@ -14,170 +15,185 @@ namespace AccTests
             proj = bridge;
         }
 
-        public int addModerator(Member member, Member moderator, Subforum subforum, DateTime term)
+        public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            if (proj != null)
-                return proj.addModerator(member, moderator, subforum, term);
-            return -1;
+            return ((ServerAPI) proj).initialize(name, userName, ID, email, pass);
         }
 
-        public int confirmEmail(Member member)
+        public int isInitialize()
         {
-            if (proj != null)
-                return proj.confirmEmail(member);
-            return -1;
+            return ((ServerAPI) proj).isInitialize();
         }
 
-        public Forum createForum(SuperUser creator, string forumName, string description, string userName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName,
+            string email, string pass, Policy policy)
         {
-            if (proj != null)
-                return proj.createForum(creator, forumName, description, userName, adminName, email, pass, policy);
-            return null;
+            return ((ServerAPI) proj).createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
         }
 
-        public Post createReplyPost(Member Author, string content, DateTime now, Post inReplyTo)
+        public int defineForumPolicy(int userID, int forumID)
         {
-            if (proj != null)
-                return proj.createReplyPost(Author, content, now, inReplyTo);
-            return null;
+            return ((ServerAPI) proj).defineForumPolicy(userID, forumID);
         }
 
-        public Subforum createSubForum(Member member, string name, string description, Member moderator, DateTime term)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            if (proj != null)
-                return proj.createSubForum(member, name, description, moderator, term);
-            return null;
+            return ((ServerAPI) proj).subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
-        public Post createThread(Member author, string title, string content, DateTime now, Subforum container)
+        public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
-            if (proj != null)
-                return proj.createThread(author, title, content, now, container);
-            return null;
+            return ((ServerAPI) proj).createThread(userID, forumID, title, content, subForumID);
         }
 
-        public int defineForumPolicy(SuperUser member, Forum forum)
+        public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            if (proj != null)
-                return proj.defineForumPolicy(member, forum);
-            return -1;
+            return ((ServerAPI) proj).createReplyPost(userID, forumID, content, replyToPost_ID);
         }
 
-        public int deletePost(Member member, Post post)
+        public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            if (proj != null)
-                return proj.deletePost(member, post);
-            return -1;
+            return ((ServerAPI) proj).createSubForum(userID, forumID, name, description, moderatorID, term);
         }
 
-        public Member getAdmin(User user, Forum forum, string userName)
+        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
         {
-            if (proj != null)
-                return proj.getAdmin(user, forum, userName);
-            return null;
+            return ((ServerAPI) proj).sendMessage(userID, forumID, targetUserNameID, message);
         }
 
-        public SuperUser login(string userName, string password)
+        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            return proj.login(userName, password);
+            return ((ServerAPI) proj).addModerator(userID, forumID, moderatorID, subForumID, term);
         }
 
-        public List<Member> getAdmins(User member, Forum forum)
+        public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            if (proj != null)
-                return proj.getAdmins(member, forum);
-            return null;
+            return ((ServerAPI) proj).updateModeratorTerm(userID, forumID, moderatorID, subforumID, term);
         }
 
-        public List<Forum> getAllForums(User member)
+        public int confirmEmail(int userID, int forumID)
         {
-            if (proj != null)
-                return proj.getAllForums(member);
-            return null;
+            return ((ServerAPI) proj).confirmEmail(userID, forumID);
         }
 
-        public Forum getForum(Member member, int forumId)
+        public int deletePost(int userID, int forumID, int postID)
         {
-            if (proj != null)
-                return proj.getForum(member, forumId);
-            return null;
+            return ((ServerAPI) proj).deletePost(userID, forumID, postID);
         }
 
-        public List<Member> getMembers(Member member, Forum forum)
+        public int editPost(int userID, int forumID, int postID, string content)
         {
-            if (proj != null)
-                return proj.getMembers(member, forum);
-            return null;
+            return ((ServerAPI) proj).editPost(userID, forumID, postID, content);
         }
 
-        public List<Member> getModerators(Member member, Subforum subforum)
+        public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            if (proj != null)
-                return proj.getModerators(member, subforum);
-            return null;
+            return ((ServerAPI) proj).deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
-        public DateTime getModeratorTermTime(Member member, Member moderator, Subforum subforum)
+        public List<Message> getAllNotificationses(int userID, int forumID)
         {
-            if (proj != null)
-                return proj.getModeratorTermTime(member, moderator, subforum);
-            return DateTime.Now.AddDays(-100);
+            return ((ServerAPI) proj).getAllNotificationses(userID, forumID);
         }
 
-        public Subforum getSubforum(Member member, int subforumId)
+        public List<Message> getNewNotificationses(int userID, int forumID)
         {
-            if (proj != null)
-                return proj.getSubforum(member, subforumId);
-            return null;
+            return ((ServerAPI) proj).getNewNotificationses(userID, forumID);
         }
 
-        public List<Subforum> getSubforums(Member member, Forum forum)
+        public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            if (proj != null)
-                return proj.getSubforums(member, forum);
-            return null;
+            return ((ServerAPI) proj).subForumTotalMessages(userID, forumID, subForumID);
         }
 
-        public Post getThread(Member member, int threadId)
+        public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            if (proj != null)
-                return proj.getThread(member, threadId);
-            return null;
+            return ((ServerAPI) proj).postsByMember(adminID, forumID, userID);
         }
 
-        public SuperUser initialize(string name, string userName, string email, string pass)
+        public ModeratorReport moderatorReport(int userID, int forumID)
         {
-            if (proj != null)
-                return proj.initialize(name, userName, email, pass);
-            return null;
+            return ((ServerAPI) proj).moderatorReport(userID, forumID);
         }
 
-        public Member login(string userName, string password, Forum forum)
+        public int totalForums(int userID)
         {
-            if (proj != null)
-                return proj.login(userName, password, forum);
-            return null;
+            return ((ServerAPI) proj).totalForums(userID);
         }
 
-        public int sendMessage(Member member, Member targetMember, Message message)
+        public List<User> membersInDifferentForums(int userID)
         {
-            if (proj != null)
-                return proj.sendMessage(member, targetMember, message);
-            return -1;
+            return ((ServerAPI) proj).membersInDifferentForums(userID);
         }
 
-        public Member subscribeToForum(string userName, string name, string email, string pass, Forum targetForum)
+        public User login(string userName, string password, int forumID)
         {
-            if (proj != null)
-                return proj.subscribeToForum(userName, name, email, pass, targetForum);
-            return null;
+            return ((ServerAPI) proj).login(userName, password, forumID);
         }
 
-        public int updateModeratorTerm(Member member, Member moderator, Subforum subforum, DateTime term)
+        public SuperUser loginSU(string userName, string password)
         {
-            if (proj != null)
-                return proj.updateModeratorTerm(member, moderator, subforum, term);
-            return -1;
+            return ((ServerAPI) proj).loginSU(userName, password);
+        }
+
+        public Post getThread(int forumID, int threadId)
+        {
+            return ((ServerAPI) proj).getThread(forumID, threadId);
+        }
+
+        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
+        {
+            return ((ServerAPI) proj).getThreads(forumID, subForumID, @from, amount);
+        }
+
+        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        {
+            return ((ServerAPI) proj).getReplays(forumID, subForumID, postID);
+        }
+
+        public Forum getForum(int forumID)
+        {
+            return ((ServerAPI) proj).getForum(forumID);
+        }
+
+        public Subforum getSubforum(int forumID, int subforumId)
+        {
+            return ((ServerAPI) proj).getSubforum(forumID, subforumId);
+        }
+
+        public List<Moderator> getModerators(int forumID, int subForumID)
+        {
+            return ((ServerAPI) proj).getModerators(forumID, subForumID);
+        }
+
+        public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
+        {
+            return ((ServerAPI) proj).getModeratorTermTime(userID, forumID, moderatorID, subforumID);
+        }
+
+        public List<Forum> getAllForums()
+        {
+            return ((ServerAPI) proj).getAllForums();
+        }
+
+        public List<Admin> getAdmins(int userID, int forumID)
+        {
+            return ((ServerAPI) proj).getAdmins(userID, forumID);
+        }
+
+        public List<User> getMembers(int userID, int forumID)
+        {
+            return ((ServerAPI) proj).getMembers(userID, forumID);
+        }
+
+        public List<Subforum> getSubforums(int forumID)
+        {
+            return ((ServerAPI) proj).getSubforums(forumID);
+        }
+
+        public Admin getAdmin(int userID, int forumID, int AdminID)
+        {
+            return ((ServerAPI) proj).getAdmin(userID, forumID, AdminID);
         }
     }
 }
