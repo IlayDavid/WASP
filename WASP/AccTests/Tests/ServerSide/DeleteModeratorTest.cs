@@ -64,8 +64,8 @@ namespace AccTests.Tests
         public void deleteModerator2()
         {
             var newAdminUser = _proj.subscribeToForum(17,"admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.Id);
-            _proj.addAdmin(_supervisor, newAdminUser.id);
-            var check = _proj.deleteModerator(newAdmin.user.id, _forum.Id, _moderator.id, _subforum.Id);
+            _proj.addAdmin(_supervisor.id,_forum.Id, newAdminUser.id);
+            var check = _proj.deleteModerator(newAdminUser.id, _forum.Id, _moderator.id, _subforum.Id);
                 Assert.IsTrue(check<0);
             
         }

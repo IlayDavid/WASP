@@ -49,7 +49,7 @@ namespace AccTests.Tests
         {
             var member = Functions.SubscribeSpecMember(_proj, _forum);
             _proj.login(member.userName, member.password, _forum.Id);
-            Post isPost = _proj.createReplyPost(member.id,_forum.Id, "sereach at google",_thread.Id);
+            Post isPost = _proj.createReplyPost(member.id,_forum.Id, "sereach at google",_thread.id);
             Assert.IsNotNull(isPost);
         }
 
@@ -59,7 +59,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void PostMsgTest2()
         {
-            Post isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "sereach at google", _thread.Id);
+            Post isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "sereach at google", _thread.id);
             Assert.IsNotNull(isPost);
         }
 
@@ -69,10 +69,10 @@ namespace AccTests.Tests
         [TestMethod]
         public void PostMsgTest3()
         {
-            Post isPost = _proj.createReplyPost(-1,_forum.Id , "sereach at google", _thread.Id);
+            Post isPost = _proj.createReplyPost(-1,_forum.Id , "sereach at google", _thread.id);
             Assert.IsNull(isPost);
 
-            isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "",  _thread.Id);
+            isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "",  _thread.id);
             Assert.IsNull(isPost);
 
             isPost = _proj.createReplyPost(_moderator.id,_forum.Id, "sereach at google", -1);

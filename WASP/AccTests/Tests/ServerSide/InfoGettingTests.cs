@@ -23,6 +23,7 @@ namespace AccTests.Tests.ServerSide
         private Dictionary<Subforum, List<User>> _moderators = new Dictionary<Subforum, List<User>>();
         private Dictionary<Forum, List<User>> _members = new Dictionary<Forum, List<User>>();
         private Dictionary<Subforum, List<Post>> _posts = new Dictionary<Subforum, List<Post>>();
+        private Dictionary<int, List<Post>> _postsByUser = new Dictionary<int, List<Post>>();
         private const int LOOPS = 10;
 
         [TestInitialize]
@@ -33,7 +34,7 @@ namespace AccTests.Tests.ServerSide
             _supervisor = _proj.loginSU(_supervisor.userName, _supervisor.password);
             for (int i = 0; i < LOOPS; i++)
             {
-                var forum = _proj.createForum(_supervisor.id, "forum_" + i, "the " + i + "th forum",100+i, "admin_" + i,
+                var forum = _proj.createForum(_supervisor.id, "forum_" + i, "the " + i + "th forum",100, "admin_" + i,
                     "admin" + i,
                     "admin" + i + "@gmail.com", "admin1234", new PasswordPolicy());
                 var admin = _proj.login("admin_" + i, "admin1234", forum.Id);
@@ -61,19 +62,30 @@ namespace AccTests.Tests.ServerSide
                 var prevMember = member;
                 var post = _proj.createThread(prevMember.id,forum.Id, "title", "first message of forum_" + i,subforum.Id);
                 _posts[subforum].Add(post);
+                _postsByUser[member.id]=new List<Post>();
+                _postsByUser[member.id].Add(post);
                 for (int j = 0; j < LOOPS; j++)
                 {
                     prevMember = member;
-                    post = _proj.createReplyPost(prevMember.id,forum.Id, "this is reply number " + i, post.Id);
-                    _posts[subforum].Add(post);
-                    member = _proj.subscribeToForum(130+j+i*10,"user_" + i + "_" + j, "user" + i + "_" + j,
+                    member = _proj.subscribeToForum(130 + j + i * 10, "user_" + i + "_" + j, "user" + i + "_" + j,
                         "user" + i + "_" + j + "@gmail.com", "user1234",
                         forum.Id);
                     _members[forum].Add(member);
+                    post = _proj.createReplyPost(prevMember.id,forum.Id, "this is reply number " + i, post.id);
+                    _postsByUser[member.id] = new List<Post>();
+                    _postsByUser[member.id].Add(post);
+
+                    _posts[subforum].Add(post);
                 }
             }
         }
-
+        /// <summary>
+        /// checks if we get the correct number of same user
+        /// </summary>
+        public void sameUser()
+        {
+            Assert.IsTrue(_proj.membersInDifferentForums(100).Count==LOOPS);
+        }
         /// <summary>
         /// check if we get the correct number of posts
         /// </summary>
@@ -88,24 +100,43 @@ namespace AccTests.Tests.ServerSide
         /// cheks that we can correctly retrieve posts made by a user
         /// </summary>
         [TestMethod]
-        public void numberOfPostsByUser()
+        public void postsByUser()
         {
             for (int i = 0; i < LOOPS; i++)
             {
                 var postsByMember = _proj.postsByMember(_admins[_forums[0]][0].id, _forums[0].Id, _members[_forums[0]][i].id);
                 var posts =
-                    _posts[_subforums[_forums[0]][0]].Where((x) => x.GetAuthor.id == _members[_forums[0]][i].id);
+                    _posts[_subforums[_forums[0]][0]].Where((x) => x.author.id == _members[_forums[0]][i].id);
                 foreach (var post in posts)
                 {
-                    Assert.IsTrue(postsByMember.Any((x) => (x).Id==post.Id));
+                    Assert.IsTrue(postsByMember.Any((x) => (x).id==post.id));
                 }
             }
         }
 
         [TestMethod]
-        public void moderatorReportTests()
+        public void moderatorReport()
         {
-            Assert.IsNotNull(null);
+            var reports = _proj.moderatorReport(_admins[_forums[0]][0].id, _forums[0].Id);
+            foreach (var mod in reports.ModeratorInsubForum)
+            {
+                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Value]].Any((x)=>x.id==mod.Key));
+            }
+            var subforums = _subforums[_forums[0]];
+            IEnumerable<User> modlist=new List<User>();
+            modlist = subforums.Aggregate(modlist, (current, subforum) => current.Concat(_moderators[subforum]));
+            foreach (var moderator in reports.moderators)
+            {
+                Assert.IsTrue(modlist.Any((x)=>x.id==moderator.user.id));
+            }
+
+            foreach (var moderatorsPost in reports.moderatorsPosts)
+            {
+                foreach (var post in moderatorsPost.Value)
+                {
+                    Assert.IsTrue(_postsByUser[moderatorsPost.Key].Any((x)=>x.id==post.id));
+                }
+            }
         }
 
 
