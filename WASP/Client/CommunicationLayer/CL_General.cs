@@ -53,7 +53,7 @@ namespace Client.CommunicationLayer
 
         public User login(string userName, string password, int forumID)
         {
-            string json = "{\"username\":" + userName + "," + "\"password\":" + password + "," + "\"forumid\":" + forumID + "}";
+            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login");
             return parseStringToUser(res);
         }
@@ -65,7 +65,7 @@ namespace Client.CommunicationLayer
 
         public SuperUser loginSU(string userName, string password)
         {
-            string json = "{\"username\":" + userName + "," + "\"password\":" + password + "}";
+            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU");
             return parseStringToSuperUser(res);
         }

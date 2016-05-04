@@ -13,7 +13,7 @@ namespace Client.CommunicationLayer
         public int editPost(int userID, int forumID, int postID, string content)
         {
             string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"postid\":" + postID
-                + "," + "\"content\":" + content + "}";
+                + "," + "\"content\":\"" + content + "\"}";
             string res = httpReq(json, "POST", _url + "/editPost");
             return 0;
         }

@@ -14,7 +14,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subForumID + "," + "\"forumid\":" + forumID
                  + "," + "\"moderatorid\":" + moderatorID
-                 + "," + "{\"termenddate\":" + term.Date + "}" + "}";
+                 + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/addModerator");
             return parseStringToModerator(res);
         }
@@ -35,8 +35,8 @@ namespace Client.CommunicationLayer
 
         public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"message\":" + message
-                + "," + "\"reciever\":" + targetUserNameID + "}";
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"message\":\"" + message
+                + "\"," + "\"reciever\":\"" + targetUserNameID + "\"}";
             string res = httpReq(json, "POST", _url + "/sendMessage");
             return 0;
         }
@@ -45,7 +45,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subforumID + "," + "\"forumid\":" + forumID
                  + "," + "\"moderatorid\":" + moderatorID
-                 + "," + "{\"termenddate\":" + term.Date + "}" + "}";
+                 + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/updateModeratorTerm");
             return 0;
         }
