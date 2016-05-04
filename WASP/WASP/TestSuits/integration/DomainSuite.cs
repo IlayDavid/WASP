@@ -110,16 +110,38 @@ namespace WASP.TestSuits.integration
             // act
             BL.addModerator(100, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
             Subforum updatedSf = BL.getSubforum(forum.Id, sf.Id);
-
-       
+            DateTime date = new DateTime(2016, 12, 12);
+            BL.updateModeratorTerm(100, forum.Id, user.Id, updatedSf.Id, date);
+            DateTime term = BL.getModeratorTermTime(100, forum.Id, user.Id, updatedSf.Id);
+            
             // assert
-            Assert.AreEqual(2, sf.GetAllModerators().Length, "added another mod execpt the one at constructor");
-            Assert.AreEqual(true, updatedSf.IsModerator(willBeMod.Id), " addModerator works");
-            Assert.AreEqual(false, sf.IsModerator(willBeMod.Id), "willBeMod is not a mod in subForum before the add function");
+            Assert.AreEqual(date, term, "term updated");
+            
+        }
+        public void checkTotals()
+        {
+            //pre-arragne
+            dal.Clean();
+            // arrange
+            Forum forum = BL.createForum(-1, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234");
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User willBeMod = BL.subscribeToForum(-1, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
+            Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
+            // act
             
 
+            // assert
+            Assert.AreEqual(1, BL.totalForums(100), "checking total forums");
+            Assert.AreEqual(1, BL.subForumTotalMessages(100, forum.Id, sf.Id),"checking subForumTotal messages");
+            Assert.AreEqual(0, BL.memberTotalMessages(100, forum.Id), "checking memberTotal messages - return 0 if no messages");
+            Assert.AreEqual(1, BL.memberTotalMessages(user.Id, forum.Id),"checking is return right number of messages");
+            Assert.AreEqual(1, BL.postsByMember(100, forum.Id, user.Id).Length, "cheking if postByMember works");
 
         }
+
+
+
     }
 }
 
