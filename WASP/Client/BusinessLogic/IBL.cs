@@ -36,8 +36,7 @@ namespace Client.BusinessLogic
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
-        
+        int defineForumPolicy(int userID, int forumID, Policy policy);  
         /*
          * Pre-conditions: none
          * Purpose: creates a Member in the forum, and return the Member.

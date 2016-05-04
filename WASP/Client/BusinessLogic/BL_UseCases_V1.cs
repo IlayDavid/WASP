@@ -61,10 +61,11 @@ namespace Client.BusinessLogic
 
         }
 
-        public int defineForumPolicy(int userID, int forumID)
+        public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            throw new NotImplementedException();
-        }  //------------------------ policy object??
+            //return _cl.defineForumPolicy(userID, forumID, policy);
+            return 1;
+        }  
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {

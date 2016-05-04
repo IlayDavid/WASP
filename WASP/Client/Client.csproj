@@ -90,6 +90,9 @@
     <Compile Include="GUI\EditWindows\EditContent.xaml.cs">
       <DependentUpon>EditContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\EditWindows\EditPolicy.xaml.cs">
+      <DependentUpon>EditPolicy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\EditWindows\EditTerm.xaml.cs">
       <DependentUpon>EditTerm.xaml</DependentUpon>
     </Compile>
@@ -98,7 +101,7 @@
     </Compile>
     <Compile Include="GUI\INotificable.cs" />
     <Compile Include="GUI\Session.cs" />
-    <Compile Include="GUI\SubForumWindow.xaml.cs">
+    <Compile Include="GUI\MainWindows\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\AddWindows\CreateAdmin.xaml.cs">
@@ -132,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\EditWindows\EditPolicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\EditWindows\EditTerm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,11 +147,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\ForumWindow.xaml">
+    <Page Include="GUI\MainWindows\ForumWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GUI\Login.xaml">
+    <Page Include="GUI\MainWindows\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -169,17 +176,17 @@
     <Compile Include="DataClasses\SuperUser.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="DataClasses\ModeratorReport.cs" />
-    <Compile Include="GUI\ForumWindow.xaml.cs">
+    <Compile Include="GUI\MainWindows\ForumWindow.xaml.cs">
       <DependentUpon>ForumWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Login.xaml.cs">
+    <Compile Include="GUI\MainWindows\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Page Include="GUI\PostWindow.xaml">
+    <Page Include="GUI\MainWindows\PostWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GUI\SubForumWindow.xaml">
+    <Page Include="GUI\MainWindows\SubForumWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -187,7 +194,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\MainWindow.xaml">
+    <Page Include="GUI\MainWindows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,10 +204,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\PostWindow.xaml.cs">
+    <Compile Include="GUI\MainWindows\PostWindow.xaml.cs">
       <DependentUpon>PostWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MainWindow.xaml.cs">
+    <Compile Include="GUI\MainWindows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\AddWindows\AddSubForum.xaml.cs">
@@ -231,6 +238,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

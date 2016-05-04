@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
+using Client.GUI.EditWindows;
 
 namespace Client
 {
@@ -129,7 +130,8 @@ namespace Client
 
         private void btnEditForumPolicy_Click(object sender, RoutedEventArgs e)
         {
-
+            EditPolicy editP = new EditPolicy();
+            editP.ShowDialog();           
         }
 
         private void SubForums_MouseDoubleClick(object sender, MouseButtonEventArgs e)
