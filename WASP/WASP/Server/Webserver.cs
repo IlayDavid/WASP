@@ -51,11 +51,16 @@ namespace WASP.Server
                             try
                             {
                                 string rstr = _responderMethod(ctx.Request);
+                                if (rstr.StartsWith("~ERROR: "))
+                                    ctx.Response.StatusCode = 400;
                                 byte[] buf = Encoding.UTF8.GetBytes(rstr);
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
-                            catch { } // suppress any exceptions
+                            catch(Exception e) // suppress any exceptions
+                            {
+                                Console.WriteLine(e);
+                            }
                             finally
                             {
                                 // always close the stream

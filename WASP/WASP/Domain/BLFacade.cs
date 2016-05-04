@@ -10,18 +10,28 @@ namespace WASP.Domain
     {
         private DAL dal;
 
+        public BLFacade()
+        {
+            this.dal = null;
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            throw new NotImplementedException();
+            this.dal = new DALSQL();
+            SuperUser user = new SuperUser(-1, userName, pass);
+            return this.dal.CreateSuperUser(user);
         }
 
         public int isInitialize()
         {
-            throw new NotImplementedException();
+            if (this.dal == null)
+                return 0;
+            return 1;
         }
 
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass)
         {
+            SuperUser su = this.dal.GetSuperUser(userID);
             //create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, null, dal);
             User user = new User(adminID, adminName, adminUserName, email, pass, newForum);

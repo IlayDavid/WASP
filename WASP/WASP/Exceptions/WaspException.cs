@@ -8,7 +8,7 @@ namespace WASP.Exceptions
 {
     public abstract class WaspException : Exception
     {
-        public WaspException (String errorMsg) : base (errorMsg)
+        public WaspException (String errorMsg) : base ("~ERROR: " + errorMsg)
         {
         }
 
