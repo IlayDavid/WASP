@@ -12,27 +12,42 @@ namespace Client.CommunicationLayer
         //---------------------------Version 2 Use Cases Start------------------------------------
         public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subForumID + "," + "\"forumid\":" + forumID
+                 + "," + "\"moderatorid\":" + moderatorID
+                 + "," + "{\"termenddate\":" + term.Date + "}" + "}";
+            string res = httpReq(json, "POST", _url + "/addModerator");
+            return parseStringToModerator(res);
         }
 
         public int confirmEmail(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/confirmEmail");
+            return 0;
         }
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"postid\":" + postID + "}";
+            string res = httpReq(json, "POST", _url + "deletePost");
+            return 0;
         }
 
         public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"message\":" + message
+                + "," + "\"reciever\":" + targetUserNameID + "}";
+            string res = httpReq(json, "POST", _url + "/sendMessage");
+            return 0;
         }
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subforumID + "," + "\"forumid\":" + forumID
+                 + "," + "\"moderatorid\":" + moderatorID
+                 + "," + "{\"termenddate\":" + term.Date + "}" + "}";
+            string res = httpReq(json, "POST", _url + "/updateModeratorTerm");
+            return 0;
         }
 
         //---------------------------Version 2 Use Cases Start------------------------------------

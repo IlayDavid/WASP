@@ -16,7 +16,6 @@ namespace Client.CommunicationLayer
     //no members in implementaion
     public partial class CL : ICL
     {
-        enum entities { USER, SUPERUSER, POST, FORUM, SUBFORUM, MESSAGE };
         private string _url { get; set; }
         public CL()
         {
@@ -28,6 +27,7 @@ namespace Client.CommunicationLayer
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = method;
+            httpWebRequest.ContentLength = json.Length;
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
@@ -35,6 +35,10 @@ namespace Client.CommunicationLayer
             }
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            if ((int)httpResponse.StatusCode != 200)
+            {
+                return HandleHttpError((int)httpResponse.StatusCode);
+            }
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
@@ -42,10 +46,15 @@ namespace Client.CommunicationLayer
             }
         }
 
+        private string HandleHttpError(int statusCode)
+        {
+            throw new NotImplementedException();
+        }
+
         public User login(string userName, string password, int forumID)
         {
-            string json = "\"User\":{\"userName\":" + userName + "," + "\"password\":" + password + "," + "\"forumID\":" + forumID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"username\":" + userName + "," + "\"password\":" + password + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/login");
             return parseStringToUser(res);
         }
 
@@ -56,8 +65,8 @@ namespace Client.CommunicationLayer
 
         public SuperUser loginSU(string userName, string password)
         {
-            string json = "\"SuperUser\":{\"userName\":" + userName + "," + "\"password\":" + password + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"username\":" + userName + "," + "\"password\":" + password + "}";
+            string res = httpReq(json, "POST", _url + "/loginSU");
             return parseStringToSuperUser(res);
         }
 
@@ -70,8 +79,8 @@ namespace Client.CommunicationLayer
 
         public Post getThread(int forumID, int threadId)
         {
-            string json =  "\"Post\":{\"threadId\":" + threadId + "," + "\"forumID\":" + forumID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"postid\":" + threadId + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getThread");
             return parseStringToPost(res);
         }
 
@@ -79,10 +88,18 @@ namespace Client.CommunicationLayer
         {
             throw new NotImplementedException();
         }
-        public List<Post> getReplys(int forumID, int subForumID, int postID)
+        public List<Post> getReplies(int forumID, int subForumID, int postID)
+        {
+            string json = "{\"postid\":" + postID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "}";
+            string res = httpReq(json, "POST", _url + "getReplies");
+            return parseStringToPosts(res);
+        }
+
+        private List<Post> parseStringToPosts(string res)
         {
             throw new NotImplementedException();
         }
+
         private Post parseStringToPost(string res)
         {
             throw new NotImplementedException();
@@ -90,15 +107,15 @@ namespace Client.CommunicationLayer
 
         public Forum getForum(int userID, int forumID)
         {
-            string json = "\"Forum\":{\"userID\":" + userID + "," + "\"forumID\":" + forumID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getForum");
             return parseStringToForum(res);
         }
 
         public Forum getForum(int forumID)
         {
-            string json = "\"Forum\":{\"forumID\":" + forumID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getForum");
             return parseStringToForum(res);
         }
 
@@ -109,8 +126,8 @@ namespace Client.CommunicationLayer
 
         public Subforum getSubforum(int forumID, int subforumId)
         {
-            string json = "\"Subforum\":{\"forumID\":" + forumID + "," + "\"subforumId\":" + subforumId + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"forumid\":" + forumID + "," + "\"subforumid\":" + subforumId + "}";
+            string res = httpReq(json, "POST", _url + "/getSubforum");
             return parseStringToSubforum(res);
         }
 
@@ -132,8 +149,8 @@ namespace Client.CommunicationLayer
 
         private Moderator getModerator(int userID, int forumID, int subForumID, int moderatorID)
         {
-            string json = "\"Moderator\":{\"userID\":" + userID + "," + "\"forumID\":" + forumID + "," + "\"subForumID\":" + subForumID + "," + "\"moderatorID\":" + moderatorID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID + "}";
+            string res = httpReq(json, "POST", _url + "/getModerator");
             return parseStringToModerator(res);
         }
 
@@ -152,8 +169,8 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {
-            string json = "\"allForums\"}";
-            string res = httpReq(json, "GET", _url);
+            string json = "";
+            string res = httpReq(json, "POST", _url + "/getAllForums");
             return parseStringToForums(res);
         }
 
@@ -164,8 +181,8 @@ namespace Client.CommunicationLayer
 
         public List<Admin> getAdmins(int userID, int forumID)
         {
-            string json = "\"allAdmins\":{\"forumID\":" + forumID + "," + "\"userID\":" + userID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"forumid\":" + forumID + "," + "\"userid\":" + userID + "}";
+            string res = httpReq(json, "POST", _url + "/getAdmins");
             return parseStringToAdmins(res);
         }
 
@@ -176,14 +193,15 @@ namespace Client.CommunicationLayer
 
         public List<User> getMembers(int userID, int forumID)
         {
-            throw new NotImplementedException();
-            //no members in implementaion
+            string json = "{\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getMembers");
+            return parseStringToUsers(res);
         }
 
         public List<Subforum> getSubforums(int forumID)
         {
-            string json = "\"allSubforums\":{\"forumID\":" + forumID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getSubforums");
             return parseStringToSubforums(res);
         }
 
@@ -194,14 +212,21 @@ namespace Client.CommunicationLayer
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            string json = "\"Admin\":{\"forumID\":" + forumID + "," + "\"userID\":" + userID + "," + "\"AdminID\":" + AdminID + "}";
-            string res = httpReq(json, "GET", _url);
+            string json = "{\"forumid\":" + forumID + "," + "\"userid\":" + userID + "," + "\"adminid\":" + AdminID + "}";
+            string res = httpReq(json, "POST", _url + "/getAdmin");
             return parseStringToAdmin(res);
         }
 
         private Admin parseStringToAdmin(string res)
         {
             throw new NotImplementedException();
+        }
+
+        public Admin addAdmin(int adminID, int forumID, int newAdminID)
+        {
+            string json = "{\"forumid\":" + forumID + "," + "\"newadminid\":" + newAdminID + "," + "\"adminid\":" + adminID + "}";
+            string res = httpReq(json, "POST", _url + "/addAdmin");
+            return parseStringToAdmin(res);
         }
     }
 }

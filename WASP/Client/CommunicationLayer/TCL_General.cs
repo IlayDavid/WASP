@@ -94,7 +94,7 @@ namespace Client.CommunicationLayer
             return posts[threadId];
         }
 
-        public List<Post> getReplys(int forumID, int subForumID, int postID)
+        public List<Post> getReplies(int forumID, int subForumID, int postID)
         {
             return posts[postID].replies;
         }
