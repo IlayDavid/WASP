@@ -6,7 +6,7 @@ namespace Client.DataClasses
     {
         private static int countId = 0;
         public Forum(){ }
-        public Forum(string name, string description, User admin)
+        public Forum(string name, string description, User admin, Policy policy)
         {
             subforums = new Dictionary<int, Subforum>();
             Name = name;
@@ -16,6 +16,7 @@ namespace Client.DataClasses
             admins.Add(admin.id, admin);
             members = new Dictionary<int, User>();
             members.Add(admin.id, admin);
+            this.policy = policy;
         }
         public int id { get; set; }
         public string Name{ get; set; }

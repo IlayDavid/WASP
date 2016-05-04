@@ -27,7 +27,7 @@ namespace Client.CommunicationLayer
             if (userID != _su.id)
                 throw new Exception("User with id - "+userID+" cannot add forum");
             User admin = new User(adminId, adminName, adminUserName, email, pass);
-            Forum forum = new Forum(forumName, description, admin);
+            Forum forum = new Forum(forumName, description, admin, policy);
             forums.Add(forum.id, forum);
             forum.members.Add(_su.id, (User) _su );
             return forum;

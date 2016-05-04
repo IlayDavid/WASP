@@ -90,6 +90,9 @@
     <Compile Include="GUI\EditWindows\EditTerm.xaml.cs">
       <DependentUpon>EditTerm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ForumReports.xaml.cs">
+      <DependentUpon>ForumReports.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\INotificable.cs" />
     <Compile Include="GUI\Session.cs" />
     <Compile Include="GUI\SubForumWindow.xaml.cs">
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\EditWindows\EditTerm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ForumReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

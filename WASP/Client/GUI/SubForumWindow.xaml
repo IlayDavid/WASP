@@ -36,7 +36,7 @@
             <Button x:Name="btnAddModerator" Visibility="Hidden" Content="Add Moderator" Click="btnAddModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="1" Margin="10,70.8,0,0" Grid.RowSpan="2"/>
             <Button x:Name="btnEditModeratorTerm" Visibility="Hidden" Content="Edit Mod. Term" Click="btnEditModeratorTerm_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="3" Margin="10,0.4,0,0"/>
             <Button x:Name="btnRemoveModerator" Visibility="Hidden" Content="Remove Moderator" Click="btnRemoveModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="4" Margin="10,0.2,0,0"/>
-            <Button x:Name="btnEditSubforumSettings" Visibility="Hidden" Content="Change Policy"  Click="btnEditSubforumSettings_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="5" Margin="10,0,0,0"/>
+            <Button x:Name="btnRepots" Visibility="Hidden" Content="Reports"  Click="btnRepots_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="5" Margin="10,0,0,0"/>
             <ListBox x:Name="SubForumsThreads" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForumsThreads_MouseDoubleClick"/>
         </Grid>
     </Grid>

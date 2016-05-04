@@ -15,8 +15,8 @@ namespace Client
     public partial class PostWindow : Window, INotificable
     {
         private readonly int CONTENT_IND = 0;
-        private readonly int EDIT_AT_IND = 0;
-        private readonly int BY_IND = 0;
+        //private readonly int EDIT_AT_IND = 0;
+        //private readonly int BY_IND = 0;
 
         public PostWindow()
         {

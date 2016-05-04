@@ -11,7 +11,7 @@ namespace Client.BusinessLogic
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
 
-        /*
+        /*ef
         * Pre-conditions: none.
         * Purpose: initialize the system and logs the superuser in
         * Return: super user details.
@@ -127,7 +127,7 @@ namespace Client.BusinessLogic
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
         List<Message> getAllNotificationses(int userID, int forumID);
         List<Message> getNewNotificationses(int userID, int forumID);
-
+        Admin addAdmin(int adminID, int forumID, int newAdminID);
         //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */

@@ -43,7 +43,7 @@ namespace Client.BusinessLogic
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            if (userID < 0 || forumID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            if (userID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
             return _cl.subForumTotalMessages(userID, forumID, subForumID);
         }
 

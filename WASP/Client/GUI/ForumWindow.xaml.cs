@@ -18,12 +18,8 @@ namespace Client
         public ForumWindow()
         {
             InitializeComponent();
-            
-            if(Session.user != null && Session.user is SuperUser)
-            {
-                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                ChangeVisibilitySU();
-            }
+
+            setVisibility();
             LoadData();
             //presenting the subforums list 
             foreach (Subforum sf in Session.forum.subforums.Values)
@@ -158,7 +154,6 @@ namespace Client
             login.ShowDialog();
             if (Session.user == null)
                 return;
-            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
             setVisibility();
         }
 

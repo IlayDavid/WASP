@@ -32,9 +32,16 @@ namespace Client.GUI
             try
             {
                 if (Session.user is SuperUser)
+                {
+                    int deletePost = deletePostPermission();
+                    int passwordPeriod = int.Parse(txtPassPeriod.Text);
+                    bool emailVerification = chkbEmailVer.IsChecked.Value;
+                    int seniority = int.Parse(txtModSen.Text);
+                    int usersSameTime = int.Parse(txtUserSameTime.Text);
+                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
                     _forum = Session.bl.createForum(Session.user.id, txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
-                    txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, null);
-
+                    txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
+                }
                 this.Close();
             }
             catch (Exception ee)
@@ -42,9 +49,24 @@ namespace Client.GUI
                 MessageBox.Show(ee.Message);
             }
         }
+
+        private int deletePostPermission()
+        {
+            int ret = 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.admin : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.moderator : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
+            return ret;
+        }
+
         public Forum getForum()
         {
             return _forum;
+        }
+
+        private void chkbOwner_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

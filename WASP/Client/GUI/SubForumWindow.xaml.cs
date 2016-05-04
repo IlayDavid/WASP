@@ -46,6 +46,8 @@ namespace Client
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
+                else if (Session.forum.members.ContainsKey(Session.user.id))
+                    ChangeVisibilityAdmin();
                 else if (Session.subForum.moderators.ContainsKey(Session.user.id))
                     ChangeVisibilityModerator();
                 else
@@ -54,13 +56,17 @@ namespace Client
         }
         private void ChangeVisibilitySU()
         {
+            ChangeVisibilityAdmin();
+        }
+        private void ChangeVisibilityAdmin()
+        {
             reverseVisibility(btnRemoveModerator);
+            reverseVisibility(btnRepots);
             ChangeVisibilityModerator();
         }
         private void ChangeVisibilityModerator()
         {
             reverseVisibility(btnAddModerator);
-            reverseVisibility(btnEditSubforumSettings);
             ChangeVisibilityUser();
         }
 
@@ -193,9 +199,11 @@ namespace Client
             editT.ShowDialog();
             Session.LoadModerators();
         }
-        private void btnEditSubforumSettings_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void btnRepots_Click(object sender, RoutedEventArgs e)
+        {
+            int num = Session.bl.subForumTotalMessages(Session.user.id, 0, Session.subForum.id);
+            MessageBox.Show("Total number of posts in Sub Forum \"" + Session.subForum.name + "\" is: " + num);
         }
     }
 }
