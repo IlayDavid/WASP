@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -104,6 +105,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Server\WebServer.cs" />
+    <Compile Include="Service\ServiceFacade.cs" />
     <Compile Include="TestSuits\PostTests.cs" />
     <Compile Include="TestSuits\SubForumTests.cs" />
     <Compile Include="TestSuits\TestsForum.cs" />

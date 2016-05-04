@@ -59,11 +59,5 @@ namespace WASP.DataClasses
             get;
             set;
         }
-
-
-
-
-
     }
-
 }

@@ -28,3 +28,4 @@ C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\WASP.pdb
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe.config
