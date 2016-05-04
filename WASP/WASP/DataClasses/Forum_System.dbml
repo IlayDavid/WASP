@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Forums_System" Class="Forum_SystemDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=IDEA-PC\SQLEXPRESS;Initial Catalog=Forums_System;Integrated Security=True" SettingsObjectName="WASP.Properties.Settings" SettingsPropertyName="Forums_SystemConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admins" Member="IAdmins">
+    <Type Name="IAdmin">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Admin_Moderator" Member="IModerators" ThisKey="userId,forumId" OtherKey="byAdmin,forumId" Type="IModerator" />
+      <Association Name="User_Admin" Member="IUser" ThisKey="userId,forumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forums" Member="IForums">
+    <Type Name="IForum">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="subject" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NChar(1000)" CanBeNull="true" />
+      <Association Name="Forum_User" Member="IUsers" ThisKey="id" OtherKey="forumId" Type="IUser" />
+      <Association Name="Forum_SubForum" Member="ISubForums" ThisKey="id" OtherKey="forumId" Type="ISubForum" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Moderators" Member="IModerators">
+    <Type Name="IModerator">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="subForumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="term" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="byAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Admin_Moderator" Member="IAdmin" ThisKey="byAdmin,forumId" OtherKey="userId,forumId" Type="IAdmin" IsForeignKey="true" />
+      <Association Name="User_Moderator" Member="IUser" ThisKey="userId,forumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
+      <Association Name="SubForum_Moderator" Member="ISubForum" ThisKey="subForumId" OtherKey="id" Type="ISubForum" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Posts" Member="IPosts">
+    <Type Name="IPost">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="reply" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="subforumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="cnt" Type="System.String" DbType="NChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="publishAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="editAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Post" Member="IPosts" ThisKey="id" OtherKey="reply" Type="IPost" />
+      <Association Name="Post_Post" Member="Post1" ThisKey="reply" OtherKey="id" Type="IPost" IsForeignKey="true" />
+      <Association Name="User_Post" Member="IUser" ThisKey="userId,forumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
+      <Association Name="SubForum_Post" Member="ISubForum" ThisKey="subforumId" OtherKey="id" Type="ISubForum" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notifications" Member="INotifications">
+    <Type Name="INotification">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fromUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fromForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="toUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="toForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="message" Type="System.String" DbType="NChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="isNew" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_Notification" Member="User" ThisKey="fromUserId,fromForumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
+      <Association Name="User_Notification1" Member="IUser" ThisKey="toUserId,toForumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="IUsers">
+    <Type Name="IUser">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Admin" Member="IAdmin" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IAdmin" Cardinality="One" />
+      <Association Name="User_Moderator" Member="IModerators" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IModerator" />
+      <Association Name="User_Post" Member="IPosts" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IPost" />
+      <Association Name="User_Notification" Member="Notifications" ThisKey="id,forumId" OtherKey="fromUserId,fromForumId" Type="INotification" />
+      <Association Name="User_Notification1" Member="INotifications" ThisKey="id,forumId" OtherKey="toUserId,toForumId" Type="INotification" />
+      <Association Name="Forum_User" Member="IForum" ThisKey="forumId" OtherKey="id" Type="IForum" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubForums" Member="ISubForums">
+    <Type Name="ISubForum">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="subject" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NChar(1000)" CanBeNull="true" />
+      <Association Name="SubForum_Moderator" Member="IModerators" ThisKey="id" OtherKey="subForumId" Type="IModerator" />
+      <Association Name="SubForum_Post" Member="IPosts" ThisKey="id" OtherKey="subforumId" Type="IPost" />
+      <Association Name="Forum_SubForum" Member="IForum" ThisKey="forumId" OtherKey="id" Type="IForum" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

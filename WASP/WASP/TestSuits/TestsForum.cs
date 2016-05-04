@@ -62,7 +62,7 @@ namespace WASP.TestSuits
             Forum forum = new Forum(0,"stackOverFlow", "description", null, null);
             User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
             forum.AddMember(user);
-            Subforum sf = new Subforum(0,"subForum", "someDescription",null,forum);
+            Subforum sf = new Subforum(0,"subForum", "someDescription",forum, null);
             bool isSf = false;
             // act
             forum.AddSubForum(sf);

@@ -139,7 +139,7 @@ namespace WASP.DataClasses
         public void Delete()
         {
             string notificationMessage = String.Format("Post {0} deleted.", Id);
-            NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
+            //NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
             Post[] replies = GetAllReplies();
             foreach (Post reply in replies)
             {
@@ -154,8 +154,8 @@ namespace WASP.DataClasses
             foreach (Post reply in GetAllReplies())
             {
                 User target = reply.GetAuthor;
-                target.NewNotification(new Notification(notification.Message, notification.IsNew, 
-                    notification.Source, target));
+                //target.NewNotification(new Notification(notification.Message, notification.IsNew, 
+                //    notification.Source, target));
             }
         }
     }

@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,14 +51,33 @@
   <ItemGroup>
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\DAL.cs" />
+    <Compile Include="DataClasses\DALSQL.cs" />
+    <Compile Include="DataClasses\DAL_EXCEPTIONS\ExistException.cs" />
+    <Compile Include="DataClasses\DAL_EXCEPTIONS\GetException.cs" />
+    <Compile Include="DataClasses\DAL_EXCEPTIONS\InvalidException.cs" />
+    <Compile Include="DataClasses\DAL_EXCEPTIONS\UpdateException.cs" />
     <Compile Include="DataClasses\Forum.cs" />
+    <Compile Include="DataClasses\Forum_System.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Forum_System.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataClasses\Moderator.cs" />
+    <Compile Include="DataClasses\ModeratorReport.cs" />
     <Compile Include="DataClasses\Notification.cs" />
     <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
     <Compile Include="DataClasses\Policies\Policy.cs" />
     <Compile Include="DataClasses\Post.cs" />
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\SuperUser.cs" />
+    <Compile Include="DataClasses\UnitTests\AdminSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\ForumSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\ModeratorSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\MsgSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\NotificSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\PostSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\SubForumSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\UserSuitTests.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="Domain\BLFacade.cs" />
     <Compile Include="Domain\IBL.cs" />
@@ -79,24 +99,37 @@
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\NewServerAPI.cs" />
-    <Compile Include="Server\Server.cs" />
-    <Compile Include="Server\ServerAPI.cs" />
-    <Compile Include="Server\ServerForum.cs" />
-    <Compile Include="Server\ServerUser.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="TestSuits\PostTests.cs" />
-    <Compile Include="TestSuits\ServerInitializationTests.cs" />
-    <Compile Include="TestSuits\serverTests.cs" />
     <Compile Include="TestSuits\SubForumTests.cs" />
     <Compile Include="TestSuits\TestsForum.cs" />
     <Compile Include="TestSuits\UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DataClasses\Forum_System.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Forum_System.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClasses\Forum_System.dbml.layout">
+      <DependentUpon>Forum_System.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

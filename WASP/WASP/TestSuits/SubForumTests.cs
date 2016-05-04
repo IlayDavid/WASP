@@ -12,13 +12,13 @@ namespace WASP.TestSuits
         {
             // arrange
 
-            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
             User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(author);
-            Subforum sf = new Subforum(0, "sf", "sf", null, forum);
-          
-            Post original = new Post("title", "content",1, author,DateTime.Now,null,sf,DateTime.Today,null);
-            Post tempPost2 = new Post("title", "content",2,author, DateTime.Today,original,sf,DateTime.Today,null);
+            Subforum sf = new Subforum(0, "sf", "sf", forum, null);
+
+            Post original = new Post(1, "title", "content", author, DateTime.Now, null, sf, DateTime.Today, null);
+            Post tempPost2 = new Post(2, "title", "content", author, DateTime.Today, original, sf, DateTime.Today, null);
             // act
             sf.AddThread(original);
             sf.AddThread(tempPost2);
@@ -32,15 +32,15 @@ namespace WASP.TestSuits
         {
             // arrange
 
-            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
             User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(author);
-            Subforum sf = new Subforum(0, "sf", "sf", null, forum);
+            Subforum sf = new Subforum(0, "sf", "sf", forum, null);
             forum.AddSubForum(sf);
             DateTime dateNow = DateTime.Now;
             DateTime future = DateTime.Today;
-            Moderator tempMod = new Moderator(author, DateTime.Today, sf, null, 0, null);
-            Moderator realMod = new Moderator(author, DateTime.Today, sf, null, 1, null);
+            Moderator tempMod = new Moderator(author, DateTime.Today, sf, null, null);
+            Moderator realMod = new Moderator(author, DateTime.Today, sf, null, null);
 
             // act
             sf.AddModerator(tempMod);

@@ -11,13 +11,13 @@ namespace WASP.TestSuits
         public void repliesTests()
         {
             // arrange
-            Forum forum = new Forum(0,"stackforum", "someDesc", null,null);
-            User author = new User(0,"edan", "userName", "email@email.com", "123",forum);
+            Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
+            User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(author);
-            Subforum sf = new Subforum(0,"sf", "sf", null, forum);
-            Post original = new Post("original","original post",0,author,DateTime.Now,null,sf, DateTime.Now,null);
-            Post reply = new Post("reply","content",1,author, DateTime.Now, original,sf,DateTime.Now, null);
-            Post reply2 = new Post("reply2", "content2", 2, author, DateTime.Now, original, sf, DateTime.Now, null);
+            Subforum sf = new Subforum(0, "sf", "sf", forum, null);
+            Post original = new Post(0, "original", "original post", author, DateTime.Now, null, sf, DateTime.Now, null);
+            Post reply = new Post(1, "reply", "content", author, DateTime.Now, original, sf, DateTime.Now, null);
+            Post reply2 = new Post(2, "reply2", "content2", author, DateTime.Now, original, sf, DateTime.Now, null);
             // act
             original.AddReply(reply);
             original.AddReply(reply2);
@@ -33,13 +33,13 @@ namespace WASP.TestSuits
         {
             //check reply to reply
             // arrange
-            Forum forum = new Forum(0,"stackforum", "someDesc", null, null);
+            Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
             User member = new User(0, "edan", "userName", "email@email.com", "123", forum);
             forum.AddMember(member);
-            Subforum sf = new Subforum(0, "sf", "sf", null, forum);
-            Post original =new Post ("original","original post",0,member,DateTime.Now,null,sf, DateTime.Now,null);
-            Post reply = new Post("reply", "content", 1, member, DateTime.Now, original, sf, DateTime.Now, null);
-            Post reply2reply = new Post("reply", "content", 1, member, DateTime.Now, reply, sf, DateTime.Now, null);
+            Subforum sf = new Subforum(0, "sf", "sf", forum, null);
+            Post original = new Post(0, "original", "original post", member, DateTime.Now, null, sf, DateTime.Now, null);
+            Post reply = new Post(1, "reply", "content", member, DateTime.Now, original, sf, DateTime.Now, null);
+            Post reply2reply = new Post(1, "reply", "content", member, DateTime.Now, reply, sf, DateTime.Now, null);
 
             // act
             original.AddReply(reply);

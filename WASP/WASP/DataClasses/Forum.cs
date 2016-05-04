@@ -30,7 +30,7 @@ namespace WASP.DataClasses
 
         public void AddPolicy(Policy policy)
         {
-            this.policy.Add(policy.Id, policy);
+            //this.policy.Add(policy.Id, policy);
         }
 
 

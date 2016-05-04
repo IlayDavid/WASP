@@ -12,7 +12,7 @@ namespace WASP.TestSuits
         {
             // arrange
             User user1 = new User(0,"edan", "habler", "email", "123",null);
-            Post post1 = new Post("title", "content",0, user1, DateTime.Now,null,null,DateTime.Today, null);
+            Post post1 = new Post(0, "title", "content", user1, DateTime.Now,null,null,DateTime.Today, null);
             int id = post1.Id;
             // act
             user1.AddPost(post1);
