@@ -47,7 +47,7 @@ namespace AccTests.Tests
             return new Tuple<Forum, Admin>(forum, admin);
         }
 
-        public static Tuple<Subforum, User> CreateSpecSubForum2(WASPBridge proj, Member admin, Forum forum)
+        public static Tuple<Subforum, User> CreateSpecSubForum2(WASPBridge proj, Admin admin, Forum forum)
         {
             var user= proj.subscribeToForum(5,"amitB", "amit", "amitB@post.bgu.ac.il",
                                         "amit123", forum.Id);

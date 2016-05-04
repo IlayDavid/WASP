@@ -12,23 +12,33 @@ namespace Client.CommunicationLayer
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"postid\":" + postID
+                + "," + "\"content\":\"" + content + "\"}";
+            string res = httpReq(json, "POST", _url + "/editPost");
+            return 0;
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subForumID + "," + "\"forumid\":" + forumID
+                 + "," + "\"moderatorid\":" + moderatorID + "}";
+            string res = httpReq(json, "POST", _url + "/deleteModerator");
+            return 0;
         }
         public List<Message> getAllNotificationses(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getAllNotificationses");
+            return parseStringToMessages(res);
         }
         public List<Message> getNewNotificationses(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getNewNotificationses");
+            return parseStringToMessages(res);
         }
 
-        public Admin addAdmin(int adminID, int forumID, int newAdminID)
+        private List<Message> parseStringToMessages(string res)
         {
             throw new NotImplementedException();
         }
@@ -36,12 +46,21 @@ namespace Client.CommunicationLayer
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "}";
+            string res = httpReq(json, "POST", _url + "/subForumTotalMessages");
+            return parseStringToNum(res);
+        }
+
+        private int parseStringToNum(string res)
+        {
             throw new NotImplementedException();
         }
 
         public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"adminid\":" + adminID + "}";
+            string res = httpReq(json, "POST", _url + "postsByMember");
+            return parseStringToPosts(res);
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
@@ -52,10 +71,19 @@ namespace Client.CommunicationLayer
         //-----------Super User Reports---------------
         public int totalForums(int userID)
         {
-            throw new NotImplementedException();
+            string json = "{\"userid\":" + userID + "}";
+            string res = httpReq(json, "POST", _url + "/totalForums");
+            return parseStringToNum(res);
         }
 
         public List<User> membersInDifferentForums(int userID)
+        {
+            string json = "{\"userid\":" + userID + "}";
+            string res = httpReq(json, "POST", _url + "/membersInDifferentForums");
+            return parseStringToUsers(res);
+        }
+
+        private List<User> parseStringToUsers(string res)
         {
             throw new NotImplementedException();
         }

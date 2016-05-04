@@ -59,9 +59,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest1()
         {
-            int isDelete = _proj.deletePost(_member.id,_forum.Id, _threadMember.Id);
+            int isDelete = _proj.deletePost(_member.id,_forum.Id, _threadMember.id);
             Assert.IsTrue(isDelete >= 0);
-            isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadModerator.Id);
+            isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadModerator.id);
             Assert.IsTrue(isDelete >= 0);
         }
 
@@ -71,15 +71,15 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest2()
         {
-            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi", _threadMember.Id);
-            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.Id);
+            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi", _threadMember.id);
+            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
             
 
-            int isDelete = _proj.deletePost(_member.id, _forum.Id, p2.Id);
+            int isDelete = _proj.deletePost(_member.id, _forum.Id, p2.id);
             Assert.IsTrue(isDelete >= 0);
-            isDelete = _proj.deletePost(_moderator.id, _forum.Id, p1.Id);
+            isDelete = _proj.deletePost(_moderator.id, _forum.Id, p1.id);
             Assert.IsTrue(isDelete >= 0);
         }
 
@@ -89,9 +89,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest3()
         {
-            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadMember.Id);
+            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, _threadMember.id);
             Assert.IsTrue(isDelete > 0);
-            isDelete = _proj.deletePost(_member.id, _forum.Id, _threadModerator.Id);
+            isDelete = _proj.deletePost(_member.id, _forum.Id, _threadModerator.id);
             Assert.IsTrue(isDelete < 0);
         }
 
@@ -101,14 +101,14 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest4()
         {
-            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi",  _threadMember.Id);
-            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.Id);
+            Post p1 = _proj.createReplyPost(_moderator.id, _forum.Id, "Hi",  _threadMember.id);
+            Post p2 = _proj.createReplyPost(_member.id, _forum.Id, "Hi", _threadModerator.id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
 
-            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, p2.Id);
+            int isDelete = _proj.deletePost(_moderator.id, _forum.Id, p2.id);
             Assert.IsTrue(isDelete > 0);
-            isDelete = _proj.deletePost(_member.id, _forum.Id, p1.Id);
+            isDelete = _proj.deletePost(_member.id, _forum.Id, p1.id);
             Assert.IsTrue(isDelete < 0);
         }
     }

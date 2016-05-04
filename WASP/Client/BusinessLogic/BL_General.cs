@@ -43,7 +43,7 @@ namespace Client.BusinessLogic
         public List<Post> getReplys(int forumID, int subForumID, int postID)
         {
             if (forumID < 0 || subForumID < 0 || postID < 0) throw new Exception("ERROR: id is illegal");
-            return _cl.getReplys(0, 0, postID);
+            return _cl.getReplies(0, 0, postID);
         }
 
         public Post getThread(int forumID, int threadId)

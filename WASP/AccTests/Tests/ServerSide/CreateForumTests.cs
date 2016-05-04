@@ -36,7 +36,7 @@ namespace AccTests.Tests
 
             // checks that there is only one admin
             Assert.IsTrue(admins.Count == 1); 
-            Assert.IsTrue(forum.GetAdmins().Count == 1);
+            Assert.IsTrue(_proj.getAdmins(_supervisor.id,forum.Id).Count == 1);
         }
 
 
