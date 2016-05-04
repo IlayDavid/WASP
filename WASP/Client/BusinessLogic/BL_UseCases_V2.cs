@@ -18,7 +18,7 @@ namespace Client.BusinessLogic
             return _cl.addModerator(userID, forumID, moderatorID, subForumID, term);
         }
 
-        public int confirmEmail(int userID, int forumID)
+        public int confirmEmail(int userID, int forumID, int code)
         {
             throw new NotImplementedException();
         }

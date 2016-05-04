@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\App.xaml
-15-2013174843
+16-1819277896
 
-531683965525
+54-676021827
 15767094614
-GUI\AddWindows\AddForum.xaml;GUI\AddWindows\AddMember.xaml;GUI\AddWindows\AddModerator.xaml;GUI\AddWindows\AddPost.xaml;GUI\DeleteWindows\DeleteModerator.xaml;GUI\EditWindows\EditContent.xaml;GUI\EditWindows\EditTerm.xaml;GUI\ForumReports.xaml;GUI\ForumWindow.xaml;GUI\Login.xaml;GUI\PostWindow.xaml;GUI\SubForumWindow.xaml;GUI\AddWindows\CreateAdmin.xaml;GUI\MainWindow.xaml;GUI\AddWindows\AddSubForum.xaml;
+GUI\AddWindows\AddForum.xaml;GUI\AddWindows\AddMember.xaml;GUI\AddWindows\AddModerator.xaml;GUI\AddWindows\AddPost.xaml;GUI\AddWindows\VerifyEmail.xaml;GUI\DeleteWindows\DeleteModerator.xaml;GUI\EditWindows\EditContent.xaml;GUI\EditWindows\EditTerm.xaml;GUI\ForumReports.xaml;GUI\ForumWindow.xaml;GUI\Login.xaml;GUI\PostWindow.xaml;GUI\SubForumWindow.xaml;GUI\AddWindows\CreateAdmin.xaml;GUI\MainWindow.xaml;GUI\AddWindows\AddSubForum.xaml;
 
 True
 

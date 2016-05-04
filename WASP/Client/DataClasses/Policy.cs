@@ -5,14 +5,16 @@
         public static int owner = 1;
         public static int moderator = 2;
         public static int admin = 4;
+        public static int all = 7;
+
 
         //post
-        public int deletePost;
+        public int deletePost; //done
         //security
         public int passwordPeriod;
-        public bool emailVerification;
+        public bool emailVerification; //done
         //moderator
-        public int seniority;
+        public int seniority;  
         //stress
         public int usersSameTime;
 

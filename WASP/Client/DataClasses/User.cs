@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Client.DataClasses
 {
     public class User
@@ -11,6 +13,8 @@ namespace Client.DataClasses
             this.userName = userName;
             this.email = email;
             this.password = pass;
+            this.joinDate = DateTime.Now;
+            this.passCreateDate = joinDate;
         }
 
         public int id { get; set; }
@@ -18,5 +22,7 @@ namespace Client.DataClasses
         public string userName { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public DateTime passCreateDate { get; set; }
+        public DateTime joinDate { get; set; }
     }
 }

@@ -21,6 +21,5 @@
             <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
             <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="134,165,0,0" Click="BtnCreate_Click"/>
         </Grid>
-
     </Grid>
 </Window>

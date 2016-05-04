@@ -29,6 +29,8 @@ namespace Client.GUI.AddWindows
             {
                 if (Session.subForum.moderators.ContainsKey(user.id))
                     continue;
+                if (user.joinDate.AddMonths(Session.forum.policy.seniority) > (DateTime.Now))
+                    continue;
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = user.userName;
                 newItem.DataContext = user;

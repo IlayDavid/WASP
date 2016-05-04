@@ -32,6 +32,12 @@ namespace Client.GUI.AddWindows
                 User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
                     txtmail.Text, passPassword.Password, Session.forum.id);
                 Session.user = user;
+                if(Session.forum.policy.emailVerification)
+                {
+                    MessageBox.Show("Check your email for verification code");
+                    VerifyEmail emailVerify = new VerifyEmail();
+                    emailVerify.ShowDialog();
+                }
                 this.Close();
             }
             catch (Exception ee)

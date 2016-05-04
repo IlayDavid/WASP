@@ -70,24 +70,32 @@ namespace Client
         }
         private void ChangeVisibilitySU()
         {
-            //acording to policy
-            ChangeVisibilityAdmin();
+            ChangeVisibilityLogIn();
         }
         private void ChangeVisibilityAdmin()
         {
             //acording to policy
-            ChangeVisibilityModerator();
+            if(Session.forum.policy.isAdminCanDeletePost())
+                reverseVisibility(btnDelete);
+            ChangeVisibilityLogIn();
         }
 
         private void ChangeVisibilityModerator()
         {
+            if (Session.forum.policy.isModeratorCanDeletePost())
+                reverseVisibility(btnDelete);
             ChangeVisibilityUser();
         }
 
         private void ChangeVisibilityUser()
         {
+            if (Session.forum.policy.isOwnerCanDeletePost())
+                reverseVisibility(btnDelete);
+            ChangeVisibilityLogIn();
+        }
+        private void ChangeVisibilityLogIn()
+        {
             reverseVisibility(btnAddReply);
-            reverseVisibility(btnDelete);
             reverseVisibility(btnEdit);
             reverseVisibility(btnRegister);
             reverseVisibility(btnLogin);

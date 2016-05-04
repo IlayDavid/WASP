@@ -94,7 +94,7 @@ namespace Client.BusinessLogic
         * Purpose: Confirms Member's email and adds him to the forum as an active member.
         * return: number>=0 if success
         */
-        int confirmEmail(int userID, int forumID);
+        int confirmEmail(int userID, int forumID, int code);
 
         /*
         * Pre-conditions: Member is loged-in, and own the post. (or manager, depend on policy)

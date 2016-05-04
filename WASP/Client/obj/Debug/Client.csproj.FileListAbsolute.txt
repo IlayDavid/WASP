@@ -54,3 +54,5 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumReports.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumReports.baml
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\VerifyEmail.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\VerifyEmail.baml

@@ -24,12 +24,16 @@ namespace Client.CommunicationLayer
         {
             initialize("amitay", "a", 205857121, "amitay140@gmail.com", "a");
 
-            Forum forum1 = createForum(_su.id, "forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", null);
+            Policy policy1 = new Policy(Policy.all, 10, false, 0, 100);
+            Policy policy2 = new Policy(Policy.all, 10, false, 0, 100);
+            Policy policy3 = new Policy(Policy.all, 10, false, 0, 100);
+
+            Forum forum1 = createForum(_su.id, "forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", policy1);
             User u11 = subscribeToForum(1234, "amitay140", "amitay", "amitay140@gmail.com", "1", forum1.id);
             User u12 = subscribeToForum(1235, "moshe12", "moshe", "moshe@gmail.com", "1", forum1.id);
             User u13 = subscribeToForum(1236, "kobi90", "kobi", "kobi@gmail.com", "1", forum1.id);
 
-            Forum forum2 = createForum(_su.id, "Sport", "This forum is about sport games", 333, "bb", "moshe", "moshe@gmail.com", "1", null);
+            Forum forum2 = createForum(_su.id, "Sport", "This forum is about sport games", 333, "bb", "moshe", "moshe@gmail.com", "1", policy2);
             User u21 = subscribeToForum(1234, "amitay141", "amitay", "amitay141@gmail.com", "1", forum2.id);
             User u22 = subscribeToForum(1235, "moshe13", "moshe", "moshe1@gmail.com", "1", forum2.id);
             User u23 = subscribeToForum(1236, "kobi91", "kobi", "kobi1@gmail.com", "1", forum2.id);
