@@ -12,7 +12,8 @@ namespace Client.CommunicationLayer
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            throw new NotImplementedException();
+            posts[postID].content = content;
+            return 1;
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
@@ -37,17 +38,18 @@ namespace Client.CommunicationLayer
         }
         public Admin addAdmin(int adminID, int forumID, int newAdminID)
         {
-            throw new NotImplementedException();
+            forums[forumID].admins.Add(newAdminID, forums[forumID].members[newAdminID]);
+            return null;
         }
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            throw new NotImplementedException();
+            return posts.Count(x => x.Value.containerID == subForumID);
         }
 
         public List<Post> postsByMember(int adminID, int forumID, int userID)
         {
-            throw new NotImplementedException();
+            return posts.Values.SkipWhile(p => p.author.id != userID).ToList();
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
@@ -58,7 +60,7 @@ namespace Client.CommunicationLayer
         //-----------Super User Reports---------------
         public int totalForums(int userID)
         {
-            throw new NotImplementedException();
+            return forums.Count;
         }
 
         public List<User> membersInDifferentForums(int userID)

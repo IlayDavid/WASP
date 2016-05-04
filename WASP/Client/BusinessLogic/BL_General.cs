@@ -88,7 +88,8 @@ namespace Client.BusinessLogic
 
         public List<User> getMembers(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            if (userID < 0 || forumID < 0) throw new Exception("ERROR: id is illegal");
+            return _cl.getMembers(userID, forumID);
         }
 
         public List<Subforum> getSubforums(int forumID)

@@ -20,10 +20,10 @@ namespace Client
         {
             InitializeComponent();
             setVisibility();
-
+            LoadData();
             //presenting the subforums list 
             List<Post> posts = Session.bl.getThreads(Session.forum.id, Session.subForum.id, 0, 20);
-            foreach (Post p in posts)
+            foreach (Post p in Session.subForum.threads)
             {
                 ListBoxItem newItem = new ListBoxItem();
                 newItem.Content = p.title;
@@ -32,11 +32,17 @@ namespace Client
             }
         }
 
+        private void LoadData()
+        {
+            Session.LoadModerators();
+            Session.LoadThreads();
+        }
+
         private void setVisibility()
         {
             if (Session.user != null)
             {
-                Session.setModerators();
+                Session.LoadModerators();
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
@@ -46,7 +52,6 @@ namespace Client
                     ChangeVisibilityUser();
             }
         }
-
         private void ChangeVisibilitySU()
         {
             reverseVisibility(btnRemoveModerator);
@@ -126,14 +131,17 @@ namespace Client
         {
             AddMember addM = new AddMember();
             addM.ShowDialog();
-            Session.user = addM.getUser();
-            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            setVisibility();
+            if (Session.user != null)
+            {
+                Session.LoadMembers();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                setVisibility();
+            }
         }
 
         private void btnPostThread_Click(object sender, RoutedEventArgs e)
         {
-            AddPost addPost = new AddPost(true);
+            AddPost addPost = new AddPost(null);
             addPost.ShowDialog();
             Post newPost = addPost.getPost();
 
@@ -169,32 +177,21 @@ namespace Client
 
         private void btnAddModerator_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddModerator addModerator = new AddModerator();
-                addModerator.ShowDialog();
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.Message);
-            }
+            AddModerator addModerator = new AddModerator();
+            addModerator.ShowDialog();
+            Session.LoadModerators();
         }
         private void btnRemoveModerator_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                DeleteModerator deleteM = new DeleteModerator();
-                deleteM.ShowDialog();
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.Message);
-            }
+            DeleteModerator deleteM = new DeleteModerator();
+            deleteM.ShowDialog();
+            Session.LoadModerators();
         }
         private void btnEditModeratorTerm_Click(object sender, RoutedEventArgs e)
         {
             EditTerm editT = new EditTerm();
             editT.ShowDialog();
+            Session.LoadModerators();
         }
         private void btnEditSubforumSettings_Click(object sender, RoutedEventArgs e)
         {

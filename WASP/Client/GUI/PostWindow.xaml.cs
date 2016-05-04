@@ -32,6 +32,7 @@ namespace Client
                     ChangeVisibilityUser();
             }
 
+            Session.LoadReplys();
             Post p = Session.post;
             TreeViewItem treeItem = makePostTree(p);
             postMesssages.Items.Add(treeItem);
@@ -57,7 +58,7 @@ namespace Client
         {
             if (Session.user != null)
             {
-                Session.setModerators();
+                Session.LoadModerators();
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 if (Session.user is SuperUser)
                     ChangeVisibilitySU();
@@ -85,6 +86,7 @@ namespace Client
 
         private void ChangeVisibilityUser()
         {
+            reverseVisibility(btnAddReply);
             reverseVisibility(btnDelete);
             reverseVisibility(btnEdit);
             reverseVisibility(btnRegister);
@@ -166,9 +168,12 @@ namespace Client
         {
             AddMember addM = new AddMember();
             addM.ShowDialog();
-            Session.user = addM.getUser();
-            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            setVisibility();
+            if (Session.user != null)
+            {
+                Session.LoadMembers();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                setVisibility();
+            }
         }
 
         private void postMesssages_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -176,14 +181,47 @@ namespace Client
             try
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
-                Post post = (Post)selected.DataContext;
-                List<Post> replys = Session.bl.getReplys(0, 0, post.id);
-                foreach(Post p in replys)
+                if(selected == null)
                 {
-                    selected.Items.Add(makePostTree(p));
+                    MessageBox.Show("Please select a post");
+                    return;
+                }
+                if (selected.Items.Count <= 3)
+                {
+                    Post post = (Post)selected.DataContext;
+                    List<Post> replys = Session.bl.getReplys(0, 0, post.id);
+
+                    foreach (Post p in replys)
+                    {
+                        selected.Items.Add(makePostTree(p));
+                    }
                 }
             }
             catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void btnAddReply_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
+                Post post = (Post)selected.DataContext;
+                AddPost addP = new AddPost(post);
+                addP.ShowDialog();
+                Post p = addP.getPost();
+
+                if(p != null)
+                {
+                    TreeViewItem tvi = makePostTree(p);
+                    tvi.IsExpanded = true;
+                    selected.Items.Add(tvi);
+                }
+                    
+            }
+            catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
             }

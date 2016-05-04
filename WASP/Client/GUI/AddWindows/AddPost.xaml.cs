@@ -20,14 +20,14 @@ namespace Client.GUI.AddWindows
     /// </summary>
     public partial class AddPost : Window
     {
-        private bool _isOpening;
+        private Post _replyTo;
         private Post _post;
 
-        public AddPost(bool isOpening)
+        public AddPost(Post replyTo)
         {
-            _isOpening = isOpening;
+            _replyTo = replyTo;
             InitializeComponent();
-            if (_isOpening)
+            if (_replyTo == null)
             {
                 lblTitle.Visibility = Visibility.Visible;
                 txtTitle.Visibility = Visibility.Visible;
@@ -36,17 +36,17 @@ namespace Client.GUI.AddWindows
 
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
-            try
+            //try
             {
-                if (_isOpening)
+                if (_replyTo == null)
                     _post = Session.bl.createThread(Session.user.id, Session.forum.id, txtTitle.Text, txtContent.Text, Session.subForum.id);
                 else
-                    _post = Session.bl.createReplyPost(Session.user.id, Session.forum.id, txtContent.Text, Session.post.id);
+                    _post = Session.bl.createReplyPost(Session.user.id, Session.forum.id, txtContent.Text, _replyTo.id);
                 this.Close();
             }
-            catch(Exception ee)
+            //catch(Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                //MessageBox.Show(ee.Message);
             }
         }
 

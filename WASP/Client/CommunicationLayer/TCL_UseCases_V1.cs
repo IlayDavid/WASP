@@ -29,6 +29,7 @@ namespace Client.CommunicationLayer
             User admin = new User(adminId, adminName, adminUserName, email, pass);
             Forum forum = new Forum(forumName, description, admin);
             forums.Add(forum.id, forum);
+            forum.members.Add(_su.id, (User) _su );
             return forum;
         }
 
@@ -49,16 +50,14 @@ namespace Client.CommunicationLayer
             Post newPost = new Post(title, content, forums[forumID].members[userID], subForumID, null);
             forums[forumID].subforums[subForumID].threads.Add(newPost);
             posts.Add(newPost.id, newPost);
+           
             return newPost;
         }
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            Forum forum = forums[forumID];
-
-            Post inReply = forum.posts[replyToPost_ID];
+            Post inReply = posts[replyToPost_ID];
             Post newPost = new Post("", content, forums[forumID].members[userID], inReply.containerID, inReply);
-            forum.posts.Add(newPost.id, newPost);
             inReply.replies.Add(newPost);
 
             posts.Add(newPost.id, newPost);

@@ -26,7 +26,7 @@ namespace Client.CommunicationLayer
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            throw new NotImplementedException();
+            return posts.Remove(postID)? 1:-1;
         }
 
         public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
@@ -36,7 +36,8 @@ namespace Client.CommunicationLayer
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            throw new NotImplementedException();
+            subforums[subforumID].moderators[moderatorID].term = term;
+            return 1;
         }
     }
 }

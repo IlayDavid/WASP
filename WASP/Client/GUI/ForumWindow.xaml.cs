@@ -12,6 +12,8 @@ namespace Client
     /// </summary>
     public partial class ForumWindow : Window, INotificable
     {
+        
+
         //the forum that presented in the window, should be set by method
         public ForumWindow()
         {
@@ -22,7 +24,7 @@ namespace Client
                 welcomeTextBlock.Text = "Welcome, " + Session.user.name;
                 ChangeVisibilitySU();
             }
-            Session.forum.subforums = Subforum.ListToDictionary(Session.bl.getSubforums(Session.forum.id));
+            LoadData();
             //presenting the subforums list 
             foreach (Subforum sf in Session.forum.subforums.Values)
             {
@@ -32,11 +34,18 @@ namespace Client
                 SubForums.Items.Add(newItem);
             }
         }
+        public void LoadData()
+        {
+            Session.LoadMembers();
+            Session.LoadSubForums();
+            Session.LoadAdmins();
+            Session.LoadMembers();
+        }
         private void setVisibility()
         {
             if (Session.user != null)
             {
-                Session.setAdmins();
+                Session.LoadAdmins();
                 if (Session.user != null )
                 {
                     welcomeTextBlock.Text = "Welcome, " + Session.user.name;
@@ -46,7 +55,6 @@ namespace Client
                         ChangeVisibilityAdmin();
                     else
                         ChangeVisibilityUser();
-
                 }
             }
         }
@@ -105,6 +113,7 @@ namespace Client
         private void btnAddAdministrator_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("It not require yet!");
+            Session.LoadAdmins();
         }
 
         private void btnAddSubforum_Click(object sender, RoutedEventArgs e)
@@ -118,6 +127,7 @@ namespace Client
                 newItem.Content = newSf.name;
                 newItem.DataContext = newSf;
                 SubForums.Items.Add(newItem);
+                Session.LoadSubForums();
             }
         }
 
@@ -171,9 +181,12 @@ namespace Client
         {
             AddMember addM = new AddMember();
             addM.ShowDialog();
-            Session.user = addM.getUser();
-            welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-            setVisibility();
+            if (Session.user != null)
+            {
+                Session.LoadMembers();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                setVisibility();
+            }
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {

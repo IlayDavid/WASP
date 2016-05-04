@@ -20,7 +20,6 @@ namespace Client.GUI.AddWindows
     /// </summary>
     public partial class AddMember : Window
     {
-        User _user = null;
         public AddMember()
         {
             InitializeComponent();
@@ -30,8 +29,9 @@ namespace Client.GUI.AddWindows
         {
             try
             {
-                _user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
+                User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
                     txtmail.Text, passPassword.Password, Session.forum.id);
+                Session.user = user;
                 this.Close();
             }
             catch (Exception ee)
@@ -40,6 +40,5 @@ namespace Client.GUI.AddWindows
             }
         }
 
-        public User getUser() { return _user; }
     }
 }

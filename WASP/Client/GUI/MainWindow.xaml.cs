@@ -23,7 +23,6 @@ namespace Client.GUI
     /// </summary>
     public partial class WelcomeWindow : Window
     {
-        private List<Forum> _forums;
         private List<ForumView> _fView;
         public WelcomeWindow()
         {
@@ -34,8 +33,13 @@ namespace Client.GUI
                 CreateAdmin cAdmin = new CreateAdmin();
                 cAdmin.ShowDialog();
             }
-            _forums = Session.bl.getAllForums();
-            _fView = ForumView.getView(_forums);
+            refresh();
+        }
+
+        private void refresh()
+        {
+            Session.LoadForums();
+            _fView = ForumView.getView(Session.forums.Values.ToList());
             dgForums.ItemsSource = _fView;
         }
 
@@ -50,8 +54,6 @@ namespace Client.GUI
                 ChangeVisibilitySU();
                 MessageBox.Show("You are login as super user, you can log out only in this window.");
             }
-               
-            
         }
         private void btnLogOutSU_Click(object sender, RoutedEventArgs e)
         {
@@ -86,9 +88,9 @@ namespace Client.GUI
             }
             int id = ((ForumView) dgForums.Items.GetItemAt(dgForums.SelectedIndex)).ID;
 
-            try
+            //try
             {
-                Session.forum = Session.bl.getAllForums().First(x => x.id == id);
+                Session.forum = Session.forums[id];
                 ForumWindow fWin = new ForumWindow();
                 fWin.Title = Session.forum.Name;
                 
@@ -99,9 +101,9 @@ namespace Client.GUI
                 Session.forum = null;
                 this.ShowDialog();
             }
-            catch (Exception ee)
+            //catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                //MessageBox.Show(ee.Message);
             }
         }
 
@@ -112,10 +114,8 @@ namespace Client.GUI
             Forum tmpF = addF.getForum();
             if (tmpF != null)
             {
-                _forums.Add(tmpF);
                 _fView.Add(new ForumView() { ID = tmpF.id, Name = tmpF.Name, Description = tmpF.Description });
-                dgForums.ItemsSource = null;
-                dgForums.ItemsSource = _fView;
+                refresh();
             }
         }
 
@@ -128,6 +128,8 @@ namespace Client.GUI
             }
             int id = ((ForumView)dgForums.Items.GetItemAt(dgForums.SelectedIndex)).ID;
 
+            //Session.bl.deleteForum();
+            refresh();
             MessageBox.Show("Did not require in use cases");
         }
 
@@ -138,27 +140,34 @@ namespace Client.GUI
 
         private void btnReports_Click(object sender, RoutedEventArgs e)
         {
-            int totalf = Session.bl.totalForums(Session.user.id);
-            
+            try
+            {
+                int totalf = Session.bl.totalForums(Session.user.id);
 
-            Window reportView = new Window();
-            DataGrid dg = new DataGrid();
-            //todo
-            var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
-            stackPanel.Children.Add(new Label { Content = "Total Forums: " + totalf + "\n"});
-            stackPanel.Children.Add(new Label { Content = "Members that exist in the same forums: "});
 
-            //List<UserView> l = new List<UserView>();
-            //l.Add(new UserView() { ID = 12345, Email="a", Name="b", UserName="c"});
-            //dg.ItemsSource = l;
-            dg.ItemsSource = UserView.getView(Session.bl.membersInDifferentForums(Session.user.id));
-            dg.IsReadOnly = true;
-            stackPanel.Children.Add(dg);
-            reportView.Content = stackPanel;
-            reportView.SizeToContent = SizeToContent.WidthAndHeight;
-            reportView.Title = "SU Reports";
-            reportView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            reportView.ShowDialog();
+                Window reportView = new Window();
+                DataGrid dg = new DataGrid();
+
+                var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
+                stackPanel.Children.Add(new Label { Content = "Total Forums: " + totalf + "\n" });
+                stackPanel.Children.Add(new Label { Content = "Members that exist in the same forums: " });
+
+                //List<UserView> l = new List<UserView>();
+                //l.Add(new UserView() { ID = 12345, Email="a", Name="b", UserName="c"});
+                //dg.ItemsSource = l;
+                dg.ItemsSource = UserView.getView(Session.bl.membersInDifferentForums(Session.user.id));
+                dg.IsReadOnly = true;
+                stackPanel.Children.Add(dg);
+                reportView.Content = stackPanel;
+                reportView.SizeToContent = SizeToContent.WidthAndHeight;
+                reportView.Title = "SU Reports";
+                reportView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                reportView.ShowDialog();
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
     }
 }

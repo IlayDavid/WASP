@@ -2,11 +2,17 @@
 using Client.DataClasses;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Client.GUI
 {
     public class Session
     {
+        public readonly static int ALL = 0;
+        public readonly static int MEMBER = 1;
+        public readonly static int SUBFORUMS = 2;
+        public readonly static int ADMINS = 3;
+
         public static IBL bl = null;
         public static User user = null;
         public static Forum forum = null;
@@ -17,51 +23,41 @@ namespace Client.GUI
         public static Dictionary<int, Forum> forums = null;
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
-        public static void AddForums(List<Forum> fList)
+        public static void LoadForums()
         {
-            if (forums == null)
-                forums = new Dictionary<int, Forum>();
-            foreach (Forum f in fList)
-            {
-                forums.Add(f.id, f);
-            }
-        }
-        public static void AddSubForums(List<Subforum> sfList)
-        {
-            if (subforums == null)
-                subforums = new Dictionary<int, Subforum>();
-            foreach (Subforum sf in sfList)
-            {
-                subforums.Add(sf.id, sf);
-            }
-        }
-        public static void AddPosts(List<Post> pList)
-        {
-            posts = new Dictionary<int, Post>();
-            foreach (Post p in pList)
-            {
-                posts.Add(p.id, p);
-            }
+            forums = bl.getAllForums().ToDictionary(x => x.id);
         }
 
-        public static void setModerators()
+        public static void LoadReplys()
         {
-            List<Moderator> list = bl.getModerators(0, subForum.id);
-            subForum.moderators = new Dictionary<int, Moderator>();
-            foreach (Moderator mod in list)
-            {
-                subForum.moderators.Add(mod.user.id, mod);
-            }
+            post.replies = bl.getReplys(0, 0, post.id);
         }
 
-        internal static void setAdmins()
+        internal static void LoadThreads()
         {
-            List<User> list = bl.getAdmins(user.id, forum.id).Select(x => x.user).ToList();
-            forum.admins = new Dictionary<int, User>();
-            foreach (User admin in list)
-            {
-                forum.admins.Add(admin.id, admin);
-            }
+            subForum.threads = bl.getThreads(forum.id, subForum.id, 0, 20);
+        }
+
+        internal static void LoadSubForums()
+        {
+            forum.subforums = bl.getSubforums(forum.id).ToDictionary(x => x.id);
+        }
+
+        public static void LoadModerators()
+        {
+            subForum.moderators = bl.getModerators(0, subForum.id).ToDictionary(x => x.user.id);
+        }
+
+        public static void LoadMembers()
+        {
+            if (user != null)
+                forum.members = bl.getMembers(user.id, forum.id).ToDictionary(x => x.id);
+        }
+
+        public static void LoadAdmins()
+        {
+            //if(user != null)
+            //forum.admins = bl.getAdmins(user.id, forum.id).Select(x => x.user).ToList().ToDictionary(x => x.id);
         }
 
         public static void CloseAllWindows()
