@@ -57,5 +57,15 @@ namespace WASP.DataClasses
             // TODO: new notification handling. 
             throw new NotImplementedException();
         }
+
+        public Notification[] GetAllNotifications()
+        {
+            return this.notifications.ToArray();
+        }
+
+        public Notification[] GetNewNotifications()
+        {
+            return this.newNotifications.ToArray();
+        }
     }
 }

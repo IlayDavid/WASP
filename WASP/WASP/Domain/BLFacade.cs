@@ -163,8 +163,7 @@ namespace WASP.Domain
             return 1;
         }
     
-    
-
+        //TODO: Check purpose of this function
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
             int counter = 0;
@@ -173,10 +172,11 @@ namespace WASP.Domain
             foreach (Post post in threads)
             {
                 if (post.GetAuthor.Id == userID)
-                    counter++;
+                    counter += 1 + post.NumOfReplies();
             }
             return counter;
         }
+        //TODO: Check purpose of this function
         public int memberTotalMessages(int userID, int forumID)
         {
             int counter = 0;
@@ -196,21 +196,21 @@ namespace WASP.Domain
 
         public int totalForums(int userID)
         {
-            List<User> usersInDiffForums = membersInDifferentForums(userID);
-            return usersInDiffForums.Count;
+            //TODO: Get superuser with this userID.
+            return dal.GetForums(null).Length;
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public User[] membersInDifferentForums(int userID)
         {
-            List<User> userList = new List<User>();
-            Forum[] forums = dal.GetForumsUserID(userID);
-            foreach (Forum forum in forums)
-                
+            //TODO fetch superuser with userID.
+            User[] users = dal.GetUseres(null, null);
+            List<User> multipleForums = new List<User>();
+            foreach (User user in users)
             {
-                User user = forum.GetMember(userID);
-                userList.Add(user);
+                if (dal.GetForumsUserID(user.Id).Length > 1)
+                    multipleForums.Add(user);
             }
-            return userList;
+            return multipleForums.ToArray();
         }
 
         public User login(string userName, string password, int forumID)
@@ -229,16 +229,9 @@ namespace WASP.Domain
             return post;
         }
 
-        public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
+        public Post[] getThreads(int forumID, int subForumID, List<int> threads)
         {
-            throw new NotImplementedException();
-            //TODO : amitay needs to delete this
-        }
-
-        public Forum getForum(int userID, int forumID)
-        {
-            throw new NotImplementedException();
-            // TODO: amitay needs to delete this
+            return dal.GetPosts(threads);
         }
 
         public Forum getForum(int forumID)
@@ -246,28 +239,17 @@ namespace WASP.Domain
             return dal.GetForum(forumID);
         }
 
-        public Subforum getSubforum(int userID, int forumID, int subforumId)
-        {
-            //TODO: amitay needs to delete this
-            throw new NotImplementedException();
-
-        }
-
         public Subforum getSubforum(int forumID, int subforumId)
         {
             return dal.GetSubForum(subforumId);
         }
 
-        public List<Moderator> getModerators(int forumID, int subForumID)
+        public Moderator[] getModerators(int forumID, int subForumID)
         {
-
             Moderator [] mods = dal.GetModeratorsInSubForum(subForumID);
-            List<Moderator> modsList = new List<Moderator>();
-            foreach (Moderator mod in mods)
-            {
-                modsList.Add(mod);
-            }
-            return modsList;
+            Forum forum = dal.GetForum(forumID);
+            Subforum sf = forum.GetSubForum(subForumID);
+            return sf.GetAllModerators();
         }
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
@@ -276,51 +258,29 @@ namespace WASP.Domain
             return mod.TermExp;
         }
 
-        public List<Forum> getAllForums()
+        public Forum[] getAllForums()
         {
-            List<Forum> forumsList = new List<Forum>();
-            Forum[] forums = dal.GetForums(null);
-            foreach(Forum forum in forums)
-            {
-                forumsList.Add(forum);
-            }
-            return forumsList;
+            return dal.GetForums(null);
         }
 
-        public List<Admin> getAdmins(int userID, int forumID)
+        public Admin[] getAdmins(int userID, int forumID)
         {
             Forum forum = dal.GetForum(forumID);
-            List<Admin> adminsList = new List<Admin>();
-            Admin[] admins = dal.GetAdmins(null, forum); 
-            foreach (Admin admin in admins)
-            {
-                adminsList.Add(admin);
-            }
-            return adminsList;
+            
+            return forum.GetAdmins();
         }
 
-        public List<User> getMembers(int userID, int forumID)
+        public User[] getMembers(int userID, int forumID)
         {
             Forum forum = dal.GetForum(forumID);
-            List<User> membersList = new List<User>();
-            User[] members = dal.GetUseres(null, forum);
-            foreach (User member in members)
-            {
-                membersList.Add(member);
-            }
-            return membersList;
+            
+            return forum.GetMembers();
         }
 
-        public List<Subforum> getSubforums(int forumID)
+        public Subforum[] getSubforums(int forumID)
         {
-            List<Subforum> sfList = new List<Subforum>();
             Forum forum = dal.GetForum(forumID);
-            Subforum[] sfArr = forum.GetAllSubForums();
-            foreach(Subforum sf in sfArr)
-            {
-                sfList.Add(sf);
-            }
-            return sfList;
+            return forum.GetAllSubForums();
         }
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
@@ -328,6 +288,33 @@ namespace WASP.Domain
             // TODO : amitay wants to check with policy if user is a member, if so, show admins otherwise don't show admins.
             Admin admin = dal.GetAdmin(AdminID, forumID);
             return admin;
+        }
+
+        public Notification[] getAllNotificationses(int userID, int forumID)
+        {
+            return dal.GetUser(userID, forumID).GetAllNotifications();
+        }
+
+        public Notification[] getNewNotificationses(int userID, int forumID)
+        {
+            return dal.GetUser(userID, forumID).GetNewNotifications();
+        }
+
+        public Post[] postsByMember(int adminID, int forumID, int userID)
+        {
+            Admin admin = dal.GetAdmin(adminID, forumID);
+            return dal.GetUser(userID, forumID).GetAllPosts();
+        }
+
+        public Post getThread(int forumID, int threadId)
+        {
+            return dal.GetPost(threadId);
+        }
+
+        public Post[] getReplys(int forumID, int subForumID, int postID)
+        {
+            Post post = dal.GetPost(postID);
+            return post.GetAllReplies();
         }
     }
 }

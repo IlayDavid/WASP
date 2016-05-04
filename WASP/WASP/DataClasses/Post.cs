@@ -158,6 +158,16 @@ namespace WASP.DataClasses
                 //    notification.Source, target));
             }
         }
+
+        public int NumOfReplies()
+        {
+            int count = 0;
+            foreach(Post reply in this.GetAllReplies())
+            {
+                count += 1 + reply.NumOfReplies();
+            }
+            return count;
+        }
     }
 }
 

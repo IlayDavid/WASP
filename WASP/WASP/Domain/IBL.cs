@@ -13,14 +13,14 @@ namespace WASP.Domain
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
 
-        /*
+       /*
         * Pre-conditions: none.
         * Purpose: initialize the system and logs the superuser in
         * Return: super user details.
         */
         SuperUser initialize(string name, string userName, int ID, string email, string pass);
 
-        /*
+       /*
         * Purpose: check if the system is already initialize, should be called before initialize.
         * Return: 0 - if not initialize, 1 - otherwise.
         */
@@ -125,15 +125,18 @@ namespace WASP.Domain
         * Return: number >= 0 if success        
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
-
+        
+        //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
+        Notification[] getAllNotificationses(int userID, int forumID);
+        Notification[] getNewNotificationses(int userID, int forumID);
         //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
         int subForumTotalMessages(int userID, int forumID, int subForumID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
-         * Purpose: return the total number of messages written by member. */
-        int memberTotalMessages(int userID, int forumID);
+         * Purpose: return the total messages written by member. */
+        Post[] postsByMember(int adminID, int forumID, int userID);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return details about moderators in all subforums,
@@ -148,8 +151,7 @@ namespace WASP.Domain
 
         /* Pre-conditions: Member is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/
-        List<User> membersInDifferentForums(int userID);
-
+        User[] membersInDifferentForums(int userID);
         //---------------------------Version 3 Use Cases End------------------------------------
 
 
@@ -175,42 +177,42 @@ namespace WASP.Domain
          * Purpose: returns a thread by id, if doesnt exist returns NULL
          * post condition: result is an opening post
          */
-        Post getThread(int userID, int forumID, int threadId);
+        Post getThread(int forumID, int threadId);
 
         /*
         * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
         */
-        List<Post> getThreads(int forumID, int subForumID, int from, int amount);
+        Post[] getThreads(int forumID, int subForumID, List<int> threads);
+
+        /*
+        * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
+        */
+        Post[] getReplys(int forumID, int subForumID, int postID);
 
         /* Purpose: returns a forum with forumId for userID, if doesnt exist returns NULL */
-        Forum getForum(int userID, int forumID);
-
-        /* Purpose: returns a forum with forumId for GUEST, if doesnt exist returns NULL */
         Forum getForum(int forumID);
 
-        /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
-        Subforum getSubforum(int userID, int forumID, int subforumId);
 
-        /* Purpose: returns a subforum with forumId for GUEST, if doesnt exist returns NULL */
+        /* Purpose: returns a subforum with forumId for userID, if doesnt exist returns NULL */
         Subforum getSubforum(int forumID, int subforumId);
 
         /* Purpose: returns modrators of subforum. */
-        List<Moderator> getModerators(int forumID, int subForumID);
+        Moderator[] getModerators(int forumID, int subForumID);
 
         /* Purpose: return the date of moderator's term time. */
         DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
 
         /* Purpose: return information about all the existing forums. */
-        List<Forum> getAllForums();
+        Forum[] getAllForums();
 
         /* Purpose: return forum's admins information. */
-        List<Admin> getAdmins(int userID, int forumID);
+        Admin[] getAdmins(int userID, int forumID);
 
         /* Purpose: return forum's members information. */
-        List<User> getMembers(int userID, int forumID);
+        User[] getMembers(int userID, int forumID);
 
         /* Purpose: return forum's subForums information. */
-        List<Subforum> getSubforums(int forumID);
+        Subforum[] getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
         Admin getAdmin(int userID, int forumID, int AdminID);
