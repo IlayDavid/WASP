@@ -21,8 +21,8 @@ namespace Client.CommunicationLayer
             isInit = 1;
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + pass + "\"," + "\"id\":" + ID
                 + "," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name + "\"}";
-            string res = httpReq(json, "POST", _url + "/initialize");
-            return parseStringToSuperUser(res);
+            string res = httpReq(json, "POST", _url + "/initialize/");
+            return parseStringToSuperUser(res, email, name);
         }
         public int isInitialize()
         {

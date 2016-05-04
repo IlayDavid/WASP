@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Web.Script.Serialization;
 //using System.Net;
 //using System.Text;  // for class Encoding
 
@@ -19,7 +20,7 @@ namespace Client.CommunicationLayer
         private string _url { get; set; }
         public CL()
         {
-
+            _url = "http://localhost:8080";
         }
 
         private string httpReq(string json, string method, string url)
@@ -51,6 +52,7 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
+
         public User login(string userName, string password, int forumID)
         {
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
@@ -73,6 +75,19 @@ namespace Client.CommunicationLayer
         private SuperUser parseStringToSuperUser(string res)
         {
             throw new NotImplementedException();
+        }
+
+        private SuperUser parseStringToSuperUser(string res, string email, string name)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string username = dict["username"];
+            int id = dict["id"];
+            string password = dict["password"];
+            string auth =dict["auth"];
+            SuperUser su = new SuperUser(name, username, id, email, password, auth);
+            return su;
+
         }
 
         //---------------------------------Getters----------------------------------------------
