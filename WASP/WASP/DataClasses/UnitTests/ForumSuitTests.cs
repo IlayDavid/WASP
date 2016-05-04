@@ -10,15 +10,18 @@ namespace WASP.TestSuits
 
     {
         private DAL dal = new DALSQL();
+        
 
         [TestCleanup]
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
         }
 
@@ -119,7 +122,7 @@ namespace WASP.TestSuits
                 int forumId1 = dal.CreateForum(forum1).Id;
                 int forumId2 = dal.CreateForum(forum2).Id;
 
-                Forum[] forums = dal.GetForums(new Collection<int> { forumId1 });
+                Forum[] forums = dal.GetForums(new int [] { forumId1 });
                 Assert.IsTrue(forums.Length == 1);
                 Assert.IsTrue(forums[0].Name == forum1.Name);
             }

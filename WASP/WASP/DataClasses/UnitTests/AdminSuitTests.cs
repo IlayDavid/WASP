@@ -20,10 +20,12 @@ namespace WASP.TestSuits
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
             user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum);
@@ -140,7 +142,7 @@ namespace WASP.TestSuits
             {
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
-                Admin[] admins = dal.GetAdmins(new Collection<int> { user1.Id }, dal.GetForum(forumId));
+                Admin[] admins = dal.GetAdmins(new int []{ user1.Id }, dal.GetForum(forumId));
                 Assert.IsTrue(admins.Length == 1);
                 Assert.IsTrue(admins[0].InnerUser.Username == user1.Username);
                 Assert.IsTrue(admins[0].InnerUser.Email == user1.Email);

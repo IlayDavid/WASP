@@ -13,14 +13,18 @@ namespace WASP.TestSuits
         int forumId1;
         int forumId2;
 
+
+
         [TestCleanup]
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
             Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
             Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
@@ -30,12 +34,13 @@ namespace WASP.TestSuits
 
 
 
+
         [TestMethod]
         public void AddSubforumTest1()
         {
             try
             {
-                Subforum subforum = new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal);
+                Subforum subforum = new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal );
 
                 int subforumId = dal.CreateSubForum(subforum).Id;
                 Assert.IsTrue(subforumId > 0);
@@ -132,7 +137,7 @@ namespace WASP.TestSuits
                 int subforumId1 = dal.CreateSubForum(subforum1).Id;
                 int subforumId2 = dal.CreateSubForum(subforum2).Id;
 
-                Subforum[] forums = dal.GetSubForums(new Collection<int> { subforumId1 });
+                Subforum[] forums = dal.GetSubForums(new int [] { subforumId1 });
                 Assert.IsTrue(forums.Length == 1);
                 Assert.IsTrue(forums[0].Name == subforum1.Name);
             }

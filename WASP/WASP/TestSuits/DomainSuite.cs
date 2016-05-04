@@ -5,14 +5,14 @@ using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 using WASP.Domain;
 
-namespace WASP.TestSuits.integration
+namespace WASP.TestSuits
 {
     [TestClass]
 
-    class DomainSuite
+  public class DomainSuite
     {
-        private BLFacade BL;
-        private DALSQL dal;
+        private BLFacade BL = new BLFacade();
+        private DALSQL dal = new DALSQL();
 
         [TestMethod]
         public void createForum()

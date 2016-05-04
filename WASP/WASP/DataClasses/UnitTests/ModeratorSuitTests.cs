@@ -17,14 +17,17 @@ namespace WASP.TestSuits
         int subforumId;
         int forumId;
 
+
         [TestCleanup]
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
 
@@ -156,7 +159,7 @@ namespace WASP.TestSuits
                     dal.GetAdmin(adminId, forumId), dal));
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
-                Moderator[] mods = dal.GetModerators(new Collection<int> { user1.Id }, dal.GetSubForum(subforumId));
+                Moderator[] mods = dal.GetModerators(new int [] { user1.Id }, dal.GetSubForum(subforumId));
                 Assert.IsTrue(mods.Length == 1);
                 Assert.IsTrue(mods[0].Id == user1.Id);
                 

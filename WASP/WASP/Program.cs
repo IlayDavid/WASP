@@ -34,7 +34,7 @@ namespace WASP
             switch (request.Url.ToString())
             {
                 case pref + "isinitialize/": return ServiceFacade.isInitialize(); break;
-                case pref + "initialize/": return ServiceFacade.Initialize(jss.Deserialize<Dictionary<string, dynamic>>(request.);
+                //case pref + "initialize/": return ServiceFacade.Initialize(jss.Deserialize<Dictionary<string, dynamic>>(request.);
             }
             return string.Format("<HTML><BODY>My web page.<br>{0}</BODY></HTML>", DateTime.Now);
         }

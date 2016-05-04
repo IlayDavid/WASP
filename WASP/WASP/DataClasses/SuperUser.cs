@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
     public class SuperUser
     {
-        public SuperUser(string userName, String name, String email, String pass)
+        public SuperUser ( int id, string userName, string password)
         {
-           /* UserName = userName;
-            Name = name;
-            Email = email;
-            Password = pass;*/
-            
+            Id = id;
+            Username = userName;
+            Password = password;
         }
+        public int Id { get; set; }
+        public String Username { get; set; }
+        public String Password { get; set; }
+
+        
     }
 }

@@ -16,14 +16,18 @@ namespace WASP.TestSuits
         int subforumId;
         int forumId;
 
+
+
         [TestCleanup]
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
 
@@ -129,7 +133,7 @@ namespace WASP.TestSuits
             {
                 int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
                 int replyId = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
-                Post[] posts = dal.GetPosts(new Collection<int> { replyId });
+                Post[] posts = dal.GetPosts(new int [] { replyId });
 
                 Assert.IsTrue(posts.Length == 1);
                 Assert.IsTrue(posts[0].Id == replyId);
@@ -150,6 +154,17 @@ namespace WASP.TestSuits
 
             dal.DeletePost(replyId);
             Assert.IsTrue(dal.GetPosts(null).Length == 1);
+            dal.DeletePost(threadId);
+            Assert.IsTrue(dal.GetPosts(null).Length == 0);
+        }
+
+        [TestMethod]
+        public void DeletePostTest7()
+        {
+            int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId1 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId2 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(replyId1), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+
             dal.DeletePost(threadId);
             Assert.IsTrue(dal.GetPosts(null).Length == 0);
         }

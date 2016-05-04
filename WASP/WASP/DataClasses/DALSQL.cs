@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 
@@ -17,11 +18,178 @@ namespace WASP.DataClasses
         private int subforum_counter = 1;
         private Object subForumLock = new Object();
 
+        private int notification_counter = 1;
+        private Object notificationLock = new Object();
+
+        private static List<ISuperUser> backUpSuperUsers;
+        private static List<IUser> backUpUsers;
+        private static List<IAdmin> backUpAdmins;
+        private static List<IModerator> backUpModerators;
+        private static List<IForum> backUpForums;
+        private static List<ISubForum> backUpSubForums;
+        private static List<INotification> backUpNotifications;
+        private static List<IPost> backUpPosts;
+
+        public static void BackUpAll()
+        {
+            backUpSuperUsers = new List<ISuperUser>();
+            backUpUsers = new List<IUser>();
+            backUpAdmins = new List<IAdmin>();
+            backUpModerators = new List<IModerator>();
+            backUpForums = new List<IForum>();
+            backUpSubForums = new List<ISubForum>();
+            backUpNotifications = new List<INotification>();
+            backUpPosts = new List<IPost>();
+
+            Forum_SystemDataContext db = new Forum_SystemDataContext();
+            //1
+            foreach (ISuperUser isuperUser in db.ISuperUsers)
+            {
+                ISuperUser isuper = new ISuperUser();
+                isuper.id = isuperUser.id;
+                isuper.userName = isuperUser.userName;
+                isuper.password = isuperUser.password;
+                backUpSuperUsers.Add(isuper);
+            }
+            //2
+            foreach (IUser user in db.IUsers)
+            {
+                IUser iuser = new IUser();
+                iuser.id = user.id;
+                iuser.userName = user.userName;
+                iuser.name = user.name;
+                iuser.password = user.password;
+                iuser.email = user.email;
+                iuser.forumId = user.forumId;
+
+                backUpUsers.Add(iuser);
+            }
+            //3
+            foreach (IAdmin admin in db.IAdmins)
+            {
+                IAdmin iadmin = new IAdmin();
+                iadmin.userId = admin.userId;
+                iadmin.forumId = admin.forumId;
+                backUpAdmins.Add(iadmin);
+            }
+            //4
+            foreach (IModerator mod in db.IModerators)
+            {
+                IModerator imod = new IModerator();
+                imod.userId = mod.userId;
+                imod.subForumId = mod.subForumId;
+                imod.forumId = mod.forumId;
+                imod.byAdmin = mod.byAdmin;
+                imod.term = mod.term;
+                backUpModerators.Add(imod);
+            }
+            //5
+            foreach (IForum forum in db.IForums)
+            {
+                IForum iforum = new IForum();
+                iforum.id = forum.id;
+                iforum.subject = forum.subject;
+                iforum.description = forum.description;
+
+                backUpForums.Add(iforum);
+            }
+            //6
+            foreach (ISubForum subf in db.ISubForums)
+            {
+                ISubForum isubf = new ISubForum();
+                isubf.id = subf.id;
+                isubf.subject = subf.subject;
+                isubf.description = subf.description;
+                isubf.forumId = subf.forumId;
+
+                backUpSubForums.Add(isubf);
+            }
+            //7
+            foreach (IPost post in db.IPosts)
+            {
+                IPost ipost = new IPost();
+                ipost.id = post.id;
+                ipost.title = post.title;
+                ipost.cnt = post.cnt;
+                ipost.userId = post.userId;
+                ipost.forumId = post.forumId;
+                ipost.publishAt = post.publishAt;
+                ipost.editAt = post.editAt;
+                ipost.reply = post.reply;
+                ipost.subforumId = post.subforumId;
+
+                backUpPosts.Add(ipost);
+            }
+            //8
+            foreach (INotification noti in db.INotifications)
+            {
+                INotification inoti = new INotification();
+                inoti.id = noti.id;
+                inoti.isNew = noti.isNew;
+                inoti.message = noti.message;
+                inoti.fromForumId = noti.fromForumId;
+                inoti.fromUserId = noti.fromUserId;
+                inoti.toForumId = noti.toForumId;
+                inoti.toUserId = noti.toUserId;
+
+                backUpNotifications.Add(inoti);
+            }
+        }
+
+        public static void GetBackUp()
+        {
+            Forum_SystemDataContext db = new Forum_SystemDataContext();
+            foreach (ISuperUser isuper in backUpSuperUsers)
+            {
+                db.ISuperUsers.InsertOnSubmit(isuper);
+            }
+
+            //5
+            foreach (IForum forum in backUpForums)
+            {
+                db.IForums.InsertOnSubmit(forum);
+            }
+
+            //6
+            foreach (ISubForum subf in backUpSubForums)
+            {
+                db.ISubForums.InsertOnSubmit(subf);
+            }
+
+            //2
+            foreach (IUser user in backUpUsers)
+            {
+                db.IUsers.InsertOnSubmit(user);
+            }
+            //3
+            foreach (IAdmin admin in backUpAdmins)
+            {
+                db.IAdmins.InsertOnSubmit(admin);
+            }
+            //4
+            foreach (IModerator mod in backUpModerators)
+            {
+                db.IModerators.InsertOnSubmit(mod);
+            }
+
+
+            //7
+            foreach (IPost post in backUpPosts)
+            {
+                db.IPosts.InsertOnSubmit(post);
+            }
+            //8
+            foreach (INotification noti in backUpNotifications)
+            {
+                db.INotifications.InsertOnSubmit(noti);
+            }
+            db.SubmitChanges();
+        }
+
         private Forum_SystemDataContext db = new Forum_SystemDataContext();
 
         public void Clean()
         {
-            //db.ExecuteCommand("DELETE FROM Entity");
             db.INotifications.DeleteAllOnSubmit(db.INotifications);
             db.IPosts.DeleteAllOnSubmit(db.IPosts);
             db.ISubForums.DeleteAllOnSubmit(db.ISubForums);
@@ -29,10 +197,8 @@ namespace WASP.DataClasses
             db.IModerators.DeleteAllOnSubmit(db.IModerators);
             db.IAdmins.DeleteAllOnSubmit(db.IAdmins);
             db.IUsers.DeleteAllOnSubmit(db.IUsers);
-            
-            
-            
-
+            db.ISuperUsers.DeleteAllOnSubmit(db.ISuperUsers);
+            db.SubmitChanges();
         }
 
         private int getNextPostId()
@@ -44,6 +210,17 @@ namespace WASP.DataClasses
                 return ret;
             }
         }
+
+        private int getNextNotificationId()
+        {
+            lock (notificationLock)
+            {
+                int ret = notification_counter;
+                notification_counter++;
+                return ret;
+            }
+        }
+
         private int getNextSubForumId()
         {
             lock (subForumLock)
@@ -170,35 +347,35 @@ namespace WASP.DataClasses
             return post;
         }
 
-        public User[] GetUseres(Collection<int> userIds, Forum forum)
+        public User[] GetUseres(int [] userIds, Forum forum)
         {
             List<User> users = new List<User>();
             foreach (IUser iuser in db.IUsers)
-                if ( (forum == null || iuser.forumId == forum.Id) && (userIds == null || userIds.Contains(iuser.id)))
+                if ((forum == null || iuser.forumId == forum.Id) && (userIds == null || userIds.Contains(iuser.id)))
                     users.Add(GetUser(iuser.id, iuser.forumId));
             return users.ToArray();
         }
-        public Moderator[] GetModerators(Collection<int> moderatorIds, Subforum subforum)
+        public Moderator[] GetModerators(int [] moderatorIds, Subforum subforum)
         {
             List<Moderator> moderators = new List<Moderator>();
             foreach (IModerator imoderator in db.IModerators)
-                if ( ( subforum == null || imoderator.ISubForum.id == subforum.Id) &&
+                if ((subforum == null || imoderator.ISubForum.id == subforum.Id) &&
                             (moderatorIds == null || moderatorIds.Contains(imoderator.userId)))
                     moderators.Add(GetModerator(imoderator.userId, imoderator.subForumId));
 
             return moderators.ToArray();
         }
-        public Admin[] GetAdmins(Collection<int> adminsIds, Forum forum)
+        public Admin[] GetAdmins(int [] adminsIds, Forum forum)
         {
             List<Admin> admins = new List<Admin>();
             foreach (IAdmin iadmin in db.IAdmins)
-                if ( (forum == null || iadmin.forumId == forum.Id) &&
+                if ((forum == null || iadmin.forumId == forum.Id) &&
                     (adminsIds == null || adminsIds.Contains(iadmin.userId)))
                     admins.Add(GetAdmin(iadmin.userId, iadmin.forumId));
 
             return admins.ToArray();
         }
-        public Forum[] GetForums(Collection<int> forumsIds)
+        public Forum[] GetForums(int [] forumsIds)
         {
             List<Forum> forums = new List<Forum>();
             foreach (IForum iforum in db.IForums)
@@ -206,7 +383,7 @@ namespace WASP.DataClasses
                     forums.Add(GetForum(iforum.id));
             return forums.ToArray();
         }
-        public Subforum[] GetSubForums(Collection<int> subForumIds)
+        public Subforum[] GetSubForums(int [] subForumIds)
         {
             List<Subforum> subforums = new List<Subforum>();
 
@@ -215,7 +392,7 @@ namespace WASP.DataClasses
                     subforums.Add(GetSubForum(isf.id));
             return subforums.ToArray();
         }
-        public Post[] GetPosts(Collection<int> Posts)
+        public Post[] GetPosts(int [] Posts)
         {
             List<Post> posts = new List<Post>();
             foreach (IPost ipost in db.IPosts)
@@ -400,7 +577,7 @@ namespace WASP.DataClasses
             {
                 Post replyTo = null;
                 if (ipost.reply != null) replyTo = GetPost((int)ipost.reply);
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt,  GetUser(ipost.userId, ipost.IUser.forumId), ipost.publishAt,
+                Post post = new Post(ipost.id, ipost.title, ipost.cnt, GetUser(ipost.userId, ipost.IUser.forumId), ipost.publishAt,
                    replyTo, GetSubForum(ipost.subforumId), ipost.editAt, this);
                 return post;
             }
@@ -411,8 +588,16 @@ namespace WASP.DataClasses
         public bool DeletePost(int postId)
         {
             IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
+
             if (ipost != null)
             {
+                IPost reply = db.IPosts.FirstOrDefault(x => x.reply == postId);
+                if (reply != null)
+                {
+                    DeletePost(reply.id);
+                    return DeletePost(postId);
+                }
+
                 db.IPosts.DeleteOnSubmit(ipost);
                 db.SubmitChanges();
                 return true;
@@ -421,7 +606,7 @@ namespace WASP.DataClasses
         }
         // delete moderator, delete forum, delete subforum
 
-           
+
         public bool DeleteUser(int id, int forumId)
         {
             IUser iuser = db.IUsers.FirstOrDefault(x => x.id == id && x.forumId == forumId);
@@ -494,7 +679,7 @@ namespace WASP.DataClasses
             }
             return moderators.ToArray();
         }
-        public Forum [] GetForumsUserID(int userId)
+        public Forum[] GetForumsUserID(int userId)
         {
             List<Forum> forums = new List<Forum>();
             foreach (IUser iuser in db.IUsers)
@@ -503,6 +688,140 @@ namespace WASP.DataClasses
                     forums.Add(GetForum(iuser.forumId));
             }
             return forums.ToArray();
+        }
+
+
+
+
+
+        public SuperUser CreateSuperUser(SuperUser superuser)
+        {
+            ISuperUser isuperuser = db.ISuperUsers.FirstOrDefault(x => x.id == superuser.Id);
+            if (isuperuser == null)
+            {
+                isuperuser = new ISuperUser();
+                isuperuser.id = superuser.Id;
+                isuperuser.userName = superuser.Username;
+                isuperuser.password = superuser.Password;
+                db.ISuperUsers.InsertOnSubmit(isuperuser);
+                db.SubmitChanges();
+                return superuser;
+            }
+            else
+                throw new ExistException(string.Format("CreateSuperUser:  SuperUser {0} exists", superuser.Id));
+
+        }
+
+        public SuperUser UpdateSuperUser(SuperUser superuser)
+        {
+            ISuperUser isuperuser = db.ISuperUsers.FirstOrDefault(x => x.id == superuser.Id);
+            if (isuperuser != null)
+            {
+                isuperuser.userName = superuser.Username;
+                isuperuser.password = superuser.Password;
+                db.SubmitChanges();
+                return superuser;
+            }
+            else
+                throw new ExistException(string.Format("SuperUser {0} does not exist", superuser.Id));
+        }
+
+        public bool DeleteSuperUser(int superuserId)
+        {
+            ISuperUser isuperuser = db.ISuperUsers.FirstOrDefault(x => x.id == superuserId);
+            if (isuperuser != null)
+            {
+                db.ISuperUsers.DeleteOnSubmit(isuperuser);
+                db.SubmitChanges();
+                return true;
+            }
+            else
+                throw new ExistException(string.Format("SuperUser {0} does not exist", superuserId));
+        }
+
+        public SuperUser GetSuperUser(int superUserId)
+        {
+            ISuperUser isuperuser = db.ISuperUsers.FirstOrDefault(x => x.id == superUserId);
+            if (isuperuser != null)
+            {
+                SuperUser superUser = new SuperUser(isuperuser.id, isuperuser.userName, isuperuser.password);
+                return superUser;
+            }
+            else
+                throw new ExistException(string.Format("SuperUser {0} does not exist", superUserId));
+        }
+
+        public SuperUser[] GetSuperUsers(int [] superuserIds)
+        {
+            List<SuperUser> superusers = new List<SuperUser>();
+            foreach (ISuperUser isuperuser in db.ISuperUsers)
+                if (superuserIds == null || superuserIds.Contains(isuperuser.id))
+                    superusers.Add(GetSuperUser(isuperuser.id));
+            return superusers.ToArray();
+
+        }
+
+
+
+        public Notification GetNotification(int notificationId)
+        {
+            INotification inoti = db.INotifications.FirstOrDefault(x => x.id == notificationId);
+            if (inoti != null)
+            {
+                Notification noti = new Notification(inoti.id, inoti.message, inoti.isNew, GetUser(inoti.fromUserId, inoti.fromForumId), GetUser(inoti.toUserId, inoti.toForumId));
+                return noti;
+            }
+            throw new GetException(string.Format("Notifitcation {0} wasn't found", notificationId));
+        }
+        public bool DeleteNotification(int notificationId)
+        {
+            INotification inoti = db.INotifications.FirstOrDefault(x => x.id == notificationId);
+
+            if (inoti != null)
+            {
+                db.INotifications.DeleteOnSubmit(inoti);
+                db.SubmitChanges();
+                return true;
+            }
+            else throw new ExistException(string.Format("Notification {0} does not exist", notificationId));
+        }
+        public Notification[] GetNotifications(int[] notificationsIds)
+        {
+            List<Notification> notifications = new List<Notification>();
+            foreach (INotification inot in db.INotifications)
+                if (notificationsIds == null || notificationsIds.Contains(inot.id))
+                    notifications.Add(GetNotification(inot.id));
+            return notifications.ToArray();
+        }
+        public Notification CreateNotification(Notification notification)
+        {
+            INotification inot = new INotification();
+            inot.id = getNextNotificationId();
+            inot.fromUserId = notification.Source.Id;
+            inot.fromForumId = notification.Source.forum.Id;
+            inot.toUserId = notification.Target.Id;
+            inot.toForumId = notification.Target.forum.Id;
+            inot.isNew = notification.IsNew;
+            inot.message = notification.Message;
+
+            db.INotifications.InsertOnSubmit(inot);
+            db.SubmitChanges();
+            notification.Id = inot.id;
+            return notification;
+        }
+
+        public Notification UpdateNotification(Notification notification)
+        {
+            INotification inot = new INotification();
+            inot.fromUserId = notification.Source.Id;
+            inot.fromForumId = notification.Source.forum.Id;
+            inot.toUserId = notification.Target.Id;
+            inot.toForumId = notification.Target.forum.Id;
+            inot.isNew = notification.IsNew;
+            inot.message = notification.Message;
+
+            db.SubmitChanges();
+            return notification;
         }
     }
 }

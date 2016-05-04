@@ -74,10 +74,10 @@
     <Compile Include="DataClasses\UnitTests\AdminSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\ForumSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\ModeratorSuitTests.cs" />
-    <Compile Include="DataClasses\UnitTests\MsgSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\NotificSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\PostSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\SubForumSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\SuperUserSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\UserSuitTests.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="Domain\BLFacade.cs" />
@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Server\WebServer.cs" />
     <Compile Include="Service\ServiceFacade.cs" />
+    <Compile Include="TestSuits\DomainSuite.cs" />
     <Compile Include="TestSuits\PostTests.cs" />
     <Compile Include="TestSuits\SubForumTests.cs" />
     <Compile Include="TestSuits\TestsForum.cs" />

@@ -30,7 +30,7 @@ namespace WASP.Domain
             newForum.AddMember(user);
             newForum.AddAdmin(admin);
 
-            // DANGER: Need to provide atomicity for this... This is a dangerous spot.
+            // DANGER: Need `o provide atomicity for this... This is a dangerous spot.
             newForum = dal.CreateForum(newForum);
             dal.CreateUser(user);
             dal.CreateAdmin(admin);
@@ -231,7 +231,7 @@ namespace WASP.Domain
 
         public Post[] getThreads(int forumID, int subForumID, List<int> threads)
         {
-            return dal.GetPosts(threads);
+            return dal.GetPosts(threads.ToArray());
         }
 
         public Forum getForum(int forumID)

@@ -11,15 +11,18 @@ namespace WASP.TestSuits
     {
         private DAL dal = new DALSQL();
         int forumId;
+    
 
         [TestCleanup]
         public void CleanUp()
         {
             ((DALSQL)dal).Clean();
+            DALSQL.GetBackUp();
         }
         [TestInitialize]
         public void SetUp()
         {
+            DALSQL.BackUpAll();
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
             forumId = forum.Id;
@@ -128,7 +131,7 @@ namespace WASP.TestSuits
             {
                 dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
                 dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                User[] users = dal.GetUseres(new Collection<int> { 315470047 }, null);
+                User[] users = dal.GetUseres(new int [] { 315470047 }, null);
                 Assert.IsTrue(users.Length == 1);
                 Assert.IsTrue(users[0].Username.Equals("matansar"));
                 Assert.IsTrue(users[0].Email.Equals("matansar@post.bgu.ac.il"));
@@ -146,6 +149,7 @@ namespace WASP.TestSuits
             dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
             int userId1 = dal.GetUser(315470047, forumId).Id;
             int userId2 = dal.GetUser(315470048, forumId).Id;
+
             dal.DeleteUser(userId1, forumId);
             Assert.IsTrue(dal.GetUseres(null,null).Length == 1);
             dal.DeleteUser(userId2, forumId);

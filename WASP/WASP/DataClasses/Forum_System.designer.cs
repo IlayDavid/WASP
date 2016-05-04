@@ -51,6 +51,9 @@ namespace WASP.DataClasses
     partial void InsertISubForum(ISubForum instance);
     partial void UpdateISubForum(ISubForum instance);
     partial void DeleteISubForum(ISubForum instance);
+    partial void InsertISuperUser(ISuperUser instance);
+    partial void UpdateISuperUser(ISuperUser instance);
+    partial void DeleteISuperUser(ISuperUser instance);
     #endregion
 		
 		public Forum_SystemDataContext() : 
@@ -138,6 +141,14 @@ namespace WASP.DataClasses
 				return this.GetTable<ISubForum>();
 			}
 		}
+		
+		public System.Data.Linq.Table<ISuperUser> ISuperUsers
+		{
+			get
+			{
+				return this.GetTable<ISuperUser>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admins")]
@@ -219,7 +230,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Admin_Moderator", Storage="_IModerators", ThisKey="userId,forumId", OtherKey="byAdmin,forumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IAdmin_IModerator", Storage="_IModerators", ThisKey="userId,forumId", OtherKey="byAdmin,forumId")]
 		public EntitySet<IModerator> IModerators
 		{
 			get
@@ -232,7 +243,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IAdmin", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
 		public IUser IUser
 		{
 			get
@@ -396,7 +407,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_User", Storage="_IUsers", ThisKey="id", OtherKey="forumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IForum_IUser", Storage="_IUsers", ThisKey="id", OtherKey="forumId")]
 		public EntitySet<IUser> IUsers
 		{
 			get
@@ -409,7 +420,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_SubForum", Storage="_ISubForums", ThisKey="id", OtherKey="forumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IForum_ISubForum", Storage="_ISubForums", ThisKey="id", OtherKey="forumId")]
 		public EntitySet<ISubForum> ISubForums
 		{
 			get
@@ -629,7 +640,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Admin_Moderator", Storage="_IAdmin", ThisKey="byAdmin,forumId", OtherKey="userId,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IAdmin_IModerator", Storage="_IAdmin", ThisKey="byAdmin,forumId", OtherKey="userId,forumId", IsForeignKey=true)]
 		public IAdmin IAdmin
 		{
 			get
@@ -665,7 +676,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Moderator", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IModerator", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
 		public IUser IUser
 		{
 			get
@@ -701,7 +712,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubForum_Moderator", Storage="_ISubForum", ThisKey="subForumId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ISubForum_IModerator", Storage="_ISubForum", ThisKey="subForumId", OtherKey="id", IsForeignKey=true)]
 		public ISubForum ISubForum
 		{
 			get
@@ -1017,7 +1028,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Post", Storage="_IPosts", ThisKey="id", OtherKey="reply")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IPost_IPost", Storage="_IPosts", ThisKey="id", OtherKey="reply")]
 		public EntitySet<IPost> IPosts
 		{
 			get
@@ -1030,7 +1041,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Post", Storage="_Post1", ThisKey="reply", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IPost_IPost", Storage="_Post1", ThisKey="reply", OtherKey="id", IsForeignKey=true)]
 		public IPost Post1
 		{
 			get
@@ -1064,7 +1075,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IPost", Storage="_IUser", ThisKey="userId,forumId", OtherKey="id,forumId", IsForeignKey=true)]
 		public IUser IUser
 		{
 			get
@@ -1100,7 +1111,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubForum_Post", Storage="_ISubForum", ThisKey="subforumId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ISubForum_IPost", Storage="_ISubForum", ThisKey="subforumId", OtherKey="id", IsForeignKey=true)]
 		public ISubForum ISubForum
 		{
 			get
@@ -1374,7 +1385,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification", Storage="_User", ThisKey="fromUserId,fromForumId", OtherKey="id,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification", Storage="_User", ThisKey="fromUserId,fromForumId", OtherKey="id,forumId", IsForeignKey=true)]
 		public IUser User
 		{
 			get
@@ -1410,7 +1421,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification1", Storage="_IUser", ThisKey="toUserId,toForumId", OtherKey="id,forumId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification1", Storage="_IUser", ThisKey="toUserId,toForumId", OtherKey="id,forumId", IsForeignKey=true)]
 		public IUser IUser
 		{
 			get
@@ -1650,7 +1661,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_IAdmin", ThisKey="id,forumId", OtherKey="userId,forumId", IsUnique=true, IsForeignKey=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IAdmin", Storage="_IAdmin", ThisKey="id,forumId", OtherKey="userId,forumId", IsUnique=true, IsForeignKey=false)]
 		public IAdmin IAdmin
 		{
 			get
@@ -1679,7 +1690,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Moderator", Storage="_IModerators", ThisKey="id,forumId", OtherKey="userId,forumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IModerator", Storage="_IModerators", ThisKey="id,forumId", OtherKey="userId,forumId")]
 		public EntitySet<IModerator> IModerators
 		{
 			get
@@ -1692,7 +1703,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_IPosts", ThisKey="id,forumId", OtherKey="userId,forumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IPost", Storage="_IPosts", ThisKey="id,forumId", OtherKey="userId,forumId")]
 		public EntitySet<IPost> IPosts
 		{
 			get
@@ -1705,7 +1716,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification", Storage="_Notifications", ThisKey="id,forumId", OtherKey="fromUserId,fromForumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification", Storage="_Notifications", ThisKey="id,forumId", OtherKey="fromUserId,fromForumId")]
 		public EntitySet<INotification> Notifications
 		{
 			get
@@ -1718,7 +1729,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Notification1", Storage="_INotifications", ThisKey="id,forumId", OtherKey="toUserId,toForumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification1", Storage="_INotifications", ThisKey="id,forumId", OtherKey="toUserId,toForumId")]
 		public EntitySet<INotification> INotifications
 		{
 			get
@@ -1731,7 +1742,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_User", Storage="_IForum", ThisKey="forumId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IForum_IUser", Storage="_IForum", ThisKey="forumId", OtherKey="id", IsForeignKey=true)]
 		public IForum IForum
 		{
 			get
@@ -1960,7 +1971,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubForum_Moderator", Storage="_IModerators", ThisKey="id", OtherKey="subForumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ISubForum_IModerator", Storage="_IModerators", ThisKey="id", OtherKey="subForumId")]
 		public EntitySet<IModerator> IModerators
 		{
 			get
@@ -1973,7 +1984,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubForum_Post", Storage="_IPosts", ThisKey="id", OtherKey="subforumId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ISubForum_IPost", Storage="_IPosts", ThisKey="id", OtherKey="subforumId")]
 		public EntitySet<IPost> IPosts
 		{
 			get
@@ -1986,7 +1997,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_SubForum", Storage="_IForum", ThisKey="forumId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IForum_ISubForum", Storage="_IForum", ThisKey="forumId", OtherKey="id", IsForeignKey=true)]
 		public IForum IForum
 		{
 			get
@@ -2062,6 +2073,116 @@ namespace WASP.DataClasses
 		{
 			this.SendPropertyChanging();
 			entity.ISubForum = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SuperUsers")]
+	public partial class ISuperUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _userName;
+		
+		private string _password;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnuserNameChanging(string value);
+    partial void OnuserNameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    #endregion
+		
+		public ISuperUser()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		public string userName
+		{
+			get
+			{
+				return this._userName;
+			}
+			set
+			{
+				if ((this._userName != value))
+				{
+					this.OnuserNameChanging(value);
+					this.SendPropertyChanging();
+					this._userName = value;
+					this.SendPropertyChanged("userName");
+					this.OnuserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

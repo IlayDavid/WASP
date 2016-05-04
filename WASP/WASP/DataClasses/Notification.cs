@@ -56,8 +56,10 @@ namespace WASP.DataClasses
 
         public String Message
         {
-            get;
-            set;
+            get
+            {
+                return this.message;
+            }
         }
     }
 }
