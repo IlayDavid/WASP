@@ -24,7 +24,7 @@ namespace WASP.Domain
         {
             //create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, null, dal);
-            User user = new User(-1, adminName, adminUserName, email, pass, newForum);
+            User user = new User(adminID, adminName, adminUserName, email, pass, newForum);
             // TODO: need to check if user and forum are fine with policy
             Admin admin = new Admin(user, newForum, dal);
             newForum.AddMember(user);

@@ -56,18 +56,11 @@ namespace WASP.DataClasses
         Moderator[] GetModeratorsInSubForum(int subForumID);
 
         Forum[] GetForumsUserID(int userId);
-
-
-
-        
         // delete moderator, delete forum, delete subforum
-
-
         bool DeleteUser(int id, int forumId);
        
         bool DeleteAdmin(int adminId, int forumId);
         
-       
         bool DeleteForum(int forumId);
        
          bool DeleteSubforum(int subforumId);
