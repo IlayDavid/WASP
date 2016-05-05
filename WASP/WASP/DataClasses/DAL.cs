@@ -9,6 +9,9 @@ namespace WASP.DataClasses
 {
     public interface DAL
     {
+        void Clean();
+        void Backup();
+        void Restore();
         //forum.Id == -1
         Forum CreateForum(Forum forum);
         //forum.Id > -1

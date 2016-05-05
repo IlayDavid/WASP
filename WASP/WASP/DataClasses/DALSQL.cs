@@ -30,6 +30,17 @@ namespace WASP.DataClasses
         private static List<INotification> backUpNotifications;
         private static List<IPost> backUpPosts;
 
+
+        public void Backup()
+        {
+            DALSQL.BackUpAll();
+        }
+
+        public void Restore()
+        {
+            DALSQL.GetBackUp();
+        }
+
         public static void BackUpAll()
         {
             backUpSuperUsers = new List<ISuperUser>();
@@ -519,11 +530,14 @@ namespace WASP.DataClasses
             {
                 Forum forum = new Forum(iforum.id, iforum.subject, iforum.description, null, this);
 
-
-
                 //need change
                 foreach (Admin admin in GetAdminsOfForum(forum))
                     forum.AddAdmin(admin);
+
+                foreach(Admin admin in forum.GetAdmins())
+                {
+                    forum.AddMember(admin.InnerUser);
+                }
                 //need change
 
                 foreach (Subforum sf in GetSubForumsOfForum(forum))

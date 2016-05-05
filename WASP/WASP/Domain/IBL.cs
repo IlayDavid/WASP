@@ -11,6 +11,9 @@ namespace WASP.Domain
 {
     public interface IBL
     {
+        void Clean();
+        void Restore();
+        void Backup();
         //---------------------------Version 1 Use Cases Start------------------------------------
 
        /*

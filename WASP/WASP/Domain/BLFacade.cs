@@ -9,22 +9,38 @@ namespace WASP.Domain
     class BLFacade : IBL
     {
         private DAL dal;
-
+        private bool initialized;
         public BLFacade()
         {
-            this.dal = null;
+            this.dal = new DALSQL();
+            this.initialized = false;
+        }
+
+        public void Clean()
+        {
+            this.dal.Clean();
+        }
+
+        public void Restore()
+        {
+            this.dal.Restore();
+        }
+
+        public void Backup()
+        {
+            this.dal.Backup();
         }
 
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            this.dal = new DALSQL();
             SuperUser user = new SuperUser(-1, userName, pass);
+            this.initialized = true;
             return this.dal.CreateSuperUser(user);
         }
 
         public int isInitialize()
         {
-            if (this.dal == null)
+            if (!initialized)
                 return 0;
             return 1;
         }
@@ -42,7 +58,7 @@ namespace WASP.Domain
 
             // DANGER: Need `o provide atomicity for this... This is a dangerous spot.
             newForum = dal.CreateForum(newForum);
-            dal.CreateUser(user);
+            //dal.CreateUser(user);
             dal.CreateAdmin(admin);
 
             return newForum;
@@ -60,11 +76,12 @@ namespace WASP.Domain
 
             // Attempt to add user.
             User user = new User(id, name, userName, email, pass, forum);
+            user = dal.CreateUser(user);
             // If user doesn't follow forum policy will throw exception.
             forum.AddMember(user);
 
             // Will throw exception if unable to create user.
-            return dal.CreateUser(user);
+            return user;
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
