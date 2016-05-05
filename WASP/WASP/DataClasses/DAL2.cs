@@ -48,9 +48,9 @@ namespace WASP.DataClasses
         User GetUser(int id, int forumId);
        
         
-        Post GetUserPosts(int userID);
+        Post[] GetUserPosts(int userID);
         Notification[] GetUserNewNotifications(int userID);
-        Notification[] GetUserNotification(int userID);
+        Notification[] GetUserNotifications(int userID);
 
         //moderator.id == -1
         Moderator CreateModerator(Moderator mod);

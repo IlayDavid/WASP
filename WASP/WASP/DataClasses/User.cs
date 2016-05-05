@@ -4,31 +4,77 @@ using System.Collections.Generic;
 
 namespace WASP.DataClasses
 {
-     public class User
+    public class User
     {
         public string Name { get; set; }
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
         public int Id { get; set; }
-        public Forum forum { get; set; }
-        public Dictionary<int, Post> posts;
-        public Queue<Notification> newNotifications=new Queue<Notification>();
-        public List<Notification> notifications=new List<Notification>();
-        
+        private Forum forum;
+        private Dictionary<int, Post> posts;
+        public Dictionary<int, Post> Posts
+        {
+            get
+            {
+                if(this.posts == null)
+                {
+                    posts = new Dictionary<int, Post>();
+                    foreach(Post post in dal.GetUserPosts(Id))
+                    {
+                        posts.Add(post.Id, post);
+                    }
+                }
+                return posts;
+            }
+        }
+        private Dictionary<int, Notification> newNotifications = null;
+        private Dictionary<int, Notification> notifications = null;
+        public Dictionary<int, Notification> Notifications
+        {
+            get
+            {
+                if(notifications == null)
+                {
+                    notifications = new Dictionary<int, Notification>();
+                    foreach(Notification notif in dal.GetUserNotifications(Id))
+                    {
+                        notifications.Add(notif.Id, notif);
+                    }
+                }
+                return notifications;
+            }
+        }
+        public Dictionary<int, Notification> NewNotifications
+        {
+            get
+            {
+                if (newNotifications == null)
+                {
+                    newNotifications = new Dictionary<int, Notification>();
+                    foreach (Notification notif in dal.GetUserNewNotifications(Id))
+                    {
+                        newNotifications.Add(notif.Id, notif);
+                    }
+                }
+                return newNotifications;
+            }
+        }
+        private DAL2 dal;
 
-        public User(int id, string name, string username,string email,string password,Forum forum)
+
+
+        public User(int id, string name, string username, string email, string password, Forum forum, DAL2 dal)
         {
             this.Id = id;
             this.Name = name;
             this.Username = username;
             this.Email = email;
             this.Password = password;
-            this.posts = new Dictionary<int, Post>();
+            this.posts = null;
             this.forum = forum;
-            
+            this.dal = dal;
         }
-
 
         public Post[] GetAllPosts()
         {
@@ -51,7 +97,7 @@ namespace WASP.DataClasses
         {
             posts.Add(post.Id, post);
         }
-        
+
         public void NewNotification(Notification newNotification)
         {
             // TODO: new notification handling. 
