@@ -10,6 +10,9 @@ namespace WASP.DataClasses
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
+       
+
+
         public int Id { get; set; }
         private Forum forum;
         private Dictionary<int, Post> posts = null;
@@ -17,6 +20,7 @@ namespace WASP.DataClasses
         private Dictionary<int, Notification> notifications = null;
         
         private DAL2 dal;
+
 
 
 
@@ -82,6 +86,21 @@ namespace WASP.DataClasses
             Posts.Values.CopyTo(postArr, 0);
             return postArr;
         }
+
+        public Forum Forum
+        {
+            get
+            {
+                return forum;
+            }
+            set
+            {
+                forum = value;
+            }
+        }
+
+
+
 
         public Post GetPost(int post_ID)
         {
