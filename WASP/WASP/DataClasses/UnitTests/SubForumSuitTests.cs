@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.ObjectModel;
 using WASP.DataClasses;
-namespace WASP.TestSuits
+namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class SubForumSuitTests

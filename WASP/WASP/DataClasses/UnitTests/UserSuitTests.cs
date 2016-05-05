@@ -4,7 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using WASP.DataClasses;
 using WASP.DataClasses.DAL_EXCEPTIONS;
-namespace WASP.TestSuits
+namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class UserSuitTests

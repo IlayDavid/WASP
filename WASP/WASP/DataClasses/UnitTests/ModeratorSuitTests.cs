@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using WASP.DataClasses;
 using WASP.DataClasses.DAL_EXCEPTIONS;
-namespace WASP.TestSuits
+namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class ModeratorSuitTest
@@ -50,9 +50,10 @@ namespace WASP.TestSuits
         {
             try
             {
-                
-                dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId), 
-                    dal.GetAdmin(adminId,forumId) , dal));
+                var subforum = dal.GetSubForum(subforumId);
+                var admin = dal.GetAdmin(adminId, forumId);
+                dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), subforum, 
+                    admin , dal));
                 Moderator mod = dal.GetModerator(user1.Id, subforumId);
                 Assert.IsTrue(mod.Id == user1.Id);
                 Assert.IsTrue(mod.Appointer.Id == adminId);

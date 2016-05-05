@@ -13,8 +13,8 @@ namespace WASP.DataClasses
         public int Id { get; set; }
         public Forum forum { get; set; }
         public Dictionary<int, Post> posts;
-        public Queue<Notification> newNotifications;
-        public List<Notification> notifications;
+        public Queue<Notification> newNotifications=new Queue<Notification>();
+        public List<Notification> notifications=new List<Notification>();
         
 
         public User(int id, string name, string username,string email,string password,Forum forum)

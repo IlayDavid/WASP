@@ -6,8 +6,8 @@ namespace WASP.DataClasses
     {
         private int id;
         private String name, description;
-        private Dictionary<int, Moderator> moderators;
-        private Dictionary<int, Post> threads;
+        private Dictionary<int, Moderator> moderators=new Dictionary<int, Moderator>();
+        private Dictionary<int, Post> threads=new Dictionary<int, Post>();
         private DAL dal;
         private Forum forum;
 

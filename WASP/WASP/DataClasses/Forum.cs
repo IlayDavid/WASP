@@ -21,7 +21,9 @@ namespace WASP.DataClasses
             this.policy = policy;
             this.members = new Dictionary<int, User>();
             this.admins = new Dictionary<int, Admin>();
+            this.subforums = new Dictionary<int, Subforum>();
             this.dal = dal;
+
             this.id = id;
 
         }
@@ -159,6 +161,10 @@ namespace WASP.DataClasses
         public void AddAdmin(Admin admin)
         {
             admins.Add(admin.Id, admin) ;
+        }
+        public Admin GetAdmin(int Id)
+        {
+            return admins[Id];
         }
 
         public void AddMember(User member)

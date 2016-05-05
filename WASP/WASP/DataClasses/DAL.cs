@@ -53,7 +53,7 @@ namespace WASP.DataClasses
         bool DeletePost(int postId);
         bool DeleteModerator(int modId, int subForumId);
 
-        Moderator[] GetModeratorsInSubForum(int subForumID);
+        Moderator[] GetModeratorsInSubForum(Subforum subForum);
 
         Forum[] GetForumsUserID(int userId);
         bool DeleteUser(int id, int forumId);
@@ -75,8 +75,8 @@ namespace WASP.DataClasses
         Notification CreateNotification(Notification notification);
 
 
-        Admin[] GetAdminsOfForum(int forumId);
-        Subforum[] GetSubForumsOfForum(int forumId);
+        Admin[] GetAdminsOfForum(Forum forum);
+        Subforum[] GetSubForumsOfForum(Forum forum);
         Post[] GetPostsInSubForum(int id);
         Post[] GetPostsOfUser(int userId, int forumId);
         IEnumerable<Post> GetReplysPost(int id);

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using WASP.DataClasses;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 
-namespace WASP.TestSuits
+namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class AdminSuitTests
@@ -41,7 +41,7 @@ namespace WASP.TestSuits
             try
             {   
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
-
+                
                 
                 Admin admin = dal.GetAdmin(user1.Id, forumId);
                 Assert.IsTrue(admin.Id == user1.Id);
@@ -62,7 +62,7 @@ namespace WASP.TestSuits
             {
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
-                Admin admin1 = dal.GetAdmin(user1.Id,forumId);
+                Admin admin1 = dal.GetAdmin(user1.Id, forumId);
                 Admin admin2 = dal.GetAdmin(user2.Id, forumId);
 
                 Assert.IsTrue(admin1.Id == user1.Id);

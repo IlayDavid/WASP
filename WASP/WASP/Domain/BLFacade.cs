@@ -256,9 +256,10 @@ namespace WASP.Domain
 
         public Moderator[] getModerators(int forumID, int subForumID)
         {
-            Moderator [] mods = dal.GetModeratorsInSubForum(subForumID);
             Forum forum = dal.GetForum(forumID);
             Subforum sf = forum.GetSubForum(subForumID);
+            Moderator[] mods = dal.GetModeratorsInSubForum(sf);
+
             return sf.GetAllModerators();
         }
 

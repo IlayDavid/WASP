@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.ObjectModel;
 using WASP.DataClasses;
-namespace WASP.TestSuits
+namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class PostSuitTests
@@ -52,7 +52,8 @@ namespace WASP.TestSuits
         {
             try
             {
-                int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+                var subforum = dal.GetSubForum(subforumId);
+                int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum, DateTime.Now, dal)).Id;
                 Assert.IsTrue(threadId > 0);
                 Post thread = dal.GetPost(threadId);
                 Assert.IsTrue(thread.Title.Equals("question"));

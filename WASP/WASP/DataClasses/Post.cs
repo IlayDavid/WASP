@@ -11,7 +11,7 @@ namespace WASP.DataClasses
         private int id;
         private Subforum container;
         private Post inReplyTo;
-        private Dictionary<int, Post> replies;
+        private Dictionary<int, Post> replies= new Dictionary<int, Post>();
         private DAL dal;
 
         public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
