@@ -13,13 +13,15 @@ namespace WASP.DataClasses
         private User source;
         private User target;
         private int id;
-        public Notification(int id, String message, bool isNew, User source, User target)
+        private DAL2 dal;
+        public Notification(int id, String message, bool isNew, User source, User target, DAL2 dal)
         {
             this.id = id;
             this.message = message;
             this.isNew = isNew;
             this.source = source;
             this.target = target;
+            this.dal = dal;
         }
 
         public int Id
@@ -43,6 +45,9 @@ namespace WASP.DataClasses
         {
             get
             {
+                if (this.source == null)
+                    this.source = this.dal.GetNotificationSource(this.Id);
+
                 return this.source;
             }
         }
@@ -50,6 +55,9 @@ namespace WASP.DataClasses
         {
             get
             {
+                if (this.target == null)
+                    this.target = this.dal.GetNotificationTarget(this.Id);
+
                 return this.target;
             }
         }
