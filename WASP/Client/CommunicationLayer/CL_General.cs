@@ -56,7 +56,7 @@ namespace Client.CommunicationLayer
         public User login(string userName, string password, int forumID)
         {
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/login");
+            string res = httpReq(json, "POST", _url + "/login/");
             return parseStringToUser(res);
         }
 
@@ -68,7 +68,7 @@ namespace Client.CommunicationLayer
         public SuperUser loginSU(string userName, string password)
         {
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
-            string res = httpReq(json, "POST", _url + "/loginSU");
+            string res = httpReq(json, "POST", _url + "/loginSU/");
             return parseStringToSuperUser(res);
         }
 
@@ -92,21 +92,23 @@ namespace Client.CommunicationLayer
 
         //---------------------------------Getters----------------------------------------------
 
-        public Post getThread(int forumID, int threadId)
+        public Post getThread(int threadId)
         {
-            string json = "{\"postid\":" + threadId + "," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getThread");
+            string json = "{\"postid\":" + threadId + "}";
+            string res = httpReq(json, "POST", _url + "/getThread/");
             return parseStringToPost(res);
         }
 
-        public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
+        public List<Post> getThreads(int subForumID)
         {
-            throw new NotImplementedException();
+            string json = "{\"subforumid\":" + subForumID + "}";
+            string res = httpReq(json, "POST", _url + "/getThreads/");
+            return parseStringToPosts(res);
         }
-        public List<Post> getReplies(int forumID, int subForumID, int postID)
+        public List<Post> getReplys(int postID)
         {
-            string json = "{\"postid\":" + postID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "}";
-            string res = httpReq(json, "POST", _url + "getReplies");
+            string json = "{\"postid\":" + postID + "}";
+            string res = httpReq(json, "POST", _url + "/getReplys/");
             return parseStringToPosts(res);
         }
 
@@ -120,17 +122,10 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Forum getForum(int userID, int forumID)
-        {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getForum");
-            return parseStringToForum(res);
-        }
-
         public Forum getForum(int forumID)
         {
             string json = "{\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getForum");
+            string res = httpReq(json, "POST", _url + "/getForum/");
             return parseStringToForum(res);
         }
 
@@ -139,10 +134,10 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Subforum getSubforum(int forumID, int subforumId)
+        public Subforum getSubforum(int subforumId)
         {
-            string json = "{\"forumid\":" + forumID + "," + "\"subforumid\":" + subforumId + "}";
-            string res = httpReq(json, "POST", _url + "/getSubforum");
+            string json = "{\"subforumid\":" + subforumId + "}";
+            string res = httpReq(json, "POST", _url + "/getSubforum/");
             return parseStringToSubforum(res);
         }
 
@@ -151,10 +146,22 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Moderator> getModerators(int forumID, int subForumID)
+        DateTime getModeratorTermTime(int moderatorID, int subforumID)
+        {
+            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID + "}";
+            string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
+            return parseStringToDate(res);
+        }
+
+        private DateTime parseStringToDate(string res)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Moderator> getModerators(int subForumID)
         {
             List<Moderator> mods = new List<Moderator>();
-            Dictionary<int, Moderator> modID = getSubforum(forumID, subForumID).moderators;
+            Dictionary<int, Moderator> modID = getSubforum(subForumID).moderators;
             foreach (KeyValuePair<int, Moderator> entry in modID)
             {
                 mods.Add(entry.Value);
@@ -165,7 +172,7 @@ namespace Client.CommunicationLayer
         private Moderator getModerator(int userID, int forumID, int subForumID, int moderatorID)
         {
             string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID + "}";
-            string res = httpReq(json, "POST", _url + "/getModerator");
+            string res = httpReq(json, "POST", _url + "/getModerator/");
             return parseStringToModerator(res);
         }
 
@@ -174,18 +181,10 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
-        {
-            Moderator mod = getModerator(userID, forumID, subforumID, moderatorID);
-            //return mod.termTime 
-            //moderator in client dont have properties
-            return new DateTime();
-        }
-
         public List<Forum> getAllForums()
         {
             string json = "";
-            string res = httpReq(json, "POST", _url + "/getAllForums");
+            string res = httpReq(json, "POST", _url + "/getAllForums/");
             return parseStringToForums(res);
         }
 
@@ -194,10 +193,10 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Admin> getAdmins(int userID, int forumID)
+        public List<Admin> getAdmins(int forumID)
         {
-            string json = "{\"forumid\":" + forumID + "," + "\"userid\":" + userID + "}";
-            string res = httpReq(json, "POST", _url + "/getAdmins");
+            string json = "{\"forumid\":" + forumID + "}";
+            string res = httpReq(json, "POST", _url + "/getAdmins/");
             return parseStringToAdmins(res);
         }
 
@@ -206,17 +205,17 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<User> getMembers(int userID, int forumID)
+        public List<User> getMembers(int forumID)
         {
             string json = "{\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getMembers");
+            string res = httpReq(json, "POST", _url + "/getMembers/");
             return parseStringToUsers(res);
         }
 
         public List<Subforum> getSubforums(int forumID)
         {
             string json = "{\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getSubforums");
+            string res = httpReq(json, "POST", _url + "/getSubforums/");
             return parseStringToSubforums(res);
         }
 
@@ -225,10 +224,10 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Admin getAdmin(int userID, int forumID, int AdminID)
+        public Admin getAdmin(int AdminID)
         {
-            string json = "{\"forumid\":" + forumID + "," + "\"userid\":" + userID + "," + "\"adminid\":" + AdminID + "}";
-            string res = httpReq(json, "POST", _url + "/getAdmin");
+            string json = "{\"adminid\":" + AdminID + "}";
+            string res = httpReq(json, "POST", _url + "/getAdmin/");
             return parseStringToAdmin(res);
         }
 
@@ -237,11 +236,5 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public Admin addAdmin(int adminID, int forumID, int newAdminID)
-        {
-            string json = "{\"forumid\":" + forumID + "," + "\"newadminid\":" + newAdminID + "," + "\"adminid\":" + adminID + "}";
-            string res = httpReq(json, "POST", _url + "/addAdmin");
-            return parseStringToAdmin(res);
-        }
     }
 }

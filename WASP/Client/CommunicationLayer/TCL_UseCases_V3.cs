@@ -16,6 +16,11 @@ namespace Client.CommunicationLayer
             return 1;
         }
 
+        public List<Post> getReplys(int postID)
+        {
+            throw new NotImplementedException();
+        }
+
         public int deleteModerator(int moderatorID, int subForumID)
         {
             Dictionary<int, Moderator> mods = forums[forumID].subforums[subForumID].moderators;
@@ -42,7 +47,7 @@ namespace Client.CommunicationLayer
             return null;
         }
         //-----------Admin Reports---------------
-        public int subForumTotalMessages()
+        public int subForumTotalMessages(int subForumID)
         {
             return posts.Count(x => x.Value.containerID == subForumID);
         }

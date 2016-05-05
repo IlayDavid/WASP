@@ -10,31 +10,38 @@ namespace Client.CommunicationLayer
     public partial class CL : ICL
     {
         //---------------------------Version 3 Use Cases Start------------------------------------
-        public int editPost(int userID, int forumID, int postID, string content)
+        public int editPost(int postID, string content)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"postid\":" + postID
+            string json = "{\"postid\":" + postID
                 + "," + "\"content\":\"" + content + "\"}";
-            string res = httpReq(json, "POST", _url + "/editPost");
+            string res = httpReq(json, "POST", _url + "/editPost/");
             return 0;
         }
 
-        public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
+        public int deleteModerator(int moderatorID, int subForumID)
         {
-            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subForumID + "," + "\"forumid\":" + forumID
-                 + "," + "\"moderatorid\":" + moderatorID + "}";
-            string res = httpReq(json, "POST", _url + "/deleteModerator");
+            string json = "{\"subforumid\":" + subForumID + "," +  "\"moderatorid\":" + moderatorID + "}";
+            string res = httpReq(json, "POST", _url + "/deleteModerator/");
             return 0;
         }
-        public List<Message> getAllNotificationses(int userID, int forumID)
+
+        public Admin addAdmin(int newAdminID)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getAllNotificationses");
+            string json = "{\"newadminid\":" + newAdminID + "}";
+            string res = httpReq(json, "POST", _url + "/addAdmin/");
+            return parseStringToAdmin(res);
+        }
+
+        public List<Message> getAllNotificationses()
+        {
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
             return parseStringToMessages(res);
         }
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public List<Message> getNewNotificationses()
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/getNewNotificationses");
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
             return parseStringToMessages(res);
         }
 
@@ -44,10 +51,10 @@ namespace Client.CommunicationLayer
         }
 
         //-----------Admin Reports---------------
-        public int subForumTotalMessages(int userID, int forumID, int subForumID)
+        public int subForumTotalMessages(int subForumID)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "}";
-            string res = httpReq(json, "POST", _url + "/subForumTotalMessages");
+            string json = "{\"subforumid\":" + subForumID + "}";
+            string res = httpReq(json, "POST", _url + "/subForumTotalMessages/");
             return parseStringToNum(res);
         }
 
@@ -56,30 +63,37 @@ namespace Client.CommunicationLayer
             throw new NotImplementedException();
         }
 
-        public List<Post> postsByMember(int adminID, int forumID, int userID)
+        public List<Post> postsByMember(int userID)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"adminid\":" + adminID + "}";
-            string res = httpReq(json, "POST", _url + "postsByMember");
+            string json = "{\"userid\":" + userID +"}";
+            string res = httpReq(json, "POST", _url + "/postsByMember/");
             return parseStringToPosts(res);
         }
 
-        public ModeratorReport moderatorReport(int userID, int forumID)
+        public ModeratorReport moderatorReport()
+        {
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/moderatorReport/");
+            return parseStringToModeratorReport(res);
+        }
+
+        private ModeratorReport parseStringToModeratorReport(string res)
         {
             throw new NotImplementedException();
         }
 
         //-----------Super User Reports---------------
-        public int totalForums(int userID)
+        public int totalForums()
         {
-            string json = "{\"userid\":" + userID + "}";
-            string res = httpReq(json, "POST", _url + "/totalForums");
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/totalForums/");
             return parseStringToNum(res);
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public List<User> membersInDifferentForums()
         {
-            string json = "{\"userid\":" + userID + "}";
-            string res = httpReq(json, "POST", _url + "/membersInDifferentForums");
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/membersInDifferentForums/");
             return parseStringToUsers(res);
         }
 

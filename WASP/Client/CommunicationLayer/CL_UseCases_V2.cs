@@ -10,44 +10,50 @@ namespace Client.CommunicationLayer
     public partial class CL : ICL
     {
         //---------------------------Version 2 Use Cases Start------------------------------------
-        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
-            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subForumID + "," + "\"forumid\":" + forumID
-                 + "," + "\"moderatorid\":" + moderatorID
+            string json = "{\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
-            string res = httpReq(json, "POST", _url + "/addModerator");
+            string res = httpReq(json, "POST", _url + "/addModerator/");
             return parseStringToModerator(res);
         }
 
-        public int confirmEmail(int userID, int forumID)
+        public int confirmEmail(int code)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "}";
-            string res = httpReq(json, "POST", _url + "/confirmEmail");
+            string json = "{\"code\":" + code  + "}";
+            string res = httpReq(json, "POST", _url + "/confirmEmail/");
             return 0;
         }
 
-        public int deletePost(int userID, int forumID, int postID)
+        public int deletePost(int postID)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"postid\":" + postID + "}";
-            string res = httpReq(json, "POST", _url + "deletePost");
+            string json = "{\"postid\":" + postID + "}";
+            string res = httpReq(json, "POST", _url + "/deletePost/");
             return 0;
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(string targetUserNameID, string message)
         {
-            string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"message\":\"" + message
+            string json = "{\"message\":\"" + message
                 + "\"," + "\"reciever\":\"" + targetUserNameID + "\"}";
-            string res = httpReq(json, "POST", _url + "/sendMessage");
+            string res = httpReq(json, "POST", _url + "/sendMessage/");
             return 0;
         }
 
-        public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
+        public int updateModeratorTerm(int moderatorID, int subforumID, DateTime term)
         {
-            string json = "{\"userid\":" + userID + "," + "\"subforumid\":" + subforumID + "," + "\"forumid\":" + forumID
-                 + "," + "\"moderatorid\":" + moderatorID
+            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
-            string res = httpReq(json, "POST", _url + "/updateModeratorTerm");
+            string res = httpReq(json, "POST", _url + "/updateModeratorTerm/");
             return 0;
+        }
+
+        DateTime ICL.getModeratorTermTime(int moderatorID, int subforumID)
+        {
+            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID
+                 + "\"}";
+            string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
+            return parseStringToDate(res);
         }
 
         //---------------------------Version 2 Use Cases Start------------------------------------
