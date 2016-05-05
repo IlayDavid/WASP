@@ -9,7 +9,7 @@ namespace Client.CommunicationLayer
 {
     public partial class TCL : ICL
     {
-        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
             Subforum sf = forums[forumID].subforums[subForumID];
             User admin = forums[forumID].members[userID];
@@ -19,22 +19,22 @@ namespace Client.CommunicationLayer
             return m;
         }
 
-        public int confirmEmail(int userID, int forumID)
+        public int confirmEmail(int code)
         {
             throw new NotImplementedException();
         }
 
-        public int deletePost(int userID, int forumID, int postID)
+        public int deletePost(int postID)
         {
             return posts.Remove(postID)? 1:-1;
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(string targetUserNameID, string message)
         {
             throw new NotImplementedException();
         }
 
-        public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
+        public int updateModeratorTerm(int subforumID, int moderatorID, DateTime term)
         {
             subforums[subforumID].moderators[moderatorID].term = term;
             return 1;

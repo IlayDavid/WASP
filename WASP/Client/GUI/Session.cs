@@ -30,12 +30,12 @@ namespace Client.GUI
 
         public static void LoadReplys()
         {
-            post.replies = bl.getReplys(0, 0, post.id);
+            post.replies = bl.getReplys(post.id);
         }
 
         internal static void LoadThreads()
         {
-            subForum.threads = bl.getThreads(forum.id, subForum.id, 0, 20);
+            subForum.threads = bl.getThreads(subForum.id);
         }
 
         internal static void LoadSubForums()
@@ -45,13 +45,13 @@ namespace Client.GUI
 
         public static void LoadModerators()
         {
-            subForum.moderators = bl.getModerators(0, subForum.id).ToDictionary(x => x.user.id);
+            subForum.moderators = bl.getModerators(subForum.id).ToDictionary(x => x.user.id);
         }
 
         public static void LoadMembers()
         {
             if (user != null)
-                forum.members = bl.getMembers(user.id, forum.id).ToDictionary(x => x.id);
+                forum.members = bl.getMembers(forum.id).ToDictionary(x => x.id);
         }
 
         public static void LoadAdmins()

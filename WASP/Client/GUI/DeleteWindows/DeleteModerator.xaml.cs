@@ -43,8 +43,7 @@ namespace Client.GUI.DeleteWindows
             int moderatorID = ((Moderator)selectedItem.DataContext).user.id;
             try
             {
-                int isDelete = Session.bl.deleteModerator(Session.user.id, Session.forum.id,
-                    moderatorID, Session.subForum.id);
+                int isDelete = Session.bl.deleteModerator(moderatorID, Session.subForum.id);
                 this.Close();
             }
             catch (Exception ee)

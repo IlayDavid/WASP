@@ -9,33 +9,33 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
-        public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
+        public Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
-            if (userID < 0 || forumID < 0 || moderatorID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            if ( moderatorID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
             DateTime now = DateTime.Now.Date;
             if (term.Date.CompareTo(now) <= 0) throw new Exception("ERROR: Term should be after " + now);
 
-            return _cl.addModerator(userID, forumID, moderatorID, subForumID, term);
+            return _cl.addModerator(moderatorID, subForumID, term);
         }
 
-        public int confirmEmail(int userID, int forumID, int code)
+        public int confirmEmail(int code)
         {
-            throw new NotImplementedException();
+            return _cl.confirmEmail(code);
         }
 
-        public int deletePost(int userID, int forumID, int postID)
+        public int deletePost(int postID)
         {
-            throw new NotImplementedException();
+            return _cl.deletePost(postID);
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(string targetUserNameID, string message)
         {
-            throw new NotImplementedException();
+            return _cl.sendMessage(targetUserNameID, message);
         }
 
-        public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
+        public int updateModeratorTerm(int subforumID, int moderatorID, DateTime term)
         {
-            throw new NotImplementedException();
+            return _cl.updateModeratorTerm(moderatorID, subforumID, term);
         }
     }
 }

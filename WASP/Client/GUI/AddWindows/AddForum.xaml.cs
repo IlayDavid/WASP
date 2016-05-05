@@ -39,7 +39,7 @@ namespace Client.GUI
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
                     Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
-                    _forum = Session.bl.createForum(Session.user.id, txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
+                    _forum = Session.bl.createForum(txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
                     txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
                 }
                 this.Close();

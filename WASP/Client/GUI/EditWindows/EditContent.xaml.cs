@@ -34,7 +34,7 @@ namespace Client.GUI.EditWindows
             try
             {
                 postContent = txtContent.Text;
-                Session.bl.editPost(Session.user.id, Session.forum.id, curPost.id, postContent);
+                Session.bl.editPost(curPost.id, postContent);
                 this.Close();
             }
             catch(Exception ee)

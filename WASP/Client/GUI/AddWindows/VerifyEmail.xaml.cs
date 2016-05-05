@@ -28,7 +28,7 @@ namespace Client.GUI.AddWindows
         {
             try
             {
-                Session.bl.confirmEmail(Session.user.id, Session.forum.id, int.Parse(txtCode.Text));
+                Session.bl.confirmEmail(int.Parse(txtCode.Text));
                 this.Close();
             }
             catch (Exception ee)

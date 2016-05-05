@@ -10,65 +10,64 @@ namespace Client.BusinessLogic
     public partial class BL : IBL
     {
         //---------------------------Version 3 Use Cases Start------------------------------------
-        public int editPost(int userID, int forumID, int postID, string content)
+        public int editPost(int postID, string content)
         {
-            if (userID < 0 || postID < 0) throw new Exception("ERROR: ID is illegal");
+            if (postID < 0) throw new Exception("ERROR: ID is illegal");
             if(!IsStrValid(content)) throw new Exception("ERROR: content is empty");
 
-            return _cl.editPost(userID, 0, postID, content);
+            return _cl.editPost(postID, content);
         }
 
-        public Admin addAdmin(int adminID, int forumID, int newAdminID)
+        public Admin addAdmin(int newAdminID)
         {
-            if (adminID < 0 || forumID < 0 || newAdminID < 0) throw new Exception("ERROR: ID is illegal");
+            if (newAdminID < 0) throw new Exception("ERROR: ID is illegal");
 
-            return _cl.addAdmin(adminID, forumID, newAdminID);
+            return _cl.addAdmin(newAdminID);
         }
 
-        public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
+        public int deleteModerator(int moderatorID, int subForumID)
         {
-            if (userID < 0 || forumID < 0 || subForumID < 0 || moderatorID < 0) throw new Exception("ERROR: ID is illegal");
+            if (subForumID < 0 || moderatorID < 0) throw new Exception("ERROR: ID is illegal");
 
-            return _cl.deleteModerator(userID, forumID, moderatorID, subForumID);
+            return _cl.deleteModerator(moderatorID, subForumID);
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public List<Message> getAllNotificationses()
         {
             throw new NotImplementedException();
         }
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public List<Message> getNewNotificationses()
         {
             throw new NotImplementedException();
         }
         //-----------Admin Reports---------------
-        public int subForumTotalMessages(int userID, int forumID, int subForumID)
+        public int subForumTotalMessages(int subForumID)
         {
-            if (userID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
-            return _cl.subForumTotalMessages(userID, forumID, subForumID);
+            if (subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            return _cl.subForumTotalMessages(subForumID);
         }
 
-        public List<Post> postsByMember(int adminID, int forumID, int userID)
+        public List<Post> postsByMember(int userID)
         {
-            if (adminID < 0 || forumID < 0 || userID < 0) throw new Exception("ERROR: ID is illegal");
+            if (userID < 0) throw new Exception("ERROR: ID is illegal");
 
-            return _cl.postsByMember(adminID, forumID, userID);
+            return _cl.postsByMember(userID);
         }
 
-        public ModeratorReport moderatorReport(int userID, int forumID)
+        public ModeratorReport moderatorReport()
         {
-            if (userID < 0 || forumID < 0) throw new Exception("ERROR: ID is illegal");
-            return _cl.moderatorReport(userID, forumID);
+            return _cl.moderatorReport();
         }
 
         //-----------Super User Reports---------------
-        public int totalForums(int userID)
+        public int totalForums()
         {
-            return _cl.totalForums(userID);
+            return _cl.totalForums();
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public List<User> membersInDifferentForums()
         {
-            return _cl.membersInDifferentForums(userID);
+            return _cl.membersInDifferentForums();
         }
         //---------------------------Version 3 Use Cases End------------------------------------
     }

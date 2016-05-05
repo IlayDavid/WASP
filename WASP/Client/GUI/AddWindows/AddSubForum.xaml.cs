@@ -45,8 +45,7 @@ namespace Client.GUI
             int moderatorID = ((User)selectedItem.DataContext).id;
             try
             {
-                sf = Session.bl.createSubForum(Session.user.id, Session.forum.id, txtName.Text,
-                    txtDescription.Text, moderatorID, calTerm.SelectedDate.Value);
+                sf = Session.bl.createSubForum(txtName.Text, txtDescription.Text, moderatorID, calTerm.SelectedDate.Value);
                 this.Close();
             }
             catch(Exception ee)

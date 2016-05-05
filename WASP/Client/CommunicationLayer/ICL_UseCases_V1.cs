@@ -29,15 +29,14 @@ namespace Client.CommunicationLayer
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
-         * Pre-conditions: superuser is loged-in 
+         * Pre-conditions: superuser (or Admin) is loged-in 
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
-
+        int defineForumPolicy(Policy policy);
         /*
          * Pre-conditions: none
          * Purpose: creates a Member in the forum, and return the Member.
@@ -47,26 +46,26 @@ namespace Client.CommunicationLayer
         User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
 
         /*
-         * Pre-conditions: member is loged-in 
+         * Pre-conditions: user is loged-in 
          * Purpose: create thread in forum.
          * Checking: forum policy on thread details.
          * Return: thread - on succsess, NULL - in fail.        
          */
-        Post createThread(int userID, int forumID, string title, string content, int subForumID);
+        Post createThread(string title, string content, int subForumID);
 
         /*
-        * Pre-conditions: member is loged-in, and replypost exist.
+        * Pre-conditions: user is loged-in, and replypost exist.
         * Purpose: create a post to reply on an existing post (identified by postId).
         * Return: post - on succsess, NULL - in fail.
         */
-        Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID);
+        Post createReplyPost(string content, int replyToPost_ID);
 
         /* 
-        * Pre-conditions: Member is loged-in and he is admin of the forum. 
+        * Pre-conditions: Admin is loged-in and he is admin of the forum. 
         * Purpose: create new subforum in the Member's forum
         * Return: subforum - on succsess, NULL - in fail.
         */
-        Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term);
+        Subforum createSubForum(string name, string description, int moderatorID, DateTime term);
         //---------------------------Version 1 Use Cases End------------------------------------
     }
 }

@@ -14,34 +14,34 @@ namespace Client.CommunicationLayer
          * Pre-conditions: Member is loged-in, second member is exists. 
          * Purpose: send a private message.
          */
-        int sendMessage(int userID, int forumID, string targetUserNameID, string message);
+        int sendMessage(string targetUserNameID, string message);
 
         /*
-         * Pre-conditions: Member is loged-in and is admin of the forum, moderator is member of the forum.
+         * Pre-conditions: Admin (or Moderator) is loged-in and is admin of the forum, moderator is member of the forum.
          * Purpose: appoint moderator to the subforum.
          * Return: number >= 0 if success.
          */
-        Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
+        Moderator addModerator(int moderatorID, int subForumID, DateTime term);
 
         /*
-        * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.
+        * Pre-conditions: Admin is loged-in, and is admin of the forum, moderator exist.
         * Purpose: Member updates moderator's term (new term=term)
         * Return: number > 0 if success
         */
-        int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term);
+        int updateModeratorTerm(int subforumID, int moderatorID, DateTime term);
 
         /*
         * Purpose: Confirms Member's email and adds him to the forum as an active member.
         * return: number>=0 if success
         */
-        int confirmEmail(int userID, int forumID);
+        int confirmEmail(int code);
 
         /*
-        * Pre-conditions: Member is loged-in, and own the post. (or manager, depend on policy)
+        * Pre-conditions: User (or Admin, Moderator) is loged-in, and own the post. (or manager, depend on policy)
         * Purpose: deletes the post
         * Return: number >= 0 id success
         */
-        int deletePost(int userID, int forumID, int postID);
+        int deletePost(int postID);
 
         //---------------------------Version 2 Use Cases End------------------------------------
 

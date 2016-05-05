@@ -79,6 +79,8 @@
                 </TextBox>
             </Grid>
         </GroupBox>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="517" Margin="0,218,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="0,0,3,0" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="16" Margin="253,0,0,0"/>
 
     </Grid>
 </Window>

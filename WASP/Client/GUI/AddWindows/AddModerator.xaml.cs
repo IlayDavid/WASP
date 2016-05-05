@@ -49,8 +49,7 @@ namespace Client.GUI.AddWindows
             int moderatorID = ((User)selectedItem.DataContext).id;
             try
             {
-                moderator = Session.bl.addModerator(Session.user.id, Session.forum.id, 
-                    moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
+                moderator = Session.bl.addModerator(moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
                 this.Close();
             }
             catch (Exception ee)

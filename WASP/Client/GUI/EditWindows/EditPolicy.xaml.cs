@@ -37,7 +37,7 @@ namespace Client.GUI.EditWindows
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
                     Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
-                    Session.bl.defineForumPolicy(Session.user.id, Session.forum.id, policy);
+                    Session.bl.defineForumPolicy(policy);
                 }
                 this.Close();
             }

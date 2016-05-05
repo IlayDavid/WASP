@@ -10,13 +10,13 @@ namespace Client.CommunicationLayer
     public partial class TCL : ICL
     {
         //---------------------------Version 3 Use Cases Start------------------------------------
-        public int editPost(int userID, int forumID, int postID, string content)
+        public int editPost(int postID, string content)
         {
             posts[postID].content = content;
             return 1;
         }
 
-        public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
+        public int deleteModerator(int moderatorID, int subForumID)
         {
             Dictionary<int, Moderator> mods = forums[forumID].subforums[subForumID].moderators;
             if (mods.Count > 1)
@@ -28,42 +28,42 @@ namespace Client.CommunicationLayer
                 throw new Exception("ERROR: Only one moderator left, can not removing him.");
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public List<Message> getAllNotificationses()
         {
             throw new NotImplementedException();
         }
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public List<Message> getNewNotificationses()
         {
             throw new NotImplementedException();
         }
-        public Admin addAdmin(int adminID, int forumID, int newAdminID)
+        public Admin addAdmin(int newAdminID)
         {
             forums[forumID].admins.Add(newAdminID, forums[forumID].members[newAdminID]);
             return null;
         }
         //-----------Admin Reports---------------
-        public int subForumTotalMessages(int userID, int forumID, int subForumID)
+        public int subForumTotalMessages()
         {
             return posts.Count(x => x.Value.containerID == subForumID);
         }
 
-        public List<Post> postsByMember(int adminID, int forumID, int userID)
+        public List<Post> postsByMember(int userID)
         {
             return posts.Values.SkipWhile(p => p.author.id != userID).ToList();
         }
 
-        public ModeratorReport moderatorReport(int userID, int forumID)
+        public ModeratorReport moderatorReport()
         {
             throw new NotImplementedException();
         }
 
         //-----------Super User Reports---------------
-        public int totalForums(int userID)
+        public int totalForums()
         {
             return forums.Count;
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public List<User> membersInDifferentForums()
         {
             throw new NotImplementedException();
         }

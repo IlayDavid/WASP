@@ -49,22 +49,20 @@ namespace Client.BusinessLogic
             return _cl.isInitialize();
         }
 
-        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             string validStr = isUserValid(adminName, adminUserName, adminID, email, pass);
             if (validStr != null) throw new Exception(validStr);
-            if (userID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(forumName)) throw new Exception("ERROR: Forum name is empty");
             if (!IsStrValid(description)) throw new Exception("ERROR: Forum description is empty");
 
-            return _cl.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
+            return _cl.createForum(forumName, description, adminID, adminUserName, adminName, email, pass, policy);
 
         }
 
-        public int defineForumPolicy(int userID, int forumID, Policy policy)
+        public int defineForumPolicy(Policy policy)
         {
-            //return _cl.defineForumPolicy(userID, forumID, policy);
-            return 1;
+            return _cl.defineForumPolicy(policy);
         }  
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
@@ -76,31 +74,31 @@ namespace Client.BusinessLogic
             return _cl.subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
-        public Post createThread(int userID, int forumID, string title, string content, int subForumID)
+        public Post createThread(string title, string content, int subForumID)
         {
-            if (userID < 0 || forumID < 0 || subForumID < 0) throw new Exception("ERROR: ID is illegal");
+            if (subForumID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(title)) throw new Exception("ERROR: Post title is empty");
             if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
 
-            return _cl.createThread(userID, forumID, title, content, subForumID);
+            return _cl.createThread(title, content, subForumID);
         }
 
-        public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
+        public Post createReplyPost(string content, int replyToPost_ID)
         {
-            if (userID < 0 || forumID < 0 || replyToPost_ID < 0) throw new Exception("ERROR: ID is illegal");
+            if (replyToPost_ID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
 
-            return _cl.createReplyPost(userID, forumID, content, replyToPost_ID);
+            return _cl.createReplyPost(content, replyToPost_ID);
         }
 
-        public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
+        public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
         {
-            if (userID < 0 || forumID < 0 || moderatorID < 0) throw new Exception("ERROR: ID is illegal");
+            if (moderatorID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(name)) throw new Exception("ERROR: name is empty or illegal");
             if (!IsStrValid(description)) throw new Exception("ERROR: description is empty or illegal");
             if (term.Date.CompareTo(DateTime.Now.Date) <= 0)throw new Exception("ERROR: Date should be after: "+ DateTime.Now.Date.ToShortDateString());
 
-            return _cl.createSubForum(userID, forumID, name, description, moderatorID, term);
+            return _cl.createSubForum(name, description, moderatorID, term);
         }
         //---------------------------Version 1 Use Cases End------------------------------------
     }

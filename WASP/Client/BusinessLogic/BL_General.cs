@@ -32,43 +32,39 @@ namespace Client.BusinessLogic
         }
 
         //---------------------------------Getters----------------------------------------------
-        public List<Post> getThreads(int forumID, int subForumID, int from, int amount)
+        public List<Post> getThreads(int subForumID)
         {
-
             if (subForumID < 0) throw new Exception("ERROR: id is illegal");
-            if (from < 0) throw new Exception("ERROR: illegal index");
-            if (amount < 0) throw new Exception("ERROR: illegal amount");
-            return _cl.getThreads(forumID, subForumID, from, amount);
+            return _cl.getThreads(subForumID);
         }
-        public List<Post> getReplys(int forumID, int subForumID, int postID)
+        public List<Post> getReplys(int postID)
         {
-            if (forumID < 0 || subForumID < 0 || postID < 0) throw new Exception("ERROR: id is illegal");
-            return _cl.getReplies(0, 0, postID);
+            if (postID < 0) throw new Exception("ERROR: id is illegal");
+            return _cl.getReplys(postID);
         }
 
-        public Post getThread(int forumID, int threadId)
+        public Post getThread(int threadId)
         {
             throw new NotImplementedException();
         }
 
-        public Forum getForum( int forumID)
+        public Forum getForum(int forumID)
         {
             throw new NotImplementedException();
         }
 
-        public Subforum getSubforum(int forumID, int subforumId)
+        public Subforum getSubforum(int subforumId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Moderator> getModerators(int forumID, int subForumID)
+        public List<Moderator> getModerators(int subForumID)
         {
-            if (forumID < 0 || subForumID < 0 ) throw new Exception("ERROR: id is illegal");
-
-            return _cl.getModerators(forumID, subForumID);
+            if (subForumID < 0 ) throw new Exception("ERROR: id is illegal");
+            return _cl.getModerators(subForumID);
         }
 
-        public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
+        public DateTime getModeratorTermTime(int moderatorID, int subforumID)
         {
             throw new NotImplementedException();
         }
@@ -78,18 +74,18 @@ namespace Client.BusinessLogic
             return _cl.getAllForums();
         }
 
-        public List<Admin> getAdmins(int userID, int forumID)
+        public List<Admin> getAdmins(int forumID)
         {
-            if (userID >= 0 && forumID >= 0)
-                return _cl.getAdmins(userID, forumID);
+            if (forumID >= 0)
+                return _cl.getAdmins(forumID);
             else
                 throw new Exception("ERROR: id is negative.");
         }
 
-        public List<User> getMembers(int userID, int forumID)
+        public List<User> getMembers(int forumID)
         {
-            if (userID < 0 || forumID < 0) throw new Exception("ERROR: id is illegal");
-            return _cl.getMembers(userID, forumID);
+            if (forumID < 0) throw new Exception("ERROR: id is illegal");
+            return _cl.getMembers(forumID);
         }
 
         public List<Subforum> getSubforums(int forumID)
@@ -100,7 +96,7 @@ namespace Client.BusinessLogic
                 throw new Exception("ERROR: illegal id");
         }
 
-        public Admin getAdmin(int userID, int forumID, int adminID)
+        public Admin getAdmin(int adminID)
         {
             throw new NotImplementedException();
         }

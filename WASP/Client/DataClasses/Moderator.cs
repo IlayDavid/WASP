@@ -7,8 +7,10 @@ namespace Client.DataClasses
 
         public User user;
         public DateTime term;
+        public DateTime appointDate;
         public User appointBy;
-        
+        public int subForumID;
+
         public Moderator() { }
         public Moderator(User user, DateTime term, User admin)
         {

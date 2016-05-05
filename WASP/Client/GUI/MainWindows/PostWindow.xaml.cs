@@ -121,7 +121,7 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post p = (Post)selected.DataContext;
-                int isSuc = Session.bl.deletePost(Session.user.id, Session.forum.id, p.id);
+                int isSuc = Session.bl.deletePost(p.id);
                 if (isSuc > 0)
                     postMesssages.Items.Remove(selected);
             }
@@ -197,7 +197,7 @@ namespace Client
                 if (selected.Items.Count <= 3)
                 {
                     Post post = (Post)selected.DataContext;
-                    List<Post> replys = Session.bl.getReplys(0, 0, post.id);
+                    List<Post> replys = Session.bl.getReplys(post.id);
 
                     foreach (Post p in replys)
                     {

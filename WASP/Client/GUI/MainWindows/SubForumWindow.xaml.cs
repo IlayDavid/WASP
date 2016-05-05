@@ -22,7 +22,7 @@ namespace Client
             setVisibility();
             LoadData();
             //presenting the subforums list 
-            List<Post> posts = Session.bl.getThreads(Session.forum.id, Session.subForum.id, 0, 20);
+            List<Post> posts = Session.bl.getThreads(Session.subForum.id);
             foreach (Post p in Session.subForum.threads)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -166,7 +166,7 @@ namespace Client
             {
                 Window moderatorView = new Window();
                 DataGrid dg = new DataGrid();
-                List<Moderator> mods = Session.bl.getModerators(Session.forum.id, Session.subForum.id);
+                List<Moderator> mods = Session.bl.getModerators(Session.subForum.id);
                 dg.ItemsSource = ModeratorView.getView(mods);
                 dg.IsReadOnly = true;
                 moderatorView.Content = dg;
@@ -202,7 +202,7 @@ namespace Client
 
         private void btnRepots_Click(object sender, RoutedEventArgs e)
         {
-            int num = Session.bl.subForumTotalMessages(Session.user.id, 0, Session.subForum.id);
+            int num = Session.bl.subForumTotalMessages(Session.subForum.id);
             MessageBox.Show("Total number of posts in Sub Forum \"" + Session.subForum.name + "\" is: " + num);
         }
     }

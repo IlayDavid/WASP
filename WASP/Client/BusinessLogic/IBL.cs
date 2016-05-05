@@ -11,7 +11,7 @@ namespace Client.BusinessLogic
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
 
-        /*ef
+        /*
         * Pre-conditions: none.
         * Purpose: initialize the system and logs the superuser in
         * Return: super user details.
@@ -29,14 +29,14 @@ namespace Client.BusinessLogic
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
+        Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
-         * Pre-conditions: superuser is loged-in 
+         * Pre-conditions: superuser (or Admin) is loged-in 
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID, Policy policy);  
+        int defineForumPolicy(Policy policy);  
         /*
          * Pre-conditions: none
          * Purpose: creates a Member in the forum, and return the Member.
@@ -46,26 +46,26 @@ namespace Client.BusinessLogic
         User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
 
         /*
-         * Pre-conditions: member is loged-in 
+         * Pre-conditions: user is loged-in 
          * Purpose: create thread in forum.
          * Checking: forum policy on thread details.
          * Return: thread - on succsess, NULL - in fail.        
          */
-        Post createThread(int userID, int forumID, string title, string content, int subForumID);
+        Post createThread(string title, string content, int subForumID);
 
         /*
-        * Pre-conditions: member is loged-in, and replypost exist.
+        * Pre-conditions: user is loged-in, and replypost exist.
         * Purpose: create a post to reply on an existing post (identified by postId).
         * Return: post - on succsess, NULL - in fail.
         */
-        Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID);
+        Post createReplyPost(string content, int replyToPost_ID);
 
         /* 
-        * Pre-conditions: Member is loged-in and he is admin of the forum. 
+        * Pre-conditions: Admin is loged-in and he is admin of the forum. 
         * Purpose: create new subforum in the Member's forum
         * Return: subforum - on succsess, NULL - in fail.
         */
-        Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term);
+        Subforum createSubForum(string name, string description, int moderatorID, DateTime term);
         //---------------------------Version 1 Use Cases End------------------------------------
 
         //---------------------------Version 2 Use Cases Start------------------------------------
@@ -73,34 +73,34 @@ namespace Client.BusinessLogic
          * Pre-conditions: Member is loged-in, second member is exists. 
          * Purpose: send a private message.
          */
-        int sendMessage(int userID, int forumID, string targetUserNameID, string message);
+        int sendMessage(string targetUserNameID, string message);
 
         /*
-         * Pre-conditions: Member is loged-in and is admin of the forum, moderator is member of the forum.
+         * Pre-conditions: Admin (or Moderator) is loged-in and is admin of the forum, moderator is member of the forum.
          * Purpose: appoint moderator to the subforum.
          * Return: number >= 0 if success.
          */
-        Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term);
+        Moderator addModerator(int moderatorID, int subForumID, DateTime term);
 
         /*
-        * Pre-conditions: Member is loged-in, and is admin of the forum, moderator exist.
+        * Pre-conditions: Admin is loged-in, and is admin of the forum, moderator exist.
         * Purpose: Member updates moderator's term (new term=term)
         * Return: number > 0 if success
         */
-        int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term);
+        int updateModeratorTerm(int subforumID, int moderatorID, DateTime term);
 
         /*
         * Purpose: Confirms Member's email and adds him to the forum as an active member.
         * return: number>=0 if success
         */
-        int confirmEmail(int userID, int forumID, int code);
+        int confirmEmail(int code);
 
         /*
-        * Pre-conditions: Member is loged-in, and own the post. (or manager, depend on policy)
+        * Pre-conditions: User (or Admin, Moderator) is loged-in, and own the post. (or manager, depend on policy)
         * Purpose: deletes the post
         * Return: number >= 0 id success
         */
-        int deletePost(int userID, int forumID, int postID);
+        int deletePost(int postID);
 
         //---------------------------Version 2 Use Cases End------------------------------------
 
@@ -110,49 +110,53 @@ namespace Client.BusinessLogic
         //---------------------------Version 3 Use Cases Start------------------------------------
 
         /* 
-        * Pre-conditions: Member is loged-in, and own the post.  
+        * Pre-conditions: User is loged-in, and own the post.  
         * Purpose: edit post (by id) written by member with id userID 
         * Return: number >= 0 id success        
         */
-        int editPost(int userID, int forumID, int postID, string content);
+        int editPost(int postID, string content);
 
         /*  
-        * Pre-conditions: Member is loged-in, and is admin of the forum.
+        * Pre-conditions: Admin is loged-in, and appoint the moderator.
         * Purpose: delete moderator from subforum, 
         * Return: number >= 0 if success        
         */
-        int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
+        int deleteModerator(int moderatorID, int subForumID);
 
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
-        List<Message> getAllNotificationses(int userID, int forumID);
-        List<Message> getNewNotificationses(int userID, int forumID);
-        Admin addAdmin(int adminID, int forumID, int newAdminID);
+        List<Message> getAllNotificationses();
+        List<Message> getNewNotificationses();
+        /*  
+        * Pre-conditions: super user (or Admin) is loged-in.
+        * Purpose: add admin to forum.
+        * Return: number >= 0 if success        
+        */
+        Admin addAdmin(int newAdminID);
         //-----------Admin Reports---------------
-        /* Pre-conditions: Member is loged-in, and is admin of the forum
+        /* Pre-conditions: Admin is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
-        int subForumTotalMessages(int userID, int forumID, int subForumID);
+        int subForumTotalMessages(int subForumID);
 
-        /* Pre-conditions: Member is loged-in, and is admin of the forum
+        /* Pre-conditions: Admin is loged-in, and is admin of the forum
          * Purpose: return the total messages written by member. */
-        List<Post> postsByMember(int adminID, int forumID, int userID);
+        List<Post> postsByMember(int userID);
 
-        /* Pre-conditions: Member is loged-in, and is admin of the forum
+        /* Pre-conditions: Admin is loged-in, and is admin of the forum
          * Purpose: return details about moderators in all subforums,
          *          for each moderator who appoint him, when, 
          *          which subforum he belongs to, and what the messages they posted. */
-        ModeratorReport moderatorReport(int userID, int forumID);
+        ModeratorReport moderatorReport();
 
         //-----------Super User Reports---------------
-        /* Pre-conditions: Member is loged-in, and is superuser.
+        /* Pre-conditions: Super User is loged-in, and is superuser.
          * Purpose: return number of the forums in the system.*/
-        int totalForums(int userID);
+        int totalForums();
 
-        /* Pre-conditions: Member is loged-in, and is superuser.
+        /* Pre-conditions: Super User is loged-in, and is superuser.
          * Purpose: return members that subscribe to more than one forum.*/
-        List<User> membersInDifferentForums(int userID);
+        List<User> membersInDifferentForums();
 
         //---------------------------Version 3 Use Cases End------------------------------------
-
 
 
 
@@ -176,43 +180,45 @@ namespace Client.BusinessLogic
          * Purpose: returns a thread by id, if doesnt exist returns NULL
          * post condition: result is an opening post
          */
-        Post getThread(int forumID, int threadId);
+        Post getThread(int threadId);
 
         /*
         * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
         */
-        List<Post> getThreads(int forumID, int subForumID, int from, int amount);
+        List<Post> getThreads(int subForumID);
 
         /*
         * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
         */
-        List<Post> getReplys(int forumID, int subForumID, int postID);
+        List<Post> getReplys(int postID);
 
         /* Purpose: returns a forum with forumId, if doesnt exist returns NULL */
         Forum getForum(int forumID);
 
         /* Purpose: returns a subforum with forumId, if doesnt exist returns NULL */
-        Subforum getSubforum(int forumID, int subforumId);
+        Subforum getSubforum(int subforumId);
 
         /* Purpose: returns modrators of subforum. */
-        List<Moderator> getModerators(int forumID, int subForumID);
+        List<Moderator> getModerators(int subForumID);
 
-        /* Purpose: return the date of moderator's term time. */
-        DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID);
+        /*
+        * Pre-conditions: 
+        * Purpose: return the date of moderator's term time. */
+        DateTime getModeratorTermTime(int moderatorID, int subforumID);
 
         /* Purpose: return information about all the existing forums. */
         List<Forum> getAllForums();
 
         /* Purpose: return forum's admins information. */
-        List<Admin> getAdmins(int userID, int forumID);
+        List<Admin> getAdmins(int forumID);
 
         /* Purpose: return forum's members information. */
-        List<User> getMembers(int userID, int forumID);
+        List<User> getMembers(int forumID);
 
         /* Purpose: return forum's subForums information. */
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int userID, int forumID, int AdminID);  
+        Admin getAdmin(int AdminID); 
     }
 }

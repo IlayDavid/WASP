@@ -142,7 +142,7 @@ namespace Client.GUI
         {
             try
             {
-                int totalf = Session.bl.totalForums(Session.user.id);
+                int totalf = Session.bl.totalForums();
 
 
                 Window reportView = new Window();
@@ -155,7 +155,7 @@ namespace Client.GUI
                 //List<UserView> l = new List<UserView>();
                 //l.Add(new UserView() { ID = 12345, Email="a", Name="b", UserName="c"});
                 //dg.ItemsSource = l;
-                dg.ItemsSource = UserView.getView(Session.bl.membersInDifferentForums(Session.user.id));
+                dg.ItemsSource = UserView.getView(Session.bl.membersInDifferentForums());
                 dg.IsReadOnly = true;
                 stackPanel.Children.Add(dg);
                 reportView.Content = stackPanel;

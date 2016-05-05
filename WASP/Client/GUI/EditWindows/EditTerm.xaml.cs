@@ -43,8 +43,7 @@ namespace Client.GUI.EditWindows
             int moderatorID = ((Moderator)selectedItem.DataContext).user.id;
             try
             {
-                int isChange = Session.bl.updateModeratorTerm(Session.user.id, Session.forum.id,
-                    moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
+                int isChange = Session.bl.updateModeratorTerm(Session.subForum.id, moderatorID, calTerm.SelectedDate.Value);
                 this.Close();
             }
             catch (Exception ee)

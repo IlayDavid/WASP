@@ -22,18 +22,18 @@ namespace Client.CommunicationLayer
             return _isInitialize ? 1 : 0;
         }
 
-        public Forum createForum(int userID, string forumName, string description, int adminId, string adminUserName, string adminName, string email, string pass, Policy policy)
+        public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             if (userID != _su.id)
                 throw new Exception("User with id - "+userID+" cannot add forum");
-            User admin = new User(adminId, adminName, adminUserName, email, pass);
+            User admin = new User(adminID, adminName, adminUserName, email, pass);
             Forum forum = new Forum(forumName, description, admin, policy);
             forums.Add(forum.id, forum);
             forum.members.Add(_su.id, (User) _su );
             return forum;
         }
 
-        public int defineForumPolicy(int userID, int forumID)
+        public int defineForumPolicy(Policy policy)
         {
             throw new NotImplementedException();
         }  //------------------------ policy object??
@@ -45,7 +45,7 @@ namespace Client.CommunicationLayer
             return newUser;
         }
 
-        public Post createThread(int userID, int forumID, string title, string content, int subForumID)
+        public Post createThread(string title, string content, int subForumID)
         {
             Post newPost = new Post(title, content, forums[forumID].members[userID], subForumID, null);
             forums[forumID].subforums[subForumID].threads.Add(newPost);
@@ -54,7 +54,7 @@ namespace Client.CommunicationLayer
             return newPost;
         }
 
-        public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
+        public Post createReplyPost(string content, int replyToPost_ID)
         {
             Post inReply = posts[replyToPost_ID];
             Post newPost = new Post("", content, forums[forumID].members[userID], inReply.containerID, inReply);
@@ -64,7 +64,7 @@ namespace Client.CommunicationLayer
             return newPost;
         }
 
-        public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
+        public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
         {
             User user = forums[forumID].members[moderatorID];
             User admin = null;
