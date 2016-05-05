@@ -8,17 +8,15 @@ namespace WASP.DataClasses
 {
     public class Moderator
     {
-        private User me;
+        private User user;
         private DateTime termExpiration;
         private Subforum subForum;
         private Admin appointer;
-        private int id;
-        private DAL dal;
+        private DAL2 dal;
 
-        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DAL dal)
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DAL2 dal)
         {
-            this.id = user.Id;
-            this.me = user;
+            this.user = user;
             this.termExpiration = termExpiration;
             this.subForum = sf;
             this.appointer = appointer;
@@ -29,23 +27,23 @@ namespace WASP.DataClasses
         {
             get
             {
-                return id;
+                return User.Id;
             }
             set
             {
-                id = value;
+                User.Id = value;
             }
         }
 
-        public User user
+        public User User
         {
             get
             {
-                return me;
+                return user;
             }
             set
             {
-                me = value;
+                user = value;
             }
         }
 

@@ -8,23 +8,19 @@ namespace WASP.DataClasses
 {
     public class Admin
     {
-        private DAL myDal;
+        private DAL2 dal;
         private User user;
-        private Dictionary<int, Moderator> appointedMods;
+        private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
-        private int id;
 
-        public Admin(User user, Forum myForum,DAL myDal)
+        public Admin(User user, Forum myForum, DAL2 dal)
         {
             this.user = user;
             this.myForum = myForum;
-            this.appointedMods = new Dictionary<int, Moderator>();
-            this.myDal = myDal;
-            this.id = user.Id;
+            this.dal = dal;
         }
 
-
-        public User InnerUser
+        public User User
         {
             get
             {
@@ -40,9 +36,9 @@ namespace WASP.DataClasses
         {
             get
             {
-                return id;
+                return User.Id;
             }
-         
+
         }
 
 
@@ -60,7 +56,21 @@ namespace WASP.DataClasses
 
         }
 
-
+        private Dictionary<int, Moderator> AppointedMods
+        {
+            get
+            {
+                if(appointedMods == null)
+                {
+                    appointedMods = new Dictionary<int, Moderator>();
+                    foreach (Moderator mod in dal.GetAdminAppointedMods(Id))
+                    {
+                        appointedMods.Add(mod.Id, mod);
+                    }
+                }
+                return appointedMods;
+            }
+        }
         public Moderator[] GetAllAppointedMods()
         {
             Moderator[] modArr = new Moderator[appointedMods.Values.Count];

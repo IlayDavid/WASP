@@ -12,54 +12,10 @@ namespace WASP.DataClasses
         public String Password { get; set; }
         public int Id { get; set; }
         private Forum forum;
-        private Dictionary<int, Post> posts;
-        public Dictionary<int, Post> Posts
-        {
-            get
-            {
-                if(this.posts == null)
-                {
-                    posts = new Dictionary<int, Post>();
-                    foreach(Post post in dal.GetUserPosts(Id))
-                    {
-                        posts.Add(post.Id, post);
-                    }
-                }
-                return posts;
-            }
-        }
+        private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
-        public Dictionary<int, Notification> Notifications
-        {
-            get
-            {
-                if(notifications == null)
-                {
-                    notifications = new Dictionary<int, Notification>();
-                    foreach(Notification notif in dal.GetUserNotifications(Id))
-                    {
-                        notifications.Add(notif.Id, notif);
-                    }
-                }
-                return notifications;
-            }
-        }
-        public Dictionary<int, Notification> NewNotifications
-        {
-            get
-            {
-                if (newNotifications == null)
-                {
-                    newNotifications = new Dictionary<int, Notification>();
-                    foreach (Notification notif in dal.GetUserNewNotifications(Id))
-                    {
-                        newNotifications.Add(notif.Id, notif);
-                    }
-                }
-                return newNotifications;
-            }
-        }
+        
         private DAL2 dal;
 
 
@@ -75,27 +31,71 @@ namespace WASP.DataClasses
             this.forum = forum;
             this.dal = dal;
         }
-
+        private Dictionary<int, Notification> Notifications
+        {
+            get
+            {
+                if (notifications == null)
+                {
+                    notifications = new Dictionary<int, Notification>();
+                    foreach (Notification notif in dal.GetUserNotifications(Id))
+                    {
+                        notifications.Add(notif.Id, notif);
+                    }
+                }
+                return notifications;
+            }
+        }
+        private Dictionary<int, Notification> NewNotifications
+        {
+            get
+            {
+                if (newNotifications == null)
+                {
+                    newNotifications = new Dictionary<int, Notification>();
+                    foreach (Notification notif in dal.GetUserNewNotifications(Id))
+                    {
+                        newNotifications.Add(notif.Id, notif);
+                    }
+                }
+                return newNotifications;
+            }
+        }
+        private Dictionary<int, Post> Posts
+        {
+            get
+            {
+                if (this.posts == null)
+                {
+                    posts = new Dictionary<int, Post>();
+                    foreach (Post post in dal.GetUserPosts(Id))
+                    {
+                        posts.Add(post.Id, post);
+                    }
+                }
+                return posts;
+            }
+        }
         public Post[] GetAllPosts()
         {
-            Post[] postArr = new Post[posts.Values.Count];
-            posts.Values.CopyTo(postArr, 0);
+            Post[] postArr = new Post[Posts.Values.Count];
+            Posts.Values.CopyTo(postArr, 0);
             return postArr;
         }
 
         public Post GetPost(int post_ID)
         {
             Post thePost;
-            posts.TryGetValue(post_ID, out thePost);
+            Posts.TryGetValue(post_ID, out thePost);
             return thePost;
         }
         public void RemovePost(int post_ID)
         {
-            posts.Remove(post_ID);
+            Posts.Remove(post_ID);
         }
         public void AddPost(Post post)
         {
-            posts.Add(post.Id, post);
+            Posts.Add(post.Id, post);
         }
 
         public void NewNotification(Notification newNotification)
@@ -106,12 +106,17 @@ namespace WASP.DataClasses
 
         public Notification[] GetAllNotifications()
         {
-            return this.notifications.ToArray();
+            Notification[] notifs = new Notification[Notifications.Values.Count];
+            Notifications.Values.CopyTo(notifs, 0);
+            return notifs;
         }
 
         public Notification[] GetNewNotifications()
         {
-            return this.newNotifications.ToArray();
+
+            Notification[] notifs = new Notification[NewNotifications.Values.Count];
+            NewNotifications.Values.CopyTo(notifs, 0);
+            return notifs;
         }
     }
 }

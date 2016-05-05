@@ -27,8 +27,6 @@ namespace WASP.DataClasses
             this.dal = dal;
         }
 
-
-
         public int Id
         {
             get
@@ -165,6 +163,8 @@ namespace WASP.DataClasses
         }
         public void Delete()
         {
+
+            //TODO:
             string notificationMessage = String.Format("Post {0} deleted.", Id);
             //NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
             Post[] replies = GetAllReplies();
@@ -178,6 +178,7 @@ namespace WASP.DataClasses
 
         public void NotifyRepliers(Notification notification)
         {
+            //TODO:
             foreach (Post reply in GetAllReplies())
             {
                 User target = reply.GetAuthor;
