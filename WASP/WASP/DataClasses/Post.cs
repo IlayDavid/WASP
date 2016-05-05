@@ -9,12 +9,12 @@ namespace WASP.DataClasses
         private User author;
         private DateTime publishedAt, editAt;
         private int id;
-        private Subforum container;
+        private Subforum subforum;
         private Post inReplyTo;
         private Dictionary<int, Post> replies= new Dictionary<int, Post>();
         private DAL dal;
 
-        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt, DAL myDal)
         {
             this.id = id;
             this.title = title;
@@ -22,7 +22,7 @@ namespace WASP.DataClasses
             this.publishedAt = now;
             this.inReplyTo = inReplyTo;
             this.author = author;
-            this.container = container;
+            this.subforum = subforum;
             this.editAt = editAt;
             this.dal = myDal;
         }
@@ -89,15 +89,15 @@ namespace WASP.DataClasses
             }
 
         }
-        public Subforum Container
+        public Subforum Subforum
         {
             get
             {
-                return container;
+                return subforum;
             }
             set
             {
-                container = value;
+                subforum = value;
             }
         }
 

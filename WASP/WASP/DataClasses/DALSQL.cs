@@ -264,12 +264,17 @@ namespace WASP.DataClasses
             _user.password = user.Password;
             _user.email = user.Email;
             _user.forumId = user.forum.Id;
-
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
             return user;
         }
-
+        public void submituser(Forum forum, User user)
+        {
+            IUser old_user = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.forum.Id));
+            IForum newForum = db.IForums.FirstOrDefault(x => (x.id == forum.Id));
+            newForum.IUsers.Add(old_user);
+            db.SubmitChanges();
+        }
         public Admin CreateAdmin(Admin admin)
         {
             IUser old_user = old_user = db.IUsers.FirstOrDefault(x => (x.id == admin.Id && x.forumId == admin.Forum.Id));
@@ -362,7 +367,16 @@ namespace WASP.DataClasses
             List<User> users = new List<User>();
             foreach (IUser iuser in db.IUsers)
                 if ((forum == null || iuser.forumId == forum.Id) && (userIds == null || userIds.Contains(iuser.id)))
-                    users.Add(GetUser(iuser.id, iuser.forumId));
+                {
+                    if (forum == null)
+                    {
+                        users.Add(GetUser(iuser.id, iuser.forumId));
+                    }
+                    else
+                    {
+                        users.Add(GetUser(iuser.id, forum));
+                    }
+                }
             return users.ToArray();
         }
         public Moderator[] GetModerators(int[] moderatorIds, Subforum subforum)
@@ -529,15 +543,23 @@ namespace WASP.DataClasses
             if (iforum != null)
             {
                 Forum forum = new Forum(iforum.id, iforum.subject, iforum.description, null, this);
-
+                List<int> ints = new List<int>();
+                foreach (var iuser in iforum.IUsers)
+                {
+                    ints.Add(iuser.id);
+                }
+                foreach(var user in  GetUseres(ints.ToArray(), forum))
+                {
+                    forum.AddMember(user);
+                }
                 //need change
                 foreach (Admin admin in GetAdminsOfForum(forum))
                     forum.AddAdmin(admin);
 
-                foreach(Admin admin in forum.GetAdmins())
+                /*foreach(Admin admin in forum.GetAdmins())
                 {
                     forum.AddMember(admin.InnerUser);
-                }
+                }*/
                 //need change
 
                 foreach (Subforum sf in GetSubForumsOfForum(forum))

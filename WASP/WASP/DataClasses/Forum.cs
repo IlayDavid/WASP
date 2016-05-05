@@ -170,6 +170,7 @@ namespace WASP.DataClasses
         public void AddMember(User member)
         {
             members.Add(member.Id,member);
+            
         }
         internal void AddSubForum(Subforum subforum)
         {

@@ -79,7 +79,7 @@ namespace WASP.Domain
             user = dal.CreateUser(user);
             // If user doesn't follow forum policy will throw exception.
             forum.AddMember(user);
-
+            dal.submituser(forum, user);
             // Will throw exception if unable to create user.
             return user;
         }

@@ -34,13 +34,14 @@ namespace WASP.TestSuits
         {
             // arrange
             Forum forum = BL.createForum(-1, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234");
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(2055, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             // act
             Forum recivedForum = BL.getForum(forum.Id);
             bool isAdmin = recivedForum.IsAdmin(100);
-            bool isMemeber = recivedForum.IsMember(user.Id);
-            
+            bool isMemeber = recivedForum.IsMember(2055);
+
             // assert
+            Assert.IsNotNull(user);
             Assert.AreEqual(recivedForum.Id, forum.Id, "check if forum created");
             Assert.AreEqual(true, isAdmin, "check if forum created and there's an admin");
             Assert.AreEqual(true, isMemeber, "checks if forum has a member");

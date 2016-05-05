@@ -28,6 +28,7 @@ namespace WASP.DataClasses
         Subforum GetSubForum(int sfId);
         //user.id == -1
         User CreateUser(User user);
+        void submituser(Forum forum, User user);
         //user.id >-1
         User updateUser(User user);
         //userIds == null -> get all users. else get all users in the forum
