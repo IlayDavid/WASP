@@ -46,7 +46,8 @@ namespace WASP.DataClasses
         //userIds == null -> get all users. else get all users in the forum
         User[] GetUsers(int[] userIds, int forumId);
         User GetUser(int id, int forumId);
-        Forum GetUserForum(int id, int forumId);
+       
+        
         Post GetUserPosts(int userID);
         Notification[] GetUserNewNotifications(int userID);
         Notification[] GetUserNotification(int userID);

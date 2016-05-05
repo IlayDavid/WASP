@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\DAL.cs" />
+    <Compile Include="DataClasses\DAL2.cs" />
     <Compile Include="DataClasses\DALSQL.cs" />
     <Compile Include="DataClasses\DAL_EXCEPTIONS\ExistException.cs" />
     <Compile Include="DataClasses\DAL_EXCEPTIONS\GetException.cs" />

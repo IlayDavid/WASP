@@ -11,10 +11,10 @@ namespace WASP.DataClasses
         private int id;
         private Subforum subforum;
         private Post inReplyTo;
-        private Dictionary<int, Post> replies= new Dictionary<int, Post>();
-        private DAL dal;
+        private Dictionary<int, Post> replies = null;
+        private DAL2 dal;
 
-        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt, DAL myDal)
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt, DAL2 dal)
         {
             this.id = id;
             this.title = title;
@@ -24,7 +24,7 @@ namespace WASP.DataClasses
             this.author = author;
             this.subforum = subforum;
             this.editAt = editAt;
-            this.dal = myDal;
+            this.dal = dal;
         }
 
 
@@ -40,7 +40,7 @@ namespace WASP.DataClasses
                 id = value;
             }
         }
-        public String Title
+        public string Title
         {
             get
             {
@@ -85,6 +85,9 @@ namespace WASP.DataClasses
         {
             get
             {
+                if (author == null)
+                    author = dal.GetPostAuthor(id);
+
                 return author;
             }
 
@@ -93,6 +96,8 @@ namespace WASP.DataClasses
         {
             get
             {
+                if (subforum == null)
+                    subforum = dal.GetPostSubforum(Id);
                 return subforum;
             }
             set
@@ -105,7 +110,10 @@ namespace WASP.DataClasses
         {
             get
             {
-                return inReplyTo;
+                if (this.InReplyTo == null)
+                    InReplyTo = dal.GetInReplyTo(this.id);
+
+                return InReplyTo;
             }
             set
             {
@@ -118,22 +126,41 @@ namespace WASP.DataClasses
         }
         public void RemoveReply(int id)
         {
-            replies.Remove(id);
+            Replies.Remove(id);
         }
         public void AddReply(Post reply)
         {
-            replies.Add(reply.Id, reply);
+            Replies.Add(reply.Id, reply);
         }
+        
+        private Dictionary<int, Post> Replies
+        {
+            get
+            {
+                if (replies == null)
+                {
+                    replies = new Dictionary<int, Post>();
+                    foreach (Post reply in dal.GetReplies(this.id))
+                    {
+                        this.replies.Add(reply.id, reply);
+                    }
+                }
+
+                return replies;
+            }
+        }
+
         public Post[] GetAllReplies()
         {
-            Post[] replyArr = new Post[replies.Values.Count];
-            replies.Values.CopyTo(replyArr, 0);
+            
+            Post[] replyArr = new Post[Replies.Values.Count];
+            Replies.Values.CopyTo(replyArr, 0);
             return replyArr;
         }
         public Post GetReply(int id)
         {
             Post reply;
-            replies.TryGetValue(id, out reply);
+            Replies.TryGetValue(id, out reply);
             return reply;
         }
         public void Delete()
@@ -162,7 +189,7 @@ namespace WASP.DataClasses
         public int NumOfReplies()
         {
             int count = 0;
-            foreach(Post reply in this.GetAllReplies())
+            foreach (Post reply in this.GetAllReplies())
             {
                 count += 1 + reply.NumOfReplies();
             }
