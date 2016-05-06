@@ -1011,5 +1011,42 @@ namespace WASP.DataClasses
             return admins.ToArray();
         }
 
+        private class UserCompId : IComparer<User>
+        {
+            public int Compare(User x, User y)
+            {
+                if (x.Id > y.Id)
+                    return 1;
+                else return -1;
+            }
+        }
+
+        public User[] GetUsersInDiffForums()
+        {
+            List<User> users = new List<User>();
+            List<User> deleteUsers = new List<User>();
+            if (db.IUsers.Count() == 0 || users.Count() == 1) return users.ToArray();
+
+            foreach (IUser iuser in db.IUsers)
+                users.Add(GetUser(iuser.id, iuser.forumId));
+
+
+
+            IComparer<User> comp = new UserCompId();
+            users.Sort(comp);
+
+
+            for (int i = 1; i < users.Count(); i++)
+                if (!(users.ElementAt(i).Id == users.ElementAt(i - 1).Id || (users.Count() - 1 >= i + 1 && users.ElementAt(i).Id == users.ElementAt(i + 1).Id)))
+                    deleteUsers.Add(users.ElementAt(i));
+            if (users.ElementAt(0).Id != users.ElementAt(1).Id)
+                deleteUsers.Add(users.ElementAt(0));
+
+            foreach (User user in deleteUsers)
+                users.Remove(user);
+            return users.ToArray();
+
+        }
+
     }
 }

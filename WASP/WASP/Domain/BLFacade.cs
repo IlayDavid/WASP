@@ -46,14 +46,15 @@ namespace WASP.Domain
 
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass)
         {
-            SuperUser su = dal.GetSuperUser(userID);
+            SuperUser su = SuperUser.Get(userID);
+            
             // create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, null);
             newForum = dal.CreateForum(newForum);
 
-            User user = new User(adminID, adminName, adminUserName, email, pass, newForum,dal);
+            User user = new User(adminID, adminName, adminUserName, email, pass, newForum);
             // TODO: need to check if user and forum are fine with policy
-            Admin admin = new Admin(user, newForum, dal);
+            Admin admin = new Admin(user, newForum);
             try
             {
                 newForum.AddMember(user);
@@ -67,7 +68,7 @@ namespace WASP.Domain
 
             dal.CreateAdmin(admin);
 
-            return newForum;
+            return Forum.Get(newForum.Id);
         }
 
         public int defineForumPolicy(int userID, int forumID)

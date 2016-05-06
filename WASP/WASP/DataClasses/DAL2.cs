@@ -132,5 +132,7 @@ namespace WASP.DataClasses
         Post[] GetPostsOfUser(int userId, int forumId);
         Post[] GetReplysPost(int id);
         Moderator[] GetAppointedModsOfAdmin(int adminId, int forumid);
+
+        User[] GetUsersInDiffForums();
     }
 }

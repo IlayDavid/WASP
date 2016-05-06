@@ -110,7 +110,7 @@ namespace WASP.TestSuits
             // arrange
             Forum forum = BL.createForum(-1, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234");
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User willBeMod = new User(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act

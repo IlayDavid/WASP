@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 namespace WASP.DataClasses.UnitTests
 {
@@ -196,6 +197,32 @@ namespace WASP.DataClasses.UnitTests
             Assert.IsTrue(dal.GetUserNotifications(user1.Id).Length == 1);
             Assert.IsTrue(dal.GetUserNotifications(user2.Id).Length == 2);
         }
+
+        [TestMethod]
+        public void UserDiffTest11()
+        {
+            Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
+            dal.CreateUser(new User(315470040, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470041, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470041, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal));
+            dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470046, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal));
+            dal.CreateUser(new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470042, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470042, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal));
+            dal.CreateUser(new User(315470047, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", forum, dal));
+
+            User[] users = dal.GetUsersInDiffForums();
+            Assert.IsTrue(users.Length == 6, "0- " + users.Length);
+
+            Assert.IsTrue(users.ToList().Where(x => x.Id == 315470041).Count() == 2, "1- " + users.ToList().Where(x => x.Id == 315470041).Count());
+            Assert.IsTrue(users.ToList().Where(x => x.Id == 315470042).Count() == 2);
+            Assert.IsTrue(users.ToList().Where(x => x.Id == 315470047).Count() == 2);
+            Assert.IsTrue(users.ToList().Where(x => x.Id == 315470046).Count() == 0);
+            Assert.IsTrue(users.ToList().Where(x => x.Id == 315470048).Count() == 0);
+
+        }
+
     }
 
 
