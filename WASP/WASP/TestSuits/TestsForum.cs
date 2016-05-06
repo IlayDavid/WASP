@@ -70,7 +70,7 @@ namespace WASP.TestSuits
             isSf = forum.IsSubForum(sf.Id);
             // assert
             Assert.AreEqual(true, isSf, "checking if subForum added successfully");
-            Assert.AreEqual(1, forum.GetSubForum().Length, "check if subforum was added");
+            Assert.AreEqual(1, forum.GetSubForums().Length, "check if subforum was added");
         }
     }
 }
