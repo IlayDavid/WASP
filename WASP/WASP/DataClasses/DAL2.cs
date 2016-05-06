@@ -81,7 +81,6 @@ namespace WASP.DataClasses
         Admin GetAdmin(int adminId, int forumId);
 
         Moderator[] GetAdminAppointedMods(int adminID);
-        Forum GetAdminForum(int adminID);
 
         Post CreatePost(Post post);
         //subForum.id > -1
@@ -89,12 +88,10 @@ namespace WASP.DataClasses
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
         Post[] GetPosts(int[] Posts);
         Post GetPost(int postId);
-        Subforum GetPostSubforum(int postID);
         //get the post PostID replied to
-        Post GetInReplyTo(int postID);
         //get all replies to postID
         Post[] GetReplies(int PostID);
-        User GetPostAuthor(int postID);
+
 
 
         //return all the forums in which userID is a member
@@ -130,8 +127,7 @@ namespace WASP.DataClasses
         bool DeleteNotification(int notificationId);
         Notification UpdateNotification(Notification notification);
         Notification CreateNotification(Notification notification);
-        User GetNotificationSource(int id);
-        User GetNotificationTarget(int id);
+
 
 
         Admin[] GetAdminsOfForum(Forum forum);

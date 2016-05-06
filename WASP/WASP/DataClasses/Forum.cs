@@ -14,7 +14,7 @@ namespace WASP.DataClasses
         private Dictionary<int, Admin> admins;
         private Dictionary<int, Policy> policy;
         private DAL2 dal;
-        public Forum(int id, String name, String description, Dictionary<int, Policy> policy,2 dal)
+        public Forum(int id, String name, String description, Dictionary<int, Policy> policy,DAL2 dal)
         {
             this.name = name;
             this.description = description;
