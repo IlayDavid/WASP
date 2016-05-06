@@ -58,11 +58,11 @@ namespace WASP.Domain
             {
                 newForum.AddMember(user);
                 newForum.AddAdmin(admin);
-                
             }
             catch (WaspException e)
             {
                 dal.DeleteForum(newForum.Id);
+                return null;
             }
 
             dal.CreateAdmin(admin);
