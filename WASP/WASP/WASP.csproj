@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Settings.cs" />
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\DAL2.cs" />

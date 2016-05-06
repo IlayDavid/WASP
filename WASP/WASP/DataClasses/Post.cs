@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace WASP.DataClasses
 {
     public class Post
@@ -12,8 +11,26 @@ namespace WASP.DataClasses
         private Subforum subforum;
         private Post inReplyTo;
         private Dictionary<int, Post> replies = null;
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
+        public static Post Get(int id)
+        {
+            return dal.GetPost(id);
+        }
+
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt)
+        {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.publishedAt = now;
+            this.inReplyTo = inReplyTo;
+            this.author = author;
+            this.subforum = subforum;
+            this.editAt = editAt;
+        }
+
+        // DEPRECATED
         public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt, DAL2 dal)
         {
             this.id = id;
@@ -24,7 +41,6 @@ namespace WASP.DataClasses
             this.author = author;
             this.subforum = subforum;
             this.editAt = editAt;
-            this.dal = dal;
         }
 
         public int Id

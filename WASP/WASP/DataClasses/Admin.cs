@@ -8,16 +8,27 @@ namespace WASP.DataClasses
 {
     public class Admin
     {
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
         private User user;
         private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
 
+        public static Admin Get(int adminId, int forumId)
+        {
+            return dal.GetAdmin(adminId, forumId);
+        }
+
+        public Admin(User user, Forum myForum)
+        {
+            this.user = user;
+            this.myForum = myForum;
+        }
+
+        // DEPRECATED
         public Admin(User user, Forum myForum, DAL2 dal)
         {
             this.user = user;
             this.myForum = myForum;
-            this.dal = dal;
         }
 
         public User User

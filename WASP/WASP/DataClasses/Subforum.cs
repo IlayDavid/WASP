@@ -8,17 +8,28 @@ namespace WASP.DataClasses
         private string name, description;
         private Dictionary<int, Moderator> moderators = null;
         private Dictionary<int, Post> threads = null;
-        private DAL2 dal;
         private Forum forum;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+        public static Subforum Get(int id)
+        {
+            return dal.GetSubForum(id);
+        }
 
+        public Subforum(int id, String name, String description, Forum forum)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.forum = forum;
+        }
+
+        // DEPRECATED
         public Subforum(int id, String name, String description, Forum forum, DAL2 dal)
         {
             this.id = id;
             this.name = name;
             this.description = description;
-            this.dal = dal;
             this.forum = forum;
-
         }
 
         public string Name

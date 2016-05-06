@@ -8,6 +8,14 @@ namespace WASP.DataClasses
 {
     public class SuperUser
     {
+
+        public static DAL2 dal = WASP.Config.Settings.GetDal();
+
+        public static SuperUser Get(int id)
+        {
+            return dal.GetSuperUser(id);
+        }
+
         public SuperUser ( int id, string userName, string password)
         {
             Id = id;

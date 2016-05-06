@@ -8,34 +8,33 @@ namespace WASP.Domain
 {
     class BLFacade : IBL
     {
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
         private bool initialized;
         public BLFacade()
         {
-            this.dal = new DALSQL();
             this.initialized = false;
         }
 
         public void Clean()
         {
-            this.dal.Clean();
+            dal.Clean();
         }
 
         public void Restore()
         {
-            this.dal.Restore();
+            dal.Restore();
         }
 
         public void Backup()
         {
-            this.dal.Backup();
+            dal.Backup();
         }
 
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             SuperUser user = new SuperUser(-1, userName, pass);
             this.initialized = true;
-            return this.dal.CreateSuperUser(user);
+            return dal.CreateSuperUser(user);
         }
 
         public int isInitialize()
@@ -47,7 +46,7 @@ namespace WASP.Domain
 
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass)
         {
-            SuperUser su = this.dal.GetSuperUser(userID);
+            SuperUser su = dal.GetSuperUser(userID);
             //create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, null, dal);
             User user = new User(adminID, adminName, adminUserName, email, pass, newForum,dal);

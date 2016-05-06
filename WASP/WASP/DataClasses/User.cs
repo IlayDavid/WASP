@@ -21,11 +21,40 @@ namespace WASP.DataClasses
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
         
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
+        public static User Get(int userId, int forumId)
+        {
+            return dal.GetUser(userId, forumId);
+        }
 
+        public User(int id, string name, string username, string email, string password, Forum forum)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.PasswordChangeDate = DateTime.Now;
+            this.StartDate = DateTime.Now;
+        }
 
+        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.PasswordChangeDate = passChangeDate;
+            this.StartDate = startDate;
+        }
 
+        // DEPRECATED
         public User(int id, string name, string username, string email, string password, Forum forum, DAL2 dal)
         {
             this.Id = id;
@@ -35,13 +64,11 @@ namespace WASP.DataClasses
             this.Password = password;
             this.posts = null;
             this.forum = forum;
-            this.dal = dal;
             this.PasswordChangeDate = DateTime.Now;
             this.StartDate = DateTime.Now;
         }
 
-
-
+        // DEPRECATED
         public User(int id, string name, string username, string email, string password, Forum forum,DateTime startDate, DateTime passChangeDate, DAL2 dal)
         {
             this.Id = id;
@@ -51,7 +78,6 @@ namespace WASP.DataClasses
             this.Password = password;
             this.posts = null;
             this.forum = forum;
-            this.dal = dal;
             this.PasswordChangeDate = passChangeDate;
             this.StartDate = startDate;
         }

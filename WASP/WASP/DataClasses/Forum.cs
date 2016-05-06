@@ -13,8 +13,14 @@ namespace WASP.DataClasses
         private Dictionary<int, User> members;
         private Dictionary<int, Admin> admins;
         private Dictionary<int, Policy> policy;
-        private DAL2 dal;
-        public Forum(int id, String name, String description, Dictionary<int, Policy> policy,DAL2 dal)
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+
+        public static Forum Get(int id)
+        {
+            return dal.GetForum(id);
+        }
+
+        public Forum(int id, String name, String description, Dictionary<int, Policy> policy)
         {
             this.name = name;
             this.description = description;
@@ -22,13 +28,22 @@ namespace WASP.DataClasses
             this.members = new Dictionary<int, User>();
             this.admins = new Dictionary<int, Admin>();
             this.subforums = new Dictionary<int, Subforum>();
-            this.dal = dal;
-
             this.id = id;
-
         }
 
-        
+        // DEPRECATED
+        public Forum(int id, String name, String description, Dictionary<int, Policy> policy, DAL2 dal)
+        {
+            this.name = name;
+            this.description = description;
+            this.policy = policy;
+            this.members = new Dictionary<int, User>();
+            this.admins = new Dictionary<int, Admin>();
+            this.subforums = new Dictionary<int, Subforum>();
+            this.id = id;
+        }
+
+
 
         public void AddPolicy(Policy policy)
         {
@@ -137,13 +152,13 @@ namespace WASP.DataClasses
 
         public Admin[] GetAdmins()
         {
-            Admin[] adminArr = new Admin [admins.Values.Count];
+            Admin[] adminArr = new Admin[admins.Values.Count];
             admins.Values.CopyTo(adminArr, 0);
             return adminArr;
         }
 
-      
-      
+
+
 
         public Subforum[] GetSubForum()
         {
@@ -152,15 +167,15 @@ namespace WASP.DataClasses
             return subArr;
         }
 
-       
 
 
- 
+
+
 
 
         public void AddAdmin(Admin admin)
         {
-            admins.Add(admin.Id, admin) ;
+            admins.Add(admin.Id, admin);
         }
         public Admin GetAdmin(int Id)
         {
@@ -169,12 +184,12 @@ namespace WASP.DataClasses
 
         public void AddMember(User member)
         {
-            members.Add(member.Id,member);
-            
+            members.Add(member.Id, member);
+
         }
         internal void AddSubForum(Subforum subforum)
         {
-            subforums.Add(subforum.Id,subforum);
+            subforums.Add(subforum.Id, subforum);
         }
 
         public bool RemoveAdmin(Admin admin)

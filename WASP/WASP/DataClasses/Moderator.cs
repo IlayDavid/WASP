@@ -12,25 +12,47 @@ namespace WASP.DataClasses
         private DateTime termExpiration,startDate;
         private Subforum subForum;
         private Admin appointer;
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
+        public static Moderator Get(int modId, int subforumID)
+        {
+            return dal.GetModerator(modId, subforumID);
+        }
 
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer)
+        {
+            this.user = user;
+            this.termExpiration = termExpiration;
+            this.subForum = sf;
+            this.appointer = appointer;
+            this.startDate = DateTime.Now;
+        }
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DateTime startDate)
+        {
+            this.user = user;
+            this.termExpiration = termExpiration;
+            this.subForum = sf;
+            this.appointer = appointer;
+            this.startDate = startDate;
+        }
+
+        // DEPRECATED
         public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DAL2 dal)
         {
             this.user = user;
             this.termExpiration = termExpiration;
             this.subForum = sf;
             this.appointer = appointer;
-            this.dal = dal;
             this.startDate = DateTime.Now;
         }
+
+        // DEPRECATED
         public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer,DateTime startDate ,DAL2 dal)
         {
             this.user = user;
             this.termExpiration = termExpiration;
             this.subForum = sf;
             this.appointer = appointer;
-            this.dal = dal;
             this.startDate = startDate;
         }
 

@@ -13,7 +13,23 @@ namespace WASP.DataClasses
         private User source;
         private User target;
         private int id;
-        private DAL2 dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+
+        public static Notification Get(int id)
+        {
+            return dal.GetNotification(id);
+        }
+
+        public Notification(int id, String message, bool isNew, User source, User target)
+        {
+            this.id = id;
+            this.message = message;
+            this.isNew = isNew;
+            this.source = source;
+            this.target = target;
+        }
+
+        // DEPRECATED
         public Notification(int id, String message, bool isNew, User source, User target, DAL2 dal)
         {
             this.id = id;
@@ -21,7 +37,6 @@ namespace WASP.DataClasses
             this.isNew = isNew;
             this.source = source;
             this.target = target;
-            this.dal = dal;
         }
 
         public int Id
