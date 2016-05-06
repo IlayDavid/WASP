@@ -45,8 +45,8 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (this.source == null)
-                    this.source = this.dal.GetNotificationSource(this.Id);
+                //if (this.source == null)
+                  //  this.source = this.dal.GetNotificationSource(this.Id);
 
                 return this.source;
             }
@@ -55,8 +55,8 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (this.target == null)
-                    this.target = this.dal.GetNotificationTarget(this.Id);
+                //if (this.target == null)
+                 //   this.target = this.dal.GetNotificationTarget(this.Id);
 
                 return this.target;
             }

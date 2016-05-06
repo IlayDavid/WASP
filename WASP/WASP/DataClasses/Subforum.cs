@@ -37,8 +37,8 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (this.forum == null)
-                    this.forum = dal.GetSubForumForum(Id);
+               // if (this.forum == null)
+                 //   this.forum = dal.GetSubForumForum(Id);
                 return forum;
             }
             set

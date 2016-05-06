@@ -36,7 +36,7 @@ namespace WASP.DataClasses
         Subforum[] GetSubForums(int[] subForumIds);
         Subforum GetSubForum(int sfId);
         Moderator[] GetSubForumMods(int subForumID);
-        Post[] GetSubForumThreads(int subForumID);
+        Post[] GetSubForumPosts(int subForumID);
         Forum GetSubForumForum(int subForumID);
 
         //user.id == -1
@@ -48,7 +48,7 @@ namespace WASP.DataClasses
         User GetUser(int id, int forumId);
        
         
-        Post[] GetUserPosts(int userID);
+        Post[] GetUserPosts(int userID,int forumID);
         Notification[] GetUserNewNotifications(int userID);
         Notification[] GetUserNotifications(int userID);
 

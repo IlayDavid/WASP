@@ -83,8 +83,8 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (author == null)
-                    author = dal.GetPostAuthor(id);
+               // if (author == null)
+                  //  author = dal.GetPostAuthor(id);
 
                 return author;
             }
@@ -94,8 +94,8 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (subforum == null)
-                    subforum = dal.GetPostSubforum(Id);
+               // if (subforum == null)
+                  //  subforum = dal.GetPostSubforum(Id);
                 return subforum;
             }
             set
@@ -108,10 +108,10 @@ namespace WASP.DataClasses
         {
             get
             {
-                if (this.InReplyTo == null)
-                    InReplyTo = dal.GetInReplyTo(this.id);
+               // if (this.InReplyTo == null)
+                 //   InReplyTo = dal.GetInReplyTo(this.id);
 
-                return InReplyTo;
+                return this.inReplyTo;
             }
             set
             {
