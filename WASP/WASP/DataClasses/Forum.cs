@@ -34,9 +34,6 @@ namespace WASP.DataClasses
             this.name = name;
             this.description = description;
             this.policy = policy;
-            this.members = new Dictionary<int, User>();
-            this.admins = new Dictionary<int, Admin>();
-            this.subforums = new Dictionary<int, Subforum>();
             this.id = id;
         }
         public int Id
@@ -158,11 +155,11 @@ namespace WASP.DataClasses
         }
         public bool RemoveSubForum(Subforum subforum)
         {
-            return subforums.Remove(subforum.Id);
+            return Subforums.Remove(subforum.Id);
         }
         internal void AddSubForum(Subforum subforum)
         {
-            subforums.Add(subforum.Id, subforum);
+            Subforums.Add(subforum.Id, subforum);
         }
 
 
@@ -184,12 +181,12 @@ namespace WASP.DataClasses
         }
         public void AddMember(User member)
         {
-            members.Add(member.Id, member);
+            Members.Add(member.Id, member);
 
         }
         public bool RemoveMember(User member)
         {
-            return members.Remove(member.Id);
+            return Members.Remove(member.Id);
         }
         
         
@@ -205,15 +202,15 @@ namespace WASP.DataClasses
         }
         public void AddAdmin(Admin admin)
         {
-            admins.Add(admin.Id, admin);
+            Admins.Add(admin.Id, admin);
         }
         public Admin GetAdmin(int Id)
         {
-            return admins[Id];
+            return Admins[Id];
         }
         public bool RemoveAdmin(Admin admin)
         {
-            return admins.Remove(admin.Id);
+            return Admins.Remove(admin.Id);
         }
 
 
