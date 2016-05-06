@@ -88,8 +88,10 @@ namespace Client.GUI
             }
             int id = ((ForumView) dgForums.Items.GetItemAt(dgForums.SelectedIndex)).ID;
 
-            //try
+            try
             {
+                if(Session.user is SuperUser)
+                    Session.bl.login(Session.user.userName, Session.user.password, id);
                 Session.forum = Session.forums[id];
                 ForumWindow fWin = new ForumWindow();
                 fWin.Title = Session.forum.Name;
@@ -101,9 +103,9 @@ namespace Client.GUI
                 Session.forum = null;
                 this.ShowDialog();
             }
-            //catch (Exception ee)
+            catch (Exception ee)
             {
-                //MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
 

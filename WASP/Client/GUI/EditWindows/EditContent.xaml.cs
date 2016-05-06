@@ -26,6 +26,7 @@ namespace Client.GUI.EditWindows
         public EditContent(Post p)
         {
             InitializeComponent();
+            txtContent.Text = p.content;
             curPost = p;
         }
 

@@ -70,15 +70,13 @@ namespace Client.CommunicationLayer
             User admin = null;
             try
             {
-                admin = forums[forumID].admins[userID];
+                admin = forums[forumID].admins[userID].user;
             }
             catch(Exception)
             {
                 if (_su.id == userID)
                     admin = _su;
             }
-
-
             Moderator m = new Moderator(user, term, admin);
 
             Subforum newSf = new Subforum(name, description, m, term);

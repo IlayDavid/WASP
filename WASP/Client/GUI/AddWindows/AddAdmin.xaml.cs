@@ -6,38 +6,36 @@ using System.Windows.Controls;
 namespace Client.GUI.AddWindows
 {
     /// <summary>
-    /// Interaction logic for AddModerator.xaml
+    /// Interaction logic for AddAdmin.xaml
     /// </summary>
-    public partial class AddModerator : Window
+    public partial class AddAdmin : Window
     {
-        public AddModerator()
+        public AddAdmin()
         {
             InitializeComponent();
             foreach (User user in Session.forum.members.Values)
             {
-                if (Session.subForum.moderators.ContainsKey(user.id))
+                if (Session.forum.admins.ContainsKey(user.id))
                     continue;
-                //if (user.joinDate.AddMonths(Session.forum.policy.seniority) > (DateTime.Now))
-                // continue;
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = user.userName;
                 newItem.DataContext = user;
-                cboxModerator.Items.Add(newItem);
+                cboxAdmin.Items.Add(newItem);
             }
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            if (cboxModerator.SelectedIndex <= 0)
+            if (cboxAdmin.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please choose moderator");
+                MessageBox.Show("Please choose admin");
                 return;
             }
-            ComboBoxItem selectedItem = (ComboBoxItem)cboxModerator.SelectedItem;
-            int moderatorID = ((User)selectedItem.DataContext).id;
+            ComboBoxItem selectedItem = (ComboBoxItem)cboxAdmin.SelectedItem;
+            User admin = ((User)selectedItem.DataContext);
             try
             {
-                Session.bl.addModerator(moderatorID, Session.subForum.id, calTerm.SelectedDate.Value);
+                Session.bl.addAdmin(admin.id);
                 this.Close();
             }
             catch (Exception ee)

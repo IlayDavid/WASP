@@ -58,3 +58,5 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csproj.Gen
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.exe
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddAdmin.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddAdmin.baml

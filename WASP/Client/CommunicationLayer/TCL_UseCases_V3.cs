@@ -38,7 +38,8 @@ namespace Client.CommunicationLayer
         }
         public Admin addAdmin(int newAdminID)
         {
-            forums[forumID].admins.Add(newAdminID, forums[forumID].members[newAdminID]);
+            Admin newAdmin = new Admin(forums[forumID].members[newAdminID]);
+            forums[forumID].admins.Add(newAdminID, newAdmin);
             return null;
         }
         //-----------Admin Reports---------------

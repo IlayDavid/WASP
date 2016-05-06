@@ -125,7 +125,10 @@ namespace Client
                 Post p = (Post)selected.DataContext;
                 int isSuc = Session.bl.deletePost(p.id);
                 if (isSuc > 0)
+                {
                     postMesssages.Items.Remove(selected);
+                    postMesssages.ItemsSource = postMesssages.ItemsSource;
+                }
             }
             catch (Exception ee)
             {

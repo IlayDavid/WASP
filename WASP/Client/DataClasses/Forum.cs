@@ -12,8 +12,9 @@ namespace Client.DataClasses
             Name = name;
             Description = description;
             id = countId++;
-            admins = new Dictionary<int, User>();
-            admins.Add(admin.id, admin);
+            admins = new Dictionary<int, Admin>();
+            Admin newAdmin = new Admin(admin);
+            admins.Add(admin.id, newAdmin);
             members = new Dictionary<int, User>();
             members.Add(admin.id, admin);
             this.policy = policy;
@@ -24,7 +25,7 @@ namespace Client.DataClasses
         public Policy policy { get; set; }
         
         public Dictionary<int,User> members { get; set; }
-        public Dictionary<int, User> admins { get; set; }
+        public Dictionary<int, Admin> admins { get; set; }
 
         public Dictionary<int, Subforum> subforums { get; set; }
         public Dictionary<int, Post> posts { get; set; }

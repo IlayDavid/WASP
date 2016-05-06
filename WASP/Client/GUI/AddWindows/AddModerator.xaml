@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI.AddWindows"
         mc:Ignorable="d"
-        Title="AddModerator" Height="309.512" Width="275.854">
+        Title="AddModerator" Height="309.512" Width="275.854"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="label_Copy1" Content="Moderaor:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
         <Label x:Name="label_Copy2" Content="Term:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,62,0,0"/>
@@ -14,6 +15,6 @@
             <ComboBoxItem Content="Select Moderator"/>
         </ComboBox>
         <Calendar x:Name="calTerm" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="66,68,0,0"/>
-        <Button x:Name="btnCreate" Content="Create" Click="btnCreate_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="92,251,0,0"/>
+        <Button x:Name="btnCreate" Content="Add" Click="btnCreate_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="92,251,0,0"/>
     </Grid>
 </Window>

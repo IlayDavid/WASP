@@ -74,6 +74,9 @@
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V3.cs" />
     <Compile Include="DataClasses\ClassView.cs" />
+    <Compile Include="GUI\AddWindows\AddAdmin.xaml.cs">
+      <DependentUpon>AddAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\AddWindows\AddForum.xaml.cs">
       <DependentUpon>AddForum.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     <Compile Include="GUI\AddWindows\CreateAdmin.xaml.cs">
       <DependentUpon>CreateAdmin.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\AddWindows\AddAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\AddWindows\AddForum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

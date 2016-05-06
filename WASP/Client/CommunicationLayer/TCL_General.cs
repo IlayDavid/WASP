@@ -135,8 +135,7 @@ namespace Client.CommunicationLayer
         }
         public List<Admin> getAdmins(int forumID)
         {
-            throw new NotImplementedException();
-            //return forums[forumID].admins.Values.ToList();
+            return forums[forumID].admins.Values.ToList();
         }
         public List<User> getMembers(int forumID)
         {

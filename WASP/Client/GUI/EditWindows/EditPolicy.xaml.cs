@@ -23,6 +23,19 @@ namespace Client.GUI.EditWindows
         public EditPolicy()
         {
             InitializeComponent();
+            resetChanges();
+        }
+
+        private void resetChanges()
+        {
+            txtModSen.Text = Session.forum.policy.seniority.ToString();
+            txtPassPeriod.Text = Session.forum.policy.passwordPeriod.ToString();
+            txtUserSameTime.Text = Session.forum.policy.usersSameTime.ToString();
+
+            chkbAdmin.IsChecked = Session.forum.policy.isAdminCanDeletePost();
+            chkbOwner.IsChecked = Session.forum.policy.isOwnerCanDeletePost();
+            chkbModerator.IsChecked = Session.forum.policy.isModeratorCanDeletePost();
+            chkbAdmin.IsChecked = Session.forum.policy.emailVerification;
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)

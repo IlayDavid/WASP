@@ -49,14 +49,12 @@ namespace Client.GUI
 
         public static void LoadMembers()
         {
-            if (user != null)
-                forum.members = bl.getMembers(forum.id).ToDictionary(x => x.id);
+            forum.members = bl.getMembers(forum.id).ToDictionary(x => x.id);
         }
 
         public static void LoadAdmins()
         {
-            //if(user != null)
-            //forum.admins = bl.getAdmins(user.id, forum.id).Select(x => x.user).ToList().ToDictionary(x => x.id);
+            forum.admins = bl.getAdmins(forum.id).ToDictionary(x => x.user.id);
         }
 
         public static void CloseAllWindows()

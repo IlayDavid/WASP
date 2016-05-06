@@ -7,6 +7,7 @@ using Client.GUI;
 using Client.GUI.AddWindows;
 using Client.GUI.EditWindows;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Client
 {
@@ -130,7 +131,7 @@ namespace Client
         {
             Window adminView = new Window();
             DataGrid dg = new DataGrid();
-            dg.ItemsSource = UserView.getView(Session.forum.admins);
+            dg.ItemsSource = UserView.getView(Session.forum.admins.Values.Select(x => x.user).ToList());
             dg.IsReadOnly = true;
             adminView.Content = dg;
             adminView.SizeToContent = SizeToContent.WidthAndHeight;
@@ -140,7 +141,8 @@ namespace Client
         }
         private void btnAddAdministrator_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("It not require yet!");
+            AddAdmin addAdmin = new AddAdmin();
+            addAdmin.ShowDialog();
             Session.LoadAdmins();
         }
 
