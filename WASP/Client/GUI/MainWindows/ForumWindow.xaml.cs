@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Client.DataClasses;
 using Client.GUI;
 using Client.GUI.AddWindows;
 using Client.GUI.EditWindows;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -13,13 +15,72 @@ namespace Client
     /// </summary>
     public partial class ForumWindow : Window, INotificable
     {
-        
+        List<Button> guestBtns;
+        List<Button> userBtns;
+        List<Button> adminBtns;
+        List<Button> suBtns;
 
+        private void setButtons()
+        {
+            guestBtns = new List<Button>() { btnRegister, btnLogin };
+            userBtns = new List<Button>() { btnLogout };
+            adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy };
+            suBtns = new List<Button>() { btnAddSubforum };
+
+            adminBtns.AddRange(userBtns);
+            suBtns.AddRange(adminBtns);
+        }
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                Session.LoadAdmins();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.forum.admins.ContainsKey(Session.user.id))
+                    ChangeVisibilityAdmin();
+                else
+                    ChangeVisibilityUser();
+            }
+            else
+                ChangeVisibilityGuest();
+        }
+
+        private void ChangeVisibilitySU()
+        {
+            setBtnVisibility(suBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityAdmin()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(adminBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityUser()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(userBtns, Visibility.Visible);
+        }
+        private void ChangeVisibilityGuest()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(guestBtns, Visibility.Visible);
+        }
+
+        private void setBtnVisibility(List<Button> btns, Visibility option)
+        {
+            foreach (Button btn in btns)
+            {
+                btn.Visibility = option;
+            }
+        }
         //the forum that presented in the window, should be set by method
         public ForumWindow()
         {
             InitializeComponent();
-
+            setButtons();
             setVisibility();
             LoadData();
             //presenting the subforums list 
@@ -31,6 +92,7 @@ namespace Client
                 SubForums.Items.Add(newItem);
             }
         }
+
         public void LoadData()
         {
             Session.LoadMembers();
@@ -38,48 +100,7 @@ namespace Client
             Session.LoadAdmins();
             Session.LoadMembers();
         }
-        private void setVisibility()
-        {
-            if (Session.user != null)
-            {
-                Session.LoadAdmins();
-                if (Session.user != null )
-                {
-                    welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                    if (Session.user is SuperUser)
-                        ChangeVisibilitySU();
-                    else if (Session.forum.admins.ContainsKey(Session.user.id))
-                        ChangeVisibilityAdmin();
-                    else
-                        ChangeVisibilityUser();
-                }
-            }
-        }
-        private void ChangeVisibilitySU()
-        {
-            reverseVisibility(btnAddAdministrator);
-            reverseVisibility(btnAddSubforum);
-            reverseVisibility(btnEditForumPolicy);
-
-            ChangeVisibilityAdmin();
-        }
-
-        private void ChangeVisibilityAdmin()
-        {
-            ChangeVisibilityUser();
-        }
-
-        private void ChangeVisibilityUser()
-        {
-            reverseVisibility(btnRegister);
-            reverseVisibility(btnLogin);
-            reverseVisibility(btnLogout);
-        }
-        private void reverseVisibility(Button btn)
-        {
-            btn.Visibility = (btn.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-        }
-
+ 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             Session.CloseAllWindows();
@@ -93,7 +114,18 @@ namespace Client
         {
             this.Close();         
         }
-
+        private void btnViewMembers_Click(object sender, RoutedEventArgs e)
+        {
+            Window membersView = new Window();
+            DataGrid dg = new DataGrid();
+            dg.ItemsSource = UserView.getView(Session.forum.members);
+            dg.IsReadOnly = true;
+            membersView.Content = dg;
+            membersView.SizeToContent = SizeToContent.WidthAndHeight;
+            membersView.Title = "Members";
+            membersView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            membersView.ShowDialog();
+        }
         private void btnViewAdministrators_Click(object sender, RoutedEventArgs e)
         {
             Window adminView = new Window();
@@ -106,7 +138,6 @@ namespace Client
             adminView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             adminView.ShowDialog();
         }
-
         private void btnAddAdministrator_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("It not require yet!");
@@ -138,12 +169,19 @@ namespace Client
         {
             ListBoxItem i = (ListBoxItem)SubForums.SelectedItem;
             Subforum sf = (Subforum)i.DataContext;
+            if (sf == null)
+            {
+                MessageBox.Show("Please select a Sub-Forum");
+                return;
+            }
+
             Session.subForum = sf;
             SubForumWindow sfWin = new SubForumWindow();
             sfWin.Title = sf.name;
             Session.currentWindow = sfWin;
             this.Hide();
             sfWin.ShowDialog();
+            setVisibility();
             this.ShowDialog();
             Session.subForum = null;
             Session.currentWindow = this;
@@ -169,8 +207,8 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                setVisibility();
                 Session.user = null;
+                setVisibility();
             }
         }
 
@@ -189,6 +227,5 @@ namespace Client
         {
 
         }
-
     }
 }

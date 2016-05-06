@@ -30,6 +30,7 @@ namespace Client.CommunicationLayer
             Policy policy2 = new Policy(Policy.all, 10, false, 0, 100);
             Policy policy3 = new Policy(Policy.all, 10, false, 0, 100);
 
+            loginSU(_su.userName, _su.password);
             Forum forum1 = createForum("forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", policy1);
             User u11 = subscribeToForum(1234, "amitay140", "amitay", "amitay140@gmail.com", "1", forum1.id);
             User u12 = subscribeToForum(1235, "moshe12", "moshe", "moshe@gmail.com", "1", forum1.id);
@@ -70,7 +71,11 @@ namespace Client.CommunicationLayer
             Dictionary<int, User> members = forums[forumID].members;
             User user = members.Values.First(x => x.userName == userName);
             if (user.password.Equals(password))
+            {
+                userID = user.id;
+                this.forumID = forumID;
                 return user;
+            }
             else
                 throw new Exception("ERROR: Password did not match");
         }
@@ -80,7 +85,10 @@ namespace Client.CommunicationLayer
             if (_isInitialize)
             {
                 if (_su.userName.Equals(userName) && _su.password.Equals(password))
+                {
+                    userID = _su.id;
                     return _su;
+                }
                 else
                     throw new Exception("ERROR: user name or password did not match!");
             }
@@ -91,7 +99,7 @@ namespace Client.CommunicationLayer
         //---------------------------------Getters----------------------------------------------
         public List<Post> getThreads(int subForumID)
         {
-            List<Post> ts = forums[forumID].subforums[subForumID].threads;
+            List<Post> ts = subforums[subForumID].threads;
             return ts;
         }
 
@@ -100,7 +108,7 @@ namespace Client.CommunicationLayer
             return posts[threadId];
         }
 
-        public List<Post> getReplies(int postID)
+        public List<Post> getReplys(int postID)
         {
             return posts[postID].replies;
         }

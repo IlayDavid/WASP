@@ -17,20 +17,72 @@ namespace Client
         private readonly int CONTENT_IND = 0;
         //private readonly int EDIT_AT_IND = 0;
         //private readonly int BY_IND = 0;
+        List<Button> guestBtns;
+        List<Button> userBtns;
+        List<Button> adminBtns;
+        List<Button> suBtns;
+
+        private void setButtons()
+        {
+            guestBtns = new List<Button>() { btnRegister, btnLogin };
+            userBtns = new List<Button>() { btnLogout , btnAddReply, btnEdit, btnDelete};
+            adminBtns = new List<Button>();
+            suBtns = new List<Button>();
+
+            adminBtns.AddRange(userBtns);
+            suBtns.AddRange(adminBtns);
+        }
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                Session.LoadAdmins();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.forum.admins.ContainsKey(Session.user.id))
+                    ChangeVisibilityAdmin();
+                else
+                    ChangeVisibilityUser();
+            }
+            else
+                ChangeVisibilityGuest();
+        }
+        private void ChangeVisibilitySU()
+        {
+            setBtnVisibility(suBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityAdmin()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(adminBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityUser()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(userBtns, Visibility.Visible);
+        }
+        private void ChangeVisibilityGuest()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(guestBtns, Visibility.Visible);
+        }
+
+        private void setBtnVisibility(List<Button> btns, Visibility option)
+        {
+            foreach (Button btn in btns)
+            {
+                btn.Visibility = option;
+            }
+        }
 
         public PostWindow()
         {
             InitializeComponent();
-            if (Session.user != null)
-            {
-                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                if (Session.user is SuperUser)
-                    ChangeVisibilitySU();
-                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
-                    ChangeVisibilityModerator();
-                else
-                    ChangeVisibilityUser();
-            }
+            setButtons();
+            setVisibility();
 
             Session.LoadReplys();
             Post p = Session.post;
@@ -42,6 +94,7 @@ namespace Client
                 ((TreeViewItem) postMesssages.Items[0]).Items.Add(treeItem);
             }
         }
+        
 
         private TreeViewItem makePostTree(Post post)
         {
@@ -54,57 +107,6 @@ namespace Client
             return treeItem;
         }
 
-        private void setVisibility()
-        {
-            if (Session.user != null)
-            {
-                Session.LoadModerators();
-                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                if (Session.user is SuperUser)
-                    ChangeVisibilitySU();
-                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
-                    ChangeVisibilityModerator();
-                else
-                    ChangeVisibilityUser();
-            }
-        }
-        private void ChangeVisibilitySU()
-        {
-            ChangeVisibilityLogIn();
-        }
-        private void ChangeVisibilityAdmin()
-        {
-            //acording to policy
-            if(Session.forum.policy.isAdminCanDeletePost())
-                reverseVisibility(btnDelete);
-            ChangeVisibilityLogIn();
-        }
-
-        private void ChangeVisibilityModerator()
-        {
-            if (Session.forum.policy.isModeratorCanDeletePost())
-                reverseVisibility(btnDelete);
-            ChangeVisibilityUser();
-        }
-
-        private void ChangeVisibilityUser()
-        {
-            if (Session.forum.policy.isOwnerCanDeletePost())
-                reverseVisibility(btnDelete);
-            ChangeVisibilityLogIn();
-        }
-        private void ChangeVisibilityLogIn()
-        {
-            reverseVisibility(btnAddReply);
-            reverseVisibility(btnEdit);
-            reverseVisibility(btnRegister);
-            reverseVisibility(btnLogin);
-            reverseVisibility(btnLogout);
-        }
-        private void reverseVisibility(Button btn)
-        {
-            btn.Visibility = (btn.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-        }
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             Session.CloseAllWindows();
@@ -167,8 +169,8 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                setVisibility();
                 Session.user = null;
+                setVisibility();
             }
         }
 

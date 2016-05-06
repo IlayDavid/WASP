@@ -14,10 +14,11 @@
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,10,0,0"/>
         <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="707,174,0,0" ToolTip="number of notifications is 0" Click="notificationsButton_Click" Height="38" />
         <Button x:Name="backButton" Content="back" Click="backButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0"/>
-        
+
 
         <Grid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood">
             <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
@@ -26,14 +27,15 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="301" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnViewAdministrators" Content="View Administrators" Click="btnViewAdministrators_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,0,0,0" />
-            <Button x:Name="btnAddAdministrator" Content="Add Administrator" Visibility="Hidden" Click="btnAddAdministrator_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,71,0,0" Grid.RowSpan="2" />
-            <Button x:Name="btnAddSubforum" Content="Add Subforum" Visibility="Hidden" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="1" Margin="10,70.8,0,0" Grid.RowSpan="2" />
-            <Button x:Name="btnEditForumPolicy" Content="Change Policy" Visibility="Hidden" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="3" Margin="10,0.4,0,0"   />
+            <Button x:Name="btnViewMembers" Content="View Members" Click="btnViewMembers_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,10,0,0" />
+            <Button x:Name="btnViewAdministrators" Content="View Administrators" Click="btnViewAdministrators_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,8.8,0,0" Grid.Row="1" />
+            <Button x:Name="btnAddAdministrator" Content="Add Administrator" Click="btnAddAdministrator_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,8.6,0,0" Grid.Row="2" />
+            <Button x:Name="btnAddSubforum" Content="Add Subforum" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="3" Margin="10,8.4,0,0" />
+            <Button x:Name="btnEditForumPolicy" Content="Change Policy" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="4" Margin="10,9.2,0,0"   />
             <ListBox x:Name="SubForums" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForums_MouseDoubleClick"/>
         </Grid>
         <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
-        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
         <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
     </Grid>
 </Window>

@@ -16,9 +16,70 @@ namespace Client
     /// </summary>
     public partial class SubForumWindow : Window, INotificable
     {
+        List<Button> guestBtns;
+        List<Button> userBtns;
+        List<Button> adminBtns;
+        List<Button> suBtns;
+
+        private void setButtons()
+        {
+            guestBtns = new List<Button>() { btnRegister, btnLogin };
+            userBtns = new List<Button>() { btnLogout, btnPostThread};
+            adminBtns = new List<Button>() {btnAddModerator, btnEditModeratorTerm, btnRemoveModerator, btnRepots };
+            suBtns = new List<Button>();
+
+            adminBtns.AddRange(userBtns);
+            suBtns.AddRange(adminBtns);
+        }
+        private void setVisibility()
+        {
+            if (Session.user != null)
+            {
+                Session.LoadAdmins();
+                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+                else if (Session.forum.admins.ContainsKey(Session.user.id))
+                    ChangeVisibilityAdmin();
+                else
+                    ChangeVisibilityUser();
+            }
+            else
+                ChangeVisibilityGuest();
+        }
+        private void ChangeVisibilitySU()
+        {
+            setBtnVisibility(suBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityAdmin()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(adminBtns, Visibility.Visible);
+        }
+
+        private void ChangeVisibilityUser()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(userBtns, Visibility.Visible);
+        }
+        private void ChangeVisibilityGuest()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(guestBtns, Visibility.Visible);
+        }
+
+        private void setBtnVisibility(List<Button> btns, Visibility option)
+        {
+            foreach (Button btn in btns)
+            {
+                btn.Visibility = option;
+            }
+        }
         public SubForumWindow()
         {
             InitializeComponent();
+            setButtons();
             setVisibility();
             LoadData();
             //presenting the subforums list 
@@ -38,50 +99,6 @@ namespace Client
             Session.LoadThreads();
         }
 
-        private void setVisibility()
-        {
-            if (Session.user != null)
-            {
-                Session.LoadModerators();
-                welcomeTextBlock.Text = "Welcome, " + Session.user.name;
-                if (Session.user is SuperUser)
-                    ChangeVisibilitySU();
-                else if (Session.forum.members.ContainsKey(Session.user.id))
-                    ChangeVisibilityAdmin();
-                else if (Session.subForum.moderators.ContainsKey(Session.user.id))
-                    ChangeVisibilityModerator();
-                else
-                    ChangeVisibilityUser();
-            }
-        }
-        private void ChangeVisibilitySU()
-        {
-            ChangeVisibilityAdmin();
-        }
-        private void ChangeVisibilityAdmin()
-        {
-            reverseVisibility(btnRemoveModerator);
-            reverseVisibility(btnRepots);
-            ChangeVisibilityModerator();
-        }
-        private void ChangeVisibilityModerator()
-        {
-            reverseVisibility(btnAddModerator);
-            ChangeVisibilityUser();
-        }
-
-        private void ChangeVisibilityUser()
-        {
-            reverseVisibility(btnPostThread);
-            reverseVisibility(btnRegister);
-            reverseVisibility(btnLogin);
-            reverseVisibility(btnLogout);
-        }
-        private void reverseVisibility(Button btn)
-        {
-            btn.Visibility = (btn.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-        }
-
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             Session.CloseAllWindows();
@@ -90,6 +107,11 @@ namespace Client
         {
             ListBoxItem i = (ListBoxItem)SubForumsThreads.SelectedItem;
             Post p = (Post)i.DataContext;
+            if (p == null)
+            {
+                MessageBox.Show("Please select a post");
+                return;
+            }
             Session.post = p;
             PostWindow pwin = new PostWindow();
             pwin.Title = p.title;
@@ -98,6 +120,7 @@ namespace Client
             this.Hide();
             pwin.ShowDialog();
             Session.currentWindow = this;
+            setVisibility();
             this.ShowDialog();
             Session.post = null;
         }

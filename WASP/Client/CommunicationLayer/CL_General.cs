@@ -54,7 +54,7 @@ namespace Client.CommunicationLayer
 
 
         public User login(string userName, string password, int forumID)
-        {
+        {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             return parseStringToUser(res);
@@ -62,11 +62,20 @@ namespace Client.CommunicationLayer
 
         private User parseStringToUser(string json)
         {
-            throw new NotImplementedException();
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(json);
+            string username = dict["username"];
+            int id = dict["id"];
+            string password = dict["password"];
+            string auth = dict["auth"];
+            string name = dict["name"];
+            string email = dict["email"]; 
+            User su = new User(id, name, username, email, password);
+            return su;
         }
 
         public SuperUser loginSU(string userName, string password)
-        {
+        {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
             return parseStringToSuperUser(res);
@@ -74,7 +83,16 @@ namespace Client.CommunicationLayer
 
         private SuperUser parseStringToSuperUser(string res)
         {
-            throw new NotImplementedException();
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string username = dict["username"];
+            int id = dict["id"];
+            string password = dict["password"];
+            string auth = dict["auth"];
+            string name = dict["name"];
+            string email = dict["email"];
+            SuperUser su = new SuperUser(name, username, id, email, password);
+            return su;
         }
 
         private SuperUser parseStringToSuperUser(string res, string email, string name)
@@ -85,15 +103,15 @@ namespace Client.CommunicationLayer
             int id = dict["id"];
             string password = dict["password"];
             string auth =dict["auth"];
-            SuperUser su = new SuperUser(name, username, id, email, password, auth);
-            return su;
+            SuperUser u = new SuperUser(name, username, id, email, password);
+            return u;
 
         }
 
         //---------------------------------Getters----------------------------------------------
 
         public Post getThread(int threadId)
-        {
+        {   
             string json = "{\"postid\":" + threadId + "}";
             string res = httpReq(json, "POST", _url + "/getThread/");
             return parseStringToPost(res);
@@ -119,7 +137,19 @@ namespace Client.CommunicationLayer
 
         private Post parseStringToPost(string res)
         {
-            throw new NotImplementedException();
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string title = dict["title"];
+            string content = dict["content"];
+            int authorid = dict["authorid"];
+            User author = new User();
+            author.id=authorid; 
+            int container = dict["container"];
+            int replypostid = dict["replypostid"];
+            Post inReplyTo = new Post();
+            inReplyTo.id = replypostid;
+            Post p = new Post( title,  content,  author,  container,  inReplyTo);
+            return p;
         }
 
         public Forum getForum(int forumID)
