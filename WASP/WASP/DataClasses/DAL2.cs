@@ -134,5 +134,10 @@ namespace WASP.DataClasses
         Moderator[] GetAppointedModsOfAdmin(int adminId, int forumid);
 
         User[] GetUsersInDiffForums();
+
+        Policy GetPolicy(int id);
+        bool DeletePolicy(int id);
+        Policy UpdatePolicy(Policy policy);
+        Policy CreatePolicy(Policy policy);
     }
 }
