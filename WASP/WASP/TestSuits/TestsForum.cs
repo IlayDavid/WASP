@@ -8,15 +8,16 @@ namespace WASP.TestSuits
     [TestClass]
     public class TestsForum
     {
+        private DAL2 dal = new DALSQL();
         [TestMethod]
         public void memberTests()
         {
             // arrange
             Forum forum = new Forum(0,"name", "desc",null,null);
-            User member = new User(0,"edan", "userName", "email@email.com", "123", forum);
+            User member = new User(0,"edan", "userName", "email@email.com", "123", forum,dal);
             forum.AddMember(member);
             int numbOfMembers, numOfMembersAfterDelete;
-            User fake = new User(1,"user", "name", "email", "pass", null);
+            User fake = new User(1,"user", "name", "email", "pass", null,dal);
             bool succDelete;
             // act
             forum.AddMember(member);
@@ -42,7 +43,7 @@ namespace WASP.TestSuits
         {
             // arrange
             Forum forum = new Forum(0,"stackOverFlow", "description",null,null);
-            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
+            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum,dal);
             Admin admin = new Admin(user, forum, null);
             bool isAdmin;
             // act
@@ -60,7 +61,7 @@ namespace WASP.TestSuits
         {
             // arrange
             Forum forum = new Forum(0,"stackOverFlow", "description", null, null);
-            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum);
+            User user = new User(0, "edanAdmin", "admin", "email", "!23123", forum,dal);
             forum.AddMember(user);
             Subforum sf = new Subforum(0,"subForum", "someDescription",forum, null);
             bool isSf = false;

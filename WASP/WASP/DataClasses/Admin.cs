@@ -63,7 +63,7 @@ namespace WASP.DataClasses
                 if(appointedMods == null)
                 {
                     appointedMods = new Dictionary<int, Moderator>();
-                    foreach (Moderator mod in dal.GetAdminAppointedMods(Id))
+                    foreach (Moderator mod in dal.GetAdminAppointedMods(Id,Forum.Id))
                     {
                         appointedMods.Add(mod.Id, mod);
                     }

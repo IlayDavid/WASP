@@ -230,8 +230,9 @@ namespace WASP.Domain
         public User[] membersInDifferentForums(int userID)
         {
             SuperUser super = dal.GetSuperUser(userID);
-            User[] users = dal.GetUsersInDiffForums();
-            return users;
+            //  User[] users = dal.GetUsersInDiffForums();
+            //    return users;
+            return null;
            
         }
 

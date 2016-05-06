@@ -5,14 +5,16 @@ using WASP.DataClasses.Policies;
 namespace WASP.TestSuits
 {
     [TestClass]
+
     public class PostTests
     {
+        private DAL2 dal = new DALSQL();
         [TestMethod]
         public void repliesTests()
         {
             // arrange
             Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
-            User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
+            User author = new User(0, "edan", "userName", "email@email.com", "123", forum,dal);
             forum.AddMember(author);
             Subforum sf = new Subforum(0, "sf", "sf", forum, null);
             Post original = new Post(0, "original", "original post", author, DateTime.Now, null, sf, DateTime.Now, null);
@@ -34,7 +36,7 @@ namespace WASP.TestSuits
             //check reply to reply
             // arrange
             Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
-            User member = new User(0, "edan", "userName", "email@email.com", "123", forum);
+            User member = new User(0, "edan", "userName", "email@email.com", "123", forum,dal);
             forum.AddMember(member);
             Subforum sf = new Subforum(0, "sf", "sf", forum, null);
             Post original = new Post(0, "original", "original post", member, DateTime.Now, null, sf, DateTime.Now, null);

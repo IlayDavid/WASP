@@ -7,13 +7,14 @@ namespace WASP.TestSuits
     [TestClass]
     public class SubForumTests
     {
+        private DAL2 dal = new DALSQL();
         [TestMethod]
         public void subForumTest()
         {
             // arrange
 
             Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
-            User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
+            User author = new User(0, "edan", "userName", "email@email.com", "123", forum,dal);
             forum.AddMember(author);
             Subforum sf = new Subforum(0, "sf", "sf", forum, null);
 
@@ -33,7 +34,7 @@ namespace WASP.TestSuits
             // arrange
 
             Forum forum = new Forum(0, "stackforum", "someDesc", null, null);
-            User author = new User(0, "edan", "userName", "email@email.com", "123", forum);
+            User author = new User(0, "edan", "userName", "email@email.com", "123", forum,dal);
             forum.AddMember(author);
             Subforum sf = new Subforum(0, "sf", "sf", forum, null);
             forum.AddSubForum(sf);
