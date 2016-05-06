@@ -1,17 +1,15 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.ObjectModel;
-using WASP.DataClasses;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class SuperUserSuitTests
     {
-        private DAL dal = new DALSQL();
+        private DAL2 dal = new DALSQL();
 
-        
+
 
         [TestCleanup]
         public void CleanUp()
@@ -113,9 +111,9 @@ namespace WASP.DataClasses.UnitTests
             {
                 dal.CreateSuperUser(new SuperUser(315470047, "matansar", "123"));
                 dal.CreateSuperUser(new SuperUser(205857121, "matansar1", "1233"));
-                SuperUser[] superusers = dal.GetSuperUsers( null);
+                SuperUser[] superusers = dal.GetSuperUsers(null);
                 Assert.IsTrue(superusers.Length == 2);
-                Assert.IsTrue(superusers[0].Username.Equals("matansar" ) || superusers[1].Username.Equals("matansar"));
+                Assert.IsTrue(superusers[0].Username.Equals("matansar") || superusers[1].Username.Equals("matansar"));
                 Assert.IsTrue(superusers[0].Username.Equals("matansar1") || superusers[1].Username.Equals("matansar1"));
             }
             catch (Exception e)
@@ -131,8 +129,8 @@ namespace WASP.DataClasses.UnitTests
             {
                 dal.CreateSuperUser(new SuperUser(315470047, "matansar", "123"));
                 dal.CreateSuperUser(new SuperUser(205857121, "matansar1", "1233"));
-                SuperUser[] superusers = dal.GetSuperUsers(new int [] { 315470047 });
-                
+                SuperUser[] superusers = dal.GetSuperUsers(new int[] { 315470047 });
+
                 Assert.IsTrue(superusers.Length == 1);
                 Assert.IsTrue(superusers[0].Username.Equals("matansar"));
                 Assert.IsTrue(superusers[0].Id.Equals(315470047));

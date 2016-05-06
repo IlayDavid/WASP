@@ -10,7 +10,7 @@ namespace WASP.DataClasses.UnitTests
     public class NotificSuitTests
 
     {
-        private DAL dal = new DALSQL();
+        private DAL2 dal = new DALSQL();
         private User user1;
         private User user2;
         int userId1;
@@ -31,11 +31,11 @@ namespace WASP.DataClasses.UnitTests
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
             forumId = forum.Id;
-            user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum);
-            user2 = new User(205857121, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum);
+            user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal);
+            user2 = new User(205857121, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
             userId1 = dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal)).Id;
             userId2 = dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal)).Id;
-            
+
         }
 
 
@@ -45,10 +45,10 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi",true, dal.GetUser(userId1, forumId), dal.GetUser(userId2,forumId)));
-                Notification not2 = dal.CreateNotification(new Notification(-1, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId)));
-                Assert.IsTrue(not1.Message  != null);
-               
+                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+                Notification not2 = dal.CreateNotification(new Notification(-1, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), dal));
+                Assert.IsTrue(not1.Message != null);
+
                 Assert.IsTrue(not1.Message.Equals("hi"));
                 Assert.IsTrue(not2.Message.Equals("hi"));
                 Assert.IsTrue(not1.IsNew == true);
@@ -67,8 +67,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId)));
-                not1 = dal.UpdateNotification(new Notification(not1.Id, "balh", false, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId)));
+                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+                not1 = dal.UpdateNotification(new Notification(not1.Id, "balh", false, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
                 Assert.IsTrue(not1.Message.Equals("balh"));
                 Assert.IsTrue(not1.IsNew == false);
                 Assert.IsTrue(not1.Source.Id == user1.Id);
@@ -84,8 +84,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId)));
-                Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId)));
+                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+                Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), dal));
 
                 Notification[] notifications = dal.GetNotifications(null);
                 Assert.IsTrue(notifications.Length == 2);
@@ -104,10 +104,10 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId)));
-                Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId)));
+                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+                Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), dal));
 
-                Notification[] notifications = dal.GetNotifications(new int[] { not1.Id});
+                Notification[] notifications = dal.GetNotifications(new int[] { not1.Id });
                 Assert.IsTrue(notifications.Length == 1);
                 Assert.IsTrue(notifications[0].Id == not1.Id);
 
@@ -121,8 +121,8 @@ namespace WASP.DataClasses.UnitTests
         [TestMethod]
         public void DeleteNotificationTest5()
         {
-            Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId)));
-            Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId)));
+            Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+            Notification not2 = dal.CreateNotification(new Notification(-1, "bo", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), dal));
 
 
             dal.DeleteNotification(not1.Id);

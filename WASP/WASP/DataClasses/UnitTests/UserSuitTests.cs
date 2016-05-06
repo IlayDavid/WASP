@@ -1,17 +1,15 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.ObjectModel;
-using WASP.DataClasses;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class UserSuitTests
     {
-        private DAL dal = new DALSQL();
+        private DAL2 dal = new DALSQL();
         int forumId;
-    
+
 
         [TestCleanup]
         public void CleanUp()
@@ -33,7 +31,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
                 User user = dal.GetUser(315470047, forumId);
                 Assert.IsTrue((user.Email).Equals("matansar@post.bgu.ac.il"));
                 Assert.IsTrue((user.Username).Equals("matansar"));
@@ -52,8 +50,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
                 User user1 = dal.GetUser(315470047, forumId);
                 User user2 = dal.GetUser(315470048, forumId);
                 Assert.IsTrue(user1.Id == 315470047);
@@ -72,8 +70,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                dal.CreateUser(new User(315470047, "matan1", "matans3ar", "matansar@post4.bgu.ac.il", "1235", dal.GetForum(forumId)));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.CreateUser(new User(315470047, "matan1", "matans3ar", "matansar@post4.bgu.ac.il", "1235", dal.GetForum(forumId), dal));
                 Assert.Fail();
             }
             catch (ExistException)
@@ -91,8 +89,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                dal.updateUser(new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId)));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.UpdateUser(new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId), dal));
                 User user = dal.GetUser(315470047, forumId);
                 Assert.IsTrue(user.Email.Equals("moshesar@post.bgu.ac.il"));
                 Assert.IsTrue(user.Username.Equals("moshesar"));
@@ -111,11 +109,11 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                User[] users = dal.GetUseres(null, null);
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                User[] users = dal.GetUsers(null, forumId);
                 Assert.IsTrue(users.Length == 2);
-                Assert.IsTrue(users[0].Username.Equals("matansar" ) || users[1].Username.Equals("matansar"));
+                Assert.IsTrue(users[0].Username.Equals("matansar") || users[1].Username.Equals("matansar"));
                 Assert.IsTrue(users[0].Username.Equals("matansar2") || users[1].Username.Equals("matansar2"));
             }
             catch (Exception e)
@@ -129,9 +127,9 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-                User[] users = dal.GetUseres(new int [] { 315470047 }, null);
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                User[] users = dal.GetUsers(new int[] { 315470047 }, forumId);
                 Assert.IsTrue(users.Length == 1);
                 Assert.IsTrue(users[0].Username.Equals("matansar"));
                 Assert.IsTrue(users[0].Email.Equals("matansar@post.bgu.ac.il"));
@@ -145,17 +143,59 @@ namespace WASP.DataClasses.UnitTests
         [TestMethod]
         public void DeleteUserTest7()
         {
-            dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId)));
-            dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId)));
+            dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
             int userId1 = dal.GetUser(315470047, forumId).Id;
             int userId2 = dal.GetUser(315470048, forumId).Id;
 
             dal.DeleteUser(userId1, forumId);
-            Assert.IsTrue(dal.GetUseres(null,null).Length == 1);
+            Assert.IsTrue(dal.GetUsers(null, forumId).Length == 1);
             dal.DeleteUser(userId2, forumId);
-            Assert.IsTrue(dal.GetUseres(null, null).Length == 0);
+            Assert.IsTrue(dal.GetUsers(null, forumId).Length == 0);
+        }
+        [TestMethod]
+        public void UserPostTest8()
+        {
+            User user1 = dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            User user2 = dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            Subforum subforum1 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId), dal));
+
+            dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum1, DateTime.Now, dal));
+            dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum1, DateTime.Now, dal));
+            dal.CreatePost(new Post(-1, "question", "blah", user2, DateTime.Now, null, subforum1, DateTime.Now, dal));
+            dal.CreatePost(new Post(-1, "question", "blah", user2, DateTime.Now, null, subforum1, DateTime.Now, dal));
+
+
+            Assert.IsTrue(dal.GetUserPosts(315470047, forumId).Length == 2);
+            Assert.IsTrue(dal.GetUserPosts(315470048, forumId).Length == 2);
         }
 
+        [TestMethod]
+        public void UseNewrNotificationsTest9()
+        {
+            User user1 = dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            User user2 = dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
+
+            Assert.IsTrue(dal.GetUserNewNotifications(user1.Id).Length == 2);
+            Assert.IsTrue(dal.GetUserNewNotifications(user2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void UserNotificationsTest10()
+        {
+            User user1 = dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            User user2 = dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
+
+            Assert.IsTrue(dal.GetUserNotifications(user1.Id).Length == 1);
+            Assert.IsTrue(dal.GetUserNotifications(user2.Id).Length == 2);
+        }
     }
 
 

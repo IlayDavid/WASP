@@ -9,8 +9,8 @@ namespace WASP.DataClasses.UnitTests
     public class ForumSuitTests
 
     {
-        private DAL dal = new DALSQL();
-        
+        private DAL2 dal = new DALSQL();
+
 
         [TestCleanup]
         public void CleanUp()
@@ -103,7 +103,7 @@ namespace WASP.DataClasses.UnitTests
 
                 Forum[] forums = dal.GetForums(null);
                 Assert.IsTrue(forums.Length == 2);
-                Assert.IsTrue(forums[0].Name == forum1.Name|| forums[1].Name == forum1.Name);
+                Assert.IsTrue(forums[0].Name == forum1.Name || forums[1].Name == forum1.Name);
                 Assert.IsTrue(forums[0].Name == forum2.Name || forums[1].Name == forum2.Name);
             }
             catch (Exception e)
@@ -122,7 +122,7 @@ namespace WASP.DataClasses.UnitTests
                 int forumId1 = dal.CreateForum(forum1).Id;
                 int forumId2 = dal.CreateForum(forum2).Id;
 
-                Forum[] forums = dal.GetForums(new int [] { forumId1 });
+                Forum[] forums = dal.GetForums(new int[] { forumId1 });
                 Assert.IsTrue(forums.Length == 1);
                 Assert.IsTrue(forums[0].Name == forum1.Name);
             }
@@ -141,6 +141,70 @@ namespace WASP.DataClasses.UnitTests
             Assert.IsTrue(dal.GetForums(null).Length == 1);
             dal.DeleteForum(forum2.Id);
             Assert.IsTrue(dal.GetForums(null).Length == 0);
+        }
+        [TestMethod]
+        public void ForumMembersTest7()
+        {
+            Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal));
+            dal.CreateUser(new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
+            dal.CreateUser(new User(315470049, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
+            dal.CreateUser(new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
+            Assert.IsTrue(dal.GetForumMembers(forum1.Id).Length == 3);
+            Assert.IsTrue(dal.GetForumMembers(forum2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void ForumAdminsTest8()
+        {
+            Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            dal.CreateAdmin(new Admin(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal), forum2, dal));
+            dal.CreateAdmin(new Admin(new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal), forum1, dal));
+            dal.CreateAdmin(new Admin(new User(315470049, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal), forum1, dal));
+            dal.CreateAdmin(new Admin(new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal), forum1, dal));
+            Assert.IsTrue(dal.GetForumAdmins(forum1.Id).Length == 3);
+            Assert.IsTrue(dal.GetForumAdmins(forum2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void ForumSubforumsTest9()
+        {
+            Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+
+            dal.CreateSubForum(new Subforum(-1, "blah", "blah", forum2, dal));
+            dal.CreateSubForum(new Subforum(-1, "blah", "blah", forum1, dal));
+            dal.CreateSubForum(new Subforum(-1, "blah", "blah", forum1, dal));
+            dal.CreateSubForum(new Subforum(-1, "blah", "blah", forum1, dal));
+            Assert.IsTrue(dal.GetForumSubForums(forum1.Id).Length == 3);
+            Assert.IsTrue(dal.GetForumSubForums(forum2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void AdminsForumTest10()
+        {
+
+            Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+
+
+            User user11 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal);
+            Admin admin11 = dal.CreateAdmin(new Admin(user11, forum1, dal));
+            User user21 = new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal);
+            Admin admin21 = dal.CreateAdmin(new Admin(user21, forum1, dal));
+
+            User user12 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            Admin admin12 = dal.CreateAdmin(new Admin(user12, forum2, dal));
+            User user22 = new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            Admin admin22 = dal.CreateAdmin(new Admin(user22, forum2, dal));
+
+            User user32 = new User(315470046, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            Admin admin32 = dal.CreateAdmin(new Admin(user32, forum2, dal));
+
+            Assert.IsTrue(dal.GetAdminsOfForum(forum1).Length == 2);
+            Assert.IsTrue(dal.GetAdminsOfForum(forum2).Length == 3);
         }
     }
 }

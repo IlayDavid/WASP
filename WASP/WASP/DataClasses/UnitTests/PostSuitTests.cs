@@ -1,21 +1,18 @@
-﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.ObjectModel;
-using WASP.DataClasses;
+
 namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class PostSuitTests
 
     {
-        private DAL dal = new DALSQL();
+        private DAL2 dal = new DALSQL();
         private User user1;
         private User user2;
         private User userAdmin;
         int subforumId;
         int forumId;
-
 
 
         [TestCleanup]
@@ -31,9 +28,9 @@ namespace WASP.DataClasses.UnitTests
             ((DALSQL)dal).Clean();
             Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
 
-            user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum);
-            user2 = new User(205857121, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum);
-            userAdmin = new User(111111111, "admin", "admina", "admina@post.bgu.ac.il", "123", forum);
+            user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal);
+            user2 = new User(205857121, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
+            userAdmin = new User(111111111, "admin", "admina", "admina@post.bgu.ac.il", "123", forum, dal);
 
             Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
             Admin admin = dal.CreateAdmin(new Admin(userAdmin, forum, dal));
@@ -52,7 +49,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                var subforum = dal.GetSubForum(subforumId);
+                Subforum subforum = dal.GetSubForum(subforumId);
                 int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum, DateTime.Now, dal)).Id;
                 Assert.IsTrue(threadId > 0);
                 Post thread = dal.GetPost(threadId);
@@ -134,7 +131,7 @@ namespace WASP.DataClasses.UnitTests
             {
                 int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
                 int replyId = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
-                Post[] posts = dal.GetPosts(new int [] { replyId });
+                Post[] posts = dal.GetPosts(new int[] { replyId });
 
                 Assert.IsTrue(posts.Length == 1);
                 Assert.IsTrue(posts[0].Id == replyId);
@@ -168,6 +165,19 @@ namespace WASP.DataClasses.UnitTests
 
             dal.DeletePost(threadId);
             Assert.IsTrue(dal.GetPosts(null).Length == 0);
+        }
+
+        [TestMethod]
+        public void PostRepliesTest8()
+        {
+            int threadId = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId1 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId3 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId2 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(replyId1), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+
+
+            Assert.IsTrue(dal.GetReplies(threadId).Length == 2);
+            Assert.IsTrue(dal.GetReplies(replyId1).Length == 1);
         }
     }
 }

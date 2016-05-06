@@ -10,6 +10,8 @@ namespace WASP.DataClasses
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime PasswordChangeDate { get; set; }
        
 
 
@@ -34,7 +36,28 @@ namespace WASP.DataClasses
             this.posts = null;
             this.forum = forum;
             this.dal = dal;
+            this.PasswordChangeDate = DateTime.Now;
+            this.StartDate = DateTime.Now;
         }
+
+
+
+        public User(int id, string name, string username, string email, string password, Forum forum,DateTime startDate, DateTime passChangeDate, DAL2 dal)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.dal = dal;
+            this.PasswordChangeDate = passChangeDate;
+            this.StartDate = startDate;
+        }
+
+
+
         private Dictionary<int, Notification> Notifications
         {
             get
@@ -72,7 +95,7 @@ namespace WASP.DataClasses
                 if (this.posts == null)
                 {
                     posts = new Dictionary<int, Post>();
-                    foreach (Post post in dal.GetUserPosts(Id))
+                    foreach (Post post in dal.GetUserPosts(Id,forum.Id))
                     {
                         posts.Add(post.Id, post);
                     }

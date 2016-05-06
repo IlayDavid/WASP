@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
+using WASP.DataClasses.Policies;
 
 namespace WASP.DataClasses
 {
-    class DALSQL : DAL
+    class DALSQL : DAL2
     {
         private int forum_counter = 1;
         private Object forumLock = new Object();
@@ -29,7 +30,6 @@ namespace WASP.DataClasses
         private static List<ISubForum> backUpSubForums;
         private static List<INotification> backUpNotifications;
         private static List<IPost> backUpPosts;
-
 
         public void Backup()
         {
@@ -255,35 +255,30 @@ namespace WASP.DataClasses
         // dont need forum..
         public User CreateUser(User user)
         {
-            IUser old_user = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.forum.Id));
-            if (old_user != null) throw new ExistException(String.Format("User {0} Forum {0} exists in the DataBase", user.Id, user.forum.Id));
+            IUser old_user = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.Forum.Id));
+            if (old_user != null) throw new ExistException(String.Format("User {0} Forum {0} exists in the DataBase", user.Id, user.Forum.Id));
             IUser _user = new IUser();
             _user.id = user.Id;
             _user.userName = user.Username;
             _user.name = user.Name;
             _user.password = user.Password;
             _user.email = user.Email;
-            _user.forumId = user.forum.Id;
+            _user.forumId = user.Forum.Id;
+
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
             return user;
         }
-        public void submituser(Forum forum, User user)
-        {
-            IUser old_user = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.forum.Id));
-            IForum newForum = db.IForums.FirstOrDefault(x => (x.id == forum.Id));
-            newForum.IUsers.Add(old_user);
-            db.SubmitChanges();
-        }
+
         public Admin CreateAdmin(Admin admin)
         {
             IUser old_user = old_user = db.IUsers.FirstOrDefault(x => (x.id == admin.Id && x.forumId == admin.Forum.Id));
             if (old_user != null) throw new ExistException(string.Format("User {0}, Forum {0} exists in the DataBase", admin.Id, admin.Forum.Id));
 
-            CreateUser(admin.InnerUser);
+            CreateUser(admin.User);
 
             IAdmin _admin = new IAdmin();
-            _admin.userId = admin.InnerUser.Id;
+            _admin.userId = admin.User.Id;
             _admin.forumId = admin.Forum.Id;
 
             db.IAdmins.InsertOnSubmit(_admin);
@@ -296,15 +291,15 @@ namespace WASP.DataClasses
             if (old_user != null)
                 throw new ExistException(string.Format("User {0}, Forum {0} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
 
-            if (mod.Appointer.Forum.Id != mod.user.forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
-                mod.user.forum.Id != mod.SubForum.Forum.Id)
+            if (mod.Appointer.Forum.Id != mod.User.Forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
+                mod.User.Forum.Id != mod.SubForum.Forum.Id)
                 throw new InvalidException("Method: CreateModerator, doesnt match 'forum' of Appointer|Subforum|User");
 
-            CreateUser(mod.user);
+            CreateUser(mod.User);
 
             IModerator _mod = new IModerator();
-            _mod.userId = mod.user.Id;
-            _mod.byAdmin = mod.Appointer.InnerUser.Id;
+            _mod.userId = mod.User.Id;
+            _mod.byAdmin = mod.Appointer.User.Id;
             _mod.forumId = mod.Appointer.Forum.Id;
             _mod.subForumId = mod.SubForum.Id;
             _mod.term = mod.TermExp;
@@ -343,7 +338,7 @@ namespace WASP.DataClasses
             IPost ipost = new IPost();
 
             ipost.id = getNextPostId();
-            ipost.subforumId = post.Container.Id;
+            ipost.subforumId = post.Subforum.Id;
             ipost.title = post.Title;
             ipost.cnt = post.Content;
             ipost.publishAt = post.PublishedAt;
@@ -353,7 +348,7 @@ namespace WASP.DataClasses
             else ipost.reply = post.InReplyTo.Id;
 
             ipost.userId = post.GetAuthor.Id;
-            ipost.forumId = post.GetAuthor.forum.Id;
+            ipost.forumId = post.GetAuthor.Forum.Id;
 
 
             db.IPosts.InsertOnSubmit(ipost);
@@ -361,22 +356,12 @@ namespace WASP.DataClasses
             post.Id = ipost.id;
             return post;
         }
-
-        public User[] GetUseres(int[] userIds, Forum forum)
+        public User[] GetUsers(int[] userIds, int forumId)
         {
             List<User> users = new List<User>();
             foreach (IUser iuser in db.IUsers)
-                if ((forum == null || iuser.forumId == forum.Id) && (userIds == null || userIds.Contains(iuser.id)))
-                {
-                    if (forum == null)
-                    {
-                        users.Add(GetUser(iuser.id, iuser.forumId));
-                    }
-                    else
-                    {
-                        users.Add(GetUser(iuser.id, forum));
-                    }
-                }
+                if (iuser.forumId == forumId && (userIds == null || userIds.Contains(iuser.id)))
+                    users.Add(GetUser(iuser.id, iuser.forumId));
             return users.ToArray();
         }
         public Moderator[] GetModerators(int[] moderatorIds, Subforum subforum)
@@ -432,8 +417,8 @@ namespace WASP.DataClasses
             if (iadmin != null)
             {
                 iadmin.forumId = admin.Forum.Id;
-                iadmin.userId = admin.InnerUser.Id;
-                updateUser(admin.InnerUser);
+                iadmin.userId = admin.User.Id;
+                UpdateUser(admin.User);
                 db.SubmitChanges();
                 return admin;
             }
@@ -452,22 +437,22 @@ namespace WASP.DataClasses
             }
             else throw new UpdateException(String.Format("Forum {0} wasn't found", forum.Id));
         }
-        public Moderator updateModerator(Moderator mod)
+        public Moderator UpdateModerator(Moderator mod)
         {
-            IModerator imod = db.IModerators.FirstOrDefault(x => (x.userId == mod.user.Id && x.subForumId == mod.SubForum.Id));
+            IModerator imod = db.IModerators.FirstOrDefault(x => (x.userId == mod.User.Id && x.subForumId == mod.SubForum.Id));
             if (imod != null)
             {
-                if (mod.Appointer.Forum.Id != mod.user.forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
-                                mod.user.forum.Id != mod.SubForum.Forum.Id)
+                if (mod.Appointer.Forum.Id != mod.User.Forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
+                                mod.User.Forum.Id != mod.SubForum.Forum.Id)
                     throw new Exception("Method: UpdateModerator, doesnt match 'forum' of Appointer|Subforum|User");
 
                 imod.subForumId = mod.SubForum.Id;
                 imod.term = mod.TermExp;
-                imod.byAdmin = mod.Appointer.InnerUser.Id;
-                imod.userId = mod.user.Id;
-                imod.forumId = mod.user.forum.Id;
+                imod.byAdmin = mod.Appointer.User.Id;
+                imod.userId = mod.User.Id;
+                imod.forumId = mod.User.Forum.Id;
 
-                updateUser(mod.user);
+                UpdateUser(mod.User);
                 db.SubmitChanges();
                 return mod;
             }
@@ -498,9 +483,9 @@ namespace WASP.DataClasses
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public User updateUser(User user)
+        public User UpdateUser(User user)
         {
-            IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.forum.Id));
+            IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.Forum.Id));
             if (iuser != null)
             {
                 iuser.userName = user.Username;
@@ -518,7 +503,7 @@ namespace WASP.DataClasses
             IPost ipost = db.IPosts.FirstOrDefault(x => x.id == post.Id);
             if (ipost != null)
             {
-                ipost.subforumId = post.Container.Id;
+                ipost.subforumId = post.Subforum.Id;
                 ipost.title = post.Title;
                 ipost.cnt = post.Content;
                 ipost.publishAt = post.PublishedAt;
@@ -527,7 +512,7 @@ namespace WASP.DataClasses
                     ipost.reply = null;
                 else ipost.reply = post.InReplyTo.Id;
                 ipost.userId = post.GetAuthor.Id;
-                ipost.forumId = post.GetAuthor.forum.Id;
+                ipost.forumId = post.GetAuthor.Forum.Id;
 
                 db.SubmitChanges();
                 return post;
@@ -543,27 +528,8 @@ namespace WASP.DataClasses
             if (iforum != null)
             {
                 Forum forum = new Forum(iforum.id, iforum.subject, iforum.description, null, this);
-                List<int> ints = new List<int>();
-                foreach (var iuser in iforum.IUsers)
-                {
-                    ints.Add(iuser.id);
-                }
-                foreach(var user in  GetUseres(ints.ToArray(), forum))
-                {
-                    forum.AddMember(user);
-                }
-                //need change
-                foreach (Admin admin in GetAdminsOfForum(forum))
-                    forum.AddAdmin(admin);
 
-                /*foreach(Admin admin in forum.GetAdmins())
-                {
-                    forum.AddMember(admin.InnerUser);
-                }*/
-                //need change
 
-                foreach (Subforum sf in GetSubForumsOfForum(forum))
-                    forum.AddSubForum(sf);
                 return forum;
             }
             throw new GetException(string.Format("forum {0} wasn't found", id));
@@ -577,106 +543,28 @@ namespace WASP.DataClasses
             {
                 Subforum sf = new Subforum(isf.id, isf.subject, isf.description, GetForum(isf.forumId), this);
 
-                //need change
-                foreach (Moderator mod in GetModeratorsInSubForum(sf))
-                    sf.AddModerator(mod);
-                //need change
-                foreach (Post post in GetPostsInSubForum(sf))
-                    sf.AddThread(post);
-
-
                 return sf;
             }
             throw new GetException(string.Format("sub-forum {0} wasn't found", sfId));
         }
 
-        public Subforum GetSubForum(int sfId, Forum forum)
-        {
-            ISubForum isf = db.ISubForums.FirstOrDefault(x => (x.id == sfId));
-            if (isf != null)
-            {
-                Subforum sf = new Subforum(isf.id, isf.subject, isf.description, forum, this);
 
-                //need change
-                foreach (Moderator mod in GetModeratorsInSubForum(sf))
-                    sf.AddModerator(mod);
-                //need change
-                foreach (Post post in GetPostsInSubForum(sf))
-                    sf.AddThread(post);
-
-
-                return sf;
-            }
-            throw new GetException(string.Format("sub-forum {0} wasn't found", sfId));
-        }
-        public Subforum GetSubForum(int sfId, Forum forum,User user)
-        {
-            ISubForum isf = db.ISubForums.FirstOrDefault(x => (x.id == sfId));
-            if (isf != null)
-            {
-                Subforum sf = new Subforum(isf.id, isf.subject, isf.description, forum, this);
-
-                //need change
-                foreach (Moderator mod in GetModeratorsInSubForum(sf))
-                    sf.AddModerator(mod);
-                //need change
-                foreach (Post post in GetPostsInSubForum(sf,user))
-                    sf.AddThread(post);
-
-
-                return sf;
-            }
-            throw new GetException(string.Format("sub-forum {0} wasn't found", sfId));
-        }
         public User GetUser(int id, int forumId)
         {
             IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == id && x.forumId == forumId));
             if (iuser != null)
             {
                 Forum forum = GetForum(forumId);
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum);
+                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, this);
 
-                //need change
-                foreach (Post post in GetPostsOfUser(user, iuser.forumId))
-                    user.AddPost(post);
-
-                return user;
-            }
-            throw new GetException(string.Format("user {0} wasn't found", id));
-        }
-        public User GetUser(int id, Forum forum)
-        {
-            IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == id && x.forumId == forum.Id));
-            if (iuser != null)
-            {
-             
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum);
-
-                //need change
-                foreach (Post post in GetPostsOfUser(user, iuser.forumId))
-                    user.AddPost(post);
 
                 return user;
             }
             throw new GetException(string.Format("user {0} wasn't found", id));
         }
 
-        public User GetUser(int id, Forum forum, Subforum subforum)
-        {
-            IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == id && x.forumId == forum.Id));
-            if (iuser != null)
-            {
 
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum);
 
-                //need change
-                foreach (Post post in GetPostsOfUser(user, iuser.forumId,subforum))
-                    user.AddPost(post);
-
-                return user;
-            }
-            throw new GetException(string.Format("user {0} wasn't found", id));
-        }
         public Moderator GetModerator(int id, int sfId)
         {
             IModerator imoderator = db.IModerators.FirstOrDefault(x => (x.userId == id && x.subForumId == sfId));
@@ -691,22 +579,9 @@ namespace WASP.DataClasses
             }
             throw new GetException(string.Format("moderator {0} wasn't found", id));
         }
-        public Moderator GetModerator(int id, Subforum subforum)
-        {
-            IModerator imoderator = db.IModerators.FirstOrDefault(x => (x.userId == id && x.subForumId == subforum.Id));
-            if (imoderator != null)
-            {
-                Admin admin = subforum.Forum.GetAdmin(imoderator.byAdmin);
-                User user = GetUser(id, subforum.Forum);
 
-                Moderator moderator = new Moderator(user, imoderator.term, subforum, admin, this);
-                return moderator;
-            }
-            throw new GetException(string.Format("moderator {0} wasn't found", id));
-        }
         public Admin GetAdmin(int adminId, int forumId)
         {
-
             IAdmin iadmin = db.IAdmins.FirstOrDefault(x => (x.userId == adminId && x.forumId == forumId));
             if (iadmin != null)
             {
@@ -714,28 +589,6 @@ namespace WASP.DataClasses
                 User user = GetUser(adminId, forumId);
                 Admin admin = new Admin(user, forum, this);
 
-                //need change
-                //foreach (Moderator mod in GetAppointedModsOfAdmin(admin.Id, admin.Forum.Id))
-                //    admin.AddAppointedMod(mod);
-
-                return admin;
-            }
-            throw new GetException(string.Format("admin {0} wasn't found", adminId));
-        }
-
-        public Admin GetAdmin(int adminId, Forum forum)
-        {
-
-            IAdmin iadmin = db.IAdmins.FirstOrDefault(x => (x.userId == adminId && x.forumId == forum.Id));
-            if (iadmin != null)
-            {
-              
-                User user = GetUser(adminId, forum);
-                Admin admin = new Admin(user, forum, this);
-
-                //need change
-                //foreach (Moderator mod in GetAppointedModsOfAdmin(admin.Id, admin.Forum.Id))
-                //    admin.AddAppointedMod(mod);
 
                 return admin;
             }
@@ -750,177 +603,18 @@ namespace WASP.DataClasses
             {
                 Post replyTo = null;
                 if (ipost.reply != null) replyTo = GetPost((int)ipost.reply);
-                var user = GetUser(ipost.userId, ipost.IUser.forumId);
-                var subforum = GetSubForum(ipost.subforumId);
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, subforum, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post))
-                    post.AddReply(p);
-
-
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId,Subforum subforum)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                if (ipost.reply != null) replyTo = GetPost((int)ipost.reply,subforum);
-                var user = GetUser(ipost.userId, subforum.Forum, subforum);
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, subforum, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post,subforum))
-                    post.AddReply(p);
-
-
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId,User user)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                if (ipost.reply != null)
-                {
-                    if (ipost.userId == user.Id)
-                    {
-                        replyTo = GetPost((int)ipost.reply,user);
-                    }
-                    else
-                    {
-                        replyTo = GetPost((int)ipost.reply);
-
-                    }
-                }
-                var subforum = GetSubForum(ipost.subforumId,user.forum,user);
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, subforum, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post,user))
-                    post.AddReply(p);
-
-
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId, User user, Subforum subforum)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                if (ipost.reply != null)
-                {
-                    if (ipost.IUser.id == user.Id)
-                    {
-                        replyTo = GetPost((int)ipost.reply,user, subforum);
-                    }
-                    else
-                    {
-                        replyTo = GetPost((int)ipost.reply, subforum);
-                    }
-                }
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, subforum, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post, subforum,user))
-                    post.AddReply(p);
-
-
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId, Post inReply)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                replyTo = inReply;
                 Post post = new Post(ipost.id, ipost.title, ipost.cnt, GetUser(ipost.userId, ipost.IUser.forumId), ipost.publishAt,
-                   replyTo, inReply.Container, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post))
-                    post.AddReply(p);
+                   replyTo, GetSubForum(ipost.subforumId), ipost.editAt, this);
 
 
                 return post;
             }
             throw new GetException(string.Format("post {0} wasn't found", postId));
         }
-        public Post GetPost(int postId, Post inReply,Subforum subforum)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                replyTo = inReply;
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, GetUser(ipost.userId, subforum.Forum,subforum), ipost.publishAt,
-                   replyTo, inReply.Container, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post,subforum))
-                    post.AddReply(p);
 
 
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId, Post inReply, User user)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                replyTo = inReply;
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, inReply.Container, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post,user))
-                    post.AddReply(p);
 
 
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
-        public Post GetPost(int postId, Post inReply, User user, Subforum subforum)
-        {
-            IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
-            if (ipost != null)
-            {
-                Post replyTo = null;
-                replyTo = inReply;
-                Post post = new Post(ipost.id, ipost.title, ipost.cnt, user, ipost.publishAt,
-                   replyTo, inReply.Container, ipost.editAt, this);
-
-                //need change
-                foreach (Post p in GetReplysPost(post,subforum,user))
-                    post.AddReply(p);
-
-
-                return post;
-            }
-            throw new GetException(string.Format("post {0} wasn't found", postId));
-        }
         public bool DeletePost(int postId)
         {
             IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
@@ -1004,16 +698,6 @@ namespace WASP.DataClasses
             else throw new ExistException(string.Format("subforum {0} does not exist", subforumId));
         }
 
-        public Moderator[] GetModeratorsInSubForum(Subforum subForum)
-        {
-            List<Moderator> moderators = new List<Moderator>();
-            foreach (IModerator imod in db.IModerators)
-            {
-                if (imod.subForumId == subForum.Id)
-                    moderators.Add(GetModerator(imod.userId, subForum));
-            }
-            return moderators.ToArray();
-        }
         public Forum[] GetForumsUserID(int userId)
         {
             List<Forum> forums = new List<Forum>();
@@ -1024,10 +708,6 @@ namespace WASP.DataClasses
             }
             return forums.ToArray();
         }
-
-
-
-
 
         public SuperUser CreateSuperUser(SuperUser superuser)
         {
@@ -1103,7 +783,7 @@ namespace WASP.DataClasses
             INotification inoti = db.INotifications.FirstOrDefault(x => x.id == notificationId);
             if (inoti != null)
             {
-                Notification noti = new Notification(inoti.id, inoti.message, inoti.isNew, GetUser(inoti.fromUserId, inoti.fromForumId), GetUser(inoti.toUserId, inoti.toForumId));
+                Notification noti = new Notification(inoti.id, inoti.message, inoti.isNew, GetUser(inoti.fromUserId, inoti.fromForumId), GetUser(inoti.toUserId, inoti.toForumId), this);
                 return noti;
             }
             throw new GetException(string.Format("Notifitcation {0} wasn't found", notificationId));
@@ -1133,9 +813,9 @@ namespace WASP.DataClasses
             INotification inot = new INotification();
             inot.id = getNextNotificationId();
             inot.fromUserId = notification.Source.Id;
-            inot.fromForumId = notification.Source.forum.Id;
+            inot.fromForumId = notification.Source.Forum.Id;
             inot.toUserId = notification.Target.Id;
-            inot.toForumId = notification.Target.forum.Id;
+            inot.toForumId = notification.Target.Forum.Id;
             inot.isNew = notification.IsNew;
             inot.message = notification.Message;
 
@@ -1149,9 +829,9 @@ namespace WASP.DataClasses
         {
             INotification inot = new INotification();
             inot.fromUserId = notification.Source.Id;
-            inot.fromForumId = notification.Source.forum.Id;
+            inot.fromForumId = notification.Source.Forum.Id;
             inot.toUserId = notification.Target.Id;
-            inot.toForumId = notification.Target.forum.Id;
+            inot.toForumId = notification.Target.Forum.Id;
             inot.isNew = notification.IsNew;
             inot.message = notification.Message;
 
@@ -1161,47 +841,15 @@ namespace WASP.DataClasses
 
 
 
-        public Admin[] GetAdminsOfForum(Forum forum)
+        public Admin[] GetAdminsOfForum(int forumId)
         {
-            IAdmin[] iadmins = db.IAdmins.Where(x => x.forumId == forum.Id).ToArray();
+            IAdmin[] iadmins = db.IAdmins.Where(x => x.forumId == forumId).ToArray();
             List<Admin> admins = new List<Admin>();
             foreach (IAdmin iadm in iadmins)
-                admins.Add(GetAdmin(iadm.userId, forum));
+                admins.Add(GetAdmin(iadm.userId, iadm.forumId));
             return admins.ToArray();
         }
 
-        public Subforum[] GetSubForumsOfForum(Forum forum)
-        {
-            ISubForum[] isubforums = db.ISubForums.Where(x => x.forumId == forum.Id).ToArray();
-            List<Subforum> subforums = new List<Subforum>();
-            foreach (ISubForum ifm in isubforums)
-                subforums.Add(GetSubForum(ifm.id,forum));
-            return subforums.ToArray();
-        }
-        public Post[] GetPostsInSubForum(int id)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.subforumId == id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id));
-            return posts.ToArray();
-        }
-        public Post[] GetPostsInSubForum(Subforum subforum)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.subforumId == subforum.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id,subforum));
-            return posts.ToArray();
-        }
-        public Post[] GetPostsInSubForum(Subforum subforum,User user)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.subforumId == subforum.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id,user, subforum));
-            return posts.ToArray();
-        }
         public Post[] GetPostsOfUser(int userId, int forumId)
         {
             IPost[] iposts = db.IPosts.Where(x => x.userId == userId && x.forumId == forumId).ToArray();
@@ -1210,23 +858,7 @@ namespace WASP.DataClasses
                 posts.Add(GetPost(ip.id));
             return posts.ToArray();
         }
-        public Post[] GetPostsOfUser(User user, int forumId)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.userId == user.Id && x.forumId == forumId).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id,user));
-            return posts.ToArray();
-        }
-        public Post[] GetPostsOfUser(User user, int forumId,Subforum subforum)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.userId == user.Id && x.forumId == forumId).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id, user,subforum));
-            return posts.ToArray();
-        }
-        public IEnumerable<Post> GetReplysPost(int id)
+        public Post[] GetReplysPost(int id)
         {
             IPost[] iposts = db.IPosts.Where(x => x.reply == id).ToArray();
             List<Post> posts = new List<Post>();
@@ -1234,38 +866,7 @@ namespace WASP.DataClasses
                 posts.Add(GetPost(ip.id));
             return posts.ToArray();
         }
-        public IEnumerable<Post> GetReplysPost(Post post)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.reply == post.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id,post));
-            return posts.ToArray();
-        }
-        public IEnumerable<Post> GetReplysPost(Post post,Subforum subforum)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.reply == post.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id, post,subforum));
-            return posts.ToArray();
-        }
-        public IEnumerable<Post> GetReplysPost(Post post, Subforum subforum, User user)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.reply == post.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id, post,  user,subforum));
-            return posts.ToArray();
-        }
-        public IEnumerable<Post> GetReplysPost(Post post,User user)
-        {
-            IPost[] iposts = db.IPosts.Where(x => x.reply == post.Id).ToArray();
-            List<Post> posts = new List<Post>();
-            foreach (IPost ip in iposts)
-                posts.Add(GetPost(ip.id, post,user));
-            return posts.ToArray();
-        }
+
         public Moderator[] GetAppointedModsOfAdmin(int adminId, int forumid)
         {
             IModerator[] imods = db.IModerators.Where(x => x.byAdmin == adminId && x.forumId == forumid).ToArray();
@@ -1273,6 +874,141 @@ namespace WASP.DataClasses
             foreach (IModerator im in imods)
                 mods.Add(GetModerator(im.userId, im.subForumId));
             return mods.ToArray();
+        }
+
+        public User[] GetForumMembers(int forumID)
+        {
+            GetForum(forumID); //checking that forumID exists
+            List<User> users = new List<User>();
+            foreach (IUser iuser in db.IUsers.Where(x => x.forumId == forumID))
+                users.Add(GetUser(iuser.id, iuser.forumId));
+            return users.ToArray();
+
+        }
+
+        public Admin[] GetForumAdmins(int forumID)
+        {
+            GetForum(forumID); //checking that forumID exists
+            List<Admin> admins = new List<Admin>();
+            foreach (IAdmin iadmin in db.IAdmins.Where(x => x.forumId == forumID))
+                admins.Add(GetAdmin(iadmin.userId, iadmin.forumId));
+            return admins.ToArray();
+        }
+
+        public Policy GetForumPolicy(int forumID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Subforum[] GetForumSubForums(int forumID)
+        {
+            ISubForum[] isubforums = db.ISubForums.Where(x => x.forumId == forumID).ToArray();
+            List<Subforum> subforums = new List<Subforum>();
+            foreach (ISubForum ifm in isubforums)
+                subforums.Add(GetSubForum(ifm.id));
+            return subforums.ToArray();
+        }
+
+        public Moderator[] GetSubForumMods(int subForumID)
+        {
+            List<Moderator> moderators = new List<Moderator>();
+            foreach (IModerator imod in db.IModerators)
+            {
+                if (imod.subForumId == subForumID)
+                    moderators.Add(GetModerator(imod.userId, imod.subForumId));
+            }
+            return moderators.ToArray();
+        }
+
+
+        public Post[] GetSubForumThreads(int subForumID)
+        {
+            IPost[] iposts = db.IPosts.Where(x => x.subforumId == subForumID && x.reply == null).ToArray();
+            List<Post> posts = new List<Post>();
+            foreach (IPost ip in iposts)
+                posts.Add(GetPost(ip.id));
+            return posts.ToArray();
+        }
+        public Post[] GetUserPosts(int userID, int forumId)
+        {
+            IPost[] iposts = db.IPosts.Where(x => x.userId == userID && x.forumId == forumId).ToArray();
+            List<Post> posts = new List<Post>();
+            foreach (IPost ip in iposts)
+                posts.Add(GetPost(ip.id));
+            return posts.ToArray();
+        }
+
+
+
+        public Forum GetSubForumForum(int subForumID)
+        {
+            return GetSubForum(subForumID).Forum;
+        }
+
+
+        public Notification[] GetUserNewNotifications(int userID)
+        {
+            List<Notification> nots = new List<Notification>();
+            foreach (INotification inot in db.INotifications.Where(x => x.toUserId == userID && x.isNew == true))
+            {
+                nots.Add(GetNotification(inot.id));
+            }
+            return nots.ToArray();
+        }
+
+        public Notification[] GetUserNotifications(int userID)
+        {
+            List<Notification> nots = new List<Notification>();
+            foreach (INotification inot in db.INotifications.Where(x => x.toUserId == userID))
+            {
+                nots.Add(GetNotification(inot.id));
+            }
+            return nots.ToArray();
+        }
+
+
+        public Subforum GetModeratorSubForum(int modID, int forumId)
+        {
+            IModerator imod = db.IModerators.FirstOrDefault(x => x.userId == modID && x.forumId == forumId);
+            if (imod == null)
+                throw new ExistException(string.Format("GetModeratorSubForum: Moderator {0} Forum {0} does not exist", modID, forumId));
+            return GetSubForum(imod.subForumId);
+        }
+
+        public Admin GetModeratorAppointerAdmin(int modID, int subforumId)
+        {
+            return GetModerator(modID, subforumId).Appointer;
+        }
+
+        public Moderator[] GetAdminAppointedMods(int adminID, int forumId)
+        {
+            List<Moderator> mods = new List<Moderator>();
+            foreach (IModerator imod in db.IModerators.Where(x => x.forumId == forumId && x.byAdmin == adminID))
+            {
+                mods.Add(GetModerator(imod.userId, imod.subForumId));
+            }
+            return mods.ToArray();
+        }
+
+
+        public Post[] GetReplies(int PostID)
+        {
+            List<Post> posts = new List<Post>();
+            foreach (IPost ipost in db.IPosts.Where(x => x.reply == PostID))
+            {
+                posts.Add(GetPost(ipost.id));
+            }
+            return posts.ToArray();
+        }
+
+        public Admin[] GetAdminsOfForum(Forum forum)
+        {
+            List<Admin> admins = new List<Admin>();
+            foreach (IAdmin iadmin in db.IAdmins.Where(x => x.forumId == forum.Id))
+            {
+                admins.Add(GetAdmin(iadmin.userId, iadmin.forumId));
+            }
+            return admins.ToArray();
         }
 
     }

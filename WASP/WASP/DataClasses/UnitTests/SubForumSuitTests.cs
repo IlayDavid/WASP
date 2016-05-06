@@ -1,15 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.ObjectModel;
-using WASP.DataClasses;
 namespace WASP.DataClasses.UnitTests
 {
     [TestClass]
     public class SubForumSuitTests
 
     {
-        private DAL dal = new DALSQL();
+        private DAL2 dal = new DALSQL();
         int forumId1;
         int forumId2;
 
@@ -40,7 +38,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Subforum subforum = new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal );
+                Subforum subforum = new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal);
 
                 int subforumId = dal.CreateSubForum(subforum).Id;
                 Assert.IsTrue(subforumId > 0);
@@ -137,7 +135,7 @@ namespace WASP.DataClasses.UnitTests
                 int subforumId1 = dal.CreateSubForum(subforum1).Id;
                 int subforumId2 = dal.CreateSubForum(subforum2).Id;
 
-                Subforum[] forums = dal.GetSubForums(new int [] { subforumId1 });
+                Subforum[] forums = dal.GetSubForums(new int[] { subforumId1 });
                 Assert.IsTrue(forums.Length == 1);
                 Assert.IsTrue(forums[0].Name == subforum1.Name);
             }
@@ -156,6 +154,46 @@ namespace WASP.DataClasses.UnitTests
             Assert.IsTrue(dal.GetSubForums(null).Length == 1);
             dal.DeleteSubforum(subforum2.Id);
             Assert.IsTrue(dal.GetSubForums(null).Length == 0);
+        }
+
+        [TestMethod]
+        public void SubforumModsTest7()
+        {
+            Subforum subforum1 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
+            Subforum subforum2 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
+            User user1 = new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            User user2 = new User(315470041, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            User user3 = new User(315470042, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            Admin admin = dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId1), dal));
+            dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(1), subforum1, admin, dal));
+            dal.CreateModerator(new Moderator(user3, DateTime.Now.AddDays(1), subforum2, admin, dal));
+            Assert.IsTrue(dal.GetSubForumMods(subforum1.Id).Length == 1);
+            Assert.IsTrue(dal.GetSubForumMods(subforum2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void SubForumPostsTest8()
+        {
+            Subforum subforum1 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
+            Subforum subforum2 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
+            User user1 = new User(315470044, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            User user2 = new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId1), dal));
+            dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId1), dal));
+
+            Post p1 = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum1, DateTime.Now, dal));
+            dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, p1, subforum1, DateTime.Now, dal));
+            Post p2 = dal.CreatePost(new Post(-1, "question", "blah", user2, DateTime.Now, null, subforum2, DateTime.Now, dal));
+            dal.CreatePost(new Post(-1, "question", "blah", user2, DateTime.Now, p2, subforum2, DateTime.Now, dal));
+            Assert.IsTrue(dal.GetSubForumThreads(subforum1.Id).Length == 1);
+            Assert.IsTrue(dal.GetSubForumThreads(subforum2.Id).Length == 1);
+        }
+
+        [TestMethod]
+        public void SubforumModsTest9()
+        {
+            Subforum subforum1 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
+            Assert.IsTrue(dal.GetSubForumForum(subforum1.Id).Id == forumId1);
         }
     }
 }

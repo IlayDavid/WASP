@@ -8,7 +8,7 @@ namespace WASP.Domain
 {
     class BLFacade : IBL
     {
-        private DAL dal;
+        private DAL2 dal;
         private bool initialized;
         public BLFacade()
         {
@@ -50,7 +50,7 @@ namespace WASP.Domain
             SuperUser su = this.dal.GetSuperUser(userID);
             //create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, null, dal);
-            User user = new User(adminID, adminName, adminUserName, email, pass, newForum);
+            User user = new User(adminID, adminName, adminUserName, email, pass, newForum,dal);
             // TODO: need to check if user and forum are fine with policy
             Admin admin = new Admin(user, newForum, dal);
             newForum.AddMember(user);
@@ -75,11 +75,11 @@ namespace WASP.Domain
             Forum forum = dal.GetForum(targetForumID);
 
             // Attempt to add user.
-            User user = new User(id, name, userName, email, pass, forum);
+            User user = new User(id, name, userName, email, pass, forum,dal);
             user = dal.CreateUser(user);
             // If user doesn't follow forum policy will throw exception.
             forum.AddMember(user);
-            dal.submituser(forum, user);
+           // dal.submituser(forum, user);
             // Will throw exception if unable to create user.
             return user;
         }
@@ -104,7 +104,7 @@ namespace WASP.Domain
         {
             User author = dal.GetUser(userID, forumID);
             Post post = dal.GetPost(replyToPost_ID);
-            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Container, DateTime.Now, dal);
+            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now, dal);
 
             post.AddReply(reply);
             author.AddPost(reply);
@@ -148,7 +148,7 @@ namespace WASP.Domain
 
             mod.TermExp = term;
             mod.SubForum.AddModerator(mod);
-            dal.updateModerator(mod);
+            dal.UpdateModerator(mod);
 
             return 1;
         }
@@ -173,7 +173,7 @@ namespace WASP.Domain
             Post post = dal.GetPost(postID);
             Forum forum = dal.GetForum(forumID);
             if (user.Id != post.GetAuthor.Id && forum.IsAdmin(userID))
-                throw new UnauthorizedEditPost(userID, postID, post.Container.Id);
+                throw new UnauthorizedEditPost(userID, postID, post.Subforum.Id);
             post.Content = content;
             dal.UpdatePost(post);
 
@@ -229,15 +229,10 @@ namespace WASP.Domain
 
         public User[] membersInDifferentForums(int userID)
         {
-            //TODO fetch superuser with userID.
-            User[] users = dal.GetUseres(null, null);
-            List<User> multipleForums = new List<User>();
-            foreach (User user in users)
-            {
-                if (dal.GetForumsUserID(user.Id).Length > 1)
-                    multipleForums.Add(user);
-            }
-            return multipleForums.ToArray();
+            SuperUser super = dal.GetSuperUser(userID);
+            User[] users = dal.GetUsersInDiffForums();
+            return users;
+           
         }
 
         public User login(string userName, string password, int forumID)
@@ -275,7 +270,7 @@ namespace WASP.Domain
         {
             Forum forum = dal.GetForum(forumID);
             Subforum sf = forum.GetSubForum(subForumID);
-            Moderator[] mods = dal.GetModeratorsInSubForum(sf);
+            Moderator[] mods = sf.GetAllModerators();
 
             return sf.GetAllModerators();
         }

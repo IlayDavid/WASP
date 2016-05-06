@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WASP.DataClasses.Policies;
+
 namespace WASP.DataClasses
 {
     public interface DAL2
@@ -36,7 +38,7 @@ namespace WASP.DataClasses
         Subforum[] GetSubForums(int[] subForumIds);
         Subforum GetSubForum(int sfId);
         Moderator[] GetSubForumMods(int subForumID);
-        Post[] GetSubForumPosts(int subForumID);
+        Post[] GetSubForumThreads(int subForumID);
         Forum GetSubForumForum(int subForumID);
 
         //user.id == -1
@@ -46,9 +48,9 @@ namespace WASP.DataClasses
         //userIds == null -> get all users. else get all users in the forum
         User[] GetUsers(int[] userIds, int forumId);
         User GetUser(int id, int forumId);
-       
-        
-        Post[] GetUserPosts(int userID,int forumID);
+
+
+        Post[] GetUserPosts(int userID, int forumId);
         Notification[] GetUserNewNotifications(int userID);
         Notification[] GetUserNotifications(int userID);
 
@@ -64,8 +66,8 @@ namespace WASP.DataClasses
         Moderator[] GetModerators(int[] moderatorIds, Subforum sf);
         Moderator GetModerator(int id, int sfId);
 
-        Subforum GetModeratorSubForum(int modID);
-        Admin GetModeratorAppointerAdmin(int modID);
+        Subforum GetModeratorSubForum(int modID, int forumId);
+        Admin GetModeratorAppointerAdmin(int modID, int subforumId);
 
 
         //Admins.id == -1
@@ -80,18 +82,15 @@ namespace WASP.DataClasses
         Admin[] GetAdmins(int[] adminsIds, Forum forum);
         Admin GetAdmin(int adminId, int forumId);
 
-        Moderator[] GetAdminAppointedMods(int adminID);
-
+        Moderator[] GetAdminAppointedMods(int adminID, int forumId);
         Post CreatePost(Post post);
         //subForum.id > -1
         Post UpdatePost(Post post);
         //subForumIds == null -> get all subForums. else, get all subForums in the forum.
         Post[] GetPosts(int[] Posts);
         Post GetPost(int postId);
-        //get the post PostID replied to
         //get all replies to postID
         Post[] GetReplies(int PostID);
-
 
 
         //return all the forums in which userID is a member
@@ -129,9 +128,7 @@ namespace WASP.DataClasses
         Notification CreateNotification(Notification notification);
 
 
-
         Admin[] GetAdminsOfForum(Forum forum);
-        Post[] GetPostsInSubForum(int id);
         Post[] GetPostsOfUser(int userId, int forumId);
         Post[] GetReplysPost(int id);
         Moderator[] GetAppointedModsOfAdmin(int adminId, int forumid);
