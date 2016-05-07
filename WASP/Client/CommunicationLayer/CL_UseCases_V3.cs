@@ -27,7 +27,7 @@ namespace Client.CommunicationLayer
         }
 
         public Admin addAdmin(int newAdminID)
-        {
+        {   //username, id, password, email, name
             string json = "{\"newadminid\":" + newAdminID + "}";
             string res = httpReq(json, "POST", _url + "/addAdmin/");
             return parser.parseStringToAdmin(res, this);
@@ -65,7 +65,7 @@ namespace Client.CommunicationLayer
         }
 
         public List<Post> postsByMember(int userID)
-        {
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"userid\":" + userID +"}";
             string res = httpReq(json, "POST", _url + "/postsByMember/");
             return parser.parseStringToPosts(res);
@@ -92,7 +92,7 @@ namespace Client.CommunicationLayer
         }
 
         public List<User> membersInDifferentForums()
-        {
+        {   //username, id, password, email, name
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/membersInDifferentForums/");
             return parser.parseStringToUsers(res);

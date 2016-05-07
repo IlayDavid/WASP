@@ -17,12 +17,12 @@ namespace Client.CommunicationLayer
 
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
-        {
+        {   //username, id, password, auth
             isInit = 1;
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + pass + "\"," + "\"id\":" + ID
                 + "," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name + "\"}";
             string res = httpReq(json, "POST", _url + "/initialize/");
-            return parser.parseStringToSuperUser(res, email, name);
+            return parser.parseStringToSuperUser(res, email, name, this);
         }
         public int isInitialize()
         {
@@ -30,7 +30,7 @@ namespace Client.CommunicationLayer
         }
 
         public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
-        {
+        {   // title, description, moderatorid
             string json = "{\"password\":\"" + pass + "\"," + "\"adminid\":" + adminID
                 + "," + "\"email\":\"" + email + "\"," + "\"forumname\":\"" + forumName
                 + "\"," + "\"description\":\"" + description + "\"," + "\"adminusername\":\"" + adminUserName
@@ -50,7 +50,7 @@ namespace Client.CommunicationLayer
         } 
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
-        {
+        {   //username, id, password, name, email
             string json = "{\"userid\":" + id + "," + "\"password\":\"" + pass + "\"," + "\"username\":\"" + userName
                 + "\"," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name
                 + "\"," + "\"forumid\":" + targetForumID + "}";
@@ -59,7 +59,7 @@ namespace Client.CommunicationLayer
         }
 
         public Post createThread(string title, string content, int subForumID)
-        {
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"title\":\"" + title + "\"," + "\"content\":\"" + content
                 + "\"," + "\"subforumid\":" + subForumID + "}";
             string res = httpReq(json, "POST", _url + "/createThread/");
@@ -67,7 +67,7 @@ namespace Client.CommunicationLayer
         }
 
         public Post createReplyPost(string content, int replyToPost_ID)
-        {
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"replytopostid\":" + replyToPost_ID + "," + "\"content\":\"" + content
                 + "\"}";
             string res = httpReq(json, "POST", _url + "/createReplyPost/");
@@ -75,7 +75,7 @@ namespace Client.CommunicationLayer
         }
 
         public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
-        {
+        {   //name, description, moderatorid
             string json = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/createSubforum/");

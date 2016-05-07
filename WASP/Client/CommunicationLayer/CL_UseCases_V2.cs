@@ -11,7 +11,7 @@ namespace Client.CommunicationLayer
     {
         //---------------------------Version 2 Use Cases Start------------------------------------
         public Moderator addModerator(int moderatorID, int subForumID, DateTime term)
-        {
+        {   //moderatorid, appointedbyid, subforumid
             string json = "{\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/addModerator/");

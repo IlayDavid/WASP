@@ -43,14 +43,14 @@ namespace Client.CommunicationLayer
             return su;
         }
 
-        public SuperUser parseStringToSuperUser(string res, string email, string name)
+        public SuperUser parseStringToSuperUser(string res, string email, string name, CL c)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             string username = dict["username"];
             int id = dict["id"];
             string password = dict["password"];
-            string _auth = dict["auth"];
+            c._auth = dict["auth"];
             SuperUser u = new SuperUser(name, username, id, email, password);
             return u;
 
@@ -94,7 +94,7 @@ namespace Client.CommunicationLayer
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             string name = dict["title"];
-            string description = dict["content"];
+            string description = dict["description"];
             int adminid = dict["authorid"];
             User user = new User();
             user.id = adminid;
@@ -107,7 +107,7 @@ namespace Client.CommunicationLayer
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             string name = dict["title"];
-            string description = dict["content"];
+            string description = dict["description"];
             int moderatorid = dict["moderatorid"];
             Moderator mod = new Moderator();
             User user = new User();
