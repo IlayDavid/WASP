@@ -92,6 +92,8 @@ namespace Client
                 newItem.DataContext = sf;
                 SubForums.Items.Add(newItem);
             }
+            if (Session.forum.subforums.Count > 0)
+                SubForums.SelectedIndex = 0;
         }
 
         public void LoadData()

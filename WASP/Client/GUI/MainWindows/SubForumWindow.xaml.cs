@@ -83,7 +83,11 @@ namespace Client
             setVisibility();
             LoadData();
             //presenting the subforums list 
-            List<Post> posts = Session.bl.getThreads(Session.subForum.id);
+            RefreshWindow();
+        }
+        private void RefreshWindow()
+        {
+            SubForumsThreads.Items.Clear();
             foreach (Post p in Session.subForum.threads)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -91,6 +95,8 @@ namespace Client
                 newItem.DataContext = p;
                 SubForumsThreads.Items.Add(newItem);
             }
+            if (Session.subForum.threads.Count > 0)
+                SubForumsThreads.SelectedIndex = 0;
         }
 
         private void LoadData()
@@ -105,13 +111,14 @@ namespace Client
         }
         private void SubForumsThreads_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListBoxItem i = (ListBoxItem)SubForumsThreads.SelectedItem;
-            Post p = (Post)i.DataContext;
-            if (p == null)
+            if (SubForumsThreads.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select a post");
                 return;
             }
+            ListBoxItem i = (ListBoxItem)SubForumsThreads.SelectedItem;
+            Post p = (Post)i.DataContext;
+            
             Session.post = p;
             PostWindow pwin = new PostWindow();
             pwin.Title = p.title;
@@ -119,6 +126,8 @@ namespace Client
             Session.currentWindow = pwin;
             this.Hide();
             pwin.ShowDialog();
+            Session.LoadThreads();
+            RefreshWindow();
             Session.currentWindow = this;
             setVisibility();
             this.ShowDialog();

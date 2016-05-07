@@ -36,7 +36,7 @@ namespace Client.GUI.AddWindows
 
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
-            //try
+            try
             {
                 if (_replyTo == null)
                     _post = Session.bl.createThread(txtTitle.Text, txtContent.Text, Session.subForum.id);
@@ -44,9 +44,9 @@ namespace Client.GUI.AddWindows
                     _post = Session.bl.createReplyPost(txtContent.Text, _replyTo.id);
                 this.Close();
             }
-            //catch(Exception ee)
+            catch(Exception ee)
             {
-                //MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
 

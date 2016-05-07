@@ -26,7 +26,14 @@ namespace Client.CommunicationLayer
 
         public int deletePost(int postID)
         {
-            return posts.Remove(postID)? 1:-1;
+            if (posts[postID].inReplyTo != null)
+            {
+                List<Post> replies = posts[postID].inReplyTo.replies;
+                replies.Remove(replies.First(x => x.id == postID));
+            }
+            posts.Remove(postID);
+            
+            return 1;
         }
 
         public int sendMessage(string targetUserNameID, string message)

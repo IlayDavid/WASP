@@ -222,6 +222,11 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post post = (Post)selected.DataContext;
+                if(post == null)
+                {
+                    MessageBox.Show("Please choose post");
+                    return;
+                }
                 AddPost addP = new AddPost(post);
                 addP.ShowDialog();
                 Post p = addP.getPost();

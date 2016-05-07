@@ -35,8 +35,9 @@ namespace Client.CommunicationLayer
 
         public int defineForumPolicy(Policy policy)
         {
-            throw new NotImplementedException();
-        }  //------------------------ policy object??
+            forums[forumID].policy = policy;
+            return 1;
+        }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
