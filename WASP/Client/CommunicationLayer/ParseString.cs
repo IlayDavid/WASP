@@ -171,9 +171,8 @@ namespace Client.CommunicationLayer
             List<Admin> ret = new List<Admin>();
             foreach (CLUser cl in dict)
             {
-                Admin ad = new Admin();
                 User u = new User(cl.id, cl.name, cl.username, cl.email, cl.password);
-                ad.user = u;
+                Admin ad = new Admin(u);
                 ret.Add(ad);
             }
             return ret;
@@ -197,8 +196,7 @@ namespace Client.CommunicationLayer
 
         public Admin parseStringToAdmin(string res, CL c)
         {
-            Admin admin = new Admin();
-            admin.user = (parseStringToUser(res, false, c));
+            Admin admin = new Admin(parseStringToUser(res, false, c));
             return admin;
         }
 
