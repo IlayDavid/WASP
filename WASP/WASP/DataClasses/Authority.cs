@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    public interface Authority
+    public abstract class Authority
     {
         public enum Level : byte
         {
@@ -14,6 +14,6 @@ namespace WASP.DataClasses
         }
 
 
-        Level AuthorizationLevel();
+        public abstract Level AuthorizationLevel();
     }
 }

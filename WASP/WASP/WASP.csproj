@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Config\Settings.cs" />
     <Compile Include="DataClasses\Admin.cs" />
+    <Compile Include="DataClasses\Authority.cs" />
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\DAL2.cs" />
     <Compile Include="DataClasses\DALSQL.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="Domain\BLFacade.cs" />
     <Compile Include="Domain\IBL.cs" />
+    <Compile Include="Exceptions\PolicyException.cs" />
     <Compile Include="Exceptions\UnauthorizedEditModTerm.cs" />
     <Compile Include="Exceptions\UnauthorizedAddModerator.cs" />
     <Compile Include="Exceptions\UnauthorizedAddNewThread.cs" />

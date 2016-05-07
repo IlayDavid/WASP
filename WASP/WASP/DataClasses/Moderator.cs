@@ -8,7 +8,7 @@ namespace WASP.DataClasses
 {
     public class Moderator : Authority
     {
-        public Authority.Level AuthorizationLevel()
+        public override Authority.Level AuthorizationLevel()
         {
             return Authority.Level.Mod;
         }
@@ -109,6 +109,17 @@ namespace WASP.DataClasses
             set
             {
                 termExpiration = value;
+            }
+        }
+        public DateTime StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                startDate = value;
             }
         }
 

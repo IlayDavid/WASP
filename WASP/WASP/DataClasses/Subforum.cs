@@ -179,10 +179,5 @@ namespace WASP.DataClasses
             return mod;
         }
 
-        public void Delete()
-        {
-            //TODO:
-            throw new NotImplementedException("Not a requirement as of yet.");
-        }
     }
 }

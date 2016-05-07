@@ -69,13 +69,18 @@ namespace WASP.DataClasses
             set { id = value; }
         }
 
+        public int UsersLoad
+        {
+            get { return usersLoad; }
+            set { usersLoad = value; }
+        }
         public PostDeletePolicy SelectedPostDeletePolicy
         {
             get { return deletePost; }
             set { deletePost = value; }
         }
 
-        public Policy(PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
+        public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
         {
             this.deletePost = deletePost;
             this.passwordPeriod = passwordPeriod;

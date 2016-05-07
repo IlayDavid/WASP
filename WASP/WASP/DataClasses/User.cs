@@ -6,7 +6,7 @@ namespace WASP.DataClasses
 {
     public class User : Authority
     {
-        public Authority.Level AuthorizationLevel()
+        public override Authority.Level AuthorizationLevel()
         {
             return Authority.Level.User;
         }

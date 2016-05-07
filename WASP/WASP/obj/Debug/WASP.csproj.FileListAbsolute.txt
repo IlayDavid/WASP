@@ -28,3 +28,4 @@ C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.Quali
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\El\wasp\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache

@@ -8,7 +8,7 @@ namespace WASP.DataClasses
 {
     public class Admin : Authority
     {
-        public Authority.Level AuthorizationLevel()
+        public override Authority.Level AuthorizationLevel()
         {
             return Authority.Level.Admin;
         }
