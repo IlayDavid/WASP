@@ -19,6 +19,21 @@ namespace WASP.DataClasses
             return dal.GetPolicy(id);
         }
 
+        public Policy Create()
+        {
+            return dal.CreatePolicy(this);
+        }
+
+        public Policy Update()
+        {
+            return dal.UpdatePolicy(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeletePolicy(id);
+        }
+
         private int id;
         //post
         private  int deletePost;
@@ -29,6 +44,12 @@ namespace WASP.DataClasses
         private  TimeSpan minimumSeniority;
         //stress
         private  int usersLoad;
+
+        public TimeSpan PasswordTimeSpan
+        {
+            get { return passwordPeriod; }
+            set { passwordPeriod = value; }
+        }
 
         public Policy(int deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
         {
