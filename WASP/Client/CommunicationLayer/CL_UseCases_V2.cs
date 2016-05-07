@@ -15,7 +15,7 @@ namespace Client.CommunicationLayer
             string json = "{\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/addModerator/");
-            return parseStringToModerator(res);
+            return parser.parseStringToModerator(res);
         }
 
         public int confirmEmail(int code)

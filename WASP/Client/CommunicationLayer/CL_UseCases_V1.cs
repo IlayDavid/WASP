@@ -22,7 +22,7 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + pass + "\"," + "\"id\":" + ID
                 + "," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name + "\"}";
             string res = httpReq(json, "POST", _url + "/initialize/");
-            return parseStringToSuperUser(res, email, name);
+            return parser.parseStringToSuperUser(res, email, name);
         }
         public int isInitialize()
         {
@@ -38,7 +38,7 @@ namespace Client.CommunicationLayer
                /*policy*/  "{\"owner\":\"" + Policy.owner + "\"," + "\"moderator\":" + Policy.moderator
                 + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}" + "\"}";
             string res = httpReq(json, "POST", _url + "/createForum/");
-            return parseStringToForum(res);
+            return parser.parseStringToForum(res);
         }
 
         public int defineForumPolicy(Policy policy)
@@ -55,7 +55,7 @@ namespace Client.CommunicationLayer
                 + "\"," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name
                 + "\"," + "\"forumid\":" + targetForumID + "}";
             string res = httpReq(json, "POST", _url + "/subscribeToForum/");
-            return parseStringToUser(res);
+            return parser.parseStringToUser(res, false, this);
         }
 
         public Post createThread(string title, string content, int subForumID)
@@ -63,7 +63,7 @@ namespace Client.CommunicationLayer
             string json = "{\"title\":\"" + title + "\"," + "\"content\":\"" + content
                 + "\"," + "\"subforumid\":" + subForumID + "}";
             string res = httpReq(json, "POST", _url + "/createThread/");
-            return parseStringToPost(res);
+            return parser.parseStringToPost(res);
         }
 
         public Post createReplyPost(string content, int replyToPost_ID)
@@ -71,7 +71,7 @@ namespace Client.CommunicationLayer
             string json = "{\"replytopostid\":" + replyToPost_ID + "," + "\"content\":\"" + content
                 + "\"}";
             string res = httpReq(json, "POST", _url + "/createReplyPost/");
-            return parseStringToPost(res);
+            return parser.parseStringToPost(res);
         }
 
         public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
@@ -79,7 +79,7 @@ namespace Client.CommunicationLayer
             string json = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/createSubforum/");
-            return parseStringToSubforum(res);
+            return parser.parseStringToSubforum(res);
         }
         //---------------------------Version 1 Use Cases End------------------------------------
     }

@@ -10,17 +10,18 @@ using System.Web.Script.Serialization;
 namespace Client.CommunicationLayer
 {
 
-    //add check to method in httpReq
-    //add rel url to field
-    //implement pasresing strings to objects
-    //getModerator return value
-    //no members in implementaion
+    //policy and dateTime
+    //admin
     public partial class CL : ICL
     {
         private string _url { get; set; }
+        public string _auth { get; set; }
+        private ParseString parser;
+
         public CL()
         {
             _url = "http://localhost:8080";
+            parser = new ParseString(); 
         }
 
         private string httpReq(string json, string method, string url)
@@ -57,123 +58,50 @@ namespace Client.CommunicationLayer
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login/");
-            return parseStringToUser(res);
-        }
-
-        private User parseStringToUser(string json)
-        {
-            var jss = new JavaScriptSerializer();
-            var dict = jss.Deserialize<Dictionary<string, dynamic>>(json);
-            string username = dict["username"];
-            int id = dict["id"];
-            string password = dict["password"];
-            string auth = dict["auth"];
-            string name = dict["name"];
-            string email = dict["email"]; 
-            User su = new User(id, name, username, email, password);
-            return su;
+            return parser.parseStringToUser(res, true, this);
         }
 
         public SuperUser loginSU(string userName, string password)
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
-            return parseStringToSuperUser(res);
-        }
-
-        private SuperUser parseStringToSuperUser(string res)
-        {
-            var jss = new JavaScriptSerializer();
-            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string username = dict["username"];
-            int id = dict["id"];
-            string password = dict["password"];
-            string auth = dict["auth"];
-            string name = dict["name"];
-            string email = dict["email"];
-            SuperUser su = new SuperUser(name, username, id, email, password);
-            return su;
-        }
-
-        private SuperUser parseStringToSuperUser(string res, string email, string name)
-        {
-            var jss = new JavaScriptSerializer();
-            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string username = dict["username"];
-            int id = dict["id"];
-            string password = dict["password"];
-            string auth =dict["auth"];
-            SuperUser u = new SuperUser(name, username, id, email, password);
-            return u;
-
+            return parser.parseStringToSuperUser(res, this);
         }
 
         //---------------------------------Getters----------------------------------------------
 
         public Post getThread(int threadId)
-        {   
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"postid\":" + threadId + "}";
             string res = httpReq(json, "POST", _url + "/getThread/");
-            return parseStringToPost(res);
+            return parser.parseStringToPost(res);
         }
 
         public List<Post> getThreads(int subForumID)
-        {
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"subforumid\":" + subForumID + "}";
             string res = httpReq(json, "POST", _url + "/getThreads/");
-            return parseStringToPosts(res);
+            return parser.parseStringToPosts(res);
         }
         public List<Post> getReplys(int postID)
-        {
+        {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"postid\":" + postID + "}";
             string res = httpReq(json, "POST", _url + "/getReplys/");
-            return parseStringToPosts(res);
-        }
-
-        private List<Post> parseStringToPosts(string res)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Post parseStringToPost(string res)
-        {
-            var jss = new JavaScriptSerializer();
-            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string title = dict["title"];
-            string content = dict["content"];
-            int authorid = dict["authorid"];
-            User author = new User();
-            author.id=authorid; 
-            int container = dict["container"];
-            int replypostid = dict["replypostid"];
-            Post inReplyTo = new Post();
-            inReplyTo.id = replypostid;
-            Post p = new Post( title,  content,  author,  container,  inReplyTo);
-            return p;
-        }
+            return parser.parseStringToPosts(res);
+        }     
 
         public Forum getForum(int forumID)
-        {
+        {   //name, description, adminid
             string json = "{\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getForum/");
-            return parseStringToForum(res);
-        }
-
-        private Forum parseStringToForum(string res)
-        {
-            throw new NotImplementedException();
-        }
+            return parser.parseStringToForum(res);
+        }       
 
         public Subforum getSubforum(int subforumId)
-        {
+        {   //name, description, moderatorid
             string json = "{\"subforumid\":" + subforumId + "}";
             string res = httpReq(json, "POST", _url + "/getSubforum/");
-            return parseStringToSubforum(res);
-        }
-
-        private Subforum parseStringToSubforum(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToSubforum(res);
         }
 
         DateTime getModeratorTermTime(int moderatorID, int subforumID)
@@ -189,81 +117,52 @@ namespace Client.CommunicationLayer
         }
 
         public List<Moderator> getModerators(int subForumID)
-        {
-            List<Moderator> mods = new List<Moderator>();
-            Dictionary<int, Moderator> modID = getSubforum(subForumID).moderators;
-            foreach (KeyValuePair<int, Moderator> entry in modID)
-            {
-                mods.Add(entry.Value);
-            }
-            return mods;
+        {   //subforumid, appointedbyid, moderatorid
+            string json = "{\"subforumid\":" + subForumID + "}";
+            string res = httpReq(json, "POST", _url + "/getModerators/");
+            return parser.parseStringToModerators(res);
         }
 
         private Moderator getModerator(int userID, int forumID, int subForumID, int moderatorID)
-        {
+        {   //moderatorid, appointedbyid, subforumid
             string json = "{\"userid\":" + userID + "," + "\"forumid\":" + forumID + "," + "\"subforumid\":" + subForumID + "," + "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/getModerator/");
-            return parseStringToModerator(res);
-        }
-
-        private Moderator parseStringToModerator(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToModerator(res);
         }
 
         public List<Forum> getAllForums()
-        {
+        {   //name, description, adminid
             string json = "";
             string res = httpReq(json, "POST", _url + "/getAllForums/");
-            return parseStringToForums(res);
-        }
-
-        private List<Forum> parseStringToForums(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToForums(res);
         }
 
         public List<Admin> getAdmins(int forumID)
-        {
+        {   //username, id, password, email, name
             string json = "{\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getAdmins/");
-            return parseStringToAdmins(res);
-        }
-
-        private List<Admin> parseStringToAdmins(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToAdmins(res);
         }
 
         public List<User> getMembers(int forumID)
-        {
+        {   //username, id, password, email, name
             string json = "{\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getMembers/");
-            return parseStringToUsers(res);
+            return parser.parseStringToUsers(res);
         }
 
         public List<Subforum> getSubforums(int forumID)
-        {
+        {   //subforumid, name, description
             string json = "{\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getSubforums/");
-            return parseStringToSubforums(res);
-        }
-
-        private List<Subforum> parseStringToSubforums(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToSubforums(res);
         }
 
         public Admin getAdmin(int AdminID)
-        {
+        {   //username, id, password, email, name
             string json = "{\"adminid\":" + AdminID + "}";
             string res = httpReq(json, "POST", _url + "/getAdmin/");
-            return parseStringToAdmin(res);
-        }
-
-        private Admin parseStringToAdmin(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToAdmin(res, this);
         }
 
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Client.CommunicationLayer
 {
@@ -29,7 +30,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"newadminid\":" + newAdminID + "}";
             string res = httpReq(json, "POST", _url + "/addAdmin/");
-            return parseStringToAdmin(res);
+            return parser.parseStringToAdmin(res, this);
         }
 
         public List<Message> getAllNotificationses()
@@ -67,7 +68,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"userid\":" + userID +"}";
             string res = httpReq(json, "POST", _url + "/postsByMember/");
-            return parseStringToPosts(res);
+            return parser.parseStringToPosts(res);
         }
 
         public ModeratorReport moderatorReport()
@@ -94,13 +95,9 @@ namespace Client.CommunicationLayer
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/membersInDifferentForums/");
-            return parseStringToUsers(res);
+            return parser.parseStringToUsers(res);
         }
 
-        private List<User> parseStringToUsers(string res)
-        {
-            throw new NotImplementedException();
-        }
         //---------------------------Version 3 Use Cases End------------------------------------
     }
 }
