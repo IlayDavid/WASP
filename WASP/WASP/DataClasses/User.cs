@@ -4,15 +4,19 @@ using System.Collections.Generic;
 
 namespace WASP.DataClasses
 {
-    public class User
+    public class User : Authority
     {
+        public Authority.Level AuthorizationLevel()
+        {
+            return Authority.Level.User;
+        }
         public string Name { get; set; }
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PasswordChangeDate { get; set; }
-       
+
 
 
         public int Id { get; set; }
@@ -20,7 +24,7 @@ namespace WASP.DataClasses
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
-        
+
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
         public static User Get(int userId, int forumId)
@@ -89,7 +93,7 @@ namespace WASP.DataClasses
         }
 
         // DEPRECATED
-        public User(int id, string name, string username, string email, string password, Forum forum,DateTime startDate, DateTime passChangeDate, DAL2 dal)
+        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, DAL2 dal)
         {
             this.Id = id;
             this.Name = name;
@@ -141,7 +145,7 @@ namespace WASP.DataClasses
                 if (this.posts == null)
                 {
                     posts = new Dictionary<int, Post>();
-                    foreach (Post post in dal.GetUserPosts(Id,forum.Id))
+                    foreach (Post post in dal.GetUserPosts(Id, forum.Id))
                     {
                         posts.Add(post.Id, post);
                     }

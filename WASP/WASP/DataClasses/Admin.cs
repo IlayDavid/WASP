@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    public class Admin
+    public class Admin : Authority
     {
+        public Authority.Level AuthorizationLevel()
+        {
+            return Authority.Level.Admin;
+        }
         private static DAL2 dal = WASP.Config.Settings.GetDal();
         private User user;
         private Dictionary<int, Moderator> appointedMods = null;
@@ -86,10 +90,10 @@ namespace WASP.DataClasses
         {
             get
             {
-                if(appointedMods == null)
+                if (appointedMods == null)
                 {
                     appointedMods = new Dictionary<int, Moderator>();
-                    foreach (Moderator mod in dal.GetAdminAppointedMods(Id,Forum.Id))
+                    foreach (Moderator mod in dal.GetAdminAppointedMods(Id, Forum.Id))
                     {
                         appointedMods.Add(mod.Id, mod);
                     }

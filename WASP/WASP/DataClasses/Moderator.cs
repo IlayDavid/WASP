@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    public class Moderator
+    public class Moderator : Authority
     {
+        public Authority.Level AuthorizationLevel()
+        {
+            return Authority.Level.Mod;
+        }
+
         private User user;
-        private DateTime termExpiration,startDate;
+        private DateTime termExpiration, startDate;
         private Subforum subForum;
         private Admin appointer;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
@@ -62,7 +67,7 @@ namespace WASP.DataClasses
         }
 
         // DEPRECATED
-        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer,DateTime startDate ,DAL2 dal)
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DateTime startDate, DAL2 dal)
         {
             this.user = user;
             this.termExpiration = termExpiration;

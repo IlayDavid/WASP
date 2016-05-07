@@ -69,7 +69,7 @@ namespace WASP.DataClasses
             set { id = value; }
         }
 
-        public PostDeletePolicy PostDeletePolicy
+        public PostDeletePolicy SelectedPostDeletePolicy
         {
             get { return deletePost; }
             set { deletePost = value; }
@@ -106,6 +106,18 @@ namespace WASP.DataClasses
             return true;
         }
 
+        public bool CanDeletePost(Authority.Level level, bool owner = false)
+        {
+            bool ownerCan = ((byte)Authority.Level.User & (byte)SelectedPostDeletePolicy) != 0;
+            if (owner && ownerCan)
+                return true;
+
+            // If not owner but still can:
+            if (((byte)level & (byte)(SelectedPostDeletePolicy)) != 0)
+                return true;
+                
+            return false;
+        }
     }
 }
 
