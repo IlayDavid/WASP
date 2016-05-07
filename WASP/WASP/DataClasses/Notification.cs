@@ -77,12 +77,20 @@ namespace WASP.DataClasses
             {
                 return this.source;
             }
+            set
+            {
+                source = value;
+            }
         }
         public User Target
         {
             get
             {
                 return this.target;
+            }
+            set
+            {
+                target = value;
             }
         }
 

@@ -12,7 +12,7 @@ namespace WASP.DataClasses
         private Dictionary<int, Subforum> subforums = null;
         private Dictionary<int, User> members = null;
         private Dictionary<int, Admin> admins = null;
-        private Dictionary<int, Policy> policy;
+        private Policy policy;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
         public static Forum Get(int id)
@@ -20,7 +20,22 @@ namespace WASP.DataClasses
             return dal.GetForum(id);
         }
 
-        public Forum(int id, String name, String description, Dictionary<int, Policy> policy)
+        public Forum Create()
+        {
+            return dal.CreateForum(this);
+        }
+
+        public Forum Update()
+        {
+            return dal.CreateForum(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteForum(Id);
+        }
+
+        public Forum(int id, String name, String description, Policy policy)
         {
             this.name = name;
             this.description = description;
@@ -29,7 +44,7 @@ namespace WASP.DataClasses
         }
 
         // DEPRECATED
-        public Forum(int id, String name, String description, Dictionary<int, Policy> policy, DAL2 dal)
+        public Forum(int id, String name, String description, Policy policy, DAL2 dal)
         {
             this.name = name;
             this.description = description;
@@ -120,13 +135,16 @@ namespace WASP.DataClasses
         }
 
 
-        public void AddPolicy(Policy policy)
+        public Policy Policy
         {
-            throw new NotImplementedException();
-        }
-        internal void DefinePolicy(Forum forum)
-        {
-            throw new NotImplementedException();
+            get
+            {
+                return policy;
+            }
+            set
+            {
+                policy = value;
+            }
         }
 
 
@@ -181,6 +199,7 @@ namespace WASP.DataClasses
         }
         public void AddMember(User member)
         {
+            this.Policy.Validate(member);
             Members.Add(member.Id, member);
 
         }
@@ -213,15 +232,18 @@ namespace WASP.DataClasses
             return Admins.Remove(admin.Id);
         }
 
-
-        internal void Update(Forum forum)
+        internal void NotifyAllMembers(Notification notification)
         {
-            throw new NotImplementedException();
-        }
+            foreach (User member in GetMembers())
+            {
 
-        internal void NotifyAllMembers(Notification notif)
-        {
-            throw new NotImplementedException();
+                //TODO Need to discuss with Avi.
+                //if(notification.Source != null)
+                //    if (member.Id == notification.Source.Id) //Skip source
+                //        continue;
+                member.NewNotification(new Notification(-1, notification.Message, notification.IsNew,
+                    notification.Source, member));
+            }
         }
     }
 }
