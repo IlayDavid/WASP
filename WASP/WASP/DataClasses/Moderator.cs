@@ -146,10 +146,5 @@ namespace WASP.DataClasses
                 appointer = value;
             }
         }
-
-
-
-
-
     }
 }
