@@ -36,7 +36,7 @@ namespace WASP.DataClasses
 
         private int id;
         //post
-        private  int deletePost;
+        private  PostDeletePolicy deletePost;
         //security
         private  TimeSpan passwordPeriod;
         private  bool emailVerification;
@@ -51,7 +51,31 @@ namespace WASP.DataClasses
             set { passwordPeriod = value; }
         }
 
-        public Policy(int deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
+        public TimeSpan MinimumSeniority
+        {
+            get { return minimumSeniority; }
+            set { minimumSeniority = value; }
+        }
+
+        public bool EmailVerfication
+        {
+            get { return emailVerification; }
+            set { emailVerification = value; }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public PostDeletePolicy PostDeletePolicy
+        {
+            get { return deletePost; }
+            set { deletePost = value; }
+        }
+
+        public Policy(PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
         {
             this.deletePost = deletePost;
             this.passwordPeriod = passwordPeriod;
