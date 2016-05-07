@@ -20,6 +20,21 @@ namespace WASP.DataClasses
             return dal.GetNotification(id);
         }
 
+        public Notification Create()
+        {
+            return dal.CreateNotification(this);
+        }
+
+        public Notification Update()
+        {
+            return dal.UpdateNotification(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteNotification(Id);
+        }
+
         public Notification(int id, String message, bool isNew, User source, User target)
         {
             this.id = id;
@@ -60,9 +75,6 @@ namespace WASP.DataClasses
         {
             get
             {
-                //if (this.source == null)
-                  //  this.source = this.dal.GetNotificationSource(this.Id);
-
                 return this.source;
             }
         }
@@ -70,9 +82,6 @@ namespace WASP.DataClasses
         {
             get
             {
-                //if (this.target == null)
-                 //   this.target = this.dal.GetNotificationTarget(this.Id);
-
                 return this.target;
             }
         }

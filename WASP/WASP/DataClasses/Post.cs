@@ -18,6 +18,37 @@ namespace WASP.DataClasses
             return dal.GetPost(id);
         }
 
+        public Post Create()
+        {
+            Post thisPost = dal.CreatePost(this);
+            string notificationMessage = String.Format("Post {0} created.", thisPost.Id);
+            Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null);
+            Subforum.Forum.NotifyAllMembers(notif);
+            return thisPost;
+        }
+
+        public Post Update()
+        {
+            Post thisPost = dal.UpdatePost(this);
+            string notificationMessage = String.Format("Post {0} updated.", thisPost.Id);
+            NotifyRepliers(new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null));
+            return thisPost;
+        }
+
+        public bool Delete()
+        {
+            string notificationMessage = String.Format("Post {0} deleted.", Id);
+            NotifyRepliers(new Notification(-1, notificationMessage, true, GetAuthor, null));
+            Post[] replies = GetAllReplies();
+            foreach (Post reply in replies)
+            {
+                reply.Delete();
+                RemoveReply(reply.Id);
+            }
+            this.author.RemovePost(Id);
+            return dal.DeletePost(Id);
+        }
+
         public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt)
         {
             this.id = id;
@@ -99,9 +130,6 @@ namespace WASP.DataClasses
         {
             get
             {
-               // if (author == null)
-                  //  author = dal.GetPostAuthor(id);
-
                 return author;
             }
 
@@ -110,8 +138,6 @@ namespace WASP.DataClasses
         {
             get
             {
-               // if (subforum == null)
-                  //  subforum = dal.GetPostSubforum(Id);
                 return subforum;
             }
             set
@@ -124,9 +150,6 @@ namespace WASP.DataClasses
         {
             get
             {
-               // if (this.InReplyTo == null)
-                 //   InReplyTo = dal.GetInReplyTo(this.id);
-
                 return this.inReplyTo;
             }
             set
@@ -177,29 +200,15 @@ namespace WASP.DataClasses
             Replies.TryGetValue(id, out reply);
             return reply;
         }
-        public void Delete()
-        {
-
-            //TODO:
-            string notificationMessage = String.Format("Post {0} deleted.", Id);
-            //NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
-            Post[] replies = GetAllReplies();
-            foreach (Post reply in replies)
-            {
-                reply.Delete();
-                RemoveReply(reply.Id);
-            }
-            this.author.RemovePost(this.id);
-        }
+        
 
         public void NotifyRepliers(Notification notification)
         {
-            //TODO:
             foreach (Post reply in GetAllReplies())
             {
                 User target = reply.GetAuthor;
-                //target.NewNotification(new Notification(notification.Message, notification.IsNew, 
-                //    notification.Source, target));
+                target.NewNotification(new Notification(-1, notification.Message, notification.IsNew, 
+                    notification.Source, target));
             }
         }
 

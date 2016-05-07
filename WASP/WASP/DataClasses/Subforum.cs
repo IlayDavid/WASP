@@ -15,6 +15,21 @@ namespace WASP.DataClasses
             return dal.GetSubForum(id);
         }
 
+        public Subforum Create()
+        {
+            return dal.CreateSubForum(this);
+        }
+
+        public Subforum Update()
+        {
+            return dal.UpdateSubForum(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteSubforum(Id);
+        }
+
         public Subforum(int id, String name, String description, Forum forum)
         {
             this.id = id;

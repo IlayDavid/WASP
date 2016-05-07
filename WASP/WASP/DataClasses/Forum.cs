@@ -218,5 +218,10 @@ namespace WASP.DataClasses
         {
             throw new NotImplementedException();
         }
+
+        internal void NotifyAllMembers(Notification notif)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

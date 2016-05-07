@@ -18,6 +18,21 @@ namespace WASP.DataClasses
             return dal.GetAdmin(adminId, forumId);
         }
 
+        public Admin Create()
+        {
+            return dal.CreateAdmin(this);
+        }
+
+        public Admin Update()
+        {
+            return dal.UpdateAdmin(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteAdmin(Id, Forum.Id);
+        }
+
         public Admin(User user, Forum myForum)
         {
             this.user = user;

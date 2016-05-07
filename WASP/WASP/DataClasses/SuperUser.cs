@@ -15,6 +15,21 @@ namespace WASP.DataClasses
         {
             return dal.GetSuperUser(id);
         }
+        public SuperUser Update()
+        {
+            return dal.UpdateSuperUser(this);
+        }
+
+        public SuperUser Create()
+        {
+            return dal.CreateSuperUser(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteSuperUser(this.Id);
+        }
+
 
         public SuperUser ( int id, string userName, string password)
         {

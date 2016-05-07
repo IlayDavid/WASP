@@ -28,6 +28,26 @@ namespace WASP.DataClasses
             return dal.GetUser(userId, forumId);
         }
 
+        public User Update()
+        {
+            User old = Get(Id, Forum.Id);
+            if (!old.Password.Equals(Password))
+            {
+                PasswordChangeDate = DateTime.Now;
+            }
+            return dal.UpdateUser(this);
+        }
+
+        public User Create()
+        {
+            return dal.CreateUser(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteUser(this.Id, this.Forum.Id);
+        }
+
         public User(int id, string name, string username, string email, string password, Forum forum)
         {
             this.Id = id;
@@ -170,6 +190,8 @@ namespace WASP.DataClasses
         {
             // TODO: new notification handling. 
             throw new NotImplementedException();
+            newNotification = newNotification.Create();
+            NewNotifications.Add(newNotification.Id, newNotification);
         }
 
         public Notification[] GetAllNotifications()

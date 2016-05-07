@@ -19,6 +19,21 @@ namespace WASP.DataClasses
             return dal.GetModerator(modId, subforumID);
         }
 
+        public Moderator Create()
+        {
+            return dal.CreateModerator(this);
+        }
+
+        public Moderator Update()
+        {
+            return dal.UpdateModerator(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteModerator(Id, SubForum.Id);
+        }
+
         public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer)
         {
             this.user = user;
