@@ -28,7 +28,7 @@ namespace WASP.DataClasses.UnitTests
         }
 
         [TestMethod]
-        public void AddUserTest1()
+        public void AddUserTest1_1()
         {
             try
             {
@@ -38,6 +38,26 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue((user.Username).Equals("matansar"));
                 Assert.IsTrue((user.Password).Equals("123"));
                 Assert.IsTrue((user.Name).Equals("matan"));
+                
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+        [TestMethod]
+        public void AddUserTest1_2()
+        {
+            try
+            {
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId),DateTime.Now.AddDays(11), DateTime.Now.AddDays(9)));
+                User user = dal.GetUser(315470047, forumId);
+                Assert.IsTrue((user.Email).Equals("matansar@post.bgu.ac.il"));
+                Assert.IsTrue((user.Username).Equals("matansar"));
+                Assert.IsTrue((user.Password).Equals("123"));
+                Assert.IsTrue((user.Name).Equals("matan"));
+                Assert.IsTrue(user.StartDate.Date == DateTime.Now.AddDays(11).Date);
+                Assert.IsTrue(user.PasswordChangeDate.Date == DateTime.Now.AddDays(9).Date);
 
             }
             catch (Exception e)
@@ -45,7 +65,6 @@ namespace WASP.DataClasses.UnitTests
                 Assert.Fail(e.Message);
             }
         }
-
         [TestMethod]
         public void AddUserTest2()
         {
@@ -86,7 +105,7 @@ namespace WASP.DataClasses.UnitTests
         }
 
         [TestMethod]
-        public void UpdateUserTest4()
+        public void UpdateUserTest4_1()
         {
             try
             {
@@ -98,13 +117,30 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue(user.Password.Equals("456"));
                 Assert.IsTrue(user.Name.Equals("moshe"));
 
+
             }
             catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
         }
+        [TestMethod]
+        public void UpdateUserTest4_2()
+        {
+            try
+            {
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now.AddDays(11), DateTime.Now.AddDays(9)));
+                User user = dal.UpdateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now.AddDays(131), DateTime.Now.AddDays(39)));
 
+                Assert.IsTrue(user.StartDate.Date == DateTime.Now.AddDays(131).Date);
+                Assert.IsTrue(user.PasswordChangeDate.Date == DateTime.Now.AddDays(39).Date);
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
         [TestMethod]
         public void GetUsersTest5()
         {

@@ -5,6 +5,7 @@ using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses.Policies;
+using static WASP.DataClasses.Policy;
 
 namespace WASP.DataClasses
 {
@@ -22,6 +23,9 @@ namespace WASP.DataClasses
         private int notification_counter = 1;
         private Object notificationLock = new Object();
 
+        private int policy_counter = 1;
+        private Object policyLock = new Object();
+
         private static List<ISuperUser> backUpSuperUsers;
         private static List<IUser> backUpUsers;
         private static List<IAdmin> backUpAdmins;
@@ -30,6 +34,7 @@ namespace WASP.DataClasses
         private static List<ISubForum> backUpSubForums;
         private static List<INotification> backUpNotifications;
         private static List<IPost> backUpPosts;
+        private static List<IPolicy> backUpPolicies;
 
         public void Backup()
         {
@@ -51,6 +56,7 @@ namespace WASP.DataClasses
             backUpSubForums = new List<ISubForum>();
             backUpNotifications = new List<INotification>();
             backUpPosts = new List<IPost>();
+            backUpPolicies = new List<IPolicy>();
 
             Forum_SystemDataContext db = new Forum_SystemDataContext();
             //1
@@ -62,6 +68,20 @@ namespace WASP.DataClasses
                 isuper.password = isuperUser.password;
                 backUpSuperUsers.Add(isuper);
             }
+
+            //1.1
+            foreach (IPolicy ipol in db.IPolicies)
+            {
+                IPolicy pol = new IPolicy();
+                pol.id = ipol.id;
+                pol.emailVerification = ipol.emailVerification;
+                pol.minimumSeniority = ipol.minimumSeniority;
+                pol.passwordPeriod = ipol.passwordPeriod;
+                pol.postDeletePolicy = ipol.postDeletePolicy;
+                pol.usersLoad = ipol.usersLoad;
+                backUpPolicies.Add(pol);
+            }
+
             //2
             foreach (IUser user in db.IUsers)
             {
@@ -155,6 +175,11 @@ namespace WASP.DataClasses
                 db.ISuperUsers.InsertOnSubmit(isuper);
             }
 
+            foreach (IPolicy ipol in backUpPolicies)
+            {
+                db.IPolicies.InsertOnSubmit(ipol);
+            }
+
             //5
             foreach (IForum forum in backUpForums)
             {
@@ -209,6 +234,7 @@ namespace WASP.DataClasses
             db.IAdmins.DeleteAllOnSubmit(db.IAdmins);
             db.IUsers.DeleteAllOnSubmit(db.IUsers);
             db.ISuperUsers.DeleteAllOnSubmit(db.ISuperUsers);
+            db.IPolicies.DeleteAllOnSubmit(db.IPolicies);
             db.SubmitChanges();
         }
 
@@ -221,7 +247,15 @@ namespace WASP.DataClasses
                 return ret;
             }
         }
-
+        private int getNextPolicyId()
+        {
+            lock (policyLock)
+            {
+                int ret = policy_counter;
+                policy_counter++;
+                return ret;
+            }
+        }
         private int getNextNotificationId()
         {
             lock (notificationLock)
@@ -264,6 +298,8 @@ namespace WASP.DataClasses
             _user.password = user.Password;
             _user.email = user.Email;
             _user.forumId = user.Forum.Id;
+            _user.PasswordChangeDate = user.PasswordChangeDate;
+            _user.StartDate = user.StartDate;
 
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
@@ -280,7 +316,7 @@ namespace WASP.DataClasses
             IAdmin _admin = new IAdmin();
             _admin.userId = admin.User.Id;
             _admin.forumId = admin.Forum.Id;
-
+            
             db.IAdmins.InsertOnSubmit(_admin);
             db.SubmitChanges();
             return admin;
@@ -303,6 +339,7 @@ namespace WASP.DataClasses
             _mod.forumId = mod.Appointer.Forum.Id;
             _mod.subForumId = mod.SubForum.Id;
             _mod.term = mod.TermExp;
+            _mod.startDate = mod.StartDate;
 
             db.IModerators.InsertOnSubmit(_mod);
             db.SubmitChanges();
@@ -314,7 +351,10 @@ namespace WASP.DataClasses
             _forum.id = getNextForumId();
             _forum.subject = forum.Name;
             _forum.description = forum.Description;
-
+            if (forum.Policy != null)
+                _forum.policyId = forum.Policy.Id;
+            else
+                _forum.policyId = null;
             db.IForums.InsertOnSubmit(_forum);
             db.SubmitChanges();
             forum.Id = _forum.id;
@@ -432,6 +472,10 @@ namespace WASP.DataClasses
             {
                 iforum.description = forum.Description;
                 iforum.subject = forum.Name;
+                if (forum.Policy != null)
+                    iforum.policyId = forum.Policy.Id;
+                else
+                    iforum.policyId = null;
                 db.SubmitChanges();
                 return forum;
             }
@@ -451,6 +495,7 @@ namespace WASP.DataClasses
                 imod.byAdmin = mod.Appointer.User.Id;
                 imod.userId = mod.User.Id;
                 imod.forumId = mod.User.Forum.Id;
+                imod.startDate = mod.StartDate;
 
                 UpdateUser(mod.User);
                 db.SubmitChanges();
@@ -492,7 +537,8 @@ namespace WASP.DataClasses
                 iuser.name = user.Name;
                 iuser.email = user.Email;
                 iuser.password = user.Password;
-
+                iuser.StartDate = user.StartDate;
+                iuser.PasswordChangeDate = user.PasswordChangeDate;
                 db.SubmitChanges();
                 return user;
             }
@@ -528,7 +574,8 @@ namespace WASP.DataClasses
             if (iforum != null)
             {
                 Forum forum = new Forum(iforum.id, iforum.subject, iforum.description, null, this);
-
+                if (iforum.policyId != null)
+                    forum.Policy = GetPolicy((int)iforum.policyId);
 
                 return forum;
             }
@@ -555,7 +602,7 @@ namespace WASP.DataClasses
             if (iuser != null)
             {
                 Forum forum = GetForum(forumId);
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, this);
+                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate);
 
 
                 return user;
@@ -574,7 +621,7 @@ namespace WASP.DataClasses
                 Admin admin = GetAdmin(imoderator.byAdmin, imoderator.forumId);
                 User user = GetUser(id, imoderator.forumId);
 
-                Moderator moderator = new Moderator(user, imoderator.term, subforum, admin, this);
+                Moderator moderator = new Moderator(user, imoderator.term, subforum, admin, imoderator.startDate);
                 return moderator;
             }
             throw new GetException(string.Format("moderator {0} wasn't found", id));
@@ -588,7 +635,6 @@ namespace WASP.DataClasses
                 Forum forum = GetForum(forumId);
                 User user = GetUser(adminId, forumId);
                 Admin admin = new Admin(user, forum, this);
-
 
                 return admin;
             }
@@ -645,7 +691,7 @@ namespace WASP.DataClasses
                 db.SubmitChanges();
                 return true;
             }
-            else throw new ExistException(string.Format("User {0} Forum {0} does not exist", id, forumId));
+            else throw new ExistException(string.Format("User {0} Forum {1} does not exist", id, forumId));
         }
         public bool DeleteAdmin(int adminId, int forumId)
         {
@@ -659,7 +705,7 @@ namespace WASP.DataClasses
 
                 return true;
             }
-            else throw new ExistException(string.Format("Admin {0} Forum {0} does not exist", adminId, forumId));
+            else throw new ExistException(string.Format("Admin {0} Forum {1} does not exist", adminId, forumId));
         }
         public bool DeleteModerator(int modId, int subforumId)
         {
@@ -673,7 +719,7 @@ namespace WASP.DataClasses
                 DeleteUser(userId, forumId);
                 return true;
             }
-            else throw new ExistException(string.Format("Moderator {0} Forum {0} does not exist", modId, subforumId));
+            else throw new ExistException(string.Format("Moderator {0} Forum {1} does not exist", modId, subforumId));
         }
         public bool DeleteForum(int forumId)
         {
@@ -1048,5 +1094,59 @@ namespace WASP.DataClasses
 
         }
 
+        public Policy GetPolicy(int id)
+        {
+            IPolicy ipolicy = db.IPolicies.FirstOrDefault(x => x.id == id);
+            if(ipolicy != null)
+            {  
+                Policy polc = new Policy(id, (PostDeletePolicy)ipolicy.postDeletePolicy,TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad);
+                return polc;
+            }
+            throw new ExistException(string.Format("GetPolicy: Policy {0} does not exist",id));
+        }
+
+        public bool DeletePolicy(int id)
+        {
+            IPolicy ipol = db.IPolicies.FirstOrDefault(x => x.id == id);
+            if (ipol != null)
+            {
+                db.IPolicies.DeleteOnSubmit(ipol);
+                db.SubmitChanges();
+                return true;
+            }
+            else throw new ExistException(string.Format("DeletePolicy: Policy {0} does not exist", id));
+        }
+
+        public Policy UpdatePolicy(Policy policy)
+        {
+            IPolicy ipolicy = db.IPolicies.FirstOrDefault(x => x.id == policy.Id);
+            if (ipolicy != null)
+            {
+                ipolicy.emailVerification = policy.EmailVerfication;
+                ipolicy.minimumSeniority = policy.MinimumSeniority.Ticks;
+                ipolicy.passwordPeriod = policy.PasswordTimeSpan.Ticks;
+                ipolicy.postDeletePolicy = (int) policy.SelectedPostDeletePolicy;
+                ipolicy.usersLoad = policy.UsersLoad;
+                return policy;
+            }
+            throw new ExistException(string.Format("UpdatePolicy: Policy {0} does not exist", policy.Id));
+        }
+
+        public Policy CreatePolicy(Policy policy)
+        {
+            IPolicy ipolicy = new IPolicy();
+            ipolicy = new IPolicy();
+            ipolicy.id = getNextPolicyId();
+            ipolicy.emailVerification = policy.EmailVerfication;
+            ipolicy.minimumSeniority = policy.MinimumSeniority.Ticks;
+            ipolicy.passwordPeriod = policy.PasswordTimeSpan.Ticks;
+            ipolicy.postDeletePolicy = (int)policy.SelectedPostDeletePolicy;
+            ipolicy.usersLoad = policy.UsersLoad;
+
+            db.IPolicies.InsertOnSubmit(ipolicy);
+            db.SubmitChanges();
+            policy.Id = ipolicy.id;
+            return policy;
+        }
     }
 }

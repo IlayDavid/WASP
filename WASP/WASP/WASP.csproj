@@ -79,6 +79,7 @@
     <Compile Include="DataClasses\UnitTests\ForumSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\ModeratorSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\NotificSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\PolicySuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\PostSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\SubForumSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\SuperUserSuitTests.cs" />

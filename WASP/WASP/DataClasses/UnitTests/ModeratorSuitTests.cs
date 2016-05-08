@@ -46,7 +46,7 @@ namespace WASP.DataClasses.UnitTests
 
 
         [TestMethod]
-        public void AddModeratorTest1()
+        public void AddModeratorTest1_1()
         {
             try
             {
@@ -59,6 +59,28 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue(mod.Appointer.Id == adminId);
                 Assert.IsTrue(mod.TermExp.Date == DateTime.Now.AddDays(10).Date);
 
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AddModeratorTest1_2()
+        {
+            try
+            {
+                Subforum subforum = dal.GetSubForum(subforumId);
+                Admin admin = dal.GetAdmin(adminId, forumId);
+                dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), subforum,
+                    admin,DateTime.Now.AddDays(11)));
+                Moderator mod = dal.GetModerator(user1.Id, subforumId);
+                Assert.IsTrue(mod.Id == user1.Id);
+                Assert.IsTrue(mod.Appointer.Id == adminId);
+                Assert.IsTrue(mod.TermExp.Date == DateTime.Now.AddDays(10).Date);
+                Assert.IsTrue(mod.StartDate.Date == DateTime.Now.AddDays(11).Date);
+                
             }
             catch (Exception e)
             {
@@ -113,22 +135,24 @@ namespace WASP.DataClasses.UnitTests
         }
 
         [TestMethod]
-        public void UpdateModeratorTest4()
+        public void UpdateModeratorTest4_1()
         {
             try
             {
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 dal.UpdateModerator(new Moderator(user1, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
-                    dal.GetAdmin(adminId, forumId), dal));
+                    dal.GetAdmin(adminId, forumId), DateTime.Now.AddDays(11)));
                 Moderator mod = dal.GetModerator(user1.Id, subforumId);
                 Assert.IsTrue(mod.TermExp.Date == DateTime.Now.AddDays(20).Date);
+                Assert.IsTrue(mod.StartDate.Date == DateTime.Now.AddDays(11).Date);
             }
             catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
         }
+        
 
         [TestMethod]
         public void GetModeratorsTest5()
