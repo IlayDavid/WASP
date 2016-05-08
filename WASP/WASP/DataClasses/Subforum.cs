@@ -1,98 +1,183 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 namespace WASP.DataClasses
 {
     public class Subforum
     {
-        private static int _idCounter = 0;
-        private readonly List<Tuple<Member, DateTime>> _moderators;
-        private readonly List<Post> _threads;
-
-        public Subforum(String name, String description, Member moderator, DateTime term)
+        private int id;
+        private string name, description;
+        private Dictionary<int, Moderator> moderators = null;
+        private Dictionary<int, Post> threads = null;
+        private Forum forum;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+        public static Subforum Get(int id)
         {
-            Id = _idCounter++;
-            Name = name;
-            Description = description;
-            _moderators = new List<Tuple<Member, DateTime>>();
-            _threads = new List<Post>();
-            AddModerator(moderator, term);
+            return dal.GetSubForum(id);
         }
 
-        public Subforum(int id, String name, String description, Member moderator, DateTime term)
+        public Subforum Create()
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            _moderators = new List<Tuple<Member, DateTime>>();
-            _threads = new List<Post>();
-            AddModerator(moderator, term);
+            return dal.CreateSubForum(this);
         }
 
-        public static bool isValid(String name, String description, Member moderator, DateTime term)
+        public Subforum Update()
         {
-            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || (moderator == null) || !Helper.isTermValid(term));
+            return dal.UpdateSubForum(this);
         }
 
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public int Id { get; set; }
-
-        public bool IsModerator(Member moderator)
+        public bool Delete()
         {
-            foreach(Tuple<Member, DateTime> tup in _moderators)
+            return dal.DeleteSubforum(Id);
+        }
+
+        public Subforum(int id, String name, String description, Forum forum)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.forum = forum;
+        }
+
+        // DEPRECATED
+        public Subforum(int id, String name, String description, Forum forum, DAL2 dal)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.forum = forum;
+        }
+
+        public string Name
+        {
+            get
             {
-                if(tup.Item1 == moderator)
-                {
-                    return true;
-                }
+                return name;
             }
-            return false;
+            set
+            {
+                name = value;
+            }
         }
 
-        public void AddModerator(Member mod, DateTime expr)
+        public Forum Forum
         {
-            Tuple<Member, DateTime> tup = new Tuple<Member, DateTime>(mod, expr);
-
-            _moderators.Add(tup);
+            get
+            {
+               // if (this.forum == null)
+                 //   this.forum = dal.GetSubForumForum(Id);
+                return forum;
+            }
+            set
+            {
+                forum = value;
+            }
         }
-        
+
+        private Dictionary<int, Moderator> Moderators
+        {
+            get
+            {
+                if(moderators == null)
+                {
+                    moderators = new Dictionary<int, Moderator>();
+                    foreach(Moderator mod in dal.GetSubForumMods(Id))
+                    {
+                        moderators.Add(mod.Id, mod);
+                    }
+                }
+                return moderators;
+            }
+        }
+        private Dictionary<int, Post> Threads
+        {
+            get
+            {
+                if (threads == null)
+                {
+                    threads = new Dictionary<int, Post>();
+                    foreach (Post thread in dal.GetSubForumThreads(Id))
+                    {
+                        threads.Add(thread.Id, thread);
+                    }
+                }
+                return threads;
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public Boolean IsModerator(int id)
+        {
+            return Moderators.ContainsKey(id);
+        }
+
+        public void AddModerator(Moderator mod)
+        {
+            Moderators.Add(mod.Id, mod);
+        }
 
         public void AddThread(Post tr)
         {
-            _threads.Add(tr);
+            Threads.Add(tr.Id, tr);
         }
 
-        public void RemoveModerator(Member moderator)
+        public void RemoveModerator(int id)
         {
-            _moderators.Remove(_moderators.First((x) => x.Item1 == moderator));
+            Moderators.Remove(id);
         }
-        public void RemoveThread(Post post)
+        public void RemoveThread(int id)
         {
-            _threads.Remove(post);
+            Threads.Remove(id);
         }
 
 
-        public List<Post> GetThreads()
+        public Post[] GetThreads()
         {
-            return _threads;
+            Post[] tr = new Post[Threads.Values.Count];
+            Threads.Values.CopyTo(tr, 0);
+            return tr;
         }
-        public List<Tuple<Member, DateTime>> GetModerators()
+        public Moderator[] GetAllModerators()
         {
-            return _moderators;
+             Moderator[] mods= new Moderator[Moderators.Values.Count];
+            Moderators.Values.CopyTo(mods, 0);
+            return mods;
         }
+
+        
         public Post GetThread(int id)
         {
-
-            return _threads.First((x) => x.Id == id);
+            Post theThread;
+            Threads.TryGetValue(id, out theThread);
+            return theThread;
         }
-        public Tuple<Member, DateTime> GetModerator(Member moderator)
+        public Moderator GetModerator(int id)
         {
-            return _moderators.First((x) => x.Item1 == moderator);
+            Moderator mod;
+            Moderators.TryGetValue(id, out mod);
+            return mod;
         }
+
     }
 }

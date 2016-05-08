@@ -7,147 +7,246 @@ namespace WASP.DataClasses
 {
     public class Forum
     {
-        private static int _idCounter = 0;
-        private int _id;
-        private String _name, _description;
-        private List<Subforum> subforums;
-        private List<Member> members;
-        private List<Member> admins;
+        private int id;
+        private String name, description;
+        private Dictionary<int, Subforum> subforums = null;
+        private Dictionary<int, User> members = null;
+        private Dictionary<int, Admin> admins = null;
         private Policy policy;
-        public Forum(String name, String description, Policy policy)
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+
+        public static Forum Get(int id)
         {
-            _id = _idCounter++;
-            _name = name;
-            _description = description;
-            this.subforums = new List<Subforum>();
-            this.members = new List<Member>();
-            this.admins = new List<Member>();
+            return dal.GetForum(id);
+        }
+        public static Forum[] Get(int[] ids)
+        {
+            return dal.GetForums(ids);
+        }
+        public Forum Create()
+        {
+            return dal.CreateForum(this);
+        }
+
+        public Forum Update()
+        {
+            return dal.CreateForum(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteForum(Id);
+        }
+
+        public Forum(int id, String name, String description, Policy policy)
+        {
+            this.name = name;
+            this.description = description;
             this.policy = policy;
+            this.id = id;
         }
 
-        public static bool isValid(String name, String description, Policy policy)
+        // DEPRECATED
+        public Forum(int id, String name, String description, Policy policy, DAL2 dal)
         {
-            return !(Helper.isEmptyString(name) || Helper.isEmptyString(description)
-                || policy == null);
-        }
-
-        public void AddPolicy(Policy policy)
-        {
-            policy.Next = this.policy;
+            this.name = name;
+            this.description = description;
             this.policy = policy;
+            this.id = id;
         }
-
-        void CheckMemberPolicy(User user)
-        {
-            this.policy.Validate(user);
-        }
-
-        internal Subforum GetSubForum(int subforumId)
-        {
-            return subforums.First((x) => x.Id == subforumId);
-        }
-
-        internal bool IsAdmin(Member member)
-        {
-            return admins.Contains(member);
-        }
-
-        internal bool IsMember(Member member)
-        {
-            return members.Contains(member);
-        }
-        internal bool IsSubForum(int subforumId)
-        {
-            return subforums.First((x) => x.Id == subforumId) != null;
-        }
-
-        internal void DefinePolicy(Forum forum)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal Member GetMember(string username)
-        {
-            return members.First(member => member.UserName.Equals(username));
-        }
-
-        internal void Update(Forum forum)
-        {
-            throw new NotImplementedException();
-        }
-
         public int Id
         {
             get
             {
-                return _id;
+                return id;
+            }
+            set
+            {
+                id = value;
             }
         }
-
         public string Name
         {
             get
             {
-                return _name;
+                return name;
             }
             set
             {
-                _name = value;
+                name = value;
             }
         }
-
         public string Description
         {
             get
             {
-                return _description;
+                return description;
             }
             set
             {
-                _description = value;
+                description = value;
             }
         }
 
-        public List<Member> GetMembers()
+
+
+
+        private Dictionary<int, Subforum> Subforums
         {
-            return members;
+            get
+            {
+                if (subforums == null)
+                {
+                    subforums = new Dictionary<int, Subforum>();
+                    foreach (Subforum sf in dal.GetForumSubForums(Id))
+                    {
+                        subforums.Add(sf.Id, sf);
+                    }
+                }
+                return subforums;
+            }
+        }
+        private Dictionary<int, User> Members
+        {
+            get
+            {
+                if (members == null)
+                {
+                    members = new Dictionary<int, User>();
+                    foreach (User user in dal.GetForumMembers(Id))
+                    {
+                        members.Add(user.Id, user);
+                    }
+                }
+                return members;
+            }
+        }
+        private Dictionary<int, Admin> Admins
+        {
+            get
+            {
+                if (admins == null)
+                {
+                    admins = new Dictionary<int, Admin>();
+                    foreach (Admin admin in dal.GetForumAdmins(Id))
+                    {
+                        admins.Add(admin.Id, admin);
+                    }
+                }
+                return admins;
+            }
         }
 
-        public List<Member> GetAdmins()
+
+        public Policy Policy
         {
-            return admins;
+            get
+            {
+                return policy;
+            }
+            set
+            {
+                policy = value;
+            }
         }
 
-        public List<Subforum> GetSubForum()
-        {
-            return subforums;
-        }
 
-        public void AddAdmin(Member admin)
-        {
-            admins.Add(admin);
-        }
 
-        public void AddMember(Member member)
+        public Subforum[] GetAllSubForums()
         {
-            members.Add(member);
+            Subforum[] sfArr = new Subforum[Subforums.Values.Count];
+            Subforums.Values.CopyTo(sfArr, 0);
+            return sfArr;
         }
-        internal void AddSubForum(Subforum subforum)
+        public Subforum GetSubForum(int sfId)
         {
-            subforums.Add(subforum);
+            Subforum sf;
+            Subforums.TryGetValue(sfId, out sf);
+            return sf;
         }
-
-        public bool RemoveAdmin(Member member)
+        public Subforum[] GetSubForums()
         {
-            return admins.Remove(member);
+            Subforum[] subArr = new Subforum[Subforums.Values.Count];
+            Subforums.Values.CopyTo(subArr, 0);
+            return subArr;
         }
-        public bool RemoveMember(Member member)
+        internal bool IsSubForum(int sfid)
         {
-            return members.Remove(member);
+            return Subforums.ContainsKey(sfid);
         }
         public bool RemoveSubForum(Subforum subforum)
         {
-            return subforums.Remove(subforum);
+            return Subforums.Remove(subforum.Id);
+        }
+        internal void AddSubForum(Subforum subforum)
+        {
+            Subforums.Add(subforum.Id, subforum);
+        }
+
+
+        internal bool IsMember(int memberid)
+        {
+            return Members.ContainsKey(memberid);
+        }
+        public User[] GetMembers()
+        {
+            User[] userArr = new User[Members.Values.Count];
+            Members.Values.CopyTo(userArr, 0);
+            return userArr;
+        }
+        internal User GetMember(int id)
+        {
+            User mem;
+            Members.TryGetValue(id, out mem);
+            return mem;
+        }
+        public void AddMember(User member)
+        {
+            this.Policy.Validate(member);
+            Members.Add(member.Id, member);
+
+        }
+        public bool RemoveMember(User member)
+        {
+            return Members.Remove(member.Id);
+        }
+        
+        
+        internal bool IsAdmin(int adminid)
+        {
+            return Admins.ContainsKey(adminid);
+        }
+        public Admin[] GetAdmins()
+        {
+            Admin[] adminArr = new Admin[Admins.Values.Count];
+            Admins.Values.CopyTo(adminArr, 0);
+            return adminArr;
+        }
+        public void AddAdmin(Admin admin)
+        {
+            Admins.Add(admin.Id, admin);
+        }
+        public Admin GetAdmin(int Id)
+        {
+            return Admins[Id];
+        }
+        public bool RemoveAdmin(Admin admin)
+        {
+            return Admins.Remove(admin.Id);
+        }
+
+        internal void NotifyAllMembers(Notification notification)
+        {
+            foreach (User member in GetMembers())
+            {
+
+                //TODO Need to discuss with Avi.
+                //if(notification.Source != null)
+                //    if (member.Id == notification.Source.Id) //Skip source
+                //        continue;
+                member.NewNotification(new Notification(-1, notification.Message, notification.IsNew,
+                    notification.Source, member));
+            }
         }
     }
 }
