@@ -5,7 +5,7 @@ using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses.Policies;
-using static WASP.DataClasses.Policy;
+using WASP.DataClasses;
 
 namespace WASP.DataClasses
 {
@@ -1099,7 +1099,7 @@ namespace WASP.DataClasses
             IPolicy ipolicy = db.IPolicies.FirstOrDefault(x => x.id == id);
             if(ipolicy != null)
             {  
-                Policy polc = new Policy(id, (PostDeletePolicy)ipolicy.postDeletePolicy,TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad);
+                Policy polc = new Policy(id, (Policy.PostDeletePolicy)ipolicy.postDeletePolicy,TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad);
                 return polc;
             }
             throw new ExistException(string.Format("GetPolicy: Policy {0} does not exist",id));
