@@ -33,15 +33,15 @@ namespace WASP.DataClasses
     partial void InsertIAdmin(IAdmin instance);
     partial void UpdateIAdmin(IAdmin instance);
     partial void DeleteIAdmin(IAdmin instance);
-    partial void InsertINotification(INotification instance);
-    partial void UpdateINotification(INotification instance);
-    partial void DeleteINotification(INotification instance);
     partial void InsertIForum(IForum instance);
     partial void UpdateIForum(IForum instance);
     partial void DeleteIForum(IForum instance);
     partial void InsertIModerator(IModerator instance);
     partial void UpdateIModerator(IModerator instance);
     partial void DeleteIModerator(IModerator instance);
+    partial void InsertINotification(INotification instance);
+    partial void UpdateINotification(INotification instance);
+    partial void DeleteINotification(INotification instance);
     partial void InsertIPolicy(IPolicy instance);
     partial void UpdateIPolicy(IPolicy instance);
     partial void DeleteIPolicy(IPolicy instance);
@@ -97,14 +97,6 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		public System.Data.Linq.Table<INotification> INotifications
-		{
-			get
-			{
-				return this.GetTable<INotification>();
-			}
-		}
-		
 		public System.Data.Linq.Table<IForum> IForums
 		{
 			get
@@ -118,6 +110,14 @@ namespace WASP.DataClasses
 			get
 			{
 				return this.GetTable<IModerator>();
+			}
+		}
+		
+		public System.Data.Linq.Table<INotification> INotifications
+		{
+			get
+			{
+				return this.GetTable<INotification>();
 			}
 		}
 		
@@ -320,306 +320,6 @@ namespace WASP.DataClasses
 		{
 			this.SendPropertyChanging();
 			entity.IAdmin = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.INotifications")]
-	public partial class INotification : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _fromUserId;
-		
-		private int _fromForumId;
-		
-		private int _toUserId;
-		
-		private int _toForumId;
-		
-		private string _message;
-		
-		private bool _isNew;
-		
-		private EntityRef<IUser> _IUser;
-		
-		private EntityRef<IUser> _IUser1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnfromUserIdChanging(int value);
-    partial void OnfromUserIdChanged();
-    partial void OnfromForumIdChanging(int value);
-    partial void OnfromForumIdChanged();
-    partial void OntoUserIdChanging(int value);
-    partial void OntoUserIdChanged();
-    partial void OntoForumIdChanging(int value);
-    partial void OntoForumIdChanged();
-    partial void OnmessageChanging(string value);
-    partial void OnmessageChanged();
-    partial void OnisNewChanging(bool value);
-    partial void OnisNewChanged();
-    #endregion
-		
-		public INotification()
-		{
-			this._IUser = default(EntityRef<IUser>);
-			this._IUser1 = default(EntityRef<IUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int NOT NULL")]
-		public int fromUserId
-		{
-			get
-			{
-				return this._fromUserId;
-			}
-			set
-			{
-				if ((this._fromUserId != value))
-				{
-					if (this._IUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfromUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._fromUserId = value;
-					this.SendPropertyChanged("fromUserId");
-					this.OnfromUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int NOT NULL")]
-		public int fromForumId
-		{
-			get
-			{
-				return this._fromForumId;
-			}
-			set
-			{
-				if ((this._fromForumId != value))
-				{
-					if (this._IUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfromForumIdChanging(value);
-					this.SendPropertyChanging();
-					this._fromForumId = value;
-					this.SendPropertyChanged("fromForumId");
-					this.OnfromForumIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toUserId", DbType="Int NOT NULL")]
-		public int toUserId
-		{
-			get
-			{
-				return this._toUserId;
-			}
-			set
-			{
-				if ((this._toUserId != value))
-				{
-					if (this._IUser1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OntoUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._toUserId = value;
-					this.SendPropertyChanged("toUserId");
-					this.OntoUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toForumId", DbType="Int NOT NULL")]
-		public int toForumId
-		{
-			get
-			{
-				return this._toForumId;
-			}
-			set
-			{
-				if ((this._toForumId != value))
-				{
-					if (this._IUser1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OntoForumIdChanging(value);
-					this.SendPropertyChanging();
-					this._toForumId = value;
-					this.SendPropertyChanged("toForumId");
-					this.OntoForumIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NChar(4000) NOT NULL", CanBeNull=false)]
-		public string message
-		{
-			get
-			{
-				return this._message;
-			}
-			set
-			{
-				if ((this._message != value))
-				{
-					this.OnmessageChanging(value);
-					this.SendPropertyChanging();
-					this._message = value;
-					this.SendPropertyChanged("message");
-					this.OnmessageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isNew", DbType="Bit NOT NULL")]
-		public bool isNew
-		{
-			get
-			{
-				return this._isNew;
-			}
-			set
-			{
-				if ((this._isNew != value))
-				{
-					this.OnisNewChanging(value);
-					this.SendPropertyChanging();
-					this._isNew = value;
-					this.SendPropertyChanged("isNew");
-					this.OnisNewChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification", Storage="_IUser", ThisKey="fromUserId,fromForumId", OtherKey="id,forumId", IsForeignKey=true)]
-		public IUser IUser
-		{
-			get
-			{
-				return this._IUser.Entity;
-			}
-			set
-			{
-				IUser previousValue = this._IUser.Entity;
-				if (((previousValue != value) 
-							|| (this._IUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._IUser.Entity = null;
-						previousValue.INotifications.Remove(this);
-					}
-					this._IUser.Entity = value;
-					if ((value != null))
-					{
-						value.INotifications.Add(this);
-						this._fromUserId = value.id;
-						this._fromForumId = value.forumId;
-					}
-					else
-					{
-						this._fromUserId = default(int);
-						this._fromForumId = default(int);
-					}
-					this.SendPropertyChanged("IUser");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification1", Storage="_IUser1", ThisKey="toUserId,toForumId", OtherKey="id,forumId", IsForeignKey=true)]
-		public IUser IUser1
-		{
-			get
-			{
-				return this._IUser1.Entity;
-			}
-			set
-			{
-				IUser previousValue = this._IUser1.Entity;
-				if (((previousValue != value) 
-							|| (this._IUser1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._IUser1.Entity = null;
-						previousValue.INotifications1.Remove(this);
-					}
-					this._IUser1.Entity = value;
-					if ((value != null))
-					{
-						value.INotifications1.Add(this);
-						this._toUserId = value.id;
-						this._toForumId = value.forumId;
-					}
-					else
-					{
-						this._toUserId = default(int);
-						this._toForumId = default(int);
-					}
-					this.SendPropertyChanged("IUser1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1167,6 +867,306 @@ namespace WASP.DataClasses
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.INotifications")]
+	public partial class INotification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _fromUserId;
+		
+		private int _fromForumId;
+		
+		private int _toUserId;
+		
+		private int _toForumId;
+		
+		private string _message;
+		
+		private bool _isNew;
+		
+		private EntityRef<IUser> _IUser;
+		
+		private EntityRef<IUser> _IUser1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnfromUserIdChanging(int value);
+    partial void OnfromUserIdChanged();
+    partial void OnfromForumIdChanging(int value);
+    partial void OnfromForumIdChanged();
+    partial void OntoUserIdChanging(int value);
+    partial void OntoUserIdChanged();
+    partial void OntoForumIdChanging(int value);
+    partial void OntoForumIdChanged();
+    partial void OnmessageChanging(string value);
+    partial void OnmessageChanged();
+    partial void OnisNewChanging(bool value);
+    partial void OnisNewChanged();
+    #endregion
+		
+		public INotification()
+		{
+			this._IUser = default(EntityRef<IUser>);
+			this._IUser1 = default(EntityRef<IUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int NOT NULL")]
+		public int fromUserId
+		{
+			get
+			{
+				return this._fromUserId;
+			}
+			set
+			{
+				if ((this._fromUserId != value))
+				{
+					if (this._IUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfromUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._fromUserId = value;
+					this.SendPropertyChanged("fromUserId");
+					this.OnfromUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int NOT NULL")]
+		public int fromForumId
+		{
+			get
+			{
+				return this._fromForumId;
+			}
+			set
+			{
+				if ((this._fromForumId != value))
+				{
+					if (this._IUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfromForumIdChanging(value);
+					this.SendPropertyChanging();
+					this._fromForumId = value;
+					this.SendPropertyChanged("fromForumId");
+					this.OnfromForumIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toUserId", DbType="Int NOT NULL")]
+		public int toUserId
+		{
+			get
+			{
+				return this._toUserId;
+			}
+			set
+			{
+				if ((this._toUserId != value))
+				{
+					if (this._IUser1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntoUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._toUserId = value;
+					this.SendPropertyChanged("toUserId");
+					this.OntoUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toForumId", DbType="Int NOT NULL")]
+		public int toForumId
+		{
+			get
+			{
+				return this._toForumId;
+			}
+			set
+			{
+				if ((this._toForumId != value))
+				{
+					if (this._IUser1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntoForumIdChanging(value);
+					this.SendPropertyChanging();
+					this._toForumId = value;
+					this.SendPropertyChanged("toForumId");
+					this.OntoForumIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NChar(4000) NOT NULL", CanBeNull=false)]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this.OnmessageChanging(value);
+					this.SendPropertyChanging();
+					this._message = value;
+					this.SendPropertyChanged("message");
+					this.OnmessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isNew", DbType="Bit NOT NULL")]
+		public bool isNew
+		{
+			get
+			{
+				return this._isNew;
+			}
+			set
+			{
+				if ((this._isNew != value))
+				{
+					this.OnisNewChanging(value);
+					this.SendPropertyChanging();
+					this._isNew = value;
+					this.SendPropertyChanged("isNew");
+					this.OnisNewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification", Storage="_IUser", ThisKey="fromUserId,fromForumId", OtherKey="id,forumId", IsForeignKey=true)]
+		public IUser IUser
+		{
+			get
+			{
+				return this._IUser.Entity;
+			}
+			set
+			{
+				IUser previousValue = this._IUser.Entity;
+				if (((previousValue != value) 
+							|| (this._IUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._IUser.Entity = null;
+						previousValue.INotifications.Remove(this);
+					}
+					this._IUser.Entity = value;
+					if ((value != null))
+					{
+						value.INotifications.Add(this);
+						this._fromUserId = value.id;
+						this._fromForumId = value.forumId;
+					}
+					else
+					{
+						this._fromUserId = default(int);
+						this._fromForumId = default(int);
+					}
+					this.SendPropertyChanged("IUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification1", Storage="_IUser1", ThisKey="toUserId,toForumId", OtherKey="id,forumId", IsForeignKey=true)]
+		public IUser IUser1
+		{
+			get
+			{
+				return this._IUser1.Entity;
+			}
+			set
+			{
+				IUser previousValue = this._IUser1.Entity;
+				if (((previousValue != value) 
+							|| (this._IUser1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._IUser1.Entity = null;
+						previousValue.INotifications1.Remove(this);
+					}
+					this._IUser1.Entity = value;
+					if ((value != null))
+					{
+						value.INotifications1.Add(this);
+						this._toUserId = value.id;
+						this._toForumId = value.forumId;
+					}
+					else
+					{
+						this._toUserId = default(int);
+						this._toForumId = default(int);
+					}
+					this.SendPropertyChanged("IUser1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IPolicies")]
 	public partial class IPolicy : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1558,7 +1558,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NChar(25)")]
 		public string title
 		{
 			get
@@ -2153,11 +2153,11 @@ namespace WASP.DataClasses
 		
 		private EntityRef<IAdmin> _IAdmin;
 		
+		private EntitySet<IModerator> _IModerators;
+		
 		private EntitySet<INotification> _INotifications;
 		
 		private EntitySet<INotification> _INotifications1;
-		
-		private EntitySet<IModerator> _IModerators;
 		
 		private EntitySet<IPost> _IPosts;
 		
@@ -2188,9 +2188,9 @@ namespace WASP.DataClasses
 		public IUser()
 		{
 			this._IAdmin = default(EntityRef<IAdmin>);
+			this._IModerators = new EntitySet<IModerator>(new Action<IModerator>(this.attach_IModerators), new Action<IModerator>(this.detach_IModerators));
 			this._INotifications = new EntitySet<INotification>(new Action<INotification>(this.attach_INotifications), new Action<INotification>(this.detach_INotifications));
 			this._INotifications1 = new EntitySet<INotification>(new Action<INotification>(this.attach_INotifications1), new Action<INotification>(this.detach_INotifications1));
-			this._IModerators = new EntitySet<IModerator>(new Action<IModerator>(this.attach_IModerators), new Action<IModerator>(this.detach_IModerators));
 			this._IPosts = new EntitySet<IPost>(new Action<IPost>(this.attach_IPosts), new Action<IPost>(this.detach_IPosts));
 			this._IForum = default(EntityRef<IForum>);
 			OnCreated();
@@ -2389,6 +2389,19 @@ namespace WASP.DataClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IModerator", Storage="_IModerators", ThisKey="id,forumId", OtherKey="userId,forumId")]
+		public EntitySet<IModerator> IModerators
+		{
+			get
+			{
+				return this._IModerators;
+			}
+			set
+			{
+				this._IModerators.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_INotification", Storage="_INotifications", ThisKey="id,forumId", OtherKey="fromUserId,fromForumId")]
 		public EntitySet<INotification> INotifications
 		{
@@ -2412,19 +2425,6 @@ namespace WASP.DataClasses
 			set
 			{
 				this._INotifications1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="IUser_IModerator", Storage="_IModerators", ThisKey="id,forumId", OtherKey="userId,forumId")]
-		public EntitySet<IModerator> IModerators
-		{
-			get
-			{
-				return this._IModerators;
-			}
-			set
-			{
-				this._IModerators.Assign(value);
 			}
 		}
 		
@@ -2495,6 +2495,18 @@ namespace WASP.DataClasses
 			}
 		}
 		
+		private void attach_IModerators(IModerator entity)
+		{
+			this.SendPropertyChanging();
+			entity.IUser = this;
+		}
+		
+		private void detach_IModerators(IModerator entity)
+		{
+			this.SendPropertyChanging();
+			entity.IUser = null;
+		}
+		
 		private void attach_INotifications(INotification entity)
 		{
 			this.SendPropertyChanging();
@@ -2517,18 +2529,6 @@ namespace WASP.DataClasses
 		{
 			this.SendPropertyChanging();
 			entity.IUser1 = null;
-		}
-		
-		private void attach_IModerators(IModerator entity)
-		{
-			this.SendPropertyChanging();
-			entity.IUser = this;
-		}
-		
-		private void detach_IModerators(IModerator entity)
-		{
-			this.SendPropertyChanging();
-			entity.IUser = null;
 		}
 		
 		private void attach_IPosts(IPost entity)

@@ -118,7 +118,7 @@ namespace WASP.Domain
         {
             User author = User.Get(userID, forumID);
             Post post = Post.Get(replyToPost_ID);
-            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now);
+            Post reply = new Post(-1,null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now);
 
             post.AddReply(reply);
             author.AddPost(reply);

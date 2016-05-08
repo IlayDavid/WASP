@@ -28,6 +28,26 @@ namespace WASP.DataClasses.UnitTests
         }
 
         [TestMethod]
+        public void AddUserTest1()
+        {
+            try
+            {
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                User user = dal.GetUser(315470047, forumId);
+                Assert.IsTrue((user.Email).Equals("matansar@post.bgu.ac.il"));
+                Assert.IsTrue((user.Username).Equals("matansar"));
+                Assert.IsTrue((user.Password).Equals("123"));
+                Assert.IsTrue((user.Name).Equals("matan"));
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
+
+        [TestMethod]
         public void AddUserTest1_1()
         {
             try
@@ -38,7 +58,7 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue((user.Username).Equals("matansar"));
                 Assert.IsTrue((user.Password).Equals("123"));
                 Assert.IsTrue((user.Name).Equals("matan"));
-                
+
             }
             catch (Exception e)
             {
@@ -50,7 +70,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId),DateTime.Now.AddDays(11), DateTime.Now.AddDays(9)));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now.AddDays(11), DateTime.Now.AddDays(9)));
                 User user = dal.GetUser(315470047, forumId);
                 Assert.IsTrue((user.Email).Equals("matansar@post.bgu.ac.il"));
                 Assert.IsTrue((user.Username).Equals("matansar"));
@@ -65,6 +85,8 @@ namespace WASP.DataClasses.UnitTests
                 Assert.Fail(e.Message);
             }
         }
+
+
         [TestMethod]
         public void AddUserTest2()
         {
@@ -104,6 +126,7 @@ namespace WASP.DataClasses.UnitTests
             }
         }
 
+
         [TestMethod]
         public void UpdateUserTest4_1()
         {
@@ -141,6 +164,28 @@ namespace WASP.DataClasses.UnitTests
                 Assert.Fail(e.Message);
             }
         }
+
+
+        [TestMethod]
+        public void UpdateUserTest4()
+        {
+            try
+            {
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
+                dal.UpdateUser(new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId), dal));
+                User user = dal.GetUser(315470047, forumId);
+                Assert.IsTrue(user.Email.Equals("moshesar@post.bgu.ac.il"));
+                Assert.IsTrue(user.Username.Equals("moshesar"));
+                Assert.IsTrue(user.Password.Equals("456"));
+                Assert.IsTrue(user.Name.Equals("moshe"));
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
         [TestMethod]
         public void GetUsersTest5()
         {

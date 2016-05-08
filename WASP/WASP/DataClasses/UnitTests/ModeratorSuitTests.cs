@@ -36,15 +36,14 @@ namespace WASP.DataClasses.UnitTests
             userAdmin = new User(111111111, "admin", "admina", "admina@post.bgu.ac.il", "123", forum, dal);
 
             Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
+            dal.CreateUser(userAdmin);
             Admin admin = dal.CreateAdmin(new Admin(userAdmin, forum, dal));
 
             forumId = forum.Id;
             subforumId = subf.Id;
             adminId = admin.Id;
         }
-
-
-
+        
         [TestMethod]
         public void AddModeratorTest1_1()
         {
@@ -52,6 +51,7 @@ namespace WASP.DataClasses.UnitTests
             {
                 Subforum subforum = dal.GetSubForum(subforumId);
                 Admin admin = dal.GetAdmin(adminId, forumId);
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), subforum,
                     admin, dal));
                 Moderator mod = dal.GetModerator(user1.Id, subforumId);
@@ -73,14 +73,15 @@ namespace WASP.DataClasses.UnitTests
             {
                 Subforum subforum = dal.GetSubForum(subforumId);
                 Admin admin = dal.GetAdmin(adminId, forumId);
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), subforum,
-                    admin,DateTime.Now.AddDays(11)));
+                    admin, DateTime.Now.AddDays(11)));
                 Moderator mod = dal.GetModerator(user1.Id, subforumId);
                 Assert.IsTrue(mod.Id == user1.Id);
                 Assert.IsTrue(mod.Appointer.Id == adminId);
                 Assert.IsTrue(mod.TermExp.Date == DateTime.Now.AddDays(10).Date);
                 Assert.IsTrue(mod.StartDate.Date == DateTime.Now.AddDays(11).Date);
-                
+
             }
             catch (Exception e)
             {
@@ -88,14 +89,18 @@ namespace WASP.DataClasses.UnitTests
             }
         }
 
+
+
         [TestMethod]
         public void AddModeratorTest2()
         {
             try
             {
 
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 Moderator mod1 = dal.GetModerator(user1.Id, subforumId);
@@ -118,8 +123,10 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 Assert.Fail();
@@ -135,32 +142,33 @@ namespace WASP.DataClasses.UnitTests
         }
 
         [TestMethod]
-        public void UpdateModeratorTest4_1()
+        public void UpdateModeratorTest4()
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 dal.UpdateModerator(new Moderator(user1, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
-                    dal.GetAdmin(adminId, forumId), DateTime.Now.AddDays(11)));
+                    dal.GetAdmin(adminId, forumId), dal));
                 Moderator mod = dal.GetModerator(user1.Id, subforumId);
                 Assert.IsTrue(mod.TermExp.Date == DateTime.Now.AddDays(20).Date);
-                Assert.IsTrue(mod.StartDate.Date == DateTime.Now.AddDays(11).Date);
             }
             catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
         }
-        
 
         [TestMethod]
         public void GetModeratorsTest5()
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 Moderator[] mods = dal.GetModerators(null, dal.GetSubForum(subforumId));
@@ -180,8 +188,10 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
                     dal.GetAdmin(adminId, forumId), dal));
                 Moderator[] mods = dal.GetModerators(new int[] { user1.Id }, dal.GetSubForum(subforumId));
@@ -198,8 +208,10 @@ namespace WASP.DataClasses.UnitTests
         [TestMethod]
         public void DeleteModeratorTest7()
         {
+            dal.CreateUser(user1);
             Moderator mod1 = dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                 dal.GetAdmin(adminId, forumId), dal));
+            dal.CreateUser(user2);
             Moderator mod2 = dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(20), dal.GetSubForum(subforumId),
                 dal.GetAdmin(adminId, forumId), dal));
 
@@ -216,9 +228,10 @@ namespace WASP.DataClasses.UnitTests
                 Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
                 Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
                 User user3 = new User(205857221, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
+                dal.CreateUser(user3);
                 Admin admin = dal.CreateAdmin(new Admin(user3, forum, dal));
 
-
+                dal.CreateUser(user1);
                 dal.CreateModerator(new Moderator(user1, DateTime.Now.AddDays(10), dal.GetSubForum(subforumId),
                     admin, dal));
                 Assert.Fail();
@@ -243,7 +256,9 @@ namespace WASP.DataClasses.UnitTests
                 Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
                 User user3 = new User(205857221, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
                 User user2 = new User(205857211, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
+                dal.CreateUser(user3);
                 Admin admin = dal.CreateAdmin(new Admin(user3, forum, dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(10), subf, admin, dal));
                 Assert.IsTrue(dal.GetModeratorSubForum(user2.Id, forum.Id).Id == subf.Id);
             }
@@ -263,7 +278,9 @@ namespace WASP.DataClasses.UnitTests
                 Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
                 User user3 = new User(205857221, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
                 User user2 = new User(205857211, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
+                dal.CreateUser(user3);
                 Admin admin = dal.CreateAdmin(new Admin(user3, forum, dal));
+                dal.CreateUser(user2);
                 dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(10), subf, admin, dal));
                 Assert.IsTrue(dal.GetModeratorAppointerAdmin(user2.Id, subf.Id).Id == admin.Id);
             }

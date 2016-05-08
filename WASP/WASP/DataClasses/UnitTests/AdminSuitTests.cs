@@ -38,6 +38,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
 
 
@@ -58,6 +59,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
+                dal.CreateUser(user2);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
                 Admin admin1 = dal.GetAdmin(user1.Id, forumId);
@@ -82,6 +85,7 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 Assert.Fail();
@@ -102,6 +106,7 @@ namespace WASP.DataClasses.UnitTests
             try
             {
                 User user11 = new User(315470047, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", dal.GetForum(forumId), dal);
+                dal.CreateUser(user1);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.UpdateAdmin(new Admin(user11, dal.GetForum(forumId), dal));
                 Admin admin = dal.GetAdmin(user1.Id, forumId);
@@ -120,6 +125,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
+                dal.CreateUser(user2);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
                 Admin[] admins = dal.GetAdmins(null, dal.GetForum(forumId));
@@ -138,6 +145,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
+                dal.CreateUser(user1);
+                dal.CreateUser(user2);
                 dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
                 dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
                 Admin[] admins = dal.GetAdmins(new int[] { user1.Id }, dal.GetForum(forumId));
@@ -155,6 +164,8 @@ namespace WASP.DataClasses.UnitTests
         [TestMethod]
         public void DeleteAdminTest7()
         {
+            dal.CreateUser(user1);
+            dal.CreateUser(user2);
             dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal));
             dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal));
             int adminId1 = dal.GetAdmin(user1.Id, forumId).Id;

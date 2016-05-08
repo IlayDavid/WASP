@@ -160,6 +160,10 @@ namespace WASP.DataClasses.UnitTests
         {
             Forum forum1 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
             Forum forum2 = dal.CreateForum(new Forum(-1, "Start-Up1", "blah", null, dal));
+            dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal));
+            dal.CreateUser(new User(315470049, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
+            dal.CreateUser(new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
+            dal.CreateUser(new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal));
             dal.CreateAdmin(new Admin(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal), forum2, dal));
             dal.CreateAdmin(new Admin(new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal), forum1, dal));
             dal.CreateAdmin(new Admin(new User(315470049, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal), forum1, dal));
@@ -191,16 +195,21 @@ namespace WASP.DataClasses.UnitTests
 
 
             User user11 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal);
+            dal.CreateUser(user11);
             Admin admin11 = dal.CreateAdmin(new Admin(user11, forum1, dal));
             User user21 = new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum1, dal);
+            dal.CreateUser(user21);
             Admin admin21 = dal.CreateAdmin(new Admin(user21, forum1, dal));
 
             User user12 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            dal.CreateUser(user12);
             Admin admin12 = dal.CreateAdmin(new Admin(user12, forum2, dal));
             User user22 = new User(315470048, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            dal.CreateUser(user22);
             Admin admin22 = dal.CreateAdmin(new Admin(user22, forum2, dal));
 
             User user32 = new User(315470046, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum2, dal);
+            dal.CreateUser(user32);
             Admin admin32 = dal.CreateAdmin(new Admin(user32, forum2, dal));
 
             Assert.IsTrue(dal.GetAdminsOfForum(forum1).Length == 2);

@@ -33,7 +33,9 @@ namespace WASP.DataClasses.UnitTests
             forumId = forum.Id;
             user1 = new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", forum, dal);
             user2 = new User(205857121, "amitay", "shaera", "shaera@post.bgu.ac.il", "123", forum, dal);
+            dal.CreateUser(user1);
             userId1 = dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId), dal)).Id;
+            dal.CreateUser(user2);
             userId2 = dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId), dal)).Id;
 
         }

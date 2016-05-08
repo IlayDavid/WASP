@@ -33,6 +33,7 @@ namespace WASP.DataClasses.UnitTests
             userAdmin = new User(111111111, "admin", "admina", "admina@post.bgu.ac.il", "123", forum, dal);
 
             Subforum subf = dal.CreateSubForum(new Subforum(-1, "calander", "Blah", forum, dal));
+            dal.CreateUser(userAdmin);
             Admin admin = dal.CreateAdmin(new Admin(userAdmin, forum, dal));
 
             dal.CreateUser(user1);

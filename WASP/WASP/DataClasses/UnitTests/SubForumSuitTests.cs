@@ -164,8 +164,11 @@ namespace WASP.DataClasses.UnitTests
             User user1 = new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
             User user2 = new User(315470041, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
             User user3 = new User(315470042, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            dal.CreateUser(user1);
             Admin admin = dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId1), dal));
+            dal.CreateUser(user2);
             dal.CreateModerator(new Moderator(user2, DateTime.Now.AddDays(1), subforum1, admin, dal));
+            dal.CreateUser(user3);
             dal.CreateModerator(new Moderator(user3, DateTime.Now.AddDays(1), subforum2, admin, dal));
             Assert.IsTrue(dal.GetSubForumMods(subforum1.Id).Length == 1);
             Assert.IsTrue(dal.GetSubForumMods(subforum2.Id).Length == 1);
@@ -178,7 +181,9 @@ namespace WASP.DataClasses.UnitTests
             Subforum subforum2 = dal.CreateSubForum(new Subforum(-1, "calandar", "blah", dal.GetForum(forumId1), dal));
             User user1 = new User(315470044, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
             User user2 = new User(315470043, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId1), dal);
+            dal.CreateUser(user1);
             dal.CreateAdmin(new Admin(user1, dal.GetForum(forumId1), dal));
+            dal.CreateUser(user2);
             dal.CreateAdmin(new Admin(user2, dal.GetForum(forumId1), dal));
 
             Post p1 = dal.CreatePost(new Post(-1, "question", "blah", user1, DateTime.Now, null, subforum1, DateTime.Now, dal));
