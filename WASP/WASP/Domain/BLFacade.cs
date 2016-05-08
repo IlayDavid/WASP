@@ -36,9 +36,9 @@ namespace WASP.Domain
         {
             if (initialized)
             {
-                throw new InitializeException("System already initialized!");
+               // throw new InitializeException("System already initialized!");
             }
-            SuperUser user = new SuperUser(-1, userName, pass);
+            SuperUser user = new SuperUser(ID, userName, pass);
             this.initialized = true;
             return user.Create();
         }
