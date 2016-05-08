@@ -83,8 +83,19 @@ namespace WASP.DataClasses
             set { deletePost = value; }
         }
 
+        public Policy()
+        {
+            this.id = -1;
+            this.deletePost = PostDeletePolicy.OwnerModeratorAndAdmin;
+            passwordPeriod = new TimeSpan(0);
+            emailVerification = false;
+            minimumSeniority = new TimeSpan(0);
+            usersLoad = 100;
+        }
+
         public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
         {
+            this.id = id;
             this.deletePost = deletePost;
             this.passwordPeriod = passwordPeriod;
             this.emailVerification = emailVerification;
@@ -92,6 +103,7 @@ namespace WASP.DataClasses
             this.usersLoad = usersLoad;
         }
 
+        
         bool CheckPassword(string password)
         {
             return true;
@@ -99,6 +111,8 @@ namespace WASP.DataClasses
 
         public bool Validate(User member)
         {
+            if (passwordPeriod.Ticks == 0)
+                return true;
             if (DateTime.Now - member.PasswordChangeDate > passwordPeriod)
                 member.NewNotification(new Notification(-1, "Password too old.", true, null, null));
                 //throw new WASP.Exceptions.PolicyException("Password too old.");
@@ -109,7 +123,7 @@ namespace WASP.DataClasses
         {
             if (DateTime.Now - mod.User.StartDate < minimumSeniority)
             {
-                throw new PolicyException("");
+                throw new PolicyException("User hasn't been a member long enough.");
             }
             return true;
         }
