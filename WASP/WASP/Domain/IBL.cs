@@ -34,7 +34,7 @@ namespace WASP.Domain
          * Purpose: create new forum which, with details of the admin.
          * Return: forum - on succsess, NULL - in fail.
          */
-        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass);
+        Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy);
 
         /*
          * Pre-conditions: superuser is loged-in 
@@ -79,7 +79,7 @@ namespace WASP.Domain
          * Pre-conditions: Member is loged-in, second member is exists. 
          * Purpose: send a private message.
          */
-        int sendMessage(int userID, int forumID, string targetUserNameID, string message);
+        int sendMessage(int userID, int forumID, int targetUserNameID, string message);
 
         /*
          * Pre-conditions: Member is loged-in and is admin of the forum, moderator is member of the forum.
@@ -185,7 +185,7 @@ namespace WASP.Domain
         /*
         * Purpose: returns 'amount' threads of subforums. start with thread 'from'. 
         */
-        Post[] getThreads(int forumID, int subForumID, List<int> threads);
+        Post[] getThreads(int subForumID);
 
         /*
         * Purpose: returns replays of some tread in subforums. start with thread 'from'. 
