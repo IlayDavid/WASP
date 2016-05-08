@@ -95,7 +95,7 @@ namespace Client.CommunicationLayer
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             string name = dict["title"];
             string description = dict["description"];
-            int adminid = dict["authorid"];
+            int adminid = dict["adminid"];
             User user = new User();
             user.id = adminid;
             Forum f = new Forum(name, description, user, new Policy(0, 0, false, 0, 0));
