@@ -68,8 +68,8 @@ namespace WASP
             routes.Add(basePrefix + "initialize/", ServiceFacade.initialize);
             routes.Add(basePrefix + "isInitialize/", ServiceFacade.isInitialize);
             routes.Add(basePrefix + "createForum/", ServiceFacade.createForum);
-            /*routes.Add(basePrefix + "defineForumPolicy/", ServiceFacade.defineForumPolicy);
-            routes.Add(basePrefix + "subscribeToForum/", ServiceFacade.subscribeToForum);
+            routes.Add(basePrefix + "defineForumPolicy/", ServiceFacade.defineForumPolicy);
+            /*routes.Add(basePrefix + "subscribeToForum/", ServiceFacade.subscribeToForum);
             routes.Add(basePrefix + "createThread/", ServiceFacade.createThread);
             routes.Add(basePrefix + "createReplyPost/", ServiceFacade.createReplyPost);
             routes.Add(basePrefix + "createSubForum/", ServiceFacade.createSubForum);
