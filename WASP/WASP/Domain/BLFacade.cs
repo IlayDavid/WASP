@@ -137,7 +137,7 @@ namespace WASP.Domain
             sf.AddModerator(mod);
             forum.AddSubForum(sf);
             sf = sf.Create();
-            sf.AddModerator(mod.Create());
+            mod.Create();
             return sf;
         }
 

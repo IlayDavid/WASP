@@ -308,10 +308,10 @@ namespace WASP.DataClasses
 
         public Admin CreateAdmin(Admin admin)
         {
-            IUser old_user = old_user = db.IUsers.FirstOrDefault(x => (x.id == admin.Id && x.forumId == admin.Forum.Id));
-            if (old_user != null) throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", admin.Id, admin.Forum.Id));
+            IAdmin old_user = old_user = db.IAdmins.FirstOrDefault(x => (x.userId== admin.Id && x.forumId == admin.Forum.Id));
+         //   if (old_user != null) throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", admin.Id, admin.Forum.Id));
 
-            CreateUser(admin.User);
+         //   CreateUser(admin.User);
 
             IAdmin _admin = new IAdmin();
             _admin.userId = admin.User.Id;
@@ -323,15 +323,15 @@ namespace WASP.DataClasses
         }
         public Moderator CreateModerator(Moderator mod)
         {
-            IUser old_user = db.IUsers.FirstOrDefault(x => x.id == mod.Id && x.forumId == mod.SubForum.Forum.Id);
-            if (old_user != null)
-             throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
+            IModerator old_mod = db.IModerators.FirstOrDefault(x => x.userId == mod.Id && x.forumId == mod.SubForum.Forum.Id);
+        //    if (old_mod != null)
+          //      throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
 
             if (mod.Appointer.Forum.Id != mod.User.Forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
                 mod.User.Forum.Id != mod.SubForum.Forum.Id)
                 throw new InvalidException("Method: CreateModerator, doesnt match 'forum' of Appointer|Subforum|User");
 
-            CreateUser(mod.User);
+         //   CreateUser(mod.User);
 
             IModerator _mod = new IModerator();
             _mod.userId = mod.User.Id;

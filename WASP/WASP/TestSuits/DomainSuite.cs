@@ -16,6 +16,7 @@ namespace WASP.TestSuits
         [TestInitialize]
         public void SetUp()
         {
+            BL.Clean();
             BL.Backup();
             BL.Clean();
             BL.initialize("moshe", "moshe", 1234, "habler@post.bgu.ac.il", "1234");
@@ -58,12 +59,12 @@ namespace WASP.TestSuits
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
-            bool isSubForum = forum.IsSubForum(sf.Id);
-            Post postFromDB = user.GetPost(post.Id);
+            bool isSubForum = Forum.Get(forum.Id).IsSubForum(sf.Id);
+            Post postFromDB = BL.getThread(forum.Id, post.Id);
             Subforum sfFromDB = BL.getSubforum(forum.Id, sf.Id);
             Forum forumFromDB = BL.getForum(forum.Id);
             // assert
-            Assert.AreEqual(isSubForum, false, "subforum added, but not updated");
+            Assert.AreEqual(isSubForum, true, "subforum added, but not updated");
             Assert.AreEqual(postFromDB.Id, post.Id, "post added to DB");
             Assert.AreEqual(forumFromDB.Id, forum.Id, "forum added to DB");
 
@@ -94,7 +95,7 @@ namespace WASP.TestSuits
         {
             // arrange
             Policy policy = new Policy().Create();
-            Forum forum = BL.createForum(-1, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234",null);
+            Forum forum = BL.createForum(-1, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", null);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
@@ -142,7 +143,7 @@ namespace WASP.TestSuits
             // assert
             Assert.AreEqual(1, BL.totalForums(100), "checking total forums");
             Assert.AreEqual(1, BL.subForumTotalMessages(100, forum.Id, sf.Id), "checking subForumTotal messages");
-           // Assert.AreEqual(0, BL.memberTotalMessages(100, forum.Id), "checking memberTotal messages - return 0 if no messages");
+            // Assert.AreEqual(0, BL.memberTotalMessages(100, forum.Id), "checking memberTotal messages - return 0 if no messages");
             //Assert.AreEqual(1, BL.memberTotalMessages(user.Id, forum.Id), "checking is return right number of messages");
             Assert.AreEqual(1, BL.postsByMember(100, forum.Id, user.Id).Length, "cheking if postByMember works");
         }
