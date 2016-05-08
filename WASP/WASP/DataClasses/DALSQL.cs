@@ -290,7 +290,7 @@ namespace WASP.DataClasses
         public User CreateUser(User user)
         {
             IUser old_user = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.Forum.Id));
-            if (old_user != null) throw new ExistException(String.Format("User {0} Forum {0} exists in the DataBase", user.Id, user.Forum.Id));
+            if (old_user != null) throw new ExistException(String.Format("User {0} Forum {1} exists in the DataBase", user.Id, user.Forum.Id));
             IUser _user = new IUser();
             _user.id = user.Id;
             _user.userName = user.Username;
@@ -309,7 +309,7 @@ namespace WASP.DataClasses
         public Admin CreateAdmin(Admin admin)
         {
             IUser old_user = old_user = db.IUsers.FirstOrDefault(x => (x.id == admin.Id && x.forumId == admin.Forum.Id));
-            if (old_user != null) throw new ExistException(string.Format("User {0}, Forum {0} exists in the DataBase", admin.Id, admin.Forum.Id));
+            if (old_user != null) throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", admin.Id, admin.Forum.Id));
 
             CreateUser(admin.User);
 
@@ -325,7 +325,7 @@ namespace WASP.DataClasses
         {
             IUser old_user = db.IUsers.FirstOrDefault(x => x.id == mod.Id && x.forumId == mod.SubForum.Forum.Id);
             if (old_user != null)
-                throw new ExistException(string.Format("User {0}, Forum {0} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
+             throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
 
             if (mod.Appointer.Forum.Id != mod.User.Forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
                 mod.User.Forum.Id != mod.SubForum.Forum.Id)
@@ -1017,7 +1017,7 @@ namespace WASP.DataClasses
         {
             IModerator imod = db.IModerators.FirstOrDefault(x => x.userId == modID && x.forumId == forumId);
             if (imod == null)
-                throw new ExistException(string.Format("GetModeratorSubForum: Moderator {0} Forum {0} does not exist", modID, forumId));
+                throw new ExistException(string.Format("GetModeratorSubForum: Moderator {0} Forum {1} does not exist", modID, forumId));
             return GetSubForum(imod.subForumId);
         }
 
