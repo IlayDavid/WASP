@@ -86,6 +86,8 @@
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="Domain\BLFacade.cs" />
     <Compile Include="Domain\IBL.cs" />
+    <Compile Include="Exceptions\InitializeException.cs" />
+    <Compile Include="Exceptions\LoginException.cs" />
     <Compile Include="Exceptions\PolicyException.cs" />
     <Compile Include="Exceptions\UnauthorizedEditModTerm.cs" />
     <Compile Include="Exceptions\UnauthorizedAddModerator.cs" />

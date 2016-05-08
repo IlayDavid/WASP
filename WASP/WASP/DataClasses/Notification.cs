@@ -19,6 +19,10 @@ namespace WASP.DataClasses
         {
             return dal.GetNotification(id);
         }
+        public static Notification[] Get(int[] ids)
+        {
+            return dal.GetNotifications(ids);
+        }
 
         public Notification Create()
         {

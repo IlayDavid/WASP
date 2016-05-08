@@ -23,6 +23,10 @@ namespace WASP.DataClasses
         {
             return dal.GetModerator(modId, subforumID);
         }
+        public static Moderator[] Get(int[] ids, int sfId)
+        {
+            return dal.GetModerators(ids, Subforum.Get(sfId));
+        }
 
         public Moderator Create()
         {

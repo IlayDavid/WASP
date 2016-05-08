@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses.DAL_EXCEPTIONS
 {
-    class UpdateException : Exception
+    class UpdateException : WASP.Exceptions.WaspException
     {
         public UpdateException(String errorMsg) : base(errorMsg)
         {

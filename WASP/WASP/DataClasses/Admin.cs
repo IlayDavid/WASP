@@ -21,6 +21,10 @@ namespace WASP.DataClasses
         {
             return dal.GetAdmin(adminId, forumId);
         }
+        public static Admin[] Get(int[] ids, int forumId)
+        {
+            return dal.GetAdmins(ids, Forum.Get(forumId));
+        }
 
         public Admin Create()
         {

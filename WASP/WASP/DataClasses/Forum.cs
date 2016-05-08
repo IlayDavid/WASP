@@ -19,7 +19,10 @@ namespace WASP.DataClasses
         {
             return dal.GetForum(id);
         }
-
+        public static Forum[] Get(int[] ids)
+        {
+            return dal.GetForums(ids);
+        }
         public Forum Create()
         {
             return dal.CreateForum(this);

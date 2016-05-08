@@ -15,6 +15,10 @@ namespace WASP.DataClasses
         {
             return dal.GetSuperUser(id);
         }
+        public static SuperUser[] Get(int[] ids)
+        {
+            return dal.GetSuperUsers(ids);
+        }
         public SuperUser Update()
         {
             return dal.UpdateSuperUser(this);

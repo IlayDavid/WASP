@@ -32,9 +32,13 @@ namespace WASP.Domain
 
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
+            if (initialized)
+            {
+                throw new InitializeException("System already initialized!");
+            }
             SuperUser user = new SuperUser(-1, userName, pass);
             this.initialized = true;
-            return dal.CreateSuperUser(user);
+            return user.Create();
         }
 
         public int isInitialize()
@@ -44,13 +48,13 @@ namespace WASP.Domain
             return 1;
         }
 
-        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass)
+        public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             SuperUser su = SuperUser.Get(userID);
             
             // create new forum with admin in it, create user for admin
-            Forum newForum = new Forum(-1, forumName, description, null);
-            newForum = dal.CreateForum(newForum);
+            Forum newForum = new Forum(-1, forumName, description, policy);
+            newForum = newForum.Create();
 
             User user = new User(adminID, adminName, adminUserName, email, pass, newForum);
             // TODO: need to check if user and forum are fine with policy
@@ -62,11 +66,11 @@ namespace WASP.Domain
             }
             catch (WaspException e)
             {
-                dal.DeleteForum(newForum.Id);
+                newForum.Delete();
                 return null;
             }
-
-            dal.CreateAdmin(admin);
+            admin.User = user.Create();
+            admin.Create();
 
             return Forum.Get(newForum.Id);
         }
@@ -78,96 +82,105 @@ namespace WASP.Domain
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            // Should throw exception if forum no found.
-            Forum forum = dal.GetForum(targetForumID);
+            // Should throw exception if forum not found.
+            Forum forum = Forum.Get(targetForumID);
 
             // Attempt to add user.
-            User user = new User(id, name, userName, email, pass, forum,dal);
-            user = dal.CreateUser(user);
-            // If user doesn't follow forum policy will throw exception.
+            User user = new User(id, name, userName, email, pass, forum);
             forum.AddMember(user);
-           // dal.submituser(forum, user);
-            // Will throw exception if unable to create user.
+            user.Create();
+            
             return user;
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
             // Should throw exception if user no found.
-            User author = dal.GetUser(userID, forumID);
+            User author = User.Get(userID, forumID);
             // Should throw exception if subforum no found.
-            Subforum sfContainer = dal.GetSubForum(subForumID);
+            Subforum sf = Subforum.Get(subForumID);
 
-            Post originalPost = new Post(-1, title, content, author, DateTime.Now, null, sfContainer, DateTime.Now, dal);
+            Post originalPost = new Post(-1, title, content, author, DateTime.Now, null, sf, DateTime.Now);
             // Should throw exception if post doesn't follow forum policy.
-            sfContainer.AddThread(originalPost);
+            sf.AddThread(originalPost);
             author.AddPost(originalPost);
 
-            return dal.CreatePost(originalPost);
+            return originalPost.Create();
         }
 
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            User author = dal.GetUser(userID, forumID);
-            Post post = dal.GetPost(replyToPost_ID);
-            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now, dal);
+            User author = User.Get(userID, forumID);
+            Post post = Post.Get(replyToPost_ID);
+            Post reply = new Post(-1, null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now);
 
             post.AddReply(reply);
             author.AddPost(reply);
 
-            return dal.CreatePost(reply);
+            return reply.Create();
         }
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            Forum forum = dal.GetForum(forumID);
-            Subforum sf = new Subforum(-1, name, description, forum, dal);
-
+            Admin admin = Admin.Get(userID, forumID);
+            Forum forum = Forum.Get(forumID);
+            User user = User.Get(moderatorID, forumID);
+            
+            Subforum sf = new Subforum(-1, name, description, forum);
+            Moderator mod = new Moderator(user, term, sf, admin);
+            sf.AddModerator(mod);
             forum.AddSubForum(sf);
-
-            return dal.CreateSubForum(sf);
+            sf = sf.Create();
+            sf.AddModerator(mod.Create());
+            return sf;
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(int userID, int forumID, int targetUserNameID, string message)
         {
-            throw new NotImplementedException();
+            User source = User.Get(userID, forumID);
+            User target = User.Get(targetUserNameID, forumID);
+            Notification newMessage = new Notification(-1, message, true, source, target);
+            target.NewNotification(newMessage);
+            
+            return 1;
         }
 
         public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            Forum forum = dal.GetForum(forumID);
-            Subforum sf = dal.GetSubForum(subForumID);
-            Admin admin = dal.GetAdmin(userID, forumID);
+            Admin admin = Admin.Get(userID, forumID);
+            Forum forum = Forum.Get(forumID);
+            Subforum sf = Subforum.Get(subForumID);
+            User user = User.Get(moderatorID, forumID);
 
-            Moderator mod = new Moderator(forum.GetMember(moderatorID), term, sf, admin, dal);
+            Moderator mod = new Moderator(user, term, sf, admin);
             sf.AddModerator(mod);
 
-            return dal.CreateModerator(mod);
+            return mod.Create();
         }
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            Moderator mod = dal.GetModerator(moderatorID, subforumID);
-            Admin admin = dal.GetAdmin(userID, forumID);
+            Moderator mod = Moderator.Get(moderatorID, subforumID);
+            Admin admin = Admin.Get(userID, forumID);
             if (mod.Appointer.Id != admin.Id)
                 throw new UnauthorizedEditModTerm(userID, moderatorID, subforumID);
 
             mod.TermExp = term;
-            mod.SubForum.AddModerator(mod);
-            dal.UpdateModerator(mod);
+            mod.Update();
 
             return 1;
         }
 
         public int confirmEmail(int userID, int forumID)
         {
+            // TODO: 
             throw new NotImplementedException();
         }
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            Post post = dal.GetPost(postID);
+            Post post = Post.Get(postID);
 
             post.Delete();
 
@@ -176,32 +189,54 @@ namespace WASP.Domain
 
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            User user = dal.GetUser(userID, forumID);
-            Post post = dal.GetPost(postID);
-            Forum forum = dal.GetForum(forumID);
-            if (user.Id != post.GetAuthor.Id && forum.IsAdmin(userID))
+            User user = User.Get(userID, forumID);
+            Post post = Post.Get(postID);
+            Forum forum = Forum.Get(forumID);
+            if (user.Id != post.GetAuthor.Id && !forum.IsAdmin(userID))
                 throw new UnauthorizedEditPost(userID, postID, post.Subforum.Id);
             post.Content = content;
-            dal.UpdatePost(post);
+            post.Update();
 
             return 1;
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            Admin admin = dal.GetAdmin(userID, forumID);
-            Moderator mod = dal.GetModerator(moderatorID, subForumID);
+            Admin admin = Admin.Get(userID, forumID);
+            Moderator mod = Moderator.Get(moderatorID, subForumID);
             if (mod.Appointer.Id != admin.Id)
                 throw new UnauthorizedDeleteModerator(userID, moderatorID);
-            dal.DeleteModerator(mod.Id, subForumID);
+            mod.Delete();
             return 1;
         }
+
+        public Admin addAdmin(int userID, int forumID, int adminId)
+        {
+            SuperUser su = null;
+            Admin admin = null;
+            try
+            {
+                su = SuperUser.Get(userID);
+            }
+            catch (WaspException e)
+            {
+                admin = Admin.Get(userID, forumID);
+            }
+            Forum forum = Forum.Get(forumID);
+
+            User user = User.Get(adminId, forumID);
+            Admin toBeAdmin = new Admin(user, forum);
+
+            return toBeAdmin.Create();
+        }
     
-        //TODO: Check purpose of this function
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
+            Admin admin = Admin.Get(userID, forumID);
+            Subforum sf = Subforum.Get(subForumID);
             int counter = 0;
-            Subforum sf = dal.GetSubForum(subForumID);
+
+
             Post[] threads = sf.GetThreads();
             foreach (Post post in threads)
             {
@@ -210,17 +245,13 @@ namespace WASP.Domain
             }
             return counter;
         }
-        //TODO: Check purpose of this function
-        public int memberTotalMessages(int userID, int forumID)
+
+        public Post[] postsByMember(int adminID, int forumID, int userID)
         {
-            int counter = 0;
-            Forum forum = dal.GetForum(forumID);
-            Subforum [] sfArr = forum.GetAllSubForums();
-            foreach (Subforum sf in sfArr)
-            {
-                counter += subForumTotalMessages(userID, forumID, sf.Id);
-            }
-            return counter;
+            Admin admin = Admin.Get(adminID, forumID);
+            User user = User.Get(userID, forumID);
+
+            return user.GetAllPosts();
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
@@ -230,43 +261,53 @@ namespace WASP.Domain
 
         public int totalForums(int userID)
         {
-            //TODO: Get superuser with this userID.
-            return dal.GetForums(null).Length;
+            SuperUser su = SuperUser.Get(userID);
+            return Forum.Get(null).Length;
         }
 
         public User[] membersInDifferentForums(int userID)
         {
             SuperUser super = dal.GetSuperUser(userID);
-            //  User[] users = dal.GetUsersInDiffForums();
-            //    return users;
-            return null;
-           
+            User[] users = dal.GetUsersInDiffForums();
+            return users;           
         }
 
         public User login(string userName, string password, int forumID)
         {
-            throw new NotImplementedException();
+            Forum forum = Forum.Get(forumID);
+            foreach (User user in forum.GetMembers())
+            {
+                if (user.Username.Equals(userName) && user.Password.Equals(password))
+                    return user;
+            }
+
+            throw new LoginException("Username or passwords are wrong.");
         }
 
         public SuperUser loginSU(string userName, string password)
         {
-            throw new NotImplementedException();
+            foreach (SuperUser user in dal.GetSuperUsers(null))
+            {
+                if (user.Username.Equals(userName) && user.Password.Equals(password))
+                    return user;
+            }
+            throw new LoginException("Username or passwords are wrong.");
         }
 
         public Post getThread(int userID, int forumID, int threadId)
         {
-            Post post = dal.GetPost(threadId);
+            Post post = Post.Get(threadId);
             return post;
         }
 
-        public Post[] getThreads(int forumID, int subForumID, List<int> threads)
+        public Post[] getThreads(int subForumID)
         {
-            return dal.GetPosts(threads.ToArray());
+            return Subforum.Get(subForumID).GetThreads();
         }
 
         public Forum getForum(int forumID)
         {
-            return dal.GetForum(forumID);
+            return f(forumID);
         }
 
         public Subforum getSubforum(int forumID, int subforumId)

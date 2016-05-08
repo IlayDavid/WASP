@@ -128,7 +128,7 @@ namespace WASP.Domain
         * Return: number >= 0 if success        
         */
         int deleteModerator(int userID, int forumID, int moderatorID, int subForumID);
-        
+        Admin addAdmin(int userID, int forumID, int adminId);
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
         Notification[] getAllNotificationses(int userID, int forumID);
         Notification[] getNewNotificationses(int userID, int forumID);

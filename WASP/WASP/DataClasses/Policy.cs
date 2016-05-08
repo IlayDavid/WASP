@@ -18,7 +18,10 @@ namespace WASP.DataClasses
         {
             return dal.GetPolicy(id);
         }
-
+        public static Policy[] Get(int[] ids)
+        {
+            throw new NotImplementedException("");
+        }
         public Policy Create()
         {
             return dal.CreatePolicy(this);

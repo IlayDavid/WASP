@@ -17,7 +17,10 @@ namespace WASP.DataClasses
         {
             return dal.GetPost(id);
         }
-
+        public static Post[] Get(int[] ids)
+        {
+            return dal.GetPosts(ids);
+        }
         public Post Create()
         {
             Post thisPost = dal.CreatePost(this);

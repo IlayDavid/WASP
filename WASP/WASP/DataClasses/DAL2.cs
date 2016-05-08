@@ -96,7 +96,6 @@ namespace WASP.DataClasses
         //return all the forums in which userID is a member
         Forum[] GetForumsUserID(int userId);
 
-
         // Deleted
         bool DeleteModerator(int modId, int subForumId);
         bool DeleteUser(int id, int forumId);
@@ -104,6 +103,7 @@ namespace WASP.DataClasses
         bool DeleteForum(int forumId);
         bool DeleteSubforum(int subforumId);
         bool DeletePost(int postID);
+
 
 
 

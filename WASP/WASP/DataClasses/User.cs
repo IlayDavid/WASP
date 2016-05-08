@@ -31,6 +31,10 @@ namespace WASP.DataClasses
         {
             return dal.GetUser(userId, forumId);
         }
+        public static User[] Get(int[] ids, int forumID)
+        {
+            return dal.GetUsers(ids, forumID);
+        }
 
         public User Update()
         {
