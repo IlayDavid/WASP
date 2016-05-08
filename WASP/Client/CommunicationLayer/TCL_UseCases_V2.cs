@@ -31,6 +31,11 @@ namespace Client.CommunicationLayer
                 List<Post> replies = posts[postID].inReplyTo.replies;
                 replies.Remove(replies.First(x => x.id == postID));
             }
+            else
+            {
+                Subforum sf = subforums[posts[postID].containerID];
+                sf.threads.Remove(sf.threads.First(x => x.id == postID));
+            }
             posts.Remove(postID);
             
             return 1;
@@ -38,7 +43,7 @@ namespace Client.CommunicationLayer
 
         public int sendMessage(int targetUserID, string message)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public int updateModeratorTerm(int subforumID, int moderatorID, DateTime term)

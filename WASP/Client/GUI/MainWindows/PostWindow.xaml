@@ -9,15 +9,15 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="589,15,0,0" Width="93" Text="Welcome, guest!"/>
-        <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
-        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
-        <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
+        <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" ToolTip="Login to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" ToolTip="Log out from the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" ToolTip="Register as new member to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
 
         <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
-        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
+        <Button x:Name="exitButton" Content="Exit" ToolTip="Exit from the system" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
-        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
-        <Button x:Name="backButton" Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0" Click="backButton_Click"/>
+        <Button x:Name="notificationsButton" Content="Notifications(0)" Click="notificationsButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
+        <Button x:Name="backButton" Content="back"  ToolTip="Go back to sub forum threads selection" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0" Click="backButton_Click"/>
 
         <Grid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood">
             <Grid.RowDefinitions>
@@ -30,10 +30,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnAddReply" Content="Add Reply" Click="btnAddReply_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="0" Margin="10,21,0,0"/>
-            <Button x:Name="btnEdit" Content="Edit" Click="btnEdit_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="1" Margin="10,20.8,0,0"/>
+            <Button x:Name="btnAddReply" Content="Add Reply" Click="btnAddReply_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="0" Margin="10,21,0,0" ToolTip="Add reply to the selected post"/>
+            <Button x:Name="btnEdit" Content="Edit" Click="btnEdit_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="1" Margin="10,20.8,0,0" ToolTip="Edit the selected post"/>
             <TreeView x:Name="postMesssages" HorizontalAlignment="Left" MouseDoubleClick="postMesssages_MouseDoubleClick" Height="397" VerticalAlignment="Top" Width="480" FontSize="15" Background="AntiqueWhite" Margin="169,18,-348.2,-59" Grid.RowSpan="5" />
-            <Button x:Name="btnDelete" Content="Delete"  Click="btnDelete_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="2" Margin="10,21.6,0,0" Grid.RowSpan="2"/>
+            <Button x:Name="btnDelete" Content="Delete"  Click="btnDelete_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="50" FontSize="20" Grid.Row="2" Margin="10,21.6,0,0" Grid.RowSpan="2" ToolTip="Delete the selected post"/>
         </Grid>
     </Grid>
 </Window>

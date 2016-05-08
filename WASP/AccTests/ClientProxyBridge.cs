@@ -4,7 +4,7 @@ using Client.DataClasses;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 using Forum = Client.DataClasses.Forum;
-using Message = Client.DataClasses.Message;
+using Notifications = Client.DataClasses.Notifications;
 using Policy = Client.DataClasses.Policy;
 using Post = Client.DataClasses.Post;
 using Subforum = Client.DataClasses.Subforum;
@@ -102,12 +102,12 @@ namespace AccTests
             return proj.deleteModerator(userID, subForumID,moderatorID,subForumID);
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public List<Notifications> getAllNotificationses(int userID, int forumID)
         {
             return ((Client.BusinessLogic.IBL) proj).getAllNotificationses(userID, forumID);
         }
 
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public List<Notifications> getNewNotificationses(int userID, int forumID)
         {
             return ((Client.BusinessLogic.IBL) proj).getNewNotificationses(userID, forumID);
         }

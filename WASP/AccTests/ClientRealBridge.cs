@@ -76,12 +76,12 @@ namespace AccTests
             return _clientAPI.deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public List<Notifications> getAllNotificationses(int userID, int forumID)
         {
             return _clientAPI.getAllNotificationses(userID, forumID);
         }
 
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public List<Notifications> getNewNotificationses(int userID, int forumID)
         {
             return _clientAPI.getNewNotificationses(userID, forumID);
         }

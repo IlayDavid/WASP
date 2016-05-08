@@ -126,8 +126,10 @@ namespace Client
                 int isSuc = Session.bl.deletePost(p.id);
                 if (isSuc > 0)
                 {
-                    postMesssages.Items.Remove(selected);
-                    postMesssages.ItemsSource = postMesssages.ItemsSource;
+                    if (selected.Parent is TreeViewItem)
+                        ((TreeViewItem)selected.Parent).Items.Remove(selected);
+                    else
+                        postMesssages.Items.Remove(selected);
                 }
             }
             catch (Exception ee)
@@ -243,6 +245,15 @@ namespace Client
             {
                 MessageBox.Show(ee.Message);
             }
+        }
+
+        private void notificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext);
+        }
+        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        {
+            Session.NotifyWindow(notifications, notsBtn);
         }
     }
 }

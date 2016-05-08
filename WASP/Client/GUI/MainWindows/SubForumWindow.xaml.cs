@@ -237,5 +237,14 @@ namespace Client
             int num = Session.bl.subForumTotalMessages(Session.subForum.id);
             MessageBox.Show("Total number of posts in Sub Forum \"" + Session.subForum.name + "\" is: " + num);
         }
+
+        private void notificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext);
+        }
+        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        {
+            Session.NotifyWindow(notifications, notsBtn);
+        }
     }
 }

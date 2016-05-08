@@ -8,6 +8,7 @@ using Client.GUI.AddWindows;
 using Client.GUI.EditWindows;
 using System.Collections.Generic;
 using System.Linq;
+using Client.GUI.MainWindows;
 
 namespace Client
 {
@@ -229,7 +230,17 @@ namespace Client
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
+            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext); 
+        }
+        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        {
+            Session.NotifyWindow(notifications, notsBtn);
+        }
 
+        private void btnSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            ChatWindow chat = new ChatWindow();
+            chat.ShowDialog();
         }
     }
 }

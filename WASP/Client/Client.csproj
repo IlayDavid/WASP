@@ -76,6 +76,7 @@
     <Compile Include="CommunicationLayer\TCL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\TCL_UseCases_V3.cs" />
     <Compile Include="DataClasses\ClassView.cs" />
+    <Compile Include="DataClasses\Notification.cs" />
     <Compile Include="GUI\AddWindows\AddAdmin.xaml.cs">
       <DependentUpon>AddAdmin.xaml</DependentUpon>
     </Compile>
@@ -110,6 +111,9 @@
       <DependentUpon>ForumReports.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\INotificable.cs" />
+    <Compile Include="GUI\MainWindows\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Session.cs" />
     <Compile Include="GUI\MainWindows\SubForumWindow.xaml.cs">
       <DependentUpon>SubForumWindow.xaml</DependentUpon>
@@ -161,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\MainWindows\ChatWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GUI\MainWindows\ForumWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -178,7 +186,7 @@
     <Compile Include="CommunicationLayer\ICL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\ICL_UseCases_V3.cs" />
     <Compile Include="CommunicationLayer\ICL_General.cs" />
-    <Compile Include="DataClasses\Message.cs" />
+    <Compile Include="DataClasses\Notifications.cs" />
     <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Policy.cs" />
     <Compile Include="DataClasses\Post.cs" />

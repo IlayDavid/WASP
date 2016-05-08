@@ -9,15 +9,15 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="589,15,0,0" Width="93" Text="Welcome, guest!"/>
-        <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
-        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
-        <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
+        <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" ToolTip="Login to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" ToolTip="Log out from the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
+        <Button x:Name="btnRegister" Content="register" Click="btnRegister_Click" ToolTip="Register as new member to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="756,10,0,0" Height="26"/>
 
         <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="375,500,0,0"/>
         <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="707,538,0,0" Click="exitButton_Click"/>
         <Label x:Name="headlineLabel" Content="Welcome to the WASP system" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,10,0,0"/>
-        <Button x:Name="notificationsButton" Content="Notifications(0)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
-        <Button x:Name="backButton" Content="back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0" Click="backButton_Click"/>
+        <Button x:Name="notificationsButton" Content="Notifications(0)" Click="notificationsButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="692,85,0,0" ToolTip="number of notifications is 0" />
+        <Button x:Name="backButton" Content="back" ToolTip="Go back to sub-forum selection window" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,500,0,0" Click="backButton_Click"/>
 
         <Grid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="4.128,9.364" Height="450" Width="676" Margin="10,45,0,0" Background="BurlyWood">
             <Grid.RowDefinitions>
@@ -31,12 +31,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnPostThread" Content="Add Thread" Click="btnPostThread_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="0" Margin="10,8,0,0"/>
-            <Button x:Name="btnViewModerators" Content="View Moderators" Click="btnViewModerators_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Margin="10,7.8,0,0" Grid.Row="1"/>
-            <Button x:Name="btnAddModerator"  Content="Add Moderator" Click="btnAddModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="2" Margin="10,7.6,0,0"/>
-            <Button x:Name="btnEditModeratorTerm"  Content="Edit Mod. Term" Click="btnEditModeratorTerm_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="3" Margin="10,8.4,0,0"/>
-            <Button x:Name="btnRemoveModerator" Content="Remove Moderator" Click="btnRemoveModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="4" Margin="10,8.2,0,0"/>
-            <Button x:Name="btnRepots" Content="Reports"  Click="btnRepots_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="5" Margin="10,8,0,0"/>
+            <Button x:Name="btnPostThread" Content="Add Thread" ToolTip="Add thread to sub forum" Click="btnPostThread_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="0" Margin="10,8,0,0"/>
+            <Button x:Name="btnViewModerators" Content="View Moderators" ToolTip="View moderators list of the sub forum" Click="btnViewModerators_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Margin="10,7.8,0,0" Grid.Row="1"/>
+            <Button x:Name="btnAddModerator"  Content="Add Moderator" ToolTip="Add moderator to sub forum" Click="btnAddModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="2" Margin="10,7.6,0,0"/>
+            <Button x:Name="btnEditModeratorTerm"  Content="Edit Mod. Term"  ToolTip="Edit moderator term" Click="btnEditModeratorTerm_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="3" Margin="10,8.4,0,0"/>
+            <Button x:Name="btnRemoveModerator" Content="Remove Moderator"  ToolTip="Remove moderator from the subforum" Click="btnRemoveModerator_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="4" Margin="10,8.2,0,0"/>
+            <Button x:Name="btnRepots" Content="Reports" ToolTip="Get report for the sub forum" Click="btnRepots_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Height="50" FontSize="20" Grid.Row="5" Margin="10,8,0,0"/>
             <ListBox x:Name="SubForumsThreads" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForumsThreads_MouseDoubleClick"/>
         </Grid>
     </Grid>

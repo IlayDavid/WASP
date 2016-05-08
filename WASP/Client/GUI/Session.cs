@@ -2,6 +2,9 @@
 using Client.DataClasses;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Client.GUI
 {
@@ -65,6 +68,27 @@ namespace Client.GUI
                     App.Current.Windows[intCounter].Close();
                 }
                 catch{ }
+        }
+
+        internal static void ShowNotifications(List<Notifications> nots)
+        {
+            if (nots == null)
+            {
+                MessageBox.Show("No new Notifications");
+                return;
+            }
+            string notsStr = "";
+            foreach (Notifications m in nots)
+            {
+                notsStr += m.message + "\n";
+            }
+            MessageBox.Show("No new Notifications");
+        }
+
+        internal static void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        {
+            notsBtn.Content = "Notifications (" + notifications.Count + ")";
+            notsBtn.DataContext = notifications;
         }
     }
 }
