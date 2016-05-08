@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WASP.DataClasses;
-
+using WASP.DataClasses.Reports;
 
 namespace WASP.Domain
 {
@@ -41,7 +41,7 @@ namespace WASP.Domain
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID);  //------------------------ policy object??
+        int defineForumPolicy(int userID, int forumID, Policy policy);  //------------------------ policy object??
 
         /*
          * Pre-conditions: none

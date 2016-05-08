@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using WASP.DataClasses;
+using WASP.DataClasses.Reports;
 using WASP.Exceptions;
 
 
@@ -51,7 +53,7 @@ namespace WASP.Domain
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
             SuperUser su = SuperUser.Get(userID);
-            
+
             // create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, policy);
             newForum = newForum.Create();
@@ -75,9 +77,12 @@ namespace WASP.Domain
             return Forum.Get(newForum.Id);
         }
 
-        public int defineForumPolicy(int userID, int forumID)
+        public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            throw new NotImplementedException();
+            Admin admin = Admin.Get(userID, forumID);
+
+            policy.Update();
+            return 1;
         }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
@@ -89,7 +94,7 @@ namespace WASP.Domain
             User user = new User(id, name, userName, email, pass, forum);
             forum.AddMember(user);
             user.Create();
-            
+
             return user;
         }
 
@@ -126,7 +131,7 @@ namespace WASP.Domain
             Admin admin = Admin.Get(userID, forumID);
             Forum forum = Forum.Get(forumID);
             User user = User.Get(moderatorID, forumID);
-            
+
             Subforum sf = new Subforum(-1, name, description, forum);
             Moderator mod = new Moderator(user, term, sf, admin);
             sf.AddModerator(mod);
@@ -142,7 +147,7 @@ namespace WASP.Domain
             User target = User.Get(targetUserNameID, forumID);
             Notification newMessage = new Notification(-1, message, true, source, target);
             target.NewNotification(newMessage);
-            
+
             return 1;
         }
 
@@ -229,7 +234,7 @@ namespace WASP.Domain
 
             return toBeAdmin.Create();
         }
-    
+
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
             Admin admin = Admin.Get(userID, forumID);
@@ -256,7 +261,16 @@ namespace WASP.Domain
 
         public ModeratorReport moderatorReport(int userID, int forumID)
         {
-            throw new NotImplementedException();
+            Admin admin = Admin.Get(userID, forumID);
+            List<Moderator> mods = new List<Moderator>();
+            foreach (Subforum sf in admin.Forum.GetAllSubForums())
+            {
+                foreach (Moderator mod in sf.GetAllModerators())
+                {
+                    mods.Add(mod);
+                }
+            }
+            return new ModeratorReport(mods.ToArray());
         }
 
         public int totalForums(int userID)
@@ -269,7 +283,7 @@ namespace WASP.Domain
         {
             SuperUser super = dal.GetSuperUser(userID);
             User[] users = dal.GetUsersInDiffForums();
-            return users;           
+            return users;
         }
 
         public User login(string userName, string password, int forumID)
@@ -339,7 +353,7 @@ namespace WASP.Domain
         public User[] getMembers(int userID, int forumID)
         {
             Forum forum = Forum.Get(forumID);
-            
+
             return forum.GetMembers();
         }
 
@@ -351,7 +365,6 @@ namespace WASP.Domain
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            // TODO : amitay wants to check with policy if user is a member, if so, show admins otherwise don't show admins.
             Admin admin = Admin.Get(AdminID, forumID);
             return admin;
         }

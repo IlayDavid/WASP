@@ -67,12 +67,12 @@
       <DependentUpon>Forum_System.dbml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\Moderator.cs" />
-    <Compile Include="DataClasses\ModeratorReport.cs" />
     <Compile Include="DataClasses\Notification.cs" />
     <Compile Include="DataClasses\Policies\PasswordPolicy.cs" />
     <Compile Include="DataClasses\Policies\Policy.cs" />
     <Compile Include="DataClasses\Policy.cs" />
     <Compile Include="DataClasses\Post.cs" />
+    <Compile Include="DataClasses\Reports\ModeratorReport.cs" />
     <Compile Include="DataClasses\Subforum.cs" />
     <Compile Include="DataClasses\SuperUser.cs" />
     <Compile Include="DataClasses\UnitTests\AdminSuitTests.cs" />
