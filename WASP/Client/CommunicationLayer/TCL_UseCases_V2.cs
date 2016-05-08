@@ -36,7 +36,7 @@ namespace Client.CommunicationLayer
             return 1;
         }
 
-        public int sendMessage(string targetUserNameID, string message)
+        public int sendMessage(int targetUserID, string message)
         {
             throw new NotImplementedException();
         }

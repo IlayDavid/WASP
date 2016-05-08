@@ -14,7 +14,7 @@ namespace Client.CommunicationLayer
          * Pre-conditions: Member is loged-in, second member is exists. 
          * Purpose: send a private message.
          */
-        int sendMessage(string targetUserNameID, string message);
+        int sendMessage(int targetUserID, string message);
 
         /*
          * Pre-conditions: Admin (or Moderator) is loged-in and is admin of the forum, moderator is member of the forum.

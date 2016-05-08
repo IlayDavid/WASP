@@ -13,22 +13,21 @@ namespace Client.CommunicationLayer
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int postID, string content)
         {
-            string json = "{\"postid\":" + postID
-                + "," + "\"content\":\"" + content + "\"}";
+            string json = "{\"postid\":" + postID + "," + "\"auth\":\"" + _auth + "\"," + "\"content\":\"" + content + "\"}";
             string res = httpReq(json, "POST", _url + "/editPost/");
             return 0;
         }
 
         public int deleteModerator(int moderatorID, int subForumID)
         {
-            string json = "{\"subforumid\":" + subForumID + "," +  "\"moderatorid\":" + moderatorID + "}";
+            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," +  "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/deleteModerator/");
             return 0;
         }
 
         public Admin addAdmin(int newAdminID)
         {   //username, id, password, email, name
-            string json = "{\"newadminid\":" + newAdminID + "}";
+            string json = "{\"newadminid\":" + newAdminID + "," + "\"auth\":\"" + _auth + "\"," + "}";
             string res = httpReq(json, "POST", _url + "/addAdmin/");
             return parser.parseStringToAdmin(res, this);
         }
@@ -54,7 +53,7 @@ namespace Client.CommunicationLayer
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int subForumID)
         {
-            string json = "{\"subforumid\":" + subForumID + "}";
+            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "}";
             string res = httpReq(json, "POST", _url + "/subForumTotalMessages/");
             return parseStringToNum(res);
         }
@@ -66,7 +65,7 @@ namespace Client.CommunicationLayer
 
         public List<Post> postsByMember(int userID)
         {   //title,  content,  authorid,  subforumid,  replypostid
-            string json = "{\"userid\":" + userID +"}";
+            string json = "{\"userid\":" + userID + "," + "\"auth\":\"" + _auth + "\"," + "}";
             string res = httpReq(json, "POST", _url + "/postsByMember/");
             return parser.parseStringToPosts(res);
         }
@@ -86,14 +85,14 @@ namespace Client.CommunicationLayer
         //-----------Super User Reports---------------
         public int totalForums()
         {
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/totalForums/");
             return parseStringToNum(res);
         }
 
         public List<User> membersInDifferentForums()
         {   //username, id, password, email, name
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/membersInDifferentForums/");
             return parser.parseStringToUsers(res);
         }

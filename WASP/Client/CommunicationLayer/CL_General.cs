@@ -132,7 +132,7 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {   //name, description, adminid
-            string json = "";
+            string json = "{\"auth\":" + _auth + "}";
             string res = httpReq(json, "POST", _url + "/getAllForums/");
             return parser.parseStringToForums(res);
         }
