@@ -32,20 +32,20 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
-        public List<Message> getAllNotificationses()
+        public List<Notification> getAllNotificationses()
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
             return parseStringToMessages(res);
         }
-        public List<Message> getNewNotificationses()
+        public List<Notification> getNewNotificationses()
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
             return parseStringToMessages(res);
         }
 
-        private List<Message> parseStringToMessages(string res)
+        private List<Notification> parseStringToMessages(string res)
         {
             throw new NotImplementedException();
         }

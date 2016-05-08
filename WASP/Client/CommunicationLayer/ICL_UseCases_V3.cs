@@ -26,8 +26,8 @@ namespace Client.CommunicationLayer
         int deleteModerator(int moderatorID, int subForumID);
 
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
-        List<Message> getAllNotificationses();
-        List<Message> getNewNotificationses();
+        List<Notification> getAllNotificationses();
+        List<Notification> getNewNotificationses();
         /*  
         * Pre-conditions: super user (or Admin) is loged-in.
         * Purpose: add admin to forum.

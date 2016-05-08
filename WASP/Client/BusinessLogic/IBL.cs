@@ -73,7 +73,7 @@ namespace Client.BusinessLogic
          * Pre-conditions: Member is loged-in, second member is exists. 
          * Purpose: send a private message.
          */
-        int sendMessage(string targetUserNameID, string message);
+        int sendMessage(int targetUserID, string message);
 
         /*
          * Pre-conditions: Admin (or Moderator) is loged-in and is admin of the forum, moderator is member of the forum.
@@ -124,8 +124,8 @@ namespace Client.BusinessLogic
         int deleteModerator(int moderatorID, int subForumID);
 
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
-        List<Message> getAllNotificationses();
-        List<Message> getNewNotificationses();
+        List<Notification> getAllNotificationses();
+        List<Notification> getNewNotificationses();
         /*  
         * Pre-conditions: super user (or Admin) is loged-in.
         * Purpose: add admin to forum.

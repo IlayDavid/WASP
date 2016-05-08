@@ -32,11 +32,11 @@ namespace Client.BusinessLogic
             return _cl.deleteModerator(moderatorID, subForumID);
         }
 
-        public List<Message> getAllNotificationses()
+        public List<Notification> getAllNotificationses()
         {
             throw new NotImplementedException();
         }
-        public List<Message> getNewNotificationses()
+        public List<Notification> getNewNotificationses()
         {
             throw new NotImplementedException();
         }

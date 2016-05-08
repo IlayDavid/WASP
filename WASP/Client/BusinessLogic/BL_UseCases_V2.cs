@@ -28,9 +28,9 @@ namespace Client.BusinessLogic
             return _cl.deletePost(postID);
         }
 
-        public int sendMessage(string targetUserNameID, string message)
+        public int sendMessage(int targetUserID, string message)
         {
-            return _cl.sendMessage(targetUserNameID, message);
+            return _cl.sendMessage(targetUserID, message);
         }
 
         public int updateModeratorTerm(int subforumID, int moderatorID, DateTime term)

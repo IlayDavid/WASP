@@ -28,11 +28,11 @@ namespace Client.CommunicationLayer
                 throw new Exception("ERROR: Only one moderator left, can not removing him.");
         }
 
-        public List<Message> getAllNotificationses()
+        public List<Notification> getAllNotificationses()
         {
             throw new NotImplementedException();
         }
-        public List<Message> getNewNotificationses()
+        public List<Notification> getNewNotificationses()
         {
             throw new NotImplementedException();
         }
