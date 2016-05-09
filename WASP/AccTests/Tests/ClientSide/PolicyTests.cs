@@ -5,22 +5,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WASP.DataClasses;
+using Client.DataClasses;
 
 namespace AccTests.Tests.ServerSide
 {
     [TestClass]
-    public class PolicyTests
+    public class ClientPolicyTests
     {
-        private WASPBridge _proj;
+        private WASPClientBridge _proj;
         private SuperUser _supervisor;
         [TestInitialize]
         public void setUp()
         {
-            _proj = Driver.getBridge();
-            _proj.Clean();
-            _supervisor = Functions.InitialSystem(_proj);
-            _supervisor = _proj.loginSU(_supervisor.Username, _supervisor.Password);
+            Driver.getBridge().Clean();
+            _proj = ClientDriver.getBridge();
+            
+            _supervisor = ClientFunctions.InitialSystem(_proj);
+            _supervisor = _proj.loginSU(_supervisor.userName, _supervisor.password);
 
         }
         /*

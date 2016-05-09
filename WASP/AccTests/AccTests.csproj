@@ -47,6 +47,20 @@
     <Compile Include="ClientDriver.cs" />
     <Compile Include="ClientProxyBridge.cs" />
     <Compile Include="ClientRealBridge.cs" />
+    <Compile Include="Tests\ClientSide\AddModeratorTests.cs" />
+    <Compile Include="Tests\ClientSide\CreateForumTests.cs" />
+    <Compile Include="Tests\ClientSide\CreateSubForumTests.cs" />
+    <Compile Include="Tests\ClientSide\DeleteModeratorTest.cs" />
+    <Compile Include="Tests\ClientSide\DeletePostTests.cs" />
+    <Compile Include="Tests\ClientSide\Functions.cs" />
+    <Compile Include="Tests\ClientSide\InfoGettingTests.cs" />
+    <Compile Include="Tests\ClientSide\InitializeTests.cs" />
+    <Compile Include="Tests\ClientSide\LogInTests.cs" />
+    <Compile Include="Tests\ClientSide\OpenThreadTests.cs" />
+    <Compile Include="Tests\ClientSide\PolicyTests.cs" />
+    <Compile Include="Tests\ClientSide\PostMsgTests.cs" />
+    <Compile Include="Tests\ClientSide\SendPrivateMsgTests.cs" />
+    <Compile Include="Tests\ClientSide\SubscribeForumTests.cs" />
     <Compile Include="Tests\ServerSide\DeleteModeratorTest.cs" />
     <Compile Include="Tests\ServerSide\InfoGettingTests.cs" />
     <Compile Include="Tests\ServerSide\PolicyTests.cs" />
@@ -85,9 +99,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\ClientSide\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

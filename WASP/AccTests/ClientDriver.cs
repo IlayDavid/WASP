@@ -1,4 +1,4 @@
-﻿namespace AccTests.Bridges.General.ClientSide
+﻿namespace AccTests
 {
     public class ClientDriver
     {
