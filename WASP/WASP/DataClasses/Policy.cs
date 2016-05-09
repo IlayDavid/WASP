@@ -111,10 +111,10 @@ namespace WASP.DataClasses
 
         public bool Validate(User member)
         {
-            if (passwordPeriod.Ticks == 0)
-                return true;
-            if (DateTime.Now - member.PasswordChangeDate > passwordPeriod)
-                member.NewNotification(new Notification(-1, "Password too old.", true, null, null));
+            //if (passwordPeriod.Ticks == 0)
+               // return true;
+           // if (DateTime.Now - member.PasswordChangeDate > passwordPeriod)
+             //   member.NewNotification(new Notification(-1, "Password too old.", true, null, null));
                 //throw new WASP.Exceptions.PolicyException("Password too old.");
             return true;
         }

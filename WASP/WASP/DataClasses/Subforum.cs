@@ -134,6 +134,7 @@ namespace WASP.DataClasses
 
         public void AddModerator(Moderator mod)
         {
+            forum.Policy.Validate(mod);
             Moderators.Add(mod.Id, mod);
         }
 

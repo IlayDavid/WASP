@@ -653,8 +653,7 @@ namespace WASP.DataClasses
             throw new GetException(string.Format("post {0} wasn't found", postId));
         }
 
-
-
+        
 
         public bool DeletePost(int postId)
         {

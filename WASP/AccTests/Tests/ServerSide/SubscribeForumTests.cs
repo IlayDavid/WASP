@@ -21,6 +21,7 @@ namespace AccTests.Tests
         public void SetUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             SuperUser supervisor = Functions.InitialSystem(_proj);
             var forumAndMember = Functions.CreateSpecForum(_proj,supervisor);
             _forum = forumAndMember.Item1;
@@ -35,13 +36,12 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest1()
         {
-
             var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             var members = _proj.getMembers(_admin.User.Id, _forum.Id);
 
             Assert.IsNotNull(isMem);
             Assert.AreEqual(members.Length, 2);
-            Assert.IsTrue(members.ToList().Contains(isMem));
+            Assert.IsTrue(members[0].Id==isMem.Id || members[1].Id==isMem.Id);
             Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.Id));
         }
 

@@ -39,7 +39,7 @@
       <Column Name="fromForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="message" Type="System.String" DbType="NChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="message" Type="System.String" DbType="NChar(4000)" CanBeNull="true" />
       <Column Name="isNew" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="IUser_INotification" Member="IUser" ThisKey="fromUserId,fromForumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
       <Association Name="IUser_INotification1" Member="IUser1" ThisKey="toUserId,toForumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />

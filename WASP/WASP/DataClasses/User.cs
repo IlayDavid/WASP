@@ -198,9 +198,9 @@ namespace WASP.DataClasses
         {
             // TODO: new notification handling. 
             // throw new NotImplementedException();
-            newNotification.Target = this;
-            newNotification = newNotification.Create();
-            NewNotifications.Add(newNotification.Id, newNotification);
+           // newNotification.Target = this;
+            //newNotification = newNotification.Create();
+            //NewNotifications.Add(newNotification.Id, newNotification);
         }
 
         public Notification[] GetAllNotifications()

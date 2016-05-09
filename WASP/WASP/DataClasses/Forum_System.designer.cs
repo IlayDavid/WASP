@@ -1034,7 +1034,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NChar(4000) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NChar(4000)")]
 		public string message
 		{
 			get

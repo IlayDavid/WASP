@@ -23,7 +23,7 @@ namespace AccTests
             //Assert.AreEqual(supervisor.email, "moshe@post.bgu.ac.il");
             Assert.AreEqual(supervisor.Password, "moshe123");
         }
-        /*
+        
         /// <summary>
         /// Nagative Test: lack of information
         /// </summary>
@@ -65,7 +65,6 @@ namespace AccTests
         {
             _proj.initialize("Moshe", "SuperUser", 96, "moshe@post.bgu.ac.il", "");
         }
-        */
         
     }
 }
