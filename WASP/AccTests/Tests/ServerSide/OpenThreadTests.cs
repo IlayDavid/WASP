@@ -28,12 +28,12 @@ namespace AccTests.Tests
             var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
+            _proj.login(_admin.User.Username, _admin.User.Password, _forum.Id);
 
             var subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.Id);
+            _proj.login(_moderator.Username, _moderator.Password, _forum.Id);
            
 
         }
@@ -46,8 +46,8 @@ namespace AccTests.Tests
         public void OpenThreadTest1()
         {
             User member = Functions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(member.userName, member.password, _forum.Id);
-            Post isOpenPost = _proj.createThread(member.id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+            _proj.login(member.Username, member.Password, _forum.Id);
+            Post isOpenPost = _proj.createThread(member.Id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
                                    _subforum.Id);
             Assert.IsNotNull(isOpenPost);
         }
@@ -58,7 +58,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest2()
         {
-            Post isOpenPost = _proj.createThread(_moderator.id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+            Post isOpenPost = _proj.createThread(_moderator.Id,_forum.Id, "webService for calander", "Someone know a good web service for Calander?",
                                    _subforum.Id);
             Assert.IsNotNull(isOpenPost);
         }
@@ -69,14 +69,14 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest3()
         {
-            Post isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "", "Someone know a good web service for Calander?",
+            Post isOpenPost = _proj.createThread(_moderator.Id, _forum.Id, "", "Someone know a good web service for Calander?",
                                    _subforum.Id);
             Assert.IsNull(isOpenPost);
 
-            isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "webService for calander", "", _subforum.Id);
+            isOpenPost = _proj.createThread(_moderator.Id, _forum.Id, "webService for calander", "", _subforum.Id);
             Assert.IsNull(isOpenPost);
 
-            isOpenPost = _proj.createThread(_moderator.id, _forum.Id, "webService for calander", "Someone know a good web service for Calander?",
+            isOpenPost = _proj.createThread(_moderator.Id, _forum.Id, "webService for calander", "Someone know a good web service for Calander?",
                        -1);
             Assert.IsNull(isOpenPost);
 

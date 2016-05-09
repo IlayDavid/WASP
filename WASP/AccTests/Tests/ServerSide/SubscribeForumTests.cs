@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 
@@ -25,7 +26,7 @@ namespace AccTests.Tests
             _forum = forumAndMember.Item1;
             _admin = forumAndMember.Item2;
 
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
+            _proj.login(_admin.User.Username, _admin.User.Password, _forum.Id);
         }
 
         /*
@@ -36,11 +37,11 @@ namespace AccTests.Tests
         {
 
             var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
-            var members = _proj.getMembers(_admin.user.id, _forum.Id);
+            var members = _proj.getMembers(_admin.User.Id, _forum.Id);
 
             Assert.IsNotNull(isMem);
-            Assert.AreEqual(members.Count, 2);
-            Assert.IsTrue(members.Contains(isMem));
+            Assert.AreEqual(members.Length, 2);
+            Assert.IsTrue(members.ToList().Contains(isMem));
             Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.Id));
         }
 

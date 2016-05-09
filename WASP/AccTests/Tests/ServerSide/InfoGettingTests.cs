@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
-using WASP.DataClasses.Policies;
 
 namespace AccTests.Tests.ServerSide
 {
@@ -31,12 +30,12 @@ namespace AccTests.Tests.ServerSide
         {
             _proj = Driver.getBridge();
             _supervisor = Functions.InitialSystem(_proj);
-            _supervisor = _proj.loginSU(_supervisor.userName, _supervisor.password);
+            _supervisor = _proj.loginSU(_supervisor.Username, _supervisor.Password);
             for (int i = 0; i < LOOPS; i++)
             {
-                var forum = _proj.createForum(_supervisor.id, "forum_" + i, "the " + i + "th forum",100, "admin_" + i,
+                var forum = _proj.createForum(_supervisor.Id, "forum_" + i, "the " + i + "th forum",100, "admin_" + i,
                     "admin" + i,
-                    "admin" + i + "@gmail.com", "admin1234", new PasswordPolicy());
+                    "admin" + i + "@gmail.com", "admin1234", new Policy());
                 var admin = _proj.login("admin_" + i, "admin1234", forum.Id);
                 _admins[forum] = new List<User>();
                 _admins[forum].Add(admin);
@@ -47,7 +46,7 @@ namespace AccTests.Tests.ServerSide
                     "mod1234",
                     forum.Id);
                 _members[forum].Add(member);
-                var subforum = _proj.createSubForum(admin.id,forum.Id, "subforum_" + i, "the " + i + "th subforum", member.id,
+                var subforum = _proj.createSubForum(admin.Id,forum.Id, "subforum_" + i, "the " + i + "th subforum", member.Id,
                     DateTime.MaxValue);
                 _moderators[subforum] = new List<User>();
                 _posts[subforum] = new List<Post>();
@@ -57,13 +56,13 @@ namespace AccTests.Tests.ServerSide
                     "mod1234",
                     forum.Id);
                 _members[forum].Add(member);
-                _proj.addModerator(admin.id,forum.Id, member.id, subforum.Id, DateTime.MaxValue);
+                _proj.addModerator(admin.Id,forum.Id, member.Id, subforum.Id, DateTime.MaxValue);
                 _moderators[subforum].Add(member);
                 var prevMember = member;
-                var post = _proj.createThread(prevMember.id,forum.Id, "title", "first message of forum_" + i,subforum.Id);
+                var post = _proj.createThread(prevMember.Id,forum.Id, "title", "first message of forum_" + i,subforum.Id);
                 _posts[subforum].Add(post);
-                _postsByUser[member.id]=new List<Post>();
-                _postsByUser[member.id].Add(post);
+                _postsByUser[member.Id]=new List<Post>();
+                _postsByUser[member.Id].Add(post);
                 for (int j = 0; j < LOOPS; j++)
                 {
                     prevMember = member;
@@ -71,9 +70,9 @@ namespace AccTests.Tests.ServerSide
                         "user" + i + "_" + j + "@gmail.com", "user1234",
                         forum.Id);
                     _members[forum].Add(member);
-                    post = _proj.createReplyPost(prevMember.id,forum.Id, "this is reply number " + i, post.id);
-                    _postsByUser[member.id] = new List<Post>();
-                    _postsByUser[member.id].Add(post);
+                    post = _proj.createReplyPost(prevMember.Id,forum.Id, "this is reply number " + i, post.Id);
+                    _postsByUser[member.Id] = new List<Post>();
+                    _postsByUser[member.Id].Add(post);
 
                     _posts[subforum].Add(post);
                 }
@@ -84,7 +83,7 @@ namespace AccTests.Tests.ServerSide
         /// </summary>
         public void sameUser()
         {
-            Assert.IsTrue(_proj.membersInDifferentForums(100).Count==LOOPS);
+            Assert.IsTrue(_proj.membersInDifferentForums(100).Length==LOOPS);
         }
         /// <summary>
         /// check if we get the correct number of posts
@@ -92,7 +91,7 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void numberOfPosts()
         {
-            var numPosts = _proj.subForumTotalMessages(_admins[_forums[0]][0].id, _forums[0].Id,_subforums[_forums[0]][0].Id);
+            var numPosts = _proj.subForumTotalMessages(_admins[_forums[0]][0].Id, _forums[0].Id,_subforums[_forums[0]][0].Id);
             Assert.IsTrue(numPosts == LOOPS*LOOPS);
         }
 
@@ -104,12 +103,12 @@ namespace AccTests.Tests.ServerSide
         {
             for (int i = 0; i < LOOPS; i++)
             {
-                var postsByMember = _proj.postsByMember(_admins[_forums[0]][0].id, _forums[0].Id, _members[_forums[0]][i].id);
+                var postsByMember = _proj.postsByMember(_admins[_forums[0]][0].Id, _forums[0].Id, _members[_forums[0]][i].Id);
                 var posts =
-                    _posts[_subforums[_forums[0]][0]].Where((x) => x.author.id == _members[_forums[0]][i].id);
+                    _posts[_subforums[_forums[0]][0]].Where((x) => x.GetAuthor.Id == _members[_forums[0]][i].Id);
                 foreach (var post in posts)
                 {
-                    Assert.IsTrue(postsByMember.Any((x) => (x).id==post.id));
+                    Assert.IsTrue(postsByMember.Any((x) => (x).Id==post.Id));
                 }
             }
         }
@@ -117,24 +116,24 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void moderatorReport()
         {
-            var reports = _proj.moderatorReport(_admins[_forums[0]][0].id, _forums[0].Id);
-            foreach (var mod in reports.ModeratorInsubForum)
+            var reports = _proj.moderatorReport(_admins[_forums[0]][0].Id, _forums[0].Id);
+            foreach (var mod in reports)
             {
-                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Value]].Any((x)=>x.id==mod.Key));
+                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Value]].Any((x)=>x.Id==mod.Key));
             }
             var subforums = _subforums[_forums[0]];
             IEnumerable<User> modlist=new List<User>();
             modlist = subforums.Aggregate(modlist, (current, subforum) => current.Concat(_moderators[subforum]));
             foreach (var moderator in reports.moderators)
             {
-                Assert.IsTrue(modlist.Any((x)=>x.id==moderator.user.id));
+                Assert.IsTrue(modlist.Any((x)=>x.Id==moderator.user.Id));
             }
 
             foreach (var moderatorsPost in reports.moderatorsPosts)
             {
                 foreach (var post in moderatorsPost.Value)
                 {
-                    Assert.IsTrue(_postsByUser[moderatorsPost.Key].Any((x)=>x.id==post.id));
+                    Assert.IsTrue(_postsByUser[moderatorsPost.Key].Any((x)=>x.Id==post.Id));
                 }
             }
         }

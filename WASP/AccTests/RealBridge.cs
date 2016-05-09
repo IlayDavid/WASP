@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using WASP;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
+using WASP.DataClasses.Reports;
+using WASP.Domain;
 using WASP.Server;
+using Policy = WASP.DataClasses.Policy;
 
 namespace AccTests
 {
     class RealBridge : WASPBridge
     {
-        private ServerAPI _serverAPI;
+        private IBL _serverAPI;
 
         public RealBridge()
         {
-            _serverAPI = new Server();
+            _serverAPI = new BLFacade();
         }
 
+        public void Clean()
+        {
+            _serverAPI.Clean();
+        }
+
+        public void Restore()
+        {
+            _serverAPI.Restore();
+        }
+
+        public void Backup()
+        {
+            _serverAPI.Backup();
+        }
 
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
@@ -33,9 +50,9 @@ namespace AccTests
             return _serverAPI.createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
         }
 
-        public int defineForumPolicy(int userID, int forumID)
+        public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            return _serverAPI.defineForumPolicy(userID, forumID);
+            return _serverAPI.defineForumPolicy(userID, forumID, policy);
         }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
@@ -58,7 +75,7 @@ namespace AccTests
             return _serverAPI.createSubForum(userID, forumID, name, description, moderatorID, term);
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(int userID, int forumID, int targetUserNameID, string message)
         {
             return _serverAPI.sendMessage(userID, forumID, targetUserNameID, message);
         }
@@ -93,12 +110,17 @@ namespace AccTests
             return _serverAPI.deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public Admin addAdmin(int userID, int forumID, int adminId)
+        {
+            return _serverAPI.addAdmin(userID, forumID, adminId);
+        }
+
+        public Notification[] getAllNotificationses(int userID, int forumID)
         {
             return _serverAPI.getAllNotificationses(userID, forumID);
         }
 
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public Notification[] getNewNotificationses(int userID, int forumID)
         {
             return _serverAPI.getNewNotificationses(userID, forumID);
         }
@@ -108,7 +130,7 @@ namespace AccTests
             return _serverAPI.subForumTotalMessages(userID, forumID, subForumID);
         }
 
-        public List<Post> postsByMember(int adminID, int forumID, int userID)
+        public Post[] postsByMember(int adminID, int forumID, int userID)
         {
             return _serverAPI.postsByMember(adminID, forumID, userID);
         }
@@ -123,7 +145,7 @@ namespace AccTests
             return _serverAPI.totalForums(userID);
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public User[] membersInDifferentForums(int userID)
         {
             return _serverAPI.membersInDifferentForums(userID);
         }
@@ -143,14 +165,14 @@ namespace AccTests
             return _serverAPI.getThread(forumID, threadId);
         }
 
-        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
+        public Post[] getThreads(int subForumID)
         {
-            return _serverAPI.getThreads(forumID, subForumID, @from, amount);
+            return _serverAPI.getThreads(subForumID);
         }
 
-        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        public Post[] getReplys(int forumID, int subForumID, int postID)
         {
-            return _serverAPI.getReplays(forumID, subForumID, postID);
+            return _serverAPI.getReplys(forumID, subForumID, postID);
         }
 
         public Forum getForum(int forumID)
@@ -163,7 +185,7 @@ namespace AccTests
             return _serverAPI.getSubforum(forumID, subforumId);
         }
 
-        public List<Moderator> getModerators(int forumID, int subForumID)
+        public Moderator[] getModerators(int forumID, int subForumID)
         {
             return _serverAPI.getModerators(forumID, subForumID);
         }
@@ -173,22 +195,22 @@ namespace AccTests
             return _serverAPI.getModeratorTermTime(userID, forumID, moderatorID, subforumID);
         }
 
-        public List<Forum> getAllForums()
+        public Forum[] getAllForums()
         {
             return _serverAPI.getAllForums();
         }
 
-        public List<Admin> getAdmins(int userID, int forumID)
+        public Admin[] getAdmins(int userID, int forumID)
         {
             return _serverAPI.getAdmins(userID, forumID);
         }
 
-        public List<User> getMembers(int userID, int forumID)
+        public User[] getMembers(int userID, int forumID)
         {
             return _serverAPI.getMembers(userID, forumID);
         }
 
-        public List<Subforum> getSubforums(int forumID)
+        public Subforum[] getSubforums(int forumID)
         {
             return _serverAPI.getSubforums(forumID);
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using WASP;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
+using WASP.DataClasses.Reports;
+using Policy = WASP.DataClasses.Policy;
 
 namespace AccTests
 {
@@ -15,185 +17,205 @@ namespace AccTests
             proj = bridge;
         }
 
+        public void Clean()
+        {
+            ((WASP.Domain.IBL) proj).Clean();
+        }
+
+        public void Restore()
+        {
+            ((WASP.Domain.IBL) proj).Restore();
+        }
+
+        public void Backup()
+        {
+            ((WASP.Domain.IBL) proj).Backup();
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
-            return ((ServerAPI) proj).initialize(name, userName, ID, email, pass);
+            return ((WASP.Domain.IBL) proj).initialize(name, userName, ID, email, pass);
         }
 
         public int isInitialize()
         {
-            return ((ServerAPI) proj).isInitialize();
+            return ((WASP.Domain.IBL) proj).isInitialize();
         }
 
         public Forum createForum(int userID, string forumName, string description, int adminID, string adminUserName, string adminName,
             string email, string pass, Policy policy)
         {
-            return ((ServerAPI) proj).createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
+            return ((WASP.Domain.IBL) proj).createForum(userID, forumName, description, adminID, adminUserName, adminName, email, pass, policy);
         }
 
-        public int defineForumPolicy(int userID, int forumID)
+        public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            return ((ServerAPI) proj).defineForumPolicy(userID, forumID);
+            return ((WASP.Domain.IBL) proj).defineForumPolicy(userID, forumID, policy);
         }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {
-            return ((ServerAPI) proj).subscribeToForum(id, userName, name, email, pass, targetForumID);
+            return ((WASP.Domain.IBL) proj).subscribeToForum(id, userName, name, email, pass, targetForumID);
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
         {
-            return ((ServerAPI) proj).createThread(userID, forumID, title, content, subForumID);
+            return ((WASP.Domain.IBL) proj).createThread(userID, forumID, title, content, subForumID);
         }
 
         public Post createReplyPost(int userID, int forumID, string content, int replyToPost_ID)
         {
-            return ((ServerAPI) proj).createReplyPost(userID, forumID, content, replyToPost_ID);
+            return ((WASP.Domain.IBL) proj).createReplyPost(userID, forumID, content, replyToPost_ID);
         }
 
         public Subforum createSubForum(int userID, int forumID, string name, string description, int moderatorID, DateTime term)
         {
-            return ((ServerAPI) proj).createSubForum(userID, forumID, name, description, moderatorID, term);
+            return ((WASP.Domain.IBL) proj).createSubForum(userID, forumID, name, description, moderatorID, term);
         }
 
-        public int sendMessage(int userID, int forumID, string targetUserNameID, string message)
+        public int sendMessage(int userID, int forumID, int targetUserNameID, string message)
         {
-            return ((ServerAPI) proj).sendMessage(userID, forumID, targetUserNameID, message);
+            return ((WASP.Domain.IBL) proj).sendMessage(userID, forumID, targetUserNameID, message);
         }
 
         public Moderator addModerator(int userID, int forumID, int moderatorID, int subForumID, DateTime term)
         {
-            return ((ServerAPI) proj).addModerator(userID, forumID, moderatorID, subForumID, term);
+            return ((WASP.Domain.IBL) proj).addModerator(userID, forumID, moderatorID, subForumID, term);
         }
 
         public int updateModeratorTerm(int userID, int forumID, int moderatorID, int subforumID, DateTime term)
         {
-            return ((ServerAPI) proj).updateModeratorTerm(userID, forumID, moderatorID, subforumID, term);
+            return ((WASP.Domain.IBL) proj).updateModeratorTerm(userID, forumID, moderatorID, subforumID, term);
         }
 
         public int confirmEmail(int userID, int forumID)
         {
-            return ((ServerAPI) proj).confirmEmail(userID, forumID);
+            return ((WASP.Domain.IBL) proj).confirmEmail(userID, forumID);
         }
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            return ((ServerAPI) proj).deletePost(userID, forumID, postID);
+            return ((WASP.Domain.IBL) proj).deletePost(userID, forumID, postID);
         }
 
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            return ((ServerAPI) proj).editPost(userID, forumID, postID, content);
+            return ((WASP.Domain.IBL) proj).editPost(userID, forumID, postID, content);
         }
 
         public int deleteModerator(int userID, int forumID, int moderatorID, int subForumID)
         {
-            return ((ServerAPI) proj).deleteModerator(userID, forumID, moderatorID, subForumID);
+            return ((WASP.Domain.IBL) proj).deleteModerator(userID, forumID, moderatorID, subForumID);
         }
 
-        public List<Message> getAllNotificationses(int userID, int forumID)
+        public Admin addAdmin(int userID, int forumID, int adminId)
         {
-            return ((ServerAPI) proj).getAllNotificationses(userID, forumID);
+            return ((WASP.Domain.IBL) proj).addAdmin(userID, forumID, adminId);
         }
 
-        public List<Message> getNewNotificationses(int userID, int forumID)
+        public Notification[] getAllNotificationses(int userID, int forumID)
         {
-            return ((ServerAPI) proj).getNewNotificationses(userID, forumID);
+            return ((WASP.Domain.IBL) proj).getAllNotificationses(userID, forumID);
+        }
+
+        public Notification[] getNewNotificationses(int userID, int forumID)
+        {
+            return ((WASP.Domain.IBL) proj).getNewNotificationses(userID, forumID);
         }
 
         public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            return ((ServerAPI) proj).subForumTotalMessages(userID, forumID, subForumID);
+            return ((WASP.Domain.IBL) proj).subForumTotalMessages(userID, forumID, subForumID);
         }
 
-        public List<Post> postsByMember(int adminID, int forumID, int userID)
+        public Post[] postsByMember(int adminID, int forumID, int userID)
         {
-            return ((ServerAPI) proj).postsByMember(adminID, forumID, userID);
+            return ((WASP.Domain.IBL) proj).postsByMember(adminID, forumID, userID);
         }
 
         public ModeratorReport moderatorReport(int userID, int forumID)
         {
-            return ((ServerAPI) proj).moderatorReport(userID, forumID);
+            return ((WASP.Domain.IBL) proj).moderatorReport(userID, forumID);
         }
 
         public int totalForums(int userID)
         {
-            return ((ServerAPI) proj).totalForums(userID);
+            return ((WASP.Domain.IBL) proj).totalForums(userID);
         }
 
-        public List<User> membersInDifferentForums(int userID)
+        public User[] membersInDifferentForums(int userID)
         {
-            return ((ServerAPI) proj).membersInDifferentForums(userID);
+            return ((WASP.Domain.IBL) proj).membersInDifferentForums(userID);
         }
 
         public User login(string userName, string password, int forumID)
         {
-            return ((ServerAPI) proj).login(userName, password, forumID);
+            return ((WASP.Domain.IBL) proj).login(userName, password, forumID);
         }
 
         public SuperUser loginSU(string userName, string password)
         {
-            return ((ServerAPI) proj).loginSU(userName, password);
+            return ((WASP.Domain.IBL) proj).loginSU(userName, password);
         }
 
         public Post getThread(int forumID, int threadId)
         {
-            return ((ServerAPI) proj).getThread(forumID, threadId);
+            return ((WASP.Domain.IBL) proj).getThread(forumID, threadId);
         }
 
-        public List<Post> getThreads(int forumID, int subForumID, int @from, int amount)
+        public Post[] getThreads(int subForumID)
         {
-            return ((ServerAPI) proj).getThreads(forumID, subForumID, @from, amount);
+            return ((WASP.Domain.IBL) proj).getThreads(subForumID);
         }
 
-        public List<Post> getReplays(int forumID, int subForumID, int postID)
+        public Post[] getReplys(int forumID, int subForumID, int postID)
         {
-            return ((ServerAPI) proj).getReplays(forumID, subForumID, postID);
+            return ((WASP.Domain.IBL) proj).getReplys(forumID, subForumID, postID);
         }
 
         public Forum getForum(int forumID)
         {
-            return ((ServerAPI) proj).getForum(forumID);
+            return ((WASP.Domain.IBL) proj).getForum(forumID);
         }
 
         public Subforum getSubforum(int forumID, int subforumId)
         {
-            return ((ServerAPI) proj).getSubforum(forumID, subforumId);
+            return ((WASP.Domain.IBL) proj).getSubforum(forumID, subforumId);
         }
 
-        public List<Moderator> getModerators(int forumID, int subForumID)
+        public Moderator[] getModerators(int forumID, int subForumID)
         {
-            return ((ServerAPI) proj).getModerators(forumID, subForumID);
+            return ((WASP.Domain.IBL) proj).getModerators(forumID, subForumID);
         }
 
         public DateTime getModeratorTermTime(int userID, int forumID, int moderatorID, int subforumID)
         {
-            return ((ServerAPI) proj).getModeratorTermTime(userID, forumID, moderatorID, subforumID);
+            return ((WASP.Domain.IBL) proj).getModeratorTermTime(userID, forumID, moderatorID, subforumID);
         }
 
-        public List<Forum> getAllForums()
+        public Forum[] getAllForums()
         {
-            return ((ServerAPI) proj).getAllForums();
+            return ((WASP.Domain.IBL) proj).getAllForums();
         }
 
-        public List<Admin> getAdmins(int userID, int forumID)
+        public Admin[] getAdmins(int userID, int forumID)
         {
-            return ((ServerAPI) proj).getAdmins(userID, forumID);
+            return ((WASP.Domain.IBL) proj).getAdmins(userID, forumID);
         }
 
-        public List<User> getMembers(int userID, int forumID)
+        public User[] getMembers(int userID, int forumID)
         {
-            return ((ServerAPI) proj).getMembers(userID, forumID);
+            return ((WASP.Domain.IBL) proj).getMembers(userID, forumID);
         }
 
-        public List<Subforum> getSubforums(int forumID)
+        public Subforum[] getSubforums(int forumID)
         {
-            return ((ServerAPI) proj).getSubforums(forumID);
+            return ((WASP.Domain.IBL) proj).getSubforums(forumID);
         }
 
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
-            return ((ServerAPI) proj).getAdmin(userID, forumID, AdminID);
+            return ((WASP.Domain.IBL) proj).getAdmin(userID, forumID, AdminID);
         }
     }
 }

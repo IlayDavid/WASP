@@ -47,3 +47,4 @@ C:\Users\edan\Source\Repos\wasp2\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config

@@ -8,7 +8,7 @@ using WASP.Exceptions;
 
 namespace WASP.Domain
 {
-    class BLFacade : IBL
+    public class BLFacade : IBL
     {
         private static DAL2 dal = WASP.Config.Settings.GetDal();
         private bool initialized;

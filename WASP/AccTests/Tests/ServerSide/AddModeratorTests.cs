@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 using WASP.DataClasses.Policies;
 using WASP;
+using Policy = WASP.DataClasses.Policy;
 
 namespace AccTests.Tests
 {
@@ -30,17 +31,17 @@ namespace AccTests.Tests
             var forumAndAdmin = Functions.CreateSpecForum(_proj,_supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.Id);
+            _proj.login(_admin.User.Username, _admin.User.Password, _forum.Id);
 
 
             var subforumAndModerator = Functions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.Id);
+            _proj.login(_moderator.Username, _moderator.Password, _forum.Id);
 
 
             _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.Id);
-            _proj.login(_member1.userName, _member1.password, _forum.Id);
+            _proj.login(_member1.Username, _member1.Password, _forum.Id);
         }
 
         /// <summary>
@@ -50,13 +51,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
-            var isModerator = _proj.addModerator(_moderator.id,_forum.Id,_member1.id,_subforum.Id, DateTime.Now.AddDays(200));
+            var isModerator = _proj.addModerator(_moderator.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(200));
             Assert.IsNotNull(isModerator);
-            Assert.IsTrue(_proj.getModerators(_moderator.id,_subforum.Id).Count == 2);
+            Assert.IsTrue(_proj.getModerators(_moderator.Id,_subforum.Id).Length == 2);
 
-            int isModified = _proj.updateModeratorTerm(_moderator.id,_forum.Id,_member1.id,_subforum.Id, DateTime.Now.AddDays(100));
+            int isModified = _proj.updateModeratorTerm(_moderator.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModified >= 0);
-            Assert.AreEqual(_proj.getModeratorTermTime(_moderator.id,_forum.Id,_member1.id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
+            Assert.AreEqual(_proj.getModeratorTermTime(_moderator.Id,_forum.Id,_member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
         }
 
 
@@ -67,13 +68,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
-            var isModerator = _proj.addModerator(_admin.user.id, _forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(200));
+            var isModerator = _proj.addModerator(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
             Assert.IsNotNull(isModerator);
-            Assert.IsTrue(_proj.getModerators(_admin.user.id, _subforum.Id).Count == 2);
+            Assert.IsTrue(_proj.getModerators(_admin.User.Id, _subforum.Id).Length == 2);
 
-            int isModified = _proj.updateModeratorTerm(_admin.user.id, _forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(100));
+            int isModified = _proj.updateModeratorTerm(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModified >= 0);
-            Assert.AreEqual(_proj.getModeratorTermTime(_admin.user.id, _forum.Id, _member1.id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
+            Assert.AreEqual(_proj.getModeratorTermTime(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
         }
 
 
@@ -85,19 +86,19 @@ namespace AccTests.Tests
         public void addModeratorAndUpdateTermTest3()
         {
 
-            Forum forum = _proj.createForum(_supervisor.id, "forum1", "blah",8, "haaronB",
-                                            "haaron", "haaronB@post.bgu.ac.il", "haaron123", new PasswordPolicy());
-            Admin admin = _proj.getAdmin(_supervisor.id, forum.Id, 8);
-            _proj.login(admin.user.userName, admin.user.password, _forum.Id);
+            Forum forum = _proj.createForum(_supervisor.Id, "forum1", "blah",8, "haaronB",
+                                            "haaron", "haaronB@post.bgu.ac.il", "haaron123",new Policy());
+            Admin admin = _proj.getAdmin(_supervisor.Id, forum.Id, 8);
+            _proj.login(admin.User.Username, admin.User.Password, _forum.Id);
 
             //another admin tries to add a moderator
-            var isModerator = _proj.addModerator(admin.user.id,_forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(200));
+            var isModerator = _proj.addModerator(admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
             Assert.IsNull(isModerator );
 
-            isModerator = _proj.addModerator(_admin.user.id,_forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(200));
+            isModerator = _proj.addModerator(_admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
             Assert.IsNotNull(isModerator);
 
-            int isModified = _proj.updateModeratorTerm(admin.user.id,_forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(100));
+            int isModified = _proj.updateModeratorTerm(admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModified < 0);
         }
 
@@ -110,14 +111,14 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest4()
         {
-            var isModerator = _proj.addModerator(_admin.user.id,_forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(-10));
+            var isModerator = _proj.addModerator(_admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(-10));
             Assert.IsNull(isModerator);
-            Assert.IsTrue(_proj.getModerators(_admin.user.id, _subforum.Id).Count== 1);
+            Assert.IsTrue(_proj.getModerators(_admin.User.Id, _subforum.Id).Length== 1);
 
-            isModerator = _proj.addModerator(_admin.user.id, _forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(200));
-            int isModified = _proj.updateModeratorTerm(_admin.user.id, _forum.Id, _member1.id, _subforum.Id, DateTime.Now.AddDays(-1));
+            isModerator = _proj.addModerator(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
+            int isModified = _proj.updateModeratorTerm(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(-1));
             Assert.IsTrue(isModified < 0);
-            Assert.AreEqual(_proj.getModeratorTermTime(_admin.user.id,_forum.Id, _member1.id, _subforum.Id).Date, DateTime.Now.AddDays(200).Date);
+            Assert.AreEqual(_proj.getModeratorTermTime(_admin.User.Id,_forum.Id, _member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(200).Date);
         }
 
 
@@ -127,13 +128,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest5()
         {
-            var isModerator = _proj.addModerator(_admin.user.id,_forum.Id, _member1.id, -1, DateTime.Now);
+            var isModerator = _proj.addModerator(_admin.User.Id,_forum.Id, _member1.Id, -1, DateTime.Now);
             Assert.IsNull(isModerator);
 
-            isModerator = _proj.addModerator(-1, _forum.Id, _member1.id, _subforum.Id, DateTime.Now);
+            isModerator = _proj.addModerator(-1, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now);
             Assert.IsNull(isModerator);
 
-            isModerator = _proj.addModerator(_admin.user.id, _forum.Id, - 1, _subforum.Id, DateTime.Now);
+            isModerator = _proj.addModerator(_admin.User.Id, _forum.Id, - 1, _subforum.Id, DateTime.Now);
             Assert.IsNull(isModerator);
         }
     }
