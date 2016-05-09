@@ -26,8 +26,8 @@ namespace Client
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
             userBtns = new List<Button>() { btnLogout };
-            adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy };
-            suBtns = new List<Button>() { btnAddSubforum };
+            adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum };
+            suBtns = new List<Button>() {  };
 
             adminBtns.AddRange(userBtns);
             suBtns.AddRange(adminBtns);

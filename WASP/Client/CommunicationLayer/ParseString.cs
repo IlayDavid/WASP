@@ -29,6 +29,14 @@ namespace Client.CommunicationLayer
             return su;
         }
 
+        public int parseStringToNum(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            int number = dict["number"];
+            return number;
+        }
+
         public SuperUser parseStringToSuperUser(string res, CL c)
         {
             var jss = new JavaScriptSerializer();

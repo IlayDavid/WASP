@@ -55,13 +55,10 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "}";
             string res = httpReq(json, "POST", _url + "/subForumTotalMessages/");
-            return parseStringToNum(res);
+            return parser.parseStringToNum(res);
         }
 
-        private int parseStringToNum(string res)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public List<Post> postsByMember(int userID)
         {   //title,  content,  authorid,  subforumid,  replypostid
@@ -87,7 +84,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/totalForums/");
-            return parseStringToNum(res);
+            return parser.parseStringToNum(res);
         }
 
         public List<User> membersInDifferentForums()

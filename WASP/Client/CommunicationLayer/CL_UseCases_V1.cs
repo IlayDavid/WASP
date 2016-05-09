@@ -26,7 +26,9 @@ namespace Client.CommunicationLayer
         }
         public int isInitialize()
         {
-            return isInit;
+            string json = "{}";
+            string res = httpReq(json, "POST", _url + "/isInitialize/");
+            return int.Parse(res);
         }
 
         public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
@@ -46,7 +48,7 @@ namespace Client.CommunicationLayer
             string json = "{\"owner\":\"" + Policy.owner + "\"," + "\"moderator\":" + Policy.moderator
                 + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}";
             string res = httpReq(json, "POST", _url + "/defineForumPolicy/");
-            return parseStringToNum(res);
+            return parser.parseStringToNum(res);
         } 
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
