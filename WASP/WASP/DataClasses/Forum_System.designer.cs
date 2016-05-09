@@ -39,6 +39,9 @@ namespace WASP.DataClasses
     partial void InsertIModerator(IModerator instance);
     partial void UpdateIModerator(IModerator instance);
     partial void DeleteIModerator(IModerator instance);
+    partial void InsertIndex(Index instance);
+    partial void UpdateIndex(Index instance);
+    partial void DeleteIndex(Index instance);
     partial void InsertINotification(INotification instance);
     partial void UpdateINotification(INotification instance);
     partial void DeleteINotification(INotification instance);
@@ -110,6 +113,14 @@ namespace WASP.DataClasses
 			get
 			{
 				return this.GetTable<IModerator>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Index> Indexes
+		{
+			get
+			{
+				return this.GetTable<Index>();
 			}
 		}
 		
@@ -867,6 +878,188 @@ namespace WASP.DataClasses
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indexes")]
+	public partial class Index : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _forum;
+		
+		private int _subforum;
+		
+		private int _policy;
+		
+		private int _post;
+		
+		private int _notification;
+		
+		private int _id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnforumChanging(int value);
+    partial void OnforumChanged();
+    partial void OnsubforumChanging(int value);
+    partial void OnsubforumChanged();
+    partial void OnpolicyChanging(int value);
+    partial void OnpolicyChanged();
+    partial void OnpostChanging(int value);
+    partial void OnpostChanged();
+    partial void OnnotificationChanging(int value);
+    partial void OnnotificationChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
+		public Index()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_forum", DbType="Int NOT NULL")]
+		public int forum
+		{
+			get
+			{
+				return this._forum;
+			}
+			set
+			{
+				if ((this._forum != value))
+				{
+					this.OnforumChanging(value);
+					this.SendPropertyChanging();
+					this._forum = value;
+					this.SendPropertyChanged("forum");
+					this.OnforumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subforum", DbType="Int NOT NULL")]
+		public int subforum
+		{
+			get
+			{
+				return this._subforum;
+			}
+			set
+			{
+				if ((this._subforum != value))
+				{
+					this.OnsubforumChanging(value);
+					this.SendPropertyChanging();
+					this._subforum = value;
+					this.SendPropertyChanged("subforum");
+					this.OnsubforumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_policy", DbType="Int NOT NULL")]
+		public int policy
+		{
+			get
+			{
+				return this._policy;
+			}
+			set
+			{
+				if ((this._policy != value))
+				{
+					this.OnpolicyChanging(value);
+					this.SendPropertyChanging();
+					this._policy = value;
+					this.SendPropertyChanged("policy");
+					this.OnpolicyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_post", DbType="Int NOT NULL")]
+		public int post
+		{
+			get
+			{
+				return this._post;
+			}
+			set
+			{
+				if ((this._post != value))
+				{
+					this.OnpostChanging(value);
+					this.SendPropertyChanging();
+					this._post = value;
+					this.SendPropertyChanged("post");
+					this.OnpostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notification", DbType="Int NOT NULL")]
+		public int notification
+		{
+			get
+			{
+				return this._notification;
+			}
+			set
+			{
+				if ((this._notification != value))
+				{
+					this.OnnotificationChanging(value);
+					this.SendPropertyChanging();
+					this._notification = value;
+					this.SendPropertyChanged("notification");
+					this.OnnotificationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.INotifications")]
 	public partial class INotification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -875,9 +1068,9 @@ namespace WASP.DataClasses
 		
 		private int _id;
 		
-		private System.Nullable<int> _fromUserId;
+		private int _fromUserId;
 		
-		private System.Nullable<int> _fromForumId;
+		private int _fromForumId;
 		
 		private int _toUserId;
 		
@@ -897,9 +1090,9 @@ namespace WASP.DataClasses
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OnfromUserIdChanging(System.Nullable<int> value);
+    partial void OnfromUserIdChanging(int value);
     partial void OnfromUserIdChanged();
-    partial void OnfromForumIdChanging(System.Nullable<int> value);
+    partial void OnfromForumIdChanging(int value);
     partial void OnfromForumIdChanged();
     partial void OntoUserIdChanging(int value);
     partial void OntoUserIdChanged();
@@ -938,8 +1131,8 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int")]
-		public System.Nullable<int> fromUserId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int NOT NULL")]
+		public int fromUserId
 		{
 			get
 			{
@@ -962,8 +1155,8 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int")]
-		public System.Nullable<int> fromForumId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int NOT NULL")]
+		public int fromForumId
 		{
 			get
 			{
@@ -1102,8 +1295,8 @@ namespace WASP.DataClasses
 					}
 					else
 					{
-						this._fromUserId = default(Nullable<int>);
-						this._fromForumId = default(Nullable<int>);
+						this._fromUserId = default(int);
+						this._fromForumId = default(int);
 					}
 					this.SendPropertyChanged("IUser");
 				}

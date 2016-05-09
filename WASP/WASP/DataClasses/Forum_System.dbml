@@ -32,11 +32,21 @@
       <Association Name="IUser_IModerator" Member="IUser" ThisKey="userId,forumId" OtherKey="id,forumId" Type="IUser" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Indexes" Member="Indexes">
+    <Type Name="Index">
+      <Column Name="forum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="subforum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="policy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="post" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="notification" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.INotifications" Member="INotifications">
     <Type Name="INotification">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fromUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fromForumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fromUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fromForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="message" Type="System.String" DbType="NChar(4000)" CanBeNull="true" />
