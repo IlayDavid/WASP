@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
 using System;
+using WASP.Exceptions;
 
 namespace AccTests.Tests
 {
@@ -19,6 +20,7 @@ namespace AccTests.Tests
         public void setUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
         }
 
@@ -50,9 +52,9 @@ namespace AccTests.Tests
             Forum forum = forumAndMember.Item1;
             Admin admin = forumAndMember.Item2;
             Assert.IsNotNull(forum); //checks that a forum is created
-            
+
             Assert.IsTrue(admin.User.Email.Equals("david@post.bgu.ac.il"));
-            Assert.IsTrue(admin.User.Username.Equals("admin"));
+            Assert.IsTrue(admin.User.Username.Equals("david"));
             Assert.IsTrue(admin.User.Password.Equals("david123"));
             Assert.IsTrue(admin.User.Name.Equals("david"));
 
@@ -79,6 +81,7 @@ namespace AccTests.Tests
         /// Nagative Test, NF - secure Test
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void CreateForumTest4()
         {
             Forum forum = _proj.createForum(-1, "subject",

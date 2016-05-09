@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using WASP;
 using WASP.DataClasses;
-using WASP.DataClasses.Policies;
 using WASP.DataClasses.Reports;
 using Policy = WASP.DataClasses.Policy;
 

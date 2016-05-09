@@ -15,6 +15,11 @@ namespace WASP.DataClasses.Reports
             this.mods = mods;
         }
 
+        public Moderator[] Mods
+        {
+            get { return mods; }
+        }
+
         public string toJson()
         {
             return "";

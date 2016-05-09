@@ -24,6 +24,7 @@ namespace AccTests.Tests
         public void setUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
             Tuple<Forum, Admin> forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
@@ -71,7 +72,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest3()
         {
-            int N = 500;
+            int N = 50;
             for (int i = 1; i <= N; i++)
             {
 
@@ -99,11 +100,11 @@ namespace AccTests.Tests
             Forum forum = forumAndModerator.Item1;
             var admin = forumAndModerator.Item2;
 
-            var moderator1 = _proj.subscribeToForum(15,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
-            var moderator2 = _proj.subscribeToForum(16,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.Id);
+            var moderator1 = _proj.subscribeToForum(1782461,"bogo", "bigi", "baga@post.bgu.ac.il", "maor123", _forum.Id);
+            var moderator2 = _proj.subscribeToForum(988,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.Id);
             _proj.login(moderator1.Username, moderator1.Password, _forum.Id);
-            _proj.login(moderator2.Username, moderator2.Password, _forum.Id);
-            // lacking of informations
+            _proj.login(moderator2.Username, moderator2.Password, forum.Id);
+            // lacking of informations 
             Subforum subforum1 = _proj.createSubForum(_admin.User.Id, _forum.Id, "", "blah", moderator1.Id, DateTime.Now.AddDays(100));
             Subforum subforum2 = _proj.createSubForum(_admin.User.Id, _forum.Id,"blah", "", moderator1.Id, DateTime.Now.AddDays(100));
 

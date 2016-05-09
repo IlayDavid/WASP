@@ -21,6 +21,7 @@ namespace AccTests.Tests
         public void SetUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
             var forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
 

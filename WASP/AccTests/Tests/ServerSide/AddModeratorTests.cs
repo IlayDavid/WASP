@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
-using WASP.DataClasses.Policies;
 using WASP;
 using Policy = WASP.DataClasses.Policy;
+using WASP.Exceptions;
 
 namespace AccTests.Tests
 {
@@ -26,6 +26,7 @@ namespace AccTests.Tests
         public void setUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
 
             var forumAndAdmin = Functions.CreateSpecForum(_proj,_supervisor);
@@ -51,13 +52,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
-            var isModerator = _proj.addModerator(_moderator.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(200));
+            var isModerator = _proj.addModerator(_admin.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(200));
             Assert.IsNotNull(isModerator);
-            Assert.IsTrue(_proj.getModerators(_moderator.Id,_subforum.Id).Length == 2);
+            Assert.IsTrue(_proj.getModerators(_admin.Id,_subforum.Id).Length == 2);
 
-            int isModified = _proj.updateModeratorTerm(_moderator.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(100));
+            int isModified = _proj.updateModeratorTerm(_admin.Id,_forum.Id,_member1.Id,_subforum.Id, DateTime.Now.AddDays(100));
             Assert.IsTrue(isModified >= 0);
-            Assert.AreEqual(_proj.getModeratorTermTime(_moderator.Id,_forum.Id,_member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
+            Assert.AreEqual(_proj.getModeratorTermTime(_admin.Id,_forum.Id,_member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(100).Date);
         }
 
 
@@ -83,13 +84,14 @@ namespace AccTests.Tests
         ///     checks that another forum's admin cannot term a moderator for another subforum
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void addModeratorAndUpdateTermTest3()
         {
 
             Forum forum = _proj.createForum(_supervisor.Id, "forum1", "blah",8, "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123",new Policy());
             Admin admin = _proj.getAdmin(_supervisor.Id, forum.Id, 8);
-            _proj.login(admin.User.Username, admin.User.Password, _forum.Id);
+            _proj.login(admin.User.Username, admin.User.Password, forum.Id);
 
             //another admin tries to add a moderator
             var isModerator = _proj.addModerator(admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
@@ -108,6 +110,7 @@ namespace AccTests.Tests
         /// <summary>
         /// Nagative Test: invalid date time
         /// </summary>
+       [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         [TestMethod]
         public void addModeratorAndUpdateTermTest4()
         {
@@ -126,6 +129,7 @@ namespace AccTests.Tests
         /// Nagative Test: bad information
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void addModeratorAndUpdateTermTest5()
         {
             var isModerator = _proj.addModerator(_admin.User.Id,_forum.Id, _member1.Id, -1, DateTime.Now);

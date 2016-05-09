@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.DataClasses;
-
+using WASP.Exceptions;
 
 namespace AccTests.Tests
 {
@@ -26,6 +26,7 @@ namespace AccTests.Tests
         public void setUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
             var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
@@ -53,21 +54,56 @@ namespace AccTests.Tests
         /// Negative Test: lack of information
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void logInTest2()
         {
-            Assert.IsNull(_proj.login("", "123456", _forum.Id));
-            Assert.IsNull(_proj.login("amitayaSh", "", _forum.Id));
+            _proj.login("", "123456", _forum.Id);
+            
         }
 
         /// <summary>
         /// Negative Test: incorrent information
         /// </summary>
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
+
         [TestMethod]
         public void logInTest3()
         {
-            Assert.IsNull(_proj.login("blah", "123456", _forum.Id));
-            Assert.IsNull(_proj.login("", "123456", _forum.Id));
-            Assert.IsNull(_proj.login("blah", "", _forum.Id));
+            
+            _proj.login("blah", "", _forum.Id);
+        }
+        /// <summary>
+        /// Negative Test: lack of information
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
+        public void logInTest4()
+        {
+ 
+            _proj.login("amitayaSh", "", _forum.Id);
+        }
+        /// <summary>
+        /// Negative Test: incorrent information
+        /// </summary>
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
+
+        [TestMethod]
+        public void logInTest5()
+        {
+            
+            _proj.login("", "123456", _forum.Id);
+            
+        }
+        /// <summary>
+        /// Negative Test: incorrent information
+        /// </summary>
+        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
+
+        [TestMethod]
+        public void logInTest6()
+        {
+            _proj.login("blah", "123456", _forum.Id);
+            
         }
     }
 }

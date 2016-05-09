@@ -2,7 +2,7 @@
 
 namespace AccTests
 {
-    public interface WASPClientBridge : IBL
+    public interface WASPClientBridge
     {
     }
 

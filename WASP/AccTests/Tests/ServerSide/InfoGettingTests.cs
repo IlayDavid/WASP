@@ -117,23 +117,25 @@ namespace AccTests.Tests.ServerSide
         public void moderatorReport()
         {
             var reports = _proj.moderatorReport(_admins[_forums[0]][0].Id, _forums[0].Id);
-            foreach (var mod in reports)
+            
+            foreach (var mod in reports.Mods)
             {
-                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Value]].Any((x)=>x.Id==mod.Key));
+                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.SubForum.Id]].Any((x)=>x.Id==mod.Id));
             }
             var subforums = _subforums[_forums[0]];
             IEnumerable<User> modlist=new List<User>();
             modlist = subforums.Aggregate(modlist, (current, subforum) => current.Concat(_moderators[subforum]));
-            foreach (var moderator in reports.moderators)
+            foreach (var moderator in reports.Mods)
             {
-                Assert.IsTrue(modlist.Any((x)=>x.Id==moderator.user.Id));
+                Assert.IsTrue(modlist.Any((x)=>x.Id==moderator.Id));
             }
 
-            foreach (var moderatorsPost in reports.moderatorsPosts)
+            foreach (var mod in reports.Mods)
             {
-                foreach (var post in moderatorsPost.Value)
+                var posts = _proj.postsByMember(_admins[_forums[0]][0].Id, _forums[0].Id, mod.Id);
+                foreach (var post in posts)
                 {
-                    Assert.IsTrue(_postsByUser[moderatorsPost.Key].Any((x)=>x.Id==post.Id));
+                    Assert.IsTrue(_postsByUser[mod.Id].Any((x)=>x.Id==post.Id));
                 }
             }
         }
