@@ -11,7 +11,7 @@ namespace AccTests.Tests.ServerSide
 {
     [TestClass]
 
-    class PolicyTests
+    public class PolicyTests
     {
         private WASPBridge _proj;
         private SuperUser _supervisor;
@@ -19,6 +19,7 @@ namespace AccTests.Tests.ServerSide
         public void setUp()
         {
             _proj = Driver.getBridge();
+            _proj.Clean();
             _supervisor = Functions.InitialSystem(_proj);
             _supervisor = _proj.loginSU(_supervisor.Username, _supervisor.Password);
 
@@ -217,7 +218,7 @@ namespace AccTests.Tests.ServerSide
              admin = _proj.login("admin", "admin1234", forum.Id);
             Assert.IsNull(admin);
         }
-
+        */
         /// <summary>
         /// positive Test: creates a number of users, and checks that they can create posts and read them correctly
         /// </summary>
@@ -229,12 +230,12 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void StressTest1()
         {
-            _forum = _proj.createForum(_supervisor.Id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _forum = _proj.createForum(_supervisor.Id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new Policy());
             _admin = _proj.login("admin", "admin1234", _forum.Id);
-            _subforum = _proj.createSubForum(_admin.id,_forum.Id, "name", "description", _admin.id, DateTime.MaxValue);
+            _subforum = _proj.createSubForum(_admin.Id,_forum.Id, "name", "description", _admin.Id, DateTime.MaxValue);
             Assert.IsNotNull(_subforum);
 
-            Thread[] threads = new Thread[500];
+            Thread[] threads = new Thread[50];
 
             for (int i = 0; i < threads.Length; i++)
             {
@@ -258,12 +259,12 @@ namespace AccTests.Tests.ServerSide
         [TestMethod]
         public void StressTest2()
         {
-            _forum = _proj.createForum(_supervisor.Id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new MaxConcurrentUsersPolicy(null, 500));
+            _forum = _proj.createForum(_supervisor.Id, "forum", "forum",22, "admin", "admin", "admin@gmail.com", "admin1234", new Policy());
             _admin = _proj.login("admin", "admin1234", _forum.Id);
-            _subforum = _proj.createSubForum(_admin.id,_forum.Id, "name", "description", _admin.id, DateTime.MaxValue);
+            _subforum = _proj.createSubForum(_admin.Id,_forum.Id, "name", "description", _admin.Id, DateTime.MaxValue);
             Assert.IsNotNull(_subforum);
 
-            Thread[] threads = new Thread[500];
+            Thread[] threads = new Thread[50];
 
             for (int i = 0; i < threads.Length; i++)
             {
@@ -299,15 +300,15 @@ namespace AccTests.Tests.ServerSide
         private async void postsLoopSuccess()
         {
             var mem = _proj.subscribeToForum(counter++,"a", "a", "a.b@c.d", "a", _forum.Id);
-            mem = _proj.login(mem.userName, mem.password, _forum.Id);
+            mem = _proj.login(mem.Username, mem.Password, _forum.Id);
             Assert.IsNotNull(mem);
             var rnd=new Random();
-            var post = _proj.createThread(mem.id,_forum.Id, "title" + rnd.Next(), ""+rnd.Next(), _subforum.Id);
+            var post = _proj.createThread(mem.Id,_forum.Id, "title" + rnd.Next(), ""+rnd.Next(), _subforum.Id);
             var prevPost = post;
             for (int i = 0; i < 60; i++)
             {
                 prevPost = post;
-                post = _proj.createReplyPost(mem.id,_forum.Id, "" + rnd.Next(), prevPost.Id);
+                post = _proj.createReplyPost(mem.Id,_forum.Id, "" + rnd.Next(), prevPost.Id);
                 Assert.IsTrue(post.InReplyTo.Content.Equals(prevPost.Content));
                 await wait(1); //wait 1 second to simulate a person waiting
             }
@@ -317,7 +318,7 @@ namespace AccTests.Tests.ServerSide
         {
             var mem = _proj.subscribeToForum(counter++,"a", "a", "a.b@c.d", "a", _forum.Id);
             Assert.IsNotNull(mem);//register shouldn't fail, only login (change return value?)
-            mem = _proj.login(mem.userName, mem.password, _forum.Id);
+            mem = _proj.login(mem.Username, mem.Password, _forum.Id);
             Assert.IsNull(mem);
         }
 
@@ -328,6 +329,6 @@ namespace AccTests.Tests.ServerSide
         }
 
 
-    */
+    
     }
 }

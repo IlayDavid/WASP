@@ -115,12 +115,12 @@ namespace AccTests.Tests
         public void addModeratorAndUpdateTermTest4()
         {
             var isModerator = _proj.addModerator(_admin.User.Id,_forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(-10));
-            Assert.IsNull(isModerator);
-            Assert.IsTrue(_proj.getModerators(_admin.User.Id, _subforum.Id).Length== 1);
+            var check = _proj.getModerators(_admin.User.Id, _subforum.Id).Length;
+            Assert.IsTrue(check== 1);
 
             isModerator = _proj.addModerator(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(200));
             int isModified = _proj.updateModeratorTerm(_admin.User.Id, _forum.Id, _member1.Id, _subforum.Id, DateTime.Now.AddDays(-1));
-            Assert.IsTrue(isModified < 0);
+            Assert.IsTrue(isModified == 0);
             Assert.AreEqual(_proj.getModeratorTermTime(_admin.User.Id,_forum.Id, _member1.Id, _subforum.Id).Date, DateTime.Now.AddDays(200).Date);
         }
 
