@@ -73,12 +73,14 @@ namespace Client.CommunicationLayer
                 author.id = cl.authorid;
                 Post inReplyTo = new Post();
                 inReplyTo.id = cl.replypostid;
-                ret.Add(new Post(cl.title, cl.content, author, cl.container, inReplyTo));
+                Post p = new Post(cl.title, cl.content, author, cl.container, inReplyTo);
+                p.id = cl.postid;
+                ret.Add(p);
             }
             return ret;
         }
 
-        public Post parseStringToPost(string res)
+        public Post parseStringToPost(string res, bool reply=false)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
@@ -94,6 +96,8 @@ namespace Client.CommunicationLayer
                 irp = null;
             Post p = new Post(title, content, author, container, irp);
             p.id = dict["postid"];
+            if (irp != null)
+                irp.replies.Add(p);
             return p;
         }
 
@@ -116,12 +120,13 @@ namespace Client.CommunicationLayer
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string name = dict["title"];
+            string name = dict["name"];
             string description = dict["description"];
             int moderatorid = dict["moderatorid"];
             int sfid = dict["id"];
             Moderator mod = new Moderator();
             User user = new User();
+            mod.user = user;
             mod.user.id = moderatorid;
             Subforum sf = new Subforum(name, description, mod, new DateTime());
             sf.id = sfid;

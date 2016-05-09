@@ -59,6 +59,7 @@ namespace WASP
             routes.Add(basePrefix + "login/", ServiceFacade.login);
             routes.Add(basePrefix + "loginSU/", ServiceFacade.loginSU);
             routes.Add(basePrefix + "getThread/", ServiceFacade.getThread);
+            routes.Add(basePrefix + "getThreads/", ServiceFacade.getThreads);
             routes.Add(basePrefix + "getReplys/", ServiceFacade.getReplys);
             routes.Add(basePrefix + "getForum/", ServiceFacade.getForum);
             routes.Add(basePrefix + "getSubforum/", ServiceFacade.getSubforum);

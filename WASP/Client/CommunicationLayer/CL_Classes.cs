@@ -33,7 +33,7 @@ namespace Client.CommunicationLayer
         public int authorid { get; set; }
         public int container { get; set; }
         public int replypostid { get; set; }
-
+        public int postid { get; set; }
         public CLPost()
         {
 

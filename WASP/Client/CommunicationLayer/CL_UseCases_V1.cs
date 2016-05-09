@@ -63,7 +63,7 @@ namespace Client.CommunicationLayer
         public Post createThread(string title, string content, int subForumID)
         {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"title\":\"" + title + "\"," + "\"content\":\"" + content
-                + "\"," + "\"subforumid\":" + subForumID  +"\"auth\":\"" + _auth + "\"}";
+                + "\"," + "\"subforumid\":" + subForumID  +",\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/createThread/");
             return parser.parseStringToPost(res);
         }
@@ -73,14 +73,14 @@ namespace Client.CommunicationLayer
             string json = "{\"replytopostid\":" + replyToPost_ID + "," + "\"auth\":\"" + _auth + "\"," + "\"content\":\"" + content
                 + "\"}";
             string res = httpReq(json, "POST", _url + "/createReplyPost/");
-            return parser.parseStringToPost(res);
+            return parser.parseStringToPost(res, true);
         }
 
         public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
         {   //name, description, moderatorid
             string json = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"," + "\"auth\":\"" + _auth + "\"," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
-            string res = httpReq(json, "POST", _url + "/createSubforum/");
+            string res = httpReq(json, "POST", _url + "/createSubForum/");
             return parser.parseStringToSubforum(res);
         }
         //---------------------------Version 1 Use Cases End------------------------------------

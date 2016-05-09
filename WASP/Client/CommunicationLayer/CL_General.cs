@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
+using System.Windows.Forms;
 //using System.Net;
 //using System.Text;  // for class Encoding
 
@@ -39,7 +40,7 @@ namespace Client.CommunicationLayer
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             if ((int)httpResponse.StatusCode != 200)
             {
-                return HandleHttpError((int)httpResponse.StatusCode, httpResponse);
+                    return HandleHttpError((int)httpResponse.StatusCode, httpResponse);
             }
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -50,7 +51,12 @@ namespace Client.CommunicationLayer
 
         private string HandleHttpError(int statusCode, HttpWebResponse r)
         {
-            throw new NotImplementedException();
+            using(var streamReader = new StreamReader(r.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                MessageBox.Show(result);
+                return result;
+            }
         }
 
 

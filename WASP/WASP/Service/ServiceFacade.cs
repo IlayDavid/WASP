@@ -334,6 +334,25 @@ namespace WASP.Service
             return jss.Serialize(result);
         }
 
+        public static string getThreads(Dictionary<string, dynamic> data)
+        {   //subforumid
+            Post[] posts = bl.getThreads(data["subforumid"]);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            //title,  content,  authorid,  subforumid,  replypostid
+            foreach (Post p in posts)
+            {
+                Dictionary<string, dynamic> res = new Dictionary<string, dynamic>();
+                res.Add("title", p.Title);
+                res.Add("content", p.Content);
+                res.Add("authorid", p.GetAuthor.Id);
+                res.Add("subforumid", p.Subforum.Id);
+                res.Add("replypostid", -1);
+                res.Add("postid", p.Id);
+                result.Add(res);
+            }
+            return jss.Serialize(result);
+        }
+
         public static string getForum(Dictionary<string, dynamic> data)
         {   //forumid
             Forum f = bl.getForum(data["forumid"]);
