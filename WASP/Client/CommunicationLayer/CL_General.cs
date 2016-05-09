@@ -132,7 +132,7 @@ namespace Client.CommunicationLayer
 
         public List<Forum> getAllForums()
         {   //name, description, adminid
-            string json = "{\"auth\":" + _auth + "}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getAllForums/");
             return parser.parseStringToForums(res);
         }
@@ -160,7 +160,7 @@ namespace Client.CommunicationLayer
 
         public Admin getAdmin(int AdminID)
         {   //username, id, password, email, name
-            string json = "{\"adminid\":" + AdminID + "}";
+            string json = "{\"adminid\":" + AdminID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/getAdmin/");
             return parser.parseStringToAdmin(res, this);
         }

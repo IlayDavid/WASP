@@ -16,44 +16,12 @@ namespace WASP
 
         public static string SendResponse(HttpListenerRequest request)
         {
-            const string pref = "http://localhost:8080/";
             Dictionary<string, dynamic> data = jss.Deserialize<Dictionary<string, dynamic>>(GetRequestPostData(request));
             string response = "";
             try
             {
                 response = routes[request.Url.ToString()](data);
-                /*
-                switch (request.Url.ToString())
-                {
-                    case pref + "addModerator/": response = ServiceFacade.createForum(data); break;
-                    case pref + "updateModeratorTerm/": response = ServiceFacade.createForum(data); break;
-                    case pref + "confirmEmail/": response = ServiceFacade.createForum(data); break;
-                    case pref + "deletePost/": response = ServiceFacade.createForum(data); break;
-                    case pref + "editPost/": response = ServiceFacade.createForum(data); break;
-                    case pref + "deleteModerator/": response = ServiceFacade.createForum(data); break;
-                    case pref + "addAdmin/": response = ServiceFacade.createForum(data); break;
-                    case pref + "getAllNotificationses/": response = ServiceFacade.createForum(data); break;
-                    case pref + "getNewNotificationses": response = ServiceFacade.createForum(data); break;
-                    case pref + "subForumTotalMessages": response = ServiceFacade.createForum(data); break;
-                    case pref + "postsByMember": response = ServiceFacade.createForum(data); break;
-                    case pref + "moderatorReport": response = ServiceFacade.createForum(data); break;
-                    case pref + "totalForums": response = ServiceFacade.createForum(data); break;
-                    case pref + "membersInDifferentForums": response = ServiceFacade.createForum(data); break;
-                    case pref + "login": response = ServiceFacade.createForum(data); break;
-                    case pref + "loginSU": response = ServiceFacade.createForum(data); break;
-                    case pref + "getThread": response = ServiceFacade.createForum(data); break;
-                    case pref + "getReplys": response = ServiceFacade.createForum(data); break;
-                    case pref + "getForum": response = ServiceFacade.createForum(data); break;
-                    case pref + "getSubforum": response = ServiceFacade.createForum(data); break;
-                    case pref + "getModerators": response = ServiceFacade.createForum(data); break;
-                    case pref + "getModeratorTermTime": response = ServiceFacade.createForum(data); break;
-                    case pref + "getAllForums": response = ServiceFacade.createForum(data); break;
-                    case pref + "getAdmins": response = ServiceFacade.createForum(data); break;
-                    case pref + "getMembers": response = ServiceFacade.createForum(data); break;
-                    case pref + "getSubforums": response = ServiceFacade.createForum(data); break;
-                    case pref + "getAdmin": response = ServiceFacade.createForum(data); break;
-                }
-                */
+                
             }
             catch (WaspException e)
             {
@@ -69,12 +37,39 @@ namespace WASP
             routes.Add(basePrefix + "isInitialize/", ServiceFacade.isInitialize);
             routes.Add(basePrefix + "createForum/", ServiceFacade.createForum);
             routes.Add(basePrefix + "defineForumPolicy/", ServiceFacade.defineForumPolicy);
-            /*routes.Add(basePrefix + "subscribeToForum/", ServiceFacade.subscribeToForum);
+            routes.Add(basePrefix + "subscribeToForum/", ServiceFacade.subscribeToForum);
             routes.Add(basePrefix + "createThread/", ServiceFacade.createThread);
             routes.Add(basePrefix + "createReplyPost/", ServiceFacade.createReplyPost);
             routes.Add(basePrefix + "createSubForum/", ServiceFacade.createSubForum);
             routes.Add(basePrefix + "sendMessage/", ServiceFacade.sendMessage);
-            */
+            routes.Add(basePrefix + "addModerator/", ServiceFacade.addModerator);
+            routes.Add(basePrefix + "updateModeratorTerm/", ServiceFacade.updateModeratorTerm);
+            routes.Add(basePrefix + "confirmEmail/", ServiceFacade.confirmEmail);
+            routes.Add(basePrefix + "deletePost/", ServiceFacade.deletePost);
+            routes.Add(basePrefix + "editPost/", ServiceFacade.editPost);
+            routes.Add(basePrefix + "deleteModerator/", ServiceFacade.deleteModerator);
+            routes.Add(basePrefix + "addAdmin/", ServiceFacade.addAdmin);
+            routes.Add(basePrefix + "getAllNotificationses/", ServiceFacade.getAllNotificationses);
+            routes.Add(basePrefix + "getNewNotificationses/", ServiceFacade.getNewNotificationses);
+            routes.Add(basePrefix + "subForumTotalMessages/", ServiceFacade.subForumTotalMessages);
+            routes.Add(basePrefix + "postsByMember/", ServiceFacade.postsByMember);
+            routes.Add(basePrefix + "moderatorReport/", ServiceFacade.moderatorReport);
+            routes.Add(basePrefix + "totalForums/", ServiceFacade.totalForums);
+            routes.Add(basePrefix + "membersInDifferentForums/", ServiceFacade.membersInDifferentForums);
+            routes.Add(basePrefix + "login/", ServiceFacade.login);
+            routes.Add(basePrefix + "loginSU/", ServiceFacade.loginSU);
+            routes.Add(basePrefix + "getThread/", ServiceFacade.getThread);
+            routes.Add(basePrefix + "getReplys/", ServiceFacade.getReplys);
+            routes.Add(basePrefix + "getForum/", ServiceFacade.getForum);
+            routes.Add(basePrefix + "getSubforum/", ServiceFacade.getSubforum);
+            routes.Add(basePrefix + "getModerators/", ServiceFacade.getModerators);
+            routes.Add(basePrefix + "getModeratorTermTime/", ServiceFacade.getModeratorTermTime);
+            routes.Add(basePrefix + "getAllForums/", ServiceFacade.getAllForums);
+            routes.Add(basePrefix + "getAdmins/", ServiceFacade.getAdmins);
+            routes.Add(basePrefix + "getMembers/", ServiceFacade.getMembers);
+            routes.Add(basePrefix + "getSubforums/", ServiceFacade.getSubforums);
+            routes.Add(basePrefix + "getAdmin/", ServiceFacade.getAdmin);
+
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);
             ws.Run();

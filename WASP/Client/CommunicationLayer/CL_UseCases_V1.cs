@@ -51,7 +51,7 @@ namespace Client.CommunicationLayer
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {   //username, id, password, name, email
-            string json = "{\"userid\":" + id + "," + "\"password\":\"" + pass + "\"," + "\"auth\":\"" + _auth + "\"," + "\"username\":\"" + userName
+            string json = "{\"userid\":" + id + "," + "\"password\":\"" + pass + "\"," + "\"username\":\"" + userName
                 + "\"," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name
                 + "\"," + "\"forumid\":" + targetForumID + "}";
             string res = httpReq(json, "POST", _url + "/subscribeToForum/");

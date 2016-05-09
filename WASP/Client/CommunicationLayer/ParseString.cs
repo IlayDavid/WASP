@@ -37,9 +37,7 @@ namespace Client.CommunicationLayer
             int id = dict["id"];
             string password = dict["password"];
             c._auth = dict["auth"];
-            string name = dict["name"];
-            string email = dict["email"];
-            SuperUser su = new SuperUser(name, username, id, email, password);
+            SuperUser su = new SuperUser("", username, id, "", password);
             return su;
         }
 
@@ -82,10 +80,12 @@ namespace Client.CommunicationLayer
             User author = new User();
             author.id = authorid;
             int container = dict["subforumid"];
-            int replypostid = dict["replypostid"];
-            Post inReplyTo = new Post();
-            inReplyTo.id = replypostid;
-            Post p = new Post(title, content, author, container, inReplyTo);
+            Post irp = new Post();
+            irp.id = dict["replypostid"];
+            if (irp.id == -1)
+                irp = null;
+            Post p = new Post(title, content, author, container, irp);
+            p.id = dict["postid"];
             return p;
         }
 
@@ -109,10 +109,12 @@ namespace Client.CommunicationLayer
             string name = dict["title"];
             string description = dict["description"];
             int moderatorid = dict["moderatorid"];
+            int sfid = dict["id"];
             Moderator mod = new Moderator();
             User user = new User();
             mod.user.id = moderatorid;
             Subforum sf = new Subforum(name, description, mod, new DateTime());
+            sf.id = sfid;
             return sf;
         }
 

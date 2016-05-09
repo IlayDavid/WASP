@@ -114,6 +114,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Server\WebServer.cs" />
+    <Compile Include="Service\LoginPair.cs" />
     <Compile Include="Service\ServiceFacade.cs" />
     <Compile Include="TestSuits\DomainSuite.cs" />
   </ItemGroup>
