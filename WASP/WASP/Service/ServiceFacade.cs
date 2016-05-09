@@ -51,6 +51,7 @@ namespace WASP.Service
             result.Add("title", forum.Name);
             result.Add("description", forum.Description);
             result.Add("adminid", forum.GetAdmins()[0].Id);
+            result.Add("forumid", forum.Id);
             return jss.Serialize(result);
         }
 
@@ -341,6 +342,7 @@ namespace WASP.Service
             result.Add("name", f.Name);
             result.Add("description", f.Description);
             result.Add("adminid", f.GetAdmins().ElementAt(0).Id);
+            result.Add("forumid", f.Id);
             return jss.Serialize(result);
         }
 
@@ -391,6 +393,7 @@ namespace WASP.Service
                 res.Add("name", f.Name);
                 res.Add("description", f.Description);
                 res.Add("adminid", f.GetAdmins().ElementAt(0).Id);
+                res.Add("forumid", f.Id);
                 result.Add(res);
             }
             return jss.Serialize(result);

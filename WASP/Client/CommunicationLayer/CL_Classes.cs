@@ -45,6 +45,7 @@ namespace Client.CommunicationLayer
         public string name { get; set; }
         public string description { get; set; }
         public int adminid { get; set; }
+        public int forumid { get; set; }
         public CLForum()
         {
 

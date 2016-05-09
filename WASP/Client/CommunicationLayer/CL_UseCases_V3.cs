@@ -27,7 +27,7 @@ namespace Client.CommunicationLayer
 
         public Admin addAdmin(int newAdminID)
         {   //username, id, password, email, name
-            string json = "{\"newadminid\":" + newAdminID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"newadminid\":" + newAdminID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/addAdmin/");
             return parser.parseStringToAdmin(res, this);
         }

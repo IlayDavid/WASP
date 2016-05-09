@@ -71,7 +71,8 @@ namespace Client.BusinessLogic
 
         public List<Forum> getAllForums()
         {
-            return _cl.getAllForums();
+             List < Forum > f= _cl.getAllForums();
+            return f;
         }
 
         public List<Admin> getAdmins(int forumID)

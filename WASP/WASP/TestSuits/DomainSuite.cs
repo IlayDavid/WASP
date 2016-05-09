@@ -33,7 +33,7 @@ namespace WASP.TestSuits
         public void createForum()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(2055, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             // act
@@ -53,7 +53,7 @@ namespace WASP.TestSuits
         public void postTests()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
@@ -74,7 +74,7 @@ namespace WASP.TestSuits
         public void updateTests()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(88, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             User user2 = BL.subscribeToForum(99, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
@@ -94,7 +94,7 @@ namespace WASP.TestSuits
         public void checkReplyTests()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
@@ -112,7 +112,7 @@ namespace WASP.TestSuits
         public void checkModerator()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
@@ -133,7 +133,7 @@ namespace WASP.TestSuits
         public void checkTotals()
         {
             // arrange
-            Policy policy = new Policy().Create();
+            Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);

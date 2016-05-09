@@ -34,7 +34,7 @@ namespace Client.CommunicationLayer
             string json = "{\"password\":\"" + pass + "\"," + "\"adminid\":" + adminID + "," + "\"auth\":\"" + _auth + "\","
                 + "\"email\":\"" + email + "\"," + "\"forumname\":\"" + forumName
                 + "\"," + "\"description\":\"" + description + "\"," + "\"adminusername\":\"" + adminUserName
-                + "\"," + "\"adminname\":\"" + adminName + "}"; /*"," +
+                + "\"," + "\"adminname\":\"" + adminName + "\"}"; /*"," +
                policy  "{\"owner\":\"" + Policy.owner + "\"," + "\"moderator\":" + Policy.moderator
                 + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}" + "\"}";*/
             string res = httpReq(json, "POST", _url + "/createForum/");

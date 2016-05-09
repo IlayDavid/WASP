@@ -54,6 +54,7 @@ namespace WASP.Domain
         {
             SuperUser su = SuperUser.Get(userID);
 
+            policy.Create();
             // create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, policy);
             newForum = newForum.Create();

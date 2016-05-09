@@ -96,9 +96,11 @@ namespace Client.CommunicationLayer
             string name = dict["title"];
             string description = dict["description"];
             int adminid = dict["adminid"];
+            int forumid = dict["forumid"];
             User user = new User();
             user.id = adminid;
             Forum f = new Forum(name, description, user, new Policy(0, 0, false, 0, 0));
+            f.id = forumid;
             return f;
         }
 
@@ -161,7 +163,9 @@ namespace Client.CommunicationLayer
             {
                 User user = new User();
                 user.id = cl.adminid;
-                ret.Add(new Forum(cl.name, cl.description, user, new Policy(0, 0, false, 0, 0)));
+                Forum f = new Forum(cl.name, cl.description, user, new Policy(0, 0, false, 0, 0));
+                f.id = cl.forumid;
+                ret.Add(f);
             }
             return ret;
         }

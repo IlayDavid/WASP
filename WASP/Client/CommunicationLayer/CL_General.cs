@@ -39,7 +39,7 @@ namespace Client.CommunicationLayer
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             if ((int)httpResponse.StatusCode != 200)
             {
-                return HandleHttpError((int)httpResponse.StatusCode);
+                return HandleHttpError((int)httpResponse.StatusCode, httpResponse);
             }
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -48,7 +48,7 @@ namespace Client.CommunicationLayer
             }
         }
 
-        private string HandleHttpError(int statusCode)
+        private string HandleHttpError(int statusCode, HttpWebResponse r)
         {
             throw new NotImplementedException();
         }
