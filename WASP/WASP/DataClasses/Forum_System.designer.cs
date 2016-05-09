@@ -385,7 +385,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="Char(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string subject
 		{
 			get
@@ -405,7 +405,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string description
 		{
 			get
@@ -875,9 +875,9 @@ namespace WASP.DataClasses
 		
 		private int _id;
 		
-		private int _fromUserId;
+		private System.Nullable<int> _fromUserId;
 		
-		private int _fromForumId;
+		private System.Nullable<int> _fromForumId;
 		
 		private int _toUserId;
 		
@@ -897,9 +897,9 @@ namespace WASP.DataClasses
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OnfromUserIdChanging(int value);
+    partial void OnfromUserIdChanging(System.Nullable<int> value);
     partial void OnfromUserIdChanged();
-    partial void OnfromForumIdChanging(int value);
+    partial void OnfromForumIdChanging(System.Nullable<int> value);
     partial void OnfromForumIdChanged();
     partial void OntoUserIdChanging(int value);
     partial void OntoUserIdChanged();
@@ -938,8 +938,8 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int NOT NULL")]
-		public int fromUserId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromUserId", DbType="Int")]
+		public System.Nullable<int> fromUserId
 		{
 			get
 			{
@@ -962,8 +962,8 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int NOT NULL")]
-		public int fromForumId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromForumId", DbType="Int")]
+		public System.Nullable<int> fromForumId
 		{
 			get
 			{
@@ -1102,8 +1102,8 @@ namespace WASP.DataClasses
 					}
 					else
 					{
-						this._fromUserId = default(int);
-						this._fromForumId = default(int);
+						this._fromUserId = default(Nullable<int>);
+						this._fromForumId = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("IUser");
 				}
@@ -1558,7 +1558,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NChar(25)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string title
 		{
 			get
@@ -1578,7 +1578,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt", DbType="NChar(1000) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string cnt
 		{
 			get
@@ -1874,7 +1874,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string subject
 		{
 			get
@@ -1894,7 +1894,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string description
 		{
 			get
@@ -2068,7 +2068,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string userName
 		{
 			get
@@ -2088,7 +2088,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string password
 		{
 			get
@@ -2240,7 +2240,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string userName
 		{
 			get
@@ -2260,7 +2260,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string password
 		{
 			get
@@ -2280,7 +2280,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string name
 		{
 			get
@@ -2300,7 +2300,7 @@ namespace WASP.DataClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string email
 		{
 			get

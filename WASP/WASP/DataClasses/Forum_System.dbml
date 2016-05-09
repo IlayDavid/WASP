@@ -11,8 +11,8 @@
   <Table Name="dbo.IForums" Member="IForums">
     <Type Name="IForum">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="subject" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NChar(1000)" CanBeNull="true" />
+      <Column Name="subject" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="policyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="IForum_ISubForum" Member="ISubForums" ThisKey="id" OtherKey="forumId" Type="ISubForum" />
       <Association Name="IForum_IUser" Member="IUsers" ThisKey="id" OtherKey="forumId" Type="IUser" />
@@ -35,8 +35,8 @@
   <Table Name="dbo.INotifications" Member="INotifications">
     <Type Name="INotification">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fromUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fromForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fromUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fromForumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="toUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="message" Type="System.String" DbType="NChar(4000)" CanBeNull="true" />
@@ -63,8 +63,8 @@
       <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="reply" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="subforumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
-      <Column Name="cnt" Type="System.String" DbType="NChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="cnt" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="publishAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="editAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="IPost_IPost" Member="IPosts" ThisKey="id" OtherKey="reply" Type="IPost" />
@@ -77,8 +77,8 @@
     <Type Name="ISubForum">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="subject" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NChar(1000)" CanBeNull="true" />
+      <Column Name="subject" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ISubForum_IModerator" Member="IModerators" ThisKey="id" OtherKey="subForumId" Type="IModerator" />
       <Association Name="ISubForum_IPost" Member="IPosts" ThisKey="id" OtherKey="subforumId" Type="IPost" />
       <Association Name="IForum_ISubForum" Member="IForum" ThisKey="forumId" OtherKey="id" Type="IForum" IsForeignKey="true" />
@@ -87,18 +87,18 @@
   <Table Name="dbo.ISuperUsers" Member="ISuperUsers">
     <Type Name="ISuperUser">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="userName" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="password" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.IUsers" Member="IUsers">
     <Type Name="IUser">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="forumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="userName" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="password" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="name" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="email" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="PasswordChangeDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="IUser_IAdmin" Member="IAdmin" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IAdmin" Cardinality="One" />
