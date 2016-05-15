@@ -10,6 +10,7 @@ namespace Client.GUI
 {
     public class Session
     {
+		
         public readonly static int ALL = 0;
         public readonly static int MEMBER = 1;
         public readonly static int SUBFORUMS = 2;
