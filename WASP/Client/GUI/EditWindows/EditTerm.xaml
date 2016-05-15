@@ -1,0 +1,20 @@
+﻿<Window x:Class="Client.GUI.EditWindows.EditTerm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client.GUI.EditWindows"
+        mc:Ignorable="d"
+        Title="EditTerm" Height="282.439" Width="267.805"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label x:Name="label_Copy1" Content="Moderaor:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,2,0,0"/>
+        <ComboBox x:Name="cboxModerator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="89,7,0,0" SelectedIndex="0">
+            <ComboBoxItem Content="Select Moderator"/>
+        </ComboBox>
+        <Button x:Name="btnSubmit" Content="Submit" Click="btnSubmit_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="170,217,0,0"/>
+        <Label x:Name="label_Copy2" Content="Term:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"/>
+        <Calendar x:Name="calTerm" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="66,41,-21,0"/>
+
+    </Grid>
+</Window>

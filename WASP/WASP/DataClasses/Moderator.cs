@@ -6,46 +6,101 @@ using System.Threading.Tasks;
 
 namespace WASP.DataClasses
 {
-    public class Moderator
+    public class Moderator : Authority
     {
-        private User me;
-        private DateTime termExpiration;
+        public override Authority.Level AuthorizationLevel()
+        {
+            return Authority.Level.Mod;
+        }
+
+        private User user;
+        private DateTime termExpiration, startDate;
         private Subforum subForum;
         private Admin appointer;
-        private int id;
-        private DAL dal;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, int id,DAL dal)
+        public static Moderator Get(int modId, int subforumID)
         {
-            this.id = id;
-            this.me = user;
+            return dal.GetModerator(modId, subforumID);
+        }
+        public static Moderator[] Get(int[] ids, int sfId)
+        {
+            return dal.GetModerators(ids, Subforum.Get(sfId));
+        }
+
+        public Moderator Create()
+        {
+            return dal.CreateModerator(this);
+        }
+
+        public Moderator Update()
+        {
+            return dal.UpdateModerator(this);
+        }
+
+        public bool Delete()
+        {
+            return dal.DeleteModerator(Id, SubForum.Id);
+        }
+
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer)
+        {
+            this.user = user;
             this.termExpiration = termExpiration;
             this.subForum = sf;
             this.appointer = appointer;
-            this.dal = dal;
+            this.startDate = DateTime.Now;
+        }
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DateTime startDate)
+        {
+            this.user = user;
+            this.termExpiration = termExpiration;
+            this.subForum = sf;
+            this.appointer = appointer;
+            this.startDate = startDate;
+        }
+
+        // DEPRECATED
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DAL2 dal)
+        {
+            this.user = user;
+            this.termExpiration = termExpiration;
+            this.subForum = sf;
+            this.appointer = appointer;
+            this.startDate = DateTime.Now;
+        }
+
+        // DEPRECATED
+        public Moderator(User user, DateTime termExpiration, Subforum sf, Admin appointer, DateTime startDate, DAL2 dal)
+        {
+            this.user = user;
+            this.termExpiration = termExpiration;
+            this.subForum = sf;
+            this.appointer = appointer;
+            this.startDate = startDate;
         }
 
         public int Id
         {
             get
             {
-                return id;
+                return User.Id;
             }
             set
             {
-                id = value;
+                User.Id = value;
             }
         }
 
-        public User user
+        public User User
         {
             get
             {
-                return me;
+                return user;
             }
             set
             {
-                me = value;
+                user = value;
             }
         }
 
@@ -58,6 +113,17 @@ namespace WASP.DataClasses
             set
             {
                 termExpiration = value;
+            }
+        }
+        public DateTime StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                startDate = value;
             }
         }
 
@@ -84,10 +150,5 @@ namespace WASP.DataClasses
                 appointer = value;
             }
         }
-
-
-
-
-
     }
 }

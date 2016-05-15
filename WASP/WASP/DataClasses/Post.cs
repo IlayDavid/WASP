@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace WASP.DataClasses
 {
     public class Post
@@ -9,25 +8,74 @@ namespace WASP.DataClasses
         private User author;
         private DateTime publishedAt, editAt;
         private int id;
-        private Subforum container;
+        private Subforum subforum;
         private Post inReplyTo;
-        private Dictionary<int, Post> replies;
-        private DAL dal;
+        private Dictionary<int, Post> replies = null;
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public Post(String title, String content, int id, User author, DateTime now, Post inReplyTo, Subforum container, DateTime editAt, DAL myDal)
+        public static Post Get(int id)
         {
+            return dal.GetPost(id);
+        }
+        public static Post[] Get(int[] ids)
+        {
+            return dal.GetPosts(ids);
+        }
+        public Post Create()
+        {
+            Post thisPost = dal.CreatePost(this);
+            //string notificationMessage = String.Format("Post {0} created.", thisPost.Id);
+           //  Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null);
+           // Subforum.Forum.NotifyAllMembers(notif);
+            return thisPost;
+        }
+
+        public Post Update()
+        {
+            Post thisPost = dal.UpdatePost(this);
+            string notificationMessage = String.Format("Post {0} updated.", thisPost.Id);
+            NotifyRepliers(new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null));
+            return thisPost;
+        }
+
+        public bool Delete()
+        {
+            string notificationMessage = String.Format("Post {0} deleted.", Id);
+            NotifyRepliers(new Notification(-1, notificationMessage, true, GetAuthor, null));
+            Post[] replies = GetAllReplies();
+            foreach (Post reply in replies)
+            {
+                reply.Delete();
+                RemoveReply(reply.Id);
+            }
+            this.author.RemovePost(Id);
+            return dal.DeletePost(Id);
+        }
+
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt)
+        {
+            this.id = id;
             this.title = title;
             this.content = content;
-            this.id = id;
             this.publishedAt = now;
             this.inReplyTo = inReplyTo;
             this.author = author;
-            this.container = container;
+            this.subforum = subforum;
             this.editAt = editAt;
-            this.dal = myDal;
         }
 
-
+        // DEPRECATED
+        public Post(int id, String title, String content, User author, DateTime now, Post inReplyTo, Subforum subforum, DateTime editAt, DAL2 dal)
+        {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.publishedAt = now;
+            this.inReplyTo = inReplyTo;
+            this.author = author;
+            this.subforum = subforum;
+            this.editAt = editAt;
+        }
 
         public int Id
         {
@@ -40,7 +88,7 @@ namespace WASP.DataClasses
                 id = value;
             }
         }
-        public String Title
+        public string Title
         {
             get
             {
@@ -89,15 +137,15 @@ namespace WASP.DataClasses
             }
 
         }
-        public Subforum Container
+        public Subforum Subforum
         {
             get
             {
-                return container;
+                return subforum;
             }
             set
             {
-                container = value;
+                subforum = value;
             }
         }
 
@@ -105,7 +153,7 @@ namespace WASP.DataClasses
         {
             get
             {
-                return inReplyTo;
+                return this.inReplyTo;
             }
             set
             {
@@ -118,45 +166,63 @@ namespace WASP.DataClasses
         }
         public void RemoveReply(int id)
         {
-            replies.Remove(id);
+            Replies.Remove(id);
         }
         public void AddReply(Post reply)
         {
-            replies.Add(reply.Id, reply);
+            Replies.Add(reply.Id, reply);
         }
+        
+        private Dictionary<int, Post> Replies
+        {
+            get
+            {
+                if (replies == null)
+                {
+                    replies = new Dictionary<int, Post>();
+                    foreach (Post reply in dal.GetReplies(this.id))
+                    {
+                        this.replies.Add(reply.id, reply);
+                    }
+                }
+
+                return replies;
+            }
+        }
+
         public Post[] GetAllReplies()
         {
-            Post[] replyArr = new Post[replies.Values.Count];
-            replies.Values.CopyTo(replyArr, 0);
+            
+            Post[] replyArr = new Post[Replies.Values.Count];
+            Replies.Values.CopyTo(replyArr, 0);
             return replyArr;
         }
         public Post GetReply(int id)
         {
             Post reply;
-            replies.TryGetValue(id, out reply);
+            Replies.TryGetValue(id, out reply);
             return reply;
         }
-        public void Delete()
-        {
-            string notificationMessage = String.Format("Post {0} deleted.", Id);
-            NotifyRepliers(new Notification(notificationMessage, true, GetAuthor, null));
-            Post[] replies = GetAllReplies();
-            foreach (Post reply in replies)
-            {
-                reply.Delete();
-                RemoveReply(reply.Id);
-            }
-            this.author.RemovePost(this.id);
-        }
+        
 
         public void NotifyRepliers(Notification notification)
         {
             foreach (Post reply in GetAllReplies())
             {
                 User target = reply.GetAuthor;
-                target.NewNotification(new Notification(notification.Message, notification.IsNew, 
+                target.NewNotification(new Notification(-1, notification.Message, notification.IsNew, 
                     notification.Source, target));
             }
+        }
+
+        public int NumOfReplies()
+        {
+            int count = 0;
+            foreach (Post reply in this.GetAllReplies())
+            {
+                count += 1 + reply.NumOfReplies();
+            }
+            return count;
         }
     }
 }

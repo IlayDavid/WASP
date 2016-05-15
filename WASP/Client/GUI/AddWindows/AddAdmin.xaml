@@ -1,0 +1,19 @@
+﻿<Window x:Class="Client.GUI.AddWindows.AddAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client.GUI.AddWindows"
+        mc:Ignorable="d"
+        Title="AddAdmin" Height="146.342" Width="206.341"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label x:Name="label_Copy1" Content="Admin:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
+        <Label x:Name="label_Copy3" Content="Admin Details:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" RenderTransformOrigin="0.45,-0.795" FontWeight="Bold"/>
+        <ComboBox x:Name="cboxAdmin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="63,36,0,0" SelectedIndex="0">
+            <ComboBoxItem Content="Select Admin"/>
+        </ComboBox>
+        <Button x:Name="btnCreate" Content="Add" Click="btnCreate_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="108,78,0,0"/>
+
+    </Grid>
+</Window>

@@ -44,28 +44,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientDriver.cs" />
+    <Compile Include="ClientProxyBridge.cs" />
+    <Compile Include="ClientRealBridge.cs" />
+    <Compile Include="Tests\ClientSide\AddModeratorTests.cs" />
+    <Compile Include="Tests\ClientSide\CreateForumTests.cs" />
+    <Compile Include="Tests\ClientSide\CreateSubForumTests.cs" />
+    <Compile Include="Tests\ClientSide\DeleteModeratorTest.cs" />
+    <Compile Include="Tests\ClientSide\DeletePostTests.cs" />
+    <Compile Include="Tests\ClientSide\Functions.cs" />
+    <Compile Include="Tests\ClientSide\InfoGettingTests.cs" />
+    <Compile Include="Tests\ClientSide\InitializeTests.cs" />
+    <Compile Include="Tests\ClientSide\LogInTests.cs" />
+    <Compile Include="Tests\ClientSide\OpenThreadTests.cs" />
+    <Compile Include="Tests\ClientSide\PolicyTests.cs" />
+    <Compile Include="Tests\ClientSide\PostMsgTests.cs" />
+    <Compile Include="Tests\ClientSide\SendPrivateMsgTests.cs" />
+    <Compile Include="Tests\ClientSide\SubscribeForumTests.cs" />
+    <Compile Include="Tests\ServerSide\DeleteModeratorTest.cs" />
+    <Compile Include="Tests\ServerSide\InfoGettingTests.cs" />
+    <Compile Include="Tests\ServerSide\PolicyTests.cs" />
+    <Compile Include="WASPClientBridge.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyBridge.cs" />
     <Compile Include="RealBridge.cs" />
-    <Compile Include="Tests\AddModeratorTests.cs" />
-    <Compile Include="Tests\CreateForumTests.cs" />
-    <Compile Include="Tests\CreateSubForumTests.cs" />
-    <Compile Include="Tests\DeletePostTests.cs" />
-    <Compile Include="Tests\Functions.cs" />
-    <Compile Include="Tests\InitializeTests.cs" />
-    <Compile Include="Tests\LogInTests.cs" />
-    <Compile Include="Tests\OpenThreadTests.cs" />
-    <Compile Include="Tests\PostMsgTests.cs" />
-    <Compile Include="Tests\SendPrivateMsgTests.cs" />
-    <Compile Include="Tests\SubscribeForumTests.cs" />
+    <Compile Include="Tests\ServerSide\AddModeratorTests.cs" />
+    <Compile Include="Tests\ServerSide\CreateForumTests.cs" />
+    <Compile Include="Tests\ServerSide\CreateSubForumTests.cs" />
+    <Compile Include="Tests\ServerSide\DeletePostTests.cs" />
+    <Compile Include="Tests\ServerSide\Functions.cs" />
+    <Compile Include="Tests\ServerSide\InitializeTests.cs" />
+    <Compile Include="Tests\ServerSide\LogInTests.cs" />
+    <Compile Include="Tests\ServerSide\OpenThreadTests.cs" />
+    <Compile Include="Tests\ServerSide\PostMsgTests.cs" />
+    <Compile Include="Tests\ServerSide\SendPrivateMsgTests.cs" />
+    <Compile Include="Tests\ServerSide\SubscribeForumTests.cs" />
     <Compile Include="WASPBridge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{44CF4DA3-32B1-4007-8DD8-E23A39B50CD5}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WASP\WASP.csproj">
       <Project>{e59b55f0-0014-4b59-a11e-fbf1f5e66adc}</Project>
       <Name>WASP</Name>
@@ -74,6 +99,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
