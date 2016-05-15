@@ -13,7 +13,11 @@ namespace Client.BusinessLogic
         private ICL _cl;
         public BL()
         {
-            _cl = new CL();
+            _cl = new TCL();
+        }
+        public void setForumID(int forumID)
+        {
+            _cl.setForumID(forumID);
         }
         public User login(string userName, string password, int forumID)
         {

@@ -19,12 +19,25 @@ namespace Client.CommunicationLayer
         public string _auth { get; set; }
         private ParseString parser;
 
+        //will set to the current forumID, which the user is loged to.
+        //will be used only for functions that require log-in.
+        private int forumID;
+
         public CL()
         {
             _url = "http://localhost:8080";
             parser = new ParseString(); 
         }
 
+        public User loginBySession(string session)
+        {
+            return null;
+        }
+
+        public void setForumID(int forumID)
+        {
+            this.forumID = forumID; 
+        }
         private string httpReq(string json, string method, string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);

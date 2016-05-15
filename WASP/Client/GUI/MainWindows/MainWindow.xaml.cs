@@ -90,8 +90,8 @@ namespace Client.GUI
 
             try
             {
-                if(Session.user is SuperUser)
-                    Session.bl.login(Session.user.userName, Session.user.password, id);
+                if (Session.user is SuperUser)
+                    Session.bl.setForumID(id);
                 Session.forum = Session.forums[id];
                 ForumWindow fWin = new ForumWindow();
                 fWin.Title = Session.forum.Name;

@@ -22,6 +22,15 @@ namespace Client.CommunicationLayer
             initForTesting();
         }
 
+        public User loginBySession(string session)
+        {
+            return null;
+        }
+
+        public void setForumID(int forumID)
+        {
+            this.forumID = forumID;
+        }
         private void initForTesting()
         {
             initialize("amitay", "a", 205857121, "amitay140@gmail.com", "a");

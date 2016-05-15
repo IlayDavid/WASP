@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.BusinessLogic
+namespace Client.CommunicationLayer
 {
-    public interface IBL
+    public interface ICL
     {
         //---------------------------Version 1 Use Cases Start------------------------------------
 
@@ -158,8 +158,8 @@ namespace Client.BusinessLogic
 
         //---------------------------Version 3 Use Cases End------------------------------------
 
-        
-            
+
+
         //---------------------------Version 4 Use Cases Start------------------------------------
 
         //login by client-session password (requested in ass3)
@@ -230,6 +230,7 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int AdminID); 
+        Admin getAdmin(int AdminID);
+
     }
 }

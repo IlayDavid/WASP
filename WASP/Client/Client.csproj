@@ -63,6 +63,7 @@
     <Compile Include="BusinessLogic\BL_UseCases_V1.cs" />
     <Compile Include="BusinessLogic\BL_UseCases_V2.cs" />
     <Compile Include="BusinessLogic\BL_UseCases_V3.cs" />
+    <Compile Include="BusinessLogic\BL_UseCases_V4.cs" />
     <Compile Include="BusinessLogic\IBL.cs" />
     <Compile Include="CommunicationLayer\CL_Classes.cs" />
     <Compile Include="CommunicationLayer\CL_General.cs" />
@@ -182,10 +183,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataClasses\Forum.cs" />
-    <Compile Include="CommunicationLayer\ICL_UseCases_V1.cs" />
-    <Compile Include="CommunicationLayer\ICL_UseCases_V2.cs" />
-    <Compile Include="CommunicationLayer\ICL_UseCases_V3.cs" />
-    <Compile Include="CommunicationLayer\ICL_General.cs" />
+    <Compile Include="CommunicationLayer\ICL.cs" />
     <Compile Include="DataClasses\Notifications.cs" />
     <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Policy.cs" />
