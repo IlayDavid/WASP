@@ -48,3 +48,14 @@ C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyR
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Forums_System.mdf
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Forums_System_log.ldf
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb

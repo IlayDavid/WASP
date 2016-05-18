@@ -5,11 +5,21 @@ using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses;
+using System.IO;
 
 namespace WASP.DataClasses
 {
     class DALSQL : DAL2
     {
+        private static string _connectionString;
+        public static string SetDb(string dbName)
+        {
+            _connectionString =
+                $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={Directory.GetParent(Directory.GetParent(
+                        Directory.GetCurrentDirectory()).FullName)}\{dbName}.mdf;Integrated Security=True;Connect Timeout=30";
+
+            return _connectionString;
+        }
         //private int forum_counter = 1;
         private Object forumLock = new Object();
 
@@ -58,7 +68,7 @@ namespace WASP.DataClasses
             backUpPosts = new List<IPost>();
             backUpPolicies = new List<IPolicy>();
 
-            Forum_SystemDataContext db = new Forum_SystemDataContext();
+            Forum_SystemDataContext db = new Forum_SystemDataContext(SetDb("Forums_System"));
             /*
             //1
             foreach (Index indx in db.Indexes)
@@ -183,7 +193,7 @@ namespace WASP.DataClasses
 
         public static void GetBackUp()
         {
-            Forum_SystemDataContext db = new Forum_SystemDataContext();
+            Forum_SystemDataContext db = new Forum_SystemDataContext(SetDb("Forums_System"));
             foreach (ISuperUser isuper in backUpSuperUsers)
             {
                 db.ISuperUsers.InsertOnSubmit(isuper);
@@ -237,7 +247,7 @@ namespace WASP.DataClasses
             db.SubmitChanges();
         }
 
-        private Forum_SystemDataContext db = new Forum_SystemDataContext();
+        private Forum_SystemDataContext db = new Forum_SystemDataContext(SetDb("Forums_System"));
 
         public void Clean()
         {
