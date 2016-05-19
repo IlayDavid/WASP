@@ -22,6 +22,18 @@ namespace Client.DataClasses
             threads = new List<Post>();
             this.term = term;
         }
+        public Subforum(int id, string name, string description, Moderator moderator, DateTime term)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+
+            moderators = new Dictionary<int, Moderator>();
+            moderators.Add(moderator.user.id, moderator);
+
+            threads = new List<Post>();
+            this.term = term;
+        }
 
         public int id { get; set; }
         public string name { get; set; }

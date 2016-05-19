@@ -25,7 +25,7 @@ namespace Client
         private void setButtons()
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
-            userBtns = new List<Button>() { btnLogout };
+            userBtns = new List<Button>() { btnLogout, btnSendMessage };
             adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum };
             suBtns = new List<Button>() {  };
 
@@ -34,6 +34,7 @@ namespace Client
         }
         private void setVisibility()
         {
+            setBtnVisibility(guestBtns, Visibility.Hidden);
             if (Session.user != null)
             {
                 Session.LoadAdmins();

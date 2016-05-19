@@ -34,6 +34,7 @@ namespace Client
         }
         private void setVisibility()
         {
+            setBtnVisibility(guestBtns, Visibility.Hidden);
             if (Session.user != null)
             {
                 Session.LoadAdmins();
@@ -77,7 +78,6 @@ namespace Client
                 btn.Visibility = option;
             }
         }
-
         public PostWindow()
         {
             InitializeComponent();
@@ -87,6 +87,7 @@ namespace Client
             Session.LoadReplys();
             Post p = Session.post;
             TreeViewItem treeItem = makePostTree(p);
+
             postMesssages.Items.Add(treeItem);
             foreach (Post post in p.replies)
             {
@@ -94,7 +95,6 @@ namespace Client
                 ((TreeViewItem) postMesssages.Items[0]).Items.Add(treeItem);
             }
         }
-        
 
         private TreeViewItem makePostTree(Post post)
         {

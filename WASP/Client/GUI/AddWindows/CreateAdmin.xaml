@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="Window1" Height="356.707" Width="300"
+        Title="Window1" Height="356.707" Width="280.86"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="Window_Closing">
     
     <Grid>
@@ -20,8 +20,9 @@
             <Label Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,88,0,0"/>
             <TextBox x:Name="txtmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,90,0,0" Width="120"/>
             <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,113,0,0"/>
-            <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
+            <PasswordBox x:Name="passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
             <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="134,165,0,0" Click="BtnCreate_Click"/>
+            <Button x:Name="btnExit" Click="btnExit_Click" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,165,0,0" />
         </Grid>
     </Grid>
 </Window>

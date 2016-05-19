@@ -24,7 +24,7 @@ namespace Client
     public partial class CreateAdmin : Window
     {
         private SuperUser _su;
-        private bool createFinish = false;
+        private bool canClose = false;
         public CreateAdmin()
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace Client
                 MessageBox.Show("Your registration is complete!\nyou can log in now as an admin.");
             else
                 MessageBox.Show("Your registration could not be completed.\nAdmin has been already registered.");
-            createFinish = true;
+            canClose = true;
             this.Close();
         }
 
@@ -68,7 +68,12 @@ namespace Client
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !createFinish;
+            e.Cancel = !canClose;
+        }
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            canClose = true;
+            Session.CloseAllWindows();
         }
     }
 }

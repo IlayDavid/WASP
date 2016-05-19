@@ -25,16 +25,14 @@ namespace Client.DataClasses
 
     public class UserView
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
-        public string Email { get; set; }
         public static List<UserView> getView(List<User> users)
         {
             List<UserView> ret = new List<UserView>();
             foreach (User u in users)
             {
-                ret.Add(new UserView() { ID= u.id, Name = u.name, UserName = u.userName, Email = u.email});
+                ret.Add(new UserView() { Name = u.name, UserName = u.userName});
             }
             return ret;
         }
@@ -43,7 +41,7 @@ namespace Client.DataClasses
             List<UserView> ret = new List<UserView>();
             foreach (User u in users.Values)
             {
-                ret.Add(new UserView() { ID = u.id, Name = u.name, UserName = u.userName, Email = u.email });
+                ret.Add(new UserView() {Name = u.name, UserName = u.userName});
             }
             return ret;
         }

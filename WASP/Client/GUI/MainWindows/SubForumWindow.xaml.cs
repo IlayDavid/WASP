@@ -33,6 +33,7 @@ namespace Client
         }
         private void setVisibility()
         {
+            setBtnVisibility(guestBtns, Visibility.Hidden);
             if (Session.user != null)
             {
                 Session.LoadAdmins();
@@ -160,8 +161,8 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                setVisibility();
                 Session.user = null;
+                setVisibility();
             }
         }
 

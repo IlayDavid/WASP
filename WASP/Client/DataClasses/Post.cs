@@ -22,6 +22,20 @@ namespace Client.DataClasses
 
             this.inReplyTo = inReplyTo;
         }
+        public Post(int id, string title, string content, User author, int container, Post inReplyTo)
+        {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.author = author;
+            publishedAt = DateTime.Now;
+            editAt = publishedAt;
+            containerID = container;
+
+            replies = new List<Post>();
+
+            this.inReplyTo = inReplyTo;
+        }
 
         public string title{ get; set; }
         public string content{ get; set; }

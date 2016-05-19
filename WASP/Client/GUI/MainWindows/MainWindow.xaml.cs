@@ -24,9 +24,48 @@ namespace Client.GUI
     public partial class WelcomeWindow : Window
     {
         private List<ForumView> _fView;
+        List<Button> guestBtns;
+        List<Button> suBtns;
+
+        private void setButtons()
+        {
+            guestBtns = new List<Button>() { btnLoginSU };
+            suBtns = new List<Button>() { btnLogOut, btnDelete, btnNewForum, btnReports };
+        }
+        private void setVisibility()
+        {
+            setBtnVisibility(guestBtns, Visibility.Hidden);
+            if (Session.user != null)
+            {
+                if (Session.user is SuperUser)
+                    ChangeVisibilitySU();
+            }
+            else
+                ChangeVisibilityGuest();
+        }
+        private void ChangeVisibilitySU()
+        {
+            setBtnVisibility(suBtns, Visibility.Visible);
+        }
+       
+        private void ChangeVisibilityGuest()
+        {
+            setBtnVisibility(suBtns, Visibility.Hidden);
+            setBtnVisibility(guestBtns, Visibility.Visible);
+        }
+
+        private void setBtnVisibility(List<Button> btns, Visibility option)
+        {
+            foreach (Button btn in btns)
+            {
+                btn.Visibility = option;
+            }
+        }
         public WelcomeWindow()
         {
             InitializeComponent();
+            setButtons();
+            setVisibility();
             Session.bl = new BL();
             if (Session.bl.isInitialize() == 0)
             {
@@ -51,7 +90,7 @@ namespace Client.GUI
 
             if (Session.user != null)
             {
-                ChangeVisibilitySU();
+                setVisibility();
                 MessageBox.Show("You are login as super user, you can log out only in this window.");
             }
         }
@@ -60,19 +99,12 @@ namespace Client.GUI
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
-                ChangeVisibilitySU();
                 Session.user = null;
+                setVisibility();  
             }
         }
 
-        private void ChangeVisibilitySU()
-        {
-            reverseVisibility(btnLoginSU);
-            reverseVisibility(btnLogOut);
-            reverseVisibility(btnNewForum);
-            reverseVisibility(btnDelete);
-            reverseVisibility(btnReports);
-        }
+        
 
         private void reverseVisibility(Button btn)
         {
@@ -99,6 +131,9 @@ namespace Client.GUI
                 Session.currentWindow = fWin;
                 this.Hide();
                 fWin.ShowDialog();
+
+                setVisibility();
+                
                 Session.currentWindow = null; //do not need notifications.
                 Session.forum = null;
                 this.ShowDialog();

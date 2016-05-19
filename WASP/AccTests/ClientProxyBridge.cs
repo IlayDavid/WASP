@@ -161,6 +161,11 @@ namespace AccTests
             return proj.login(userName, password, forumID);
         }
 
+        public User loginBySession(string session)
+        {
+            throw new NotImplementedException();
+        }
+
         public SuperUser loginSU(string userName, string password)
         {
             return proj.loginSU(userName, password);
@@ -184,6 +189,11 @@ namespace AccTests
         public int sendMessage(int targetUserID, string message)
         {
             return proj.sendMessage(targetUserID, message);
+        }
+
+        public void setForumID(int forumID)
+        {
+            throw new NotImplementedException();
         }
 
         public int subForumTotalMessages(int subForumID)

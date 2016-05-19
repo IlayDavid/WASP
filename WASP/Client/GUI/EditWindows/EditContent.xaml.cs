@@ -36,6 +36,7 @@ namespace Client.GUI.EditWindows
             {
                 postContent = txtContent.Text;
                 Session.bl.editPost(curPost.id, postContent);
+                curPost.content = postContent;
                 this.Close();
             }
             catch(Exception ee)

@@ -44,15 +44,17 @@ namespace Client.GUI.MainWindows
             User selectedUser = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
 
             lstMessages.Items.Clear();
-            ListBoxItem item = new ListBoxItem() { Content = "Chat Coming Soon!" };
-            lstMessages.Items.Add(item);
+            StackPanel messageView = MakeMessageView(); 
+            lstMessages.Items.Add(messageView);         
+        }
+
+        private StackPanel MakeMessageView()
+        {
             StackPanel stackPanel = new StackPanel();
-            TextBox l = new TextBox() {};
+            TextBox l = new TextBox() { };
             Button b = new Button() { Content = "Send" };
             stackPanel.Children.Add(l); stackPanel.Children.Add(b);
-            item = new ListBoxItem() { Content = stackPanel};
-
-            lstMessages.Items.Add(item);
+            throw new NotImplementedException();
         }
 
         private void btnSend_Click(object sender, RoutedEventArgs e)

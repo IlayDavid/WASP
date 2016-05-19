@@ -16,7 +16,7 @@ namespace WASP.DataClasses
         {
             _connectionString =
                 $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={Directory.GetParent(Directory.GetParent(
-                        Directory.GetCurrentDirectory()).Parent?.FullName)}\{dbName}.mdf;Integrated Security=True;Connect Timeout=30";
+                        Directory.GetCurrentDirectory()).Parent.FullName)}\{dbName}.mdf;Integrated Security=True;Connect Timeout=30";
 
             return _connectionString;
         }
