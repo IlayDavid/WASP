@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\Client\obj\Debug\
+C:\Users\Ilay David\Desktop\wasp\WASP\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\Client\App.xaml
+C:\Users\Ilay David\Desktop\wasp\WASP\Client\App.xaml
 19-2094960030
 
-581428380714
+58-435355482
 161334265193
 GUI\AddWindows\AddAdmin.xaml;GUI\AddWindows\AddForum.xaml;GUI\AddWindows\AddMember.xaml;GUI\AddWindows\AddModerator.xaml;GUI\AddWindows\AddPost.xaml;GUI\AddWindows\VerifyEmail.xaml;GUI\DeleteWindows\DeleteModerator.xaml;GUI\EditWindows\EditContent.xaml;GUI\EditWindows\EditPolicy.xaml;GUI\EditWindows\EditTerm.xaml;GUI\ForumReports.xaml;GUI\MainWindows\ChatWindow.xaml;GUI\MainWindows\ForumWindow.xaml;GUI\MainWindows\Login.xaml;GUI\MainWindows\PostWindow.xaml;GUI\MainWindows\SubForumWindow.xaml;GUI\AddWindows\CreateAdmin.xaml;GUI\MainWindows\MainWindow.xaml;GUI\AddWindows\AddSubForum.xaml;
 
