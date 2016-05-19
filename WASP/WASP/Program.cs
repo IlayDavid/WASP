@@ -14,13 +14,37 @@ namespace WASP
         static string basePrefix = "http://localhost:8080/";
         static Dictionary<string, Func<Dictionary<string, dynamic>, string>> routes = new Dictionary<string, Func<Dictionary<string, dynamic>, string>>();
 
+
         public static string SendResponse(HttpListenerRequest request)
         {
-            Dictionary<string, dynamic> data = jss.Deserialize<Dictionary<string, dynamic>>(GetRequestPostData(request));
+            Dictionary<string, dynamic> data;
+            string url = request.Url.ToString();
+            if (url.Contains("/Web/"))
+            {
+                data = new Dictionary<string, dynamic>();
+                string filename = url.Substring(url.IndexOf("Web/"));
+                int qsIndex = filename.IndexOf("?");
+                if(qsIndex > -1)
+                {
+                    data["qs"] = filename.Substring(qsIndex + 1);
+                    filename = filename.Substring(0, qsIndex);
+                }
+                data["file"] = filename;
+                url = url.Substring(0, url.IndexOf("/Web/") + "/Web/".Length);
+            }
+            else
+            {
+                var dataStr = GetRequestPostData(request);
+                Console.WriteLine(dataStr);
+                data = jss.Deserialize<Dictionary<string, dynamic>>(dataStr);
+            }
+                
+            
             string response = "";
             try
             {
-                response = routes[request.Url.ToString()](data);
+                Console.WriteLine(url);
+                response = routes[url](data);
                 
             }
             catch (WaspException e)
@@ -70,6 +94,7 @@ namespace WASP
             routes.Add(basePrefix + "getMembers/", ServiceFacade.getMembers);
             routes.Add(basePrefix + "getSubforums/", ServiceFacade.getSubforums);
             routes.Add(basePrefix + "getAdmin/", ServiceFacade.getAdmin);
+            routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);

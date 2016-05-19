@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>banana</title>
+    <script src="http://localhost:8080/Web/JS/jquery.js" type="application/javascript"></script>
+    <script src="http://localhost:8080/Web/JS/util.js" type="application/javascript"></script>
+
+
+</head>
+<body>
+    <script type="application/javascript">
+        var string1 = "getParameterByName(\"id\"): " + getParameterByName("id") + "\n";
+        var qs1 = GetQuerySet();
+        var qs2 = urlParams;
+        var string2 = "GetQuerySet(): " + qs1['id'] + "\n";
+        var string3 = "urlParams: " + qs2['id'] + "\n";
+        //data["name"], data["username"], data["id"], data["email"], data["password"]
+        params = {
+            "name": "dude", 
+            "username": "dude", 
+            "id": 12345, 
+            "email": "bobo@bgu.ac.il", 
+            "password": "pass"
+        };
+        $.post("http://localhost:8080/initialize/", JSON.stringify(params), function(data, status){
+            console.log(data);
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+        alert(string1 + string2 + string3);
+        console.log(qs1);
+        console.log(qs2);
+    </script>
+    <p>banana!!<br /><br />banana!</p>
+</body>
+</html>
