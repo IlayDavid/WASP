@@ -10,7 +10,9 @@
 
 </head>
 <body>
-    <script type="application/javascript">
+    <p id="p1">banana!!<br /><br />banana!</p>
+
+<script type="application/javascript">
         var string1 = "getParameterByName(\"id\"): " + getParameterByName("id") + "\n";
         var qs1 = GetQuerySet();
         var qs2 = urlParams;
@@ -18,10 +20,10 @@
         var string3 = "urlParams: " + qs2['id'] + "\n";
         //data["name"], data["username"], data["id"], data["email"], data["password"]
         params = {
-            "name": "dude", 
-            "username": "dude", 
-            "id": 12345, 
-            "email": "bobo@bgu.ac.il", 
+            "name": "dude",
+            "username": "dude",
+            "id": 12345,
+            "email": "bobo@bgu.ac.il",
             "password": "pass"
         };
         $.post("http://localhost:8080/initialize/", JSON.stringify(params), function(data, status){
@@ -31,7 +33,7 @@
         alert(string1 + string2 + string3);
         console.log(qs1);
         console.log(qs2);
+    document.getElementById("p1").innerHTML = qs1['id']+ "<br /><br />"+ qs2['id'];
     </script>
-    <p>banana!!<br /><br />banana!</p>
 </body>
 </html>

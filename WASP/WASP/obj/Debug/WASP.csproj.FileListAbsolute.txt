@@ -73,3 +73,14 @@ C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WA
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\banana.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\jquery.js
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\util.js
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
