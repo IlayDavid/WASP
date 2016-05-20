@@ -154,7 +154,7 @@ namespace Client.CommunicationLayer
         {
             return forums[forumID].subforums.Values.ToList();
         }
-        public Admin getAdmin(int AdminID)
+        public Admin getAdmin(int AdminID, int forumID)
         {
             //return forums[forumID].admins[AdminID];
             throw new NotImplementedException();

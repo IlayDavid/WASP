@@ -113,10 +113,10 @@ namespace Client.BusinessLogic
                 throw new Exception("ERROR: illegal id");
         }
 
-        public Admin getAdmin(int adminID)
+        public Admin getAdmin(int adminID, int forumID)
         {
             if (adminID >= 0)
-                return _cl.getAdmin(adminID);
+                return _cl.getAdmin(adminID, forumID);
             else
                 throw new Exception("ERROR: illegal id");
         }

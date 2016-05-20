@@ -471,9 +471,9 @@ namespace WASP.Service
         }
 
         public static string getAdmin(Dictionary<string, dynamic> data)
-        {   //adminid
+        {   //adminid, forumid
             LoginPair pair = loggedIn[data["auth"]];
-            Admin a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            Admin a = bl.getAdmin(pair.UserId, data["forumid"], data["adminid"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             //username, id, password, email, name
             User u = a.User;

@@ -181,9 +181,9 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSubforums(res);
         }
 
-        public Admin getAdmin(int AdminID)
+        public Admin getAdmin(int AdminID, int forumID)
         {   //username, id, password, email, name
-            string json = "{\"adminid\":" + AdminID + "," + "\"auth\":\"" + _auth + "\"" + "}";
+            string json = "{\"adminid\":" + AdminID + "," + "\"auth\":\"" + _auth + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getAdmin/");
             return parser.parseStringToAdmin(res, this);
         }

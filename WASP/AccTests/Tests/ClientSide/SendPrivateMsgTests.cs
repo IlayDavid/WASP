@@ -58,7 +58,7 @@ namespace AccTests.Tests
             string userName = "odedb";
             Forum forum = _proj.createForum( "subject12", "blah",52, userName, "oded",
                             "odedb@post.bgu.ac.il", "odded123", new Policy(5, 5, false, 5, 500));
-            var member = _proj.getAdmin(52);
+            var member = _proj.getAdmin(52, forum.id);
 
             var msg = "first message";
             int feedback1 = _proj.sendMessage( _member1.id, msg);

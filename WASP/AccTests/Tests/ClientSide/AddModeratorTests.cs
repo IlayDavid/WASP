@@ -88,7 +88,7 @@ namespace AccTests.Tests
 
             Forum forum = _proj.createForum( "forum1", "blah",8, "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123", new Policy(5, 5, false, 5, 500));
-            Admin admin = _proj.getAdmin(8);
+            Admin admin = _proj.getAdmin(8, forum.id);
             _proj.login(admin.user.userName, admin.user.password, forum.id);
 
             //another admin tries to add a moderator

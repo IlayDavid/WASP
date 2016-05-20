@@ -230,6 +230,6 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int AdminID); 
+        Admin getAdmin(int AdminID, int forumID); 
     }
 }

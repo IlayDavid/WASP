@@ -70,9 +70,9 @@ namespace AccTests
             return _clientAPI.editPost(postID, content);
         }
 
-        public Client.DataClasses.Admin getAdmin(int AdminID)
+        public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
         {
-            return _clientAPI.getAdmin(AdminID);
+            return _clientAPI.getAdmin(AdminID, forumID);
         }
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
