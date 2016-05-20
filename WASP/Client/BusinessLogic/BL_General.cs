@@ -49,33 +49,45 @@ namespace Client.BusinessLogic
 
         public Post getThread(int threadId)
         {
-            throw new NotImplementedException();
+            if (threadId >= 0)
+                return _cl.getThread(threadId);
+            else
+                throw new Exception("ERROR: illegal id");
         }
 
         public Forum getForum(int forumID)
         {
-            throw new NotImplementedException();
+            if (forumID >= 0)
+                return _cl.getForum(forumID);
+            else
+                throw new Exception("ERROR: illegal id");
         }
 
         public Subforum getSubforum(int subforumId)
         {
-            throw new NotImplementedException();
+            if (subforumId >= 0)
+                return _cl.getSubforum(subforumId);
+            else
+                throw new Exception("ERROR: illegal id");
         }
 
         public List<Moderator> getModerators(int subForumID)
         {
-            if (subForumID < 0 ) throw new Exception("ERROR: id is illegal");
+            if (subForumID < 0) throw new Exception("ERROR: id is illegal");
             return _cl.getModerators(subForumID);
         }
 
         public DateTime getModeratorTermTime(int moderatorID, int subforumID)
         {
-            throw new NotImplementedException();
+            if (subforumID >= 0 && moderatorID >= 0)
+                return _cl.getModeratorTermTime(moderatorID, subforumID);
+            else
+                throw new Exception("ERROR: illegal id");
         }
 
         public List<Forum> getAllForums()
         {
-             List < Forum > f= _cl.getAllForums();
+            List<Forum> f = _cl.getAllForums();
             return f;
         }
 
@@ -103,7 +115,10 @@ namespace Client.BusinessLogic
 
         public Admin getAdmin(int adminID)
         {
-            throw new NotImplementedException();
+            if (adminID >= 0)
+                return _cl.getAdmin(adminID);
+            else
+                throw new Exception("ERROR: illegal id");
         }
     }
 }

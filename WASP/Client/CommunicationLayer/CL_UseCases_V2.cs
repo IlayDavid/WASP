@@ -52,7 +52,7 @@ namespace Client.CommunicationLayer
             string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID
                  + "\"}";
             string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
-            return parseStringToDate(res);
+            return parser.parseStringToDate(res);
         }
 
         //---------------------------Version 2 Use Cases Start------------------------------------

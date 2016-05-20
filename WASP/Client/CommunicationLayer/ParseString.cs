@@ -80,7 +80,7 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
-        public Post parseStringToPost(string res, bool reply=false)
+        public Post parseStringToPost(string res, bool reply = false)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
@@ -230,6 +230,13 @@ namespace Client.CommunicationLayer
                 ret.Add(u);
             }
             return ret;
+        }
+
+        public DateTime parseStringToDate(string res)
+        {   //termtime
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            return DateTime.Parse(dict["termenddate"]);
         }
     }
 }
