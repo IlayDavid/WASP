@@ -120,5 +120,10 @@ namespace Client.BusinessLogic
             else
                 throw new Exception("ERROR: illegal id");
         }
+
+        public Admin getAdmin(int adminID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

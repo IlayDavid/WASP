@@ -70,10 +70,17 @@ namespace AccTests
             return _clientAPI.editPost(postID, content);
         }
 
+        public Admin getAdmin(int AdminID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
         {
             return _clientAPI.getAdmin(AdminID, forumID);
         }
+
+        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {

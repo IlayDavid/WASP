@@ -76,10 +76,17 @@ namespace AccTests
             return proj.editPost(postID, content);
         }
 
+        public Client.DataClasses.Admin getAdmin(int AdminID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
         {
             return proj.getAdmin(AdminID, forumID);
         }
+
+        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {
