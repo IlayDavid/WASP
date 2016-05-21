@@ -3,23 +3,22 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>banana</title>
+    <title>forums</title>
     <script src="http://localhost:8080/Web/JS/jquery.js" type="application/javascript"></script>
     <script src="http://localhost:8080/Web/JS/util.js" type="application/javascript"></script>
 
 
 </head>
 <body>
-            <p id="container"></p>
+    <p id="container"></p>
 
-<script type="application/javascript">
+    <script type="application/javascript">
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
          $.post("http://localhost:8080/isInitialize/", JSON.stringify(nil), function(data, status){
-		 alert("data:= " +data);
-		 console.log(data);
-                if(data==0){
-
+         alert("data:= " +data);
+         console.log(data);
+            if(data==0){
                     var params = {
                         "name": "dude",
                         "username": "dude",
@@ -31,32 +30,32 @@
                     console.log(data);
                     alert("Data: " + data + "\nStatus: " + status);
 
-    var forum={"userID":12345,
-     "forumName":"firstoforum",
-    "description":"description",
-    "adminId":1,
-    "adminUserName": "adasd",
-    "email":"asdnasiona@askdn.asd",
-    "pass":"dasdsa",
-    "policy":""}
-    $.post("http://localhost:8080/createForum/", JSON.stringify(forum), function(data, status){
+             var forum={"userID":12345,
+                        "forumName":"firstoforum",
+                        "description":"description",
+                        "adminId":1,
+                        "adminUserName": "adasd",
+                        "email":"asdnasiona@askdn.asd",
+                        "pass":"dasdsa",
+                        "policy":""}
+             $.post("http://localhost:8080/createForum/", JSON.stringify(forum), function(data, status){
                     console.log(data);
                     alert("Data: " + data + "\nStatus: " + status);
-    }
-                );
-                })
-            }
-			
-			            params = {};
+                            }
+                                    );
+                                    })
+                                }
+
+                        params = {};
             $.post("http://localhost:8080/getAllForums/", JSON.stringify(nil), function(data, status){
                 data.forEach(forumsToButtons);
             });
-        var container=document.getElementById("container");
-        function forumsToButtons(item, index){
-            container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/getForums.html?name="+item['name']+">"+item['name']+"<br><\br>"+item['description']+"<\p>";
-        }
-			
-			});
+            var container=document.getElementById("container");
+            function forumsToButtons(item, index){
+                container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/Web/HTML/getSubForums.html?id="+item['id']+">"+item['name']+"<br><\br>"+item['description']+"<br><\br><br><\br><\p>";
+            }
+
+            });
 
 
 

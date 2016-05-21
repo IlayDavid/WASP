@@ -84,3 +84,12 @@ C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addReply.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addThread.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getForums.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getPost.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForum.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForums.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\login.html
+C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\SHA256.js

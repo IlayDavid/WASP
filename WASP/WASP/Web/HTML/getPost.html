@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>post</title>
+    <script src="http://localhost:8080/Web/JS/jquery.js" type="application/javascript"></script>
+    <script src="http://localhost:8080/Web/JS/util.js" type="application/javascript"></script>
+
+
+</head>
+<body>
+    <p id="container"></p>
+
+    <script type="application/javascript">
+	var id = GetQuerySet();
+            //data["name"], data["username"], data["id"], data["email"], data["password"]
+        var nil={};
+         $.post("http://localhost:8080/isInitialize/", JSON.stringify(nil), function(data, status){
+         if(data==0){
+			$.post("http://localhost:8080/getThread/", JSON.stringify(id), function(firstPost, status){
+			$.post("http://localhost:8080/getReplys/", JSON.stringify(id), function(data, status){
+			var container=document.getElementById("container");
+			container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br><\br>"+firstPost['content']+"<br><\br><br><\br><\p>";
+			
+			count=0;
+			data.forEach(subForumsToButtons);
+			
+            function subForumsToButtons(item, index){
+                container.innerHTML=container.innerHTML + "<p> Reply #"+count+"<br><\br>"+item['content']+"<br><\br><br><\br><\p>";
+				count=count+1;
+            }
+
+            })}});
+
+
+
+    </script>
+</body>
+</html>
