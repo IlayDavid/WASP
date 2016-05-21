@@ -70,3 +70,6 @@ C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\Ne
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.pdb

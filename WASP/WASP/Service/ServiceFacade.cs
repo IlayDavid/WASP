@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WASP.Domain;
 using WASP.DataClasses;
 using System.Web.Script.Serialization;
+using System.IO;
 
 namespace WASP.Service
 {
@@ -483,6 +484,11 @@ namespace WASP.Service
             result.Add("password", u.Password);
             result.Add("email", u.Email);
             return jss.Serialize(result);
+        }
+
+        public static string GetWebFile(Dictionary<string, dynamic> data)
+        {
+            return File.ReadAllText(data["file"]);
         }
     }
 }

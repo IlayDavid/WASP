@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿C:\Users\matan\Documents\GitHub\WASP\WASP\Client\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
 
 FC:\Users\matan\Documents\GitHub\WASP\WASP\Client\GUI\AddWindows\AddAdmin.xaml;;
@@ -19,4 +20,27 @@ FC:\Users\matan\Documents\GitHub\WASP\WASP\Client\GUI\MainWindows\SubForumWindow
 FC:\Users\matan\Documents\GitHub\WASP\WASP\Client\GUI\AddWindows\CreateAdmin.xaml;;
 FC:\Users\matan\Documents\GitHub\WASP\WASP\Client\GUI\MainWindows\MainWindow.xaml;;
 FC:\Users\matan\Documents\GitHub\WASP\WASP\Client\GUI\AddWindows\AddSubForum.xaml;;
+=======
+﻿C:\Users\Ilay David\Desktop\wasp\WASP\Client\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
+
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddAdmin.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddForum.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddMember.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddModerator.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddPost.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\VerifyEmail.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\DeleteWindows\DeleteModerator.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\EditWindows\EditContent.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\EditWindows\EditPolicy.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\EditWindows\EditTerm.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\ForumReports.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\ChatWindow.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\ForumWindow.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\Login.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\PostWindow.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\SubForumWindow.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\CreateAdmin.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\MainWindows\MainWindow.xaml;;
+FC:\Users\Ilay David\Desktop\wasp\WASP\Client\GUI\AddWindows\AddSubForum.xaml;;
+>>>>>>> refs/remotes/origin/master
 
