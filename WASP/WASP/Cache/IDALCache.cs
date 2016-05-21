@@ -13,6 +13,7 @@ namespace WASP.Cache
 
         void AddForum(Forum f);
         void AddSubforum(Subforum sf);
+        void AddSuperUser(SuperUser su);
         void AddUser(User user);
         void AddModerator(Moderator mod);
         void AddAdmin(Admin admin);
@@ -20,8 +21,17 @@ namespace WASP.Cache
 
         void RemoveForum(int f);
         void RemoveSubforum(int sf);
-        void RemoveUser(int user);
-        void RemoveModerator(int mod);
-        void RemoveAdmin(int admin);
+        void RemoveSuperUser(int su);
+        void RemoveUser(int user, int forum);
+        void RemoveModerator(int mod, int subforum);
+        void RemoveAdmin(int admin, int forum);
+
+        Forum GetForum(int f);
+        Subforum GetSubforum(int sf);
+        SuperUser GetSuperUser(int su);
+        User GetUser(int user, int forum);
+        Moderator GetModerator(int mod, int subforum);
+        Admin GetAdmin(int admin, int forum);
+
     }
 }
