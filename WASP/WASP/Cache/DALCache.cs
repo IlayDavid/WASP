@@ -19,6 +19,8 @@ namespace WASP.Cache
         private const string _Moderator = "Moderator";
         private const string _Admin = "Admin";
         
+        //delete, get for posts
+
 
         private TimeSpan _postExpiration = new TimeSpan(0, 1, 0);
         public void setPostExpiration(int hours, int minutes, int secs)
