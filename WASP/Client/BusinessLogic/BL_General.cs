@@ -3,6 +3,7 @@ using Client.DataClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace Client.BusinessLogic
         private ICL _cl;
         public BL()
         {
-            _cl = new CL();
+            _cl = new TCL();
         }
         public void setForumID(int forumID)
         {
@@ -24,17 +25,31 @@ namespace Client.BusinessLogic
             if (!IsStrValid(userName)) throw new Exception("ERROR: username is empty or iilegal");
             if (!IsStrValid(password)) throw new Exception("ERROR: password is empty or iilegal");
             if (forumID < 0) throw new Exception("ERROR: forum id is iilegal");
-            return _cl.login(userName, password, forumID);
+            return _cl.login(userName, sha256_hash(password), forumID);
         }
 
         public SuperUser loginSU(string userName, string password)
         {
             if (IsStrValid(userName) && IsPasswordValid(password))
-                return _cl.loginSU(userName, password);
+                return _cl.loginSU(userName, sha256_hash(password));
             else
                 throw new Exception("ERROR: user name or password are illegal");
         }
+        private static String sha256_hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
 
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
+        }
         //---------------------------------Getters----------------------------------------------
         public List<Post> getThreads(int subForumID)
         {
