@@ -520,6 +520,7 @@ namespace WASP.Service
                 Dictionary<string, dynamic> friendDict = new Dictionary<string, dynamic>();
                 friendDict.Add("id", friend.Id);
                 friendDict.Add("name", friend.Name);
+                friendDict.Add("username", friend.Username);
                 result.Add(friendDict);
             }
             
