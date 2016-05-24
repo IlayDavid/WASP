@@ -41,7 +41,7 @@ namespace WASP.Domain
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID, Policy policy);  //------------------------ policy object??
+        int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser = false);  //------------------------ policy object??
 
         /*
          * Pre-conditions: none
@@ -135,17 +135,17 @@ namespace WASP.Domain
         //-----------Admin Reports---------------
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total number of messages posted in the entire forum. */
-        int subForumTotalMessages(int userID, int forumID, int subForumID);
+        int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser=false);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return the total messages written by member. */
-        Post[] postsByMember(int adminID, int forumID, int userID);
+        Post[] postsByMember(int adminID, int forumID, int userID, bool superUser = false);
 
         /* Pre-conditions: Member is loged-in, and is admin of the forum
          * Purpose: return details about moderators in all subforums,
          *          for each moderator who appoint him, when, 
          *          which subforum he belongs to, and what the messages they posted. */
-        ModeratorReport moderatorReport(int userID, int forumID);
+        ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false);
 
         //-----------Super User Reports---------------
         /* Pre-conditions: Member is loged-in, and is superuser.
@@ -219,5 +219,9 @@ namespace WASP.Domain
 
         /* Purpose: return forum's Admin information. */
         Admin getAdmin(int userID, int forumID, int AdminID);
+
+        User[] getFriends(int userID, int forumID);
+
+        int addFriend(int userID, int forumID, int friendID);
     }
 }

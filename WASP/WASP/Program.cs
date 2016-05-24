@@ -94,6 +94,8 @@ namespace WASP
             routes.Add(basePrefix + "getMembers/", ServiceFacade.getMembers);
             routes.Add(basePrefix + "getSubforums/", ServiceFacade.getSubforums);
             routes.Add(basePrefix + "getAdmin/", ServiceFacade.getAdmin);
+            routes.Add(basePrefix + "getFriends/", ServiceFacade.getFriends);
+            routes.Add(basePrefix + "addFriend/", ServiceFacade.addFriend);
             routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);

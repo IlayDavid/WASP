@@ -58,9 +58,17 @@ namespace WASP.Service
 
         public static string defineForumPolicy(Dictionary<string, dynamic> data)
         {
+            //TODO
             LoginPair pair = loggedIn[data["auth"]];
+            int forumId = pair.ForumId;
+            bool superUser = false;
+            if(forumId == -1)
+            {
+                forumId = data["forum"];
+                superUser = true;
+            }
             Policy policy = new Policy();
-            bl.defineForumPolicy(pair.UserId, pair.ForumId, policy);
+            bl.defineForumPolicy(pair.UserId, forumId, policy, superUser);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
 
             return jss.Serialize(result);
@@ -217,14 +225,29 @@ namespace WASP.Service
         public static string subForumTotalMessages(Dictionary<string, dynamic> data)
         {
             LoginPair pair = loggedIn[data["auth"]];
-            return "{ \"messagenumber\": " +
+            if(pair.ForumId > -1)
+            {
+                return "{ \"messagenumber\": " +
                 bl.subForumTotalMessages(pair.UserId, pair.ForumId, data["subforumid"]) + "}";
+            }
+            else
+            {
+                return "{ \"messagenumber\": " +
+                bl.subForumTotalMessages(pair.UserId, data["forum"], data["subforumid"], true) + "}";
+            }
         }
 
         public static string postsByMember(Dictionary<string, dynamic> data)
         {
             LoginPair pair = loggedIn[data["auth"]];
-            Post[] posts = bl.postsByMember(pair.UserId, pair.ForumId, data["userid"]);
+            int forumId = pair.ForumId;
+            bool superUser = false;
+            if (forumId == -1)
+            {
+                forumId = data["forum"];
+                superUser = true;
+            }
+            Post[] posts = bl.postsByMember(pair.UserId, forumId, data["userid"], superUser);
             List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
             foreach (Post post in posts)
             {
@@ -245,6 +268,7 @@ namespace WASP.Service
 
         public static string moderatorReport(Dictionary<string, dynamic> data)
         {
+            //TODO:
             return "Not implemented yet";
         }
 
@@ -484,6 +508,28 @@ namespace WASP.Service
             result.Add("password", u.Password);
             result.Add("email", u.Email);
             return jss.Serialize(result);
+        }
+
+        public static string getFriends(Dictionary<string, dynamic> data)
+        {   //adminid
+            LoginPair pair = loggedIn[data["auth"]];
+            User u = User.Get(pair.UserId, pair.ForumId);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            foreach (User friend in u.GetAllFriends())
+            {
+                Dictionary<string, dynamic> friendDict = new Dictionary<string, dynamic>();
+                friendDict.Add("id", friend.Id);
+                friendDict.Add("name", friend.Name);
+                result.Add(friendDict);
+            }
+            
+            return jss.Serialize(result);
+        }
+
+        public static string addFriend(Dictionary<string, dynamic> data)
+        {  
+            LoginPair pair = loggedIn[data["auth"]]; 
+            return bl.addFriend(pair.UserId, pair.ForumId, data["friend"]).ToString();
         }
 
         public static string GetWebFile(Dictionary<string, dynamic> data)
