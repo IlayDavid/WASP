@@ -15,6 +15,55 @@ namespace Client.BusinessLogic
         public BL()
         {
             _cl = new TCL();
+            if (_cl is TCL)
+                initForTesting();
+        }
+        private void initForTesting()
+        {
+            string su_userName = "a";
+            string su_password = "a";
+            string userPassword = "1";
+
+            initialize("amitay", su_userName, 205857121, "amitay140@gmail.com", su_password);
+
+            Policy policy1 = new Policy(Policy.all, 10, false, 0, 100);
+            Policy policy2 = new Policy(Policy.all, 10, false, 0, 100);
+            Policy policy3 = new Policy(Policy.all, 10, false, 0, 100);
+
+            loginSU(su_userName, su_password);
+            Forum forum1 = createForum("forum1", "this is Forum number 1", 222, "aa", "eli", "eli@gmail.com", "1", policy1);
+            User u11 = subscribeToForum(1234, "amitay140", "amitay", "amitay140@gmail.com", userPassword, forum1.id);
+            User u12 = subscribeToForum(1235, "moshe12", "moshe", "moshe@gmail.com", userPassword, forum1.id);
+            User u13 = subscribeToForum(1236, "kobi90", "kobi", "kobi@gmail.com", userPassword, forum1.id);
+
+            Forum forum2 = createForum("Sport", "This forum is about sport games", 333, "bb", "moshe", "moshe@gmail.com", "1", policy2);
+            User u21 = subscribeToForum(1234, "amitay141", "amitay", "amitay141@gmail.com", userPassword, forum2.id);
+            User u22 = subscribeToForum(1235, "moshe13", "moshe", "moshe1@gmail.com", userPassword, forum2.id);
+            User u23 = subscribeToForum(1236, "kobi91", "kobi", "kobi1@gmail.com", userPassword, forum2.id);
+
+            login(su_userName, su_password, forum1.id);
+            Subforum sf11 = createSubForum("Sub - forum 1", "this is SF 1", u11.id, DateTime.Now.AddDays(3));
+            Subforum sf12 = createSubForum("Sub - forum 2", "this is SF 2", u12.id, DateTime.Now.AddDays(3));
+            Subforum sf13 = createSubForum("Sub - forum 3", "this is SF 3", u13.id, DateTime.Now.AddDays(3));
+
+            login(su_userName, su_password, forum2.id);
+            Subforum sf21 = createSubForum("Sub - forum 1", "this is SF 1", u21.id, DateTime.Now.AddDays(3));
+            Subforum sf22 = createSubForum("Sub - forum 2", "this is SF 2", u21.id, DateTime.Now.AddDays(3));
+
+            login(u11.userName, userPassword, forum1.id);
+            Post p111 = createThread("Thread number 1", "this is the opening thread test 1", sf11.id);
+            Post p112 = createThread("Thread number 2", "this is the opening thread test 2", sf11.id);
+            Post p113 = createThread("Thread number 3", "this is the opening thread test 3", sf11.id);
+
+            login(u12.userName, userPassword, forum1.id);
+            Post p12 = createThread("Thread number 2", "this is the opening thread test 2", sf12.id);
+
+            login(u13.userName, userPassword, forum1.id);
+            Post p13 = createThread("Thread number 3", "this is the opening thread test 3", sf13.id);
+
+            login(u21.userName, userPassword, forum2.id);
+            Post p21 = createThread("Thread number 1", "this is the opening thread test 1", sf21.id);
+            Post p22 = createThread("Thread number 2", "this is the opening thread test 2", sf22.id);
         }
         public void setForumID(int forumID)
         {

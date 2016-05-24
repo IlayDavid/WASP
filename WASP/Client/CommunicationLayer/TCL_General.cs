@@ -19,7 +19,7 @@ namespace Client.CommunicationLayer
             forums = new Dictionary<int, Forum>();
             subforums = new Dictionary<int, Subforum>();
             posts = new Dictionary<int, Post>();
-            initForTesting();
+            //initForTesting();
         }
 
         public User loginBySession(string session)
