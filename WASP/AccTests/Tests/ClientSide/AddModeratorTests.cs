@@ -13,34 +13,38 @@ namespace AccTests.Tests
     {
         private WASPClientBridge _proj;
         private SuperUser _supervisor;
+        private String supass="moshe123";
         private Admin _admin;
+        private String adminpass="david123";
         private Forum _forum;
         private Subforum _subforum;
         private User _moderator;
+        private String modpass="ilan123";
         private User _member1;
+        private String mempass="mem123";
 
-    
+
         [TestInitialize]
         public void setUp()
         {
             Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
-            _supervisor = ClientFunctions.InitialSystem(_proj);
+            _supervisor = ClientFunctions.InitialSystem(_proj); //password is moshe123
 
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj,_supervisor);
             _forum = forumAndAdmin.Item1;
-            _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _admin = forumAndAdmin.Item2; //password is david123
+            _proj.login(_admin.user.userName, adminpass, _forum.id);
 
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
-            _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            _moderator = subforumAndModerator.Item2; //password is ilan123
+            _proj.login(_moderator.userName, modpass, _forum.id);
 
 
-            _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id);
-            _proj.login(_member1.userName, _member1.password, _forum.id);
+            _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
+            _proj.login(_member1.userName, mempass, _forum.id);
         }
 
         /// <summary>
@@ -50,7 +54,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id);
             var isModerator = _proj.addModerator(_member1.id,_subforum.id, DateTime.Now.AddDays(200));
             Assert.IsNotNull(isModerator);
             Assert.IsTrue(_proj.getModerators(_subforum.id).Count == 2);

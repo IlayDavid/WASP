@@ -26,7 +26,7 @@ namespace AccTests.Tests
             var user = proj.subscribeToForum(2,"ilanB", "ilan", "ilanB@post.bgu.ac.il",
                                         "ilan123",forum.id);
             Subforum subforum =  proj.createSubForum("sub1", "blah", 2, DateTime.Now.AddDays(100));
-            var moderator = proj.login(user.userName, user.password, forum.id);
+            var moderator = proj.login(user.userName, "ilan123", forum.id);
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 
