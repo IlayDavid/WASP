@@ -26,6 +26,11 @@ namespace AccTests
             return proj.addAdmin(newAdminID);
         }
 
+        public int addFriend(int friendID)
+        {
+            return proj.addFriend(friendID);
+        }
+
         public Client.DataClasses.Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
             return proj.addModerator(moderatorID, subForumID, term);
@@ -106,6 +111,11 @@ namespace AccTests
         public Forum getForum(int forumID)
         {
             return proj.getForum(forumID);
+        }
+
+        public List<User> getFriends()
+        {
+            return proj.getFriends();
         }
 
         public List<User> getMembers(int forumID)

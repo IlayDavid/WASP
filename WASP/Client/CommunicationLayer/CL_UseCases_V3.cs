@@ -95,5 +95,19 @@ namespace Client.CommunicationLayer
         }
 
         //---------------------------Version 3 Use Cases End------------------------------------
+
+        //---------------------------Version 4 Use Cases-----------------------------------
+
+        public List<User> getFriends()
+        {
+            throw new NotImplementedException();
+        }
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        public int addFriend(int friendID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

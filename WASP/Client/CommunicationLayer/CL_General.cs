@@ -26,6 +26,7 @@ namespace Client.CommunicationLayer
         public CL()
         {
             _url = "http://localhost:8080";
+            forumID = -1;
             parser = new ParseString();
         }
 
