@@ -162,7 +162,9 @@ C:\Users\amitay140\Documents\WASP V4 test client\WASP\Client\obj\Debug\Client.Pr
 C:\Users\amitay140\Documents\WASP V4 test client\WASP\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\amitay140\Documents\WASP V4 test client\WASP\Client\obj\Debug\Client.exe
 C:\Users\amitay140\Documents\WASP V4 test client\WASP\Client\obj\Debug\Client.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe.config
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddAdmin.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddForum.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddMember.g.cs
@@ -185,9 +187,6 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\Ad
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\App.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client_MarkupCompile.cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client_MarkupCompile.lref
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe.config
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.exe
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Client.pdb
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddAdmin.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddForum.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddMember.baml

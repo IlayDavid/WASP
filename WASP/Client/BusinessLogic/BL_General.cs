@@ -189,5 +189,20 @@ namespace Client.BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        /* Pre-conditions: User is loged-in.
+         * Purpose: return the friends list of the loged-in user.*/
+        public List<User> getFriends()
+        {
+            return _cl.getFriends();
+        }
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        public int addFriend(int friendID)
+        {
+            return _cl.addFriend(friendID);
+        }
+
     }
 }

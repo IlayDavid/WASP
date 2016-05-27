@@ -23,7 +23,8 @@ namespace Client.GUI.MainWindows
         public ChatWindow()
         {
             InitializeComponent();
-            foreach(User user in Session.forum.members.Values)
+            Session.LoadFriends();
+            foreach(User user in Session.user.friends)
             {
                 ListBoxItem item = new ListBoxItem();
                 item.Content = user.userName;

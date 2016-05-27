@@ -26,12 +26,17 @@ namespace Client.GUI
         public static Dictionary<int, Forum> forums = null;
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
-        public static void LoadForums()
+
+        internal static void LoadFriends()
+        {
+            user.friends = bl.getFriends();
+        }
+        internal static void LoadForums()
         {
             forums = bl.getAllForums().ToDictionary(x => x.id);
         }
 
-        public static void LoadReplys()
+        internal static void LoadReplys()
         {
             post.replies = bl.getReplys(post.id);
         }
