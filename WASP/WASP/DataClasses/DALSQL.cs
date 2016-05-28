@@ -1182,5 +1182,15 @@ namespace WASP.DataClasses
             policy.Id = ipolicy.id;
             return policy;
         }
+
+        public User[] GetUserFriends(int id, int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddFriend(User user, User friend)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

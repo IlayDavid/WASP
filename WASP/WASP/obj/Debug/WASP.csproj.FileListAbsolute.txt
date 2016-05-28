@@ -93,3 +93,21 @@ C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForums.htm
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\login.html
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\SHA256.js
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\addReply.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\addThread.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\banana.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getForums.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getPost.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getSubForum.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getSubForums.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\login.html
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\jquery.js
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\SHA256.js
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\util.js
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.pdb
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
