@@ -8,11 +8,17 @@ namespace WASP.DataClasses
 {
     public class Notification
     {
+        public enum Types : int
+        {
+            Message = 1, Post
+        }
         private String message;
         private bool isNew;
-        private User source;
+        private int source;
         private User target;
         private int id;
+        private DateTime creationTime;
+        private Types type;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
         public static Notification Get(int id)
@@ -39,17 +45,30 @@ namespace WASP.DataClasses
             return dal.DeleteNotification(Id);
         }
 
-        public Notification(int id, String message, bool isNew, User source, User target)
+        public Notification(int id, String message, bool isNew, int source, User target, Types type)
         {
             this.id = id;
             this.message = message;
             this.isNew = isNew;
             this.source = source;
             this.target = target;
+            this.type = type;
+            this.creationTime = DateTime.Now;
+        }
+
+        public Notification(int id, String message, bool isNew, int source, User target, Types type, DateTime creationTime)
+        {
+            this.id = id;
+            this.message = message;
+            this.isNew = isNew;
+            this.source = source;
+            this.target = target;
+            this.type = type;
+            this.creationTime = creationTime;
         }
 
         // DEPRECATED
-        public Notification(int id, String message, bool isNew, User source, User target, DAL2 dal)
+        public Notification(int id, String message, bool isNew, int source, User target, DAL2 dal)
         {
             this.id = id;
             this.message = message;
@@ -75,7 +94,7 @@ namespace WASP.DataClasses
                 isNew = value;
             }
         }
-        public User Source
+        public int Source
         {
             get
             {
@@ -104,6 +123,23 @@ namespace WASP.DataClasses
             {
                 return this.message;
             }
+        }
+
+        public Types Type
+        {
+            get
+            {
+                return this.type;
+            }
+            set
+            {
+                this.type = value;
+            }
+        }
+
+        public DateTime CreationTime
+        {
+            get { return this.creationTime; }
         }
     }
 }
