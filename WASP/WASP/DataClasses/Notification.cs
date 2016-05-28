@@ -14,7 +14,7 @@ namespace WASP.DataClasses
         }
         private String message;
         private bool isNew;
-        private int source;
+        private User source;
         private User target;
         private int id;
         private DateTime creationTime;
@@ -45,7 +45,17 @@ namespace WASP.DataClasses
             return dal.DeleteNotification(Id);
         }
 
-        public Notification(int id, String message, bool isNew, int source, User target, Types type)
+        public Notification(int id, String message, bool isNew, User source, User target)
+        {
+            this.id = id;
+            this.message = message;
+            this.isNew = isNew;
+            this.source = source;
+            this.target = target;
+            this.type = Types.Post;
+            this.creationTime = DateTime.Now;
+        }
+        public Notification(int id, String message, bool isNew, User source, User target, Types type)
         {
             this.id = id;
             this.message = message;
@@ -56,7 +66,7 @@ namespace WASP.DataClasses
             this.creationTime = DateTime.Now;
         }
 
-        public Notification(int id, String message, bool isNew, int source, User target, Types type, DateTime creationTime)
+        public Notification(int id, String message, bool isNew, User source, User target, Types type, DateTime creationTime)
         {
             this.id = id;
             this.message = message;
@@ -68,7 +78,7 @@ namespace WASP.DataClasses
         }
 
         // DEPRECATED
-        public Notification(int id, String message, bool isNew, int source, User target, DAL2 dal)
+        public Notification(int id, String message, bool isNew, User source, User target, DAL2 dal)
         {
             this.id = id;
             this.message = message;
@@ -94,7 +104,7 @@ namespace WASP.DataClasses
                 isNew = value;
             }
         }
-        public int Source
+        public User Source
         {
             get
             {
