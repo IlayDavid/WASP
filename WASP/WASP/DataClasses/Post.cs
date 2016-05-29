@@ -24,9 +24,9 @@ namespace WASP.DataClasses
         public Post Create()
         {
             Post thisPost = dal.CreatePost(this);
-            //string notificationMessage = String.Format("Post {0} created.", thisPost.Id);
-           //  Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null);
-           // Subforum.Forum.NotifyAllMembers(notif);
+            string notificationMessage = String.Format("Post {0} created.", thisPost.Id);
+            Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null);
+            Subforum.Forum.NotifyAllMembers(notif);
             return thisPost;
         }
 
@@ -211,7 +211,7 @@ namespace WASP.DataClasses
             {
                 User target = reply.GetAuthor;
                 target.NewNotification(new Notification(-1, notification.Message, notification.IsNew, 
-                    notification.Source, target));
+                    notification.Source, target, Notification.Types.Post));
             }
         }
 

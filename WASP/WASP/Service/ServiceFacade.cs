@@ -13,17 +13,23 @@ namespace WASP.Service
     public static class ServiceFacade
     {
         private static IBL bl = null;
-        private static Dictionary<string, LoginPair> loggedIn = null;
+        private static Dictionary<string, LoginPair> loggedIn = new Dictionary<string, LoginPair>();
         static JavaScriptSerializer jss = new JavaScriptSerializer();
         private static string GenerateRandomHash()
         {
             return Guid.NewGuid().ToString();
         }
+        public static bool isLoggedIn(string loginHash)
+        {
+            LoginPair lg;
+            loggedIn.TryGetValue(loginHash, out lg);
+
+            return lg != null;
+        }
         public static string initialize(Dictionary<string, dynamic> data)
         {
             bl = new BLFacade();
             SuperUser su = ServiceFacade.bl.initialize(data["name"], data["username"], data["id"], data["email"], data["password"]);
-            loggedIn = new Dictionary<string, LoginPair>();
             string key = GenerateRandomHash();
             loggedIn.Add(key, new LoginPair(su.Id));
 
@@ -62,7 +68,7 @@ namespace WASP.Service
             LoginPair pair = loggedIn[data["auth"]];
             int forumId = pair.ForumId;
             bool superUser = false;
-            if(forumId == -1)
+            if (forumId == -1)
             {
                 forumId = data["forum"];
                 superUser = true;
@@ -225,7 +231,7 @@ namespace WASP.Service
         public static string subForumTotalMessages(Dictionary<string, dynamic> data)
         {
             LoginPair pair = loggedIn[data["auth"]];
-            if(pair.ForumId > -1)
+            if (pair.ForumId > -1)
             {
                 return "{ \"messagenumber\": " +
                 bl.subForumTotalMessages(pair.UserId, pair.ForumId, data["subforumid"]) + "}";
@@ -523,13 +529,13 @@ namespace WASP.Service
                 friendDict.Add("username", friend.Username);
                 result.Add(friendDict);
             }
-            
+
             return jss.Serialize(result);
         }
 
         public static string addFriend(Dictionary<string, dynamic> data)
-        {  
-            LoginPair pair = loggedIn[data["auth"]]; 
+        {
+            LoginPair pair = loggedIn[data["auth"]];
             return bl.addFriend(pair.UserId, pair.ForumId, data["friend"]).ToString();
         }
 

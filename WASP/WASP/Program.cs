@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using WASP.Server;
 using WASP.Service;
 using WASP.Exceptions;
@@ -100,6 +101,8 @@ namespace WASP
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);
+            Thread notificationServerThread = new Thread(NotificationServer.Run);
+            notificationServerThread.Start();
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

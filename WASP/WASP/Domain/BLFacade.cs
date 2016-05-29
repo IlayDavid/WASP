@@ -157,7 +157,7 @@ namespace WASP.Domain
         {
             User source = User.Get(userID, forumID);
             User target = User.Get(targetUserNameID, forumID);
-            Notification newMessage = new Notification(-1, message, true, source, target);
+            Notification newMessage = new Notification(-1, message, true, source, target, Notification.Types.Message);
             target.NewNotification(newMessage);
 
             return 1;
@@ -404,7 +404,13 @@ namespace WASP.Domain
 
         public Notification[] getNewNotificationses(int userID, int forumID)
         {
-            return User.Get(userID, forumID).GetNewNotifications();
+            Notification[] notifs = User.Get(userID, forumID).GetNewNotifications();
+            foreach(Notification notif in notifs)
+            {
+                notif.IsNew = false;
+                notif.Update();
+            }
+            return notifs;
         }
 
         public Post[] getReplys(int forumID, int subForumID, int postID)
