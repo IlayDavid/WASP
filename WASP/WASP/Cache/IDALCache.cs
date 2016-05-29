@@ -25,6 +25,7 @@ namespace WASP.Cache
         void RemoveUser(int user, int forum);
         void RemoveModerator(int mod, int subforum);
         void RemoveAdmin(int admin, int forum);
+        void RemovePost(int p);
 
         Forum GetForum(int f);
         Subforum GetSubforum(int sf);
@@ -32,6 +33,7 @@ namespace WASP.Cache
         User GetUser(int user, int forum);
         Moderator GetModerator(int mod, int subforum);
         Admin GetAdmin(int admin, int forum);
+        Post GetPost(int p);
 
     }
 }

@@ -44,5 +44,15 @@ namespace WASP.Properties {
                 return ((string)(this["Forums_SystemConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MATAN\\MATAN;Initial Catalog=Forums_System;Integrated Security=True")]
+        public string Forums_SystemConnectionString2 {
+            get {
+                return ((string)(this["Forums_SystemConnectionString2"]));
+            }
+        }
     }
 }
