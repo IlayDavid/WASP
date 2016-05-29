@@ -100,14 +100,19 @@ namespace Client.CommunicationLayer
 
         public List<User> getFriends()
         {
-            throw new NotImplementedException();
+            string json = "{\"auth\":\"" + _auth + "\"}";
+            string res = httpReq(json, "POST", _url + "/getFriends/");
+            return parser.parseStringToFriends(res);
         }
 
         /* Pre-conditions: User is loged-in.
         * Purpose: add user with friendID to the loged-in user's friend list.*/
         public int addFriend(int friendID)
         {
-            throw new NotImplementedException();
+            string json = "{\"friend\":" + friendID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string res = httpReq(json, "POST", _url + "/addFriend/");
+            return 0;
         }
+
     }
 }

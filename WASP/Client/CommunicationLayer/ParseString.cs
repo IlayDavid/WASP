@@ -232,6 +232,19 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
+        public List<User> parseStringToFriends(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLFriend>>(res);
+            List<User> ret = new List<User>();
+            foreach (CLFriend cl in dict)
+            {
+                User u = new User(cl.id, cl.name, cl.username, null, null);
+                ret.Add(u);
+            }
+            return ret;
+        }
+
         public DateTime parseStringToDate(string res)
         {   //termtime
             var jss = new JavaScriptSerializer();
