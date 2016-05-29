@@ -10,7 +10,7 @@ namespace WASP.DataClasses
     {
         public enum Types : int
         {
-            Message = 1, Post
+            Message = 1, Post = 0
         }
         private String message;
         private bool isNew;
@@ -134,6 +134,7 @@ namespace WASP.DataClasses
                 return this.message;
             }
         }
+
 
         public Types Type
         {
