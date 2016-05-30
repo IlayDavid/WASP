@@ -226,7 +226,7 @@ namespace WASP.DataClasses
             newNotification.Target = this;
             newNotification = newNotification.Create();
             NewNotifications.Add(newNotification.Id, newNotification);
-            Config.Settings.NotificationMethod(Id);
+            Config.Settings.NotificationMethod(Id, forum.Id);
         }
 
         public Notification[] GetAllNotifications()

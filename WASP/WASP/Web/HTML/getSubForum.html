@@ -13,19 +13,22 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-	var id = GetQuerySet();
+	var get = GetQuerySet();
+
+    var i=parseInt(get['id']);
+    var id={"forumid":get['id']};
+    id['forumid']=i;
             //data["name"], data["username"], data["id"], data["email"], data["password"]
-        var nil={};
-         $.post("http://localhost:8080/isInitialize/", JSON.stringify(nil), function(data, status){
-         if(data==0){
+        var container=document.getElementById("container");
 			$.post("http://localhost:8080/getSubforums/", JSON.stringify(id), function(data, status){
+            console.log(data);
+            data=JSON.parse(data);
 			data.forEach(subForumsToButtons);
-            var container=document.getElementById("container");
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/Web/HTML/getSubForums.html?name="+item['name']+">"+item['name']+"<br><\br>"+item['description']+"<\p>";
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getThreads.html?id="+item['subforumid']+">"+item['name']+"<br>"+item['description']+"<br><br>";
             }
 
-            })}});
+            });
 
 
 

@@ -13,14 +13,21 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-	var id = GetQuerySet();
+	    var get = GetQuerySet();
+
+    var i=parseInt(get['id']);
+    var id={"subforumid":get['id']};
+    id['subforumid']=i;
+    console.log(id);
             //data["name"], data["username"], data["id"], data["email"], data["password"]
-        var nil={};
-			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
+  			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
 			var container=document.getElementById("container");
-			data.forEach(subForumsToButtons);
+            console.log(data);
+			data=JSON.parse(data);
+            data.forEach(subForumsToButtons);
+            
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/Web/HTML/getPost.html?id="+item['id']+">"+item['title']+"<br><\br>"+item['content']+"<br><\br><br><\br><\p>";
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+">"+item['title']+"<br>"+item['content']+"<br><br>";
             }
 
             });

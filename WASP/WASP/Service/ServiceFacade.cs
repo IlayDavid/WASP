@@ -13,8 +13,13 @@ namespace WASP.Service
     public static class ServiceFacade
     {
         private static IBL bl = null;
+        
         private static Dictionary<string, LoginPair> loggedIn = new Dictionary<string, LoginPair>();
         static JavaScriptSerializer jss = new JavaScriptSerializer();
+        public static void webInitialize()
+        {
+            bl = new BLFacade();
+        }
         private static string GenerateRandomHash()
         {
             return Guid.NewGuid().ToString();
@@ -26,7 +31,7 @@ namespace WASP.Service
 
             return lg != null;
         }
-
+        
         public static LoginPair GetPair(string hash)
         {
             return loggedIn[hash];

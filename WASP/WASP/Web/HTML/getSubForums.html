@@ -13,10 +13,15 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-	var id = GetQuerySet();
+	
+    var get = GetQuerySet();
+
+    var i=parseInt(get['id']);
+    var id={"forumid":get['id']};
+    id['forumid']=i;
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
-			$.post("http://localhost:8080/getSubforums/", JSON.stringify(id), function(data, status){
+			$.post("http://localhost:8080/getSubforum/", JSON.stringify(id), function(data, status){
 			var container=document.getElementById("container");
 			data.forEach(subForumsToButtons);
             function subForumsToButtons(item, index){

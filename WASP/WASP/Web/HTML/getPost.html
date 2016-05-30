@@ -13,20 +13,28 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-	var id = GetQuerySet();
+    var get = GetQuerySet();
+
+    var i=parseInt(get['id']);
+    var id={"postid":get['id']};
+    id['postid']=i;
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
 
 			$.post("http://localhost:8080/getThread/", JSON.stringify(id), function(firstPost, status){
 			$.post("http://localhost:8080/getReplys/", JSON.stringify(id), function(data, status){
+                console.log(firstPost);
+                console.log(data);
+                firstPost=JSON.parse(firstPost);
+                data=JSON.parse(data);
 			var container=document.getElementById("container");
-			container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br><\br>"+firstPost['content']+"<br><\br><br><\br><\p>";
+			container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br>"+firstPost['content']+"<br><br><\p>";
 			
 			count=0;
 			data.forEach(subForumsToButtons);
 			
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<p> Reply #"+count+"<br><\br>"+item['content']+"<br><\br><br><\br><\p>";
+                container.innerHTML=container.innerHTML + "<p> Reply #"+count+"<br>"+item['content']+"<br><br><\p>";
 				count=count+1;
             }
 

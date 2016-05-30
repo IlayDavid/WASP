@@ -15,14 +15,23 @@
     <script type="application/javascript">
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
-
             var container=document.getElementById("container");
             function forumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/Web/HTML/getSubForums.html?id="+item['id']+">"+item['name']+"<br><\br>"+item['description']+"<br><\br><br><\br><\p>";
+                var p=document.createElement("A");
+                p.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+item['forumid'];
+                p.innerHTML=item['name']+"<br>"+item['description']+"<br><br>";
+                
+                container.appendChild(p);
             };
             $.post("http://localhost:8080/getAllForums/", JSON.stringify(nil), function(data, status){
+                data=JSON.parse(data);
+                console.log(data);
+                console.log(data.length);
+                console.log(data[1]);
                 data.forEach(forumsToButtons);
+                
             });
     </script>
+
 </body>
 </html>
