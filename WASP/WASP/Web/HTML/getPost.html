@@ -16,8 +16,7 @@
 	var id = GetQuerySet();
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
-         $.post("http://localhost:8080/isInitialize/", JSON.stringify(nil), function(data, status){
-         if(data==0){
+
 			$.post("http://localhost:8080/getThread/", JSON.stringify(id), function(firstPost, status){
 			$.post("http://localhost:8080/getReplys/", JSON.stringify(id), function(data, status){
 			var container=document.getElementById("container");
@@ -31,7 +30,7 @@
 				count=count+1;
             }
 
-            })}});
+            })});
 
 
 

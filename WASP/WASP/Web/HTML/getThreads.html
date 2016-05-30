@@ -16,8 +16,6 @@
 	var id = GetQuerySet();
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
-         $.post("http://localhost:8080/isInitialize/", JSON.stringify(nil), function(data, status){
-         if(data==0){
 			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
 			var container=document.getElementById("container");
 			data.forEach(subForumsToButtons);
@@ -25,7 +23,7 @@
                 container.innerHTML=container.innerHTML + "<p href=http://localhost:8080/Web/HTML/getPost.html?id="+item['id']+">"+item['title']+"<br><\br>"+item['content']+"<br><\br><br><\br><\p>";
             }
 
-            })}});
+            });
 
 
 
