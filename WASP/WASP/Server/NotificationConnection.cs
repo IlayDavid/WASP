@@ -33,10 +33,10 @@ namespace WASP.Server
                 if (hash != null)
                 {
                     connectionToHash.Remove(connectionId);
-                    return Groups.Remove(connectionId, hash);
+                    return Groups.Remove(NotificationServer.GetGroup(hash), hash);
                 }
             }
-            return Groups.Add(connectionId, data);
+            return Groups.Add(connectionId, NotificationServer.GetGroup(data));
         }
 
         protected override Task OnDisconnected(IRequest request, string connectionId, bool stopCalled)

@@ -137,3 +137,10 @@ C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.xml
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.Owin.xml
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.SelfHost.xml
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.pdb

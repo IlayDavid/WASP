@@ -27,5 +27,16 @@ namespace WASP.Server
             var context = GlobalHost.ConnectionManager.GetConnectionContext<NotificationConnection>();
             context.Groups.Send(group, message);
         }
+
+        public static string GetGroup(string hash)
+        {
+            Service.LoginPair pair = Service.ServiceFacade.GetPair(hash);
+            return GetGroup(pair.UserId, pair.ForumId);
+        }
+
+        public static string GetGroup(int uId, int fId)
+        {
+            return String.Format("forum: {0}|id: {1}", fId, uId);
+        }
     }
 }

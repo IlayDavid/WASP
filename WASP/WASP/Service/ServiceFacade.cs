@@ -26,6 +26,11 @@ namespace WASP.Service
 
             return lg != null;
         }
+
+        public static LoginPair GetPair(string hash)
+        {
+            return loggedIn[hash];
+        }
         public static string initialize(Dictionary<string, dynamic> data)
         {
             bl = new BLFacade();
@@ -307,15 +312,13 @@ namespace WASP.Service
         {
             User user = bl.login(data["username"], data["password"], data["forumid"]);
             string key = GenerateRandomHash();
-            loggedIn.Add(key, new LoginPair(user.Id, user.Forum.Id));
+            LoginPair pair = new LoginPair(user.Id, user.Forum.Id);
+            loggedIn.Add(key, pair);
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("username", user.Username);
-            result.Add("password", user.Password);
             result.Add("id", user.Id);
-            result.Add("email", user.Email);
-            result.Add("name", user.Name);
             result.Add("auth", key);
+            result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
         }
 
@@ -323,13 +326,23 @@ namespace WASP.Service
         {
             SuperUser su = bl.loginSU(data["username"], data["password"]);
             string key = GenerateRandomHash();
-            loggedIn.Add(key, new LoginPair(su.Id));
+            LoginPair pair = new LoginPair(su.Id);
+            loggedIn.Add(key, pair);
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("auth", key);
             result.Add("id", su.Id);
-            result.Add("username", su.Username);
-            result.Add("password", su.Password);
+            result.Add("forum", pair.ForumId);
+            return jss.Serialize(result);
+        }
+
+        public static string loginHash(Dictionary<string, dynamic> data)
+        {
+            LoginPair pair = loggedIn[data["auth"]];
+            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            result.Add("auth", data["auth"]);
+            result.Add("id", pair.UserId);
+            result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
         }
 
