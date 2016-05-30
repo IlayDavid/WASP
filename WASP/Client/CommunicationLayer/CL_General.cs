@@ -133,12 +133,7 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSubforum(res);
         }
 
-        DateTime getModeratorTermTime(int moderatorID, int subforumID)
-        {
-            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID + "}";
-            string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
-            return parser.parseStringToDate(res);
-        }
+        
 
         public List<Moderator> getModerators(int subForumID)
         {   //subforumid, appointedbyid, moderatorid

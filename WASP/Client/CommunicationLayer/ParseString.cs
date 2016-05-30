@@ -151,6 +151,22 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
+        public Moderator parseStringToModerator(string res, DateTime dt)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            int modid = dict["moderatorid"];
+            int subforumid = dict["subforumid"];
+            int appointedbyid = dict["appointedbyid"];
+            User user = new User();
+            user.id = modid;
+            User appoint = new User();
+            appoint.id = appointedbyid;
+            Moderator mod = new Moderator(user, dt, appoint);
+            mod.subForumID = subforumid;
+            return mod;
+        }
+
         public Moderator parseStringToModerator(string res)
         {
             var jss = new JavaScriptSerializer();
@@ -162,7 +178,7 @@ namespace Client.CommunicationLayer
             user.id = modid;
             User appoint = new User();
             appoint.id = appointedbyid;
-            Moderator mod = new Moderator(user, new DateTime(), appoint);
+            Moderator mod = new Moderator(user, DateTime.Now, appoint);
             mod.subForumID = subforumid;
             return mod;
         }
@@ -249,7 +265,7 @@ namespace Client.CommunicationLayer
         {   //termtime
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            return DateTime.Parse(dict["termenddate"]);
+            return DateTime.Parse(dict["termtime"]);
         }
     }
 }
