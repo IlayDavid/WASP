@@ -8,13 +8,19 @@ namespace Client.CommunicationLayer
 {
     class NotificationComponent
     {
-        public static void Main(string[] args)
+        public static void DoSomething(string data)
+        {
+            Console.WriteLine(data);
+
+        }
+
+        public static void Main()
         {
             // Connect to the service
             var connection = new Connection("http://localhost:5000/signalr");
 
             // Print the message when it comes in
-            connection.Received += data => Console.WriteLine(data);
+            connection.Received += data => DoSomething(data);
 
             // Start the connection
             connection.Start().Wait();
