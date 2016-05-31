@@ -19,12 +19,14 @@ namespace WASP.DataClasses
 
 
 
+
+
         public int Id { get; set; }
         private Forum forum;
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
-
+        private Dictionary<int, User> friends = null;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
         public static User Get(int userId, int forumId)
@@ -111,7 +113,21 @@ namespace WASP.DataClasses
         }
 
 
-
+        private Dictionary<int, User> Friends
+        {
+            get
+            {
+                if (friends == null)
+                {
+                    friends = new Dictionary<int, User>();
+                    foreach (User friend in dal.GetUserFriends(Id, Forum.Id))
+                    {
+                        friends.Add(friend.Id, friend);
+                    }
+                }
+                return Friends;
+            }
+        }
         private Dictionary<int, Notification> Notifications
         {
             get
@@ -163,7 +179,16 @@ namespace WASP.DataClasses
             Posts.Values.CopyTo(postArr, 0);
             return postArr;
         }
-
+        public User[] GetAllFriends()
+        {
+            User[] frnds = new User[Friends.Values.Count];
+            Friends.Values.CopyTo(frnds, 0);
+            return frnds;
+        }
+        public void AddFriend(User friend)
+        {
+            this.Friends.Add(friend.Id, friend);
+        }
         public Forum Forum
         {
             get
@@ -196,11 +221,10 @@ namespace WASP.DataClasses
 
         public void NewNotification(Notification newNotification)
         {
-            // TODO: new notification handling. 
-            // throw new NotImplementedException();
-           // newNotification.Target = this;
-            //newNotification = newNotification.Create();
-            //NewNotifications.Add(newNotification.Id, newNotification);
+            newNotification.Target = this;
+            newNotification = newNotification.Create();
+            NewNotifications.Add(newNotification.Id, newNotification);
+            Config.Settings.NotificationMethod(Id, forum.Id);
         }
 
         public Notification[] GetAllNotifications()

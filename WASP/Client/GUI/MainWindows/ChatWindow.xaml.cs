@@ -23,8 +23,7 @@ namespace Client.GUI.MainWindows
         public ChatWindow()
         {
             InitializeComponent();
-            Session.LoadFriends();
-            foreach(User user in Session.user.friends)
+            foreach(User user in Session.forum.members.Values)
             {
                 ListBoxItem item = new ListBoxItem();
                 item.Content = user.userName;
@@ -54,28 +53,10 @@ namespace Client.GUI.MainWindows
             StackPanel stackPanel = new StackPanel();
             TextBox l = new TextBox() { };
             Button b = new Button() { Content = "Send" };
-            b.Click += new System.Windows.RoutedEventHandler(this.btnSend1_Click);
-            b.DataContext = l;
             stackPanel.Children.Add(l); stackPanel.Children.Add(b);
-
-
-            return stackPanel;
+            throw new NotImplementedException();
         }
-        private void btnSend1_Click(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)((Control)sender).DataContext;
-            MessageBox.Show(tb.Text);
-            try
-            {
-                User user = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
-                Session.bl.sendMessage(user.id, txtMessage.Text);
-                txtMessage.Clear();
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.Message);
-            }
-        }
+
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             if (lstMembers.SelectedIndex < 0)

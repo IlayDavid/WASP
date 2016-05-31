@@ -31,50 +31,24 @@ namespace Client
         {
             _forumID = loginTo;
             InitializeComponent();
-            rdbUserPass.IsChecked = true;
         }
-
+        
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (rdbClientSession.IsChecked.Value)
-                {
-                    string session = txtClientSession.Text;
-                    _user = Session.bl.loginBySession(session);
-                }
+                string username = txtUsername.Text;
+                string password = passPassword.Password;
+                if (_forumID == ALL_FORUMS)
+                    _user = Session.bl.loginSU(username, password);
                 else
-                {
-
-                    string username = txtUsername.Text;
-                    string password = passPassword.Password;
-                    if (_forumID == ALL_FORUMS)
-                        _user = Session.bl.loginSU(username, password);
-                    else
-                        _user = Session.bl.login(username, password, _forumID);
-                    Session.user = _user;
-                    this.Close();
-                }
+                    _user = Session.bl.login(username, password, _forumID);
+                Session.user = _user;
+                this.Close();
             }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
-            }
-        }
-
-        private void rdb_Checked(object sender, RoutedEventArgs e)
-        {
-            if(rdbClientSession.IsChecked.Value)
-            {
-                txtUsername.IsEnabled = false;
-                passPassword.IsEnabled = false;
-                txtClientSession.IsEnabled = true;
-            }
-            else
-            {
-                txtUsername.IsEnabled = true;
-                passPassword.IsEnabled = true;
-                txtClientSession.IsEnabled = false;
             }
         }
     }

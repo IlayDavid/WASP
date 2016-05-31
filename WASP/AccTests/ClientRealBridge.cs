@@ -20,11 +20,6 @@ namespace AccTests
             return _clientAPI.addAdmin(newAdminID);
         }
 
-        public int addFriend(int friendID)
-        {
-            return _clientAPI.addFriend(friendID);
-        }
-
         public Client.DataClasses.Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
             return _clientAPI.addModerator(moderatorID, subForumID, term);
@@ -75,17 +70,10 @@ namespace AccTests
             return _clientAPI.editPost(postID, content);
         }
 
-        public Admin getAdmin(int AdminID)
+        public Client.DataClasses.Admin getAdmin(int AdminID)
         {
-            throw new NotImplementedException();
+            return _clientAPI.getAdmin(AdminID);
         }
-
-        public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
-        {
-            return _clientAPI.getAdmin(AdminID, forumID);
-        }
-
-        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {
@@ -105,11 +93,6 @@ namespace AccTests
         public Forum getForum(int forumID)
         {
             return _clientAPI.getForum(forumID);
-        }
-
-        public List<User> getFriends()
-        {
-            return _clientAPI.getFriends();
         }
 
         public List<User> getMembers(int forumID)

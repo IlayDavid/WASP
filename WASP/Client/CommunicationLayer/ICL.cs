@@ -230,13 +230,7 @@ namespace Client.CommunicationLayer
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int AdminID, int forumID);
-
-        List<User> getFriends();
-
-        /* Pre-conditions: User is loged-in.
-        * Purpose: add user with friendID to the loged-in user's friend list.*/
-        int addFriend(int friendID);
+        Admin getAdmin(int AdminID);
 
     }
 }
