@@ -14,7 +14,7 @@ namespace Client.CommunicationLayer
 
         }
 
-        public static void Main()
+        public static void Mainn()
         {
             // Connect to the service
             var connection = new Connection("http://localhost:5000/signalr");

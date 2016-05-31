@@ -11,13 +11,7 @@ D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.Unit
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.exe
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.pdb
@@ -48,8 +42,6 @@ C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyR
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.exe
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.pdb
@@ -144,3 +136,4 @@ C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.SelfHost.xm
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.pdb
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.Owin.dll
