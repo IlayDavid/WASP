@@ -22,30 +22,38 @@ namespace AccTests.Tests
         private String modpass="ilan123";
         private User _member1;
         private String mempass="mem123";
-
+        private static int setup = 0;
 
         [TestInitialize]
         public void setUp()
         {
-            WASPBridge _clean =Driver.getBridge();
-            _clean.Clean();
+            Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
-            _supervisor = ClientFunctions.InitialSystem(_proj); //password is moshe123
-
-            var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj,_supervisor);
-            _forum = forumAndAdmin.Item1;
-            _admin = forumAndAdmin.Item2; //password is david123
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
-
-
-            var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
-            _subforum = subforumAndModerator.Item1;
-            _moderator = subforumAndModerator.Item2; //password is ilan123
-            _proj.login(_moderator.userName, modpass, _forum.id);
+            if (setup == 0)
+            {
+                setup = 1;
+                _supervisor = ClientFunctions.InitialSystem(_proj); //password is 
+            }
+                var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
+                _forum = forumAndAdmin.Item1;
+                _admin = forumAndAdmin.Item2; //password is david123
+                _proj.login(_admin.user.userName, adminpass, _forum.id);
 
 
-            _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
-            _proj.login(_member1.userName, mempass, _forum.id);
+                var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
+                _subforum = subforumAndModerator.Item1;
+                _moderator = subforumAndModerator.Item2; //password is ilan123
+                _proj.login(_moderator.userName, modpass, _forum.id);
+
+
+                _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
+                _proj.login(_member1.userName, mempass, _forum.id);
+        }
+
+        [TestCleanup]
+        public void TearDown()
+        {
+            Driver.getBridge().Clean();
         }
 
 
@@ -56,6 +64,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
+
             _proj.login(_admin.user.userName, adminpass, _forum.id);
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator(_member1.id,_subforum.id, dt.AddDays(200));
@@ -65,6 +74,8 @@ namespace AccTests.Tests
             int isModified = _proj.updateModeratorTerm(_subforum.id, _member1.id, dt.AddDays(100));
             Assert.IsTrue(isModified >= 0);
             Assert.AreEqual(_proj.getModeratorTermTime(_member1.id, _subforum.id).Date, dt.AddDays(100).Date);
+            _proj.deleteModerator(_member1.id, _subforum.id);
+            int num = _proj.getModerators(_subforum.id).Count;
         }
 
 
@@ -84,6 +95,7 @@ namespace AccTests.Tests
             int isModified = _proj.updateModeratorTerm(  _subforum.id, _member1.id, dt.AddDays(100));
             Assert.IsTrue(isModified >= 0);
             Assert.AreEqual(_proj.getModeratorTermTime(_member1.id, _subforum.id).Date, dt.AddDays(100).Date);
+            _proj.deleteModerator(_member1.id, _subforum.id);
         }
 
 
