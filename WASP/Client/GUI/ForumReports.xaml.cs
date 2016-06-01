@@ -24,10 +24,6 @@ namespace Client.GUI
         public ForumReports()
         {
             InitializeComponent();
-            lblAppointBy.DataContext = lblAppointBy.Content;
-            lblDate.DataContext = lblDate.Content;
-            lblSubForum.DataContext = lblSubForum.Content;
-
             try
             {
                 report = Session.bl.moderatorReport();
@@ -66,7 +62,7 @@ namespace Client.GUI
         {
             if (cmboxModerator.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please choose moderator to the subforum");
+                MessageBox.Show("Please choose moderator");
                 return;
             }
             ComboBoxItem selectedItem = (ComboBoxItem)cmboxModerator.SelectedItem;
@@ -87,7 +83,7 @@ namespace Client.GUI
         {
             if (cmboxMember.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please choose moderator to the subforum");
+                MessageBox.Show("Please choose member");
                 return;
             }
             try
@@ -107,11 +103,6 @@ namespace Client.GUI
             {
                 MessageBox.Show(ee.Message);
             }
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

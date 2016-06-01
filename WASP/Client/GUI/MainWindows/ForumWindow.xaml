@@ -43,6 +43,7 @@
             <Button x:Name="btnAddSubforum" Content="Add Subforum" ToolTip="Add new Sub Forum to the forum" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="3" Margin="10,8,0,0" />
             <Button x:Name="btnEditForumPolicy" Content="Change Policy" ToolTip="Change the policy of the forum" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="4" Margin="10,10,0,0"   />
             <ListBox x:Name="SubForums" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForums_MouseDoubleClick"/>
+            <Button x:Name="btnReports" Content="Reports" ToolTip="Forum reports" Click="btnReports_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="5" Margin="10,9,0,0"   />
         </Grid>
         <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" ToolTip="Login to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>
         <Button x:Name="btnLogout" Content="Log Out" Click="btnLogout_Click" ToolTip="Log out from the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>

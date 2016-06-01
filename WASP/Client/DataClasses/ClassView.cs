@@ -49,10 +49,7 @@ namespace Client.DataClasses
 
     public class ModeratorView
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
         public string UserName { get; set; }
-        public string Email { get; set; }
         public DateTime Term { get; set; }
         public string AppointBy { get; set; }
 
@@ -61,8 +58,7 @@ namespace Client.DataClasses
             List<ModeratorView> ret = new List<ModeratorView>();
             foreach (Moderator m in moderators)
             {
-                ret.Add(new ModeratorView() { ID = m.user.id, Name = m.user.name,
-                    UserName = m.user.userName, Email = m.user.email,
+                ret.Add(new ModeratorView() {UserName = m.user.userName,
                     Term = m.term, AppointBy = m.appointBy.userName});
             }
             return ret;

@@ -1,6 +1,9 @@
 ﻿using Client.GUI;
+using Client.GUI.MainWindows;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Client
 {
@@ -21,7 +24,7 @@ namespace Client
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            //try
             {
                 if (rdbClientSession.IsChecked.Value)
                 {
@@ -41,9 +44,10 @@ namespace Client
                     this.Close();
                 }
             }
-            catch (Exception ee)
+            //catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                
+                //MessageBox.Show(ee.Message);
             }
         }
 
@@ -61,6 +65,13 @@ namespace Client
                 passPassword.IsEnabled = true;
                 txtClientSession.IsEnabled = false;
             }
+        }
+        private void lblForget_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            RestorePassword rp = new RestorePassword();
+            this.Hide();
+            rp.ShowDialog();
+            this.Close();
         }
     }
 }

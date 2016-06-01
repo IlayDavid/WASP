@@ -14,6 +14,10 @@ namespace Client
     /// </summary>
     public partial class PostWindow : Window, INotificable
     {
+        public void NotifyWindow(List<Notification> notifications)
+        {
+            throw new NotImplementedException();
+        }
         private readonly int CONTENT_IND = 0;
         //private readonly int EDIT_AT_IND = 0;
         //private readonly int BY_IND = 0;
@@ -249,9 +253,9 @@ namespace Client
 
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext);
+            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext);
         }
-        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        void NotifyWindow(List<Notification> notifications, Button notsBtn)
         {
             Session.NotifyWindow(notifications, notsBtn);
         }

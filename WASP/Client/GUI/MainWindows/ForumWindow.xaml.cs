@@ -17,6 +17,10 @@ namespace Client
     /// </summary>
     public partial class ForumWindow : Window, INotificable
     {
+        public void NotifyWindow(List<Notification> notifications)
+        {
+            throw new NotImplementedException();
+        }
         List<Button> guestBtns;
         List<Button> userBtns;
         List<Button> adminBtns;
@@ -26,7 +30,7 @@ namespace Client
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
             userBtns = new List<Button>() { btnLogout, btnSendMessage };
-            adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum };
+            adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum, btnReports };
             suBtns = new List<Button>() {  };
 
             adminBtns.AddRange(userBtns);
@@ -133,6 +137,7 @@ namespace Client
             DataGrid dgFriends = new DataGrid();
             if (Session.user != null)
             {
+                Session.LoadFriends();
                 dgFriends.ItemsSource = UserView.getView(Session.user.friends);
                 dgFriends.IsReadOnly = true;
             }
@@ -278,9 +283,9 @@ namespace Client
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext); 
+            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext); 
         }
-        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        void NotifyWindow(List<Notification> notifications, Button notsBtn)
         {
             Session.NotifyWindow(notifications, notsBtn);
         }
@@ -289,6 +294,12 @@ namespace Client
         {
             ChatWindow chat = new ChatWindow();
             chat.ShowDialog();
+        }
+
+        private void btnReports_Click(object sender, RoutedEventArgs e)
+        {
+            ForumReports fr = new ForumReports();
+            fr.ShowDialog();
         }
     }
 }

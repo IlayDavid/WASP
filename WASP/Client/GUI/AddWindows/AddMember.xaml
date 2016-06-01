@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI.AddWindows"
         mc:Ignorable="d"
-        Title="AddMember" Height="243.659" Width="242.927"
+        Title="AddMember" Height="247.819" Width="422.403"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="194" VerticalAlignment="Top" Width="227" Margin="10,10,0,0">
+        <Grid Margin="10,10,0,-0.2" HorizontalAlignment="Left" Width="406">
             <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"/>
             <TextBox x:Name="txtID" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="89,11,0,0"/>
             <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,35,0,0"/>
@@ -19,7 +19,33 @@
             <TextBox x:Name="txtmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,90,0,0" Width="120"/>
             <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,113,0,0"/>
             <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
-            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="134,165,0,0" Click="BtnCreate_Click"/>
+            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="172,172,0,0" Click="BtnCreate_Click"/>
         </Grid>
+        <GroupBox x:Name="groupBox_Copy3" Header="Restore Password - QA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="232,10,0,0" Height="140" Width="175">
+            <Grid HorizontalAlignment="Left" Margin="0,0,-3.4,-4.8" Width="165">
+                <Label x:Name="label4" Content="Enter a question:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+                <TextBox x:Name="txtUserQuestion" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Margin="5,25,0,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.288"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+                <Label x:Name="label4_Copy" Content="Enter a answer:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0"/>
+                <TextBox x:Name="txtUserAnswer" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Margin="5,85,0,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.288"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

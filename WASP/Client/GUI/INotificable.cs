@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Client.GUI
 {
     public interface INotificable
     {
-        //void NotifyWindow(List<Message> notifications, Button notsBtn);
+        void NotifyWindow(List<Notification> notifications);
     }
 }

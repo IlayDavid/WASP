@@ -88,6 +88,7 @@ namespace Client.GUI.MainWindows
                 User user = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
                 Session.bl.sendMessage(user.id, txtMessage.Text);
                 txtMessage.Clear();
+                lstMembers_SelectionChanged(null, null);
             }
             catch(Exception ee)
             {
