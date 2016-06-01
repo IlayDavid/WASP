@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>forums</title>
+    <script src="http://localhost:8080/Web/JS/jquery.js" type="application/javascript"></script>
+    <script src="http://localhost:8080/Web/JS/util.js" type="application/javascript"></script>
+
+
+</head>
+<body>
+    <p id="container"></p>
+
+    <script type="application/javascript">
+            //data["name"], data["username"], data["id"], data["email"], data["password"]
+        var nil={};
+            var container=document.getElementById("container");
+            function forumsToButtons(item, index){
+                var p=document.createElement("A");
+                p.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+item['forumid'];
+                p.innerHTML=item['name']+"<br>"+item['description']+"<br><br>";
+                
+                container.appendChild(p);
+            };
+            $.post("http://localhost:8080/getAllForums/", JSON.stringify(nil), function(data, status){
+                data=JSON.parse(data);
+                console.log(data);
+                console.log(data.length);
+                console.log(data[1]);
+                data.forEach(forumsToButtons);
+                
+            });
+    </script>
+
+</body>
+</html>

@@ -113,6 +113,5 @@ namespace Client.CommunicationLayer
             string res = httpReq(json, "POST", _url + "/addFriend/");
             return 0;
         }
-
     }
 }

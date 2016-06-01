@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>threads</title>
+    <script src="http://localhost:8080/Web/JS/jquery.js" type="application/javascript"></script>
+    <script src="http://localhost:8080/Web/JS/util.js" type="application/javascript"></script>
+
+
+</head>
+<body>
+    <p id="container"></p>
+
+    <script type="application/javascript">
+	    var get = GetQuerySet();
+
+    var i=parseInt(get['id']);
+    var id={"subforumid":get['id']};
+    id['subforumid']=i;
+    console.log(id);
+            //data["name"], data["username"], data["id"], data["email"], data["password"]
+  			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
+			var container=document.getElementById("container");
+            console.log(data);
+			data=JSON.parse(data);
+            data.forEach(subForumsToButtons);
+            
+            function subForumsToButtons(item, index){
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+">"+item['title']+"<br>"+item['content']+"<br><br>";
+            }
+
+            });
+
+
+
+    </script>
+</body>
+</html>

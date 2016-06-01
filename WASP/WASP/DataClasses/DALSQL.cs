@@ -6,6 +6,7 @@ using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses;
 using System.IO;
+using static WASP.DataClasses.Notification;
 
 namespace WASP.DataClasses
 {
@@ -45,6 +46,8 @@ namespace WASP.DataClasses
         private static List<IPost> backUpPosts;
         private static List<IPolicy> backUpPolicies;
         private static List<Index> backUpIndexes;
+        private static List<IFriend> backUpFriends;
+
         public void Backup()
         {
             DALSQL.BackUpAll();
@@ -67,6 +70,7 @@ namespace WASP.DataClasses
             backUpNotifications = new List<INotification>();
             backUpPosts = new List<IPost>();
             backUpPolicies = new List<IPolicy>();
+            backUpFriends = new List<IFriend>();
 
             Forum_SystemDataContext db = new Forum_SystemDataContext(SetDb("Forums_System"));
             /*
@@ -182,12 +186,21 @@ namespace WASP.DataClasses
                 inoti.id = noti.id;
                 inoti.isNew = noti.isNew;
                 inoti.message = noti.message;
-                inoti.fromForumId = noti.fromForumId;
-                inoti.fromUserId = noti.fromUserId;
-                inoti.toForumId = noti.toForumId;
+                inoti.sourceForum = noti.sourceForum;
+                inoti.source = noti.source;
+                inoti.type = noti.type;
+                inoti.date = noti.date;
                 inoti.toUserId = noti.toUserId;
-
                 backUpNotifications.Add(inoti);
+            }
+
+            //9
+            foreach (IFriend ifriend in db.IFriends)
+            {
+                IFriend ifrnd = new IFriend();
+                ifrnd.forumId = ifriend.forumId;
+                ifrnd.userId = ifriend.userId;
+                ifrnd.friendId = ifriend.friendId;
             }
         }
 
@@ -244,6 +257,11 @@ namespace WASP.DataClasses
             {
                 db.INotifications.InsertOnSubmit(noti);
             }
+
+            foreach (IFriend frnd in backUpFriends)
+            {
+                db.IFriends.InsertOnSubmit(frnd);
+            }
             db.SubmitChanges();
         }
 
@@ -251,6 +269,7 @@ namespace WASP.DataClasses
 
         public void Clean()
         {
+            db.IFriends.DeleteAllOnSubmit(db.IFriends);
             db.INotifications.DeleteAllOnSubmit(db.INotifications);
             db.IPosts.DeleteAllOnSubmit(db.IPosts);
             db.ISubForums.DeleteAllOnSubmit(db.ISubForums);
@@ -863,7 +882,10 @@ namespace WASP.DataClasses
             INotification inoti = db.INotifications.FirstOrDefault(x => x.id == notificationId);
             if (inoti != null)
             {
-                Notification noti = new Notification(inoti.id, inoti.message, inoti.isNew, GetUser(inoti.fromUserId, inoti.fromForumId), GetUser(inoti.toUserId, inoti.toForumId), this);
+                User source  = null;
+                if (inoti.source > 0)
+                    source = GetUser(inoti.source,inoti.sourceForum);  
+                Notification noti = new Notification(inoti.id, inoti.message, inoti.isNew, source, GetUser(inoti.toUserId, inoti.sourceForum), (Types)inoti.type, inoti.date);
                 return noti;
             }
             throw new GetException(string.Format("Notifitcation {0} wasn't found", notificationId));
@@ -890,15 +912,18 @@ namespace WASP.DataClasses
         }
         public Notification CreateNotification(Notification notification)
         {
+            if (notification.Source != null && notification.Source.Forum.Id != notification.Target.Forum.Id)
+                throw new InvalidException(string.Format("CreateNotification: target's forum ({1}) and source's forum ({1}) do not match", notification.Target.Forum.Id, notification.Source.Forum.Id));
             INotification inot = new INotification();
             inot.id = getNextNotificationId();
-            inot.fromUserId = notification.Source.Id;
-            inot.fromForumId = notification.Source.Forum.Id;
+            if (notification.Source == null)
+                inot.source = 0;
+            inot.sourceForum = notification.Target.Forum.Id;
             inot.toUserId = notification.Target.Id;
-            inot.toForumId = notification.Target.Forum.Id;
             inot.isNew = notification.IsNew;
             inot.message = notification.Message;
-
+            inot.date = notification.CreationTime;
+            inot.type = (int)notification.Type;
             db.INotifications.InsertOnSubmit(inot);
             db.SubmitChanges();
             notification.Id = inot.id;
@@ -907,21 +932,30 @@ namespace WASP.DataClasses
 
         public Notification UpdateNotification(Notification notification)
         {
-            INotification inot = new INotification();
-            inot.fromUserId = notification.Source.Id;
-            inot.fromForumId = notification.Source.Forum.Id;
-            inot.toUserId = notification.Target.Id;
-            inot.toForumId = notification.Target.Forum.Id;
-            inot.isNew = notification.IsNew;
-            inot.message = notification.Message;
+            INotification inot = db.INotifications.FirstOrDefault(x => x.id == notification.Id);
+            if (inot != null)
+            {
+                int source = 0;
+                if (notification.Source != null)
+                    source = notification.Source.Id;
 
-            db.SubmitChanges();
-            return notification;
+                inot.source = source;
+                inot.toUserId = notification.Target.Id;
+                inot.sourceForum = notification.Target.Forum.Id;
+                inot.isNew = notification.IsNew;
+                inot.message = notification.Message;
+                inot.date = notification.CreationTime;
+                inot.type = (int)notification.Type;
+                db.SubmitChanges();
+                return notification;
+            }
+            throw new ExistException(string.Format("UpdateNotification: Notification {0} does not exist", notification.Id));
+
         }
 
 
 
-        public Admin[] GetAdminsOfForum(int forumId)
+    public Admin[] GetAdminsOfForum(int forumId)
         {
             IAdmin[] iadmins = db.IAdmins.Where(x => x.forumId == forumId).ToArray();
             List<Admin> admins = new List<Admin>();
@@ -1181,6 +1215,36 @@ namespace WASP.DataClasses
             db.SubmitChanges();
             policy.Id = ipolicy.id;
             return policy;
+        }
+
+        public User[] GetUserFriends(int id, int forumId)
+        {
+            List<User> friends = new List<User>();
+            foreach (IFriend ifriend in db.IFriends)
+                if (ifriend.userId == id && ifriend.forumId == forumId)
+                    friends.Add(GetUser(ifriend.friendId, forumId));
+            return friends.ToArray();
+        }
+
+        // אני מניח ששניהם קיימים במערכת
+        public void AddFriend(User user, User friend)
+        {
+            IUser usr = db.IUsers.FirstOrDefault(x => (x.id == user.Id && x.forumId == user.Forum.Id));
+            if (usr == null) throw new ExistException(String.Format("AddFriend: User {0} Forum {1} is not exists in the DataBase", user.Id, user.Forum.Id));
+
+            IUser frnd = db.IUsers.FirstOrDefault(x => (x.id == friend.Id && x.forumId == friend.Forum.Id));
+            if (frnd == null) throw new ExistException(String.Format("AddFriend: User (the friend) {0} Forum {1} is not exists in the DataBase", friend.Id, friend.Forum.Id));
+            
+            if(user.Forum.Id != friend.Forum.Id)
+                throw new ExistException(String.Format("AddFriend: the friend's ({0}) forum and user's ({1}) forum do not match", friend.Id, user.Id));
+
+            IFriend _friend = new IFriend();
+            _friend.userId = user.Id;
+            _friend.friendId = friend.Id;
+            _friend.forumId = user.Forum.Id;
+
+            db.IFriends.InsertOnSubmit(_friend);
+            db.SubmitChanges();
         }
     }
 }
