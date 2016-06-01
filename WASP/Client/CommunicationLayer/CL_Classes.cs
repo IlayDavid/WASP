@@ -26,6 +26,18 @@ namespace Client.CommunicationLayer
         }
     }
 
+    public class CLNotification
+    {
+        public int id { get; set; }
+        public string message { get; set; }
+        public bool isnew { get; set; }
+        public string sourceid { get; set; }
+        public string targetid { get; set; }
+        public CLNotification()
+        {
+        }
+    }
+
     public class CLFriend
     {
         public int id { get; set; }

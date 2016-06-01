@@ -34,20 +34,15 @@ namespace Client.CommunicationLayer
 
         public List<Notification> getAllNotificationses()
         {
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
-            return parseStringToMessages(res);
+            return parser.parseStringToMessages(res);
         }
         public List<Notification> getNewNotificationses()
         {
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
-            return parseStringToMessages(res);
-        }
-
-        private List<Notification> parseStringToMessages(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToMessages(res);
         }
 
         //-----------Admin Reports---------------
@@ -71,13 +66,9 @@ namespace Client.CommunicationLayer
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/moderatorReport/");
-            return parseStringToModeratorReport(res);
+            return parser.parseStringToModeratorReport(res);
         }
 
-        private ModeratorReport parseStringToModeratorReport(string res)
-        {
-            throw new NotImplementedException();
-        }
 
         //-----------Super User Reports---------------
         public int totalForums()

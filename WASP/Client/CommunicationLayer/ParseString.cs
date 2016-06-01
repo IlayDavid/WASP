@@ -270,5 +270,27 @@ namespace Client.CommunicationLayer
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             return DateTime.Parse(dict["termtime"]);
         }
+
+        public List<Notification> parseStringToMessages(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLNotification>>(res);
+            List<Notification> ret = new List<Notification>();
+            if (dict != null)
+            {
+                foreach (CLNotification cl in dict)
+                {
+                    Notification n=null;
+                    //Notification n = new Notification(cl.id, cl.message, cl.sourceid, cl.targetid, cl.isnew);
+                    ret.Add(n);
+                }
+            }
+            return ret;
+        }
+
+        public ModeratorReport parseStringToModeratorReport(string res)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
