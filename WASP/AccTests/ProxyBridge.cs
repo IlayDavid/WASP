@@ -216,5 +216,35 @@ namespace AccTests
         {
             return ((WASP.Domain.IBL) proj).getAdmin(userID, forumID, AdminID);
         }
+
+        public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser = false)
+        {
+            return ((WASP.Domain.IBL)proj).defineForumPolicy(userID, forumID, policy, superUser);
+        }
+
+        public int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser = false)
+        {
+            return ((WASP.Domain.IBL)proj).subForumTotalMessages(userID, forumID, subForumID, superUser);
+        }
+
+        public Post[] postsByMember(int adminID, int forumID, int userID, bool superUser = false)
+        {
+            return ((WASP.Domain.IBL)proj).postsByMember(adminID, forumID, userID, superUser);
+        }
+
+        public ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false)
+        {
+            return ((WASP.Domain.IBL)proj).moderatorReport(userID, forumID, superUser);
+        }
+
+        public User[] getFriends(int userID, int forumID)
+        {
+            return ((WASP.Domain.IBL)proj).getFriends(userID, forumID);
+        }
+
+        public int addFriend(int userID, int forumID, int friendID)
+        {
+            return ((WASP.Domain.IBL)proj).addFriend(userID, forumID, friendID);
+        }
     }
 }
