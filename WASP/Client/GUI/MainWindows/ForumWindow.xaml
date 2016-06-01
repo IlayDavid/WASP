@@ -30,20 +30,18 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="301" />
             </Grid.ColumnDefinitions>
             <Button x:Name="btnViewMembers" Content="View Members" ToolTip="View members of this forum" Click="btnViewMembers_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,10,0,0" />
-            <Button x:Name="btnViewAdministrators" Content="View Administrators" ToolTip="View admins of this forum" 
-                    Click="btnViewAdministrators_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" 
-                    FontSize="20" Margin="10,8.8,0,0" Grid.Row="1" />
             <Button x:Name="btnSendMessage" Content="Send Message" ToolTip="Send Message to member in the forum"
                     Click="btnSendMessage_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20"
-                    Margin="10,9.6,0,0" Grid.Row="2" />
-            <Button x:Name="btnAddAdministrator" Content="Add Administrator" ToolTip="Add new admin to the forum" Click="btnAddAdministrator_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,9.4,0,0" Grid.Row="3" />
-            <Button x:Name="btnAddSubforum" Content="Add Subforum" ToolTip="Add new Sub Forum to the forum" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="4" Margin="10,9.2,0,0" />
-            <Button x:Name="btnEditForumPolicy" Content="Change Policy" ToolTip="Change the policy of the forum" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="5" Margin="10,10,0,0"   />
+                    Margin="10,10,0,0" Grid.Row="1" />
+            <Button x:Name="btnAddAdministrator" Content="Add Administrator" ToolTip="Add new admin to the forum" Click="btnAddAdministrator_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Margin="10,10,0,0" Grid.Row="2" />
+            <Button x:Name="btnAddSubforum" Content="Add Subforum" ToolTip="Add new Sub Forum to the forum" Click="btnAddSubforum_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="3" Margin="10,8,0,0" />
+            <Button x:Name="btnEditForumPolicy" Content="Change Policy" ToolTip="Change the policy of the forum" Click="btnEditForumPolicy_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="50" FontSize="20" Grid.Row="4" Margin="10,10,0,0"   />
             <ListBox x:Name="SubForums" SelectionMode="Single" HorizontalAlignment="Left" Height="397" VerticalAlignment="Top" Width="325" FontSize="15" Background="AntiqueWhite" Margin="324,18,-347,-131" Grid.RowSpan="4" MouseDoubleClick="SubForums_MouseDoubleClick"/>
         </Grid>
         <Button x:Name="btnLogin" Content="Log In" Click="btnLogin_Click" ToolTip="Login to the forum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="697,10,0,0" Height="26"/>

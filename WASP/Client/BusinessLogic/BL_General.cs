@@ -14,7 +14,7 @@ namespace Client.BusinessLogic
         private ICL _cl;
         public BL()
         {
-            _cl = new TCL();
+            _cl = new CL();
             if (_cl is TCL)
                 initForTesting();
         }

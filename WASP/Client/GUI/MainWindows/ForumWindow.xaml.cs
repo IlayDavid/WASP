@@ -122,26 +122,73 @@ namespace Client
         private void btnViewMembers_Click(object sender, RoutedEventArgs e)
         {
             Window membersView = new Window();
-            DataGrid dg = new DataGrid();
-            dg.ItemsSource = UserView.getView(Session.forum.members);
-            dg.IsReadOnly = true;
-            membersView.Content = dg;
+            DataGrid dgMembers = new DataGrid();
+            dgMembers.ItemsSource = UserView.getView(Session.forum.members);
+            dgMembers.IsReadOnly = true;
+
+            DataGrid dgAdmins = new DataGrid();
+            dgAdmins.ItemsSource = UserView.getView(Session.forum.admins.Values.Select(x => x.user).ToList());
+            dgAdmins.IsReadOnly = true;
+
+            DataGrid dgFriends = new DataGrid();
+            if (Session.user != null)
+            {
+                dgFriends.ItemsSource = UserView.getView(Session.user.friends);
+                dgFriends.IsReadOnly = true;
+            }
+
+            StackPanel mainSp = new StackPanel();
+            StackPanel rightSp = new StackPanel();
+            StackPanel leftSp = new StackPanel();
+
+            leftSp.Children.Add(new Label() { Content = "Members:" });
+            leftSp.Children.Add(dgMembers);
+            leftSp.Children.Add(new Label() { Content = "Administrators:" });
+            leftSp.Children.Add(dgAdmins);
+            leftSp.Children.Add(new Label() { Content = "  " });
+
+            Button btnAddFriends = new Button() { Content = "Add Friend", DataContext = dgMembers };
+            btnAddFriends.Click += new System.Windows.RoutedEventHandler(this.btnAddFriends_Click);
+
+            if (Session.user != null)
+            {
+                rightSp.Children.Add(new Label() { Content = "Friends:" });
+                rightSp.Children.Add(dgFriends);
+                rightSp.Children.Add(new Label() { Content = "In order to add friend,\nchoose member record\nand press the button." });
+                rightSp.Children.Add(btnAddFriends);
+            }
+           
+            mainSp.Orientation = Orientation.Horizontal;
+            mainSp.Children.Add(new Label() { Content = "  " });
+            mainSp.Children.Add(leftSp);
+            mainSp.Children.Add(new Label() { Content = "             "});
+            mainSp.Children.Add(rightSp);
+            mainSp.Children.Add(new Label() { Content = "  " });
+
+            membersView.Content = mainSp;
             membersView.SizeToContent = SizeToContent.WidthAndHeight;
-            membersView.Title = "Members";
+            membersView.Title = "Members & Friends";
             membersView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             membersView.ShowDialog();
         }
-        private void btnViewAdministrators_Click(object sender, RoutedEventArgs e)
+        private void btnAddFriends_Click(object sender, RoutedEventArgs e)
         {
-            Window adminView = new Window();
-            DataGrid dg = new DataGrid();
-            dg.ItemsSource = UserView.getView(Session.forum.admins.Values.Select(x => x.user).ToList());
-            dg.IsReadOnly = true;
-            adminView.Content = dg;
-            adminView.SizeToContent = SizeToContent.WidthAndHeight;
-            adminView.Title = "Administators";
-            adminView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            adminView.ShowDialog();
+            try
+            {
+                DataGrid dgMembers = (DataGrid)((Button)sender).DataContext;
+                UserView selectedUser = (UserView)dgMembers.SelectedItem;
+                if (selectedUser == null)
+                {
+                    MessageBox.Show("Please select a friend", "Add Friend", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                int id = Session.forum.members.First(x => (x.Value.userName == selectedUser.UserName)).Value.id;
+                Session.bl.addFriend(id);
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void btnAddAdministrator_Click(object sender, RoutedEventArgs e)
         {

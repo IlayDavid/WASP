@@ -14,6 +14,7 @@ namespace Client.DataClasses
         public DateTime passCreateDate { get; set; }
         public DateTime joinDate { get; set; }
         public List<User> friends;
+        public string client_session;
 
         public User() { }
         public User(int id, string name, string userName, string email, string pass)
@@ -26,6 +27,7 @@ namespace Client.DataClasses
             this.joinDate = DateTime.Now;
             this.passCreateDate = joinDate;
             this.friends = new List<User>();
+            client_session = "need to get from CL";
         }
 
 
