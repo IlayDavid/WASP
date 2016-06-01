@@ -8,16 +8,23 @@ namespace Client.CommunicationLayer
 {
     class NotificationComponent
     {
+        private static Connection connection;
         public static void DoSomething(string data)
         {
-            Console.WriteLine(data);
-
+            if(!data.Contains("ntf")) // Not a notification!
+                Console.WriteLine(data);
+            else
+            {
+                // This is a notification. Your code here!
+            }
         }
 
-        public static void Main()
+
+
+        public static void Initialize(string loginHash)
         {
             // Connect to the service
-            var connection = new Connection("http://localhost:5000/signalr");
+            connection = new Connection("http://localhost:5000/signalr");
 
             // Print the message when it comes in
             connection.Received += data => DoSomething(data);
@@ -25,12 +32,8 @@ namespace Client.CommunicationLayer
             // Start the connection
             connection.Start().Wait();
 
-            string line = null;
-            while ((line = Console.ReadLine()) != null)
-            {
-                // Send a message to the server
-                connection.Send(line).Wait();
-            }
+
+            connection.Send(loginHash).Wait();
         }
     }
 }
