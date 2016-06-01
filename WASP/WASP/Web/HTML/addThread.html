@@ -14,9 +14,33 @@
 
     <script type="application/javascript">
 			var container=document.getElementById("container");
+				    var get = GetQuerySet();
 
-	var subforumId = 5;;
-	container.innerHTML="		<form action=\"createThread\"> 		Title: <input type=\"text\" size=55 name=\"title\"><br>        Content: <textarea cols=50  rows=30 name=\"content\"></textarea><br>		<input type=\"hidden\" name=\"subForum\" value="+subforumId+">        <input type=\"submit\" value=\"Create Thread\"><br><br>	</form>	";
+var i=parseInt(get['id']);
+    var id={"subforumid":get['id']};
+    id['subforumid']=i;
+    console.log(id);
+		var auth=get["auth"];
+		
+		
+
+
+	container.innerHTML="		<form action=\"createThread\"> 		Title: <input type=\"text\" size=55 id=\"title\"><br>        Content: <textarea cols=50  rows=30 id=\"content\"></textarea><br><br><br>	";
+	
+			var button=document.createElement("button");
+		button.setAttribute("onclick","addThread(document.getElementById(\"title\").value,document.getElementById(\"content\").value,i,auth)");
+		button.setAttribute("type","button");
+		button.innerHTML="addThread";
+		container.appendChild(button);
+	function addThread(title, content, subforumid, auth){
+		var param={"title":title,"content":content,"subforumid":"-1","auth":auth};
+		
+		param['subforumid']=subforumid;
+		$.post("http://localhost:8080/createThread/", JSON.stringify(param), function(data, status){
+				window.location.href="http://localhost:8080/Web/HTML/getThreads.html?id="+i+"&auth="+auth;
+            });
+	}
+		
     </script>
 </body>
 </html>

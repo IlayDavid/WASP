@@ -18,11 +18,12 @@
             var container=document.getElementById("container");
             function forumsToButtons(item, index){
                 var p=document.createElement("A");
-                p.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+item['forumid'];
+                p.href="http://localhost:8080/Web/HTML/login.html?id="+item['forumid'];
                 p.innerHTML=item['name']+"<br>"+item['description']+"<br><br>";
                 
                 container.appendChild(p);
             };
+			
             $.post("http://localhost:8080/getAllForums/", JSON.stringify(nil), function(data, status){
                 data=JSON.parse(data);
                 console.log(data);

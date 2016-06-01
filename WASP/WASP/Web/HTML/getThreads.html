@@ -19,6 +19,16 @@
     var id={"subforumid":get['id']};
     id['subforumid']=i;
     console.log(id);
+		var auth=get["auth"];
+		var button=document.createElement("button");
+		button.setAttribute("onclick","addThread()");
+		button.setAttribute("type","button");
+		button.setAttribute("value","addThread");
+		function addThread(){
+			window.location.href="http://localhost:8080/Web/HTML/addThread.html?id="+i+"&auth="+auth;
+		}
+		button.innerHTML="addThread";
+		container.appendChild(button);
             //data["name"], data["username"], data["id"], data["email"], data["password"]
   			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
 			var container=document.getElementById("container");
@@ -27,11 +37,11 @@
             data.forEach(subForumsToButtons);
             
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+">"+item['title']+"<br>"+item['content']+"<br><br>";
+                container.innerHTML=container.innerHTML + "<br><br><br><a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+">"+item['title']+"<br>"+item['content']+"<br><br>";
             }
 
             });
-
+		
 
 
     </script>
