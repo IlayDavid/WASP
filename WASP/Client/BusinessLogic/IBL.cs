@@ -230,6 +230,16 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int AdminID); 
+        Admin getAdmin(int AdminID, int forumID);
+
+        Admin getAdmin(int AdminID);
+
+        /* Pre-conditions: User is loged-in.
+         * Purpose: return the friends list of the loged-in user.*/
+        List<User> getFriends();
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        int addFriend(int friendID);
     }
 }

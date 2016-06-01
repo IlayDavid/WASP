@@ -19,10 +19,5 @@ namespace WASP.Config
             }
             return dal;
         }
-
-        public static void NotificationMethod(int uId, int fId)
-        {
-            WASP.Server.NotificationServer.GroupNotify(WASP.Server.NotificationServer.GetGroup(uId, fId), "ntf");
-        }
     }
 }

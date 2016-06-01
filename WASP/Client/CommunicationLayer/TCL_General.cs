@@ -19,7 +19,7 @@ namespace Client.CommunicationLayer
             forums = new Dictionary<int, Forum>();
             subforums = new Dictionary<int, Subforum>();
             posts = new Dictionary<int, Post>();
-            initForTesting();
+            //initForTesting();
         }
 
         public User loginBySession(string session)
@@ -154,9 +154,21 @@ namespace Client.CommunicationLayer
         {
             return forums[forumID].subforums.Values.ToList();
         }
-        public Admin getAdmin(int AdminID)
+        public Admin getAdmin(int AdminID, int forumID)
         {
             //return forums[forumID].admins[AdminID];
+            throw new NotImplementedException();
+        }
+
+        public List<User> getFriends()
+        {
+            throw new NotImplementedException();
+        }
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        public int addFriend(int friendID)
+        {
             throw new NotImplementedException();
         }
     }

@@ -28,7 +28,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/isInitialize/");
-            return int.Parse(res);
+            return int.Parse(res); //1 init, 0 not init
         }
 
         public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)

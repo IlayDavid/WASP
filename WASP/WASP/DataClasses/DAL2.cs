@@ -138,8 +138,5 @@ namespace WASP.DataClasses
         bool DeletePolicy(int id);
         Policy UpdatePolicy(Policy policy);
         Policy CreatePolicy(Policy policy);
-
-        User[] GetUserFriends(int id, int forumId);
-        void AddFriend(User user, User friend);
     }
 }

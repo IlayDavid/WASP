@@ -11,7 +11,6 @@ D:\prgUni\WASP\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.Unit
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.exe
 D:\prgUni\WASP\WASP\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\WASP\WASP\WASP\obj\Debug\WASP.pdb
@@ -42,6 +41,17 @@ C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyR
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\edan\Source\Repos\wasp2\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Forums_System.mdf
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Forums_System_log.ldf
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
+C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.exe.config
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.exe
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\WASP.pdb
@@ -51,89 +61,3 @@ C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\bin\Debug\Ne
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\amitay140\Documents\WASP V4 51 test did not pass\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\banana.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\jquery.js
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\util.js
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addReply.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addThread.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getForums.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getPost.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForum.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForums.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\login.html
-C:\Users\REL\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\SHA256.js
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe.config
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\addReply.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\addThread.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\banana.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getForums.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getPost.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getSubForum.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getSubForums.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\HTML\login.html
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\jquery.js
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\SHA256.js
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Web\JS\util.js
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.exe
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\WASP.pdb
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.AspNet.SignalR.SystemWeb.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Host.HttpListener.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Hosting.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Security.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Owin.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Net.Http.Formatting.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.Owin.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.SelfHost.dll
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.AspNet.SignalR.Core.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.AspNet.SignalR.SystemWeb.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Hosting.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Microsoft.Owin.Security.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addReply.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\addThread.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\banana.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getForums.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getPost.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForum.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getSubForums.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\getThreads.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\HTML\login.html
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\jquery.js
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\SHA256.js
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Web\JS\util.js
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe.config
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.exe
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\WASP.pdb
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.dll
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Newtonsoft.Json.xml
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
-C:\Users\matan\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Net.Http.Formatting.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.Owin.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\bin\Debug\System.Web.Http.SelfHost.xml
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.exe
-C:\Users\Ilay David\Desktop\wasp\WASP\WASP\obj\Debug\WASP.pdb
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\Microsoft.Owin.dll

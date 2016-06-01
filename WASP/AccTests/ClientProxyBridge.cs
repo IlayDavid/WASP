@@ -26,6 +26,11 @@ namespace AccTests
             return proj.addAdmin(newAdminID);
         }
 
+        public int addFriend(int friendID)
+        {
+            return proj.addFriend(friendID);
+        }
+
         public Client.DataClasses.Moderator addModerator(int moderatorID, int subForumID, DateTime term)
         {
             return proj.addModerator(moderatorID, subForumID, term);
@@ -78,8 +83,15 @@ namespace AccTests
 
         public Client.DataClasses.Admin getAdmin(int AdminID)
         {
-            return proj.getAdmin(AdminID);
+            throw new NotImplementedException();
         }
+
+        public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
+        {
+            return proj.getAdmin(AdminID, forumID);
+        }
+
+        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {
@@ -99,6 +111,11 @@ namespace AccTests
         public Forum getForum(int forumID)
         {
             return proj.getForum(forumID);
+        }
+
+        public List<User> getFriends()
+        {
+            return proj.getFriends();
         }
 
         public List<User> getMembers(int forumID)

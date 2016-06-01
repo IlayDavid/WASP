@@ -6,40 +6,23 @@ using System.Threading.Tasks;
 using WASP.Domain;
 using WASP.DataClasses;
 using System.Web.Script.Serialization;
-using System.IO;
 
 namespace WASP.Service
 {
     public static class ServiceFacade
     {
         private static IBL bl = null;
-        
-        private static Dictionary<string, LoginPair> loggedIn = new Dictionary<string, LoginPair>();
+        private static Dictionary<string, LoginPair> loggedIn = null;
         static JavaScriptSerializer jss = new JavaScriptSerializer();
-        public static void webInitialize()
-        {
-            bl = new BLFacade();
-        }
         private static string GenerateRandomHash()
         {
             return Guid.NewGuid().ToString();
-        }
-        public static bool isLoggedIn(string loginHash)
-        {
-            LoginPair lg;
-            loggedIn.TryGetValue(loginHash, out lg);
-
-            return lg != null;
-        }
-        
-        public static LoginPair GetPair(string hash)
-        {
-            return loggedIn[hash];
         }
         public static string initialize(Dictionary<string, dynamic> data)
         {
             bl = new BLFacade();
             SuperUser su = ServiceFacade.bl.initialize(data["name"], data["username"], data["id"], data["email"], data["password"]);
+            loggedIn = new Dictionary<string, LoginPair>();
             string key = GenerateRandomHash();
             loggedIn.Add(key, new LoginPair(su.Id));
 
@@ -74,17 +57,9 @@ namespace WASP.Service
 
         public static string defineForumPolicy(Dictionary<string, dynamic> data)
         {
-            //TODO
             LoginPair pair = loggedIn[data["auth"]];
-            int forumId = pair.ForumId;
-            bool superUser = false;
-            if (forumId == -1)
-            {
-                forumId = data["forum"];
-                superUser = true;
-            }
             Policy policy = new Policy();
-            bl.defineForumPolicy(pair.UserId, forumId, policy, superUser);
+            bl.defineForumPolicy(pair.UserId, pair.ForumId, policy);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
 
             return jss.Serialize(result);
@@ -241,29 +216,14 @@ namespace WASP.Service
         public static string subForumTotalMessages(Dictionary<string, dynamic> data)
         {
             LoginPair pair = loggedIn[data["auth"]];
-            if (pair.ForumId > -1)
-            {
-                return "{ \"messagenumber\": " +
+            return "{ \"messagenumber\": " +
                 bl.subForumTotalMessages(pair.UserId, pair.ForumId, data["subforumid"]) + "}";
-            }
-            else
-            {
-                return "{ \"messagenumber\": " +
-                bl.subForumTotalMessages(pair.UserId, data["forum"], data["subforumid"], true) + "}";
-            }
         }
 
         public static string postsByMember(Dictionary<string, dynamic> data)
         {
             LoginPair pair = loggedIn[data["auth"]];
-            int forumId = pair.ForumId;
-            bool superUser = false;
-            if (forumId == -1)
-            {
-                forumId = data["forum"];
-                superUser = true;
-            }
-            Post[] posts = bl.postsByMember(pair.UserId, forumId, data["userid"], superUser);
+            Post[] posts = bl.postsByMember(pair.UserId, pair.ForumId, data["userid"]);
             List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
             foreach (Post post in posts)
             {
@@ -284,7 +244,6 @@ namespace WASP.Service
 
         public static string moderatorReport(Dictionary<string, dynamic> data)
         {
-            //TODO:
             return "Not implemented yet";
         }
 
@@ -317,13 +276,15 @@ namespace WASP.Service
         {
             User user = bl.login(data["username"], data["password"], data["forumid"]);
             string key = GenerateRandomHash();
-            LoginPair pair = new LoginPair(user.Id, user.Forum.Id);
-            loggedIn.Add(key, pair);
+            loggedIn.Add(key, new LoginPair(user.Id, user.Forum.Id));
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            result.Add("username", user.Username);
+            result.Add("password", user.Password);
             result.Add("id", user.Id);
+            result.Add("email", user.Email);
+            result.Add("name", user.Name);
             result.Add("auth", key);
-            result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
         }
 
@@ -331,23 +292,13 @@ namespace WASP.Service
         {
             SuperUser su = bl.loginSU(data["username"], data["password"]);
             string key = GenerateRandomHash();
-            LoginPair pair = new LoginPair(su.Id);
-            loggedIn.Add(key, pair);
+            loggedIn.Add(key, new LoginPair(su.Id));
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("auth", key);
             result.Add("id", su.Id);
-            result.Add("forum", pair.ForumId);
-            return jss.Serialize(result);
-        }
-
-        public static string loginHash(Dictionary<string, dynamic> data)
-        {
-            LoginPair pair = loggedIn[data["auth"]];
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("auth", data["auth"]);
-            result.Add("id", pair.UserId);
-            result.Add("forum", pair.ForumId);
+            result.Add("username", su.Username);
+            result.Add("password", su.Password);
             return jss.Serialize(result);
         }
 
@@ -520,9 +471,9 @@ namespace WASP.Service
         }
 
         public static string getAdmin(Dictionary<string, dynamic> data)
-        {   //adminid
+        {   //adminid, forumid
             LoginPair pair = loggedIn[data["auth"]];
-            Admin a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            Admin a = bl.getAdmin(pair.UserId, data["forumid"], data["adminid"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             //username, id, password, email, name
             User u = a.User;
@@ -532,34 +483,6 @@ namespace WASP.Service
             result.Add("password", u.Password);
             result.Add("email", u.Email);
             return jss.Serialize(result);
-        }
-
-        public static string getFriends(Dictionary<string, dynamic> data)
-        {   //adminid
-            LoginPair pair = loggedIn[data["auth"]];
-            User u = User.Get(pair.UserId, pair.ForumId);
-            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
-            foreach (User friend in u.GetAllFriends())
-            {
-                Dictionary<string, dynamic> friendDict = new Dictionary<string, dynamic>();
-                friendDict.Add("id", friend.Id);
-                friendDict.Add("name", friend.Name);
-                friendDict.Add("username", friend.Username);
-                result.Add(friendDict);
-            }
-
-            return jss.Serialize(result);
-        }
-
-        public static string addFriend(Dictionary<string, dynamic> data)
-        {
-            LoginPair pair = loggedIn[data["auth"]];
-            return bl.addFriend(pair.UserId, pair.ForumId, data["friend"]).ToString();
-        }
-
-        public static string GetWebFile(Dictionary<string, dynamic> data)
-        {
-            return File.ReadAllText(data["file"]);
         }
     }
 }

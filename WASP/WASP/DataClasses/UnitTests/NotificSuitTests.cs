@@ -47,8 +47,8 @@ namespace WASP.DataClasses.UnitTests
         {
             try
             {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), Notification.Types.Message, DateTime.Now.Date));
-                Notification not2 = dal.CreateNotification(new Notification(-1, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), Notification.Types.Message, DateTime.Now));
+                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId), dal));
+                Notification not2 = dal.CreateNotification(new Notification(-1, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), dal));
                 Assert.IsTrue(not1.Message != null);
 
                 Assert.IsTrue(not1.Message.Equals("hi"));
@@ -64,35 +64,6 @@ namespace WASP.DataClasses.UnitTests
             }
         }
 
-        [TestMethod]
-        public void AddNotificationTest1_1()
-        {
-            try
-            {
-                Notification not1 = dal.CreateNotification(new Notification(-1, "hi", true, dal.GetUser(userId1, forumId), dal.GetUser(userId2, forumId),Notification.Types.Message,DateTime.Now));
-                Notification not2 = dal.CreateNotification(new Notification(-1, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), Notification.Types.Message, DateTime.Now.AddDays(10)));
-                dal.UpdateNotification(new Notification(not2.Id, "hi", false, dal.GetUser(userId2, forumId), dal.GetUser(userId1, forumId), Notification.Types.Post, DateTime.Now.AddDays(6)));
-                not2 = dal.GetNotification(not2.Id);
-                Assert.IsTrue(not1.Message != null);
-
-                Assert.IsTrue(not1.Message.Equals("hi"));
-                Assert.IsTrue(not2.Message.Equals("hi"));
-                Assert.IsTrue(not1.IsNew == true);
-                Assert.IsTrue(not2.IsNew == false);
-                Assert.IsTrue(not1.Source.Id == user1.Id);
-                Assert.IsTrue(not2.Source.Id == user2.Id);
-
-                Assert.IsTrue(not1.Type == Notification.Types.Message);
-                Assert.IsTrue(not2.Type == Notification.Types.Post);
-                Assert.IsTrue(not2.CreationTime.Date == DateTime.Now.AddDays(6).Date);
-                Assert.IsTrue(not1.CreationTime.Date == DateTime.Now.Date);
-
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(e.Message);
-            }
-        }
         [TestMethod]
         public void UpdateNotificationTest2()
         {

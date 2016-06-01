@@ -257,10 +257,10 @@ namespace WASP.DataClasses.UnitTests
         {
             User user1 = dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
             User user2 = dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
-            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2,Notification.Types.Message, DateTime.Now));
-            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, Notification.Types.Message, DateTime.Now));
-            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, Notification.Types.Message, DateTime.Now));
-            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, Notification.Types.Message, DateTime.Now));
+            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
 
             Assert.IsTrue(dal.GetUserNewNotifications(user1.Id).Length == 2);
             Assert.IsTrue(dal.GetUserNewNotifications(user2.Id).Length == 1);
@@ -271,9 +271,9 @@ namespace WASP.DataClasses.UnitTests
         {
             User user1 = dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
             User user2 = dal.CreateUser(new User(315470048, "matan", "matansar2", "matansar2@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
-            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2, Notification.Types.Message, DateTime.Now));
-            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, Notification.Types.Message, DateTime.Now));
-            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, Notification.Types.Message, DateTime.Now));
+            dal.CreateNotification(new Notification(-1, "hi", true, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", false, user1, user2, dal));
+            dal.CreateNotification(new Notification(-1, "hi", true, user2, user1, dal));
 
             Assert.IsTrue(dal.GetUserNotifications(user1.Id).Length == 1);
             Assert.IsTrue(dal.GetUserNotifications(user2.Id).Length == 2);
@@ -302,18 +302,6 @@ namespace WASP.DataClasses.UnitTests
             Assert.IsTrue(users.ToList().Where(x => x.Id == 315470046).Count() == 0);
             Assert.IsTrue(users.ToList().Where(x => x.Id == 315470048).Count() == 0);
 
-        }
-        [TestMethod]
-        public void UserAddFriendTest12()
-        {
-            Forum forum = dal.CreateForum(new Forum(-1, "Start-Up", "blah", null, dal));
-            User user1 = dal.CreateUser(new User(111111, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
-            User user2 = dal.CreateUser(new User(222222, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), dal));
-
-            dal.AddFriend(user1, user2);
-            User[] users = dal.GetUserFriends(user1.Id, user1.Forum.Id);
-            Assert.IsTrue(users.Length == 1);
-            Assert.IsTrue(users[0].Id == user2.Id);
         }
 
     }

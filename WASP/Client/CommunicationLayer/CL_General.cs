@@ -26,7 +26,8 @@ namespace Client.CommunicationLayer
         public CL()
         {
             _url = "http://localhost:8080";
-            parser = new ParseString(); 
+            forumID = -1;
+            parser = new ParseString();
         }
 
         public User loginBySession(string session)
@@ -36,7 +37,7 @@ namespace Client.CommunicationLayer
 
         public void setForumID(int forumID)
         {
-            this.forumID = forumID; 
+            this.forumID = forumID;
         }
         private string httpReq(string json, string method, string url)
         {
@@ -50,21 +51,30 @@ namespace Client.CommunicationLayer
                 streamWriter.Write(json);
             }
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            if ((int)httpResponse.StatusCode != 200)
+            try
             {
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                if ((int)httpResponse.StatusCode != 200)
+                {
                     return HandleHttpError((int)httpResponse.StatusCode, httpResponse);
+                }
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    return result;
+                }
             }
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            catch (WebException e)
             {
-                var result = streamReader.ReadToEnd();
-                return result;
+                //MessageBox.Show(e.Message);
+                return "error";
             }
+
         }
 
         private string HandleHttpError(int statusCode, HttpWebResponse r)
         {
-            using(var streamReader = new StreamReader(r.GetResponseStream()))
+            using (var streamReader = new StreamReader(r.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
                 MessageBox.Show(result);
@@ -107,14 +117,14 @@ namespace Client.CommunicationLayer
             string json = "{\"postid\":" + postID + "}";
             string res = httpReq(json, "POST", _url + "/getReplys/");
             return parser.parseStringToPosts(res);
-        }     
+        }
 
         public Forum getForum(int forumID)
         {   //name, description, adminid
             string json = "{\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getForum/");
             return parser.parseStringToForum(res);
-        }       
+        }
 
         public Subforum getSubforum(int subforumId)
         {   //name, description, moderatorid
@@ -123,17 +133,7 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSubforum(res);
         }
 
-        DateTime getModeratorTermTime(int moderatorID, int subforumID)
-        {
-            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID + "}";
-            string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
-            return parseStringToDate(res);
-        }
-
-        private DateTime parseStringToDate(string res)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public List<Moderator> getModerators(int subForumID)
         {   //subforumid, appointedbyid, moderatorid
@@ -177,9 +177,9 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSubforums(res);
         }
 
-        public Admin getAdmin(int AdminID)
+        public Admin getAdmin(int AdminID, int forumID)
         {   //username, id, password, email, name
-            string json = "{\"adminid\":" + AdminID + "," + "\"auth\":\"" + _auth + "\"" + "}";
+            string json = "{\"adminid\":" + AdminID + "," + "\"auth\":\"" + _auth + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/getAdmin/");
             return parser.parseStringToAdmin(res, this);
         }

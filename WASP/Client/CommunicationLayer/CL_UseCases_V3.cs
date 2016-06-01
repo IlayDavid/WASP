@@ -95,5 +95,24 @@ namespace Client.CommunicationLayer
         }
 
         //---------------------------Version 3 Use Cases End------------------------------------
+
+        //---------------------------Version 4 Use Cases-----------------------------------
+
+        public List<User> getFriends()
+        {
+            string json = "{\"auth\":\"" + _auth + "\"}";
+            string res = httpReq(json, "POST", _url + "/getFriends/");
+            return parser.parseStringToFriends(res);
+        }
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        public int addFriend(int friendID)
+        {
+            string json = "{\"friend\":" + friendID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string res = httpReq(json, "POST", _url + "/addFriend/");
+            return 0;
+        }
+
     }
 }

@@ -5,20 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client"
       mc:Ignorable="d"
-      Title="Login" Height="177.6" Width="261.2"
+      Title="Login" Height="237.8" Width="297.2"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="234" Margin="10,10,0,0">
-            <Button Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="151,91,0,0"
-    			Click="BtnLogIn_Click"/>
-            <Grid HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="200" Margin="10,10,0,0">
-                <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,8,0,0"/>
-                <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,39,0,0"/>
-                <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="74,11,0,0"/>
-                <PasswordBox x:Name="passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,42,0,0" Width="120" Height="23"/>
-            </Grid>
-        </Grid>
+        <Button Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" Margin="211,161,0,0"
+        	Click="BtnLogIn_Click"/>
+        <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="61,26,0,0"/>
+        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="64,57,0,0"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="132,29,0,0"/>
+        <PasswordBox x:Name="passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,60,0,0" Width="120" Height="23"/>
+        <Label Content="*Client-Session:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,104,0,0" Width="100"/>
+        <TextBox x:Name="txtClientSession" IsEnabled="False" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="133,107,0,0"/>
+        <RadioButton x:Name="rdbUserPass" Checked="rdb_Checked" Content="I want to login by username &amp; password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,9,0,0" FontWeight="Bold"/>
+        <RadioButton x:Name="rdbClientSession" Checked="rdb_Checked" Content="I have logged-in and have a Client-Session" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,87,0,0" FontWeight="Bold"/>
 
 
     </Grid>

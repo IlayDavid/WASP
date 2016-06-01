@@ -78,20 +78,9 @@ namespace WASP.Domain
             return Forum.Get(newForum.Id);
         }
 
-        public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser=false)
+        public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            //TODO
-            Forum forum;
-            if (superUser)
-            {
-                SuperUser.Get(userID);
-                forum = Forum.Get(forumID);
-            }
-            else
-            {
-                Admin admin = Admin.Get(userID, forumID);
-            }
-                
+            Admin admin = Admin.Get(userID, forumID);
 
             policy.Update();
             return 1;
@@ -157,7 +146,7 @@ namespace WASP.Domain
         {
             User source = User.Get(userID, forumID);
             User target = User.Get(targetUserNameID, forumID);
-            Notification newMessage = new Notification(-1, message, true, source, target, Notification.Types.Message);
+            Notification newMessage = new Notification(-1, message, true, source, target);
             target.NewNotification(newMessage);
 
             return 1;
@@ -247,17 +236,9 @@ namespace WASP.Domain
             return toBeAdmin.Create();
         }
 
-        public int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser = false)
+        public int subForumTotalMessages(int userID, int forumID, int subForumID)
         {
-            if (superUser)
-            {
-                SuperUser.Get(userID);
-            }
-            else
-            {
-                Admin admin = Admin.Get(userID, forumID);
-            }
-                
+            Admin admin = Admin.Get(userID, forumID);
             Subforum sf = Subforum.Get(subForumID);
             int counter = 0;
 
@@ -271,23 +252,15 @@ namespace WASP.Domain
             return counter;
         }
 
-        public Post[] postsByMember(int adminID, int forumID, int userID, bool superUser = false)
+        public Post[] postsByMember(int adminID, int forumID, int userID)
         {
-            if (superUser)
-            {
-                SuperUser.Get(adminID);
-            }
-            else
-            {
-                Admin.Get(adminID, forumID);
-            }
-            
+            Admin admin = Admin.Get(adminID, forumID);
             User user = User.Get(userID, forumID);
 
             return user.GetAllPosts();
         }
 
-        public ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false)
+        public ModeratorReport moderatorReport(int userID, int forumID)
         {
             Admin admin = Admin.Get(userID, forumID);
             List<Moderator> mods = new List<Moderator>();
@@ -404,35 +377,13 @@ namespace WASP.Domain
 
         public Notification[] getNewNotificationses(int userID, int forumID)
         {
-            Notification[] notifs = User.Get(userID, forumID).GetNewNotifications();
-            foreach(Notification notif in notifs)
-            {
-                notif.IsNew = false;
-                notif.Update();
-            }
-            return notifs;
+            return User.Get(userID, forumID).GetNewNotifications();
         }
 
         public Post[] getReplys(int forumID, int subForumID, int postID)
         {
             Post post = Post.Get(postID);
             return post.GetAllReplies();
-        }
-
-        public User[] getFriends(int userID, int forumID)
-        {
-            return User.Get(userID, forumID).GetAllFriends();
-        }
-
-        public int addFriend(int userID, int forumID, int friendID)
-        {
-            User user = User.Get(userID, forumID);
-            User friend = User.Get(friendID, forumID);
-
-            user.AddFriend(friend);
-
-            dal.AddFriend(user, friend);
-            return 1;
         }
     }
 }

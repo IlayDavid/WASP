@@ -238,8 +238,13 @@ namespace WASP.DataClasses
         {
             foreach (User member in GetMembers())
             {
+
+                //TODO Need to discuss with Avi.
+                //if(notification.Source != null)
+                //    if (member.Id == notification.Source.Id) //Skip source
+                //        continue;
                 member.NewNotification(new Notification(-1, notification.Message, notification.IsNew,
-                    notification.Source, member, notification.Type));
+                    notification.Source, member));
             }
         }
     }

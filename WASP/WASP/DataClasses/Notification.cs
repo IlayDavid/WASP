@@ -8,17 +8,11 @@ namespace WASP.DataClasses
 {
     public class Notification
     {
-        public enum Types : int
-        {
-            Message = 1, Post = 0
-        }
         private String message;
         private bool isNew;
         private User source;
         private User target;
         private int id;
-        private DateTime creationTime;
-        private Types type;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
         public static Notification Get(int id)
@@ -52,29 +46,6 @@ namespace WASP.DataClasses
             this.isNew = isNew;
             this.source = source;
             this.target = target;
-            this.type = Types.Post;
-            this.creationTime = DateTime.Now;
-        }
-        public Notification(int id, String message, bool isNew, User source, User target, Types type)
-        {
-            this.id = id;
-            this.message = message;
-            this.isNew = isNew;
-            this.source = source;
-            this.target = target;
-            this.type = type;
-            this.creationTime = DateTime.Now;
-        }
-
-        public Notification(int id, String message, bool isNew, User source, User target, Types type, DateTime creationTime)
-        {
-            this.id = id;
-            this.message = message;
-            this.isNew = isNew;
-            this.source = source;
-            this.target = target;
-            this.type = type;
-            this.creationTime = creationTime;
         }
 
         // DEPRECATED
@@ -133,24 +104,6 @@ namespace WASP.DataClasses
             {
                 return this.message;
             }
-        }
-
-
-        public Types Type
-        {
-            get
-            {
-                return this.type;
-            }
-            set
-            {
-                this.type = value;
-            }
-        }
-
-        public DateTime CreationTime
-        {
-            get { return this.creationTime; }
         }
     }
 }

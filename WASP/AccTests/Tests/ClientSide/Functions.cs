@@ -16,7 +16,7 @@ namespace AccTests.Tests
         {
             string userName = "admin";
             Forum forum = proj.createForum( "start-up", "ideas", 1,"david","david", "david@post.bgu.ac.il", "david123", new Policy(5,5,false,5,500));
-            var admin = proj.getAdmin(1);
+            var admin = proj.getAdmin(1, forum.id);
 
             return new Tuple<Forum, Admin>(forum, admin);
         }
@@ -26,7 +26,7 @@ namespace AccTests.Tests
             var user = proj.subscribeToForum(2,"ilanB", "ilan", "ilanB@post.bgu.ac.il",
                                         "ilan123",forum.id);
             Subforum subforum =  proj.createSubForum("sub1", "blah", 2, DateTime.Now.AddDays(100));
-            var moderator = proj.login(user.userName, user.password, forum.id);
+            var moderator = proj.login(user.userName, "ilan123", forum.id);
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 
@@ -40,7 +40,7 @@ namespace AccTests.Tests
             string userName = "admin1";
             Forum forum = proj.createForum( "start-up", "ideas", 4,
                                             "ronen","ronen", "ronen@post.bgu.ac.il", "ronen123", new Policy(5, 5, false, 5, 500));
-            Admin admin = proj.getAdmin(4);
+            Admin admin = proj.getAdmin(4, forum.id);
 
             return new Tuple<Forum, Admin>(forum, admin);
         }
