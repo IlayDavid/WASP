@@ -162,10 +162,9 @@ namespace WASP.Service
         public static string updateModeratorTerm(Dictionary<string, dynamic> data)
         {   //subforumid, moderatorid, termenddate, auth
             LoginPair pair = loggedIn[data["auth"]];
-            Moderator moderator = bl.updateModeratorTerm(pair.UserId, pair.ForumId, data["moderatorid"], data["subforumid"], DateTime.Parse(data["termenddate"]));
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            int result = bl.updateModeratorTerm(pair.UserId, pair.ForumId, data["moderatorid"], data["subforumid"], DateTime.Parse(data["termenddate"]));
             //ok message
-            return 1.ToString();
+            return result.ToString();
         }
 
         public static string confirmEmail(Dictionary<string, dynamic> data)

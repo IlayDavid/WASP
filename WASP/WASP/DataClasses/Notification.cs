@@ -10,7 +10,7 @@ namespace WASP.DataClasses
     {
         public enum Types : int
         {
-            Message = 1, Post = 0
+            System = 0, Message = 1, Post = 2
         }
         private String message;
         private bool isNew;
@@ -52,7 +52,7 @@ namespace WASP.DataClasses
             this.isNew = isNew;
             this.source = source;
             this.target = target;
-            this.type = Types.Post;
+            this.type = Types.System;
             this.creationTime = DateTime.Now;
         }
         public Notification(int id, String message, bool isNew, User source, User target, Types type)

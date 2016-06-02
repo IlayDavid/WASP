@@ -10,28 +10,33 @@ namespace WASP.DataClasses
         {
             return Authority.Level.User;
         }
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+
         public string Name { get; set; }
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PasswordChangeDate { get; set; }
-
-
-
-
-
         public int Id { get; set; }
+
         private Forum forum;
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
         private Dictionary<int, User> friends = null;
-        private static DAL2 dal = WASP.Config.Settings.GetDal();
+        private string[] answers = new string[2];
 
-        public static User Get(int userId, int forumId)
+        public static User Get(int userId, int forumId, bool useCache = true)
         {
-            return dal.GetUser(userId, forumId);
+            User user = null;
+            if (useCache)
+            {
+                //TODO
+            }
+            else
+                user = dal.GetUser(userId, forumId);
+            return user;
         }
         public static User[] Get(int[] ids, int forumID)
         {
@@ -40,7 +45,7 @@ namespace WASP.DataClasses
 
         public User Update()
         {
-            User old = Get(Id, Forum.Id);
+            User old = Get(Id, Forum.Id, false);
             if (!old.Password.Equals(Password))
             {
                 PasswordChangeDate = DateTime.Now;

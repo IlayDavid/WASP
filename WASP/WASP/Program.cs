@@ -161,6 +161,7 @@ namespace WASP
             routes.Add(basePrefix + "getAdmin/", ServiceFacade.getAdmin);
             routes.Add(basePrefix + "getFriends/", ServiceFacade.getFriends);
             routes.Add(basePrefix + "addFriend/", ServiceFacade.addFriend);
+            routes.Add(basePrefix + "loginHash/", ServiceFacade.loginHash);
             routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
 
 
