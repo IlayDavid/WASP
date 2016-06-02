@@ -76,6 +76,21 @@ namespace WASP.DataClasses
             this.StartDate = DateTime.Now;
         }
 
+        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, string [] answers)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.PasswordChangeDate = passChangeDate;
+            this.StartDate = startDate;
+            this.answers = answers;
+        }
+
+        // DEPRECATED
         public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate)
         {
             this.Id = id;
@@ -245,6 +260,12 @@ namespace WASP.DataClasses
             Notification[] notifs = new Notification[NewNotifications.Values.Count];
             NewNotifications.Values.CopyTo(notifs, 0);
             return notifs;
+        }
+
+        public string[] Answers
+        {
+            get { return this.answers; }
+            set { this.answers = value; }
         }
     }
 }
