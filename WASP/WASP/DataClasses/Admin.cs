@@ -17,8 +17,10 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
 
-        public static Admin Get(int adminId, int forumId)
+        public static Admin Get(int adminId, int forumId, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetAdmin(adminId, forumId);
              return dal.GetAdmin(adminId, forumId);
         }
         public static Admin[] Get(int[] ids, int forumId)

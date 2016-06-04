@@ -19,8 +19,10 @@ namespace WASP.DataClasses
         private Admin appointer;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static Moderator Get(int modId, int subforumID)
+        public static Moderator Get(int modId, int subforumID, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetModerator(modId, subforumID);
             return dal.GetModerator(modId, subforumID);
         }
         public static Moderator[] Get(int[] ids, int sfId)

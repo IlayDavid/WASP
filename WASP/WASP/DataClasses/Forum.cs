@@ -14,8 +14,10 @@ namespace WASP.DataClasses
         private Policy policy;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static Forum Get(int id)
+        public static Forum Get(int id, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetForum(id);
             return dal.GetForum(id);
         }
         public static Forum[] Get(int[] ids)

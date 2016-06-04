@@ -29,14 +29,10 @@ namespace WASP.DataClasses
 
         public static User Get(int userId, int forumId, bool useCache = true)
         {
-            User user = null;
             if (useCache)
-            {
-                //TODO
-            }
-            else
-                user = dal.GetUser(userId, forumId);
-            return user;
+                return WASP.Config.Settings.GetCache().GetUser(userId, forumId);
+            
+            return dal.GetUser(userId, forumId);
         }
         public static User[] Get(int[] ids, int forumID)
         {
@@ -260,6 +256,12 @@ namespace WASP.DataClasses
             Notification[] notifs = new Notification[NewNotifications.Values.Count];
             NewNotifications.Values.CopyTo(notifs, 0);
             return notifs;
+        }
+
+        public void ReceivedNotification(Notification notif)
+        {
+            NewNotifications.Remove(notif.Id);
+            Notifications.Add(notif.Id, notif);
         }
 
         public string[] Answers

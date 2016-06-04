@@ -9,10 +9,12 @@ namespace WASP.DataClasses
     public class SuperUser
     {
 
-        public static DAL2 dal = WASP.Config.Settings.GetDal();
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static SuperUser Get(int id)
+        public static SuperUser Get(int id, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetSuperUser(id);
             return dal.GetSuperUser(id);
         }
         public static SuperUser[] Get(int[] ids)

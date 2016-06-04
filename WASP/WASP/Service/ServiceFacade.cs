@@ -144,7 +144,11 @@ namespace WASP.Service
 
         public static string sendMessage(Dictionary<string, dynamic> data)
         {
-            return "Not yet implemented.";
+            //int userID, int forumID, int targetUserNameID, string message
+            LoginPair pair = loggedIn[data["auth"]];
+            bl.sendMessage(pair.UserId, pair.ForumId, data["target"], data["message"]);
+
+            return 1.ToString();
         }
 
         public static string addModerator(Dictionary<string, dynamic> data)
@@ -220,21 +224,39 @@ namespace WASP.Service
         }
 
         public static string getAllNotificationses(Dictionary<string, dynamic> data)
-        {   /*code (int) , auth
+        {
             LoginPair pair = loggedIn[data["auth"]];
-            int moderator = bl.confirmEmail(pair.UserId, pair.ForumId);
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            //ok message */
-            return "not yet implemented";
+            Notification[] notifs = bl.getAllNotificationses(pair.UserId, pair.ForumId);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            foreach (Notification notif in notifs)
+            {
+                Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
+                ntf.Add("type", notif.Type);
+                ntf.Add("message", notif.Message);
+                ntf.Add("source", notif.Source.Id);
+                ntf.Add("target", notif.Target.Id);
+                ntf.Add("id", notif.Id);
+                result.Add(ntf);
+            }
+            return jss.Serialize(result);
         }
 
         public static string getNewNotificationses(Dictionary<string, dynamic> data)
-        {   /*code (int) , auth
+        {
             LoginPair pair = loggedIn[data["auth"]];
-            int moderator = bl.confirmEmail(pair.UserId, pair.ForumId);
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            //ok message */
-            return "not yet implemented";
+            Notification[] notifs = bl.getNewNotificationses(pair.UserId, pair.ForumId);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            foreach (Notification notif in notifs)
+            {
+                Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
+                ntf.Add("type", notif.Type);
+                ntf.Add("message", notif.Message);
+                ntf.Add("source", notif.Source.Id);
+                ntf.Add("target", notif.Target.Id);
+                ntf.Add("id", notif.Id);
+                result.Add(ntf);
+            }
+            return jss.Serialize(result);
         }
 
         public static string subForumTotalMessages(Dictionary<string, dynamic> data)
