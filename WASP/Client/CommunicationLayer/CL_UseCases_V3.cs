@@ -20,7 +20,7 @@ namespace Client.CommunicationLayer
 
         public int deleteModerator(int moderatorID, int subForumID)
         {
-            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," +  "\"moderatorid\":" + moderatorID + "}";
+            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/deleteModerator/");
             return 0;
         }
@@ -36,13 +36,13 @@ namespace Client.CommunicationLayer
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
-            return parser.parseStringToMessages(res);
+            return parser.parseStringToMessages(res, false);
         }
         public List<Notification> getNewNotificationses()
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
-            return parser.parseStringToMessages(res);
+            return parser.parseStringToMessages(res, true);
         }
 
         //-----------Admin Reports---------------
@@ -53,7 +53,7 @@ namespace Client.CommunicationLayer
             return parser.parseStringToNum(res);
         }
 
-        
+
 
         public List<Post> postsByMember(int userID)
         {   //title,  content,  authorid,  subforumid,  replypostid

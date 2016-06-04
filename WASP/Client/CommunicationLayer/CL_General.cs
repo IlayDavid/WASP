@@ -30,15 +30,11 @@ namespace Client.CommunicationLayer
             parser = new ParseString();
         }
 
-        public User loginBySession(string session)
-        {
-            return null;
-        }
-
         public void setForumID(int forumID)
         {
             this.forumID = forumID;
         }
+
         private string httpReq(string json, string method, string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -97,6 +93,17 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSuperUser(res, this);
         }
 
+        public User loginBySession(string session)
+        {
+            //username, id, auth, password, email, name
+            string json = "{\"auth\":\"" + session + "\"}";
+            string res = httpReq(json, "POST", _url + "/loginHash/");
+            if (forumID == -1)
+                return parser.parseStringToSuperUser(res, this);
+            else
+                return parser.parseStringToUser(res, true, this);
+        }
+
         //---------------------------------Getters----------------------------------------------
 
         public Post getThread(int threadId)
@@ -133,7 +140,7 @@ namespace Client.CommunicationLayer
             return parser.parseStringToSubforum(res);
         }
 
-        
+
 
         public List<Moderator> getModerators(int subForumID)
         {   //subforumid, appointedbyid, moderatorid

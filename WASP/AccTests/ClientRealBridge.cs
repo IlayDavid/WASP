@@ -157,6 +157,11 @@ namespace AccTests
             return _clientAPI.getThreads(subForumID);
         }
 
+        public string getUserQuestion(string username)
+        {
+            return _clientAPI.getUserQuestion(username);
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return _clientAPI.initialize(name, userName, ID, email, pass);
@@ -174,7 +179,7 @@ namespace AccTests
 
         public User loginBySession(string session)
         {
-            throw new NotImplementedException();
+            return _clientAPI.loginBySession(session);
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -195,6 +200,11 @@ namespace AccTests
         public List<Post> postsByMember(int userID)
         {
             return _clientAPI.postsByMember(userID);
+        }
+
+        public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        {
+            throw new NotImplementedException();
         }
 
         public int sendMessage(int targetUserID, string message)

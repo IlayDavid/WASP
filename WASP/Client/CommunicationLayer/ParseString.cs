@@ -271,7 +271,7 @@ namespace Client.CommunicationLayer
             return DateTime.Parse(dict["termtime"]);
         }
 
-        public List<Notification> parseStringToMessages(string res)
+        public List<Notification> parseStringToMessages(string res, bool isnew)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<List<CLNotification>>(res);
@@ -280,8 +280,12 @@ namespace Client.CommunicationLayer
             {
                 foreach (CLNotification cl in dict)
                 {
-                    Notification n=null;
-                    //Notification n = new Notification(cl.id, cl.message, cl.sourceid, cl.targetid, cl.isnew);
+                    Notification.Types t;
+                    if (cl.type == CLNotification.Types.Message)
+                        t = Notification.Types.Message;
+                    else
+                        t = Notification.Types.Post;
+                    Notification n = new Notification(cl.id, cl.message, isnew, cl.source, cl.target, t);
                     ret.Add(n);
                 }
             }

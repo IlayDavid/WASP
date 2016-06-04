@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Client.DataClasses;
 using WASP.DataClasses;
 using Forum = Client.DataClasses.Forum;
-using Notifications = Client.DataClasses.Notifications;
 using Policy = Client.DataClasses.Policy;
 using Post = Client.DataClasses.Post;
 using Subforum = Client.DataClasses.Subforum;
@@ -163,6 +162,11 @@ namespace AccTests
             return proj.getThreads(subForumID);
         }
 
+        public string getUserQuestion(string username)
+        {
+            return ((WASPClientBridge)proj).getUserQuestion(username);
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return proj.initialize(name, userName, ID, email, pass);
@@ -201,6 +205,11 @@ namespace AccTests
         public List<Post> postsByMember(int userID)
         {
             return proj.postsByMember(userID);
+        }
+
+        public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        {
+            return proj.restorePasswordbyAnswer(username, answer, newPassword);
         }
 
         public int sendMessage(int targetUserID, string message)
