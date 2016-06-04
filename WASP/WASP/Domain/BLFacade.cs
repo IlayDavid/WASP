@@ -78,21 +78,21 @@ namespace WASP.Domain
             return Forum.Get(newForum.Id);
         }
 
-        public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser=false)
+        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false)
         {
             //TODO
-            Forum forum;
+            Forum forum = Forum.Get(forumID); ;
             if (superUser)
             {
                 SuperUser.Get(userID);
-                forum = Forum.Get(forumID);
             }
             else
             {
                 Admin admin = Admin.Get(userID, forumID);
             }
+            Policy.PostDeletePolicy dp = (Policy.PostDeletePolicy)Enum.Parse(typeof(Policy.PostDeletePolicy), deletePost);
+            Policy policy = new Policy(-1, dp, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions);
                 
-
             policy.Update();
             return 1;
         }
@@ -289,16 +289,20 @@ namespace WASP.Domain
 
         public ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false)
         {
-            Admin admin = Admin.Get(userID, forumID);
+            if(!superUser)
+                Admin.Get(userID, forumID);
+            else
+                SuperUser.Get(userID);
+            Forum forum = Forum.Get(forumID);
             List<Moderator> mods = new List<Moderator>();
-            foreach (Subforum sf in admin.Forum.GetAllSubForums())
+            foreach (Subforum sf in forum.GetAllSubForums())
             {
                 foreach (Moderator mod in sf.GetAllModerators())
                 {
                     mods.Add(mod);
                 }
             }
-            return new ModeratorReport(mods.ToArray());
+            return new ModeratorReport(forum, mods.ToArray());
         }
 
         public int totalForums(int userID)

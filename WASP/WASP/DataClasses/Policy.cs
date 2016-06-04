@@ -47,7 +47,7 @@ namespace WASP.DataClasses
         private TimeSpan minimumSeniority;
         //stress
         private int usersLoad;
-        private string[] questions = new string[2];
+        private string[] questions;
 
         public TimeSpan PasswordTimeSpan
         {
@@ -98,7 +98,7 @@ namespace WASP.DataClasses
             emailVerification = false;
             minimumSeniority = new TimeSpan(0);
             usersLoad = 100;
-            questions = new string[0];
+            questions = new string[2] {"", ""};
         }
 
         public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions)
@@ -111,7 +111,6 @@ namespace WASP.DataClasses
             this.usersLoad = usersLoad;
             this.questions[0] = questions[0];
             this.questions[1] = questions[1];
-
         }
 
 
