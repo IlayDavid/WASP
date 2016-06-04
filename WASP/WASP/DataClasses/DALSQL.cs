@@ -6,7 +6,7 @@ using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses;
 using System.IO;
-using static WASP.DataClasses.Notification;
+using WASP.DataClasses.Notification;
 
 namespace WASP.DataClasses
 {
