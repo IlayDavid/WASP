@@ -23,7 +23,7 @@ namespace Client.BusinessLogic
         * Return: 0 - if not initialize, 1 - otherwise.
         */
         int isInitialize();
-
+        
         /*
          * Pre-conditions: super user is loged-in 
          * Purpose: create new forum which, with details of the admin.
@@ -59,6 +59,7 @@ namespace Client.BusinessLogic
         * Return: post - on succsess, NULL - in fail.
         */
         Post createReplyPost(string content, int replyToPost_ID);
+        
 
         /* 
         * Pre-conditions: Admin is loged-in and he is admin of the forum. 
@@ -165,6 +166,12 @@ namespace Client.BusinessLogic
         //login by client-session password (requested in ass3)
         User loginBySession(string session);
 
+        //return question specified by the user.
+        string getUserQuestion(string username);
+        //check if the answer match the answer specified by the user in registration.
+        //return: password
+        string restorePasswordbyAnswer(string username, string answer, string newPassword);
+
         //---------------------------Version 4 Use Cases End------------------------------------
 
 
@@ -230,6 +237,16 @@ namespace Client.BusinessLogic
         List<Subforum> getSubforums(int forumID);
 
         /* Purpose: return forum's Admin information. */
-        Admin getAdmin(int AdminID); 
+        Admin getAdmin(int AdminID, int forumID);
+
+        Admin getAdmin(int AdminID);
+
+        /* Pre-conditions: User is loged-in.
+         * Purpose: return the friends list of the loged-in user.*/
+        List<User> getFriends();
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        int addFriend(int friendID);
     }
 }

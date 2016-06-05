@@ -218,5 +218,35 @@ namespace AccTests
         {
             return _serverAPI.getAdmin(userID, forumID, AdminID);
         }
+
+        public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser = false)
+        {
+            return _serverAPI.defineForumPolicy(userID, forumID, policy, superUser);
+        }
+
+        public int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser = false)
+        {
+            return _serverAPI.subForumTotalMessages(userID, forumID, subForumID, superUser);
+        }
+
+        public Post[] postsByMember(int adminID, int forumID, int userID, bool superUser = false)
+        {
+            return _serverAPI.postsByMember(adminID, forumID, userID, superUser);
+        }
+
+        public ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false)
+        {
+            return _serverAPI.moderatorReport(userID, forumID, superUser);
+        }
+
+        public User[] getFriends(int userID, int forumID)
+        {
+            return _serverAPI.getFriends(userID, forumID);
+        }
+
+        public int addFriend(int userID, int forumID, int friendID)
+        {
+            return _serverAPI.addFriend(userID, forumID, friendID);
+        }
     }
 }

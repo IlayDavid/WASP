@@ -1,20 +1,9 @@
-﻿using Client.BusinessLogic;
-using Client.CommunicationLayer;
-using Client.DataClasses;
-using Client.GUI;
+﻿using Client.GUI;
+using Client.GUI.MainWindows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -24,32 +13,65 @@ namespace Client
     public partial class Login : Window
     {
         int _forumID;
-        User _user;
         public static readonly int ALL_FORUMS = -1;
 
         public Login(int loginTo)
         {
             _forumID = loginTo;
             InitializeComponent();
+            rdbUserPass.IsChecked = true;
         }
-        
+
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            //try
             {
-                string username = txtUsername.Text;
-                string password = passPassword.Password;
-                if (_forumID == ALL_FORUMS)
-                    _user = Session.bl.loginSU(username, password);
+                if (rdbClientSession.IsChecked.Value)
+                {
+                    string session = txtClientSession.Text;
+                    Session.user = Session.bl.loginBySession(session);
+                    this.Close();
+                }
                 else
-                    _user = Session.bl.login(username, password, _forumID);
-                Session.user = _user;
-                this.Close();
+                {
+                    string username = txtUsername.Text;
+                    string password = passPassword.Password;
+                    if (_forumID == ALL_FORUMS)
+                        Session.user = Session.bl.loginSU(username, password);
+                    else
+                        Session.user = Session.bl.login(username, password, _forumID);
+                    MessageBox.Show("Your client-session is: "+Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
             }
-            catch (Exception ee)
+            //catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                
+                //MessageBox.Show(ee.Message);
             }
+        }
+
+        private void rdb_Checked(object sender, RoutedEventArgs e)
+        {
+            if(rdbClientSession.IsChecked.Value)
+            {
+                txtUsername.IsEnabled = false;
+                passPassword.IsEnabled = false;
+                txtClientSession.IsEnabled = true;
+            }
+            else
+            {
+                txtUsername.IsEnabled = true;
+                passPassword.IsEnabled = true;
+                txtClientSession.IsEnabled = false;
+            }
+        }
+        private void lblForget_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            RestorePassword rp = new RestorePassword();
+            this.Hide();
+            rp.ShowDialog();
+            this.Close();
         }
     }
 }

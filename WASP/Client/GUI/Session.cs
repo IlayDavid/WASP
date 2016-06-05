@@ -10,7 +10,6 @@ namespace Client.GUI
 {
     public class Session
     {
-		
         public readonly static int ALL = 0;
         public readonly static int MEMBER = 1;
         public readonly static int SUBFORUMS = 2;
@@ -26,12 +25,17 @@ namespace Client.GUI
         public static Dictionary<int, Forum> forums = null;
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
-        public static void LoadForums()
+
+        internal static void LoadFriends()
+        {
+            user.friends = bl.getFriends();
+        }
+        internal static void LoadForums()
         {
             forums = bl.getAllForums().ToDictionary(x => x.id);
         }
 
-        public static void LoadReplys()
+        internal static void LoadReplys()
         {
             post.replies = bl.getReplys(post.id);
         }
@@ -71,7 +75,7 @@ namespace Client.GUI
                 catch{ }
         }
 
-        internal static void ShowNotifications(List<Notifications> nots)
+        internal static void ShowNotifications(List<Notification> nots)
         {
             if (nots == null)
             {
@@ -79,14 +83,26 @@ namespace Client.GUI
                 return;
             }
             string notsStr = "";
-            foreach (Notifications m in nots)
+            foreach (Notification m in nots)
             {
                 notsStr += m.message + "\n";
             }
-            MessageBox.Show("No new Notifications");
+            MessageBox.Show(notsStr, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-        internal static void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        public static void NotifyWindows(List<Notification> nots)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                try
+                {
+                    if (App.Current.Windows[intCounter] is INotificable)
+                    {
+                        INotificable curr = (INotificable) App.Current.Windows[intCounter];
+                        curr.NotifyWindow(nots);
+                    }// curr.
+                }
+                catch { }
+        }
+        internal static void NotifyWindow(List<Notification> notifications, Button notsBtn)
         {
             notsBtn.Content = "Notifications (" + notifications.Count + ")";
             notsBtn.DataContext = notifications;

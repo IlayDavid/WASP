@@ -16,7 +16,7 @@ namespace Client.BusinessLogic
         {
             string validStr = isUserValid(name, userName, ID, email, pass);
             if (validStr == null)
-                return _cl.initialize(name, userName, ID, email, pass);
+                return _cl.initialize(name, userName, ID, email, sha256_hash(pass));
             else
                 throw new Exception(validStr);
         }
@@ -56,7 +56,7 @@ namespace Client.BusinessLogic
             if (!IsStrValid(forumName)) throw new Exception("ERROR: Forum name is empty");
             if (!IsStrValid(description)) throw new Exception("ERROR: Forum description is empty");
 
-            return _cl.createForum(forumName, description, adminID, adminUserName, adminName, email, pass, policy);
+            return _cl.createForum(forumName, description, adminID, adminUserName, adminName, email, sha256_hash(pass), policy);
 
         }
 
@@ -71,7 +71,7 @@ namespace Client.BusinessLogic
             if (targetForumID < 0) throw new Exception("ERROR: ID is illegal");
             if (errorMsg != null) throw new Exception(errorMsg);
 
-            return _cl.subscribeToForum(id, userName, name, email, pass, targetForumID);
+            return _cl.subscribeToForum(id, userName, name, email, sha256_hash(pass), targetForumID);
         }
 
         public Post createThread(string title, string content, int subForumID)

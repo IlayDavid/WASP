@@ -80,7 +80,7 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
-        public Post parseStringToPost(string res, bool reply=false)
+        public Post parseStringToPost(string res, bool reply = false)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
@@ -151,6 +151,22 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
+        public Moderator parseStringToModerator(string res, DateTime dt)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            int modid = dict["moderatorid"];
+            int subforumid = dict["subforumid"];
+            int appointedbyid = dict["appointedbyid"];
+            User user = new User();
+            user.id = modid;
+            User appoint = new User();
+            appoint.id = appointedbyid;
+            Moderator mod = new Moderator(user, dt, appoint);
+            mod.subForumID = subforumid;
+            return mod;
+        }
+
         public Moderator parseStringToModerator(string res)
         {
             var jss = new JavaScriptSerializer();
@@ -162,7 +178,7 @@ namespace Client.CommunicationLayer
             user.id = modid;
             User appoint = new User();
             appoint.id = appointedbyid;
-            Moderator mod = new Moderator(user, new DateTime(), appoint);
+            Moderator mod = new Moderator(user, DateTime.Now, appoint);
             mod.subForumID = subforumid;
             return mod;
         }
@@ -230,6 +246,55 @@ namespace Client.CommunicationLayer
                 ret.Add(u);
             }
             return ret;
+        }
+
+        public List<User> parseStringToFriends(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLFriend>>(res);
+            List<User> ret = new List<User>();
+            if (dict != null)
+            {
+                foreach (CLFriend cl in dict)
+                {
+                    User u = new User(cl.id, cl.name, cl.username, null, null);
+                    ret.Add(u);
+                }
+            }
+            return ret;
+        }
+
+        public DateTime parseStringToDate(string res)
+        {   //termtime
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            return DateTime.Parse(dict["termtime"]);
+        }
+
+        public List<Notification> parseStringToMessages(string res, bool isnew)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLNotification>>(res);
+            List<Notification> ret = new List<Notification>();
+            if (dict != null)
+            {
+                foreach (CLNotification cl in dict)
+                {
+                    Notification.Types t;
+                    if (cl.type == CLNotification.Types.Message)
+                        t = Notification.Types.Message;
+                    else
+                        t = Notification.Types.Post;
+                    Notification n = new Notification(cl.id, cl.message, isnew, cl.source, cl.target, t);
+                    ret.Add(n);
+                }
+            }
+            return ret;
+        }
+
+        public ModeratorReport parseStringToModeratorReport(string res)
+        {
+            throw new NotImplementedException();
         }
     }
 }

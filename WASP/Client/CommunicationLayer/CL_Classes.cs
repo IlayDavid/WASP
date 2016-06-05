@@ -26,6 +26,32 @@ namespace Client.CommunicationLayer
         }
     }
 
+    public class CLNotification
+    {
+        public enum Types : int
+        {
+            Message = 1, Post = 0
+        }
+        public int id { get; set; }
+        public string message { get; set; }
+        public Types type { get; set; }
+        public int source { get; set; }
+        public int target { get; set; }
+        public CLNotification()
+        {
+        }
+    }
+
+    public class CLFriend
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string username { get; set; }
+        public CLFriend()
+        {
+        }
+    }
+
     public class CLPost
     {
         public string title { get; set; }

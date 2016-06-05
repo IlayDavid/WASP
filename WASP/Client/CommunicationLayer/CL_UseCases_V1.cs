@@ -28,7 +28,7 @@ namespace Client.CommunicationLayer
         {
             string json = "{}";
             string res = httpReq(json, "POST", _url + "/isInitialize/");
-            return int.Parse(res);
+            return int.Parse(res); //1 init, 0 not init
         }
 
         public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
@@ -49,7 +49,24 @@ namespace Client.CommunicationLayer
                 + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}";
             string res = httpReq(json, "POST", _url + "/defineForumPolicy/");
             return parser.parseStringToNum(res);
-        } 
+        }
+
+
+       /* public static string defineForumPolicy(Dictionary<string, dynamic> data)
+        {
+            LoginPair pair = loggedIn[data["auth"]];
+            int forumId = pair.ForumId;
+            bool superUser = false;
+            if (forumId == -1)
+            {
+                forumId = data["forum"];
+                superUser = true;
+            }
+            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], superUser);
+
+            return 1.ToString();
+        }
+        */
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {   //username, id, password, name, email
@@ -63,7 +80,7 @@ namespace Client.CommunicationLayer
         public Post createThread(string title, string content, int subForumID)
         {   //title,  content,  authorid,  subforumid,  replypostid
             string json = "{\"title\":\"" + title + "\"," + "\"content\":\"" + content
-                + "\"," + "\"subforumid\":" + subForumID  +",\"auth\":\"" + _auth + "\"}";
+                + "\"," + "\"subforumid\":" + subForumID + ",\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/createThread/");
             return parser.parseStringToPost(res);
         }

@@ -20,7 +20,7 @@ namespace Client.CommunicationLayer
 
         public int deleteModerator(int moderatorID, int subForumID)
         {
-            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," +  "\"moderatorid\":" + moderatorID + "}";
+            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/deleteModerator/");
             return 0;
         }
@@ -34,20 +34,15 @@ namespace Client.CommunicationLayer
 
         public List<Notification> getAllNotificationses()
         {
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
-            return parseStringToMessages(res);
+            return parser.parseStringToMessages(res, false);
         }
         public List<Notification> getNewNotificationses()
         {
-            string json = "{}";
+            string json = "{\"auth\":\"" + _auth + "\"}";
             string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
-            return parseStringToMessages(res);
-        }
-
-        private List<Notification> parseStringToMessages(string res)
-        {
-            throw new NotImplementedException();
+            return parser.parseStringToMessages(res, true);
         }
 
         //-----------Admin Reports---------------
@@ -58,7 +53,7 @@ namespace Client.CommunicationLayer
             return parser.parseStringToNum(res);
         }
 
-        
+
 
         public List<Post> postsByMember(int userID)
         {   //title,  content,  authorid,  subforumid,  replypostid
@@ -69,15 +64,15 @@ namespace Client.CommunicationLayer
 
         public ModeratorReport moderatorReport()
         {
-            string json = "{}";
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("auth", _auth);
+            dict.Add("forum", forumID);
+            string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/moderatorReport/");
-            return parseStringToModeratorReport(res);
+            return parser.parseStringToModeratorReport(res);
         }
 
-        private ModeratorReport parseStringToModeratorReport(string res)
-        {
-            throw new NotImplementedException();
-        }
 
         //-----------Super User Reports---------------
         public int totalForums()
@@ -95,5 +90,23 @@ namespace Client.CommunicationLayer
         }
 
         //---------------------------Version 3 Use Cases End------------------------------------
+
+        //---------------------------Version 4 Use Cases-----------------------------------
+
+        public List<User> getFriends()
+        {
+            string json = "{\"auth\":\"" + _auth + "\"}";
+            string res = httpReq(json, "POST", _url + "/getFriends/");
+            return parser.parseStringToFriends(res);
+        }
+
+        /* Pre-conditions: User is loged-in.
+        * Purpose: add user with friendID to the loged-in user's friend list.*/
+        public int addFriend(int friendID)
+        {
+            string json = "{\"friend\":" + friendID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string res = httpReq(json, "POST", _url + "/addFriend/");
+            return 0;
+        }
     }
 }
