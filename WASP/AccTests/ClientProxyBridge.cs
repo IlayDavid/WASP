@@ -13,6 +13,10 @@ namespace AccTests
 {
     public class ClientProxyBridge : WASPClientBridge
     {
+        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
         private ClientRealBridge proj;
 
         public ClientProxyBridge(ClientRealBridge bridge)
@@ -161,12 +165,6 @@ namespace AccTests
         {
             return proj.getThreads(subForumID);
         }
-
-        public string getUserQuestion(string username)
-        {
-            return ((WASPClientBridge)proj).getUserQuestion(username);
-        }
-
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return proj.initialize(name, userName, ID, email, pass);

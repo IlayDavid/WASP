@@ -166,11 +166,9 @@ namespace Client.BusinessLogic
         //login by client-session password (requested in ass3)
         User loginBySession(string session);
 
-        //return question specified by the user.
-        string getUserQuestion(string username);
-        //check if the answer match the answer specified by the user in registration.
-        //return: password
-        string restorePasswordbyAnswer(string username, string answer, string newPassword);
+        //check if the answers match the answers specified by the user in registration.
+        //return: none, throw exeption specified the wrong answer.
+        void restorePasswordbyAnswers(string username, List<string> answers, string newPassword);
 
         //---------------------------Version 4 Use Cases End------------------------------------
 

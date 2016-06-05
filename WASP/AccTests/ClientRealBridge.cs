@@ -8,6 +8,10 @@ namespace AccTests
 {
     public class ClientRealBridge : WASPClientBridge
     {
+        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
         private IBL _clientAPI;
 
         public ClientRealBridge()
@@ -155,11 +159,6 @@ namespace AccTests
         public List<Post> getThreads(int subForumID)
         {
             return _clientAPI.getThreads(subForumID);
-        }
-
-        public string getUserQuestion(string username)
-        {
-            return _clientAPI.getUserQuestion(username);
         }
 
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)

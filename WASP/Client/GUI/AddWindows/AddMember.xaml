@@ -21,20 +21,10 @@
             <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
             <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="172,172,0,0" Click="BtnCreate_Click"/>
         </Grid>
-        <GroupBox x:Name="groupBox_Copy3" Header="Restore Password - QA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="232,10,0,0" Height="140" Width="175">
+        <GroupBox x:Name="gBoxRestore" Header="Restore Password - QA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="232,10,0,0" Height="140" Width="175">
             <Grid HorizontalAlignment="Left" Margin="0,0,-3.4,-4.8" Width="165">
-                <Label x:Name="label4" Content="Enter a question:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
-                <TextBox x:Name="txtUserQuestion" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Margin="5,25,0,0" RenderTransformOrigin="0.5,0.5">
-                    <TextBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0.288"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBox.RenderTransform>
-                </TextBox>
-                <Label x:Name="label4_Copy" Content="Enter a answer:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0"/>
+                <Label x:Name="label4" Content="Answer the question:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+                <Label x:Name="label4_Copy" Content="Enter an answer:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0"/>
                 <TextBox x:Name="txtUserAnswer" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Margin="5,85,0,0" RenderTransformOrigin="0.5,0.5">
                     <TextBox.RenderTransform>
                         <TransformGroup>
@@ -45,6 +35,7 @@
                         </TransformGroup>
                     </TextBox.RenderTransform>
                 </TextBox>
+                <Label x:Name="lblUserQusetion" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,25,0,0" FontWeight="Bold"/>
             </Grid>
         </GroupBox>
     </Grid>

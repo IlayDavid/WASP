@@ -23,6 +23,17 @@ namespace Client.GUI.AddWindows
         public AddMember()
         {
             InitializeComponent();
+            try
+            {
+                if (Session.forum.policy.questions != null)
+                {
+                    string question = Session.forum.policy.questions[0];
+                    lblUserQusetion.Content = question;                    
+                }
+                else
+                    gBoxRestore.IsEnabled = false;
+            }
+            catch { }
         }
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)

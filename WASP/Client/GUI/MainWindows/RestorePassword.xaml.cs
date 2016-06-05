@@ -23,16 +23,17 @@ namespace Client.GUI.MainWindows
         {
             InitializeComponent();
 
-            txtAnswer.Visibility = Visibility.Hidden;
-            txtNewpassword.Visibility = Visibility.Hidden;
-            lblans.Visibility = Visibility.Hidden;
-            lblPsw.Visibility = Visibility.Hidden;
-            btnRestore.Visibility = Visibility.Hidden;
+            if (Session.forum.policy.questions == null || Session.forum.policy.questions.Count() == 0)
+            {
+                string question = Session.forum.policy.questions[0];
+                lblQuestion.Content = question;
+            }
         }
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
             string answer = txtAnswer.Text;
+            List<string> answers = new List<string> { answer };
             string username = txtUserName.Text;
             string newpassword = txtNewpassword.Text;
             if (answer.Equals("") || newpassword.Equals(""))
@@ -40,34 +41,12 @@ namespace Client.GUI.MainWindows
                 MessageBox.Show("Please enter answer and new password");
                 return;
             }
-            string password = Session.bl.restorePasswordbyAnswer(username, answer, newpassword);
-            if (password != null)
-                MessageBox.Show("Your new password is: "+password, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
-                
-        }
-
-        private void btnCheck_Click(object sender, RoutedEventArgs e)
-        {
-            string username = txtUserName.Text;
-            if (username.Equals(""))
+            try
             {
-                MessageBox.Show("Please enter your username");
-                return;
+                Session.bl.restorePasswordbyAnswers(username, answers, newpassword);
+                MessageBox.Show("Your new password is: " + newpassword, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            string question = Session.bl.getUserQuestion(username);
-            if(question == null)
-            {
-                MessageBox.Show("You may type wrong username or you did not define question.");
-                return;
-            }
-            lblQuestion.Content = question;
-            txtUserName.IsEnabled = false;
-
-            txtAnswer.Visibility = Visibility.Visible;
-            txtNewpassword.Visibility = Visibility.Visible;
-            lblans.Visibility = Visibility.Visible;
-            lblPsw.Visibility = Visibility.Visible;
-            btnRestore.Visibility = Visibility.Visible;
+            catch { }
         }
     }
 }
