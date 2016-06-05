@@ -39,14 +39,15 @@ namespace WASP.DataClasses
 
         private int id;
         //post
-        private  PostDeletePolicy deletePost;
+        private PostDeletePolicy deletePost;
         //security
-        private  TimeSpan passwordPeriod;
-        private  bool emailVerification;
+        private TimeSpan passwordPeriod;
+        private bool emailVerification;
         //moderator
-        private  TimeSpan minimumSeniority;
+        private TimeSpan minimumSeniority;
         //stress
-        private  int usersLoad;
+        private int usersLoad;
+        private string[] questions;
 
         public TimeSpan PasswordTimeSpan
         {
@@ -83,6 +84,12 @@ namespace WASP.DataClasses
             set { deletePost = value; }
         }
 
+        public string[] Questions
+        {
+            get { return this.questions; }
+            set { this.questions = value; }
+        }
+
         public Policy()
         {
             this.id = -1;
@@ -91,9 +98,10 @@ namespace WASP.DataClasses
             emailVerification = false;
             minimumSeniority = new TimeSpan(0);
             usersLoad = 100;
+            questions = new string[2] {"", ""};
         }
 
-        public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad)
+        public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions)
         {
             this.id = id;
             this.deletePost = deletePost;
@@ -101,9 +109,11 @@ namespace WASP.DataClasses
             this.emailVerification = emailVerification;
             this.minimumSeniority = minimumSeniority;
             this.usersLoad = usersLoad;
+            this.questions[0] = questions[0];
+            this.questions[1] = questions[1];
         }
 
-        
+
         bool CheckPassword(string password)
         {
             return true;
@@ -111,11 +121,13 @@ namespace WASP.DataClasses
 
         public bool Validate(User member)
         {
-            //if (passwordPeriod.Ticks == 0)
-               // return true;
-           // if (DateTime.Now - member.PasswordChangeDate > passwordPeriod)
-             //   member.NewNotification(new Notification(-1, "Password too old.", true, null, null));
-                //throw new WASP.Exceptions.PolicyException("Password too old.");
+            if (passwordPeriod.Ticks == 0)
+                return true;
+            if (DateTime.Now - member.PasswordChangeDate > passwordPeriod)
+            {
+                member.NewNotification(new Notification(-1, "Password too old.", true, null, null));
+                throw new WASP.Exceptions.PolicyException("Password too old.");
+            }
             return true;
         }
 
@@ -137,9 +149,11 @@ namespace WASP.DataClasses
             // If not owner but still can:
             if (((byte)level & (byte)(SelectedPostDeletePolicy)) != 0)
                 return true;
-                
+
             return false;
         }
+
+
     }
 }
 

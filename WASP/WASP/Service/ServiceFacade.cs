@@ -72,9 +72,10 @@ namespace WASP.Service
             return jss.Serialize(result);
         }
 
+
+
         public static string defineForumPolicy(Dictionary<string, dynamic> data)
         {
-            //TODO
             LoginPair pair = loggedIn[data["auth"]];
             int forumId = pair.ForumId;
             bool superUser = false;
@@ -83,11 +84,9 @@ namespace WASP.Service
                 forumId = data["forum"];
                 superUser = true;
             }
-            Policy policy = new Policy();
-            bl.defineForumPolicy(pair.UserId, forumId, policy, superUser);
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], superUser);
 
-            return jss.Serialize(result);
+            return 1.ToString();
         }
 
         public static string subscribeToForum(Dictionary<string, dynamic> data)
@@ -144,7 +143,11 @@ namespace WASP.Service
 
         public static string sendMessage(Dictionary<string, dynamic> data)
         {
-            return "Not yet implemented.";
+            //int userID, int forumID, int targetUserNameID, string message
+            LoginPair pair = loggedIn[data["auth"]];
+            bl.sendMessage(pair.UserId, pair.ForumId, data["target"], data["message"]);
+
+            return 1.ToString();
         }
 
         public static string addModerator(Dictionary<string, dynamic> data)
@@ -162,10 +165,9 @@ namespace WASP.Service
         public static string updateModeratorTerm(Dictionary<string, dynamic> data)
         {   //subforumid, moderatorid, termenddate, auth
             LoginPair pair = loggedIn[data["auth"]];
-            Moderator moderator = bl.updateModeratorTerm(pair.UserId, pair.ForumId, data["moderatorid"], data["subforumid"], DateTime.Parse(data["termenddate"]));
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            int result = bl.updateModeratorTerm(pair.UserId, pair.ForumId, data["moderatorid"], data["subforumid"], DateTime.Parse(data["termenddate"]));
             //ok message
-            return 1.ToString();
+            return result.ToString();
         }
 
         public static string confirmEmail(Dictionary<string, dynamic> data)
@@ -221,21 +223,39 @@ namespace WASP.Service
         }
 
         public static string getAllNotificationses(Dictionary<string, dynamic> data)
-        {   /*code (int) , auth
+        {
             LoginPair pair = loggedIn[data["auth"]];
-            int moderator = bl.confirmEmail(pair.UserId, pair.ForumId);
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            //ok message */
-            return "not yet implemented";
+            Notification[] notifs = bl.getAllNotificationses(pair.UserId, pair.ForumId);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            foreach (Notification notif in notifs)
+            {
+                Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
+                ntf.Add("type", notif.Type);
+                ntf.Add("message", notif.Message);
+                ntf.Add("source", notif.Source.Id);
+                ntf.Add("target", notif.Target.Id);
+                ntf.Add("id", notif.Id);
+                result.Add(ntf);
+            }
+            return jss.Serialize(result);
         }
 
         public static string getNewNotificationses(Dictionary<string, dynamic> data)
-        {   /*code (int) , auth
+        {
             LoginPair pair = loggedIn[data["auth"]];
-            int moderator = bl.confirmEmail(pair.UserId, pair.ForumId);
-            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            //ok message */
-            return "not yet implemented";
+            Notification[] notifs = bl.getNewNotificationses(pair.UserId, pair.ForumId);
+            List<Dictionary<string, dynamic>> result = new List<Dictionary<string, dynamic>>();
+            foreach (Notification notif in notifs)
+            {
+                Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
+                ntf.Add("type", notif.Type);
+                ntf.Add("message", notif.Message);
+                ntf.Add("source", notif.Source.Id);
+                ntf.Add("target", notif.Target.Id);
+                ntf.Add("id", notif.Id);
+                result.Add(ntf);
+            }
+            return jss.Serialize(result);
         }
 
         public static string subForumTotalMessages(Dictionary<string, dynamic> data)
@@ -284,8 +304,16 @@ namespace WASP.Service
 
         public static string moderatorReport(Dictionary<string, dynamic> data)
         {
-            //TODO:
-            return "Not implemented yet";
+            LoginPair pair = loggedIn[data["auth"]];
+            int forumId = pair.ForumId;
+            bool superUser = false;
+            if (forumId == -1)
+            {
+                forumId = data["forum"];
+                superUser = true;
+            }
+            DataClasses.Reports.ModeratorReport mr = bl.moderatorReport(pair.UserId, forumId, superUser);
+            return jss.Serialize(mr.toJson());
         }
 
         public static string totalForums(Dictionary<string, dynamic> data)
@@ -323,6 +351,9 @@ namespace WASP.Service
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("id", user.Id);
             result.Add("auth", key);
+            result.Add("username", user.Username);
+            result.Add("password", user.Password);
+            result.Add("email", user.Email);
             result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
         }
@@ -338,6 +369,8 @@ namespace WASP.Service
             result.Add("auth", key);
             result.Add("id", su.Id);
             result.Add("forum", pair.ForumId);
+            result.Add("username", su.Username);
+            result.Add("password", su.Password);
             return jss.Serialize(result);
         }
 
@@ -345,6 +378,19 @@ namespace WASP.Service
         {
             LoginPair pair = loggedIn[data["auth"]];
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            if (pair.ForumId == -1)
+            {
+                SuperUser su = SuperUser.Get(pair.UserId);
+                result.Add("username", su.Username);
+                result.Add("password", su.Password);
+            }
+            else
+            {
+                User user = User.Get(pair.UserId, pair.ForumId);
+                result.Add("username", user.Username);
+                result.Add("password", user.Password);
+                result.Add("email", user.Email);
+            }
             result.Add("auth", data["auth"]);
             result.Add("id", pair.UserId);
             result.Add("forum", pair.ForumId);
@@ -405,12 +451,23 @@ namespace WASP.Service
         public static string getForum(Dictionary<string, dynamic> data)
         {   //forumid
             Forum f = bl.getForum(data["forumid"]);
+            
+            Dictionary<string, dynamic> policy = new Dictionary<string, dynamic>();
+            //PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions
+            policy.Add("deletepost", f.Policy.SelectedPostDeletePolicy.ToString());
+            policy.Add("passperiod", f.Policy.PasswordTimeSpan);
+            policy.Add("emailverf", f.Policy.EmailVerfication);
+            policy.Add("seniority", f.Policy.MinimumSeniority);
+            policy.Add("usersload", f.Policy.UsersLoad);
+            policy.Add("questions", f.Policy.Questions);
+
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             //name, description, adminid
             result.Add("name", f.Name);
             result.Add("description", f.Description);
             result.Add("adminid", f.GetAdmins().ElementAt(0).Id);
             result.Add("forumid", f.Id);
+            result.Add("policy", policy);
             return jss.Serialize(result);
         }
 

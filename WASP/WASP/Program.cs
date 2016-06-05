@@ -57,10 +57,10 @@ namespace WASP
 
         static void Populate()
         {
-            ServiceFacade.webInitialize();
+
             DAL2 myDal = new DALSQL();
             myDal.Clean();
-
+            ServiceFacade.webInitialize();
             Policy policy = new Policy();
            
             Policy newpolicy = myDal.CreatePolicy(policy);
@@ -118,7 +118,7 @@ namespace WASP
         static void Main(string[] args)
         {
 
-            //Populate(); //for web
+            Populate(); //for web
             //add items to DB
 
             string basePrefix = "http://localhost:8080/";
@@ -161,6 +161,7 @@ namespace WASP
             routes.Add(basePrefix + "getAdmin/", ServiceFacade.getAdmin);
             routes.Add(basePrefix + "getFriends/", ServiceFacade.getFriends);
             routes.Add(basePrefix + "addFriend/", ServiceFacade.addFriend);
+            routes.Add(basePrefix + "loginHash/", ServiceFacade.loginHash);
             routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
 
 

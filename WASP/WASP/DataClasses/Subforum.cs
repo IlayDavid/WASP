@@ -10,8 +10,10 @@ namespace WASP.DataClasses
         private Dictionary<int, Post> threads = null;
         private Forum forum;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
-        public static Subforum Get(int id)
+        public static Subforum Get(int id, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetSubforum(id);
             return dal.GetSubForum(id);
         }
 

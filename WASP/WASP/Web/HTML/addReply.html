@@ -15,8 +15,41 @@
     <script type="application/javascript">
 			var container=document.getElementById("container");
 
-	var threadId = 5;;
-	container.innerHTML="		<form action=\"addReply\">     Content: <textarea cols=50  rows=30 name=\"content\"></textarea><br>		<input type=\"hidden\" name=\"thread\" value="+threadId+">        <input type=\"submit\" value=\"Add Reply\"><br><br>	</form>	";
+	
+    var get = GetQuerySet();
+	var i=parseInt(get['id']);
+    var id={"replytopostid":get['id']};
+    id['replytopostid']=i;
+	var ret = get['ret'];
+    console.log(id);
+		var auth=get["auth"];
+	
+	
+	container.innerHTML="Content: <textarea cols=50  rows=30 id=\"content\"></textarea><br><br>	";
+
+
+
+			var button=document.createElement("button");
+		button.setAttribute("onclick","addReply(document.getElementById(\"content\").value,i,auth)");
+		button.setAttribute("type","button");
+		button.innerHTML="addReply";
+		container.appendChild(button);
+	function addReply(content, i, auth){
+		var param={"content":content,"replytopostid":"-1","auth":auth};
+		
+		param['replytopostid']=i;
+		$.post("http://localhost:8080/createReplyPost/", JSON.stringify(param), function(data, status){
+				window.location.href="http://localhost:8080/Web/HTML/getPost.html?id="+ret+"&auth="+auth;
+            });
+	}
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses;
 using System.IO;
-using static WASP.DataClasses.Notification;
+using WASP.DataClasses.Notification;
 
 namespace WASP.DataClasses
 {
@@ -73,20 +73,7 @@ namespace WASP.DataClasses
             backUpFriends = new List<IFriend>();
 
             Forum_SystemDataContext db = new Forum_SystemDataContext(SetDb("Forums_System"));
-            /*
-            //1
-            foreach (Index indx in db.Indexes)
-            {
-                Index index = new Index();
-                index.post = indx.post;
-                index.subforum = indx.subforum;
-                index.forum = indx.forum;
-                index.notification = indx.notification;
-                index.policy = indx.policy;
-        
-                backUpIndexes.Add(indx);
-            }
-*/
+
             //1
             foreach (ISuperUser isuperUser in db.ISuperUsers)
             {
@@ -107,6 +94,8 @@ namespace WASP.DataClasses
                 pol.passwordPeriod = ipol.passwordPeriod;
                 pol.postDeletePolicy = ipol.postDeletePolicy;
                 pol.usersLoad = ipol.usersLoad;
+                pol.question1 = ipol.question1;
+                pol.question2 = ipol.question2;
                 backUpPolicies.Add(pol);
             }
 
@@ -120,6 +109,8 @@ namespace WASP.DataClasses
                 iuser.password = user.password;
                 iuser.email = user.email;
                 iuser.forumId = user.forumId;
+                iuser.answer1 = user.answer1;
+                iuser.answer2 = user.answer2;
 
                 backUpUsers.Add(iuser);
             }
@@ -358,6 +349,8 @@ namespace WASP.DataClasses
             _user.forumId = user.Forum.Id;
             _user.PasswordChangeDate = user.PasswordChangeDate;
             _user.StartDate = user.StartDate;
+            _user.answer1 = user.Answers[0];
+            _user.answer2 = user.Answers[1];
 
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
@@ -593,6 +586,9 @@ namespace WASP.DataClasses
                 iuser.password = user.Password;
                 iuser.StartDate = user.StartDate;
                 iuser.PasswordChangeDate = user.PasswordChangeDate;
+                iuser.answer1 = user.Answers[0];
+                iuser.answer2 = user.Answers[1];
+
                 db.SubmitChanges();
                 return user;
             }
@@ -656,7 +652,8 @@ namespace WASP.DataClasses
             if (iuser != null)
             {
                 Forum forum = GetForum(forumId);
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate);
+                string[] answers = { iuser.answer1, iuser.answer2 };
+                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate, answers);
 
 
                 return user;
@@ -1011,7 +1008,14 @@ namespace WASP.DataClasses
 
         public Policy GetForumPolicy(int forumID)
         {
-            throw new NotImplementedException();
+            IForum iforum = db.IForums.First(x => x.id == forumID);
+            IPolicy ipol = db.IPolicies.First(x => x.id == iforum.id);
+            string[] questions = { ipol.question1, ipol.question2 };
+            Policy pol = new Policy(ipol.id, (Policy.PostDeletePolicy) ipol.postDeletePolicy,
+                                    TimeSpan.FromTicks(ipol.passwordPeriod), 
+                                    ipol.emailVerification, TimeSpan.FromTicks(ipol.minimumSeniority),
+                                    ipol.usersLoad,questions );
+            return pol;
         }
 
         public Subforum[] GetForumSubForums(int forumID)
@@ -1167,7 +1171,8 @@ namespace WASP.DataClasses
             IPolicy ipolicy = db.IPolicies.FirstOrDefault(x => x.id == id);
             if (ipolicy != null)
             {
-                Policy polc = new Policy(id, (Policy.PostDeletePolicy)ipolicy.postDeletePolicy, TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad);
+                string[] questions = { ipolicy.question1, ipolicy.question2 };
+                Policy polc = new Policy(id, (Policy.PostDeletePolicy)ipolicy.postDeletePolicy, TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad, questions);
                 return polc;
             }
             throw new ExistException(string.Format("GetPolicy: Policy {0} does not exist", id));
@@ -1195,6 +1200,8 @@ namespace WASP.DataClasses
                 ipolicy.passwordPeriod = policy.PasswordTimeSpan.Ticks;
                 ipolicy.postDeletePolicy = (int)policy.SelectedPostDeletePolicy;
                 ipolicy.usersLoad = policy.UsersLoad;
+                ipolicy.question1 = policy.Questions[0];
+                ipolicy.question2 = policy.Questions[1];
                 return policy;
             }
             throw new ExistException(string.Format("UpdatePolicy: Policy {0} does not exist", policy.Id));
@@ -1210,6 +1217,8 @@ namespace WASP.DataClasses
             ipolicy.passwordPeriod = policy.PasswordTimeSpan.Ticks;
             ipolicy.postDeletePolicy = (int)policy.SelectedPostDeletePolicy;
             ipolicy.usersLoad = policy.UsersLoad;
+            ipolicy.question1 = policy.Questions[0];
+            ipolicy.question2 = policy.Questions[1];
 
             db.IPolicies.InsertOnSubmit(ipolicy);
             db.SubmitChanges();

@@ -10,27 +10,28 @@ namespace WASP.DataClasses
         {
             return Authority.Level.User;
         }
+        private static DAL2 dal = WASP.Config.Settings.GetDal();
+
         public string Name { get; set; }
         public String Username { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PasswordChangeDate { get; set; }
-
-
-
-
-
         public int Id { get; set; }
+
         private Forum forum;
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
         private Dictionary<int, Notification> notifications = null;
         private Dictionary<int, User> friends = null;
-        private static DAL2 dal = WASP.Config.Settings.GetDal();
+        private string[] answers = new string[2];
 
-        public static User Get(int userId, int forumId)
+        public static User Get(int userId, int forumId, bool useCache = true)
         {
+            if (useCache)
+                return WASP.Config.Settings.GetCache().GetUser(userId, forumId);
+            
             return dal.GetUser(userId, forumId);
         }
         public static User[] Get(int[] ids, int forumID)
@@ -40,7 +41,7 @@ namespace WASP.DataClasses
 
         public User Update()
         {
-            User old = Get(Id, Forum.Id);
+            User old = Get(Id, Forum.Id, false);
             if (!old.Password.Equals(Password))
             {
                 PasswordChangeDate = DateTime.Now;
@@ -71,6 +72,21 @@ namespace WASP.DataClasses
             this.StartDate = DateTime.Now;
         }
 
+        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, string [] answers)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.PasswordChangeDate = passChangeDate;
+            this.StartDate = startDate;
+            this.answers = answers;
+        }
+
+        // DEPRECATED
         public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate)
         {
             this.Id = id;
@@ -240,6 +256,18 @@ namespace WASP.DataClasses
             Notification[] notifs = new Notification[NewNotifications.Values.Count];
             NewNotifications.Values.CopyTo(notifs, 0);
             return notifs;
+        }
+
+        public void ReceivedNotification(Notification notif)
+        {
+            NewNotifications.Remove(notif.Id);
+            Notifications.Add(notif.Id, notif);
+        }
+
+        public string[] Answers
+        {
+            get { return this.answers; }
+            set { this.answers = value; }
         }
     }
 }
