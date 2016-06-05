@@ -51,7 +51,9 @@ namespace AccTests
 
         public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            return _serverAPI.defineForumPolicy(userID, forumID, policy);
+            //todo:
+            //return _serverAPI.defineForumPolicy(userID, forumID, policy);
+            return 1;
         }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
@@ -221,7 +223,9 @@ namespace AccTests
 
         public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser = false)
         {
-            return _serverAPI.defineForumPolicy(userID, forumID, policy, superUser);
+            //todo:
+            //return _serverAPI.defineForumPolicy(userID, forumID, policy, superUser);
+            return 1;
         }
 
         public int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser = false)
@@ -247,6 +251,11 @@ namespace AccTests
         public int addFriend(int userID, int forumID, int friendID)
         {
             return _serverAPI.addFriend(userID, forumID, friendID);
+        }
+
+        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false)
+        {
+            return _serverAPI.defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, superUser);
         }
     }
 }

@@ -294,7 +294,42 @@ namespace Client.CommunicationLayer
 
         public ModeratorReport parseStringToModeratorReport(string res)
         {
-            throw new NotImplementedException();
+            ModeratorReport mr = new ModeratorReport();
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string forumid = dict["forum"];
+            List<Dictionary<string, dynamic>> moderators = dict["moderators"];
+            foreach(Dictionary<string, dynamic> d in moderators)
+            {
+                int modid = d["id"];
+                User mod = new User();
+                mod.id = modid;
+                User appointedBy = new User();
+                appointedBy.id = d["appointer"];
+                Moderator m = new Moderator(mod, DateTime.Parse(d["startdate"]), appointedBy, d["subforum"]);
+                mr.moderators.Add(m);
+                List<Dictionary<string, dynamic>> posts = d["posts"];
+                List<Post> modposts = new List<Post>();
+                foreach (Dictionary<string, dynamic> dp in posts)
+                {
+                    int pid = dp["postid"];
+                    string title = dp["title"];
+                    string content = dp["content"];
+                    User author = new User();
+                    author.id = modid;
+                    int container = dp["subforum"];
+                    Post inreply = new Post();
+                    inreply.id = dp["inreplyto"];
+                    Post p = new Post(pid, title, content, author, container, inreply);
+                    p.publishedAt = DateTime.Parse(dp["publishedat"]);
+                    modposts.Add(p);
+                }
+                mr.moderatorsPosts.Add(modid, modposts);
+
+            }
+
+            return mr;
         }
     }
 }
