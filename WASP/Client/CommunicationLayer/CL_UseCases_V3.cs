@@ -64,7 +64,11 @@ namespace Client.CommunicationLayer
 
         public ModeratorReport moderatorReport()
         {
-            string json = "{}";
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("auth", _auth);
+            dict.Add("forum", forumID);
+            string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/moderatorReport/");
             return parser.parseStringToModeratorReport(res);
         }
