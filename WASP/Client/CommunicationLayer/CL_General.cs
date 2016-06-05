@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 //using System.Net;
@@ -17,7 +18,12 @@ namespace Client.CommunicationLayer
     {
         private string _url { get; set; }
         public string _auth { get; set; }
+        public List<Notification> notifList { get; set; }
+        private Thread nc;
+        public Thread notif;
         private ParseString parser;
+        private object lockList;
+        public int isNotif = 0;
 
         //will set to the current forumID, which the user is loged to.
         //will be used only for functions that require log-in.
@@ -28,6 +34,43 @@ namespace Client.CommunicationLayer
             _url = "http://localhost:8080";
             forumID = -1;
             parser = new ParseString();
+            nc = new Thread(new ParameterizedThreadStart (NotificationComponent.Initialize));
+            notif= new Thread(new ThreadStart(getnotifications));
+            notifList = new List<Notification>();
+
+        }
+
+        public void getnotifications()
+        {
+            List<Notification> newNot = getNewNotifications();
+            lock (lockList)
+            {
+                foreach (Notification n in newNot)
+                {
+                    notifList.Add(n);
+                    isNotif = 1;
+                }
+            }
+
+        }
+
+        public List<Notification> getNotifFromList()
+        {
+            List<Notification> ans = new List<Notification>();
+            lock (lockList)
+            {
+                ans = notifList;
+                notifList.Clear();
+                isNotif = 0;
+                return ans;
+            }
+        }
+
+        public List<Notification> getNewNotifications()
+        {
+            string json = "{\"auth\":\"" + _auth + "\"}";
+            string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
+            return parser.parseStringToMessages(res, true);
         }
 
         public void setForumID(int forumID)
@@ -78,19 +121,28 @@ namespace Client.CommunicationLayer
             }
         }
 
+        private void startThread()
+        {
+            nc.Start(this);
+        }
+
 
         public User login(string userName, string password, int forumID)
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login/");
-            return parser.parseStringToUser(res, true, this);
+            User ans= parser.parseStringToUser(res, true, this);
+            startThread();
+            return ans;
         }
 
         public SuperUser loginSU(string userName, string password)
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
-            return parser.parseStringToSuperUser(res, this);
+            SuperUser ans =parser.parseStringToSuperUser(res, this);
+            startThread();
+            return ans;
         }
 
         public User loginBySession(string session)
@@ -99,9 +151,17 @@ namespace Client.CommunicationLayer
             string json = "{\"auth\":\"" + session + "\"}";
             string res = httpReq(json, "POST", _url + "/loginHash/");
             if (forumID == -1)
-                return parser.parseStringToSuperUser(res, this);
+            {
+                SuperUser ans = parser.parseStringToSuperUser(res, this);
+                startThread();
+                return ans;
+            }
             else
-                return parser.parseStringToUser(res, true, this);
+            {
+                User ans = parser.parseStringToUser(res, true, this);
+                startThread();
+                return ans;
+            }
         }
 
         //---------------------------------Getters----------------------------------------------
