@@ -303,11 +303,12 @@ namespace Client.CommunicationLayer
             foreach(Dictionary<string, dynamic> d in moderators)
             {
                 int modid = d["id"];
+                int sfid = d["subforum"];
                 User mod = new User();
                 mod.id = modid;
                 User appointedBy = new User();
                 appointedBy.id = d["appointer"];
-                Moderator m = new Moderator(mod, DateTime.Parse(d["startdate"]), appointedBy, d["subforum"]);
+                Moderator m = new Moderator(mod, DateTime.Parse(d["startdate"]), appointedBy, sfid);
                 mr.moderators.Add(m);
                 List<Dictionary<string, dynamic>> posts = d["posts"];
                 List<Post> modposts = new List<Post>();
@@ -318,13 +319,15 @@ namespace Client.CommunicationLayer
                     string content = dp["content"];
                     User author = new User();
                     author.id = modid;
-                    int container = dp["subforum"];
+                    Subforum cont = dp["subforum"];
+                    int container = cont.id;
                     Post inreply = new Post();
-                    inreply.id = dp["inreplyto"];
-                    Post p = new Post(pid, title, content, author, container, inreply);
+                    //inreply.id = dp["inreplyto"];
+                    Post p = new Post(pid, title, content, author, container,null);
                     p.publishedAt = DateTime.Parse(dp["publishedat"]);
                     modposts.Add(p);
                 }
+                mr.ModeratorInsubForum.Add(modid, sfid);
                 mr.moderatorsPosts.Add(modid, modposts);
 
             }

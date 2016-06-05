@@ -18,6 +18,8 @@
         //stress
         public int usersSameTime;
 
+        public string[] questions;
+
         public Policy(int deletePost, int passwordPeriod, bool emailVerification, int seniority, int usersSameTime)
         {
             this.deletePost = deletePost;
@@ -25,6 +27,16 @@
             this.emailVerification = emailVerification;
             this.seniority = seniority;
             this.usersSameTime = usersSameTime;
+        }
+
+        public Policy(int deletePost, int passwordPeriod, bool emailVerification, int seniority, int usersSameTime, string[] questions)
+        {
+            this.deletePost = deletePost;
+            this.passwordPeriod = passwordPeriod;
+            this.emailVerification = emailVerification;
+            this.seniority = seniority;
+            this.usersSameTime = usersSameTime;
+            this.questions = questions;
         }
         public bool isOwnerCanDeletePost()
         {

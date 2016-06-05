@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using Client.CommunicationLayer;
+using System.Web.Script.Serialization;
 
 namespace Client.CommunicationLayer
 {
@@ -36,37 +37,61 @@ namespace Client.CommunicationLayer
             string json = "{\"password\":\"" + pass + "\"," + "\"adminid\":" + adminID + "," + "\"auth\":\"" + _auth + "\","
                 + "\"email\":\"" + email + "\"," + "\"forumname\":\"" + forumName
                 + "\"," + "\"description\":\"" + description + "\"," + "\"adminusername\":\"" + adminUserName
-                + "\"," + "\"adminname\":\"" + adminName + "\"}"; /*"," +
-               policy  "{\"owner\":\"" + Policy.owner + "\"," + "\"moderator\":" + Policy.moderator
-                + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}" + "\"}";*/
+                + "\"," + "\"adminname\":\"" + adminName + "\"}";
             string res = httpReq(json, "POST", _url + "/createForum/");
             return parser.parseStringToForum(res);
         }
 
         public int defineForumPolicy(Policy policy)
         {
-            string json = "{\"owner\":\"" + Policy.owner + "\"," + "\"moderator\":" + Policy.moderator
-                + "," + "\"admin\":\"" + Policy.admin + "\"," + "\"all\":\"" + Policy.all + "}";
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("auth", _auth);
+            dict.Add("forum", forumID);
+            string delete = getDeleteString(policy.deletePost);
+            dict.Add("deletepost", delete);
+            dict.Add("emailverf", policy.emailVerification);
+            dict.Add("questions", policy.questions);
+            dict.Add("usersload", policy.usersSameTime);
+            TimeSpan password = new TimeSpan(policy.passwordPeriod, 0, 0, 0, 0);
+            TimeSpan seniority = new TimeSpan(policy.seniority, 0, 0, 0, 0);
+            dict.Add("passperiod", password);
+            dict.Add("seniority", seniority);
+            string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/defineForumPolicy/");
             return parser.parseStringToNum(res);
         }
 
-
-       /* public static string defineForumPolicy(Dictionary<string, dynamic> data)
+        private string getDeleteString(int deletePost)
         {
-            LoginPair pair = loggedIn[data["auth"]];
-            int forumId = pair.ForumId;
-            bool superUser = false;
-            if (forumId == -1)
+            string ret = "";
+            switch (deletePost)
             {
-                forumId = data["forum"];
-                superUser = true;
+                case 1:
+                    ret = "Owner";
+                    break;
+                case 2:
+                    ret = "Moderator";
+                    break;
+                case 3:
+                    ret = "OwnerAndModerator";
+                    break;
+                case 4:
+                    ret = "Admin";
+                    break;
+                case 5:
+                    ret = "OwnerAndAdmin";
+                    break;
+                case 6:
+                    ret = "ModeratorAndAdmin";
+                    break;
+                case 7:
+                    ret = "OwnerModeratorAndAdmin";
+                    break;
             }
-            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], superUser);
-
-            return 1.ToString();
+            return ret;
         }
-        */
+
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
         {   //username, id, password, name, email
