@@ -53,7 +53,7 @@ namespace AccTests.Tests
         [TestCleanup]
         public void TearDown()
         {
-            Driver.getBridge().Clean();
+            //Driver.getBridge().Clean();
         }
 
 

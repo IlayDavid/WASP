@@ -9,14 +9,14 @@ namespace Client.DataClasses
             Message = 1, Post = 0
         }
         public string message;
-        private bool isNew;
-        private User source;
-        private int sourceID;
-        private User target;
-        private int targetID;
-        private int id;
-        private DateTime creationTime;
-        private Types type;
+        public bool isNew;
+        public User source;
+        public int sourceID;
+        public User target;
+        public int targetID;
+        public int id;
+        public DateTime creationTime;
+        public Types type;
 
         public Notification(int id, String message, bool isNew, User source, User target)
         {

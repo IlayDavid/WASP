@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-
+using WASP.Config;
 namespace WASP.DataClasses
 {
     public class User : Authority
@@ -27,10 +27,10 @@ namespace WASP.DataClasses
         private Dictionary<int, User> friends = null;
         private string[] answers = new string[2];
 
-        public static User Get(int userId, int forumId, bool useCache = true)
+        public static User Get(int userId, int forumId)
         {
-            if (useCache)
-                return WASP.Config.Settings.GetCache().GetUser(userId, forumId);
+            if (Settings.UseCache())
+                return Settings.GetCache().GetUser(userId, forumId);
             
             return dal.GetUser(userId, forumId);
         }
@@ -41,7 +41,7 @@ namespace WASP.DataClasses
 
         public User Update()
         {
-            User old = Get(Id, Forum.Id, false);
+            User old = Get(Id, Forum.Id);
             if (!old.Password.Equals(Password))
             {
                 PasswordChangeDate = DateTime.Now;
@@ -141,7 +141,7 @@ namespace WASP.DataClasses
                         friends.Add(friend.Id, friend);
                     }
                 }
-                return Friends;
+                return friends;
             }
         }
         private Dictionary<int, Notification> Notifications
@@ -238,6 +238,7 @@ namespace WASP.DataClasses
         public void NewNotification(Notification newNotification)
         {
             newNotification.Target = this;
+            var tmp = NewNotifications.Count;
             newNotification = newNotification.Create();
             NewNotifications.Add(newNotification.Id, newNotification);
             Config.Settings.NotificationMethod(Id, forum.Id);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WASP.Config;
 namespace WASP.DataClasses
 {
     public class Moderator : Authority
@@ -19,9 +19,9 @@ namespace WASP.DataClasses
         private Admin appointer;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static Moderator Get(int modId, int subforumID, bool useCache = true)
+        public static Moderator Get(int modId, int subforumID)
         {
-            if (useCache)
+            if (Settings.UseCache())
                 return WASP.Config.Settings.GetCache().GetModerator(modId, subforumID);
             return dal.GetModerator(modId, subforumID);
         }

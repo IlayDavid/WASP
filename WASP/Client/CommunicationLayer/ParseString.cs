@@ -26,6 +26,7 @@ namespace Client.CommunicationLayer
             string name = dict["name"];
             string email = dict["email"];
             User su = new User(id, name, username, email, password);
+            su.client_session = c._auth;
             return su;
         }
 
@@ -46,6 +47,7 @@ namespace Client.CommunicationLayer
             string password = dict["password"];
             c._auth = dict["auth"];
             SuperUser su = new SuperUser("", username, id, "", password);
+            su.client_session = c._auth;
             return su;
         }
 
@@ -298,33 +300,34 @@ namespace Client.CommunicationLayer
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
             JavaScriptSerializer jss = new JavaScriptSerializer();
             dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string forumid = dict["forum"];
-            List<Dictionary<string, dynamic>> moderators = dict["moderators"];
-            foreach(Dictionary<string, dynamic> d in moderators)
+            int forumid = dict["forum"];
+            var moderators = dict["moderators"];
+            foreach(var d in moderators)
             {
                 int modid = d["id"];
                 int sfid = d["subforum"];
                 User mod = new User();
+                mod.userName = d["username"];
                 mod.id = modid;
                 User appointedBy = new User();
                 appointedBy.id = d["appointer"];
-                Moderator m = new Moderator(mod, DateTime.Parse(d["startdate"]), appointedBy, sfid);
+                Moderator m = new Moderator(mod, d["startdate"], appointedBy, sfid);
                 mr.moderators.Add(m);
-                List<Dictionary<string, dynamic>> posts = d["posts"];
+                var posts = d["posts"];
                 List<Post> modposts = new List<Post>();
-                foreach (Dictionary<string, dynamic> dp in posts)
+                foreach (var dp in posts)
                 {
                     int pid = dp["postid"];
                     string title = dp["title"];
                     string content = dp["content"];
                     User author = new User();
                     author.id = modid;
-                    Subforum cont = dp["subforum"];
-                    int container = cont.id;
+                    var cont = dp["subforum"];
+                    int container = cont["Id"];
                     Post inreply = new Post();
                     //inreply.id = dp["inreplyto"];
                     Post p = new Post(pid, title, content, author, container,null);
-                    p.publishedAt = DateTime.Parse(dp["publishedat"]);
+                    p.publishedAt = dp["publishedat"];
                     modposts.Add(p);
                 }
                 mr.ModeratorInsubForum.Add(modid, sfid);

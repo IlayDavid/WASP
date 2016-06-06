@@ -27,14 +27,14 @@ namespace Client.CommunicationLayer
 
         public int deletePost(int postID)
         {
-            string json = "{\"postid\":" + postID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"postid\":" + postID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/deletePost/");
             return 0;
         }
 
         public int sendMessage(int targetUserID, string message)
         {
-            string json = "{\"message\":\"" + message + "\"," + "\"auth\":\"" + _auth + "\"," + "\"recieverid\":" + targetUserID + "}";
+            string json = "{\"message\":\"" + message + "\"," + "\"auth\":\"" + _auth + "\"," + "\"target\":" + targetUserID + "}";
             string res = httpReq(json, "POST", _url + "/sendMessage/");
             return 0;
         }

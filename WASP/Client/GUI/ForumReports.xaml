@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI"
         mc:Ignorable="d"
-        Title="ForumReports" Height="311.68" Width="715.256">
+        Title="ForumReports" Height="311.68" Width="715.256"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="label_Copy1" Content="Moderators Reports:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8,0,0" FontWeight="Bold"/>
         <Label x:Name="lblAppointBy" Content="Appoint by:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="151,41,0,0"/>
         <Label x:Name="lblAppointByData" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="241,41,0,0"/>
-        <ComboBox x:Name="cmboxModerator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,43,0,0" SelectedIndex="0" SelectionChanged="cmboxModerator_SelectionChanged">
+        <ComboBox x:Name="cmboxModerator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,43,0,0" SelectedIndex="0">
             <ComboBoxItem Content="Select Moderator"/>
         </ComboBox>
         <Border BorderBrush="Black" BorderThickness="3,0,0,0" HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="3" Margin="352,-1,0,0" RenderTransformOrigin="0.5,0.5">
@@ -30,7 +31,7 @@
         <Label x:Name="label_Copy5" Content="List of posts:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,122,0,0"/>
         <Label x:Name="label" Content="Member Reports:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="386,7,0,0" FontWeight="Bold"/>
         <Label x:Name="label_Copy" Content="List of posts:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="386,127,0,0"/>
-        <ComboBox x:Name="cmboxMember" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="386,43,0,0" SelectedIndex="0" SelectionChanged="cmboxMember_SelectionChanged">
+        <ComboBox x:Name="cmboxMember" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="386,43,0,0" SelectedIndex="0">
             <ComboBoxItem Content="Select Member"/>
         </ComboBox>
         <TreeView x:Name="treeModPost" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="317" Margin="10,153,0,0"/>

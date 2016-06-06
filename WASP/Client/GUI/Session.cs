@@ -28,7 +28,10 @@ namespace Client.GUI
 
         internal static void LoadFriends()
         {
-            user.friends = bl.getFriends();
+            if (user is SuperUser)
+                user.friends = new List<User>();
+            else
+                user.friends = bl.getFriends();
         }
         internal static void LoadForums()
         {

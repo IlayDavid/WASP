@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WASP.Config;
 
 namespace WASP.DataClasses
 {
@@ -11,9 +12,9 @@ namespace WASP.DataClasses
 
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static SuperUser Get(int id, bool useCache = true)
+        public static SuperUser Get(int id)
         {
-            if (useCache)
+            if (Settings.UseCache())
                 return WASP.Config.Settings.GetCache().GetSuperUser(id);
             return dal.GetSuperUser(id);
         }

@@ -7,7 +7,7 @@ namespace Client.DataClasses
     {
         public static int counter = 0;
 
-        public Post() { }
+        public Post() { replies = new List<Post>(); }
         public Post(string title, string content, User author, int container, Post inReplyTo)
         {
             id = counter++;

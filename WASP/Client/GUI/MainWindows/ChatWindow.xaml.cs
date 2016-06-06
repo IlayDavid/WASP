@@ -33,6 +33,8 @@ namespace Client.GUI.MainWindows
             }
             if (lstMembers.Items.Count > 0)
                 lstMembers.SelectedIndex = 0;
+
+            lstMembers.SelectionChanged += lstMembers_SelectionChanged;
         }
 
         private void lstMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,9 +46,20 @@ namespace Client.GUI.MainWindows
             }
             User selectedUser = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
 
-            lstMessages.Items.Clear();
-            StackPanel messageView = MakeMessageView(); 
-            lstMessages.Items.Add(messageView);         
+            Session.bl.getNewNotificationses();
+            List<Notification> nots = Session.bl.getAllNotificationses();
+            foreach (Notification n in nots)
+            {
+                MessageBox.Show(n.message);
+                if (n.type == Notification.Types.Message )
+                   // && n.sourceID != -1 && 
+                   // (n.source.userName.Equals(selectedUser.userName)
+                   // || n.target.userName.Equals(selectedUser.userName)))
+                {
+                    ListBoxItem item = new ListBoxItem() { Content = n.target.userName + ": " + n.message };
+                    lstMessages.Items.Add(item);
+                }
+            } 
         }
 
         private StackPanel MakeMessageView()

@@ -41,14 +41,14 @@ namespace Client.CommunicationLayer
         public List<Notification> getNewNotificationses()
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
-            string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
+            string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
             return parser.parseStringToMessages(res, true);
         }
 
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int subForumID)
         {
-            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/subForumTotalMessages/");
             return parser.parseStringToNum(res);
         }
@@ -57,7 +57,7 @@ namespace Client.CommunicationLayer
 
         public List<Post> postsByMember(int userID)
         {   //title,  content,  authorid,  subforumid,  replypostid
-            string json = "{\"userid\":" + userID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"userid\":" + userID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/postsByMember/");
             return parser.parseStringToPosts(res);
         }
@@ -104,7 +104,7 @@ namespace Client.CommunicationLayer
         * Purpose: add user with friendID to the loged-in user's friend list.*/
         public int addFriend(int friendID)
         {
-            string json = "{\"friend\":" + friendID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"friend\":" + friendID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/addFriend/");
             return 0;
         }

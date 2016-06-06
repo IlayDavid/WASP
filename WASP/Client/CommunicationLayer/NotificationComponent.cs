@@ -38,7 +38,6 @@ namespace Client.CommunicationLayer
             // Start the connection
             connection.Start().Wait();
 
-
             connection.Send(loginHash).Wait();
         }
     }

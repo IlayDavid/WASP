@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WASP.Config;
 namespace WASP.DataClasses
 {
     public class Admin : Authority
@@ -17,10 +17,10 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
 
-        public static Admin Get(int adminId, int forumId, bool useCache = true)
+        public static Admin Get(int adminId, int forumId)
         {
-            if (useCache)
-                return WASP.Config.Settings.GetCache().GetAdmin(adminId, forumId);
+            if (Settings.UseCache())
+                return Settings.GetCache().GetAdmin(adminId, forumId);
              return dal.GetAdmin(adminId, forumId);
         }
         public static Admin[] Get(int[] ids, int forumId)

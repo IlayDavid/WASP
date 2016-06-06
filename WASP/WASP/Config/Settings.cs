@@ -21,6 +21,11 @@ namespace WASP.Config
             return dal;
         }
 
+        public static bool UseCache()
+        {
+            return false;
+        }
+
         public static IDALCache GetCache()
         {
             if (cache == null)

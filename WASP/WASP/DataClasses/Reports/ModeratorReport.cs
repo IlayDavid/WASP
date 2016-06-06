@@ -46,6 +46,7 @@ namespace WASP.DataClasses.Reports
                     posts.Add(p);
                 }
                 entry.Add("posts", posts);
+                entry.Add("username", mod.User.Username);
                 moderators.Add(entry);
             }
             json.Add("moderators", moderators);

@@ -24,6 +24,7 @@ namespace Client.GUI
         public ForumReports()
         {
             InitializeComponent();
+            
             try
             {
                 report = Session.bl.moderatorReport();
@@ -31,7 +32,6 @@ namespace Client.GUI
             catch(Exception ee)
             {
                 MessageBox.Show(ee.Message);
-                report = new ModeratorReport();
             }
             foreach (Moderator mod in report.moderators)
             {
@@ -47,6 +47,8 @@ namespace Client.GUI
                 item.DataContext = user;
                 cmboxMember.Items.Add(item);
             }
+            cmboxModerator.SelectionChanged += cmboxModerator_SelectionChanged;
+            cmboxMember.SelectionChanged += cmboxMember_SelectionChanged;
         }
         private TreeViewItem makePostTree(Post post)
         {
@@ -90,7 +92,7 @@ namespace Client.GUI
             {
                 ComboBoxItem selectedItem = (ComboBoxItem)cmboxMember.SelectedItem;
                 User user = (User)selectedItem.DataContext;
-
+               
                 List<Post> postList = Session.bl.postsByMember(user.id);
                 treeMemberPost.Items.Clear();
                 foreach (Post p in postList)

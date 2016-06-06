@@ -19,6 +19,7 @@ namespace WASP
         {
             Dictionary<string, dynamic> data;
             string url = request.Url.ToString();
+            Console.WriteLine(url);
             if (url.Contains("/Web/"))
             {
                 data = new Dictionary<string, dynamic>();
@@ -43,7 +44,6 @@ namespace WASP
             string response = "";
             try
             {
-                Console.WriteLine(url);
                 response = routes[url](data);
 
             }
@@ -68,7 +68,7 @@ namespace WASP
             Forum forum2 = new Forum(-1, "forum2", "description of forum2", newpolicy);
             Forum newforum1 = myDal.CreateForum(forum1);
             Forum newforum2 = myDal.CreateForum(forum2);
-
+            /*
             User user1 = new User(10, "edan", "edan", "email@email.com", "123456", newforum1);
             User user2 = new User(11, "ariel", "ariel", "ariel@ariel.com", "123456", newforum1);
             User user3 = new User(12, "ilay", "ilay", "email2@email.com", "123456", newforum2);
@@ -77,7 +77,16 @@ namespace WASP
             User newuser2 = myDal.CreateUser(user2);
             User newuser3 = myDal.CreateUser(user3);
             User newuser4 = myDal.CreateUser(user4);
-
+            */
+            var hashPass = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+            User user1 = new User(10, "edan", "edan", "email@email.com", hashPass, newforum1);
+            User user2 = new User(11, "ariel", "ariel", "ariel@ariel.com", hashPass, newforum1);
+            User user3 = new User(12, "ilay", "ilay", "email2@email.com", hashPass, newforum2);
+            User user4 = new User(13, "matan", "matan", "email3@email.com", hashPass, newforum2);
+            User newuser1 = myDal.CreateUser(user1);
+            User newuser2 = myDal.CreateUser(user2);
+            User newuser3 = myDal.CreateUser(user3);
+            User newuser4 = myDal.CreateUser(user4);
             Subforum sf1 = new Subforum(-1, "sf1", "desc1", newforum1);
             Subforum sf2 = new Subforum(-1, "sf2", "desc2", newforum1);
             Subforum sf3 = new Subforum(-1, "sf3", "desc3", newforum2);

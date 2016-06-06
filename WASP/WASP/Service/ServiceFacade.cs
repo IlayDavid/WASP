@@ -232,7 +232,10 @@ namespace WASP.Service
                 Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
                 ntf.Add("type", notif.Type);
                 ntf.Add("message", notif.Message);
-                ntf.Add("source", notif.Source.Id);
+                if (notif.Source == null)
+                    ntf.Add("source", -1);
+                else
+                    ntf.Add("source", notif.Source.Id);
                 ntf.Add("target", notif.Target.Id);
                 ntf.Add("id", notif.Id);
                 result.Add(ntf);
@@ -353,6 +356,7 @@ namespace WASP.Service
             result.Add("auth", key);
             result.Add("username", user.Username);
             result.Add("password", user.Password);
+            result.Add("name", user.Name);
             result.Add("email", user.Email);
             result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
@@ -389,6 +393,7 @@ namespace WASP.Service
                 User user = User.Get(pair.UserId, pair.ForumId);
                 result.Add("username", user.Username);
                 result.Add("password", user.Password);
+                result.Add("name", user.Name);
                 result.Add("email", user.Email);
             }
             result.Add("auth", data["auth"]);

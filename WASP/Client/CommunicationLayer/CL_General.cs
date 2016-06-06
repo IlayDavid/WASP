@@ -37,7 +37,6 @@ namespace Client.CommunicationLayer
             nc = new Thread(new ParameterizedThreadStart (NotificationComponent.Initialize));
             notif= new Thread(new ThreadStart(getnotifications));
             notifList = new List<Notification>();
-
         }
 
         public void getnotifications()
@@ -51,7 +50,6 @@ namespace Client.CommunicationLayer
                     isNotif = 1;
                 }
             }
-
         }
 
         public List<Notification> getNotifFromList()
@@ -132,7 +130,7 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             User ans= parser.parseStringToUser(res, true, this);
-            startThread();
+            //startThread();
             return ans;
         }
 
@@ -141,7 +139,7 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
             SuperUser ans =parser.parseStringToSuperUser(res, this);
-            startThread();
+            //startThread();
             return ans;
         }
 
