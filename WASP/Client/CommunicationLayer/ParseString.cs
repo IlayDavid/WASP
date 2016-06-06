@@ -113,9 +113,47 @@ namespace Client.CommunicationLayer
             int forumid = dict["forumid"];
             User user = new User();
             user.id = adminid;
-            Forum f = new Forum(name, description, user, new Policy(0, 0, false, 0, 0));
+            Dictionary<string, dynamic> policy = dict["policy"];
+            TimeSpan pass = policy["passperiod"];
+            int password = pass.Days;
+            TimeSpan sen = policy["seniority"];
+            int seniority = sen.Days;
+            String delete = policy["deletepost"];
+            int deletepost = getDeleteNum(delete);
+            Policy fp = new Policy(deletepost,password, policy["emailverf"],seniority, policy["usersload"], policy["questions"]);
+            Forum f = new Forum(name, description, user, fp);
             f.id = forumid;
             return f;
+        }
+
+        private int getDeleteNum(string delete)
+        {
+            int ret = -1;
+            switch (delete)
+            {
+                case "Owner":
+                    ret = 1;
+                    break;
+                case "Moderator":
+                    ret = 2;
+                    break;
+                case "OwnerAndModerator":
+                    ret = 3;
+                    break;
+                case "Admin":
+                    ret = 4;
+                    break;
+                case "OwnerAndAdmin":
+                    ret = 5;
+                    break;
+                case "ModeratorAndAdmin":
+                    ret = 6;
+                    break;
+                case "OwnerModeratorAndAdmin":
+                    ret = 7;
+                    break;
+            }
+            return ret;
         }
 
         public Subforum parseStringToSubforum(string res)
