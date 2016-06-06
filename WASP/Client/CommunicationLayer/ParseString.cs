@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.DataClasses;
 using System.Web.Script.Serialization;
+using System.Collections;
 
 namespace Client.CommunicationLayer
 {
@@ -107,23 +108,39 @@ namespace Client.CommunicationLayer
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string name = dict["title"];
+            string name = dict["name"];
             string description = dict["description"];
             int adminid = dict["adminid"];
             int forumid = dict["forumid"];
             User user = new User();
             user.id = adminid;
             Dictionary<string, dynamic> policy = dict["policy"];
-            TimeSpan pass = policy["passperiod"];
-            int password = pass.Days;
-            TimeSpan sen = policy["seniority"];
-            int seniority = sen.Days;
-            String delete = policy["deletepost"];
-            int deletepost = getDeleteNum(delete);
-            Policy fp = new Policy(deletepost,password, policy["emailverf"],seniority, policy["usersload"], policy["questions"]);
+            Policy fp = parseStringToPolicy(policy);
             Forum f = new Forum(name, description, user, fp);
             f.id = forumid;
             return f;
+        }
+
+        public Policy parseStringToPolicy(Dictionary<string, dynamic> policy)
+        {
+            //TimeSpan pass = (TimeSpan)(policy["passperiod"]);
+            Dictionary<string, dynamic> pass = policy["passperiod"];
+            int password = pass["Days"];
+            Dictionary<string, dynamic> sen = policy["seniority"];
+            int seniority = sen["Days"];
+            String delete = policy["deletepost"];
+            int deletepost = getDeleteNum(delete);
+            bool email = policy["emailverf"];
+            int users = policy["usersload"];
+            ArrayList q = policy["questions"];
+            object [] ques = q.ToArray();
+            string[] questions = new string[ques.Length] ;
+            for (int i=0; i<ques.Length; i++)
+            {
+                questions[i] = (string)(ques[i]);
+            }
+            Policy fp = new Policy(deletepost, password, email, seniority, users, questions);
+            return fp;
         }
 
         private int getDeleteNum(string delete)
