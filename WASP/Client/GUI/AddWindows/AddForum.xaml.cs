@@ -27,11 +27,11 @@ namespace Client.GUI
         {
             InitializeComponent();
             questions = new List<string>();
-    }
+        }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            try
+            //try
             {
                 if (Session.user is SuperUser)
                 {
@@ -52,9 +52,9 @@ namespace Client.GUI
                 }
                 this.Close();
             }
-            catch (Exception ee)
+            //catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                //MessageBox.Show(ee.Message);
             }
         }
 

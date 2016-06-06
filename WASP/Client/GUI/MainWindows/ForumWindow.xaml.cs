@@ -104,10 +104,15 @@ namespace Client
 
         public void LoadData()
         {
-            Session.LoadMembers();
-            Session.LoadSubForums();
-            Session.LoadAdmins();
-            Session.LoadMembers();
+            try
+            {
+                Session.LoadMembers();
+                Session.LoadSubForums();
+                Session.LoadAdmins();
+                Session.LoadMembers();
+                Session.LoadPolicy();
+            }
+            catch { }
         }
  
         private void exitButton_Click(object sender, RoutedEventArgs e)
@@ -152,7 +157,7 @@ namespace Client
             leftSp.Children.Add(dgAdmins);
             leftSp.Children.Add(new Label() { Content = "  " });
 
-            Button btnAddFriends = new Button() { Content = "Add Friend", DataContext = dgMembers };
+            Button btnAddFriends = new Button() { Content = "Add Friend", DataContext = new List<DataGrid>{ dgMembers, dgFriends } };
             btnAddFriends.Click += new System.Windows.RoutedEventHandler(this.btnAddFriends_Click);
 
             if (Session.user != null)
@@ -180,7 +185,8 @@ namespace Client
         {
             try
             {
-                DataGrid dgMembers = (DataGrid)((Button)sender).DataContext;
+                DataGrid dgMembers = ((List<DataGrid>)((Button)sender).DataContext)[0];
+                DataGrid dgFriends = ((List<DataGrid>)((Button)sender).DataContext)[1];
                 UserView selectedUser = (UserView)dgMembers.SelectedItem;
                 if (selectedUser == null)
                 {
@@ -189,6 +195,8 @@ namespace Client
                 }
                 int id = Session.forum.members.First(x => (x.Value.userName == selectedUser.UserName)).Value.id;
                 Session.bl.addFriend(id);
+                Session.LoadFriends();
+                dgFriends.ItemsSource = UserView.getView(Session.user.friends);
             }
             catch (Exception ee)
             {

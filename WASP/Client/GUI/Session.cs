@@ -110,5 +110,11 @@ namespace Client.GUI
             notsBtn.Content = "Notifications (" + notifications.Count + ")";
             notsBtn.DataContext = notifications;
         }
+
+        internal static void LoadPolicy()
+        {
+            Forum f = bl.getForum(forum.id);
+            forum.policy = f.policy;
+        }
     }
 }

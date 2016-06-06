@@ -127,13 +127,14 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post p = (Post)selected.DataContext;
-                int isSuc = Session.bl.deletePost(p.id);
-                if (isSuc > 0)
+                Session.bl.deletePost(p.id);
+                if (selected.Parent is TreeViewItem)
+                    ((TreeViewItem)selected.Parent).Items.Remove(selected);
+                else
                 {
-                    if (selected.Parent is TreeViewItem)
-                        ((TreeViewItem)selected.Parent).Items.Remove(selected);
-                    else
-                        postMesssages.Items.Remove(selected);
+                    postMesssages.Items.Remove(selected);
+                    MessageBox.Show("The thread deleted", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
             }
             catch (Exception ee)

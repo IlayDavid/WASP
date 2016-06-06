@@ -19,12 +19,14 @@ namespace Client
         {
             _forumID = loginTo;
             InitializeComponent();
+            if (_forumID == ALL_FORUMS)
+                lblForget.Visibility = Visibility.Hidden;
             rdbUserPass.IsChecked = true;
         }
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            //try
+            try
             {
                 if (rdbClientSession.IsChecked.Value)
                 {
@@ -44,10 +46,9 @@ namespace Client
                     this.Close();
                 }
             }
-            //catch (Exception ee)
+            catch (Exception ee)
             {
-                
-                //MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
 
