@@ -70,9 +70,9 @@ namespace Client.GUI
             ComboBoxItem selectedItem = (ComboBoxItem)cmboxModerator.SelectedItem;
             Moderator mod = (Moderator)selectedItem.DataContext;
 
-            lblAppointBy.Content = ((string)lblAppointBy.DataContext) + mod.appointBy.userName;
-            lblDate.Content = ((string)lblDate.DataContext) + mod.appointDate.ToShortDateString();
-            lblSubForum.Content = ((string)lblSubForum.DataContext) + Session.forum.subforums[mod.subForumID].name;
+            lblAppointByData.Content = mod.appointBy.userName;
+            lblDateData.Content = mod.appointDate.ToShortDateString();
+            lblSubForumData.Content = Session.forum.subforums[mod.subForumID].name;
 
             treeModPost.Items.Clear();
             foreach(Post p in report.moderatorsPosts[mod.user.id])

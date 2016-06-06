@@ -48,7 +48,9 @@ namespace Client.GUI
                     //todo
 
                     _forum = Session.bl.createForum(txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
-                    txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
+                        txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
+                   // Session.bl.defineForumPolicy(policy);
+                    //_forum = Session.bl.getForum(_forum.id);
                 }
                 this.Close();
             }

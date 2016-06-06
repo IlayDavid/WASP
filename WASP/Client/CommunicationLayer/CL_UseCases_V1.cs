@@ -39,7 +39,7 @@ namespace Client.CommunicationLayer
                 + "\"," + "\"description\":\"" + description + "\"," + "\"adminusername\":\"" + adminUserName
                 + "\"," + "\"adminname\":\"" + adminName + "\"}";
             string res = httpReq(json, "POST", _url + "/createForum/");
-            return parser.parseStringToForum(res);
+            return parser.parseStringToCreateForum(res);
         }
 
         public int defineForumPolicy(Policy policy)

@@ -121,6 +121,22 @@ namespace Client.CommunicationLayer
             return f;
         }
 
+        public Forum parseStringToCreateForum(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string name = dict["name"];
+            string description = dict["description"];
+            int adminid = dict["adminid"];
+            int forumid = dict["forumid"];
+            User user = new User();
+            user.id = adminid;
+            Policy fp = new Policy(0, 0, false, 0, 0);
+            Forum f = new Forum(name, description, user, fp);
+            f.id = forumid;
+            return f;
+        }
+
         public Policy parseStringToPolicy(Dictionary<string, dynamic> policy)
         {
             //TimeSpan pass = (TimeSpan)(policy["passperiod"]);

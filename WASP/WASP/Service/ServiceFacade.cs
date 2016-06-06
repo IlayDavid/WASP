@@ -65,7 +65,7 @@ namespace WASP.Service
             Policy policy = new Policy();
             Forum forum = bl.createForum(pair.UserId, data["forumname"], data["description"], data["adminid"], data["adminusername"], data["adminname"], data["email"], data["password"], policy);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("title", forum.Name);
+            result.Add("name", forum.Name);
             result.Add("description", forum.Description);
             result.Add("adminid", forum.GetAdmins()[0].Id);
             result.Add("forumid", forum.Id);
