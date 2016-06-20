@@ -161,6 +161,11 @@ namespace AccTests
             return _clientAPI.getThreads(subForumID);
         }
 
+        public string getUserQuestion(string username)
+        {
+            return _clientAPI.getUserQuestion(username);
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return _clientAPI.initialize(name, userName, ID, email, pass);
