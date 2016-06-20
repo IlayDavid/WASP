@@ -123,7 +123,7 @@ namespace Client.BusinessLogic
         * Return: number >= 0 if success        
         */
         int deleteModerator(int moderatorID, int subForumID);
-
+        
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
         List<Notification> getAllNotificationses();
         List<Notification> getNewNotificationses();
