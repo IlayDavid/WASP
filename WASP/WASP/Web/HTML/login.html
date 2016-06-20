@@ -33,7 +33,7 @@ container.innerHTML=container.innerHTML+"<br><br><br>Hashcode: <input type=\"tex
 	function submitFunc(username,password,forumid){
 	param={
 	"username":username,
-	"password":password,
+	"password":Sha256.hash(password),
 	"forumid":forumid};
 	param["forumid"]=parseInt(forumid);
 	console.log(param);

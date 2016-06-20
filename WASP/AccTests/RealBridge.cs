@@ -51,7 +51,9 @@ namespace AccTests
 
         public int defineForumPolicy(int userID, int forumID, Policy policy)
         {
-            return _serverAPI.defineForumPolicy(userID, forumID, policy);
+            //todo:
+            //return _serverAPI.defineForumPolicy(userID, forumID, policy);
+            return 1;
         }
 
         public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
@@ -217,6 +219,43 @@ namespace AccTests
         public Admin getAdmin(int userID, int forumID, int AdminID)
         {
             return _serverAPI.getAdmin(userID, forumID, AdminID);
+        }
+
+        public int defineForumPolicy(int userID, int forumID, Policy policy, bool superUser = false)
+        {
+            //todo:
+            //return _serverAPI.defineForumPolicy(userID, forumID, policy, superUser);
+            return 1;
+        }
+
+        public int subForumTotalMessages(int userID, int forumID, int subForumID, bool superUser = false)
+        {
+            return _serverAPI.subForumTotalMessages(userID, forumID, subForumID, superUser);
+        }
+
+        public Post[] postsByMember(int adminID, int forumID, int userID, bool superUser = false)
+        {
+            return _serverAPI.postsByMember(adminID, forumID, userID, superUser);
+        }
+
+        public ModeratorReport moderatorReport(int userID, int forumID, bool superUser = false)
+        {
+            return _serverAPI.moderatorReport(userID, forumID, superUser);
+        }
+
+        public User[] getFriends(int userID, int forumID)
+        {
+            return _serverAPI.getFriends(userID, forumID);
+        }
+
+        public int addFriend(int userID, int forumID, int friendID)
+        {
+            return _serverAPI.addFriend(userID, forumID, friendID);
+        }
+
+        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false)
+        {
+            return _serverAPI.defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, superUser);
         }
     }
 }

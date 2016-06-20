@@ -21,15 +21,17 @@ namespace Client.GUI
     /// </summary>
     public partial class AddForum : Window
     {
-        Forum _forum = null;
+        private Forum _forum = null;
+        private List<string> questions = null;
         public AddForum()
         {
             InitializeComponent();
+            questions = new List<string>();
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            try
+            //try
             {
                 if (Session.user is SuperUser)
                 {
@@ -38,15 +40,23 @@ namespace Client.GUI
                     bool emailVerification = chkbEmailVer.IsChecked.Value;
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
+                    
                     Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
+                    
+                    //todo
+                    policy.questions = questions.ToArray();
+                    //todo
+
                     _forum = Session.bl.createForum(txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
-                    txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
+                        txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
+                   // Session.bl.defineForumPolicy(policy);
+                    //_forum = Session.bl.getForum(_forum.id);
                 }
                 this.Close();
             }
-            catch (Exception ee)
+            //catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                //MessageBox.Show(ee.Message);
             }
         }
 
@@ -64,9 +74,17 @@ namespace Client.GUI
             return _forum;
         }
 
-        private void chkbOwner_Checked(object sender, RoutedEventArgs e)
+        private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
         {
-
+            string newQ = txtNewQuestion.Text;
+            if (newQ.Equals(""))
+            {
+                MessageBox.Show("Enter a question.");
+                return;
+            }
+            questions.Add(newQ);
+            ListBoxItem item = new ListBoxItem() { Content = newQ };
+            lstBoxRestoreQuestion.Items.Add(item);
         }
     }
 }

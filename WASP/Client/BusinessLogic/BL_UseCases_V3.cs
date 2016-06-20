@@ -34,11 +34,11 @@ namespace Client.BusinessLogic
 
         public List<Notification> getAllNotificationses()
         {
-            throw new NotImplementedException();
+            return _cl.getAllNotificationses();
         }
         public List<Notification> getNewNotificationses()
         {
-            throw new NotImplementedException();
+            return _cl.getNewNotificationses();
         }
         //-----------Admin Reports---------------
         public int subForumTotalMessages(int subForumID)

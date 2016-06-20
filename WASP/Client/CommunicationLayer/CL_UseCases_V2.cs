@@ -15,7 +15,7 @@ namespace Client.CommunicationLayer
             string json = "{\"subforumid\":" + subForumID + "," + "\"auth\":\"" + _auth + "\"," + "\"moderatorid\":" + moderatorID
                  + "," + "\"termenddate\":\"" + term.ToString() + "\"}";
             string res = httpReq(json, "POST", _url + "/addModerator/");
-            return parser.parseStringToModerator(res);
+            return parser.parseStringToModerator(res, term);
         }
 
         public int confirmEmail(int code)
@@ -27,14 +27,14 @@ namespace Client.CommunicationLayer
 
         public int deletePost(int postID)
         {
-            string json = "{\"postid\":" + postID + "," + "\"auth\":\"" + _auth + "\"," + "}";
+            string json = "{\"postid\":" + postID + "," + "\"auth\":\"" + _auth + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/deletePost/");
             return 0;
         }
 
         public int sendMessage(int targetUserID, string message)
         {
-            string json = "{\"message\":\"" + message + "\"," + "\"auth\":\"" + _auth + "\"," + "\"recieverid\":" + targetUserID + "}";
+            string json = "{\"message\":\"" + message + "\"," + "\"auth\":\"" + _auth + "\"," + "\"target\":" + targetUserID + "}";
             string res = httpReq(json, "POST", _url + "/sendMessage/");
             return 0;
         }
@@ -49,10 +49,9 @@ namespace Client.CommunicationLayer
 
         DateTime ICL.getModeratorTermTime(int moderatorID, int subforumID)
         {
-            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID
-                 + "\"}";
+            string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");
-            return parseStringToDate(res);
+            return parser.parseStringToDate(res);
         }
 
         //---------------------------Version 2 Use Cases Start------------------------------------

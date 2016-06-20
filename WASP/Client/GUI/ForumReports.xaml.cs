@@ -24,10 +24,7 @@ namespace Client.GUI
         public ForumReports()
         {
             InitializeComponent();
-            lblAppointBy.DataContext = lblAppointBy.Content;
-            lblDate.DataContext = lblDate.Content;
-            lblSubForum.DataContext = lblSubForum.Content;
-
+            
             try
             {
                 report = Session.bl.moderatorReport();
@@ -35,7 +32,6 @@ namespace Client.GUI
             catch(Exception ee)
             {
                 MessageBox.Show(ee.Message);
-                report = new ModeratorReport();
             }
             foreach (Moderator mod in report.moderators)
             {
@@ -51,6 +47,8 @@ namespace Client.GUI
                 item.DataContext = user;
                 cmboxMember.Items.Add(item);
             }
+            cmboxModerator.SelectionChanged += cmboxModerator_SelectionChanged;
+            cmboxMember.SelectionChanged += cmboxMember_SelectionChanged;
         }
         private TreeViewItem makePostTree(Post post)
         {
@@ -66,15 +64,15 @@ namespace Client.GUI
         {
             if (cmboxModerator.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please choose moderator to the subforum");
+                MessageBox.Show("Please choose moderator");
                 return;
             }
             ComboBoxItem selectedItem = (ComboBoxItem)cmboxModerator.SelectedItem;
             Moderator mod = (Moderator)selectedItem.DataContext;
 
-            lblAppointBy.Content = ((string)lblAppointBy.DataContext) + mod.appointBy.userName;
-            lblDate.Content = ((string)lblDate.DataContext) + mod.appointDate.ToShortDateString();
-            lblSubForum.Content = ((string)lblSubForum.DataContext) + Session.forum.subforums[mod.subForumID].name;
+            lblAppointByData.Content = mod.appointBy.userName;
+            lblDateData.Content = mod.appointDate.ToShortDateString();
+            lblSubForumData.Content = Session.forum.subforums[mod.subForumID].name;
 
             treeModPost.Items.Clear();
             foreach(Post p in report.moderatorsPosts[mod.user.id])
@@ -87,14 +85,14 @@ namespace Client.GUI
         {
             if (cmboxMember.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please choose moderator to the subforum");
+                MessageBox.Show("Please choose member");
                 return;
             }
             try
             {
                 ComboBoxItem selectedItem = (ComboBoxItem)cmboxMember.SelectedItem;
                 User user = (User)selectedItem.DataContext;
-
+               
                 List<Post> postList = Session.bl.postsByMember(user.id);
                 treeMemberPost.Items.Clear();
                 foreach (Post p in postList)
@@ -107,11 +105,6 @@ namespace Client.GUI
             {
                 MessageBox.Show(ee.Message);
             }
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

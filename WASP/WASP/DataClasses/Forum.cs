@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using WASP.Config;
 namespace WASP.DataClasses
 {
     public class Forum
@@ -14,9 +14,9 @@ namespace WASP.DataClasses
         private Policy policy;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public static Forum Get(int id, bool useCache = true)
+        public static Forum Get(int id)
         {
-            if (useCache)
+            if (Settings.UseCache())
                 return WASP.Config.Settings.GetCache().GetForum(id);
             return dal.GetForum(id);
         }

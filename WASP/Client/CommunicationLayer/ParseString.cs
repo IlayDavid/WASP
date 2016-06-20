@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.DataClasses;
 using System.Web.Script.Serialization;
+using System.Collections;
 
 namespace Client.CommunicationLayer
 {
@@ -26,6 +27,7 @@ namespace Client.CommunicationLayer
             string name = dict["name"];
             string email = dict["email"];
             User su = new User(id, name, username, email, password);
+            su.client_session = c._auth;
             return su;
         }
 
@@ -46,6 +48,7 @@ namespace Client.CommunicationLayer
             string password = dict["password"];
             c._auth = dict["auth"];
             SuperUser su = new SuperUser("", username, id, "", password);
+            su.client_session = c._auth;
             return su;
         }
 
@@ -80,7 +83,7 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
-        public Post parseStringToPost(string res, bool reply=false)
+        public Post parseStringToPost(string res, bool reply = false)
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
@@ -105,15 +108,85 @@ namespace Client.CommunicationLayer
         {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
-            string name = dict["title"];
+            string name = dict["name"];
             string description = dict["description"];
             int adminid = dict["adminid"];
             int forumid = dict["forumid"];
             User user = new User();
             user.id = adminid;
-            Forum f = new Forum(name, description, user, new Policy(0, 0, false, 0, 0));
+            Dictionary<string, dynamic> policy = dict["policy"];
+            Policy fp = parseStringToPolicy(policy);
+            Forum f = new Forum(name, description, user, fp);
             f.id = forumid;
             return f;
+        }
+
+        public Forum parseStringToCreateForum(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            string name = dict["name"];
+            string description = dict["description"];
+            int adminid = dict["adminid"];
+            int forumid = dict["forumid"];
+            User user = new User();
+            user.id = adminid;
+            Policy fp = new Policy(0, 0, false, 0, 0);
+            Forum f = new Forum(name, description, user, fp);
+            f.id = forumid;
+            return f;
+        }
+
+        public Policy parseStringToPolicy(Dictionary<string, dynamic> policy)
+        {
+            //TimeSpan pass = (TimeSpan)(policy["passperiod"]);
+            Dictionary<string, dynamic> pass = policy["passperiod"];
+            int password = pass["Days"];
+            Dictionary<string, dynamic> sen = policy["seniority"];
+            int seniority = sen["Days"];
+            String delete = policy["deletepost"];
+            int deletepost = getDeleteNum(delete);
+            bool email = policy["emailverf"];
+            int users = policy["usersload"];
+            ArrayList q = policy["questions"];
+            object [] ques = q.ToArray();
+            string[] questions = new string[ques.Length] ;
+            for (int i=0; i<ques.Length; i++)
+            {
+                questions[i] = (string)(ques[i]);
+            }
+            Policy fp = new Policy(deletepost, password, email, seniority, users, questions);
+            return fp;
+        }
+
+        private int getDeleteNum(string delete)
+        {
+            int ret = -1;
+            switch (delete)
+            {
+                case "Owner":
+                    ret = 1;
+                    break;
+                case "Moderator":
+                    ret = 2;
+                    break;
+                case "OwnerAndModerator":
+                    ret = 3;
+                    break;
+                case "Admin":
+                    ret = 4;
+                    break;
+                case "OwnerAndAdmin":
+                    ret = 5;
+                    break;
+                case "ModeratorAndAdmin":
+                    ret = 6;
+                    break;
+                case "OwnerModeratorAndAdmin":
+                    ret = 7;
+                    break;
+            }
+            return ret;
         }
 
         public Subforum parseStringToSubforum(string res)
@@ -151,6 +224,22 @@ namespace Client.CommunicationLayer
             return ret;
         }
 
+        public Moderator parseStringToModerator(string res, DateTime dt)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            int modid = dict["moderatorid"];
+            int subforumid = dict["subforumid"];
+            int appointedbyid = dict["appointedbyid"];
+            User user = new User();
+            user.id = modid;
+            User appoint = new User();
+            appoint.id = appointedbyid;
+            Moderator mod = new Moderator(user, dt, appoint);
+            mod.subForumID = subforumid;
+            return mod;
+        }
+
         public Moderator parseStringToModerator(string res)
         {
             var jss = new JavaScriptSerializer();
@@ -162,7 +251,7 @@ namespace Client.CommunicationLayer
             user.id = modid;
             User appoint = new User();
             appoint.id = appointedbyid;
-            Moderator mod = new Moderator(user, new DateTime(), appoint);
+            Moderator mod = new Moderator(user, DateTime.Now, appoint);
             mod.subForumID = subforumid;
             return mod;
         }
@@ -230,6 +319,94 @@ namespace Client.CommunicationLayer
                 ret.Add(u);
             }
             return ret;
+        }
+
+        public List<User> parseStringToFriends(string res)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLFriend>>(res);
+            List<User> ret = new List<User>();
+            if (dict != null)
+            {
+                foreach (CLFriend cl in dict)
+                {
+                    User u = new User(cl.id, cl.name, cl.username, null, null);
+                    ret.Add(u);
+                }
+            }
+            return ret;
+        }
+
+        public DateTime parseStringToDate(string res)
+        {   //termtime
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            return DateTime.Parse(dict["termtime"]);
+        }
+
+        public List<Notification> parseStringToMessages(string res, bool isnew)
+        {
+            var jss = new JavaScriptSerializer();
+            var dict = jss.Deserialize<List<CLNotification>>(res);
+            List<Notification> ret = new List<Notification>();
+            if (dict != null)
+            {
+                foreach (CLNotification cl in dict)
+                {
+                    Notification.Types t;
+                    if (cl.type == CLNotification.Types.Message)
+                        t = Notification.Types.Message;
+                    else
+                        t = Notification.Types.Post;
+                    Notification n = new Notification(cl.id, cl.message, isnew, cl.source, cl.target, t);
+                    ret.Add(n);
+                }
+            }
+            return ret;
+        }
+
+        public ModeratorReport parseStringToModeratorReport(string res)
+        {
+            ModeratorReport mr = new ModeratorReport();
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
+            int forumid = dict["forum"];
+            var moderators = dict["moderators"];
+            foreach(var d in moderators)
+            {
+                int modid = d["id"];
+                int sfid = d["subforum"];
+                User mod = new User();
+                mod.userName = d["username"];
+                mod.id = modid;
+                User appointedBy = new User();
+                appointedBy.id = d["appointer"];
+                Moderator m = new Moderator(mod, d["startdate"], appointedBy, sfid);
+                mr.moderators.Add(m);
+                var posts = d["posts"];
+                List<Post> modposts = new List<Post>();
+                foreach (var dp in posts)
+                {
+                    int pid = dp["postid"];
+                    string title = dp["title"];
+                    string content = dp["content"];
+                    User author = new User();
+                    author.id = modid;
+                    var cont = dp["subforum"];
+                    int container = cont["Id"];
+                    Post inreply = new Post();
+                    //inreply.id = dp["inreplyto"];
+                    Post p = new Post(pid, title, content, author, container,null);
+                    p.publishedAt = dp["publishedat"];
+                    modposts.Add(p);
+                }
+                mr.ModeratorInsubForum.Add(modid, sfid);
+                mr.moderatorsPosts.Add(modid, modposts);
+
+            }
+
+            return mr;
         }
     }
 }

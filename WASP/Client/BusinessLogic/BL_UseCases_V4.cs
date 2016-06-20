@@ -16,7 +16,10 @@ namespace Client.BusinessLogic
         {
             return _cl.loginBySession(session);
         }
-
+        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
         //---------------------------Version 4 Use Cases End------------------------------------
 
     }

@@ -14,6 +14,10 @@ namespace Client
     /// </summary>
     public partial class PostWindow : Window, INotificable
     {
+        public void NotifyWindow(List<Notification> notifications)
+        {
+            throw new NotImplementedException();
+        }
         private readonly int CONTENT_IND = 0;
         //private readonly int EDIT_AT_IND = 0;
         //private readonly int BY_IND = 0;
@@ -123,13 +127,14 @@ namespace Client
             {
                 TreeViewItem selected = (TreeViewItem)postMesssages.SelectedItem;
                 Post p = (Post)selected.DataContext;
-                int isSuc = Session.bl.deletePost(p.id);
-                if (isSuc > 0)
+                Session.bl.deletePost(p.id);
+                if (selected.Parent is TreeViewItem)
+                    ((TreeViewItem)selected.Parent).Items.Remove(selected);
+                else
                 {
-                    if (selected.Parent is TreeViewItem)
-                        ((TreeViewItem)selected.Parent).Items.Remove(selected);
-                    else
-                        postMesssages.Items.Remove(selected);
+                    postMesssages.Items.Remove(selected);
+                    MessageBox.Show("The thread deleted", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
             }
             catch (Exception ee)
@@ -249,9 +254,9 @@ namespace Client
 
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notifications>)notificationsButton.DataContext);
+            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext);
         }
-        void NotifyWindow(List<Notifications> notifications, Button notsBtn)
+        void NotifyWindow(List<Notification> notifications, Button notsBtn)
         {
             Session.NotifyWindow(notifications, notsBtn);
         }

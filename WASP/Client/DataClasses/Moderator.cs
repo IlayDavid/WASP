@@ -18,5 +18,13 @@ namespace Client.DataClasses
             this.term = term;
             appointBy = admin;
         }
+
+        public Moderator(User user, DateTime term, User admin, int sfid)
+        {
+            this.user = user;
+            this.term = term;
+            appointBy = admin;
+            subForumID = sfid;
+        }
     }
 }

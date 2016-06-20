@@ -23,7 +23,8 @@ namespace Client.GUI.MainWindows
         public ChatWindow()
         {
             InitializeComponent();
-            foreach(User user in Session.forum.members.Values)
+            Session.LoadFriends();
+            foreach(User user in Session.user.friends)
             {
                 ListBoxItem item = new ListBoxItem();
                 item.Content = user.userName;
@@ -32,6 +33,8 @@ namespace Client.GUI.MainWindows
             }
             if (lstMembers.Items.Count > 0)
                 lstMembers.SelectedIndex = 0;
+
+            lstMembers.SelectionChanged += lstMembers_SelectionChanged;
         }
 
         private void lstMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -43,9 +46,20 @@ namespace Client.GUI.MainWindows
             }
             User selectedUser = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
 
-            lstMessages.Items.Clear();
-            StackPanel messageView = MakeMessageView(); 
-            lstMessages.Items.Add(messageView);         
+            Session.bl.getNewNotificationses();
+            List<Notification> nots = Session.bl.getAllNotificationses();
+            foreach (Notification n in nots)
+            {
+                MessageBox.Show(n.message);
+                if (n.type == Notification.Types.Message )
+                   // && n.sourceID != -1 && 
+                   // (n.source.userName.Equals(selectedUser.userName)
+                   // || n.target.userName.Equals(selectedUser.userName)))
+                {
+                    ListBoxItem item = new ListBoxItem() { Content = n.target.userName + ": " + n.message };
+                    lstMessages.Items.Add(item);
+                }
+            } 
         }
 
         private StackPanel MakeMessageView()
@@ -53,10 +67,28 @@ namespace Client.GUI.MainWindows
             StackPanel stackPanel = new StackPanel();
             TextBox l = new TextBox() { };
             Button b = new Button() { Content = "Send" };
+            b.Click += new System.Windows.RoutedEventHandler(this.btnSend1_Click);
+            b.DataContext = l;
             stackPanel.Children.Add(l); stackPanel.Children.Add(b);
-            throw new NotImplementedException();
-        }
 
+
+            return stackPanel;
+        }
+        private void btnSend1_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)((Control)sender).DataContext;
+            MessageBox.Show(tb.Text);
+            try
+            {
+                User user = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
+                Session.bl.sendMessage(user.id, txtMessage.Text);
+                txtMessage.Clear();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             if (lstMembers.SelectedIndex < 0)
@@ -69,6 +101,7 @@ namespace Client.GUI.MainWindows
                 User user = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
                 Session.bl.sendMessage(user.id, txtMessage.Text);
                 txtMessage.Clear();
+                lstMembers_SelectionChanged(null, null);
             }
             catch(Exception ee)
             {

@@ -109,6 +109,7 @@ namespace WASP.DataClasses
             this.emailVerification = emailVerification;
             this.minimumSeniority = minimumSeniority;
             this.usersLoad = usersLoad;
+            this.questions = new string[2] { "", "" };
             this.questions[0] = questions[0];
             this.questions[1] = questions[1];
         }

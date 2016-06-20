@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI"
         mc:Ignorable="d"
-        Title="AddForum" Height="558.455" Width="523.81"
+        Title="AddForum" Height="582.988" Width="523.81"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="0,0,0.4,4">
         <Label x:Name="label" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"/>
@@ -25,10 +25,10 @@
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="376,123,0,0"/>
         <PasswordBox x:Name="passPass" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="120" Margin="376,151,0,0"/>
         <Label x:Name="label_Copy7" Content="Forum Details:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontWeight="Bold"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnCreate_Click" Width="75" Margin="421,488,0,0"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnCreate_Click" Width="75" Margin="421,518,0,0"/>
         <GroupBox x:Name="groupBox" Header="Who can delete post?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,252,0,0" Height="98" Width="175">
             <Grid HorizontalAlignment="Left" Width="155" Margin="0,10,0,-1">
-                <CheckBox x:Name="chkbOwner" Content="Owner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,9,0,0" Checked="chkbOwner_Checked"/>
+                <CheckBox x:Name="chkbOwner" Content="Owner" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,9,0,0"/>
                 <CheckBox x:Name="chkbModerator" Content="Moderator" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0"/>
                 <CheckBox x:Name="chkbAdmin" Content="Admin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,49,0,0"/>
             </Grid>
@@ -81,6 +81,14 @@
         </GroupBox>
         <Border BorderBrush="Black" BorderThickness="0,3,0,0" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="517" Margin="0,218,0,0"/>
         <Border BorderBrush="Black" BorderThickness="0,0,3,0" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="16" Margin="253,0,0,0"/>
+        <GroupBox x:Name="groupBox1" Header="Restore Questions" HorizontalAlignment="Left" Margin="214,337,0,0" VerticalAlignment="Top" Height="203" Width="175">
+            <Grid Margin="4,3,-3.4,-3">
+                <ListBox x:Name="lstBoxRestoreQuestion" Height="105" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtNewQuestion" Height="23" Margin="1,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Button x:Name="btnAddQuestion" Click="btnAddQuestion_Click" Content="Add Question" HorizontalAlignment="Left" Margin="63,158,0,0" VerticalAlignment="Top" Width="93"/>
+                <Label x:Name="label4" Content="Enter new Question" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,105,0,0"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>

@@ -8,6 +8,10 @@ namespace AccTests
 {
     public class ClientRealBridge : WASPClientBridge
     {
+        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
         private IBL _clientAPI;
 
         public ClientRealBridge()
@@ -18,6 +22,11 @@ namespace AccTests
         public Client.DataClasses.Admin addAdmin(int newAdminID)
         {
             return _clientAPI.addAdmin(newAdminID);
+        }
+
+        public int addFriend(int friendID)
+        {
+            return _clientAPI.addFriend(friendID);
         }
 
         public Client.DataClasses.Moderator addModerator(int moderatorID, int subForumID, DateTime term)
@@ -70,10 +79,17 @@ namespace AccTests
             return _clientAPI.editPost(postID, content);
         }
 
-        public Client.DataClasses.Admin getAdmin(int AdminID)
+        public Admin getAdmin(int AdminID)
         {
-            return _clientAPI.getAdmin(AdminID);
+            throw new NotImplementedException();
         }
+
+        public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
+        {
+            return _clientAPI.getAdmin(AdminID, forumID);
+        }
+
+        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {
@@ -93,6 +109,11 @@ namespace AccTests
         public Forum getForum(int forumID)
         {
             return _clientAPI.getForum(forumID);
+        }
+
+        public List<User> getFriends()
+        {
+            return _clientAPI.getFriends();
         }
 
         public List<User> getMembers(int forumID)
@@ -140,6 +161,11 @@ namespace AccTests
             return _clientAPI.getThreads(subForumID);
         }
 
+        public string getUserQuestion(string username)
+        {
+            return _clientAPI.getUserQuestion(username);
+        }
+
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return _clientAPI.initialize(name, userName, ID, email, pass);
@@ -157,7 +183,7 @@ namespace AccTests
 
         public User loginBySession(string session)
         {
-            throw new NotImplementedException();
+            return _clientAPI.loginBySession(session);
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -178,6 +204,11 @@ namespace AccTests
         public List<Post> postsByMember(int userID)
         {
             return _clientAPI.postsByMember(userID);
+        }
+
+        public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        {
+            throw new NotImplementedException();
         }
 
         public int sendMessage(int targetUserID, string message)

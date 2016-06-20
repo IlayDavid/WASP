@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WASP.Config;
 namespace WASP.DataClasses
 {
     public class Subforum
@@ -10,9 +11,9 @@ namespace WASP.DataClasses
         private Dictionary<int, Post> threads = null;
         private Forum forum;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
-        public static Subforum Get(int id, bool useCache = true)
+        public static Subforum Get(int id)
         {
-            if (useCache)
+            if (Settings.UseCache())
                 return WASP.Config.Settings.GetCache().GetSubforum(id);
             return dal.GetSubForum(id);
         }

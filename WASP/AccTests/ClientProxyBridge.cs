@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Client.DataClasses;
 using WASP.DataClasses;
 using Forum = Client.DataClasses.Forum;
-using Notifications = Client.DataClasses.Notifications;
 using Policy = Client.DataClasses.Policy;
 using Post = Client.DataClasses.Post;
 using Subforum = Client.DataClasses.Subforum;
@@ -14,6 +13,10 @@ namespace AccTests
 {
     public class ClientProxyBridge : WASPClientBridge
     {
+        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
         private ClientRealBridge proj;
 
         public ClientProxyBridge(ClientRealBridge bridge)
@@ -24,6 +27,11 @@ namespace AccTests
         public Client.DataClasses.Admin addAdmin(int newAdminID)
         {
             return proj.addAdmin(newAdminID);
+        }
+
+        public int addFriend(int friendID)
+        {
+            return proj.addFriend(friendID);
         }
 
         public Client.DataClasses.Moderator addModerator(int moderatorID, int subForumID, DateTime term)
@@ -78,8 +86,15 @@ namespace AccTests
 
         public Client.DataClasses.Admin getAdmin(int AdminID)
         {
-            return proj.getAdmin(AdminID);
+            throw new NotImplementedException();
         }
+
+        public Client.DataClasses.Admin getAdmin(int AdminID, int forumID)
+        {
+            return proj.getAdmin(AdminID, forumID);
+        }
+
+        
 
         public List<Client.DataClasses.Admin> getAdmins(int forumID)
         {
@@ -99,6 +114,11 @@ namespace AccTests
         public Forum getForum(int forumID)
         {
             return proj.getForum(forumID);
+        }
+
+        public List<User> getFriends()
+        {
+            return proj.getFriends();
         }
 
         public List<User> getMembers(int forumID)
@@ -145,7 +165,6 @@ namespace AccTests
         {
             return proj.getThreads(subForumID);
         }
-
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
             return proj.initialize(name, userName, ID, email, pass);
@@ -184,6 +203,11 @@ namespace AccTests
         public List<Post> postsByMember(int userID)
         {
             return proj.postsByMember(userID);
+        }
+
+        public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        {
+            return proj.restorePasswordbyAnswer(username, answer, newPassword);
         }
 
         public int sendMessage(int targetUserID, string message)

@@ -65,7 +65,7 @@ namespace WASP.Service
             Policy policy = new Policy();
             Forum forum = bl.createForum(pair.UserId, data["forumname"], data["description"], data["adminid"], data["adminusername"], data["adminname"], data["email"], data["password"], policy);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("title", forum.Name);
+            result.Add("name", forum.Name);
             result.Add("description", forum.Description);
             result.Add("adminid", forum.GetAdmins()[0].Id);
             result.Add("forumid", forum.Id);
@@ -232,7 +232,10 @@ namespace WASP.Service
                 Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
                 ntf.Add("type", notif.Type);
                 ntf.Add("message", notif.Message);
-                ntf.Add("source", notif.Source.Id);
+                if (notif.Source == null)
+                    ntf.Add("source", -1);
+                else
+                    ntf.Add("source", notif.Source.Id);
                 ntf.Add("target", notif.Target.Id);
                 ntf.Add("id", notif.Id);
                 result.Add(ntf);
@@ -353,6 +356,7 @@ namespace WASP.Service
             result.Add("auth", key);
             result.Add("username", user.Username);
             result.Add("password", user.Password);
+            result.Add("name", user.Name);
             result.Add("email", user.Email);
             result.Add("forum", pair.ForumId);
             return jss.Serialize(result);
@@ -389,6 +393,7 @@ namespace WASP.Service
                 User user = User.Get(pair.UserId, pair.ForumId);
                 result.Add("username", user.Username);
                 result.Add("password", user.Password);
+                result.Add("name", user.Name);
                 result.Add("email", user.Email);
             }
             result.Add("auth", data["auth"]);

@@ -23,6 +23,17 @@ namespace Client.GUI.AddWindows
         public AddMember()
         {
             InitializeComponent();
+            try
+            {
+                if (Session.forum.policy.questions != null)
+                {
+                    string question = Session.forum.policy.questions[0];
+                    lblUserQusetion.Content = question;                    
+                }
+                else
+                    gBoxRestore.IsEnabled = false;
+            }
+            catch { }
         }
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
@@ -31,7 +42,7 @@ namespace Client.GUI.AddWindows
             {
                 User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
                     txtmail.Text, passPassword.Password, Session.forum.id);
-                Session.user = user;
+                Session.user = Session.bl.login(user.userName, user.password, Session.forum.id);
                 if(Session.forum.policy.emailVerification)
                 {
                     MessageBox.Show("Check your email for verification code");
