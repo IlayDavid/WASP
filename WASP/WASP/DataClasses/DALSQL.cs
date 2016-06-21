@@ -7,12 +7,11 @@ using WASP.DataClasses.DAL_EXCEPTIONS;
 using WASP.DataClasses;
 using System.IO;
 using static WASP.DataClasses.Notification;
-using WASP.DataClasses.Cache2;
+
 namespace WASP.DataClasses
 {
     class DALSQL : DAL2
     {
-        private IDALCache2 _cache;
         private static string _connectionString;
         public static string SetDb(string dbName)
         {
@@ -22,12 +21,6 @@ namespace WASP.DataClasses
 
             return _connectionString;
         }
-
-        public DALSQL()
-        {
-            _cache = new DALCache2(this);
-        }
-
         //private int forum_counter = 1;
         private Object forumLock = new Object();
 
@@ -361,33 +354,27 @@ namespace WASP.DataClasses
 
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
-
-            _cache.AddUser(user);
             return user;
         }
 
         public Admin CreateAdmin(Admin admin)
         {
             IAdmin old_admin = db.IAdmins.FirstOrDefault(x => (x.userId == admin.Id && x.forumId == admin.Forum.Id));
-            if (old_admin != null) throw new ExistException(string.Format("Admin {0}, Forum {1} exists in the DataBase", admin.Id, admin.Forum.Id));
-            IUser curr_user = db.IUsers.FirstOrDefault(x => (x.id == admin.User.Id && x.forumId == admin.Forum.Id));
-            if (curr_user == null) throw new ExistException(string.Format("user {0}, Forum {1} does not exists in the DataBase", admin.Id, admin.Forum.Id));
+            if (old_admin != null) throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", admin.Id, admin.Forum.Id));
+
             IAdmin _admin = new IAdmin();
             _admin.userId = admin.User.Id;
             _admin.forumId = admin.Forum.Id;
 
             db.IAdmins.InsertOnSubmit(_admin);
             db.SubmitChanges();
-            _cache.AddAdmin(admin);
             return admin;
         }
         public Moderator CreateModerator(Moderator mod)
         {
             IModerator old_mod = db.IModerators.FirstOrDefault(x => x.userId == mod.Id && x.forumId == mod.SubForum.Forum.Id);
             if (old_mod != null)
-                throw new ExistException(string.Format("Moderator {0}, Forum {1} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
-            IUser curr_user = db.IUsers.FirstOrDefault(x => (x.id == mod.User.Id && x.forumId == mod.SubForum.Forum.Id));
-            if (curr_user == null) throw new ExistException(string.Format("user {0}, Forum {1} does not exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
+                throw new ExistException(string.Format("User {0}, Forum {1} exists in the DataBase", mod.Id, mod.SubForum.Forum.Id));
 
             if (mod.Appointer.Forum.Id != mod.User.Forum.Id || mod.Appointer.Forum.Id != mod.SubForum.Forum.Id ||
                 mod.User.Forum.Id != mod.SubForum.Forum.Id)
@@ -403,8 +390,6 @@ namespace WASP.DataClasses
 
             db.IModerators.InsertOnSubmit(_mod);
             db.SubmitChanges();
-
-            _cache.AddModerator(mod);
             return mod;
         }
         public Forum CreateForum(Forum forum)
@@ -420,8 +405,6 @@ namespace WASP.DataClasses
             db.IForums.InsertOnSubmit(_forum);
             db.SubmitChanges();
             forum.Id = _forum.id;
-
-            _cache.AddForum(forum);
             return forum;
         }
         public Subforum CreateSubForum(Subforum sf)
@@ -435,8 +418,6 @@ namespace WASP.DataClasses
             db.ISubForums.InsertOnSubmit(_subf);
             db.SubmitChanges();
             sf.Id = _subf.id;
-
-            _cache.AddSubforum(sf);
             return sf;
         }
         public Post CreatePost(Post post)
@@ -460,8 +441,6 @@ namespace WASP.DataClasses
             db.IPosts.InsertOnSubmit(ipost);
             db.SubmitChanges();
             post.Id = ipost.id;
-
-            _cache.AddPost(post);
             return post;
         }
         public User[] GetUsers(int[] userIds, int forumId)
@@ -528,7 +507,6 @@ namespace WASP.DataClasses
                 iadmin.userId = admin.User.Id;
                 UpdateUser(admin.User);
                 db.SubmitChanges();
-                _cache.AddAdmin(admin);
                 return admin;
             }
             throw new UpdateException(String.Format("Admin {0} Forum {0} wasn't found", admin.Id, admin.Forum.Id));
@@ -546,7 +524,6 @@ namespace WASP.DataClasses
                 else
                     iforum.policyId = null;
                 db.SubmitChanges();
-                _cache.AddForum(forum);
                 return forum;
             }
             else throw new UpdateException(String.Format("Forum {0} wasn't found", forum.Id));
@@ -569,7 +546,6 @@ namespace WASP.DataClasses
 
                 UpdateUser(mod.User);
                 db.SubmitChanges();
-                _cache.AddModerator(mod);
                 return mod;
             }
             throw new UpdateException(String.Format("Moderator {0} Forum {0} wasn't found", mod.Id, mod.SubForum.Forum.Id));
@@ -589,7 +565,6 @@ namespace WASP.DataClasses
                 isf.description = sf.Description;
                 isf.forumId = sf.Forum.Id;
                 db.SubmitChanges();
-                _cache.AddSubforum(sf);
                 return sf;
             }
             throw new UpdateException(String.Format("sub-forum {0} wasn't found", sf.Id));
@@ -615,7 +590,6 @@ namespace WASP.DataClasses
                 iuser.answer2 = user.Answers[1];
 
                 db.SubmitChanges();
-                _cache.AddUser(user);
                 return user;
             }
             throw new UpdateException(String.Format("user {0} wasn't found", user.Id));
@@ -637,27 +611,23 @@ namespace WASP.DataClasses
                 ipost.forumId = post.GetAuthor.Forum.Id;
 
                 db.SubmitChanges();
-
-                _cache.AddPost(post);
                 return post;
             }
             throw new UpdateException(String.Format("post {0} wasn't found", post.Id));
         }
 
+
+
         public Forum GetForum(int id)
         {
-            Forum cf = _cache.GetForum(id);
-            if (cf != null)
-                return cf;
             IForum iforum = db.IForums.FirstOrDefault(x => (x.id == id));
             if (iforum != null)
             {
                 Forum forum = new Forum(iforum.id, iforum.subject, iforum.description, null, this);
                 if (iforum.policyId != null)
                     forum.Policy = GetPolicy((int)iforum.policyId);
-                _cache.AddForum(forum);
+
                 return forum;
-                
             }
             throw new GetException(string.Format("forum {0} wasn't found", id));
         }
@@ -665,15 +635,11 @@ namespace WASP.DataClasses
 
         public Subforum GetSubForum(int sfId)
         {
-            Subforum csf = _cache.GetSubforum(sfId);
-            if (csf != null)
-                return csf;
-
             ISubForum isf = db.ISubForums.FirstOrDefault(x => (x.id == sfId));
             if (isf != null)
             {
                 Subforum sf = new Subforum(isf.id, isf.subject, isf.description, GetForum(isf.forumId), this);
-                _cache.AddSubforum(sf);
+
                 return sf;
             }
             throw new GetException(string.Format("sub-forum {0} wasn't found", sfId));
@@ -682,9 +648,6 @@ namespace WASP.DataClasses
 
         public User GetUser(int id, int forumId)
         {
-            User cuser = _cache.GetUser(id, forumId);
-            if (cuser != null)
-                return cuser;
             IUser iuser = db.IUsers.FirstOrDefault(x => (x.id == id && x.forumId == forumId));
             if (iuser != null)
             {
@@ -692,7 +655,7 @@ namespace WASP.DataClasses
                 string[] answers = { iuser.answer1, iuser.answer2 };
                 User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate, answers);
 
-                _cache.AddUser(user);
+
                 return user;
             }
             throw new GetException(string.Format("user {0} wasn't found", id));
@@ -702,10 +665,6 @@ namespace WASP.DataClasses
 
         public Moderator GetModerator(int id, int sfId)
         {
-            Moderator cmod = _cache.GetModerator(id, sfId);
-            if (cmod != null)
-                return cmod;
-
             IModerator imoderator = db.IModerators.FirstOrDefault(x => (x.userId == id && x.subForumId == sfId));
             if (imoderator != null)
             {
@@ -714,7 +673,6 @@ namespace WASP.DataClasses
                 User user = GetUser(id, imoderator.forumId);
 
                 Moderator moderator = new Moderator(user, imoderator.term, subforum, admin, imoderator.startDate);
-                _cache.AddModerator(moderator);
                 return moderator;
             }
             throw new GetException(string.Format("moderator {0} wasn't found", id));
@@ -722,27 +680,21 @@ namespace WASP.DataClasses
 
         public Admin GetAdmin(int adminId, int forumId)
         {
-            Admin cadmin = _cache.GetAdmin(adminId, forumId);
-            if (cadmin != null)
-                return cadmin;
             IAdmin iadmin = db.IAdmins.FirstOrDefault(x => (x.userId == adminId && x.forumId == forumId));
             if (iadmin != null)
             {
                 Forum forum = GetForum(forumId);
                 User user = GetUser(adminId, forumId);
                 Admin admin = new Admin(user, forum, this);
-                _cache.AddAdmin(admin);
+
                 return admin;
             }
             throw new GetException(string.Format("admin {0} wasn't found", adminId));
         }
 
+
         public Post GetPost(int postId)
         {
-            Post cpost = _cache.GetPost(postId);
-            if (cpost != null)
-                return cpost;
-
             IPost ipost = db.IPosts.FirstOrDefault(x => x.id == postId);
             if (ipost != null)
             {
@@ -751,7 +703,7 @@ namespace WASP.DataClasses
                 Post post = new Post(ipost.id, ipost.title, ipost.cnt, GetUser(ipost.userId, ipost.IUser.forumId), ipost.publishAt,
                    replyTo, GetSubForum(ipost.subforumId), ipost.editAt, this);
 
-                _cache.AddPost(post);
+
                 return post;
             }
             throw new GetException(string.Format("post {0} wasn't found", postId));
@@ -774,7 +726,6 @@ namespace WASP.DataClasses
 
                 db.IPosts.DeleteOnSubmit(ipost);
                 db.SubmitChanges();
-                _cache.RemovePost(postId);
                 return true;
             }
             else throw new ExistException(string.Format("Post {0} does not exist", postId));
@@ -788,7 +739,6 @@ namespace WASP.DataClasses
             {
                 db.IUsers.DeleteOnSubmit(iuser);
                 db.SubmitChanges();
-                _cache.RemoveUser(id, forumId);
                 return true;
             }
             else throw new ExistException(string.Format("User {0} Forum {1} does not exist", id, forumId));
@@ -802,7 +752,7 @@ namespace WASP.DataClasses
                 db.IAdmins.DeleteOnSubmit(iadmin);
                 db.SubmitChanges();
                 DeleteUser(userId, forumId);
-                _cache.RemoveAdmin(adminId, forumId);
+
                 return true;
             }
             else throw new ExistException(string.Format("Admin {0} Forum {1} does not exist", adminId, forumId));
@@ -817,7 +767,6 @@ namespace WASP.DataClasses
                 db.IModerators.DeleteOnSubmit(imoderator);
                 db.SubmitChanges();
                 DeleteUser(userId, forumId);
-                _cache.RemoveModerator(modId, subforumId);
                 return true;
             }
             else throw new ExistException(string.Format("Moderator {0} Forum {1} does not exist", modId, subforumId));
@@ -829,7 +778,6 @@ namespace WASP.DataClasses
             {
                 db.IForums.DeleteOnSubmit(iforum);
                 db.SubmitChanges();
-                _cache.RemoveForum(forumId);
                 return true;
             }
             else throw new ExistException(string.Format("Forum {0} does not exist", forumId));
@@ -841,7 +789,6 @@ namespace WASP.DataClasses
             {
                 db.ISubForums.DeleteOnSubmit(isubforum);
                 db.SubmitChanges();
-                _cache.RemoveSubforum(subforumId);
                 return true;
             }
             else throw new ExistException(string.Format("subforum {0} does not exist", subforumId));
@@ -869,7 +816,6 @@ namespace WASP.DataClasses
                 isuperuser.password = superuser.Password;
                 db.ISuperUsers.InsertOnSubmit(isuperuser);
                 db.SubmitChanges();
-                _cache.AddSuperUser(superuser);
                 return superuser;
             }
             else
@@ -885,7 +831,6 @@ namespace WASP.DataClasses
                 isuperuser.userName = superuser.Username;
                 isuperuser.password = superuser.Password;
                 db.SubmitChanges();
-                _cache.AddSuperUser(superuser);
                 return superuser;
             }
             else
@@ -899,7 +844,6 @@ namespace WASP.DataClasses
             {
                 db.ISuperUsers.DeleteOnSubmit(isuperuser);
                 db.SubmitChanges();
-                _cache.RemoveSuperUser(superuserId);
                 return true;
             }
             else
@@ -908,15 +852,10 @@ namespace WASP.DataClasses
 
         public SuperUser GetSuperUser(int superUserId)
         {
-            SuperUser csu = _cache.GetSuperUser(superUserId);
-            if (csu != null)
-                return csu;
-
             ISuperUser isuperuser = db.ISuperUsers.FirstOrDefault(x => x.id == superUserId);
             if (isuperuser != null)
             {
                 SuperUser superUser = new SuperUser(isuperuser.id, isuperuser.userName, isuperuser.password);
-                _cache.AddSuperUser(superUser);
                 return superUser;
             }
             else
@@ -1011,7 +950,9 @@ namespace WASP.DataClasses
 
         }
 
-        public Admin[] GetAdminsOfForum(int forumId)
+
+
+    public Admin[] GetAdminsOfForum(int forumId)
         {
             IAdmin[] iadmins = db.IAdmins.Where(x => x.forumId == forumId).ToArray();
             List<Admin> admins = new List<Admin>();

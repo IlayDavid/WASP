@@ -126,10 +126,8 @@
     <Compile Include="Config\Settings.cs" />
     <Compile Include="DataClasses\Admin.cs" />
     <Compile Include="DataClasses\Authority.cs" />
-    <Compile Include="DataClasses\Cache2\UnitTests\CacheTests.cs" />
     <Compile Include="DataClasses\DAL.cs" />
     <Compile Include="DataClasses\DAL2.cs" />
-    <Compile Include="DataClasses\Cache2\DALCache2.cs" />
     <Compile Include="DataClasses\DALSQL.cs" />
     <Compile Include="DataClasses\DAL_EXCEPTIONS\ExistException.cs" />
     <Compile Include="DataClasses\DAL_EXCEPTIONS\GetException.cs" />
@@ -141,7 +139,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Forum_System.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DataClasses\Cache2\IDALCache2.cs" />
     <Compile Include="DataClasses\Moderator.cs" />
     <Compile Include="DataClasses\Notification.cs" />
     <Compile Include="DataClasses\Policy.cs" />
