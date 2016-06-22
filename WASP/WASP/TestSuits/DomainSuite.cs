@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WASP.DataClasses;
 using WASP.Domain;
+using WASP.Exceptions;
+
 
 namespace WASP.TestSuits
 {
@@ -148,6 +150,25 @@ namespace WASP.TestSuits
             //Assert.AreEqual(1, BL.memberTotalMessages(user.Id, forum.Id), "checking is return right number of messages");
            // Assert.AreEqual(1, BL.postsByMember(100, forum.Id, user.Id).Length, "cheking if postByMember works");
         }
+
+
+        [TestMethod]
+        public void createForumTest()
+        {
+            Policy policy = new Policy();
+            Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
+            Assert.AreEqual(true, BL.getAllForums().Length > 0, "forum created");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LoginException))]
+        public void checkLogin()
+        {
+            Policy policy = new Policy();
+            Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
+            BL.login("ori", "thisisfakeuser", forum.Id);
+        }
+
     }
 }
 
