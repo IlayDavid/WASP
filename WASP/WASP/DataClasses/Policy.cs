@@ -48,6 +48,13 @@ namespace WASP.DataClasses
         //stress
         private int usersLoad;
         private string[] questions;
+        private bool notifyOffline;
+
+        public bool NotifyOffline
+        {
+            get { return notifyOffline; }
+            set { notifyOffline = value; }
+        }
 
         public TimeSpan PasswordTimeSpan
         {
@@ -99,9 +106,10 @@ namespace WASP.DataClasses
             minimumSeniority = new TimeSpan(0);
             usersLoad = 100;
             questions = new string[2] {"", ""};
+            notifyOffline = true;
         }
 
-        public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions)
+        public Policy(int id, PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline)
         {
             this.id = id;
             this.deletePost = deletePost;
@@ -112,6 +120,7 @@ namespace WASP.DataClasses
             this.questions = new string[2] { "", "" };
             this.questions[0] = questions[0];
             this.questions[1] = questions[1];
+            this.notifyOffline = notifyOffline;
         }
 
 

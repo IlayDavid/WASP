@@ -19,7 +19,12 @@ namespace WASP.DataClasses
         public DateTime StartDate { get; set; }
         public DateTime PasswordChangeDate { get; set; }
         public int Id { get; set; }
-
+        public bool WantNotifications { get; set; }
+        public int OnlineCount
+        {
+            get;
+            set;
+        }
         private Forum forum;
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
@@ -70,9 +75,11 @@ namespace WASP.DataClasses
             this.forum = forum;
             this.PasswordChangeDate = DateTime.Now;
             this.StartDate = DateTime.Now;
+            this.WantNotifications = true;
+            this.OnlineCount = 0;
         }
 
-        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, string [] answers)
+        public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, string [] answers, bool wantNotifications)
         {
             this.Id = id;
             this.Name = name;
@@ -84,6 +91,8 @@ namespace WASP.DataClasses
             this.PasswordChangeDate = passChangeDate;
             this.StartDate = startDate;
             this.answers = answers;
+            this.WantNotifications = wantNotifications;
+            this.OnlineCount = 0;
         }
 
         // DEPRECATED
@@ -237,6 +246,12 @@ namespace WASP.DataClasses
 
         public void NewNotification(Notification newNotification)
         {
+            if (!this.WantNotifications)            
+                return;
+
+            if (!this.Forum.Policy.NotifyOffline && this.OnlineCount == 0)
+                return;
+            
             newNotification.Target = this;
             var tmp = NewNotifications.Count;
             newNotification = newNotification.Create();
