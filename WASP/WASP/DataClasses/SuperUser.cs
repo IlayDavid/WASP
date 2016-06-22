@@ -53,6 +53,8 @@ namespace WASP.DataClasses
             get;
             set;
         }
+
+        public string Secret { get; set; }
         
     }
 }

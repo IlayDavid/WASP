@@ -25,6 +25,8 @@ namespace WASP.DataClasses
             get;
             set;
         }
+
+        public string Secret { get; set; }
         private Forum forum;
         private Dictionary<int, Post> posts = null;
         private Dictionary<int, Notification> newNotifications = null;
@@ -77,6 +79,7 @@ namespace WASP.DataClasses
             this.StartDate = DateTime.Now;
             this.WantNotifications = true;
             this.OnlineCount = 0;
+            this.Secret = "";
         }
 
         public User(int id, string name, string username, string email, string password, Forum forum, DateTime startDate, DateTime passChangeDate, string [] answers, bool wantNotifications)
@@ -93,6 +96,7 @@ namespace WASP.DataClasses
             this.answers = answers;
             this.WantNotifications = wantNotifications;
             this.OnlineCount = 0;
+            this.Secret = "";
         }
 
         // DEPRECATED

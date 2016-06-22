@@ -325,7 +325,7 @@ namespace WASP.Domain
             {
                 if (user.Username.Equals(userName) && user.Password.Equals(password))
                 {
-                    user.OnlineCount++;
+                    ///user.OnlineCount++;
                     return user;
                 }
 
@@ -340,7 +340,7 @@ namespace WASP.Domain
             {
                 if (user.Username.Equals(userName) && user.Password.Equals(password))
                 {
-                    user.OnlineCount++;
+                    //user.OnlineCount++;
                     return user;
                 }
             }
