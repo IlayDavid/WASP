@@ -16,39 +16,28 @@
 			var container=document.getElementById("container");
 
 	var forumid = GetQuerySet()['id'];
-	//alert(Sha256.hash("bla678"));
-	var hash=Sha256.hash("bla567");
-	container.innerHTML="Username: <input type=\"text\" id=\"username\"><br>        Password: <input type=\"password\" id=\"password\"><br>	";
+
+	container.innerHTML="Username: <input type=\"text\" id=\"username\"><br>        Password: <input type=\"password\" id=\"password\"><br> Hash: <input type=\"text\" id=\"hash\"><br>";
 		var button=document.createElement("button");
-		button.setAttribute("onclick","submitFunc(document.getElementById(\"username\").value,document.getElementById(\"password\").value,forumid)");
+		button.setAttribute("onclick","submitFunc(document.getElementById(\"username\").value,document.getElementById(\"password\").value,forumid,document.getElementById(\"hash\").value)");
 		button.setAttribute("type","button");
 		button.innerHTML="login";
 		container.appendChild(button);
-container.innerHTML=container.innerHTML+"<br><br><br>Hashcode: <input type=\"text\" id=\"hash\"><br>";
-		var button=document.createElement("button");
-		button.setAttribute("onclick","hashFunc(document.getElementById(\"hash\").value,forumid)");
-		button.setAttribute("type","button");
-		button.innerHTML="login";
-		container.appendChild(button);
-	function submitFunc(username,password,forumid){
+
+	function submitFunc(username,password,forumid,hash){
 	param={
 	"username":username,
 	"password":Sha256.hash(password),
-	"forumid":forumid};
+	"forumid":forumid,
+	"hash":hash};
 	param["forumid"]=parseInt(forumid);
 	console.log(param);
 	$.post("http://localhost:8080/login/", JSON.stringify(param), function(data, status){
 			   data=JSON.parse(data);
-                window.location.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+forumid+"&auth="+data['auth'];
+                window.location.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+forumid+"&auth="+data['auth']+"&hash="+data['hash'];
             });
 	}
-	function hashFunc(hash, forumid){
-	param={"auth":hash};
-	$.post("http://localhost:8080/loginHash/", JSON.stringify(param), function(data, status){
-			   data=JSON.parse(data);
-                window.location.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+forumid+"&auth="+data['auth'];
-            });
-	}
+	
 	
     </script>
 </body>

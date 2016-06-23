@@ -175,10 +175,13 @@ namespace WASP.DataClasses.UnitTests
             int replyId1 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
             int replyId3 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(threadId), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
             int replyId2 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(replyId1), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
+            int replyId4 = dal.CreatePost(new Post(-1, "answer", "blah", user1, DateTime.Now, dal.GetPost(replyId3), dal.GetSubForum(subforumId), DateTime.Now, dal)).Id;
 
-
+            Assert.IsTrue(replyId4 == dal.GetPost(replyId4).Id);
+            Assert.IsTrue(replyId1 == dal.GetPost(replyId1).Id);
             Assert.IsTrue(dal.GetReplies(threadId).Length == 2);
             Assert.IsTrue(dal.GetReplies(replyId1).Length == 1);
         }
+        
     }
 }

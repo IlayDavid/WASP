@@ -100,13 +100,14 @@ namespace WASP.TestSuits
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
             User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
-           // Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
+            // Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
-            bool isSubForum = forum.IsSubForum(sf.Id);
+    
             Forum forum2 = BL.getForum(forum.Id); // forum after subscribe subforum - contains sub forum.
+            
             bool isSubforum = forum2.IsSubForum(sf.Id);
             // assert
-            Assert.AreEqual(true, isSubForum, "subforum added, but not updated");
+            Assert.AreEqual(true, isSubforum, "subforum added, but not updated");
 
         }
 
@@ -210,13 +211,13 @@ namespace WASP.TestSuits
 
 
         [TestMethod]
-        [ExpectedException(typeof(WaspException))]
+        [ExpectedException(typeof(Exception))]
 
         public void checkSuspendMod()
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(0, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);

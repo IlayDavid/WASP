@@ -13,35 +13,49 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-	    var get = GetQuerySet();
+        var get = GetQuerySet();
 
     var i=parseInt(get['id']);
     var id={"subforumid":get['id']};
     id['subforumid']=i;
     console.log(id);
-		var auth=get["auth"];
-		var button=document.createElement("button");
-		button.setAttribute("onclick","addThread()");
-		button.setAttribute("type","button");
-		button.setAttribute("value","addThread");
-		function addThread(){
-			window.location.href="http://localhost:8080/Web/HTML/addThread.html?id="+i+"&auth="+auth;
-		}
-		button.innerHTML="addThread";
-		container.appendChild(button);
+        var auth=get["auth"];
+        var container=document.getElementById("container");
+
+            container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+        var button=document.createElement("button");
+        button.setAttribute("onclick","logout()");
+        button.setAttribute("type","button");
+        button.innerHTML="logout";
+        container.appendChild(button);
+        container.innerHTML=container.innerHTML+"<br>"
+        function logout(){
+            $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
+            window.location.href="http://localhost:8080/Web/HTML/getForums";
+            })
+        }
+        var button=document.createElement("button");
+        button.setAttribute("onclick","addThread()");
+        button.setAttribute("type","button");
+        button.setAttribute("value","addThread");
+        function addThread(){
+            window.location.href="http://localhost:8080/Web/HTML/addThread.html?id="+i+"&auth="+auth+"&hash="+get['hash'];
+        }
+        button.innerHTML="addThread";
+        container.appendChild(button);
             //data["name"], data["username"], data["id"], data["email"], data["password"]
-  			$.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
-			var container=document.getElementById("container");
+            $.post("http://localhost:8080/getThreads/", JSON.stringify(id), function(data, status){
+
             console.log(data);
-			data=JSON.parse(data);
+            data=JSON.parse(data);
             data.forEach(subForumsToButtons);
-            
+
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<br><br><br><a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+">"+item['title']+"<br>"+item['content']+"<br><br>";
+                container.innerHTML=container.innerHTML + "<br><br><br><a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+"&hash="+get['hash']+">"+item['title']+"<br>"+item['content']+"<br><br>";
             }
 
             });
-		
+
 
 
     </script>
