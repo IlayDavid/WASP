@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using System.Threading;
+using Client.GUI;
 
 namespace Client.CommunicationLayer
 {
@@ -18,6 +19,7 @@ namespace Client.CommunicationLayer
             else
             {
                 n.Start();
+                Session.AddNewNotifications(null);
             }
         }
 

@@ -143,6 +143,9 @@
     <Compile Include="GUI\MainWindows\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MainWindows\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MainWindows\RestorePassword.xaml.cs">
       <DependentUpon>RestorePassword.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
     <Compile Include="GUI\MainWindows\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\MainWindows\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\MainWindows\PostWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

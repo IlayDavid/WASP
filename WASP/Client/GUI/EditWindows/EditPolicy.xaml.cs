@@ -67,5 +67,10 @@ namespace Client.GUI.EditWindows
             ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
             return ret;
         }
+
+        private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

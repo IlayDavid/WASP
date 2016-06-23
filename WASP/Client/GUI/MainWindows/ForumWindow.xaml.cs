@@ -291,11 +291,7 @@ namespace Client
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext); 
-        }
-        void NotifyWindow(List<Notification> notifications, Button notsBtn)
-        {
-            Session.NotifyWindow(notifications, notsBtn);
+            Session.ShowNotifications(); 
         }
 
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)
@@ -308,6 +304,16 @@ namespace Client
         {
             ForumReports fr = new ForumReports();
             fr.ShowDialog();
+        }
+
+        public void NotifyWindow()
+        {
+            Session.NotifyWindow(notificationsButton);
+        }
+
+        public void ClearNotification()
+        {
+            Session.ClearNotification(notificationsButton);
         }
     }
 }

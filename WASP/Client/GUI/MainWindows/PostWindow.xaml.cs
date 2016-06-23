@@ -254,11 +254,16 @@ namespace Client
 
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext);
+            Session.ShowNotifications();
         }
-        void NotifyWindow(List<Notification> notifications, Button notsBtn)
+        public void NotifyWindow()
         {
-            Session.NotifyWindow(notifications, notsBtn);
+            Session.NotifyWindow(notificationsButton);
+        }
+
+        public void ClearNotification()
+        {
+            Session.ClearNotification(notificationsButton);
         }
     }
 }
