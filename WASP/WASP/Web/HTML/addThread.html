@@ -13,34 +13,45 @@
     <p id="container"></p>
 
     <script type="application/javascript">
-			var container=document.getElementById("container");
-				    var get = GetQuerySet();
+                var container=document.getElementById("container");
+                        var get = GetQuerySet();
 
-var i=parseInt(get['id']);
-    var id={"subforumid":get['id']};
-    id['subforumid']=i;
-    console.log(id);
-		var auth=get["auth"];
-		
-		
+    var i=parseInt(get['id']);
+        var id={"subforumid":get['id']};
+        id['subforumid']=i;
+        console.log(id);
+            var auth=get["auth"];
 
 
-	container.innerHTML="		<form action=\"createThread\"> 		Title: <input type=\"text\" size=55 id=\"title\"><br>        Content: <textarea cols=50  rows=30 id=\"content\"></textarea><br><br><br>	";
-	
-			var button=document.createElement("button");
-		button.setAttribute("onclick","addThread(document.getElementById(\"title\").value,document.getElementById(\"content\").value,i,auth)");
-		button.setAttribute("type","button");
-		button.innerHTML="addThread";
-		container.appendChild(button);
-	function addThread(title, content, subforumid, auth){
-		var param={"title":title,"content":content,"subforumid":"-1","auth":auth};
-		
-		param['subforumid']=subforumid;
-		$.post("http://localhost:8080/createThread/", JSON.stringify(param), function(data, status){
-				window.location.href="http://localhost:8080/Web/HTML/getThreads.html?id="+i+"&auth="+auth;
-            });
-	}
-		
+                container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+            var button=document.createElement("button");
+            button.setAttribute("onclick","logout()");
+            button.setAttribute("type","button");
+            button.innerHTML="logout";
+            container.appendChild(button);
+            container.innerHTML=container.innerHTML+"<br>"
+            function logout(){
+                $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
+                window.location.href="http://localhost:8080/Web/HTML/getForums";
+                })
+            }
+
+        container.innerHTML=container.innerHTML+"		<form action=\"createThread\"> 		Title: <input type=\"text\" size=55 id=\"title\"><br>        Content: <textarea cols=50  rows=30 id=\"content\"></textarea><br><br><br>	";
+
+                var button=document.createElement("button");
+            button.setAttribute("onclick","addThread(document.getElementById(\"title\").value,document.getElementById(\"content\").value,i,auth)");
+            button.setAttribute("type","button");
+            button.innerHTML="addThread";
+            container.appendChild(button);
+        function addThread(title, content, subforumid, auth){
+            var param={"title":title,"content":content,"subforumid":"-1","auth":auth};
+
+            param['subforumid']=subforumid;
+            $.post("http://localhost:8080/createThread/", JSON.stringify(param), function(data, status){
+                    window.location.href="http://localhost:8080/Web/HTML/getThreads.html?id="+i+"&auth="+auth+"&hash="+get['hash'];
+                });
+        }
+
     </script>
 </body>
 </html>

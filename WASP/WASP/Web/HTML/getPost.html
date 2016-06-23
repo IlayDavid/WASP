@@ -14,48 +14,60 @@
 
     <script type="application/javascript">
     var get = GetQuerySet();
-
+        var container=document.getElementById("container");
     var i=parseInt(get['id']);
     var id={"postid":get['id']};
     id['postid']=i;
-		var auth=get["auth"];
+        var auth=get["auth"];
 
+            container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+        var button=document.createElement("button");
+        button.setAttribute("onclick","logout()");
+        button.setAttribute("type","button");
+        button.innerHTML="logout";
+        container.appendChild(button);
+        container.innerHTML=container.innerHTML+"<br>"
+        function logout(){
+            $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
+            window.location.href="http://localhost:8080/Web/HTML/getForums";
+            })
+        }
             //data["name"], data["username"], data["id"], data["email"], data["password"]
         var nil={};
 
-			$.post("http://localhost:8080/getThread/", JSON.stringify(id), function(firstPost, status){
-			$.post("http://localhost:8080/getReplys/", JSON.stringify(id), function(data, status){
+            $.post("http://localhost:8080/getThread/", JSON.stringify(id), function(firstPost, status){
+            $.post("http://localhost:8080/getReplys/", JSON.stringify(id), function(data, status){
                 console.log(firstPost);
                 console.log(data);
                 firstPost=JSON.parse(firstPost);
                 data=JSON.parse(data);
-			var container=document.getElementById("container");
-			container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br>"+firstPost['content']+"<br><br><\p>";
-						var button=document.createElement("button");
-		button.setAttribute("onclick","addReply(i,auth)");
-		button.setAttribute("type","button");
-		button.innerHTML="addReply";
-		container.appendChild(button);
-			count=0;
-			data.forEach(subForumsToButtons);
-			
+
+            container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br>"+firstPost['content']+"<br><br><\p>";
+                        var button=document.createElement("button");
+        button.setAttribute("onclick","addReply(i,auth)");
+        button.setAttribute("type","button");
+        button.innerHTML="addReply";
+        container.appendChild(button);
+            count=0;
+            data.forEach(subForumsToButtons);
+
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<p> Reply #"+count+"<br>"+item['content']+"<br><br><\p>";
-				count=count+1;
-										var button=document.createElement("button");
-										console.log(item);
-										
-		button.setAttribute("onclick","addReply("+item['postid']+",auth)");
-		button.setAttribute("type","button");
-		button.innerHTML="addReply";
-		container.appendChild(button);
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+"&hash="+get['hash']+"> Reply #"+count+"<br>"+item['content']+"<br><br><\a>";
+                count=count+1;
+                                        var button=document.createElement("button");
+                                        console.log(item);
+
+        button.setAttribute("onclick","addReply("+item['postid']+",auth)");
+        button.setAttribute("type","button");
+        button.innerHTML="addReply";
+        container.appendChild(button);
             }
 
             })});
-			function addReply(id, auth){
-							window.location.href="http://localhost:8080/Web/HTML/addReply.html?id="+id+"&auth="+auth+"&ret="+i;
+            function addReply(id, auth){
+                            window.location.href="http://localhost:8080/Web/HTML/addReply.html?id="+id+"&auth="+auth+"&ret="+i+"&hash="+get['hash'];
 
-			}
+            }
 
 
     </script>
