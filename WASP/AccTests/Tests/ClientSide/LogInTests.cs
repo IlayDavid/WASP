@@ -16,9 +16,10 @@ namespace AccTests.Tests
         private SuperUser _supervisor;
         private Forum _forum;
         private Admin _admin;
+        private string adminpass = "david123";
         private User _member1;
         private User _member2;
-
+        private string mempass = "123456";
         //private Subforum _subforum;
 
         
@@ -34,9 +35,9 @@ namespace AccTests.Tests
             _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id);
             _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
 
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
-            _proj.login(_member1.userName, _member1.password, _forum.id);
-            _proj.login(_member2.userName, _member2.password, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_member1.userName, mempass, _forum.id);
+            _proj.login(_member2.userName, mempass, _forum.id);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace AccTests.Tests
         {
             Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum.id));
             Assert.IsNotNull(_proj.login("edanHb", "123456", _forum.id));
-            Assert.IsNotNull(_proj.login(_admin.user.userName, _admin.user.password, _forum.id));
+            Assert.IsNotNull(_proj.login(_admin.user.userName, adminpass, _forum.id));
         }
 
         /// <summary>

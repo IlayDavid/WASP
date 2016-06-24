@@ -29,13 +29,13 @@ namespace AccTests.Tests
         {
             Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
-            if (_proj.isInitialize() == 0)
+            _supervisor = ClientFunctions.InitialSystem(_proj);
+            /*if (_proj.isInitialize() == 0)
                 _supervisor = ClientFunctions.InitialSystem(_proj); //password is 
             else
             {
-                _proj.getAllForums();
                 _proj.loginSU(suusername, supass);
-            }
+            }*/
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2; //password is david123
@@ -74,7 +74,6 @@ namespace AccTests.Tests
             int num = _proj.getModerators(_subforum.id).Count;
         }
 
-
         /// <summary>
         /// Positive Test:  checks that admin of a forum can add a moderator to the forum's subforum
         ///                 checks that the term's update is succeed
@@ -82,6 +81,8 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
+            WASP.DataClasses.DAL2 dal = new WASP.DataClasses.DALSQL();
+            dal.Clean();
             _proj.login(_admin.user.userName, adminpass, _forum.id);
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator( _member1.id, _subforum.id, dt.AddDays(200));
@@ -103,11 +104,12 @@ namespace AccTests.Tests
         [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void addModeratorAndUpdateTermTest3()
         {
+            _proj.loginSU(suusername, supass);
 
             Forum forum = _proj.createForum( "forum1", "blah",8, "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123", new Policy(5, 5, false, 5, 500));
             Admin admin = _proj.getAdmin(8, forum.id);
-            _proj.login(admin.user.userName, admin.user.password, forum.id);
+            _proj.login(admin.user.userName, "haaron123", forum.id);
 
             //another admin tries to add a moderator
             var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));

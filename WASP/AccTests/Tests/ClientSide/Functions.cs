@@ -9,7 +9,7 @@ namespace AccTests.Tests
         
         public static SuperUser InitialSystem(WASPClientBridge proj)
         {
-            return proj.initialize("Moshe", "SuperUser",0, "moshe@post.bgu.ac.il", "moshe123");
+            return proj.initialize("Moshe", "SuperUser",2, "moshe@post.bgu.ac.il", "moshe123");
         }
 
         public static Tuple<Forum,Admin> CreateSpecForum(WASPClientBridge proj, SuperUser supervisor)
