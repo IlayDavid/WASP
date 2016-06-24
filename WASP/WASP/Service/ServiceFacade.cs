@@ -41,6 +41,7 @@ namespace WASP.Service
             bl = new BLFacade();
             SuperUser su = ServiceFacade.bl.initialize(data["name"], data["username"], data["id"], data["email"], data["password"]);
             string key = GenerateRandomHash();
+            su.Secret = key;
             loggedIn.Add(key, new LoginPair(su.Id));
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
@@ -347,13 +348,21 @@ namespace WASP.Service
         public static string login(Dictionary<string, dynamic> data)
         {
             User user = bl.login(data["username"], data["password"], data["forumid"]);
-            string key = GenerateRandomHash();
+            if(user.Secret.Equals(""))
+                user.Secret = GenerateRandomHash();
+            else
+            {
+                dynamic key;
+                data.TryGetValue("auth", out key);
+                if (key == null || !user.Secret.Equals(key))
+                    throw new WASP.Exceptions.LoginException("Secret key required for login.");
+            }
             LoginPair pair = new LoginPair(user.Id, user.Forum.Id);
-            loggedIn.Add(key, pair);
+            loggedIn.Add(user.Secret, pair);
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("id", user.Id);
-            result.Add("auth", key);
+            result.Add("auth", user.Secret);
             result.Add("username", user.Username);
             result.Add("password", user.Password);
             result.Add("name", user.Name);
@@ -365,12 +374,20 @@ namespace WASP.Service
         public static string loginSU(Dictionary<string, dynamic> data)
         {
             SuperUser su = bl.loginSU(data["username"], data["password"]);
-            string key = GenerateRandomHash();
+            if (su.Secret.Equals(""))
+                su.Secret = GenerateRandomHash();
+            else
+            {
+                dynamic key;
+                data.TryGetValue("auth", out key);
+                if (key == null || !su.Secret.Equals(key))
+                    throw new WASP.Exceptions.LoginException("Secret key required for login.");
+            }
             LoginPair pair = new LoginPair(su.Id);
-            loggedIn.Add(key, pair);
+            loggedIn.Add(su.Secret, pair);
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("auth", key);
+            result.Add("auth", su.Secret);
             result.Add("id", su.Id);
             result.Add("forum", pair.ForumId);
             result.Add("username", su.Username);
