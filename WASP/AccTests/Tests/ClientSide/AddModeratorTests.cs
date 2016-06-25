@@ -81,8 +81,6 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
-            WASP.DataClasses.DAL2 dal = new WASP.DataClasses.DALSQL();
-            dal.Clean();
             _proj.login(_admin.user.userName, adminpass, _forum.id);
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator( _member1.id, _subforum.id, dt.AddDays(200));

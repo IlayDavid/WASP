@@ -18,13 +18,8 @@ namespace Client.CommunicationLayer
     {
         private string _url { get; set; }
         public string _auth { get; set; }
-        public List<Notification> notifList { get; set; }
-        private Thread nc;
-        public Thread notif;
         private ParseString parser;
-        private object lockList;
-        public int isNotif = 0;
-
+        private Thread notifThread;
         //will set to the current forumID, which the user is loged to.
         //will be used only for functions that require log-in.
         private int forumID;
@@ -34,35 +29,8 @@ namespace Client.CommunicationLayer
             _url = "http://localhost:8080";
             forumID = -1;
             parser = new ParseString();
-            nc = new Thread(new ParameterizedThreadStart (NotificationComponent.Initialize));
-            notif= new Thread(new ThreadStart(getnotifications));
-            notifList = new List<Notification>();
         }
 
-        public void getnotifications()
-        {
-            List<Notification> newNot = getNewNotifications();
-            lock (lockList)
-            {
-                foreach (Notification n in newNot)
-                {
-                    notifList.Add(n);
-                    isNotif = 1;
-                }
-            }
-        }
-
-        public List<Notification> getNotifFromList()
-        {
-            List<Notification> ans = new List<Notification>();
-            lock (lockList)
-            {
-                ans = notifList;
-                notifList.Clear();
-                isNotif = 0;
-                return ans;
-            }
-        }
 
         public List<Notification> getNewNotifications()
         {
@@ -119,18 +87,15 @@ namespace Client.CommunicationLayer
             }
         }
 
-        private void startThread()
-        {
-            nc.Start(this);
-        }
-
 
         public User login(string userName, string password, int forumID)
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             User ans= parser.parseStringToUser(res, true, this);
-            //startThread();
+            NotifConnection ncon = new NotifConnection(_auth, this);
+            notifThread = new Thread(ncon.Run);
+            notifThread.Start();
             return ans;
         }
 
@@ -139,7 +104,6 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
             SuperUser ans =parser.parseStringToSuperUser(res, this);
-            //startThread();
             return ans;
         }
 
@@ -151,13 +115,11 @@ namespace Client.CommunicationLayer
             if (forumID == -1)
             {
                 SuperUser ans = parser.parseStringToSuperUser(res, this);
-                startThread();
                 return ans;
             }
             else
             {
                 User ans = parser.parseStringToUser(res, true, this);
-                startThread();
                 return ans;
             }
         }
