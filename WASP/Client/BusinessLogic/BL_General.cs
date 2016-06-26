@@ -20,7 +20,7 @@ namespace Client.BusinessLogic
         }
         private void initForTesting()
         {
-            string su_userName = "a";
+            /*string su_userName = "a";
             string su_password = "a";
             string userPassword = "1";
 
@@ -63,7 +63,7 @@ namespace Client.BusinessLogic
 
             login(u21.userName, userPassword, forum2.id);
             Post p21 = createThread("Thread number 1", "this is the opening thread test 1", sf21.id);
-            Post p22 = createThread("Thread number 2", "this is the opening thread test 2", sf22.id);
+            Post p22 = createThread("Thread number 2", "this is the opening thread test 2", sf22.id);*/
         }
         public void setForumID(int forumID)
         {
@@ -83,6 +83,11 @@ namespace Client.BusinessLogic
                 return _cl.loginSU(userName, sha256_hash(password));
             else
                 throw new Exception("ERROR: user name or password are illegal");
+        }
+
+        public void logout()
+        {
+            _cl.logout();
         }
         private static String sha256_hash(String value)
         {

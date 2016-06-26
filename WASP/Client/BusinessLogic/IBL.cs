@@ -189,6 +189,8 @@ namespace Client.BusinessLogic
         */
         SuperUser loginSU(string userName, string password);
 
+        void logout();
+
         //---------------------------------Getters----------------------------------------------
 
         /*

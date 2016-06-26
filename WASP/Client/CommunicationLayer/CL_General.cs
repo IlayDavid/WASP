@@ -106,7 +106,10 @@ namespace Client.CommunicationLayer
             SuperUser ans =parser.parseStringToSuperUser(res, this);
             return ans;
         }
+        public void logout()
+        {
 
+        } 
         public User loginBySession(string session)
         {
             //username, id, auth, password, email, name
