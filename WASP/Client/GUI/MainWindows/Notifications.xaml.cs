@@ -23,7 +23,7 @@ namespace Client.GUI.MainWindows
         public Notifications()
         {
             InitializeComponent();
-            foreach(Notification n in Session.notfications)
+            foreach(Notification n in Session.notifications)
             {
                 TreeViewItem item = new TreeViewItem();
                 item = makePostTree(n);
@@ -33,7 +33,7 @@ namespace Client.GUI.MainWindows
         private TreeViewItem makePostTree(Notification not)
         {
             TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Header = "From: " + not.source.userName + " Date: " + not.creationTime.ToShortDateString();
+            treeItem.Header = "From: " + /*not.source.userName + */" Date: " + not.creationTime.ToShortDateString();
             treeItem.DataContext = not;
             treeItem.Items.Add(new TreeViewItem() { Header = not.message, IsEnabled = false });
             return treeItem;

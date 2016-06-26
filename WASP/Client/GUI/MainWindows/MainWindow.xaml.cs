@@ -99,6 +99,7 @@ namespace Client.GUI
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
+                Session.bl.logout();
                 Session.user = null;
                 setVisibility();  
             }

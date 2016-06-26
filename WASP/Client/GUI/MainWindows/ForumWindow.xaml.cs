@@ -17,10 +17,6 @@ namespace Client
     /// </summary>
     public partial class ForumWindow : Window, INotificable
     {
-        public void NotifyWindow(List<Notification> notifications)
-        {
-            throw new NotImplementedException();
-        }
         List<Button> guestBtns;
         List<Button> userBtns;
         List<Button> adminBtns;
@@ -29,7 +25,7 @@ namespace Client
         private void setButtons()
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
-            userBtns = new List<Button>() { btnLogout, btnSendMessage };
+            userBtns = new List<Button>() { btnLogout, btnSendMessage, notificationsButton };
             adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum, btnReports };
             suBtns = new List<Button>() {  };
 
@@ -72,6 +68,7 @@ namespace Client
         }
         private void ChangeVisibilityGuest()
         {
+            welcomeTextBlock.Text = "Welcome, guest!";
             setBtnVisibility(suBtns, Visibility.Hidden);
             setBtnVisibility(guestBtns, Visibility.Visible);
         }
@@ -273,6 +270,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
+                Session.bl.logout();
                 Session.user = null;
                 setVisibility();
             }

@@ -33,6 +33,7 @@ namespace Client
                 else
                     Session.user = Session.bl.login(username, password, _forumID, session);
                 MessageBox.Show("Your client-session is: " + Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
+                Session.AddNewNotifications();
                 this.Close();
             }
             catch (Exception ee)

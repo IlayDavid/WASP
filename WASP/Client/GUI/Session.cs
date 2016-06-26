@@ -27,10 +27,9 @@ namespace Client.GUI
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
 
-        public static List<Notification> notfications = new List<Notification>();
+        public static List<Notification> notifications = new List<Notification>();
         public static List<Notification> messages = new List<Notification>();
-
-
+        
         internal static void LoadFriends()
         {
             if (user is SuperUser)
@@ -72,21 +71,18 @@ namespace Client.GUI
         {
             forum.admins = bl.getAdmins(forum.id).ToDictionary(x => x.user.id);
         }
-
-        public static void CloseAllWindows()
+        internal static void LoadPolicy()
         {
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                try
-                {
-                    App.Current.Windows[intCounter].Close();
-                }
-                catch{ }
+            Forum f = bl.getForum(forum.id);
+            forum.policy = f.policy;
         }
+        
 
         internal static void ShowNotifications()
         {
-            if (notfications == null)
+            if (notifications == null || notifications.Count == 0)
             {
+                notifications = new List<Notification>();
                 MessageBox.Show("No new Notifications");
                 return;
             }
@@ -104,7 +100,7 @@ namespace Client.GUI
                 if (n.type == Notification.Types.Message)
                     messages.Add(n);
                 else
-                    notfications.Add(n);
+                    notifications.Add(n);
             }
 
             App.Current.Dispatcher.Invoke((Action)(() =>
@@ -124,7 +120,7 @@ namespace Client.GUI
         }
         public static void ClearNotifications()
         {
-            notfications.Clear();
+            notifications.Clear();
             messages.Clear();
 
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
@@ -141,16 +137,20 @@ namespace Client.GUI
 
         internal static void NotifyWindow(Button btnNots)
         {
-            btnNots.Content = "Notifications (" + notfications.Count + ")";
+            btnNots.Content = "Notifications (" + notifications.Count + ")";
         }
         internal static void ClearNotification(Button btnNots)
         {
             btnNots.Content = "Notifications (0)";
         }
-        internal static void LoadPolicy()
+        public static void CloseAllWindows()
         {
-            Forum f = bl.getForum(forum.id);
-            forum.policy = f.policy;
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                try
+                {
+                    App.Current.Windows[intCounter].Close();
+                }
+                catch { }
         }
     }
 }

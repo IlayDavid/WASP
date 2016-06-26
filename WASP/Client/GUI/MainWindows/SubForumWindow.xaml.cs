@@ -28,7 +28,7 @@ namespace Client
         private void setButtons()
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
-            userBtns = new List<Button>() { btnLogout, btnPostThread};
+            userBtns = new List<Button>() { btnLogout, btnPostThread, notificationsButton};
             adminBtns = new List<Button>() {btnAddModerator, btnEditModeratorTerm, btnRemoveModerator, btnRepots };
             suBtns = new List<Button>();
 
@@ -70,6 +70,7 @@ namespace Client
         }
         private void ChangeVisibilityGuest()
         {
+            welcomeTextBlock.Text = "Welcome, guest!";
             setBtnVisibility(suBtns, Visibility.Hidden);
             setBtnVisibility(guestBtns, Visibility.Visible);
         }
@@ -165,6 +166,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
+                Session.bl.logout();
                 Session.user = null;
                 setVisibility();
             }

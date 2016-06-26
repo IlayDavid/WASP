@@ -41,6 +41,7 @@ namespace Client.GUI.EditWindows
             questions = Session.forum.policy.questions.ToList();
             if (questions == null)
                 questions = new List<string>();
+            lstBoxRestoreQuestion.Items.Clear();
             foreach (string s in questions)
             {
                 lstBoxRestoreQuestion.Items.Add(new ListBoxItem() { Content = s });
