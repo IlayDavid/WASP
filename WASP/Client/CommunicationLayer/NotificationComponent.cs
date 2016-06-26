@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.SignalR.Client;
+using System.Collections.Generic;
 
 namespace Client.CommunicationLayer
 {
@@ -7,6 +8,10 @@ namespace Client.CommunicationLayer
     {
         private static Connection connection;
         private static CL _cl;
+
+        public static List<DataClasses.Notification> notifList;
+
+
         public static void DoSomething(string data)
         {
             if(!data.Contains("ntf")) // Not a notification!
@@ -15,8 +20,8 @@ namespace Client.CommunicationLayer
             {
                 Console.WriteLine("DoSomething else");
                 Console.ReadLine();
-                _cl.getNewNotifications();
-                
+                List<DataClasses.Notification> nList =_cl.getNewNotifications();
+                notifList.AddRange(nList);
             }
         }
 
@@ -40,6 +45,13 @@ namespace Client.CommunicationLayer
         public static void close()
         {
             connection.Send("logout").Wait();
+        }
+
+        public static List<DataClasses.Notification> getNotifications()
+        {
+            List<DataClasses.Notification> list = notifList;
+            notifList.Clear();
+            return list;
         }
     }
 }
