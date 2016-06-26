@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="label" Content="Notification:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="219" VerticalAlignment="Top" Width="282" Margin="10,41,0,0"/>
+        <ListBox x:Name="lstBoxNots" HorizontalAlignment="Left" Height="219" VerticalAlignment="Top" Width="282" Margin="10,41,0,0"/>
 
     </Grid>
 </Window>

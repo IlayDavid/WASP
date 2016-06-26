@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI.EditWindows"
         mc:Ignorable="d"
-        Title="EditPolicy" Height="352.334" Width="553.196"
+        Title="EditPolicy" Height="352" Width="550"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <GroupBox x:Name="groupBox" Header="Who can delete post?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,18,0,0" Height="98" Width="175">
@@ -69,13 +69,14 @@
                 <Label x:Name="label4" Content="Enter new Question" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,105,0,0"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox_Copy3" Header="Interactivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="414,19,0,0" Height="97" Width="97">
+        <GroupBox x:Name="groupBox_Copy3" Header="Interactivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="414,19,0,0" Height="97" Width="120">
             <Grid Margin="0,0,-2.2,-4.6">
                 <RadioButton x:Name="rdbOn" IsChecked="True" GroupName="inter" Content="Online" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0"/>
                 <RadioButton x:Name="rdbOff" GroupName="inter" Content="Offline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0"/>
                 <RadioButton x:Name="rdbSelective" GroupName="inter" Content="Selective" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,54,0,0"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnCreate_Click" Width="75" Margin="461,293,0,0"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnCreate_Click" Width="55" Margin="481,293,0,0"/>
+        <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnReset_Click" Width="55" Margin="414,293,0,0"/>
     </Grid>
 </Window>

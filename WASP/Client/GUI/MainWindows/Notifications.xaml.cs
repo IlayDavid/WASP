@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,20 @@ namespace Client.GUI.MainWindows
         public Notifications()
         {
             InitializeComponent();
+            foreach(Notification n in Session.notfications)
+            {
+                TreeViewItem item = new TreeViewItem();
+                item = makePostTree(n);
+                lstBoxNots.Items.Add(item);
+            }
+        }
+        private TreeViewItem makePostTree(Notification not)
+        {
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = "From: " + not.source.userName + " Date: " + not.creationTime.ToShortDateString();
+            treeItem.DataContext = not;
+            treeItem.Items.Add(new TreeViewItem() { Header = not.message, IsEnabled = false });
+            return treeItem;
         }
     }
 }

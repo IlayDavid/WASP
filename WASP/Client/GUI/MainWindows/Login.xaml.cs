@@ -19,9 +19,6 @@ namespace Client
         {
             _forumID = loginTo;
             InitializeComponent();
-            if (_forumID == ALL_FORUMS)
-                lblForget.Visibility = Visibility.Hidden;
-            rdbUserPass.IsChecked = true;
         }
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
@@ -43,22 +40,7 @@ namespace Client
                 MessageBox.Show(ee.Message);
             }
         }
-
-        private void rdb_Checked(object sender, RoutedEventArgs e)
-        {
-            if(rdbClientSession.IsChecked.Value)
-            {
-                txtUsername.IsEnabled = false;
-                passPassword.IsEnabled = false;
-                txtClientSession.IsEnabled = true;
-            }
-            else
-            {
-                txtUsername.IsEnabled = true;
-                passPassword.IsEnabled = true;
-                txtClientSession.IsEnabled = false;
-            }
-        }
+        
         private void lblForget_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             RestorePassword rp = new RestorePassword();

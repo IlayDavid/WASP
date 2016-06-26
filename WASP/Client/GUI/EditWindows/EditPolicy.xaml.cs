@@ -48,8 +48,7 @@ namespace Client.GUI.EditWindows
 
             if (Session.forum.policy.notification == Policy.NOTIFICATION.online)
                 rdbOn.IsChecked = true;
-            else
-                if (Session.forum.policy.notification == Policy.NOTIFICATION.offline)
+            else if (Session.forum.policy.notification == Policy.NOTIFICATION.offline)
                 rdbOff.IsChecked = true;
             else
                 rdbSelective.IsChecked = true;
@@ -66,7 +65,9 @@ namespace Client.GUI.EditWindows
                     bool emailVerification = chkbEmailVer.IsChecked.Value;
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
-                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
+
+                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime,
+                        questions.ToArray(), notificationSelecting());
                     Session.bl.defineForumPolicy(policy);
                 }
                 this.Close();
@@ -76,6 +77,17 @@ namespace Client.GUI.EditWindows
                 MessageBox.Show(ee.Message);
             }
         }
+
+        private Policy.NOTIFICATION notificationSelecting()
+        {
+            if (rdbOff.IsChecked.Value)
+                return Policy.NOTIFICATION.offline;
+            else if (rdbOn.IsChecked.Value)
+                return Policy.NOTIFICATION.online;
+            else
+                return Policy.NOTIFICATION.selective;
+        }
+
         private int deletePostPermission()
         {
             int ret = 0;
@@ -96,6 +108,11 @@ namespace Client.GUI.EditWindows
             questions.Add(newQ);
             ListBoxItem item = new ListBoxItem() { Content = newQ };
             lstBoxRestoreQuestion.Items.Add(item);
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            resetChanges();
         }
     }
 }
