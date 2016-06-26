@@ -35,6 +35,7 @@ namespace Client.GUI.MainWindows
                 lstMembers.SelectedIndex = 0;
 
             lstMembers.SelectionChanged += lstMembers_SelectionChanged;
+            Session.LoadMessages();
         }
 
         private void lstMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,20 +47,20 @@ namespace Client.GUI.MainWindows
             }
             User selectedUser = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
 
-            Session.bl.getNewNotificationses();
-            List<Notification> nots = Session.bl.getAllNotificationses();
-            foreach (Notification n in nots)
+            Session.AddNewNotifications();
+            foreach (Notification msg in Session.messages)
             {
-                MessageBox.Show(n.message);
-                if (n.type == Notification.Types.Message )
-                   // && n.sourceID != -1 && 
-                   // (n.source.userName.Equals(selectedUser.userName)
-                   // || n.target.userName.Equals(selectedUser.userName)))
+                if (msg.sourceID == Session.user.id && msg.targetID == selectedUser.id)
                 {
-                    ListBoxItem item = new ListBoxItem() { Content = n.target.userName + ": " + n.message };
+                    ListBoxItem item = new ListBoxItem() { Content = "YOU: " + msg.message };
                     lstMessages.Items.Add(item);
                 }
-            } 
+                if (msg.sourceID == selectedUser.id && msg.targetID == Session.user.id)
+                {
+                    ListBoxItem item = new ListBoxItem() { Content = selectedUser.userName + ": " + msg.message };
+                    lstMessages.Items.Add(item);
+                }
+            }
         }
 
         private StackPanel MakeMessageView()

@@ -1635,6 +1635,8 @@ namespace WASP.DataClasses
 		
 		private string _question2;
 		
+		private bool _notifyOffline;
+		
 		private EntitySet<IForum> _IForums;
 		
     #region Extensibility Method Definitions
@@ -1657,6 +1659,8 @@ namespace WASP.DataClasses
     partial void Onquestion1Changed();
     partial void Onquestion2Changing(string value);
     partial void Onquestion2Changed();
+    partial void OnnotifyOfflineChanging(bool value);
+    partial void OnnotifyOfflineChanged();
     #endregion
 		
 		public IPolicy()
@@ -1821,6 +1825,26 @@ namespace WASP.DataClasses
 					this._question2 = value;
 					this.SendPropertyChanged("question2");
 					this.Onquestion2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notifyOffline", DbType="Bit NOT NULL")]
+		public bool notifyOffline
+		{
+			get
+			{
+				return this._notifyOffline;
+			}
+			set
+			{
+				if ((this._notifyOffline != value))
+				{
+					this.OnnotifyOfflineChanging(value);
+					this.SendPropertyChanging();
+					this._notifyOffline = value;
+					this.SendPropertyChanged("notifyOffline");
+					this.OnnotifyOfflineChanged();
 				}
 			}
 		}
@@ -2649,6 +2673,12 @@ namespace WASP.DataClasses
 		
 		private string _answer2;
 		
+		private bool _wantNotifications;
+		
+		private int _onlineCount;
+		
+		private string _secret;
+		
 		private EntityRef<IAdmin> _IAdmin;
 		
 		private EntitySet<IFriend> _IFriends;
@@ -2687,6 +2717,12 @@ namespace WASP.DataClasses
     partial void Onanswer1Changed();
     partial void Onanswer2Changing(string value);
     partial void Onanswer2Changed();
+    partial void OnwantNotificationsChanging(bool value);
+    partial void OnwantNotificationsChanged();
+    partial void OnonlineCountChanging(int value);
+    partial void OnonlineCountChanged();
+    partial void OnsecretChanging(string value);
+    partial void OnsecretChanged();
     #endregion
 		
 		public IUser()
@@ -2901,6 +2937,66 @@ namespace WASP.DataClasses
 					this._answer2 = value;
 					this.SendPropertyChanged("answer2");
 					this.Onanswer2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wantNotifications", DbType="Bit NOT NULL")]
+		public bool wantNotifications
+		{
+			get
+			{
+				return this._wantNotifications;
+			}
+			set
+			{
+				if ((this._wantNotifications != value))
+				{
+					this.OnwantNotificationsChanging(value);
+					this.SendPropertyChanging();
+					this._wantNotifications = value;
+					this.SendPropertyChanged("wantNotifications");
+					this.OnwantNotificationsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_onlineCount", DbType="Int NOT NULL")]
+		public int onlineCount
+		{
+			get
+			{
+				return this._onlineCount;
+			}
+			set
+			{
+				if ((this._onlineCount != value))
+				{
+					this.OnonlineCountChanging(value);
+					this.SendPropertyChanging();
+					this._onlineCount = value;
+					this.SendPropertyChanged("onlineCount");
+					this.OnonlineCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_secret", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string secret
+		{
+			get
+			{
+				return this._secret;
+			}
+			set
+			{
+				if ((this._secret != value))
+				{
+					this.OnsecretChanging(value);
+					this.SendPropertyChanging();
+					this._secret = value;
+					this.SendPropertyChanged("secret");
+					this.OnsecretChanged();
 				}
 			}
 		}

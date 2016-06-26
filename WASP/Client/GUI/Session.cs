@@ -47,6 +47,17 @@ namespace Client.GUI
             post.replies = bl.getReplys(post.id);
         }
 
+        internal static void LoadMessages()
+        {
+            messages = new List<Notification>();
+            List<Notification> nots = bl.getAllNotificationses();
+            foreach (Notification n in nots)
+            {
+                if (n.type == Notification.Types.Message)
+                    messages.Add(n);
+            }
+        }
+
         internal static void LoadThreads()
         {
             subForum.threads = bl.getThreads(subForum.id);
@@ -121,7 +132,6 @@ namespace Client.GUI
         public static void ClearNotifications()
         {
             notifications.Clear();
-            messages.Clear();
 
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
                 try
