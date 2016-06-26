@@ -8,10 +8,6 @@ namespace AccTests
 {
     public class ClientRealBridge : WASPClientBridge
     {
-        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
         private IBL _clientAPI;
 
         public ClientRealBridge()
@@ -22,6 +18,11 @@ namespace AccTests
         public Client.DataClasses.Admin addAdmin(int newAdminID)
         {
             return _clientAPI.addAdmin(newAdminID);
+        }
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            throw new NotImplementedException();
         }
 
         public int addFriend(int friendID)
@@ -171,16 +172,10 @@ namespace AccTests
             return _clientAPI.isInitialize();
         }
 
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {
-            return _clientAPI.login(userName, password, forumID);
+            return _clientAPI.login(userName, password, forumID, session);
         }
-
-        public User loginBySession(string session)
-        {
-            return _clientAPI.loginBySession(session);
-        }
-
         public SuperUser loginSU(string userName, string password)
         {
             return _clientAPI.loginSU(userName, password);
@@ -202,6 +197,11 @@ namespace AccTests
         }
 
         public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
         {
             throw new NotImplementedException();
         }

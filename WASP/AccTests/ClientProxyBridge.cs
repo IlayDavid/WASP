@@ -13,10 +13,6 @@ namespace AccTests
 {
     public class ClientProxyBridge : WASPClientBridge
     {
-        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
         private ClientRealBridge proj;
 
         public ClientProxyBridge(ClientRealBridge bridge)

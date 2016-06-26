@@ -20,6 +20,7 @@ namespace Client.GUI.EditWindows
     /// </summary>
     public partial class EditPolicy : Window
     {
+        private List<string> questions = null;
         public EditPolicy()
         {
             InitializeComponent();
@@ -36,6 +37,14 @@ namespace Client.GUI.EditWindows
             chkbOwner.IsChecked = Session.forum.policy.isOwnerCanDeletePost();
             chkbModerator.IsChecked = Session.forum.policy.isModeratorCanDeletePost();
             chkbAdmin.IsChecked = Session.forum.policy.emailVerification;
+
+            questions = Session.forum.policy.questions.ToList();
+            if (questions == null)
+                questions = new List<string>();
+            foreach (string s in questions)
+            {
+                lstBoxRestoreQuestion.Items.Add(new ListBoxItem() { Content = s });
+            }
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
@@ -70,7 +79,15 @@ namespace Client.GUI.EditWindows
 
         private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
         {
-
+            string newQ = txtNewQuestion.Text;
+            if (newQ.Equals(""))
+            {
+                MessageBox.Show("Enter a question.");
+                return;
+            }
+            questions.Add(newQ);
+            ListBoxItem item = new ListBoxItem() { Content = newQ };
+            lstBoxRestoreQuestion.Items.Add(item);
         }
     }
 }

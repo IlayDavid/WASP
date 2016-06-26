@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.SignalR.Client;
 using System.Collections.Generic;
+using Client.GUI;
 
 namespace Client.CommunicationLayer
 {
@@ -9,8 +10,6 @@ namespace Client.CommunicationLayer
         private static Connection connection;
         private static CL _cl;
 
-        public static List<DataClasses.Notification> notifList;
-
 
         public static void DoSomething(string data)
         {
@@ -18,10 +17,7 @@ namespace Client.CommunicationLayer
                 Console.WriteLine(data);
             else
             {
-                Console.WriteLine("DoSomething else");
-                Console.ReadLine();
-                List<DataClasses.Notification> nList =_cl.getNewNotifications();
-                notifList.AddRange(nList);
+                Session.AddNewNotifications();
             }
         }
 
@@ -45,13 +41,6 @@ namespace Client.CommunicationLayer
         public static void close()
         {
             connection.Send("logout").Wait();
-        }
-
-        public static List<DataClasses.Notification> getNotifications()
-        {
-            List<DataClasses.Notification> list = notifList;
-            notifList.Clear();
-            return list;
         }
     }
 }

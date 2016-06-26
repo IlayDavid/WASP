@@ -72,7 +72,7 @@ namespace Client.GUI.AddWindows
                 User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
                     txtmail.Text, passPassword.Password, Session.forum.id);
                 
-                Session.user = Session.bl.login(user.userName, user.password, Session.forum.id);
+                Session.user = Session.bl.login(user.userName, user.password, Session.forum.id, "");
                 if(Session.forum.policy.emailVerification)
                 {
                     MessageBox.Show("An email with verification code has been sent!");

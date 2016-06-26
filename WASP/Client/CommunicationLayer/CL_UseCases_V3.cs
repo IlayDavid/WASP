@@ -41,7 +41,7 @@ namespace Client.CommunicationLayer
         public List<Notification> getNewNotificationses()
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
-            string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
+            string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
             return parser.parseStringToMessages(res, true);
         }
 

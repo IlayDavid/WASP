@@ -10,13 +10,17 @@ namespace Client.BusinessLogic
     public partial class BL : IBL
     {
         //---------------------------Version 4 Use Cases Start------------------------------------
-
-        //login by client-session password (requested in ass3)
-        public User loginBySession(string session)
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
         {
-            return _cl.loginBySession(session);
+            throw new NotImplementedException();
         }
-        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User login(string userName, string password, int forumID, string session)
         {
             throw new NotImplementedException();
         }

@@ -27,7 +27,7 @@ namespace Client.GUI
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
 
-        public static List<Notification> nots = new List<Notification>();
+        public static List<Notification> notfications = new List<Notification>();
         public static List<Notification> messages = new List<Notification>();
 
 
@@ -85,7 +85,7 @@ namespace Client.GUI
 
         internal static void ShowNotifications()
         {
-            if (nots == null)
+            if (notfications == null)
             {
                 MessageBox.Show("No new Notifications");
                 return;
@@ -94,37 +94,37 @@ namespace Client.GUI
             Notifications notWin = new Notifications();
             notWin.ShowDialog();
 
-            string notsStr = "";
-            foreach (Notification m in nots)
-            {
-                notsStr += m.message + "\n";
-            }
-            MessageBox.Show(notsStr, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+            ClearNotifications();
         }
-        public static void AddNewNotifications(List<Notification> nots)
+        public static void AddNewNotifications()
         {
+            List<Notification> nots = bl.getNewNotificationses();
             foreach(Notification n in nots)
             {
                 if (n.type == Notification.Types.Message)
                     messages.Add(n);
                 else
-                    nots.Add(n);
+                    notfications.Add(n);
             }
 
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                try
-                {
-                    if (App.Current.Windows[intCounter] is INotificable)
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                    try
                     {
-                        INotificable curr = (INotificable) App.Current.Windows[intCounter];
-                        curr.NotifyWindow();
+                        if (App.Current.Windows[intCounter] is INotificable)
+                        {
+                            INotificable curr = (INotificable)App.Current.Windows[intCounter];
+                            curr.NotifyWindow();
+                        }
                     }
-                }
-                catch { }
+                    catch { }
+            }));
+            
         }
         public static void ClearNotifications()
         {
-            nots.Clear();
+            notfications.Clear();
             messages.Clear();
 
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
@@ -141,7 +141,7 @@ namespace Client.GUI
 
         internal static void NotifyWindow(Button btnNots)
         {
-            btnNots.Content = "Notifications (" + nots.Count + ")";
+            btnNots.Content = "Notifications (" + notfications.Count + ")";
         }
         internal static void ClearNotification(Button btnNots)
         {

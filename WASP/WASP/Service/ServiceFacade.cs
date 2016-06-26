@@ -13,7 +13,7 @@ namespace WASP.Service
     public static class ServiceFacade
     {
         private static IBL bl = null;
-        
+
         private static Dictionary<string, LoginPair> loggedIn = new Dictionary<string, LoginPair>();
         static JavaScriptSerializer jss = new JavaScriptSerializer();
         public static void webInitialize()
@@ -31,7 +31,7 @@ namespace WASP.Service
 
             return lg != null;
         }
-        
+
         public static LoginPair GetPair(string hash)
         {
             return loggedIn[hash];
@@ -253,7 +253,10 @@ namespace WASP.Service
                 Dictionary<string, dynamic> ntf = new Dictionary<string, dynamic>();
                 ntf.Add("type", notif.Type);
                 ntf.Add("message", notif.Message);
-                ntf.Add("source", notif.Source.Id);
+                if (notif.Source != null)
+                    ntf.Add("source", notif.Source.Id);
+                else
+                    ntf.Add("source", -1);
                 ntf.Add("target", notif.Target.Id);
                 ntf.Add("id", notif.Id);
                 result.Add(ntf);
@@ -456,7 +459,7 @@ namespace WASP.Service
         public static string getForum(Dictionary<string, dynamic> data)
         {   //forumid
             Forum f = bl.getForum(data["forumid"]);
-            
+
             Dictionary<string, dynamic> policy = new Dictionary<string, dynamic>();
             //PostDeletePolicy deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions
             policy.Add("deletepost", f.Policy.SelectedPostDeletePolicy.ToString());
@@ -584,7 +587,11 @@ namespace WASP.Service
         public static string getAdmin(Dictionary<string, dynamic> data)
         {   //adminid
             LoginPair pair = loggedIn[data["auth"]];
-            Admin a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            Admin a;
+            if (pair.ForumId != -1)
+                a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            else
+                a = bl.getAdmin(pair.UserId, data["forumid"], data["adminid"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             //username, id, password, email, name
             User u = a.User;

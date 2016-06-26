@@ -163,13 +163,13 @@ namespace Client.BusinessLogic
             
         //---------------------------Version 4 Use Cases Start------------------------------------
 
-        //login by client-session password (requested in ass3)
-        User loginBySession(string session);
-
         //check if the answers match the answers specified by the user in registration.
         //return: none, throw exeption specified the wrong answer.
-        void restorePasswordbyAnswers(string username, List<string> answers, string newPassword);
-
+        void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword);
+        
+        //immdietally after the registration. this is part of the registration
+        void addAnswers(int user_id, List<string> answers);
+        
         //---------------------------Version 4 Use Cases End------------------------------------
 
 
@@ -181,8 +181,7 @@ namespace Client.BusinessLogic
         * Purpose: logged in, to the specified forum.
         * Return: return the Member, if success, NULL otherwise.
         */
-        User login(string userName, string password, int forumID);
-
+        User login(string userName, string password, int forumID, string session);
         /*
         * Pre-conditions: member is super user.
         * Purpose: logged in as super user, to the the Forums system.

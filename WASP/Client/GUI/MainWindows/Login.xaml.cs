@@ -28,23 +28,15 @@ namespace Client
         {
             try
             {
-                if (rdbClientSession.IsChecked.Value)
-                {
-                    string session = txtClientSession.Text;
-                    Session.user = Session.bl.loginBySession(session);
-                    this.Close();
-                }
+                string session = txtClientSession.Text;
+                string username = txtUsername.Text;
+                string password = passPassword.Password;
+                if (_forumID == ALL_FORUMS)
+                    Session.user = Session.bl.loginSU(username, password);
                 else
-                {
-                    string username = txtUsername.Text;
-                    string password = passPassword.Password;
-                    if (_forumID == ALL_FORUMS)
-                        Session.user = Session.bl.loginSU(username, password);
-                    else
-                        Session.user = Session.bl.login(username, password, _forumID);
-                    MessageBox.Show("Your client-session is: "+Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
+                    Session.user = Session.bl.login(username, password, _forumID, session);
+                MessageBox.Show("Your client-session is: " + Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             catch (Exception ee)
             {

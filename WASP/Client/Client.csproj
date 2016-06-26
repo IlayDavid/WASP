@@ -98,6 +98,7 @@
     <Compile Include="CommunicationLayer\CL_UseCases_V1.cs" />
     <Compile Include="CommunicationLayer\CL_UseCases_V2.cs" />
     <Compile Include="CommunicationLayer\CL_UseCases_V3.cs" />
+    <Compile Include="CommunicationLayer\NotifConnection.cs" />
     <Compile Include="CommunicationLayer\NotificationComponent.cs" />
     <Compile Include="CommunicationLayer\ParseString.cs" />
     <Compile Include="DataClasses\Admin.cs" />
