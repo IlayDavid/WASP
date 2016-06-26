@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         int isInit = 0;//0 not init, 1 init
 
@@ -57,6 +57,8 @@ namespace Client.CommunicationLayer
             TimeSpan seniority = new TimeSpan(policy.seniority, 0, 0, 0, 0);
             dict.Add("passperiod", password);
             dict.Add("seniority", seniority);
+            //TODO: add the field of 'online offline'
+            dict.Add("notifSetting", policy.notification.ToString());
             string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/defineForumPolicy/");
             return parser.parseStringToNum(res);

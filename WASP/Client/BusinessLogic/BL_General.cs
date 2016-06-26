@@ -11,7 +11,7 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
-        private ICL _cl;
+        private IBL _cl;
         public BL()
         {
             _cl = new CL();
@@ -69,12 +69,12 @@ namespace Client.BusinessLogic
         {
             _cl.setForumID(forumID);
         }
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {
             if (!IsStrValid(userName)) throw new Exception("ERROR: username is empty or iilegal");
             if (!IsStrValid(password)) throw new Exception("ERROR: password is empty or iilegal");
             if (forumID < 0) throw new Exception("ERROR: forum id is iilegal");
-            return _cl.login(userName, sha256_hash(password), forumID);
+            return _cl.login(userName, sha256_hash(password), forumID, session);
         }
 
         public SuperUser loginSU(string userName, string password)

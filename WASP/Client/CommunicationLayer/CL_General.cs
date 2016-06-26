@@ -14,7 +14,7 @@ namespace Client.CommunicationLayer
 
     //policy and dateTime
     //admin
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         private string _url { get; set; }
         public string _auth { get; set; }
@@ -88,9 +88,9 @@ namespace Client.CommunicationLayer
         }
 
 
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {   //username, id, auth, password, email, name
-            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
+            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "," + "\"auth\":\"" + session + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             User ans= parser.parseStringToUser(res, true, this);
             NotifConnection ncon = new NotifConnection(_auth, this);
@@ -211,5 +211,32 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("username", username);
+            dict.Add("answers", answers);
+            dict.Add("forumid", forum_id);
+            dict.Add("newpassword", newPassword);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/restorePasswordbyAnswers/");
+        }
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("userid", user_id);
+            dict.Add("answers", answers);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/addAnswers/");
+            
+        }
+
+        public Admin getAdmin(int AdminID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

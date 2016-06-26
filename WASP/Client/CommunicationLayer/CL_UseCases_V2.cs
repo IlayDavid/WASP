@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         //---------------------------Version 2 Use Cases Start------------------------------------
         public Moderator addModerator(int moderatorID, int subForumID, DateTime term)
@@ -47,7 +47,7 @@ namespace Client.CommunicationLayer
             return 0;
         }
 
-        DateTime ICL.getModeratorTermTime(int moderatorID, int subforumID)
+        public DateTime getModeratorTermTime(int moderatorID, int subforumID)
         {
             string json = "{\"subforumid\":" + subforumID + "," + "\"moderatorid\":" + moderatorID + "}";
             string res = httpReq(json, "POST", _url + "/getModeratorTermTime/");

@@ -20,10 +20,7 @@ namespace Client.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public User login(string userName, string password, int forumID, string session)
-        {
-            throw new NotImplementedException();
-        }
+        
         //---------------------------Version 4 Use Cases End------------------------------------
 
     }

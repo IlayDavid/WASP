@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int postID, string content)
