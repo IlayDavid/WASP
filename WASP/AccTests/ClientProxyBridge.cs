@@ -191,6 +191,11 @@ namespace AccTests
             return proj.loginSU(userName, password);
         }
 
+        public void logout()
+        {
+            proj.logout();
+        }
+
         public List<User> membersInDifferentForums()
         {
             return proj.membersInDifferentForums();

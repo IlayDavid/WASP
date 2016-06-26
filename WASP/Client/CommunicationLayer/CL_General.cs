@@ -108,6 +108,11 @@ namespace Client.CommunicationLayer
         }
         public void logout()
         {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("auth", _auth);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/logout/");
 
         } 
         public User loginBySession(string session)

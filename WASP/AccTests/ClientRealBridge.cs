@@ -181,6 +181,11 @@ namespace AccTests
             return _clientAPI.loginSU(userName, password);
         }
 
+        public void logout()
+        {
+            _clientAPI.logout();
+        }
+
         public List<User> membersInDifferentForums()
         {
             return _clientAPI.membersInDifferentForums();
