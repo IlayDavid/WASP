@@ -45,6 +45,14 @@ namespace Client.GUI.EditWindows
             {
                 lstBoxRestoreQuestion.Items.Add(new ListBoxItem() { Content = s });
             }
+
+            if (Session.forum.policy.notification == Policy.NOTIFICATION.online)
+                rdbOn.IsChecked = true;
+            else
+                if (Session.forum.policy.notification == Policy.NOTIFICATION.offline)
+                rdbOff.IsChecked = true;
+            else
+                rdbSelective.IsChecked = true;
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
