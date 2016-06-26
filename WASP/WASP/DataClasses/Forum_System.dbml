@@ -76,6 +76,7 @@
       <Column Name="postDeletePolicy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="question1" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="question2" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="notifyOffline" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="IPolicy_IForum" Member="IForums" ThisKey="id" OtherKey="policyId" Type="IForum" />
     </Type>
   </Table>
@@ -126,6 +127,9 @@
       <Column Name="PasswordChangeDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="answer1" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="answer2" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wantNotifications" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="onlineCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="secret" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="IUser_IAdmin" Member="IAdmin" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IAdmin" Cardinality="One" />
       <Association Name="IUser_IFriend" Member="IFriends" ThisKey="id,forumId" OtherKey="userId,forumId" Type="IFriend" />
       <Association Name="IUser_IFriend1" Member="IFriends1" ThisKey="id,forumId" OtherKey="friendId,forumId" Type="IFriend" />

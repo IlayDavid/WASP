@@ -91,7 +91,7 @@ namespace WASP.DataClasses.UnitTests
             try
             {
                 string [] answers = { "Hi", "Bye" };
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now.AddDays(11), DateTime.Now.AddDays(9),answers));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now.AddDays(11), DateTime.Now.AddDays(9),answers, false));
                 User user = dal.GetUser(315470047, forumId);
                 Assert.IsTrue((user.Email).Equals("matansar@post.bgu.ac.il"));
                 Assert.IsTrue((user.Username).Equals("matansar"));
@@ -101,7 +101,7 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue(user.PasswordChangeDate.Date == DateTime.Now.AddDays(9).Date);
                 Assert.IsTrue(user.Answers[0].Equals(answers[0]));
                 Assert.IsTrue(user.Answers[1].Equals(answers[1]));
-
+                Assert.IsTrue(user.WantNotifications == false);
             }
             catch (Exception e)
             {
@@ -208,15 +208,15 @@ namespace WASP.DataClasses.UnitTests
             }
         }
 
-                [TestMethod]
+        [TestMethod]
         public void UpdateUserTest4_3()
         {
             try
             {
                 string[] sheet = { "", "" };
                 string[] answers = { "Hi", "Bye" };
-                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId),DateTime.Now, DateTime.Now, sheet));
-                dal.UpdateUser(new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId), DateTime.Now, DateTime.Now, answers));
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId),DateTime.Now, DateTime.Now, sheet, false));
+                dal.UpdateUser(new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId), DateTime.Now, DateTime.Now, answers, true));
                 User user = dal.GetUser(315470047, forumId);
                 Assert.IsTrue(user.Email.Equals("moshesar@post.bgu.ac.il"));
                 Assert.IsTrue(user.Username.Equals("moshesar"));
@@ -224,13 +224,44 @@ namespace WASP.DataClasses.UnitTests
                 Assert.IsTrue(user.Name.Equals("moshe"));
                 Assert.IsTrue(user.Answers[0].Equals(answers[0]));
                 Assert.IsTrue(user.Answers[1].Equals(answers[1]));
-
+                Assert.IsTrue(user.WantNotifications == true);
             }
             catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
         }
+
+        [TestMethod]
+        public void UpdateUserTest4_4()
+        {
+            try
+            {
+                string[] sheet = { "", "" };
+                string[] answers = { "Hi", "Bye" };
+                dal.CreateUser(new User(315470047, "matan", "matansar", "matansar@post.bgu.ac.il", "123", dal.GetForum(forumId), DateTime.Now, DateTime.Now, sheet, false));
+                User us = new User(315470047, "moshe", "moshesar", "moshesar@post.bgu.ac.il", "456", dal.GetForum(forumId), DateTime.Now, DateTime.Now, answers, true);
+                us.Secret = "moshe";
+                us.OnlineCount = 4;
+                dal.UpdateUser(us);
+                User user = dal.GetUser(315470047, forumId);
+                Assert.IsTrue(user.Email.Equals("moshesar@post.bgu.ac.il"));
+                Assert.IsTrue(user.Username.Equals("moshesar"));
+                Assert.IsTrue(user.Password.Equals("456"));
+                Assert.IsTrue(user.Name.Equals("moshe"));
+                Assert.IsTrue(user.Answers[0].Equals(answers[0]));
+                Assert.IsTrue(user.Answers[1].Equals(answers[1]));
+                Assert.IsTrue(user.WantNotifications == true);
+
+                Assert.IsTrue(user.Secret.Equals("moshe"));
+                Assert.IsTrue(user.OnlineCount == 4);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
 
         [TestMethod]
         public void GetUsersTest5()

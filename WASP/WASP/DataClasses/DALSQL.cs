@@ -18,8 +18,8 @@ namespace WASP.DataClasses
         {
             _connectionString =
                 $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={Directory.GetParent(Directory.GetParent(
-                        Directory.GetCurrentDirectory()).Parent.FullName)}\{dbName}.mdf;Integrated Security=True;Connect Timeout=30";
-
+                        Directory.GetCurrentDirectory()).Parent.FullName)}\{dbName}.mdf;Integrated Security=True; MultipleActiveResultSets=True";
+            //Connect Timeout=30
             return _connectionString;
         }
 
@@ -359,6 +359,10 @@ namespace WASP.DataClasses
             _user.answer1 = user.Answers[0];
             _user.answer2 = user.Answers[1];
 
+            _user.onlineCount = user.OnlineCount;
+            _user.wantNotifications = user.WantNotifications;
+            _user.secret = user.Secret;
+
             db.IUsers.InsertOnSubmit(_user);
             db.SubmitChanges();
 
@@ -613,6 +617,9 @@ namespace WASP.DataClasses
                 iuser.PasswordChangeDate = user.PasswordChangeDate;
                 iuser.answer1 = user.Answers[0];
                 iuser.answer2 = user.Answers[1];
+                iuser.onlineCount = user.OnlineCount;
+                iuser.wantNotifications = user.WantNotifications;
+                iuser.secret = user.Secret;
 
                 db.SubmitChanges();
                 _cache.AddUser(user);
@@ -635,6 +642,7 @@ namespace WASP.DataClasses
                 else ipost.reply = post.InReplyTo.Id;
                 ipost.userId = post.GetAuthor.Id;
                 ipost.forumId = post.GetAuthor.Forum.Id;
+                
 
                 db.SubmitChanges();
 
@@ -690,8 +698,7 @@ namespace WASP.DataClasses
             {
                 Forum forum = GetForum(forumId);
                 string[] answers = { iuser.answer1, iuser.answer2 };
-                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate, answers);
-
+                User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate, answers, iuser.wantNotifications);
                 _cache.AddUser(user);
                 return user;
             }
@@ -1073,7 +1080,7 @@ namespace WASP.DataClasses
             Policy pol = new Policy(ipol.id, (Policy.PostDeletePolicy)ipol.postDeletePolicy,
                                     TimeSpan.FromTicks(ipol.passwordPeriod),
                                     ipol.emailVerification, TimeSpan.FromTicks(ipol.minimumSeniority),
-                                    ipol.usersLoad, questions);
+                                    ipol.usersLoad, questions, ipol.notifyOffline);
             return pol;
         }
 
@@ -1231,7 +1238,7 @@ namespace WASP.DataClasses
             if (ipolicy != null)
             {
                 string[] questions = { ipolicy.question1, ipolicy.question2 };
-                Policy polc = new Policy(id, (Policy.PostDeletePolicy)ipolicy.postDeletePolicy, TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad, questions);
+                Policy polc = new Policy(id, (Policy.PostDeletePolicy)ipolicy.postDeletePolicy, TimeSpan.FromTicks(ipolicy.passwordPeriod), ipolicy.emailVerification, new TimeSpan(ipolicy.minimumSeniority), ipolicy.usersLoad, questions, ipolicy.notifyOffline);
                 return polc;
             }
             throw new ExistException(string.Format("GetPolicy: Policy {0} does not exist", id));
@@ -1261,6 +1268,7 @@ namespace WASP.DataClasses
                 ipolicy.usersLoad = policy.UsersLoad;
                 ipolicy.question1 = policy.Questions[0];
                 ipolicy.question2 = policy.Questions[1];
+                ipolicy.notifyOffline = policy.NotifyOffline;
                 return policy;
             }
             throw new ExistException(string.Format("UpdatePolicy: Policy {0} does not exist", policy.Id));
@@ -1278,6 +1286,7 @@ namespace WASP.DataClasses
             ipolicy.usersLoad = policy.UsersLoad;
             ipolicy.question1 = policy.Questions[0];
             ipolicy.question2 = policy.Questions[1];
+            ipolicy.notifyOffline = policy.NotifyOffline;
 
             db.IPolicies.InsertOnSubmit(ipolicy);
             db.SubmitChanges();
