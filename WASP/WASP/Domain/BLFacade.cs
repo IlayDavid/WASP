@@ -78,7 +78,7 @@ namespace WASP.Domain
             return Forum.Get(newForum.Id);
         }
 
-        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false)
+        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline, bool superUser = false)
         {
             //TODO
             Forum forum = Forum.Get(forumID); ;
@@ -91,7 +91,7 @@ namespace WASP.Domain
                 Admin admin = Admin.Get(userID, forumID);
             }
             Policy.PostDeletePolicy dp = (Policy.PostDeletePolicy)Enum.Parse(typeof(Policy.PostDeletePolicy), deletePost);
-            Policy policy = new Policy(-1, dp, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions);
+            Policy policy = new Policy(-1, dp, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, notifyOffline);
                 
             policy.Update();
             return 1;
@@ -324,7 +324,11 @@ namespace WASP.Domain
             foreach (User user in forum.GetMembers())
             {
                 if (user.Username.Equals(userName) && user.Password.Equals(password))
+                {
+                    ///user.OnlineCount++;
                     return user;
+                }
+
             }
 
             throw new LoginException("Username or passwords are wrong.");
@@ -335,7 +339,10 @@ namespace WASP.Domain
             foreach (SuperUser user in dal.GetSuperUsers(null))
             {
                 if (user.Username.Equals(userName) && user.Password.Equals(password))
+                {
+                    //user.OnlineCount++;
                     return user;
+                }
             }
             throw new LoginException("Username or passwords are wrong.");
         }

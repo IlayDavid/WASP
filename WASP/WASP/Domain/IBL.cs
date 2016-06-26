@@ -41,7 +41,7 @@ namespace WASP.Domain
          * Purpose: set a policy for specific forum.
          * Return: 0 - on succsess, negative - in fail.        
          */
-        int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false); //------------------------ policy object??
+        int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline, bool superUser = false); //------------------------ policy object??
 
         /*
          * Pre-conditions: none
