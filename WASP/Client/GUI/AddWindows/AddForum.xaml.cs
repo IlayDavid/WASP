@@ -31,7 +31,7 @@ namespace Client.GUI
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            //try
+            try
             {
                 if (Session.user is SuperUser)
                 {
@@ -41,25 +41,31 @@ namespace Client.GUI
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
                     
-                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime);
-                    
-                    //todo
-                    policy.questions = questions.ToArray();
-                    //todo
+                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime, 
+                        questions.ToArray(), notificationSelecting());
 
                     _forum = Session.bl.createForum(txtForumName.Text, txtForumDesc.Text, int.Parse(txtAdminID.Text),
                         txtAdminUserName.Text, txtAdminName.Text, txtEmail.Text, passPass.Password, policy);
-                   // Session.bl.defineForumPolicy(policy);
-                    //_forum = Session.bl.getForum(_forum.id);
+
+                    Session.bl.defineForumPolicy(policy);
+                    _forum = Session.bl.getForum(_forum.id);
                 }
                 this.Close();
             }
-            //catch (Exception ee)
+            catch (Exception ee)
             {
-                //MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
-
+        private Policy.NOTIFICATION notificationSelecting()
+        {
+            if (rdbOff.IsChecked.Value)
+                return Policy.NOTIFICATION.offline;
+            else if (rdbOn.IsChecked.Value)
+                return Policy.NOTIFICATION.online;
+            else
+                return Policy.NOTIFICATION.selective;
+        }
         private int deletePostPermission()
         {
             int ret = 0;

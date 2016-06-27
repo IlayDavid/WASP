@@ -13,10 +13,6 @@ namespace AccTests
 {
     public class ClientProxyBridge : WASPClientBridge
     {
-        public void restorePasswordbyAnswers(string username, List<string> answers, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
         private ClientRealBridge proj;
 
         public ClientProxyBridge(ClientRealBridge bridge)
@@ -27,6 +23,11 @@ namespace AccTests
         public Client.DataClasses.Admin addAdmin(int newAdminID)
         {
             return proj.addAdmin(newAdminID);
+        }
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            proj.addAnswers(user_id, answers);
         }
 
         public int addFriend(int friendID)
@@ -175,9 +176,9 @@ namespace AccTests
             return proj.isInitialize();
         }
 
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {
-            return proj.login(userName, password, forumID);
+            return proj.login(userName, password, forumID, session);
         }
 
         public User loginBySession(string session)
@@ -188,6 +189,11 @@ namespace AccTests
         public SuperUser loginSU(string userName, string password)
         {
             return proj.loginSU(userName, password);
+        }
+
+        public void logout()
+        {
+            proj.logout();
         }
 
         public List<User> membersInDifferentForums()
@@ -208,6 +214,11 @@ namespace AccTests
         public string restorePasswordbyAnswer(string username, string answer, string newPassword)
         {
             return proj.restorePasswordbyAnswer(username, answer, newPassword);
+        }
+
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        {
+            proj.restorePasswordbyAnswers(username, forum_id, answers, newPassword);
         }
 
         public int sendMessage(int targetUserID, string message)

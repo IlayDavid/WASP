@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Client.GUI.MainWindows;
 
 namespace Client.GUI
 {
@@ -26,6 +27,9 @@ namespace Client.GUI
         public static Dictionary<int, Subforum> subforums = null;
         public static Dictionary<int, Post> posts = null;
 
+        public static List<Notification> notifications = new List<Notification>();
+        public static List<Notification> messages = new List<Notification>();
+        
         internal static void LoadFriends()
         {
             if (user is SuperUser)
@@ -41,6 +45,17 @@ namespace Client.GUI
         internal static void LoadReplys()
         {
             post.replies = bl.getReplys(post.id);
+        }
+
+        internal static void LoadMessages()
+        {
+            messages = new List<Notification>();
+            List<Notification> nots = bl.getAllNotificationses();
+            foreach (Notification n in nots)
+            {
+                if (n.type == Notification.Types.Message)
+                    messages.Add(n);
+            }
         }
 
         internal static void LoadThreads()
@@ -67,7 +82,77 @@ namespace Client.GUI
         {
             forum.admins = bl.getAdmins(forum.id).ToDictionary(x => x.user.id);
         }
+        internal static void LoadPolicy()
+        {
+            Forum f = bl.getForum(forum.id);
+            forum.policy = f.policy;
+        }
+        
 
+        internal static void ShowNotifications()
+        {
+            if (notifications == null || notifications.Count == 0)
+            {
+                notifications = new List<Notification>();
+                MessageBox.Show("No new Notifications");
+                return;
+            }
+
+            Notifications notWin = new Notifications();
+            notWin.ShowDialog();
+
+            ClearNotifications();
+        }
+        public static void AddNewNotifications()
+        {
+            List<Notification> nots = bl.getNewNotificationses();
+            foreach(Notification n in nots)
+            {
+                if (n.type == Notification.Types.Message)
+                    messages.Add(n);
+                else
+                    notifications.Add(n);
+            }
+
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                    try
+                    {
+                        if (App.Current.Windows[intCounter] is INotificable)
+                        {
+                            INotificable curr = (INotificable)App.Current.Windows[intCounter];
+                            curr.NotifyWindow();
+                        }
+                    }
+                    catch { }
+            }));
+            
+        }
+        public static void ClearNotifications()
+        {
+            notifications.Clear();
+
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                try
+                {
+                    if (App.Current.Windows[intCounter] is INotificable)
+                    {
+                        INotificable curr = (INotificable)App.Current.Windows[intCounter];
+                        curr.ClearNotification();
+                    }
+                }
+                catch { }
+        }
+
+        internal static void NotifyWindow(Button btnNots)
+        {
+            btnNots.Content = "Notifications (" + notifications.Count + ")";
+        }
+        internal static void ClearNotification(Button btnNots)
+        {
+            btnNots.Content = "Notifications (0)";
+        }
         public static void CloseAllWindows()
         {
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
@@ -75,46 +160,7 @@ namespace Client.GUI
                 {
                     App.Current.Windows[intCounter].Close();
                 }
-                catch{ }
-        }
-
-        internal static void ShowNotifications(List<Notification> nots)
-        {
-            if (nots == null)
-            {
-                MessageBox.Show("No new Notifications");
-                return;
-            }
-            string notsStr = "";
-            foreach (Notification m in nots)
-            {
-                notsStr += m.message + "\n";
-            }
-            MessageBox.Show(notsStr, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-        public static void NotifyWindows(List<Notification> nots)
-        {
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                try
-                {
-                    if (App.Current.Windows[intCounter] is INotificable)
-                    {
-                        INotificable curr = (INotificable) App.Current.Windows[intCounter];
-                        curr.NotifyWindow(nots);
-                    }// curr.
-                }
                 catch { }
-        }
-        internal static void NotifyWindow(List<Notification> notifications, Button notsBtn)
-        {
-            notsBtn.Content = "Notifications (" + notifications.Count + ")";
-            notsBtn.DataContext = notifications;
-        }
-
-        internal static void LoadPolicy()
-        {
-            Forum f = bl.getForum(forum.id);
-            forum.policy = f.policy;
         }
     }
 }

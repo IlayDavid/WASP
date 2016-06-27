@@ -9,7 +9,7 @@ namespace AccTests.Tests
         
         public static SuperUser InitialSystem(WASPClientBridge proj)
         {
-            return proj.initialize("Moshe", "SuperUser",0, "moshe@post.bgu.ac.il", "moshe123");
+            return proj.initialize("Moshe", "SuperUser",2, "moshe@post.bgu.ac.il", "moshe123");
         }
 
         public static Tuple<Forum,Admin> CreateSpecForum(WASPClientBridge proj, SuperUser supervisor)
@@ -26,7 +26,7 @@ namespace AccTests.Tests
             var user = proj.subscribeToForum(2,"ilanB", "ilan", "ilanB@post.bgu.ac.il",
                                         "ilan123",forum.id);
             Subforum subforum =  proj.createSubForum("sub1", "blah", 2, DateTime.Now.AddDays(100));
-            var moderator = proj.login(user.userName, "ilan123", forum.id);
+            var moderator = proj.login(user.userName, "ilan123", forum.id, "");
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 
@@ -50,7 +50,7 @@ namespace AccTests.Tests
             var user= proj.subscribeToForum(5,"amitB", "amit", "amitB@post.bgu.ac.il",
                                         "amit123", forum.id);
             Subforum subforum = proj.createSubForum("subbbbb2", "blah", 5, DateTime.Now.AddDays(100));
-            var moderator = proj.login(user.userName, user.password, forum.id);
+            var moderator = proj.login(user.userName, user.password, forum.id, "");
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 

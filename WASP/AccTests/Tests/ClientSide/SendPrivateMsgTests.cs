@@ -31,8 +31,9 @@ namespace AccTests.Tests
             _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.id);
             _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
 
-            _proj.login(_member1.userName, _member1.password, _forum.id);
-            _proj.login(_member2.userName, _member2.password, _forum.id);
+            _proj.login(_member1.userName, _member1.password, _forum.id,"");
+            _proj.logout();
+            _proj.login(_member2.userName, _member2.password, _forum.id,"");
         }
 
         /*
@@ -44,7 +45,7 @@ namespace AccTests.Tests
             var msg = "first message";
             int feedback1 = _proj.sendMessage(_member1.id, msg);
             int feedback2 = _proj.sendMessage(_member2.id, msg);
-
+            _proj.logout();
             Assert.IsTrue(feedback1 >= 0);
             Assert.IsTrue(feedback2 >= 0);
         }

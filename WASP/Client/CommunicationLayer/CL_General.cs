@@ -14,17 +14,12 @@ namespace Client.CommunicationLayer
 
     //policy and dateTime
     //admin
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         private string _url { get; set; }
         public string _auth { get; set; }
-        public List<Notification> notifList { get; set; }
-        private Thread nc;
-        public Thread notif;
         private ParseString parser;
-        private object lockList;
-        public int isNotif = 0;
-
+        private Thread notifThread;
         //will set to the current forumID, which the user is loged to.
         //will be used only for functions that require log-in.
         private int forumID;
@@ -34,35 +29,8 @@ namespace Client.CommunicationLayer
             _url = "http://localhost:8080";
             forumID = -1;
             parser = new ParseString();
-            nc = new Thread(new ParameterizedThreadStart (NotificationComponent.Initialize));
-            notif= new Thread(new ThreadStart(getnotifications));
-            notifList = new List<Notification>();
         }
 
-        public void getnotifications()
-        {
-            List<Notification> newNot = getNewNotifications();
-            lock (lockList)
-            {
-                foreach (Notification n in newNot)
-                {
-                    notifList.Add(n);
-                    isNotif = 1;
-                }
-            }
-        }
-
-        public List<Notification> getNotifFromList()
-        {
-            List<Notification> ans = new List<Notification>();
-            lock (lockList)
-            {
-                ans = notifList;
-                notifList.Clear();
-                isNotif = 0;
-                return ans;
-            }
-        }
 
         public List<Notification> getNewNotifications()
         {
@@ -119,18 +87,15 @@ namespace Client.CommunicationLayer
             }
         }
 
-        private void startThread()
-        {
-            nc.Start(this);
-        }
 
-
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {   //username, id, auth, password, email, name
-            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "}";
+            string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "," + "\"auth\":\"" + session + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             User ans= parser.parseStringToUser(res, true, this);
-            //startThread();
+            NotifConnection ncon = new NotifConnection(_auth, this);
+            notifThread = new Thread(ncon.Run);
+            notifThread.Start();
             return ans;
         }
 
@@ -139,10 +104,17 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
             SuperUser ans =parser.parseStringToSuperUser(res, this);
-            //startThread();
             return ans;
         }
+        public void logout()
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("auth", _auth);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/logout/");
 
+        } 
         public User loginBySession(string session)
         {
             //username, id, auth, password, email, name
@@ -151,13 +123,11 @@ namespace Client.CommunicationLayer
             if (forumID == -1)
             {
                 SuperUser ans = parser.parseStringToSuperUser(res, this);
-                startThread();
                 return ans;
             }
             else
             {
                 User ans = parser.parseStringToUser(res, true, this);
-                startThread();
                 return ans;
             }
         }
@@ -249,5 +219,32 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("username", username);
+            dict.Add("answers", answers);
+            dict.Add("forumid", forum_id);
+            dict.Add("newpassword", newPassword);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/restorePasswordbyAnswers/");
+        }
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("userid", user_id);
+            dict.Add("answers", answers);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/addAnswers/");
+            
+        }
+
+        public Admin getAdmin(int AdminID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

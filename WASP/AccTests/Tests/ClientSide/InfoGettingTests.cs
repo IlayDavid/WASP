@@ -37,7 +37,7 @@ namespace AccTests.Tests.ServerSide
                 var forum = _proj.createForum( "forum_" + i, "the " + i + "th forum",100, "admin_" + i,
                     "admin" + i,
                     "admin" + i + "@gmail.com", "admin1234", new Policy(5, 5, false, 5, 500));
-                var admin = _proj.login("admin_" + i, "admin1234", forum.id);
+                var admin = _proj.login("admin_" + i, "admin1234", forum.id, "");
                 _admins[forum] = new List<User>();
                 _admins[forum].Add(admin);
                 _forums.Add(forum);
