@@ -30,7 +30,7 @@ namespace AccTests.Tests
             Tuple<Forum, Admin> forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace AccTests.Tests
 
             var moderator1 = _proj.subscribeToForum(1782461,"bogo", "bigi", "baga@post.bgu.ac.il", "maor123", _forum.id);
             var moderator2 = _proj.subscribeToForum(988,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.id);
-            _proj.login(moderator1.userName, moderator1.password, _forum.id);
-            _proj.login(moderator2.userName, moderator2.password, forum.id);
+            _proj.login(moderator1.userName, moderator1.password, _forum.id, "");
+            _proj.login(moderator2.userName, moderator2.password, forum.id, "");
             // lacking of informations 
             Subforum subforum1 = _proj.createSubForum( "", "blah", moderator1.id, DateTime.Now.AddDays(100));
             Subforum subforum2 = _proj.createSubForum("blah", "", moderator1.id, DateTime.Now.AddDays(100));

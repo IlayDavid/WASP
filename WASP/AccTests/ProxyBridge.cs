@@ -253,7 +253,12 @@ namespace AccTests
 
         public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool superUser = false)
         {
-            return ((WASPBridge)proj).defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, superUser);
+            return ((WASP.Domain.IBL)proj).defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, superUser);
+        }
+
+        public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline, bool superUser = false)
+        {
+            return ((WASP.Domain.IBL)proj).defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, notifyOffline, superUser);
         }
     }
 }

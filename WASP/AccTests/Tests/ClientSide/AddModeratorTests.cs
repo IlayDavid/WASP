@@ -39,17 +39,17 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2; //password is david123
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
 
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2; //password is ilan123
-            _proj.login(_moderator.userName, modpass, _forum.id);
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
 
 
             _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
-            _proj.login(_member1.userName, mempass, _forum.id);
+            _proj.login(_member1.userName, mempass, _forum.id, "");
         }
 
 
@@ -61,7 +61,7 @@ namespace AccTests.Tests
         public void addModeratorAndUpdateTermTest1()
         {
 
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator(_member1.id,_subforum.id, dt.AddDays(200));
             Assert.IsNotNull(isModerator);
@@ -81,7 +81,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator( _member1.id, _subforum.id, dt.AddDays(200));
             Assert.IsNotNull(isModerator);
@@ -107,7 +107,7 @@ namespace AccTests.Tests
             Forum forum = _proj.createForum( "forum1", "blah",8, "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123", new Policy(5, 5, false, 5, 500));
             Admin admin = _proj.getAdmin(8, forum.id);
-            _proj.login(admin.user.userName, "haaron123", forum.id);
+            _proj.login(admin.user.userName, "haaron123", forum.id, "");
 
             //another admin tries to add a moderator
             var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));

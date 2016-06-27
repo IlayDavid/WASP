@@ -35,9 +35,9 @@ namespace AccTests.Tests
             _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id);
             _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
 
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
-            _proj.login(_member1.userName, mempass, _forum.id);
-            _proj.login(_member2.userName, mempass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id,"");
+            _proj.login(_member1.userName, mempass, _forum.id, "");
+            _proj.login(_member2.userName, mempass, _forum.id, "");
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest1()
         {
-            Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum.id));
-            Assert.IsNotNull(_proj.login("edanHb", "123456", _forum.id));
-            Assert.IsNotNull(_proj.login(_admin.user.userName, adminpass, _forum.id));
+            Assert.IsNotNull(_proj.login("amitayaSh", "123456", _forum.id, ""));
+            Assert.IsNotNull(_proj.login("edanHb", "123456", _forum.id, ""));
+            Assert.IsNotNull(_proj.login(_admin.user.userName, adminpass, _forum.id, ""));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace AccTests.Tests
         [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void logInTest2()
         {
-            _proj.login("", "123456", _forum.id);
+            _proj.login("", "123456", _forum.id, "");
             
         }
 
@@ -71,7 +71,7 @@ namespace AccTests.Tests
         public void logInTest3()
         {
             
-            _proj.login("blah", "", _forum.id);
+            _proj.login("blah", "", _forum.id, "");
         }
         /// <summary>
         /// Negative Test: lack of information
@@ -81,7 +81,7 @@ namespace AccTests.Tests
         public void logInTest4()
         {
  
-            _proj.login("amitayaSh", "", _forum.id);
+            _proj.login("amitayaSh", "", _forum.id, "");
         }
         /// <summary>
         /// Negative Test: incorrent information
@@ -92,7 +92,7 @@ namespace AccTests.Tests
         public void logInTest5()
         {
             
-            _proj.login("", "123456", _forum.id);
+            _proj.login("", "123456", _forum.id, "");
             
         }
         /// <summary>
@@ -103,7 +103,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest6()
         {
-            _proj.login("blah", "123456", _forum.id);
+            _proj.login("blah", "123456", _forum.id, "");
             
         }
     }
