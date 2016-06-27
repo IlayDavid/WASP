@@ -14,13 +14,9 @@ namespace Client
     /// </summary>
     public partial class PostWindow : Window, INotificable
     {
-        public void NotifyWindow(List<Notification> notifications)
-        {
-            throw new NotImplementedException();
-        }
+
         private readonly int CONTENT_IND = 0;
-        //private readonly int EDIT_AT_IND = 0;
-        //private readonly int BY_IND = 0;
+        
         List<Button> guestBtns;
         List<Button> userBtns;
         List<Button> adminBtns;
@@ -29,7 +25,7 @@ namespace Client
         private void setButtons()
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
-            userBtns = new List<Button>() { btnLogout , btnAddReply, btnEdit, btnDelete};
+            userBtns = new List<Button>() { btnLogout , btnAddReply, btnEdit, btnDelete, notificationsButton};
             adminBtns = new List<Button>();
             suBtns = new List<Button>();
 
@@ -71,6 +67,7 @@ namespace Client
         }
         private void ChangeVisibilityGuest()
         {
+            welcomeTextBlock.Text = "Welcome, guest!";
             setBtnVisibility(suBtns, Visibility.Hidden);
             setBtnVisibility(guestBtns, Visibility.Visible);
         }
@@ -88,6 +85,11 @@ namespace Client
             setButtons();
             setVisibility();
 
+            refresh();
+        }
+        private void refresh()
+        {
+            postMesssages.Items.Clear();
             Session.LoadReplys();
             Post p = Session.post;
             TreeViewItem treeItem = makePostTree(p);
@@ -96,7 +98,7 @@ namespace Client
             foreach (Post post in p.replies)
             {
                 treeItem = makePostTree(post);
-                ((TreeViewItem) postMesssages.Items[0]).Items.Add(treeItem);
+                ((TreeViewItem)postMesssages.Items[0]).Items.Add(treeItem);
             }
         }
 
@@ -179,6 +181,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
+                Session.bl.logout();
                 Session.user = null;
                 setVisibility();
             }
@@ -254,11 +257,18 @@ namespace Client
 
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext);
+            Session.ShowNotifications();
         }
-        void NotifyWindow(List<Notification> notifications, Button notsBtn)
+        public void NotifyWindow()
         {
-            Session.NotifyWindow(notifications, notsBtn);
+            refresh();
+            Session.NotifyWindow(notificationsButton);
+        }
+
+       
+        public void ClearNotification()
+        {
+            Session.ClearNotification(notificationsButton);
         }
     }
 }

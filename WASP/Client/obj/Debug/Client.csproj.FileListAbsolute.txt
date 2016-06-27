@@ -178,6 +178,7 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Microsoft.Owin.Di
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Microsoft.Owin.Hosting.xml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddAdmin.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddForum.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\AddWindows\AddMember.g.cs
@@ -192,6 +193,7 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumReports.
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\ChatWindow.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\ForumWindow.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\Login.g.cs
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\Notifications.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\PostWindow.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\RestorePassword.g.cs
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\SubForumWindow.g.cs
@@ -215,6 +217,7 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\ForumReports.
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\ChatWindow.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\ForumWindow.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\Login.baml
+C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\Notifications.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\PostWindow.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\RestorePassword.baml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\Client\obj\Debug\GUI\MainWindows\SubForumWindow.baml

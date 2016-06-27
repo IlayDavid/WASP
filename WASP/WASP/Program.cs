@@ -6,6 +6,7 @@ using WASP.Exceptions;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using System.Threading;
 namespace WASP
 {
     class Program
@@ -62,7 +63,7 @@ namespace WASP
             myDal.Clean();
             ServiceFacade.webInitialize();
             Policy policy = new Policy();
-           
+
             Policy newpolicy = myDal.CreatePolicy(policy);
             Forum forum1 = new Forum(-1, "forum1", "description of forum1", newpolicy);
             Forum forum2 = new Forum(-1, "forum2", "description of forum2", newpolicy);
@@ -176,6 +177,8 @@ namespace WASP
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);
+            Thread notificationServerThread = new Thread(NotificationServer.Run);
+            notificationServerThread.Start();
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

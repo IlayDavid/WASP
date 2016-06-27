@@ -29,18 +29,18 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.id, "");
 
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
 
 
             _moderator2 = _proj.subscribeToForum(16,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id);
             _proj.addModerator(_moderator2.id, _subforum.id, DateTime.MaxValue);
-            _proj.login(_moderator2.userName, _moderator2.password, _forum.id);
+            _proj.login(_moderator2.userName, _moderator2.password, _forum.id, "");
         }
         /// <summary>
         /// Positive Test:  checks that admin can delete a moderator to subforum
@@ -52,7 +52,7 @@ namespace AccTests.Tests
             Assert.IsTrue(check>=0);
             var numMods = _proj.getModerators( _subforum.id);
             Assert.IsTrue(numMods.Count==1);
-            var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
             Assert.IsNotNull(firedMod);
         }
 
@@ -83,9 +83,9 @@ namespace AccTests.Tests
             Assert.IsTrue(check < 0);
             var numMods = _proj.getModerators( _subforum.id);
             Assert.IsTrue(numMods.Count == 1);
-            var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
             Assert.IsNotNull(firedMod);
-            var mod = _proj.login(_moderator2.userName, _moderator2.password, _forum.id);
+            var mod = _proj.login(_moderator2.userName, _moderator2.password, _forum.id, "");
             Assert.IsNotNull(mod);
             Assert.IsTrue(_proj.getModerators(_subforum.id).Any((x) => x.user.id == _moderator2.id));
         }

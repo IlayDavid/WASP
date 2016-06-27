@@ -16,9 +16,7 @@
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="132,29,0,0"/>
         <PasswordBox x:Name="passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,60,0,0" Width="120" Height="23"/>
         <Label Content="*Client-Session:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,134,0,0" Width="100"/>
-        <TextBox x:Name="txtClientSession" IsEnabled="False" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="133,137,0,0"/>
-        <RadioButton x:Name="rdbUserPass" Checked="rdb_Checked" Content="I want to login by username &amp; password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,9,0,0" FontWeight="Bold"/>
-        <RadioButton x:Name="rdbClientSession" Checked="rdb_Checked" Content="I have logged-in and have a Client-Session" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,117,0,0" FontWeight="Bold"/>
+        <TextBox x:Name="txtClientSession" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="133,137,0,0"/>
         <Label x:Name="lblForget" Content="Forget your password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,83,0,0"
                Foreground="Blue" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="lblForget_MouseDoubleClick">
             <Label.RenderTransform>

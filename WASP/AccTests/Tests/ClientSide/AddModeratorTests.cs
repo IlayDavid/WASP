@@ -14,6 +14,7 @@ namespace AccTests.Tests
         private WASPClientBridge _proj;
         private SuperUser _supervisor;
         private String supass="moshe123";
+        private String suusername = "SuperUser";
         private Admin _admin;
         private String adminpass="david123";
         private Forum _forum;
@@ -22,38 +23,33 @@ namespace AccTests.Tests
         private String modpass="ilan123";
         private User _member1;
         private String mempass="mem123";
-        private static int setup = 0;
 
         [TestInitialize]
         public void setUp()
         {
             Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
-            if (setup == 0)
-            {
-                setup = 1;
+            _supervisor = ClientFunctions.InitialSystem(_proj);
+            /*if (_proj.isInitialize() == 0)
                 _supervisor = ClientFunctions.InitialSystem(_proj); //password is 
-            }
-                var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
-                _forum = forumAndAdmin.Item1;
-                _admin = forumAndAdmin.Item2; //password is david123
-                _proj.login(_admin.user.userName, adminpass, _forum.id);
+            else
+            {
+                _proj.loginSU(suusername, supass);
+            }*/
+            var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
+            _forum = forumAndAdmin.Item1;
+            _admin = forumAndAdmin.Item2; //password is david123
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
 
 
-                var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
-                _subforum = subforumAndModerator.Item1;
-                _moderator = subforumAndModerator.Item2; //password is ilan123
-                _proj.login(_moderator.userName, modpass, _forum.id);
+            var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
+            _subforum = subforumAndModerator.Item1;
+            _moderator = subforumAndModerator.Item2; //password is ilan123
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
 
 
-                _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
-                _proj.login(_member1.userName, mempass, _forum.id);
-        }
-
-        [TestCleanup]
-        public void TearDown()
-        {
-            //Driver.getBridge().Clean();
+            _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
+            _proj.login(_member1.userName, mempass, _forum.id, "");
         }
 
 
@@ -65,7 +61,7 @@ namespace AccTests.Tests
         public void addModeratorAndUpdateTermTest1()
         {
 
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator(_member1.id,_subforum.id, dt.AddDays(200));
             Assert.IsNotNull(isModerator);
@@ -78,7 +74,6 @@ namespace AccTests.Tests
             int num = _proj.getModerators(_subforum.id).Count;
         }
 
-
         /// <summary>
         /// Positive Test:  checks that admin of a forum can add a moderator to the forum's subforum
         ///                 checks that the term's update is succeed
@@ -86,7 +81,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest2()
         {
-            _proj.login(_admin.user.userName, adminpass, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             DateTime dt = DateTime.Now;
             var isModerator = _proj.addModerator( _member1.id, _subforum.id, dt.AddDays(200));
             Assert.IsNotNull(isModerator);
@@ -107,11 +102,12 @@ namespace AccTests.Tests
         [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void addModeratorAndUpdateTermTest3()
         {
+            _proj.loginSU(suusername, supass);
 
             Forum forum = _proj.createForum( "forum1", "blah",8, "haaronB",
                                             "haaron", "haaronB@post.bgu.ac.il", "haaron123", new Policy(5, 5, false, 5, 500));
             Admin admin = _proj.getAdmin(8, forum.id);
-            _proj.login(admin.user.userName, admin.user.password, forum.id);
+            _proj.login(admin.user.userName, "haaron123", forum.id, "");
 
             //another admin tries to add a moderator
             var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));

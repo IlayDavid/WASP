@@ -43,7 +43,7 @@ namespace Client.GUI.MainWindows
             }
             try
             {
-                Session.bl.restorePasswordbyAnswers(username, answers, newpassword);
+                Session.bl.restorePasswordbyAnswers(username, Session.forum.id,answers, newpassword);
                 MessageBox.Show("Your new password is: " + newpassword, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch { }

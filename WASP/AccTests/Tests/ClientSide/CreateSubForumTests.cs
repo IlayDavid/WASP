@@ -15,6 +15,7 @@ namespace AccTests.Tests
         private SuperUser _supervisor;
         private Forum _forum;
         private Admin _admin;
+        private string adminpass = "david123";
 
         //private Subforum _subforum;
 
@@ -29,7 +30,7 @@ namespace AccTests.Tests
             Tuple<Forum, Admin> forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
         }
 
         /// <summary>
@@ -43,10 +44,10 @@ namespace AccTests.Tests
 
             Assert.IsNotNull(subforum);
             Assert.AreEqual(_proj.getModerators(subforum.id).Count, 1);
-            Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.userName, moderator.userName);
-            Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.name, moderator.name);
-            Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.password, moderator.password);
-            Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.email, moderator.email);
+            Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.id, moderator.id);
+            Assert.AreEqual(_proj.getModerators(subforum.id)[0].appointBy.id, _admin.user.id);
+           // Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.password, moderator.password);
+            //Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.email, moderator.email);
             //Assert.AreEqual(_proj.getModerators(_admin.user.id, subforum.id)[0].MemberForum, moderator.MemberForum);
         }
 
@@ -83,7 +84,7 @@ namespace AccTests.Tests
                         "blah blah blah", moderator.id, DateTime.Now.AddDays(100));
 
                 Assert.IsNotNull(subforum);
-                Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.userName, moderator.userName);
+                Assert.AreEqual(_proj.getModerators(subforum.id)[0].user.id, moderator.id);
                 Assert.AreEqual(_proj.getModerators(subforum.id).Count, 1);
             }
 
@@ -102,8 +103,8 @@ namespace AccTests.Tests
 
             var moderator1 = _proj.subscribeToForum(1782461,"bogo", "bigi", "baga@post.bgu.ac.il", "maor123", _forum.id);
             var moderator2 = _proj.subscribeToForum(988,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.id);
-            _proj.login(moderator1.userName, moderator1.password, _forum.id);
-            _proj.login(moderator2.userName, moderator2.password, forum.id);
+            _proj.login(moderator1.userName, moderator1.password, _forum.id, "");
+            _proj.login(moderator2.userName, moderator2.password, forum.id, "");
             // lacking of informations 
             Subforum subforum1 = _proj.createSubForum( "", "blah", moderator1.id, DateTime.Now.AddDays(100));
             Subforum subforum2 = _proj.createSubForum("blah", "", moderator1.id, DateTime.Now.AddDays(100));

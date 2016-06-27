@@ -15,10 +15,14 @@ namespace AccTests.Tests
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
+        private String supass = "moshe123";
         private Admin _admin;
+        private String adminpass = "david123";
         private User _moderator;
+        private String modpass = "ilan123";
         private Post _thread;
         private User _member;
+        private String mempass = "ariel123";
         private Post _threadModerator;
         private Post _threadMember;
 
@@ -34,15 +38,15 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName,adminpass, _forum.id, "");
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
 
             _member = ClientFunctions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(_member.userName, _member.password, _forum.id);
+            _proj.login(_member.userName, mempass, _forum.id, "");
 
             _threadModerator = _proj.createThread("webService for calander",
                                     "Someone know a good web service for Calander?",  _subforum.id);
@@ -62,6 +66,7 @@ namespace AccTests.Tests
         {
             int isDelete = _proj.deletePost(_threadMember.id);
             Assert.IsTrue(isDelete >= 0);
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
             isDelete = _proj.deletePost(_threadModerator.id);
             Assert.IsTrue(isDelete >= 0);
         }
@@ -102,11 +107,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest4()
         {
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
             Post p1 = _proj.createReplyPost("Hi",  _threadMember.id);
             Post p2 = _proj.createReplyPost("Hi", _threadModerator.id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
 
+            _proj.login(_member.userName, mempass, _forum.id, "");
             int isDelete = _proj.deletePost(p2.id);
             Assert.IsTrue(isDelete > 0);
             isDelete = _proj.deletePost(p1.id);

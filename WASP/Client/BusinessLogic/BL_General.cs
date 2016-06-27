@@ -11,7 +11,7 @@ namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
-        private ICL _cl;
+        private IBL _cl;
         public BL()
         {
             _cl = new CL();
@@ -20,7 +20,7 @@ namespace Client.BusinessLogic
         }
         private void initForTesting()
         {
-            string su_userName = "a";
+            /*string su_userName = "a";
             string su_password = "a";
             string userPassword = "1";
 
@@ -63,18 +63,18 @@ namespace Client.BusinessLogic
 
             login(u21.userName, userPassword, forum2.id);
             Post p21 = createThread("Thread number 1", "this is the opening thread test 1", sf21.id);
-            Post p22 = createThread("Thread number 2", "this is the opening thread test 2", sf22.id);
+            Post p22 = createThread("Thread number 2", "this is the opening thread test 2", sf22.id);*/
         }
         public void setForumID(int forumID)
         {
             _cl.setForumID(forumID);
         }
-        public User login(string userName, string password, int forumID)
+        public User login(string userName, string password, int forumID, string session)
         {
             if (!IsStrValid(userName)) throw new Exception("ERROR: username is empty or iilegal");
             if (!IsStrValid(password)) throw new Exception("ERROR: password is empty or iilegal");
             if (forumID < 0) throw new Exception("ERROR: forum id is iilegal");
-            return _cl.login(userName, sha256_hash(password), forumID);
+            return _cl.login(userName, sha256_hash(password), forumID, session);
         }
 
         public SuperUser loginSU(string userName, string password)
@@ -83,6 +83,11 @@ namespace Client.BusinessLogic
                 return _cl.loginSU(userName, sha256_hash(password));
             else
                 throw new Exception("ERROR: user name or password are illegal");
+        }
+
+        public void logout()
+        {
+            _cl.logout();
         }
         private static String sha256_hash(String value)
         {

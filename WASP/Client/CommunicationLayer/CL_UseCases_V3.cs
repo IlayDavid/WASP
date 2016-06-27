@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 
 namespace Client.CommunicationLayer
 {
-    public partial class CL : ICL
+    public partial class CL : BusinessLogic.IBL
     {
         //---------------------------Version 3 Use Cases Start------------------------------------
         public int editPost(int postID, string content)
@@ -41,7 +41,7 @@ namespace Client.CommunicationLayer
         public List<Notification> getNewNotificationses()
         {
             string json = "{\"auth\":\"" + _auth + "\"}";
-            string res = httpReq(json, "POST", _url + "/getAllNotificationses/");
+            string res = httpReq(json, "POST", _url + "/getNewNotificationses/");
             return parser.parseStringToMessages(res, true);
         }
 

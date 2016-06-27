@@ -27,7 +27,8 @@ namespace AccTests.Tests
             _forum = forumAndMember.Item1;
             _admin = forumAndMember.Item2;
 
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.id, "");
+            
         }
 
         /*
@@ -42,7 +43,9 @@ namespace AccTests.Tests
             Assert.IsNotNull(isMem);
             Assert.AreEqual(members.Count, 2);
             Assert.IsTrue(members[0].id==isMem.id || members[1].id==isMem.id);
-            Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.id));
+            _proj.logout();
+            Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.id, ""));
+            _proj.logout();
         }
 
         /*
@@ -62,6 +65,7 @@ namespace AccTests.Tests
 
             isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1);
             Assert.IsNull(isMem);
+            _proj.logout();
         }
     }
 }

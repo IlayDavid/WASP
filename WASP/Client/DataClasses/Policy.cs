@@ -7,7 +7,8 @@
         public static int admin = 4;
         public static int all = 7;
 
-
+        public enum NOTIFICATION{ online=1, offline=2, selective=3}
+        public NOTIFICATION notification;
         //post
         public int deletePost; //done
         //security
@@ -37,6 +38,16 @@
             this.seniority = seniority;
             this.usersSameTime = usersSameTime;
             this.questions = questions;
+        }
+        public Policy(int deletePost, int passwordPeriod, bool emailVerification, int seniority, int usersSameTime, string[] questions, NOTIFICATION notification)
+        {
+            this.deletePost = deletePost;
+            this.passwordPeriod = passwordPeriod;
+            this.emailVerification = emailVerification;
+            this.seniority = seniority;
+            this.usersSameTime = usersSameTime;
+            this.questions = questions;
+            this.notification = notification;
         }
         public bool isOwnerCanDeletePost()
         {

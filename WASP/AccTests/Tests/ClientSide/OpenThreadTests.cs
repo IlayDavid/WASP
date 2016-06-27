@@ -30,12 +30,12 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id);
+            _proj.login(_admin.user.userName, _admin.user.password, _forum.id, "");
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.id);
+            _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
            
 
         }
@@ -48,7 +48,7 @@ namespace AccTests.Tests
         public void OpenThreadTest1()
         {
             User member = ClientFunctions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(member.userName, member.password, _forum.id);
+            _proj.login(member.userName, member.password, _forum.id, "");
             Post isOpenPost = _proj.createThread("webService for calander", "Someone know a good web service for Calander?",
                                    _subforum.id);
             Assert.IsNotNull(isOpenPost);

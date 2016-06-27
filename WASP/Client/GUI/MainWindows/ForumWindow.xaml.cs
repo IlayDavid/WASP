@@ -17,10 +17,6 @@ namespace Client
     /// </summary>
     public partial class ForumWindow : Window, INotificable
     {
-        public void NotifyWindow(List<Notification> notifications)
-        {
-            throw new NotImplementedException();
-        }
         List<Button> guestBtns;
         List<Button> userBtns;
         List<Button> adminBtns;
@@ -29,7 +25,7 @@ namespace Client
         private void setButtons()
         {
             guestBtns = new List<Button>() { btnRegister, btnLogin };
-            userBtns = new List<Button>() { btnLogout, btnSendMessage };
+            userBtns = new List<Button>() { btnLogout, btnSendMessage, notificationsButton };
             adminBtns = new List<Button>() { btnAddAdministrator, btnEditForumPolicy, btnAddSubforum, btnReports };
             suBtns = new List<Button>() {  };
 
@@ -72,6 +68,7 @@ namespace Client
         }
         private void ChangeVisibilityGuest()
         {
+            welcomeTextBlock.Text = "Welcome, guest!";
             setBtnVisibility(suBtns, Visibility.Hidden);
             setBtnVisibility(guestBtns, Visibility.Visible);
         }
@@ -89,8 +86,15 @@ namespace Client
             InitializeComponent();
             setButtons();
             setVisibility();
+            //presenting the subforums list 
+            refresh();
+        }
+        private void refresh()
+        {
             LoadData();
             //presenting the subforums list 
+
+            SubForums.Items.Clear();
             foreach (Subforum sf in Session.forum.subforums.Values)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -101,7 +105,6 @@ namespace Client
             if (Session.forum.subforums.Count > 0)
                 SubForums.SelectedIndex = 0;
         }
-
         public void LoadData()
         {
             try
@@ -273,6 +276,7 @@ namespace Client
             var ans = MessageBox.Show("Do you want to log out?", "Save and Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (ans == MessageBoxResult.Yes)
             {
+                Session.bl.logout();
                 Session.user = null;
                 setVisibility();
             }
@@ -291,11 +295,7 @@ namespace Client
         }
         private void notificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            Session.ShowNotifications((List<Notification>)notificationsButton.DataContext); 
-        }
-        void NotifyWindow(List<Notification> notifications, Button notsBtn)
-        {
-            Session.NotifyWindow(notifications, notsBtn);
+            Session.ShowNotifications(); 
         }
 
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)
@@ -308,6 +308,19 @@ namespace Client
         {
             ForumReports fr = new ForumReports();
             fr.ShowDialog();
+        }
+
+        public void NotifyWindow()
+        {
+            refresh();
+            Session.NotifyWindow(notificationsButton);
+        }
+
+        
+
+        public void ClearNotification()
+        {
+            Session.ClearNotification(notificationsButton);
         }
     }
 }
