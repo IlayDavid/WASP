@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Linq;
 using System.Linq;
 using WASP.DataClasses.DAL_EXCEPTIONS;
-using WASP.DataClasses;
 using System.IO;
 using static WASP.DataClasses.Notification;
 using WASP.DataClasses.Cache2;
+using WASP.LoggerPC;
 namespace WASP.DataClasses
 {
     class DALSQL : DAL2
     {
         private IDALCache2 _cache;
+        private Logger _logger;
         private static string _connectionString;
         public static string SetDb(string dbName)
         {
@@ -26,6 +25,7 @@ namespace WASP.DataClasses
         public DALSQL()
         {
             _cache = new DALCache2(this);
+            _logger = new Logger("../../../LoggerOutput/dal_logger.txt");
         }
 
         //private int forum_counter = 1;
@@ -267,6 +267,7 @@ namespace WASP.DataClasses
 
         public void Clean()
         {
+            _logger.deleteFile();
             db.IFriends.DeleteAllOnSubmit(db.IFriends);
             db.INotifications.DeleteAllOnSubmit(db.INotifications);
             db.IPosts.DeleteAllOnSubmit(db.IPosts);
@@ -877,6 +878,8 @@ namespace WASP.DataClasses
                 db.ISuperUsers.InsertOnSubmit(isuperuser);
                 db.SubmitChanges();
                 _cache.AddSuperUser(superuser);
+                _logger.writeToFile("added superuser");
+                _logger.writeToFile("created superuser");
                 return superuser;
             }
             else
