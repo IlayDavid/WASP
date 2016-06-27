@@ -203,9 +203,7 @@ namespace WASP.DataClasses
         }
         public void AddMember(User member)
         {
-            this.Policy.Validate(member);
             Members.Add(member.Id, member);
-
         }
         public bool RemoveMember(User member)
         {

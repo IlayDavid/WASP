@@ -85,7 +85,7 @@ namespace WASP.Service
                 forumId = data["forum"];
                 superUser = true;
             }
-            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], superUser);
+            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], data["notifiyoffline"], superUser);
 
             return 1.ToString();
         }
