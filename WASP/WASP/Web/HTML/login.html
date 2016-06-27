@@ -29,7 +29,7 @@
 	"username":username,
 	"password":Sha256.hash(password),
 	"forumid":forumid,
-	"hash":hash};
+	"auth":hash};
 	param["forumid"]=parseInt(forumid);
 	console.log(param);
 	$.post("http://localhost:8080/login/", JSON.stringify(param), function(data, status){
