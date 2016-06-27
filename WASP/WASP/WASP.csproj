@@ -179,6 +179,7 @@
     <Compile Include="Exceptions\UnauthorizedDeletePost.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Exceptions\WaspException.cs" />
+    <Compile Include="LoggerPC\Logger.cs" />
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
