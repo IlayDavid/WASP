@@ -85,6 +85,11 @@ namespace Client
             setButtons();
             setVisibility();
 
+            refresh();
+        }
+        private void refresh()
+        {
+            postMesssages.Items.Clear();
             Session.LoadReplys();
             Post p = Session.post;
             TreeViewItem treeItem = makePostTree(p);
@@ -93,7 +98,7 @@ namespace Client
             foreach (Post post in p.replies)
             {
                 treeItem = makePostTree(post);
-                ((TreeViewItem) postMesssages.Items[0]).Items.Add(treeItem);
+                ((TreeViewItem)postMesssages.Items[0]).Items.Add(treeItem);
             }
         }
 
@@ -256,9 +261,11 @@ namespace Client
         }
         public void NotifyWindow()
         {
+            refresh();
             Session.NotifyWindow(notificationsButton);
         }
 
+       
         public void ClearNotification()
         {
             Session.ClearNotification(notificationsButton);

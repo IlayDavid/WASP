@@ -16,10 +16,6 @@ namespace Client
     /// </summary>
     public partial class SubForumWindow : Window, INotificable
     {
-        public void NotifyWindow(List<Notification> notifications)
-        {
-            throw new NotImplementedException();
-        }
         List<Button> guestBtns;
         List<Button> userBtns;
         List<Button> adminBtns;
@@ -87,12 +83,12 @@ namespace Client
             InitializeComponent();
             setButtons();
             setVisibility();
-            LoadData();
             //presenting the subforums list 
-            RefreshWindow();
+            refresh();
         }
-        private void RefreshWindow()
+        private void refresh()
         {
+            LoadData();
             SubForumsThreads.Items.Clear();
             foreach (Post p in Session.subForum.threads)
             {
@@ -133,7 +129,7 @@ namespace Client
             this.Hide();
             pwin.ShowDialog();
             Session.LoadThreads();
-            RefreshWindow();
+            refresh();
             Session.currentWindow = this;
             setVisibility();
             this.ShowDialog();
@@ -251,9 +247,11 @@ namespace Client
         }
         public void NotifyWindow()
         {
+            refresh();
             Session.NotifyWindow(notificationsButton);
         }
 
+        
         public void ClearNotification()
         {
             Session.ClearNotification(notificationsButton);

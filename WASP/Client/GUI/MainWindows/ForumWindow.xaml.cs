@@ -86,8 +86,15 @@ namespace Client
             InitializeComponent();
             setButtons();
             setVisibility();
+            //presenting the subforums list 
+            refresh();
+        }
+        private void refresh()
+        {
             LoadData();
             //presenting the subforums list 
+
+            SubForums.Items.Clear();
             foreach (Subforum sf in Session.forum.subforums.Values)
             {
                 ListBoxItem newItem = new ListBoxItem();
@@ -98,7 +105,6 @@ namespace Client
             if (Session.forum.subforums.Count > 0)
                 SubForums.SelectedIndex = 0;
         }
-
         public void LoadData()
         {
             try
@@ -306,8 +312,11 @@ namespace Client
 
         public void NotifyWindow()
         {
+            refresh();
             Session.NotifyWindow(notificationsButton);
         }
+
+        
 
         public void ClearNotification()
         {
