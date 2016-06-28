@@ -6,6 +6,8 @@ using WASP.Exceptions;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using WASP.DataClasses;
+using System.Threading;
+
 namespace WASP
 {
     class Program
@@ -178,6 +180,8 @@ namespace WASP
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);
+            Thread notificationServerThread = new Thread(NotificationServer.Run);
+            notificationServerThread.Start();
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

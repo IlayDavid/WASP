@@ -3,3 +3,328 @@
 6/28/2016 12:49:09 AM: added superuser
 6/28/2016 12:49:09 AM: created superuser
 28/06/2016 21:50:07: create BL object
+28/06/2016 23:29:55: create BL object
+28/06/2016 23:29:59: initialize the system
+28/06/2016 23:30:00: get all forum
+28/06/2016 23:30:36: get members
+28/06/2016 23:30:36: get sub forums
+28/06/2016 23:30:36: get admin
+28/06/2016 23:30:36: get members
+28/06/2016 23:30:36: get forum
+28/06/2016 23:30:43: login - not super user
+28/06/2016 23:30:43: get new notifications
+28/06/2016 23:30:43: get members
+28/06/2016 23:30:43: get sub forums
+28/06/2016 23:30:43: get admin
+28/06/2016 23:30:43: get members
+28/06/2016 23:30:43: get forum
+28/06/2016 23:30:43: get admin
+28/06/2016 23:31:03: create BL object
+28/06/2016 23:31:03: get all forum
+28/06/2016 23:31:06: get members
+28/06/2016 23:31:06: get sub forums
+28/06/2016 23:31:06: get admin
+28/06/2016 23:31:06: get members
+28/06/2016 23:31:06: get forum
+28/06/2016 23:31:13: login - not super user
+28/06/2016 23:31:15: login - not super user
+28/06/2016 23:31:23: login - not super user
+28/06/2016 23:31:23: get new notifications
+28/06/2016 23:31:23: get members
+28/06/2016 23:31:23: get sub forums
+28/06/2016 23:31:23: get admin
+28/06/2016 23:31:23: get members
+28/06/2016 23:31:23: get forum
+28/06/2016 23:31:24: get admin
+28/06/2016 23:38:25: create BL object
+28/06/2016 23:38:30: initialize the system
+28/06/2016 23:38:30: get all forum
+28/06/2016 23:38:32: get members
+28/06/2016 23:38:32: get sub forums
+28/06/2016 23:38:32: get admin
+28/06/2016 23:38:32: get members
+28/06/2016 23:38:32: get forum
+28/06/2016 23:38:41: login - not super user
+28/06/2016 23:38:42: get new notifications
+28/06/2016 23:38:42: get members
+28/06/2016 23:38:42: get sub forums
+28/06/2016 23:38:42: get admin
+28/06/2016 23:38:42: get members
+28/06/2016 23:38:42: get forum
+28/06/2016 23:38:42: get admin
+28/06/2016 23:49:02: create BL object
+28/06/2016 23:49:03: get all forum
+28/06/2016 23:49:06: get members
+28/06/2016 23:49:06: get sub forums
+28/06/2016 23:49:06: get admin
+28/06/2016 23:49:06: get members
+28/06/2016 23:49:06: get forum
+28/06/2016 23:49:16: login - not super user
+28/06/2016 23:49:17: get new notifications
+28/06/2016 23:49:17: get members
+28/06/2016 23:49:17: get sub forums
+28/06/2016 23:49:17: get admin
+28/06/2016 23:49:17: get members
+28/06/2016 23:49:17: get forum
+28/06/2016 23:49:17: get admin
+28/06/2016 23:49:57: create BL object
+28/06/2016 23:50:01: initialize the system
+28/06/2016 23:50:04: get all forum
+28/06/2016 23:50:08: get members
+28/06/2016 23:50:08: get sub forums
+28/06/2016 23:50:09: get admin
+28/06/2016 23:50:09: get members
+28/06/2016 23:50:09: get forum
+28/06/2016 23:50:21: create BL object
+28/06/2016 23:50:21: get all forum
+28/06/2016 23:50:28: get members
+28/06/2016 23:50:28: get sub forums
+28/06/2016 23:50:28: get admin
+28/06/2016 23:50:28: get members
+28/06/2016 23:50:28: get forum
+28/06/2016 23:50:39: login - not super user
+28/06/2016 23:50:40: get new notifications
+28/06/2016 23:50:40: get members
+28/06/2016 23:50:40: get sub forums
+28/06/2016 23:50:40: get admin
+28/06/2016 23:50:40: get members
+28/06/2016 23:50:40: get forum
+28/06/2016 23:50:40: get admin
+28/06/2016 23:54:17: create BL object
+28/06/2016 23:54:17: get all forum
+28/06/2016 23:54:26: get members
+28/06/2016 23:54:26: get sub forums
+28/06/2016 23:54:26: get admin
+28/06/2016 23:54:26: get members
+28/06/2016 23:54:26: get forum
+28/06/2016 23:54:42: login - not super user
+28/06/2016 23:54:43: get new notifications
+28/06/2016 23:54:43: get members
+28/06/2016 23:54:43: get sub forums
+28/06/2016 23:54:43: get admin
+28/06/2016 23:54:43: get members
+28/06/2016 23:54:43: get forum
+28/06/2016 23:54:43: get admin
+29/06/2016 00:06:40: create BL object
+29/06/2016 00:06:45: initialize the system
+29/06/2016 00:06:46: get all forum
+29/06/2016 00:06:50: get members
+29/06/2016 00:06:50: get sub forums
+29/06/2016 00:06:50: get admin
+29/06/2016 00:06:50: get members
+29/06/2016 00:06:50: get forum
+29/06/2016 00:06:58: login - not super user
+29/06/2016 00:06:59: get new notifications
+29/06/2016 00:06:59: get members
+29/06/2016 00:06:59: get sub forums
+29/06/2016 00:06:59: get admin
+29/06/2016 00:06:59: get members
+29/06/2016 00:06:59: get forum
+29/06/2016 00:06:59: get admin
+29/06/2016 00:07:13: logout the system
+29/06/2016 00:07:22: login - not super user
+29/06/2016 00:07:22: get new notifications
+29/06/2016 00:07:22: get members
+29/06/2016 00:07:22: get sub forums
+29/06/2016 00:07:22: get admin
+29/06/2016 00:07:22: get members
+29/06/2016 00:07:22: get forum
+29/06/2016 00:07:22: get admin
+29/06/2016 00:07:28: get admin
+29/06/2016 00:07:28: get moderator
+29/06/2016 00:07:28: get threads
+29/06/2016 00:07:36: create BL object
+29/06/2016 00:07:36: get all forum
+29/06/2016 00:07:40: get members
+29/06/2016 00:07:40: get sub forums
+29/06/2016 00:07:40: get admin
+29/06/2016 00:07:40: get members
+29/06/2016 00:07:40: get forum
+29/06/2016 00:07:51: login - not super user
+29/06/2016 00:07:52: get new notifications
+29/06/2016 00:07:52: get members
+29/06/2016 00:07:52: get sub forums
+29/06/2016 00:07:52: get admin
+29/06/2016 00:07:52: get members
+29/06/2016 00:07:52: get forum
+29/06/2016 00:07:52: get admin
+29/06/2016 00:08:08: create thread
+29/06/2016 00:08:08: get new notifications
+29/06/2016 00:08:08: get new notifications
+29/06/2016 00:08:08: get new notifications
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get sub forums
+29/06/2016 00:08:09: get admin
+29/06/2016 00:08:09: get moderator
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get threads
+29/06/2016 00:08:09: get forum
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get sub forums
+29/06/2016 00:08:09: get admin
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get forum
+29/06/2016 00:08:09: get moderator
+29/06/2016 00:08:09: get threads
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get sub forums
+29/06/2016 00:08:09: get admin
+29/06/2016 00:08:09: get members
+29/06/2016 00:08:09: get forum
+29/06/2016 00:08:20: create thread
+29/06/2016 00:08:20: get new notifications
+29/06/2016 00:08:20: get new notifications
+29/06/2016 00:08:21: get members
+29/06/2016 00:08:21: get moderator
+29/06/2016 00:08:21: get sub forums
+29/06/2016 00:08:21: get threads
+29/06/2016 00:08:21: get admin
+29/06/2016 00:08:21: get members
+29/06/2016 00:08:21: get members
+29/06/2016 00:08:21: get sub forums
+29/06/2016 00:08:21: get forum
+29/06/2016 00:08:21: get admin
+29/06/2016 00:08:21: get members
+29/06/2016 00:08:21: get forum
+29/06/2016 00:08:58: get admin
+29/06/2016 00:09:02: get admin
+29/06/2016 00:09:02: get moderator
+29/06/2016 00:09:02: get threads
+29/06/2016 00:09:04: get admin
+29/06/2016 00:09:04: get replys
+29/06/2016 00:09:07: get threads
+29/06/2016 00:09:07: get moderator
+29/06/2016 00:09:07: get threads
+29/06/2016 00:09:07: get admin
+29/06/2016 00:09:53: create thread
+29/06/2016 00:09:53: get new notifications
+29/06/2016 00:09:53: get new notifications
+29/06/2016 00:09:53: get moderator
+29/06/2016 00:09:53: get members
+29/06/2016 00:09:53: get threads
+29/06/2016 00:09:53: get sub forums
+29/06/2016 00:09:53: get members
+29/06/2016 00:09:53: get admin
+29/06/2016 00:09:53: get sub forums
+29/06/2016 00:09:53: get members
+29/06/2016 00:09:53: get admin
+29/06/2016 00:09:53: get forum
+29/06/2016 00:09:53: get members
+29/06/2016 00:09:53: get forum
+29/06/2016 00:10:22: get admin
+29/06/2016 00:10:22: get replys
+29/06/2016 00:11:30: get all notifications
+29/06/2016 00:11:42: get threads
+29/06/2016 00:11:42: get moderator
+29/06/2016 00:11:42: get threads
+29/06/2016 00:11:42: get admin
+29/06/2016 00:11:51: get admin
+29/06/2016 00:12:01: get all notifications
+29/06/2016 00:12:06: send private message
+29/06/2016 00:12:06: get new notifications
+29/06/2016 00:12:06: get new notifications
+29/06/2016 00:12:06: get members
+29/06/2016 00:12:06: get members
+29/06/2016 00:12:06: get sub forums
+29/06/2016 00:12:06: get sub forums
+29/06/2016 00:12:06: get admin
+29/06/2016 00:12:06: get admin
+29/06/2016 00:12:06: get members
+29/06/2016 00:12:06: get members
+29/06/2016 00:12:06: get forum
+29/06/2016 00:12:06: get forum
+29/06/2016 00:12:06: send private message
+29/06/2016 00:12:06: get new notifications
+29/06/2016 00:12:06: get new notifications
+29/06/2016 00:12:07: get members
+29/06/2016 00:12:07: get sub forums
+29/06/2016 00:12:07: get members
+29/06/2016 00:12:07: get sub forums
+29/06/2016 00:12:07: get admin
+29/06/2016 00:12:07: get admin
+29/06/2016 00:12:07: get members
+29/06/2016 00:12:07: get members
+29/06/2016 00:12:07: get forum
+29/06/2016 00:12:07: get forum
+29/06/2016 00:12:12: send private message
+29/06/2016 00:12:12: get new notifications
+29/06/2016 00:12:12: get new notifications
+29/06/2016 00:12:12: get members
+29/06/2016 00:12:12: get members
+29/06/2016 00:12:12: get sub forums
+29/06/2016 00:12:12: get sub forums
+29/06/2016 00:12:12: get admin
+29/06/2016 00:12:12: get admin
+29/06/2016 00:12:12: get members
+29/06/2016 00:12:12: get members
+29/06/2016 00:12:12: get forum
+29/06/2016 00:12:12: get forum
+29/06/2016 00:12:17: send private message
+29/06/2016 00:12:17: get new notifications
+29/06/2016 00:12:17: get new notifications
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get sub forums
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get admin
+29/06/2016 00:12:17: get sub forums
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get admin
+29/06/2016 00:12:17: get forum
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get forum
+29/06/2016 00:12:17: send private message
+29/06/2016 00:12:17: get new notifications
+29/06/2016 00:12:17: get new notifications
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get sub forums
+29/06/2016 00:12:17: get sub forums
+29/06/2016 00:12:17: get admin
+29/06/2016 00:12:17: get admin
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get members
+29/06/2016 00:12:17: get forum
+29/06/2016 00:12:17: get forum
+29/06/2016 00:12:21: send private message
+29/06/2016 00:12:22: get new notifications
+29/06/2016 00:12:22: get new notifications
+29/06/2016 00:12:22: get members
+29/06/2016 00:12:22: get members
+29/06/2016 00:12:22: get sub forums
+29/06/2016 00:12:22: get sub forums
+29/06/2016 00:12:22: get admin
+29/06/2016 00:12:22: get admin
+29/06/2016 00:12:22: get members
+29/06/2016 00:12:22: get members
+29/06/2016 00:12:22: get forum
+29/06/2016 00:12:22: get forum
+29/06/2016 00:12:26: get all notifications
+29/06/2016 00:13:07: get all notifications
+29/06/2016 00:13:33: get all notifications
+29/06/2016 00:13:40: get all notifications
+29/06/2016 00:13:50: get all notifications
+29/06/2016 00:14:01: get all notifications
+29/06/2016 00:14:02: get new notifications
+29/06/2016 00:14:02: get members
+29/06/2016 00:14:02: get sub forums
+29/06/2016 00:14:02: get admin
+29/06/2016 00:14:02: get members
+29/06/2016 00:14:02: get forum
+29/06/2016 00:14:03: get new notifications
+29/06/2016 00:14:03: get members
+29/06/2016 00:14:03: get sub forums
+29/06/2016 00:14:03: get admin
+29/06/2016 00:14:03: get members
+29/06/2016 00:14:03: get forum
+29/06/2016 00:14:03: get new notifications
+29/06/2016 00:14:03: get members
+29/06/2016 00:14:03: get sub forums
+29/06/2016 00:14:03: get admin
+29/06/2016 00:14:03: get members
+29/06/2016 00:14:03: get forum
+29/06/2016 00:14:04: get new notifications
+29/06/2016 00:14:04: get members
+29/06/2016 00:14:04: get sub forums
+29/06/2016 00:14:04: get admin
+29/06/2016 00:14:04: get members
+29/06/2016 00:14:04: get forum
