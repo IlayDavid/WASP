@@ -12,6 +12,7 @@ namespace Client.BusinessLogic
         //---------------------------Version 4 Use Cases Start------------------------------------
         public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
         {
+            _logger.writeToFile("restore password by answers");
             _cl.restorePasswordbyAnswers(userid, forum_id, answers, newPassword);
         }
         //---------------------------Version 4 Use Cases End------------------------------------
