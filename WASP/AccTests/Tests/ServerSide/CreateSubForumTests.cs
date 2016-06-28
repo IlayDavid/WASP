@@ -16,6 +16,7 @@ namespace AccTests.Tests
         private SuperUser _supervisor;
         private Forum _forum;
         private Admin _admin;
+        private string[] arr;
 
         //private Subforum _subforum;
 
@@ -38,7 +39,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest1()
         {
-            var moderator = _proj.subscribeToForum(11,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
+            var moderator = _proj.subscribeToForum(11,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id, arr, false);
             Subforum subforum = _proj.createSubForum(_admin.User.Id,_forum.Id, "subject2", "blah blah blah", moderator.Id, DateTime.Now.AddDays(100));
 
             Assert.IsNotNull(subforum);
@@ -56,8 +57,8 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreatesubforumTest2()
         {
-            var moderator1 = _proj.subscribeToForum(12,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id);
-            var moderator2 = _proj.subscribeToForum(13,"yaelp", "yael", "yaelp@post.bgu.ac.il", "yaelp123", _forum.Id);
+            var moderator1 = _proj.subscribeToForum(12,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", _forum.Id, arr, false);
+            var moderator2 = _proj.subscribeToForum(13,"yaelp", "yael", "yaelp@post.bgu.ac.il", "yaelp123", _forum.Id, arr, false);
             Subforum subforum1 = _proj.createSubForum(_admin.User.Id, _forum.Id, "subject1", "blah blah blah", moderator1.Id, DateTime.Now.AddDays(100));
             Subforum subforum2 = _proj.createSubForum(_admin.User.Id, _forum.Id, "subject2", "blah blah blah", moderator2.Id, DateTime.Now.AddDays(100));
 
@@ -78,7 +79,7 @@ namespace AccTests.Tests
 
                 var moderator = _proj.subscribeToForum(500+i,"moderator"+i.ToString(),
                         "moderator", "moderator"+i.ToString()+"@post.bgu.ac.il", 
-                        "moderator".ToString(), _forum.Id);
+                        "moderator".ToString(), _forum.Id, arr, false);
                 Subforum subforum = _proj.createSubForum(_admin.User.Id, _forum.Id, "subject" + i.ToString(), 
                         "blah blah blah", moderator.Id, DateTime.Now.AddDays(100));
 
@@ -100,8 +101,8 @@ namespace AccTests.Tests
             Forum forum = forumAndModerator.Item1;
             var admin = forumAndModerator.Item2;
 
-            var moderator1 = _proj.subscribeToForum(1782461,"bogo", "bigi", "baga@post.bgu.ac.il", "maor123", _forum.Id);
-            var moderator2 = _proj.subscribeToForum(988,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.Id);
+            var moderator1 = _proj.subscribeToForum(1782461,"bogo", "bigi", "baga@post.bgu.ac.il", "maor123", _forum.Id, arr, false);
+            var moderator2 = _proj.subscribeToForum(988,"maorh", "maor", "maorh@post.bgu.ac.il", "maor123", forum.Id, arr, false);
             _proj.login(moderator1.Username, moderator1.Password, _forum.Id);
             _proj.login(moderator2.Username, moderator2.Password, forum.Id);
             // lacking of informations 

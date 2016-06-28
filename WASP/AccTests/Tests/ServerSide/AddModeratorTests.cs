@@ -20,6 +20,7 @@ namespace AccTests.Tests
         private Subforum _subforum;
         private User _moderator;
         private User _member1;
+        private string[] arr;
 
     
         [TestInitialize]
@@ -41,7 +42,7 @@ namespace AccTests.Tests
             _proj.login(_moderator.Username, _moderator.Password, _forum.Id);
 
 
-            _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.Id);
+            _member1 = _proj.subscribeToForum(7,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.Id, arr, false);
             _proj.login(_member1.Username, _member1.Password, _forum.Id);
         }
 
