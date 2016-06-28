@@ -92,7 +92,7 @@ namespace Client.CommunicationLayer
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "," + "\"auth\":\"" + session + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/login/");
-            User ans= parser.parseStringToUser(res, true, this);
+            User ans = parser.parseStringToUser(res, true, this);
             NotifConnection ncon = new NotifConnection(_auth, this);
             notifThread = new Thread(ncon.Run);
             notifThread.Start();
@@ -103,7 +103,7 @@ namespace Client.CommunicationLayer
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
-            SuperUser ans =parser.parseStringToSuperUser(res, this);
+            SuperUser ans = parser.parseStringToSuperUser(res, this);
             return ans;
         }
         public void logout()
@@ -114,7 +114,7 @@ namespace Client.CommunicationLayer
             string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/logout/");
 
-        } 
+        }
         public User loginBySession(string session)
         {
             //username, id, auth, password, email, name
@@ -219,11 +219,11 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
-        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
         {
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            dict.Add("username", username);
+            dict.Add("userid", userid);
             dict.Add("answers", answers);
             dict.Add("forumid", forum_id);
             dict.Add("newpassword", newPassword);
@@ -239,7 +239,7 @@ namespace Client.CommunicationLayer
             dict.Add("answers", answers);
             string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/addAnswers/");
-            
+
         }
 
         public Admin getAdmin(int AdminID)

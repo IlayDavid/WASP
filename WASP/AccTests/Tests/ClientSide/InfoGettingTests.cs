@@ -34,7 +34,7 @@ namespace AccTests.Tests.ServerSide
             _supervisor = _proj.loginSU(_supervisor.userName, _supervisor.password);
             for (int i = 0; i < LOOPS; i++)
             {
-                var forum = _proj.createForum( "forum_" + i, "the " + i + "th forum",100, "admin_" + i,
+                var forum = _proj.createForum("forum_" + i, "the " + i + "th forum", 100, "admin_" + i,
                     "admin" + i,
                     "admin" + i + "@gmail.com", "admin1234", new Policy(5, 5, false, 5, 500));
                 var admin = _proj.login("admin_" + i, "admin1234", forum.id, "");
@@ -43,9 +43,9 @@ namespace AccTests.Tests.ServerSide
                 _forums.Add(forum);
                 _subforums[forum] = new List<Subforum>();
                 _members[forum] = new List<User>();
-                var member = _proj.subscribeToForum(110+i,"mod_" + i + "_1", "mod" + i + "_1", "mod" + i + "_1@gmail.com",
+                var member = _proj.subscribeToForum(110 + i, "mod_" + i + "_1", "mod" + i + "_1", "mod" + i + "_1@gmail.com",
                     "mod1234",
-                    forum.id);
+                    forum.id, new List<string>(), false);
                 _members[forum].Add(member);
                 var subforum = _proj.createSubForum("subforum_" + i, "the " + i + "th subforum", member.id,
                     DateTime.MaxValue);
@@ -53,16 +53,16 @@ namespace AccTests.Tests.ServerSide
                 _posts[subforum] = new List<Post>();
                 _subforums[forum].Add(subforum);
                 _moderators[subforum].Add(member);
-                member = _proj.subscribeToForum(120+i,"mod_" + i + "_2", "mod" + i + "_2", "mod" + i + "_2@gmail.com",
+                member = _proj.subscribeToForum(120 + i, "mod_" + i + "_2", "mod" + i + "_2", "mod" + i + "_2@gmail.com",
                     "mod1234",
-                    forum.id);
+                    forum.id, new List<string>(), false);
                 _members[forum].Add(member);
                 _proj.addModerator(member.id, subforum.id, DateTime.MaxValue);
                 _moderators[subforum].Add(member);
                 var prevMember = member;
-                var post = _proj.createThread("title", "first message of forum_" + i,subforum.id);
+                var post = _proj.createThread("title", "first message of forum_" + i, subforum.id);
                 _posts[subforum].Add(post);
-                _postsByUser[member.id]=new List<Post>();
+                _postsByUser[member.id] = new List<Post>();
                 _postsByUser[member.id].Add(post);
                 for (int j = 0; j < LOOPS; j++)
                 {
@@ -84,7 +84,7 @@ namespace AccTests.Tests.ServerSide
         /// </summary>
         public void sameUser()
         {
-            Assert.IsTrue(_proj.membersInDifferentForums().Count==LOOPS);
+            Assert.IsTrue(_proj.membersInDifferentForums().Count == LOOPS);
         }
         /// <summary>
         /// check if we get the correct number of posts
@@ -93,7 +93,7 @@ namespace AccTests.Tests.ServerSide
         public void numberOfPosts()
         {
             var numPosts = _proj.subForumTotalMessages(_subforums[_forums[0]][0].id);
-            Assert.IsTrue(numPosts == LOOPS*LOOPS);
+            Assert.IsTrue(numPosts == LOOPS * LOOPS);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace AccTests.Tests.ServerSide
                     _posts[_subforums[_forums[0]][0]].Where((x) => x.author.id == _members[_forums[0]][i].id);
                 foreach (var post in posts)
                 {
-                    Assert.IsTrue(postsByMember.Any((x) => (x).id==post.id));
+                    Assert.IsTrue(postsByMember.Any((x) => (x).id == post.id));
                 }
             }
         }
@@ -118,17 +118,17 @@ namespace AccTests.Tests.ServerSide
         public void moderatorReport()
         {
             var reports = _proj.moderatorReport();
-            
+
             foreach (var mod in reports.ModeratorInsubForum)
             {
-                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Key]].Any((x)=>x.id==mod.Value));
+                Assert.IsTrue(_moderators[_subforums[_forums[0]][mod.Key]].Any((x) => x.id == mod.Value));
             }
             var subforums = _subforums[_forums[0]];
-            IEnumerable<User> modlist=new List<User>();
+            IEnumerable<User> modlist = new List<User>();
             modlist = subforums.Aggregate(modlist, (current, subforum) => current.Concat(_moderators[subforum]));
             foreach (var moderator in reports.ModeratorInsubForum)
             {
-                Assert.IsTrue(modlist.Any((x)=>x.id==moderator.Key));
+                Assert.IsTrue(modlist.Any((x) => x.id == moderator.Key));
             }
 
             foreach (var mod in reports.moderatorsPosts)
@@ -136,7 +136,7 @@ namespace AccTests.Tests.ServerSide
                 var posts = _proj.postsByMember(mod.Key);
                 foreach (var post in posts)
                 {
-                    Assert.IsTrue(_postsByUser[mod.Key].Any((x)=>x.id==post.id));
+                    Assert.IsTrue(_postsByUser[mod.Key].Any((x) => x.id == post.id));
                 }
             }
         }

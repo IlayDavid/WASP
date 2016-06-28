@@ -38,7 +38,7 @@ namespace AccTests.Tests
             _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
 
 
-            _moderator2 = _proj.subscribeToForum(16,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id);
+            _moderator2 = _proj.subscribeToForum(16, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, new List<string>(), false);
             _proj.addModerator(_moderator2.id, _subforum.id, DateTime.MaxValue);
             _proj.login(_moderator2.userName, _moderator2.password, _forum.id, "");
         }
@@ -49,9 +49,9 @@ namespace AccTests.Tests
         public void deleteModerator1()
         {
             var check = _proj.deleteModerator(_moderator.id, _subforum.id);
-            Assert.IsTrue(check>=0);
-            var numMods = _proj.getModerators( _subforum.id);
-            Assert.IsTrue(numMods.Count==1);
+            Assert.IsTrue(check >= 0);
+            var numMods = _proj.getModerators(_subforum.id);
+            Assert.IsTrue(numMods.Count == 1);
             var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
             Assert.IsNotNull(firedMod);
         }
@@ -63,11 +63,11 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator2()
         {
-            var newAdminUser = _proj.subscribeToForum(17,"admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.id);
+            var newAdminUser = _proj.subscribeToForum(17, "admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.id, new List<string>(), false);
             _proj.addAdmin(newAdminUser.id);
             var check = _proj.deleteModerator(_moderator.id, _subforum.id);
-                Assert.IsTrue(check<0);
-            
+            Assert.IsTrue(check < 0);
+
         }
 
 
@@ -77,11 +77,11 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator3()
         {
-            var check = _proj.deleteModerator( _moderator.id, _subforum.id);
+            var check = _proj.deleteModerator(_moderator.id, _subforum.id);
             Assert.IsTrue(check >= 0);
-            check = _proj.deleteModerator( _moderator2.id, _subforum.id);
+            check = _proj.deleteModerator(_moderator2.id, _subforum.id);
             Assert.IsTrue(check < 0);
-            var numMods = _proj.getModerators( _subforum.id);
+            var numMods = _proj.getModerators(_subforum.id);
             Assert.IsTrue(numMods.Count == 1);
             var firedMod = _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
             Assert.IsNotNull(firedMod);

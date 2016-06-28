@@ -23,7 +23,7 @@ namespace Client.BusinessLogic
         * Return: 0 - if not initialize, 1 - otherwise.
         */
         int isInitialize();
-        
+
         /*
          * Pre-conditions: super user is loged-in 
          * Purpose: create new forum which, with details of the admin.
@@ -43,7 +43,7 @@ namespace Client.BusinessLogic
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online);
 
         /*
          * Pre-conditions: user is loged-in 
@@ -59,7 +59,7 @@ namespace Client.BusinessLogic
         * Return: post - on succsess, NULL - in fail.
         */
         Post createReplyPost(string content, int replyToPost_ID);
-        
+
 
         /* 
         * Pre-conditions: Admin is loged-in and he is admin of the forum. 
@@ -123,7 +123,7 @@ namespace Client.BusinessLogic
         * Return: number >= 0 if success        
         */
         int deleteModerator(int moderatorID, int subForumID);
-        
+
         //1: interactivity. forum should push new notifications to the users. regardless, the user should be able to get the notifications.
         List<Notification> getAllNotificationses();
         List<Notification> getNewNotificationses();
@@ -159,17 +159,17 @@ namespace Client.BusinessLogic
 
         //---------------------------Version 3 Use Cases End------------------------------------
 
-        
-            
+
+
         //---------------------------Version 4 Use Cases Start------------------------------------
 
         //check if the answers match the answers specified by the user in registration.
         //return: none, throw exeption specified the wrong answer.
-        void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword);
-        
+        void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword);
+
         //immdietally after the registration. this is part of the registration
         void addAnswers(int user_id, List<string> answers);
-        
+
         //---------------------------Version 4 Use Cases End------------------------------------
 
 

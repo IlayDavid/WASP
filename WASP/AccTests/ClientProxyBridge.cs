@@ -211,14 +211,14 @@ namespace AccTests
             return proj.postsByMember(userID);
         }
 
-        public string restorePasswordbyAnswer(string username, string answer, string newPassword)
+        public string restorePasswordbyAnswer(int userid, string answer, string newPassword)
         {
-            return proj.restorePasswordbyAnswer(username, answer, newPassword);
+            return proj.restorePasswordbyAnswer("", answer, newPassword);
         }
 
-        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
         {
-            proj.restorePasswordbyAnswers(username, forum_id, answers, newPassword);
+            proj.restorePasswordbyAnswers(userid, forum_id, answers, newPassword);
         }
 
         public int sendMessage(int targetUserID, string message)
@@ -236,9 +236,9 @@ namespace AccTests
             return proj.subForumTotalMessages(subForumID);
         }
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online)
         {
-            return proj.subscribeToForum(id, userName, name, email, pass, targetForumID);
+            return proj.subscribeToForum(id, userName, name, email, pass, targetForumID, answers, online);
         }
 
         public int totalForums()
