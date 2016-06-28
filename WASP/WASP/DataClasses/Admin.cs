@@ -17,6 +17,11 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
 
+        public void initialize()
+        {
+            Object obj = this.AppointedMods;
+        }
+
         public static Admin Get(int adminId, int forumId)
         {
             if (Settings.UseCache())

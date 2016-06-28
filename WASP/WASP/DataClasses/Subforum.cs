@@ -11,6 +11,12 @@ namespace WASP.DataClasses
         private Dictionary<int, Post> threads = null;
         private Forum forum;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
+        public void initialize()
+        {
+            Object obj = this.Moderators;
+            obj = this.Threads;
+        }
+
         public static Subforum Get(int id)
         {
             if (Settings.UseCache())
