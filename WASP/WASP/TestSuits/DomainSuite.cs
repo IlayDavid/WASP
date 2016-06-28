@@ -14,7 +14,7 @@ namespace WASP.TestSuits
     {
         private BLFacade BL = new BLFacade();
         private DALSQL dal = new DALSQL();
-
+        string[] strarr = new string[2];
         [TestInitialize]
         public void SetUp()
         {
@@ -37,7 +37,7 @@ namespace WASP.TestSuits
             // arrange
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(2055, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(2055, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             // act
             Forum recivedForum = BL.getForum(forum.Id);
             bool isAdmin = recivedForum.IsAdmin(100);
@@ -57,7 +57,7 @@ namespace WASP.TestSuits
             // arrange
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
@@ -78,8 +78,8 @@ namespace WASP.TestSuits
             // arrange
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(88, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User user2 = BL.subscribeToForum(99, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(88, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user2 = BL.subscribeToForum(99, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             Post reply = BL.createReplyPost(user2.Id, forum.Id, "content", post.Id);
@@ -98,7 +98,7 @@ namespace WASP.TestSuits
             // arrange
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             // Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
@@ -115,10 +115,11 @@ namespace WASP.TestSuits
         public void checkModerator()
         {
             // arrange
+            
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
            // Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
@@ -138,8 +139,8 @@ namespace WASP.TestSuits
             // arrange
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, DateTime.Today);
             //Post post = BL.createThread(user.Id, forum.Id, "title", "content", sf.Id);
             // act
@@ -174,7 +175,7 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             User userlogged = BL.login("edan", "123", forum.Id);
             Assert.IsNotNull(userlogged, "user logged succ");
         }
@@ -198,8 +199,8 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);
             BL.addModerator(100, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
@@ -217,8 +218,8 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(0, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(0, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr,true);
+            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr,true);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);
             BL.addModerator(100, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
@@ -232,8 +233,8 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
+            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id,strarr, true);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);
             BL.addModerator(user.Id, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
@@ -248,9 +249,9 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id);
-            User user3 = BL.subscribeToForum(-1, "noam", "barkay", "noam@post.bgu.ac.il", "123", forum.Id);
+            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user3 = BL.subscribeToForum(-1, "noam", "barkay", "noam@post.bgu.ac.il", "123", forum.Id, strarr, true);
             user1.AddFriend(user2);
             user1.AddFriend(user3); 
             Assert.AreEqual(2, user1.GetAllFriends().Length, "2 friends added correctly");
@@ -262,8 +263,8 @@ namespace WASP.TestSuits
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id);
-            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id);
+            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
             BL.sendMessage(user1.Id, forum.Id, user2.Id, "user1 sends msg to user 2");
             Assert.AreEqual(1, user2.GetNewNotifications().Length,"message recived");
             Assert.AreEqual(0, user1.GetNewNotifications().Length, "no new messages");

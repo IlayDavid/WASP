@@ -91,6 +91,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -157,6 +158,7 @@
     <Compile Include="DataClasses\UnitTests\PostSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\SubForumSuitTests.cs" />
     <Compile Include="DataClasses\UnitTests\SuperUserSuitTests.cs" />
+    <Compile Include="DataClasses\UnitTests\ThreadsTests.cs" />
     <Compile Include="DataClasses\UnitTests\UserSuitTests.cs" />
     <Compile Include="DataClasses\User.cs" />
     <Compile Include="Domain\BLFacade.cs" />
@@ -180,7 +182,6 @@
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Exceptions\WaspException.cs" />
     <Compile Include="LoggerPC\Logger.cs" />
-    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

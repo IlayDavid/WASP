@@ -51,14 +51,11 @@ namespace Client.GUI.MainWindows
             lstMessages.Items.Clear();
             foreach (Notification msg in Session.messages)
             {
-                //will not hold anyway with the current implamantation
                 if (msg.sourceID == Session.user.id && msg.targetID == selectedUser.id)
                 {
                     ListBoxItem item = new ListBoxItem() { Content = "YOU: " + msg.message };
                     lstMessages.Items.Add(item);
                 }
-                //
-                MessageBox.Show("src ID = " + msg.sourceID + "   dst ID = "+ msg.targetID);
                 if (msg.sourceID == selectedUser.id && msg.targetID == Session.user.id)
                 {
                     ListBoxItem item = new ListBoxItem() { Content = selectedUser.userName + ": " + msg.message };
