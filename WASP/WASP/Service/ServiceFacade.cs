@@ -92,7 +92,7 @@ namespace WASP.Service
 
         public static string subscribeToForum(Dictionary<string, dynamic> data)
         {
-            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"]);
+            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"], data["answers"], data["wantnotifications"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("username", user.Username);
             result.Add("id", user.Id);
@@ -357,6 +357,7 @@ namespace WASP.Service
                 if (key == null || !user.Secret.Equals(key))
                     throw new WASP.Exceptions.LoginException("Secret key required for login.");
             }
+            user.OnlineCount++;
             LoginPair pair = new LoginPair(user.Id, user.Forum.Id);
             loggedIn.Add(user.Secret, pair);
 
@@ -634,6 +635,31 @@ namespace WASP.Service
         {
             LoginPair pair = loggedIn[data["auth"]];
             return bl.addFriend(pair.UserId, pair.ForumId, data["friend"]).ToString();
+        }
+
+        public static string restorePasswordByAnswers(Dictionary<string, dynamic> data)
+        {
+            bl.restorePasswordByAnswers(data["userid"], data["forumid"], data["answers"], data["newpassword"]);
+
+            return 1.ToString();
+        }
+
+        public static string logout(Dictionary<string, dynamic> data)
+        {
+            LoginPair pair = loggedIn[data["auth"]];
+            if (pair.ForumId == -1)
+            {
+                SuperUser user = SuperUser.Get(pair.UserId);
+                user.Secret = "";
+            }
+            else
+            {
+                User user = User.Get(pair.UserId, pair.ForumId);
+                user.OnlineCount--;
+                if (user.OnlineCount == 0)
+                    user.Secret = "";
+            }
+            return 1.ToString();
         }
 
         public static string GetWebFile(Dictionary<string, dynamic> data)

@@ -58,8 +58,8 @@ namespace WASP.Domain
             // create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, policy);
             newForum = newForum.Create();
-
-            User user = new User(adminID, adminName, adminUserName, email, pass, newForum);
+            string[] answers = {"", ""};
+            User user = new User(adminID, adminName, adminUserName, email, pass, newForum, answers);
             // TODO: need to check if user and forum are fine with policy
             Admin admin = new Admin(user, newForum);
             try
@@ -104,13 +104,13 @@ namespace WASP.Domain
             return 1;
         }
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, string[] answers, bool wantNotifications=true)
         {
             // Should throw exception if forum not found.
             Forum forum = Forum.Get(targetForumID);
 
             // Attempt to add user.
-            User user = new User(id, name, userName, email, pass, forum).Create();
+            User user = new User(id, name, userName, email, pass, forum, answers, wantNotifications).Create();
             forum.AddMember(user);
             return user;
         }
@@ -458,6 +458,16 @@ namespace WASP.Domain
 
             dal.AddFriend(user, friend);
             return 1;
+        }
+        public int restorePasswordByAnswers(int userID, int forumID, string[] answers, string newPassword)
+        {
+            User user = User.Get(userID, forumID);
+            if (!(answers[0].Equals(user.Answers[0]) && answers[1].Equals(user.Answers[1])))
+                throw new PolicyException("Incorrect security answers");
+            user.Password = newPassword;
+            user.Update();
+            return 1;
+                
         }
     }
 }
