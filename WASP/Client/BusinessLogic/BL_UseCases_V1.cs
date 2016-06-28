@@ -65,13 +65,13 @@ namespace Client.BusinessLogic
             return _cl.defineForumPolicy(policy);
         }  
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online)
         {
             string errorMsg = isUserValid(name, userName, id, email, pass);
             if (targetForumID < 0) throw new Exception("ERROR: ID is illegal");
             if (errorMsg != null) throw new Exception(errorMsg);
 
-            return _cl.subscribeToForum(id, userName, name, email, sha256_hash(pass), targetForumID);
+            return _cl.subscribeToForum(id, userName, name, email, sha256_hash(pass), targetForumID, answers, online);
         }
 
         public Post createThread(string title, string content, int subForumID)

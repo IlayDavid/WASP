@@ -166,10 +166,7 @@ namespace Client.BusinessLogic
         //check if the answers match the answers specified by the user in registration.
         //return: none, throw exeption specified the wrong answer.
         void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword);
-
-        //immdietally after the registration. this is part of the registration
-        void addAnswers(int user_id, List<string> answers);
-
+       
         //---------------------------Version 4 Use Cases End------------------------------------
 
 

@@ -34,16 +34,17 @@ namespace Client.GUI.MainWindows
         {
             string answer = txtAnswer.Text;
             List<string> answers = new List<string> { answer };
-            string username = txtUserName.Text;
-            string newpassword = txtNewpassword.Text;
-            if (answer.Equals("") || newpassword.Equals(""))
-            {
-                MessageBox.Show("Please enter answer and new password");
-                return;
-            }
             try
             {
-                Session.bl.restorePasswordbyAnswers(username, Session.forum.id,answers, newpassword);
+
+                int user_id = int.Parse(txtUserName.Text);
+                string newpassword = txtNewpassword.Text;
+                if (answer.Equals("") || newpassword.Equals(""))
+                {
+                    MessageBox.Show("Please enter answer and new password");
+                    return;
+                }
+                Session.bl.restorePasswordbyAnswers(user_id, Session.forum.id, answers, newpassword);
                 MessageBox.Show("Your new password is: " + newpassword, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch { }
