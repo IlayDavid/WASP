@@ -199,6 +199,5 @@ C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\System.Net.Http.For
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\System.Web.Http.xml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\System.Web.Http.Owin.xml
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\bin\Debug\System.Web.Http.SelfHost.xml
-C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.csprojResolveAssemblyReference.cache
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.exe
 C:\Users\amitay140\Documents\GitHub\WASP\WASP\WASP\obj\Debug\WASP.pdb

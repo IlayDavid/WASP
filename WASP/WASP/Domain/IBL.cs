@@ -49,7 +49,7 @@ namespace WASP.Domain
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, string[] answers, bool wantNotifications=true);
 
         /*
          * Pre-conditions: member is loged-in 
@@ -223,5 +223,6 @@ namespace WASP.Domain
         User[] getFriends(int userID, int forumID);
 
         int addFriend(int userID, int forumID, int friendID);
+        int restorePasswordByAnswers(int userID, int forumID, string[] answers, string newPassword);
     }
 }

@@ -66,7 +66,7 @@ namespace WASP.DataClasses
             return dal.DeleteUser(this.Id, this.Forum.Id);
         }
 
-        public User(int id, string name, string username, string email, string password, Forum forum)
+        public User(int id, string name, string username, string email, string password, Forum forum, bool wantNotifications = true)
         {
             this.Id = id;
             this.Name = name;
@@ -77,6 +77,24 @@ namespace WASP.DataClasses
             this.forum = forum;
             this.PasswordChangeDate = DateTime.Now;
             this.StartDate = DateTime.Now;
+            this.answers[0] = "";
+            this.answers[1] = "";
+            this.WantNotifications = true;
+            this.OnlineCount = 0;
+            this.Secret = "";
+        }
+        public User(int id, string name, string username, string email, string password, Forum forum, string[] answers, bool wantNotifications = true)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.posts = null;
+            this.forum = forum;
+            this.PasswordChangeDate = DateTime.Now;
+            this.StartDate = DateTime.Now;
+            this.answers = answers;
             this.WantNotifications = true;
             this.OnlineCount = 0;
             this.Secret = "";
