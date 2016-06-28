@@ -16,6 +16,7 @@ namespace AccTests.Tests
         private WASPClientBridge _proj;
         private Forum _forum;
         private Admin _admin;
+        private string adminpass = "david123";
 
         [TestInitialize]     //before each Test
         public void SetUp()
@@ -27,7 +28,7 @@ namespace AccTests.Tests
             _forum = forumAndMember.Item1;
             _admin = forumAndMember.Item2;
 
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id, "");
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
 
         }
 
@@ -43,9 +44,7 @@ namespace AccTests.Tests
             Assert.IsNotNull(isMem);
             Assert.AreEqual(members.Count, 2);
             Assert.IsTrue(members[0].id == isMem.id || members[1].id == isMem.id);
-            _proj.logout();
             Assert.IsNotNull(_proj.login("mosheB", "moshe123", _forum.id, ""));
-            _proj.logout();
         }
 
         /*

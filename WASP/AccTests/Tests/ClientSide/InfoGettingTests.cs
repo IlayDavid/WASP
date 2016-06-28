@@ -69,7 +69,7 @@ namespace AccTests.Tests.ServerSide
                     prevMember = member;
                     member = _proj.subscribeToForum(130 + j + i * 10, "user_" + i + "_" + j, "user" + i + "_" + j,
                         "user" + i + "_" + j + "@gmail.com", "user1234",
-                        forum.id);
+                        forum.id, new List<string>(), false);
                     _members[forum].Add(member);
                     post = _proj.createReplyPost("this is reply number " + i, post.id);
                     _postsByUser[member.id] = new List<Post>();

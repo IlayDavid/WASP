@@ -28,6 +28,7 @@ namespace AccTests.Tests
                                         "ilan123", forum.id, new List<string>(), false);
             Subforum subforum = proj.createSubForum("sub1", "blah", 2, DateTime.Now.AddDays(100));
             var moderator = proj.login(user.userName, "ilan123", forum.id, "");
+            //proj.logout();
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 
@@ -52,6 +53,7 @@ namespace AccTests.Tests
                                         "amit123", forum.id, new List<string>(), false);
             Subforum subforum = proj.createSubForum("subbbbb2", "blah", 5, DateTime.Now.AddDays(100));
             var moderator = proj.login(user.userName, user.password, forum.id, "");
+            //proj.logout();
             return new Tuple<Subforum, User>(subforum, moderator);
         }
 
