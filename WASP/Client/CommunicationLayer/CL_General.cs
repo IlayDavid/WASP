@@ -219,11 +219,11 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
-        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
         {
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            dict.Add("username", username);
+            dict.Add("userid", userid);
             dict.Add("answers", answers);
             dict.Add("forumid", forum_id);
             dict.Add("newpassword", newPassword);

@@ -95,13 +95,22 @@ namespace Client.CommunicationLayer
         }
 
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online)
         {   //username, id, password, name, email
-            string json = "{\"userid\":" + id + "," + "\"password\":\"" + pass + "\"," + "\"username\":\"" + userName
-                + "\"," + "\"email\":\"" + email + "\"," + "\"name\":\"" + name
-                + "\"," + "\"forumid\":" + targetForumID + "}";
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("userid", id);
+            dict.Add("password", pass);
+            dict.Add("username", userName);
+            dict.Add("email", email);
+            dict.Add("name", name);
+            dict.Add("forumid", targetForumID);
+            dict.Add("answers", answers);
+            dict.Add("wantnotifications", online);
+            string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/subscribeToForum/");
             return parser.parseStringToUser(res, false, this);
+
         }
 
         public Post createThread(string title, string content, int subForumID)

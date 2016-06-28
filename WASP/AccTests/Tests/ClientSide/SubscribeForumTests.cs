@@ -37,7 +37,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest1()
         {
-            var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id);
+            var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id, new List<string>(), false);
             var members = _proj.getMembers(_forum.id);
 
             Assert.IsNotNull(isMem);
@@ -54,16 +54,16 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest2()
         {
-            var isMem = _proj.subscribeToForum(57,"", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id);
+            var isMem = _proj.subscribeToForum(57,"", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id, new List<string>(), false);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(58,"mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id);
+            isMem = _proj.subscribeToForum(58,"mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum.id, new List<string>(), false);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(59,"mosheB", "moshe", "", "moshe123", _forum.id);
+            isMem = _proj.subscribeToForum(59,"mosheB", "moshe", "", "moshe123", _forum.id, new List<string>(), false);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1);
+            isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1, new List<string>(), false);
             Assert.IsNull(isMem);
             _proj.logout();
         }

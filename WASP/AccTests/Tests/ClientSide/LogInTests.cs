@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.Exceptions;
 using Client.DataClasses;
+using System.Collections.Generic;
 
 namespace AccTests.Tests
 {
@@ -32,8 +33,8 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id);
-            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
+            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id, new List<string>(), false);
+            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id, new List<string>(), false);
 
             _proj.login(_admin.user.userName, adminpass, _forum.id,"");
             _proj.login(_member1.userName, mempass, _forum.id, "");

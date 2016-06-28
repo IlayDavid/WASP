@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.Exceptions;
 using Client.DataClasses;
+using System.Collections.Generic;
 
 namespace AccTests.Tests
 {
@@ -48,7 +49,7 @@ namespace AccTests.Tests
             _proj.login(_moderator.userName, modpass, _forum.id, "");
 
 
-            _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id); //password is ilan123
+            _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, new List<string>(), false); //password is ilan123
             _proj.login(_member1.userName, mempass, _forum.id, "");
         }
 

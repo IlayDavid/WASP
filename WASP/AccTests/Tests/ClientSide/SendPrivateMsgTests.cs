@@ -2,6 +2,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Client.DataClasses;
+using System.Collections.Generic;
 
 namespace AccTests.Tests
 {
@@ -28,8 +29,8 @@ namespace AccTests.Tests
             var forumAndMember = ClientFunctions.CreateSpecForum(_proj, _supervisor);
 
             _forum = forumAndMember.Item1;
-            _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.id);
-            _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
+            _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.id, new List<string>(), false);
+            _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id, new List<string>(), false);
 
             _proj.login(_member1.userName, _member1.password, _forum.id,"");
             _proj.logout();

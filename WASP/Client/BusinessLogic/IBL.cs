@@ -43,7 +43,7 @@ namespace Client.BusinessLogic
          * Checking: forum policy on user details.
          * Return: member - on succsess, NULL - in fail. confirmEmail should be done.       
          */
-        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID);
+        User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online);
 
         /*
          * Pre-conditions: user is loged-in 
@@ -165,7 +165,7 @@ namespace Client.BusinessLogic
 
         //check if the answers match the answers specified by the user in registration.
         //return: none, throw exeption specified the wrong answer.
-        void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword);
+        void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword);
         
         //immdietally after the registration. this is part of the registration
         void addAnswers(int user_id, List<string> answers);
