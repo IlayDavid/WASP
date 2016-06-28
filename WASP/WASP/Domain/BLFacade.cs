@@ -58,10 +58,13 @@ namespace WASP.Domain
             // create new forum with admin in it, create user for admin
             Forum newForum = new Forum(-1, forumName, description, policy);
             newForum = newForum.Create();
+            newForum.initialize();
+
             string[] answers = {"", ""};
-            User user = new User(adminID, adminName, adminUserName, email, pass, newForum, answers);
-            // TODO: need to check if user and forum are fine with policy
-            Admin admin = new Admin(user, newForum);
+            User user = new User(adminID, adminName, adminUserName, email, pass, newForum, answers).Create();
+            user.initialize();
+            Admin admin = new Admin(user, newForum).Create();
+            admin.initialize();
             try
             {
                 newForum.AddMember(user);
@@ -72,10 +75,8 @@ namespace WASP.Domain
                 newForum.Delete();
                 return null;
             }
-            admin.User = user.Create();
-            admin.Create();
 
-            return Forum.Get(newForum.Id);
+            return newForum;
         }
 
         public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline, bool superUser = false)
@@ -111,6 +112,7 @@ namespace WASP.Domain
 
             // Attempt to add user.
             User user = new User(id, name, userName, email, pass, forum, answers, wantNotifications).Create();
+            user.initialize();
             forum.AddMember(user);
             return user;
         }
@@ -123,6 +125,7 @@ namespace WASP.Domain
             Subforum sf = Subforum.Get(subForumID);
 
             Post originalPost = new Post(-1, title, content, author, DateTime.Now, null, sf, DateTime.Now).Create();
+            originalPost.initialize();
             // Should throw exception if post doesn't follow forum policy.
             sf.AddThread(originalPost);
             author.AddPost(originalPost);
@@ -136,7 +139,7 @@ namespace WASP.Domain
             User author = User.Get(userID, forumID);
             Post post = Post.Get(replyToPost_ID);
             Post reply = new Post(-1,null, content, author, DateTime.Now, post, post.Subforum, DateTime.Now).Create();
-
+            reply.initialize();
             post.AddReply(reply);
             author.AddPost(reply);
 
@@ -152,8 +155,10 @@ namespace WASP.Domain
             Subforum sf = new Subforum(-1, name, description, forum);
             Moderator mod = new Moderator(user, term, sf, admin);
             forum.Policy.Validate(mod);
-            mod = mod.Create();
             sf = sf.Create();
+            sf.initialize();
+            mod.SubForum = sf;
+            mod = mod.Create();
             sf.AddModerator(mod);
             forum.AddSubForum(sf);
             return sf;
@@ -237,6 +242,8 @@ namespace WASP.Domain
             if (mod.Appointer.Id != admin.Id)
                 throw new UnauthorizedDeleteModerator(userID, moderatorID);
             mod.Delete();
+            mod.SubForum.RemoveModerator(mod.Id);
+            admin.DeleteAppointedMod(mod.Id);
             return 1;
         }
 
@@ -256,6 +263,7 @@ namespace WASP.Domain
 
             User user = User.Get(adminId, forumID);
             Admin toBeAdmin = new Admin(user, forum).Create();
+            toBeAdmin.initialize();
             forum.AddAdmin(toBeAdmin);
 
             return toBeAdmin;

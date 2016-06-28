@@ -347,19 +347,28 @@ namespace WASP.Service
 
         public static string login(Dictionary<string, dynamic> data)
         {
+            dynamic key = null;
             User user = bl.login(data["username"], data["password"], data["forumid"]);
             if(user.Secret.Equals(""))
                 user.Secret = GenerateRandomHash();
             else
             {
-                dynamic key;
                 data.TryGetValue("auth", out key);
                 if (key == null || !user.Secret.Equals(key))
                     throw new WASP.Exceptions.LoginException("Secret key required for login.");
             }
+
             user.OnlineCount++;
-            LoginPair pair = new LoginPair(user.Id, user.Forum.Id);
-            loggedIn.Add(user.Secret, pair);
+            LoginPair pair;
+            if (key == null)
+            {
+                pair = new LoginPair(user.Id, user.Forum.Id);
+                loggedIn.Add(user.Secret, pair);
+            }
+            else
+            {
+                pair = loggedIn[user.Secret];
+            }
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("id", user.Id);
@@ -374,18 +383,26 @@ namespace WASP.Service
 
         public static string loginSU(Dictionary<string, dynamic> data)
         {
+            dynamic key = null;
             SuperUser su = bl.loginSU(data["username"], data["password"]);
             if (su.Secret.Equals(""))
                 su.Secret = GenerateRandomHash();
             else
             {
-                dynamic key;
                 data.TryGetValue("auth", out key);
                 if (key == null || !su.Secret.Equals(key))
                     throw new WASP.Exceptions.LoginException("Secret key required for login.");
             }
-            LoginPair pair = new LoginPair(su.Id);
-            loggedIn.Add(su.Secret, pair);
+            LoginPair pair;
+            if (key == null)
+            {
+                pair = new LoginPair(su.Id, -1);
+                loggedIn.Add(su.Secret, pair);
+            }
+            else
+            {
+                pair = loggedIn[su.Secret];
+            }
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("auth", su.Secret);

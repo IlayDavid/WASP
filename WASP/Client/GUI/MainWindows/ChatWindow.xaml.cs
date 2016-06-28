@@ -35,7 +35,7 @@ namespace Client.GUI.MainWindows
                 lstMembers.SelectedIndex = 0;
 
             lstMembers.SelectionChanged += lstMembers_SelectionChanged;
-            Session.LoadMessages();
+            lstMembers_SelectionChanged(null, null);
         }
 
         private void lstMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,7 +47,7 @@ namespace Client.GUI.MainWindows
             }
             User selectedUser = (User)((ListBoxItem)lstMembers.SelectedItem).DataContext;
 
-            Session.AddNewNotifications();
+            Session.LoadMessages();
             lstMessages.Items.Clear();
             foreach (Notification msg in Session.messages)
             {
@@ -57,11 +57,11 @@ namespace Client.GUI.MainWindows
                     ListBoxItem item = new ListBoxItem() { Content = "YOU: " + msg.message };
                     lstMessages.Items.Add(item);
                 }
-                //
-                MessageBox.Show("src ID = " + msg.sourceID + "   dst ID = "+ msg.targetID);
+                
+                //MessageBox.Show("src ID = " + msg.sourceID + "   dst ID = "+ msg.targetID);
                 if (msg.sourceID == selectedUser.id && msg.targetID == Session.user.id)
                 {
-                    ListBoxItem item = new ListBoxItem() { Content = selectedUser.userName + ": " + msg.message };
+                    ListBoxItem item = new ListBoxItem() { Content = ": " + msg.message };
                     lstMessages.Items.Add(item);
                 }
             }

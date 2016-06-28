@@ -64,10 +64,12 @@ namespace WASP
             myDal.Clean();
             ServiceFacade.webInitialize();
             Policy policy = new Policy();
-           
+            string[] strs = new string[5];
+            Policy policy2 = new Policy(999, Policy.PostDeletePolicy.ModeratorAndAdmin, TimeSpan.MaxValue, false, TimeSpan.MinValue, 100, strs, true);
             Policy newpolicy = myDal.CreatePolicy(policy);
-            Forum forum1 = new Forum(-1, "forum1", "description of forum1", newpolicy);
-            Forum forum2 = new Forum(-1, "forum2", "description of forum2", newpolicy);
+            Policy newpolicy2= myDal.CreatePolicy(policy2);
+            Forum forum1 = new Forum(-1, "Sports", "All about sports", newpolicy);
+            Forum forum2 = new Forum(-1, "General", "Everything else goes here", newpolicy2);
             Forum newforum1 = myDal.CreateForum(forum1);
             Forum newforum2 = myDal.CreateForum(forum2);
             /*
@@ -81,18 +83,22 @@ namespace WASP
             User newuser4 = myDal.CreateUser(user4);
             */
             var hashPass = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
-            User user1 = new User(10, "edan", "edan", "email@email.com", hashPass, newforum1);
-            User user2 = new User(11, "ariel", "ariel", "ariel@ariel.com", hashPass, newforum1);
-            User user3 = new User(12, "ilay", "ilay", "email2@email.com", hashPass, newforum2);
-            User user4 = new User(13, "matan", "matan", "email3@email.com", hashPass, newforum2);
+            User user1 = new User(10, "admin_1_sports", "admin_1_sports", "email@email.com", hashPass, newforum1);
+            User user2 = new User(11, "moderator_1_sports", "moderator_1_sports", "ariel@ariel.com", hashPass, newforum1);
+            User user3 = new User(12, "admin_1_general", "admin_1_general", "email2@email.com", hashPass, newforum2);
+            User user4 = new User(13, "moderator_1_general", "moderator_1_general", "email3@email.com", hashPass, newforum2);
+            User user5 = new User(14, "ariel", "ariel", "ar2ie2l@ariel.com", hashPass, newforum1);
+            User user6 = new User(15, "ilay", "ilay", "email32@email.com", hashPass, newforum2);
             User newuser1 = myDal.CreateUser(user1);
             User newuser2 = myDal.CreateUser(user2);
             User newuser3 = myDal.CreateUser(user3);
             User newuser4 = myDal.CreateUser(user4);
-            Subforum sf1 = new Subforum(-1, "sf1", "desc1", newforum1);
-            Subforum sf2 = new Subforum(-1, "sf2", "desc2", newforum1);
-            Subforum sf3 = new Subforum(-1, "sf3", "desc3", newforum2);
-            Subforum sf4 = new Subforum(-1, "sf4", "desc4", newforum2);
+            User newuser5 = myDal.CreateUser(user5);
+            User newuser6 = myDal.CreateUser(user6);
+            Subforum sf1 = new Subforum(-1, "Soccer", "Soccer games", newforum1);
+            Subforum sf2 = new Subforum(-1, "Tenis", "Tenis games", newforum1);
+            Subforum sf3 = new Subforum(-1, "Cats", "Cats are fun", newforum2);
+            Subforum sf4 = new Subforum(-1, "Cities", "Talk about cities here", newforum2);
             Subforum newsf1 = myDal.CreateSubForum(sf1);
             Subforum newsf2 = myDal.CreateSubForum(sf2);
             Subforum newsf3 = myDal.CreateSubForum(sf3);
@@ -109,22 +115,66 @@ namespace WASP
             Moderator newmod1 = myDal.CreateModerator(mod1);
             Moderator newmod2 = myDal.CreateModerator(mod2);
 
-            Post post1 = new Post(-1, "title1", "someContent", newuser1, DateTime.Now, null, newsf1, DateTime.Now);
+            Post post1 = new Post(-1, "we meet tommrow", "everyone are welcome", newuser1, DateTime.Now, null, newsf1, DateTime.Now);
             Post newpost1 = myDal.CreatePost(post1);
-            Post reply = new Post(-1, "title1", "someContent", newuser2, DateTime.Now, newpost1, newsf1, DateTime.Now);
+            Post reply = new Post(-1, "we meet tommrow", "where?", newuser2, DateTime.Now, newpost1, newsf1, DateTime.Now);
             Post newreply = myDal.CreatePost(reply);
 
-            Post anotherReply = new Post(-1, "title1", "oneMoreReply", newuser2, DateTime.Now, newpost1, newsf1, DateTime.Now);
-            Post reply2reply = new Post(-1, "title", "reply2reply", newuser1, DateTime.Now, newreply, newsf1, DateTime.Now);
+            Post post3 = new Post(-1, "game cancelled", "no game today", newuser1, DateTime.Now, null, newsf1, DateTime.Now);
+            Post newpost3 = myDal.CreatePost(post3);
+            Post reply3 = new Post(-1, "game cancelled", "why", newuser2, DateTime.Now, newpost3, newsf1, DateTime.Now);
+            Post newreply3 = myDal.CreatePost(reply3);
+
+            Post anotherReply = new Post(-1, "we meet tommrow", "at the football field", newuser2, DateTime.Now, newpost1, newsf1, DateTime.Now);
+            Post reply2reply = new Post(-1, "we meet tommrow", "when?", newuser1, DateTime.Now, newreply, newsf1, DateTime.Now);
             Post newanotherReply = myDal.CreatePost(anotherReply);
             Post newreply2reply = myDal.CreatePost(reply2reply);
 
-            Post reply2reply2 = new Post(-1, "title", "anotherReply2Reply", newuser1, DateTime.Now, newreply, newsf1, DateTime.Now);
+            Post reply2reply2 = new Post(-1, "we meet tommrow", "coming", newuser1, DateTime.Now, newreply, newsf1, DateTime.Now);
             Post newreply2reply2 = myDal.CreatePost(reply2reply2);
-            Post post2 = new Post(-1, "title2", "someContent2", newuser3, DateTime.Now, null, newsf2, DateTime.Now);
-            Post newpost2 = myDal.CreatePost(post2);
-            Post reply2 = new Post(-1, "title2", "someContent2", newuser4, DateTime.Now, newpost2, newsf2, DateTime.Now);
-            myDal.CreatePost(reply2);
+
+            
+
+            Post post5 = new Post(-1, "Ni hao", "i like cats", newuser3, DateTime.Now, null, newsf3, DateTime.Now);
+            Post newpost5 = myDal.CreatePost(post5);
+            Post reply5 = new Post(-1, "Ni hao", "me too", newuser4, DateTime.Now, newpost5, newsf3, DateTime.Now);
+            Post newreply5 = myDal.CreatePost(reply5);
+
+            Post post6 = new Post(-1, "my cat is cute", "right?", newuser3, DateTime.Now, null, newsf3, DateTime.Now);
+            Post newpost6 = myDal.CreatePost(post6);
+            Post reply6 = new Post(-1, "my cat is cute", "yes", newuser4, DateTime.Now, newpost6, newsf3, DateTime.Now);
+            Post newreply6 = myDal.CreatePost(reply6);
+
+
+
+            Post post7 = new Post(-1, "Tennis tommrow", "anybody?", newuser1, DateTime.Now, null, newsf2, DateTime.Now);
+            Post newpost7 = myDal.CreatePost(post7);
+            Post reply7 = new Post(-1, "Tennis tommrow", "sure, where?", newuser2, DateTime.Now, newpost7, newsf2, DateTime.Now);
+            Post newreply7 = myDal.CreatePost(reply7);
+
+            Post post8 = new Post(-1, "game cancelled", "no tennis game today", newuser1, DateTime.Now, null, newsf2, DateTime.Now);
+            Post newpost8 = myDal.CreatePost(post8);
+            Post reply8 = new Post(-1, "game cancelled", "say so earlier next time", newuser2, DateTime.Now, newpost8, newsf2, DateTime.Now);
+            Post newreply8 = myDal.CreatePost(reply8);
+
+            Post anotherReply9 = new Post(-1, "Tennis tommrow", "at the sports center", newuser2, DateTime.Now, newpost7, newsf2, DateTime.Now);
+            Post reply2reply9 = new Post(-1, "Tennis tommrow", "when?", newuser1, DateTime.Now, newreply7, newsf2, DateTime.Now);
+            Post newanotherReply9 = myDal.CreatePost(anotherReply9);
+            Post newreply2reply9 = myDal.CreatePost(reply2reply9);
+
+            Post reply2reply10 = new Post(-1, "Tennis tommrow", "coming", newuser1, DateTime.Now, newreply8, newsf2, DateTime.Now);
+            Post newreply2reply10 = myDal.CreatePost(reply2reply10);
+            
+
+            Post post12 = new Post(-1, "Rome", "is a city in italy", newuser3, DateTime.Now, null, newsf4, DateTime.Now);
+            Post newpost12 = myDal.CreatePost(post12);
+            Post reply12 = new Post(-1, "Rome", "ORLY", newuser4, DateTime.Now, newpost12, newsf4, DateTime.Now);
+            Post newreply12 = myDal.CreatePost(reply12);
+
+            Post post13 = new Post(-1, "Jerusalem", "who wants to come", newuser3, DateTime.Now, null, newsf4, DateTime.Now);
+            Post newpost13 = myDal.CreatePost(post13);
+            Post reply13 = new Post(-1, "Jerusalem", "I do", newuser4, DateTime.Now, newpost13, newsf4, DateTime.Now);
+            Post newreply13 = myDal.CreatePost(reply13);
         }
         static void Main(string[] args)
         {
@@ -182,6 +232,7 @@ namespace WASP
             WebServer ws = new WebServer(SendResponse, prefixes);
             Thread notificationServerThread = new Thread(NotificationServer.Run);
             notificationServerThread.Start();
+
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

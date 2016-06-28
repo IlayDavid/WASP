@@ -34,6 +34,14 @@ namespace WASP.DataClasses
         private Dictionary<int, User> friends = null;
         private string[] answers = new string[2];
 
+        public void initialize()
+        {
+            Object obj = this.NewNotifications;
+            obj = this.Notifications;
+            obj = this.Posts;
+            obj = this.Friends;
+        }
+
         public static User Get(int userId, int forumId)
         {
             if (Settings.UseCache())

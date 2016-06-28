@@ -12,7 +12,10 @@ namespace WASP.DataClasses
         private Post inReplyTo;
         private Dictionary<int, Post> replies = null;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
-
+        public void initialize()
+        {
+            Object obj = this.Replies;
+        }
         public static Post Get(int id)
         {
             return dal.GetPost(id);

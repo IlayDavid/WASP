@@ -9,7 +9,6 @@ using WASP.Exceptions;
 namespace WASP.TestSuits
 {
     [TestClass]
-
     public class DomainSuite
     {
         private BLFacade BL = new BLFacade();
@@ -212,59 +211,60 @@ namespace WASP.TestSuits
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+       [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
 
         public void checkSuspendMod()
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(0, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr,true);
+            User user = BL.subscribeToForum(1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr,true);
             User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr,true);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);
             BL.addModerator(100, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
+            forum = BL.getForum(forum.Id);
             BL.deleteModerator(user.Id, forum.Id, willBeMod.Id, sf.Id);
        
         }
         [TestMethod]
-        [ExpectedException(typeof(WaspException))]
+        //[ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
 
         public void checkSuspendMod2()
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user = BL.subscribeToForum(53, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             User willBeMod = BL.subscribeToForum(88, "edanAdmin", "habler", "habler@post.bgu.ac.il", "123", forum.Id,strarr, true);
             DateTime now = DateTime.Today;
             Subforum sf = BL.createSubForum(100, forum.Id, "sf", "desc", user.Id, now);
-            BL.addModerator(user.Id, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
-            BL.deleteModerator(user.Id, forum.Id, willBeMod.Id, sf.Id);
+            BL.addModerator(100, forum.Id, willBeMod.Id, sf.Id, DateTime.Today);
+            BL.deleteModerator(100, forum.Id, willBeMod.Id, sf.Id);
             sf = BL.getSubforum(forum.Id, sf.Id);
             Assert.AreEqual(sf.GetModerator(willBeMod.Id), null, "delete succeded");
 
             
         }
-
+        [TestMethod]
         public void checkFriends()
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
-            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
-            User user3 = BL.subscribeToForum(-1, "noam", "barkay", "noam@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user1 = BL.subscribeToForum(1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user2 = BL.subscribeToForum(2, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user3 = BL.subscribeToForum(3, "noam", "barkay", "noam@post.bgu.ac.il", "123", forum.Id, strarr, true);
             user1.AddFriend(user2);
             user1.AddFriend(user3); 
             Assert.AreEqual(2, user1.GetAllFriends().Length, "2 friends added correctly");
-            Assert.IsNull(user2.GetAllFriends());
+            Assert.AreEqual(0, user2.GetAllFriends().Length);
             
         }
-
+        [TestMethod]
         public void checkNotification()
         {
             Policy policy = new Policy();
             Forum forum = BL.createForum(1234, "AviTheKing", "avi is a king", 100, "avi", "avi", "avi@gmail.com", "1234", policy);
-            User user1 = BL.subscribeToForum(-1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
-            User user2 = BL.subscribeToForum(-1, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user1 = BL.subscribeToForum(1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
+            User user2 = BL.subscribeToForum(2, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
             BL.sendMessage(user1.Id, forum.Id, user2.Id, "user1 sends msg to user 2");
             Assert.AreEqual(1, user2.GetNewNotifications().Length,"message recived");
             Assert.AreEqual(0, user1.GetNewNotifications().Length, "no new messages");
