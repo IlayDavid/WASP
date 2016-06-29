@@ -62,10 +62,11 @@ namespace WASP
             myDal.Clean();
             ServiceFacade.webInitialize();
             Policy policy = new Policy();
-            string[] strs = new string[5];
-            Policy policy2 = new Policy(999, Policy.PostDeletePolicy.ModeratorAndAdmin, TimeSpan.MaxValue, false, TimeSpan.MinValue, 100, strs);
-            Policy newpolicy = myDal.CreatePolicy(policy);
-            Policy newpolicy2= myDal.CreatePolicy(policy2);
+            policy.Questions[0] = "Mother's maiden name?";
+            policy.Questions[1] = "What is your company's name?";
+            Policy policy2 = new Policy(999, Policy.PostDeletePolicy.ModeratorAndAdmin, TimeSpan.MaxValue, false, TimeSpan.MinValue, 100, policy.Questions, false);
+            Policy newpolicy = policy.Create();
+            Policy newpolicy2 = policy2.Create();
             Forum forum1 = new Forum(-1, "Sports", "All about sports", newpolicy);
             Forum forum2 = new Forum(-1, "General", "Everything else goes here", newpolicy2);
             Forum newforum1 = myDal.CreateForum(forum1);
@@ -81,12 +82,13 @@ namespace WASP
             User newuser4 = myDal.CreateUser(user4);
             */
             var hashPass = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
-            User user1 = new User(10, "admin_1_sports", "admin_1_sports", "email@email.com", hashPass, newforum1);
-            User user2 = new User(11, "moderator_1_sports", "moderator_1_sports", "ariel@ariel.com", hashPass, newforum1);
-            User user3 = new User(12, "admin_1_general", "admin_1_general", "email2@email.com", hashPass, newforum2);
-            User user4 = new User(13, "moderator_1_general", "moderator_1_general", "email3@email.com", hashPass, newforum2);
-            User user5 = new User(14, "ariel", "ariel", "ar2ie2l@ariel.com", hashPass, newforum1);
-            User user6 = new User(15, "ilay", "ilay", "email32@email.com", hashPass, newforum2);
+            string[] answers = { "solomon", "wasp" };
+            User user1 = new User(10, "admin_1_sports", "admin_1_sports", "email@email.com", hashPass, newforum1, answers);
+            User user2 = new User(11, "moderator_1_sports", "moderator_1_sports", "ariel@ariel.com", hashPass, newforum1, answers, false);
+            User user3 = new User(12, "admin_1_general", "admin_1_general", "email2@email.com", hashPass, newforum2, answers);
+            User user4 = new User(13, "moderator_1_general", "moderator_1_general", "email3@email.com", hashPass, newforum2, answers, false);
+            User user5 = new User(14, "ariel", "ariel", "ar2ie2l@ariel.com", hashPass, newforum1, answers);
+            User user6 = new User(15, "ilay", "ilay", "email32@email.com", hashPass, newforum2, answers);
             User newuser1 = myDal.CreateUser(user1);
             User newuser2 = myDal.CreateUser(user2);
             User newuser3 = myDal.CreateUser(user3);
