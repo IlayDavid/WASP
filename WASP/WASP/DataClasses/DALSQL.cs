@@ -378,7 +378,7 @@ namespace WASP.DataClasses
                 db.IUsers.InsertOnSubmit(_user);
                 db.SubmitChanges();
 
-                _cache.AddUser(user.initialize());
+                //_cache.AddUser(user.initialize());
                 _logger.writeToFile("create user");
                 return user;
             }
@@ -398,7 +398,7 @@ namespace WASP.DataClasses
 
                 db.IAdmins.InsertOnSubmit(_admin);
                 db.SubmitChanges();
-                _cache.AddAdmin(admin.initialize());
+                //_cache.AddAdmin(admin.initialize());
                 _logger.writeToFile("create admin");
                 return admin;
             }
@@ -428,7 +428,7 @@ namespace WASP.DataClasses
                 db.IModerators.InsertOnSubmit(_mod);
                 db.SubmitChanges();
 
-                _cache.AddModerator(mod);
+                //_cache.AddModerator(mod);
                 _logger.writeToFile("create moderator");
                 return mod;
             }
@@ -452,7 +452,7 @@ namespace WASP.DataClasses
 
                 forum.Id = _forum.id;
 
-                _cache.AddForum(forum.initialize());
+                //_cache.AddForum(forum.initialize());
                 _logger.writeToFile("create forum");
 
                 return forum;
@@ -472,7 +472,7 @@ namespace WASP.DataClasses
                 db.SubmitChanges();
                 sf.Id = _subf.id;
                 _logger.writeToFile("create sub-forum");
-                _cache.AddSubforum(sf.initialize());
+                //_cache.AddSubforum(sf.initialize());
 
                 return sf;
             }
@@ -501,7 +501,7 @@ namespace WASP.DataClasses
                 db.SubmitChanges();
                 post.Id = ipost.id;
 
-                _cache.AddPost(post.initialize());
+                //_cache.AddPost(post.initialize());
 
 
                 return post;

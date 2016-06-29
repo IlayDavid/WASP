@@ -25,8 +25,9 @@ namespace Client.GUI.MainWindows
 
             if (Session.forum.policy.questions == null || Session.forum.policy.questions.Count() == 0)
             {
-                string question = Session.forum.policy.questions[0];
-                lblQuestion.Content = question;
+                string[] questions = Session.forum.policy.questions;
+                lblQuestion1.Content = questions[0];
+                lblQuestion2.Content = questions[1];
             }
         }
 

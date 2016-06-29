@@ -4298,3 +4298,24 @@
 29/06/2016 09:36:51: Subscribe to forum
 29/06/2016 09:36:51: login - not super user
 29/06/2016 09:36:51: add moderator
+29/06/2016 10:06:05: create BL object
+29/06/2016 10:06:11: initialize the system
+29/06/2016 10:06:12: get all forum
+29/06/2016 10:11:39: create BL object
+29/06/2016 10:11:47: initialize the system
+29/06/2016 10:11:49: get all forum
+29/06/2016 10:12:08: get members
+29/06/2016 10:12:08: get sub forums
+29/06/2016 10:12:08: get admin
+29/06/2016 10:12:08: get members
+29/06/2016 10:12:08: get forum
+29/06/2016 10:12:17: Subscribe to forum
+29/06/2016 10:12:17: login - not super user
+29/06/2016 10:12:17: get new notifications
+29/06/2016 10:12:17: get members
+29/06/2016 10:12:17: get sub forums
+29/06/2016 10:12:17: get admin
+29/06/2016 10:12:18: get members
+29/06/2016 10:12:18: get forum
+29/06/2016 10:12:21: get members
+29/06/2016 10:12:21: get admin
