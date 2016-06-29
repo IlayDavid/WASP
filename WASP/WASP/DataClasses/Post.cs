@@ -12,14 +12,13 @@ namespace WASP.DataClasses
         private Post inReplyTo;
         private Dictionary<int, Post> replies = null;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
-        public Post initialize()
+        public void initialize()
         {
             Object obj = this.Replies;
-            return this;
         }
         public static Post Get(int id)
         {
-            return dal.GetPost(id).initialize();
+            return dal.GetPost(id);
         }
         public static Post[] Get(int[] ids)
         {
@@ -29,7 +28,7 @@ namespace WASP.DataClasses
         {
             Post thisPost = dal.CreatePost(this);
             string notificationMessage = String.Format("Post {0} created.", thisPost.Id);
-            Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null, Notification.Types.Post);
+            Notification notif = new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null);
             Subforum.Forum.NotifyAllMembers(notif);
             return thisPost;
         }
@@ -38,26 +37,21 @@ namespace WASP.DataClasses
         {
             Post thisPost = dal.UpdatePost(this);
             string notificationMessage = String.Format("Post {0} updated.", thisPost.Id);
-            NotifyRepliers(new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null, Notification.Types.Post));
+            NotifyRepliers(new Notification(-1, notificationMessage, true, thisPost.GetAuthor, null));
             return thisPost;
         }
 
         public bool Delete()
         {
             string notificationMessage = String.Format("Post {0} deleted.", Id);
-            NotifyRepliers(new Notification(-1, notificationMessage, true, GetAuthor, null, Notification.Types.Post));
+            NotifyRepliers(new Notification(-1, notificationMessage, true, GetAuthor, null));
             Post[] replies = GetAllReplies();
             foreach (Post reply in replies)
             {
                 reply.Delete();
+                RemoveReply(reply.Id);
             }
             this.author.RemovePost(Id);
-            if (IsOriginal())
-                this.Subforum.RemoveThread(this.Id);
-            else
-            {
-                this.InReplyTo.RemoveReply(this.Id);
-            }
             return dal.DeletePost(Id);
         }
 

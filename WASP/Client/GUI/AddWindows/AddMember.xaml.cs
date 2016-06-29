@@ -34,13 +34,10 @@ namespace Client.GUI.AddWindows
                     {
                         ListViewItem item = makeQuestionItem(q);
                         lstQuestions.Items.Add(item);
-                    }                
+                    }                    
                 }
                 else
                     gBoxRestore.IsEnabled = false;
-
-                if (!(Session.forum.policy.notification == Policy.NOTIFICATION.selective))
-                    gridInteractivity.IsEnabled = false;
             }
             catch { }
         }
@@ -61,32 +58,23 @@ namespace Client.GUI.AddWindows
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
-          //  try
+            try
             {
                 List<string> answers = new List<string>();
-
-                //take answers, if it defined in the policy.
-                if (Session.forum.policy.questions != null && Session.forum.policy.questions.Length != 0)
-                    foreach (ListBoxItem item in lstQuestions.Items)
-                    {
-                        string ans = ((TextBox)item.DataContext).Text;
-                        answers.Add(ans);
-                    }
-
-                bool online = Session.forum.policy.notification == Policy.NOTIFICATION.online ? true : false;
-                if (Session.forum.policy.notification == Policy.NOTIFICATION.selective)
+                foreach(ListBoxItem item in lstQuestions.Items)
                 {
-                    online = rdbOn.IsChecked.Value ? true : false;
+                    string ans = ((TextBox)item.DataContext).Text;
+                    MessageBox.Show("");
+                    answers.Add(ans);
                 }
 
+
                 User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
-                    txtmail.Text, passPassword.Password, Session.forum.id, answers, online);
+                    txtmail.Text, passPassword.Password, Session.forum.id);
 
-                Session.user = Session.bl.login(user.userName, passPassword.Password, Session.forum.id, "");
                 Session.AddNewNotifications();
-                MessageBox.Show("Your client-session is: " + Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                if (Session.forum.policy.emailVerification)
+                Session.user = Session.bl.login(user.userName, user.password, Session.forum.id, "");
+                if(Session.forum.policy.emailVerification)
                 {
                     MessageBox.Show("An email with verification code has been sent!");
                     VerifyEmail emailVerify = new VerifyEmail();
@@ -94,9 +82,9 @@ namespace Client.GUI.AddWindows
                 }
                 this.Close();
             }
-           // catch (Exception ee)
+            catch (Exception ee)
             {
-               // MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
 

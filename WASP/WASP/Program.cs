@@ -6,8 +6,6 @@ using WASP.Exceptions;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using WASP.DataClasses;
-using System.Threading;
-
 namespace WASP
 {
     class Program
@@ -133,7 +131,7 @@ namespace WASP
             Post reply2reply2 = new Post(-1, "we meet tommrow", "coming", newuser1, DateTime.Now, newreply, newsf1, DateTime.Now);
             Post newreply2reply2 = myDal.CreatePost(reply2reply2);
 
-
+            
 
             Post post5 = new Post(-1, "Ni hao", "i like cats", newuser3, DateTime.Now, null, newsf3, DateTime.Now);
             Post newpost5 = myDal.CreatePost(post5);
@@ -164,7 +162,7 @@ namespace WASP
 
             Post reply2reply10 = new Post(-1, "Tennis tommrow", "coming", newuser1, DateTime.Now, newreply8, newsf2, DateTime.Now);
             Post newreply2reply10 = myDal.CreatePost(reply2reply10);
-
+            
 
             Post post12 = new Post(-1, "Rome", "is a city in italy", newuser3, DateTime.Now, null, newsf4, DateTime.Now);
             Post newpost12 = myDal.CreatePost(post12);
@@ -226,14 +224,10 @@ namespace WASP
             routes.Add(basePrefix + "restorePasswordByAnswers/", ServiceFacade.restorePasswordByAnswers);
             routes.Add(basePrefix + "logout/", ServiceFacade.logout);
             routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
-            routes.Add(basePrefix + "Clean/", ServiceFacade.Clean);
 
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);
             WebServer ws = new WebServer(SendResponse, prefixes);
-            Thread notificationServerThread = new Thread(NotificationServer.Run);
-            notificationServerThread.Start();
-
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();

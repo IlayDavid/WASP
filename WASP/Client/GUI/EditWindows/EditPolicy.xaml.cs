@@ -40,9 +40,12 @@ namespace Client.GUI.EditWindows
 
             questions = Session.forum.policy.questions.ToList();
             if (questions == null)
-                questions = new List<string>() { "", ""};
-            txtNewQuestion1.Text = questions[0];
-            txtNewQuestion2.Text = questions[1];
+                questions = new List<string>();
+            lstBoxRestoreQuestion.Items.Clear();
+            foreach (string s in questions)
+            {
+                lstBoxRestoreQuestion.Items.Add(new ListBoxItem() { Content = s });
+            }
 
             if (Session.forum.policy.notification == Policy.NOTIFICATION.online)
                 rdbOn.IsChecked = true;
@@ -56,17 +59,18 @@ namespace Client.GUI.EditWindows
         {
             try
             {
-                int deletePost = deletePostPermission();
-                int passwordPeriod = int.Parse(txtPassPeriod.Text);
-                bool emailVerification = chkbEmailVer.IsChecked.Value;
-                int seniority = int.Parse(txtModSen.Text);
-                int usersSameTime = int.Parse(txtUserSameTime.Text);
+                if (Session.user is SuperUser)
+                {
+                    int deletePost = deletePostPermission();
+                    int passwordPeriod = int.Parse(txtPassPeriod.Text);
+                    bool emailVerification = chkbEmailVer.IsChecked.Value;
+                    int seniority = int.Parse(txtModSen.Text);
+                    int usersSameTime = int.Parse(txtUserSameTime.Text);
 
-                questions = new List<string> { txtNewQuestion1.Text, txtNewQuestion2.Text };
-
-                Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime,
-                    questions.ToArray(), notificationSelecting());
-                Session.bl.defineForumPolicy(policy);
+                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime,
+                        questions.ToArray(), notificationSelecting());
+                    Session.bl.defineForumPolicy(policy);
+                }
                 this.Close();
             }
             catch (Exception ee)
@@ -89,9 +93,22 @@ namespace Client.GUI.EditWindows
         {
             int ret = 0;
             ret += chkbAdmin.IsChecked.Value ? Policy.admin : 0;
-            ret += chkbModerator.IsChecked.Value ? Policy.moderator : 0;
-            ret += chkbOwner.IsChecked.Value ? Policy.owner : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.moderator : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
             return ret;
+        }
+
+        private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            string newQ = txtNewQuestion.Text;
+            if (newQ.Equals(""))
+            {
+                MessageBox.Show("Enter a question.");
+                return;
+            }
+            questions.Add(newQ);
+            ListBoxItem item = new ListBoxItem() { Content = newQ };
+            lstBoxRestoreQuestion.Items.Add(item);
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)

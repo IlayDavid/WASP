@@ -285,8 +285,6 @@ namespace WASP.DataClasses
                 db.ISuperUsers.DeleteAllOnSubmit(db.ISuperUsers);
                 db.IPolicies.DeleteAllOnSubmit(db.IPolicies);
                 db.SubmitChanges();
-               // db = new Forum_SystemDataContext(SetDb("Forums_System"));
-                _cache = new DALCache2(this);
             }
         }
 

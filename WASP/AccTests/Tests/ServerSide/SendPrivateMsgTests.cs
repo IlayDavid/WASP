@@ -16,7 +16,6 @@ namespace AccTests.Tests
         private Forum _forum;
         private User _member1;
         private User _member2;
-        private string [] arr = { "shlomo", "moshe" };
 
         [TestInitialize]     //before each Test
         public void SetUp()
@@ -27,8 +26,8 @@ namespace AccTests.Tests
             var forumAndMember = Functions.CreateSpecForum(_proj, _supervisor);
 
             _forum = forumAndMember.Item1;
-            _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.Id, arr, false);
-            _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id, arr, false);
+            _member1 = _proj.subscribeToForum(50,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456",_forum.Id);
+            _member2 = _proj.subscribeToForum(51,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id);
 
             _proj.login(_member1.Username, _member1.Password, _forum.Id);
             _proj.login(_member2.Username, _member2.Password, _forum.Id);

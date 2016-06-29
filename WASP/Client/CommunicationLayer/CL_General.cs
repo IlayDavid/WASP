@@ -20,7 +20,6 @@ namespace Client.CommunicationLayer
         public string _auth { get; set; }
         private ParseString parser;
         private Thread notifThread;
-        private NotifConnection ncon;
         //will set to the current forumID, which the user is loged to.
         //will be used only for functions that require log-in.
         private int forumID;
@@ -73,7 +72,7 @@ namespace Client.CommunicationLayer
             catch (WebException e)
             {
                 //MessageBox.Show(e.Message);
-                return e.Message;
+                return "error";
             }
 
         }
@@ -93,8 +92,8 @@ namespace Client.CommunicationLayer
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "," + "\"auth\":\"" + session + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/login/");
-            User ans = parser.parseStringToUser(res, true, this);
-            ncon = new NotifConnection(_auth, this);
+            User ans= parser.parseStringToUser(res, true, this);
+            NotifConnection ncon = new NotifConnection(_auth, this);
             notifThread = new Thread(ncon.Run);
             notifThread.Start();
             return ans;
@@ -104,7 +103,7 @@ namespace Client.CommunicationLayer
         {   //username, id, auth, password, email, name
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"}";
             string res = httpReq(json, "POST", _url + "/loginSU/");
-            SuperUser ans = parser.parseStringToSuperUser(res, this);
+            SuperUser ans =parser.parseStringToSuperUser(res, this);
             return ans;
         }
         public void logout()
@@ -113,11 +112,9 @@ namespace Client.CommunicationLayer
             JavaScriptSerializer jss = new JavaScriptSerializer();
             dict.Add("auth", _auth);
             string json = jss.Serialize(dict);
-            if(ncon != null)
-                ncon.Stop();
             string res = httpReq(json, "POST", _url + "/logout/");
 
-        }
+        } 
         public User loginBySession(string session)
         {
             //username, id, auth, password, email, name
@@ -222,16 +219,16 @@ namespace Client.CommunicationLayer
             return parser.parseStringToAdmin(res, this);
         }
 
-        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
         {
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            dict.Add("userid", userid);
+            dict.Add("username", username);
             dict.Add("answers", answers);
             dict.Add("forumid", forum_id);
             dict.Add("newpassword", newPassword);
             string json = jss.Serialize(dict);
-            string res = httpReq(json, "POST", _url + "/restorePasswordByAnswers/");
+            string res = httpReq(json, "POST", _url + "/restorePasswordbyAnswers/");
         }
 
         public void addAnswers(int user_id, List<string> answers)
@@ -242,22 +239,12 @@ namespace Client.CommunicationLayer
             dict.Add("answers", answers);
             string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/addAnswers/");
-
+            
         }
 
         public Admin getAdmin(int AdminID)
         {
             throw new NotImplementedException();
-        }
-
-        public void Clean()
-        {
-            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            dict.Add("userid", 1);
-            string json = jss.Serialize(dict);
-            string res = httpReq(json, "POST", _url + "/Clean/");
-
         }
     }
 }

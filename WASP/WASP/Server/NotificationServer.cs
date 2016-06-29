@@ -14,19 +14,12 @@ namespace WASP.Server
         public static void Run()
         {
             const string baseUrl = "http://localhost:5000/";
-            try
+
+            using (WebApp.Start<Startup1>(url: baseUrl))
             {
-                using (WebApp.Start<Startup1>(url: baseUrl))
-                {
-                    Console.WriteLine("Press Enter to quit.");
-                    Console.ReadKey();
-                }
+                Console.WriteLine("Press Enter to quit.");
+                Console.ReadKey();
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
         }
 
         public static void GroupNotify(string group, string message)

@@ -46,12 +46,11 @@ namespace AccTests.Tests
             _proj.login(_moderator.userName, modpass, _forum.id, "");
 
             _member = ClientFunctions.SubscribeSpecMember(_proj, _forum);
-            
+            _proj.login(_member.userName, mempass, _forum.id, "");
 
             _threadModerator = _proj.createThread("webService for calander",
                                     "Someone know a good web service for Calander?",  _subforum.id);
 
-            _proj.login(_member.userName, mempass, _forum.id, "");
             _threadMember = _proj.createThread("webService for calander",
                         "Someone know a good web service for Calander?",  _subforum.id);
 
@@ -79,7 +78,6 @@ namespace AccTests.Tests
         public void deletePostTest2()
         {
             Post p1 = _proj.createReplyPost("Hi", _threadMember.id);
-            _proj.login(_moderator.userName, modpass, _forum.id, "");
             Post p2 = _proj.createReplyPost("Hi", _threadModerator.id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
@@ -87,7 +85,6 @@ namespace AccTests.Tests
 
             int isDelete = _proj.deletePost(p2.id);
             Assert.IsTrue(isDelete >= 0);
-            _proj.login(_member.userName, mempass, _forum.id, "");
             isDelete = _proj.deletePost(p1.id);
             Assert.IsTrue(isDelete >= 0);
         }
@@ -110,13 +107,13 @@ namespace AccTests.Tests
         [TestMethod]
         public void deletePostTest4()
         {
-            Post p1 = _proj.createReplyPost("Hi",  _threadMember.id);
             _proj.login(_moderator.userName, modpass, _forum.id, "");
+            Post p1 = _proj.createReplyPost("Hi",  _threadMember.id);
             Post p2 = _proj.createReplyPost("Hi", _threadModerator.id);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(p1);
 
-            
+            _proj.login(_member.userName, mempass, _forum.id, "");
             int isDelete = _proj.deletePost(p2.id);
             Assert.IsTrue(isDelete > 0);
             isDelete = _proj.deletePost(p1.id);

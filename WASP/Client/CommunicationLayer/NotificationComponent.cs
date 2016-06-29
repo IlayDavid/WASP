@@ -7,7 +7,7 @@ namespace Client.CommunicationLayer
 {
     class NotificationComponent
     {
-        private static Connection connection=null;
+        private static Connection connection;
         private static CL _cl;
 
 
@@ -40,11 +40,7 @@ namespace Client.CommunicationLayer
 
         public static void close()
         {
-            if (connection.State.Equals(ConnectionState.Connected))
-            {
-                connection.Send("logout");
-                connection.Stop();
-            }
+            connection.Send("logout").Wait();
         }
     }
 }

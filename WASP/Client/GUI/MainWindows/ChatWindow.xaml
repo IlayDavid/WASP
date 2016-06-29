@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI.MainWindows"
         mc:Ignorable="d"
-        Title="ChatWindow" Height="429.428" Width="413.415"
+        Title="ChatWindow" Height="384.213" Width="413.415"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Label x:Name="label" Content="Choose Friend:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,58,0,0"/>
-        <Label x:Name="label_Copy" Content="Messages:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,58,0,0"/>
-        <ListBox x:Name="lstMembers" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="157" Margin="10,84,0,0"
+        <Label x:Name="label" Content="Choose Friend:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <Label x:Name="label_Copy" Content="Messages:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,10,0,0"/>
+        <ListBox x:Name="lstMembers" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="157" Margin="10,36,0,0"
                  Foreground="#FF00FFF2" BorderBrush="#FF00F9F4">
             <ListBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -20,18 +20,17 @@
                 </LinearGradientBrush>
             </ListBox.Background>
         </ListBox>
-        <ListBox x:Name="lstMessages" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="225" Margin="172,84,0,0">
+        <ListBox x:Name="lstMessages" HorizontalAlignment="Left" Height="236" VerticalAlignment="Top" Width="225" Margin="172,36,0,0">
             <ListBox.Background>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF00CDFF" Offset="0.535"/>
-                    <GradientStop Color="#FF0083A3"/>
-                </LinearGradientBrush>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FF00CDFF" Offset="0.535"/>
+                <GradientStop Color="#FF0083A3"/>
+            </LinearGradientBrush>
             </ListBox.Background>
         </ListBox>
-        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Height="57" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" Margin="10,325,0,0" Background="#FFCFF5FF" BorderBrush="#FFF1F2F4"/>
-        <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,363,0,0"/>
-        <Label x:Name="label_Copy1" Content="You can view the messages that sent to you by a friend" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontWeight="Bold" FontStyle="Italic" Height="43" Width="387" FontSize="14"/>
+        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Height="57" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" Margin="10,277,0,0" Background="#FFCFF5FF" BorderBrush="#FFF1F2F4"/>
+        <Button x:Name="btnSend" Content="Send" Click="btnSend_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,315,0,0"/>
 
     </Grid>
 </Window>

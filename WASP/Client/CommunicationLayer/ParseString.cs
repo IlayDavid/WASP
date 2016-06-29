@@ -53,7 +53,7 @@ namespace Client.CommunicationLayer
         }
 
         public SuperUser parseStringToSuperUser(string res, string email, string name, CL c)
-        {   
+        {
             var jss = new JavaScriptSerializer();
             var dict = jss.Deserialize<Dictionary<string, dynamic>>(res);
             string username = dict["username"];

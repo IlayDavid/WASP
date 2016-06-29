@@ -10,11 +10,17 @@ namespace Client.BusinessLogic
     public partial class BL : IBL
     {
         //---------------------------Version 4 Use Cases Start------------------------------------
-        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
         {
-            _logger.writeToFile("restore password by answers");
-            _cl.restorePasswordbyAnswers(userid, forum_id, answers, sha256_hash(newPassword) );
+            throw new NotImplementedException();
         }
+
+        public void addAnswers(int user_id, List<string> answers)
+        {
+            throw new NotImplementedException();
+        }
+
+        
         //---------------------------Version 4 Use Cases End------------------------------------
 
     }

@@ -16,7 +16,6 @@ namespace AccTests.Tests
         private WASPBridge _proj;
         private Forum _forum;
         private Admin _admin;
-        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]     //before each Test
         public void SetUp()
@@ -37,7 +36,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest1()
         {
-            var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id, arr, false);
+            var isMem = _proj.subscribeToForum(55,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             var members = _proj.getMembers(_admin.User.Id, _forum.Id);
 
             Assert.IsNotNull(isMem);
@@ -52,16 +51,16 @@ namespace AccTests.Tests
         [TestMethod]
         public void subscribeToForumTest2()
         {
-            var isMem = _proj.subscribeToForum(57,"", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id, arr, false);
+            var isMem = _proj.subscribeToForum(57,"", "moshe", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(58,"mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id, arr, false);
+            isMem = _proj.subscribeToForum(58,"mosheB", "", "mosheB@psot.bgu.ac.il", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(59,"mosheB", "moshe", "", "moshe123", _forum.Id, arr, false);
+            isMem = _proj.subscribeToForum(59,"mosheB", "moshe", "", "moshe123", _forum.Id);
             Assert.IsNull(isMem);
 
-            isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1, arr, false);
+            isMem = _proj.subscribeToForum(60,"mosheB", "moshe", "mosheB@psot.bgu.ac.il", "", -1);
             Assert.IsNull(isMem);
         }
     }

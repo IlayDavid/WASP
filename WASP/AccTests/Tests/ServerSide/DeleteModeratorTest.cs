@@ -18,7 +18,6 @@ namespace AccTests.Tests
         private Subforum _subforum;
         private User _moderator;
         private User _moderator2;
-        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]
         public void setUp()
@@ -38,7 +37,7 @@ namespace AccTests.Tests
             _proj.login(_moderator.Username, _moderator.Password, _forum.Id);
 
 
-            _moderator2 = _proj.subscribeToForum(16,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.Id, arr, false);
+            _moderator2 = _proj.subscribeToForum(16,"mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.Id);
             _proj.addModerator(_admin.User.Id, _forum.Id, _moderator2.Id, _subforum.Id, DateTime.MaxValue);
             _proj.login(_moderator2.Username, _moderator2.Password, _forum.Id);
         }
@@ -63,7 +62,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator2()
         {
-            var newAdminUser = _proj.subscribeToForum(17,"admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.Id, arr, false);
+            var newAdminUser = _proj.subscribeToForum(17,"admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.Id);
             _proj.addAdmin(_supervisor.Id,_forum.Id, newAdminUser.Id);
             var check = _proj.deleteModerator(newAdminUser.Id, _forum.Id, _moderator.Id, _subforum.Id);
                 Assert.IsTrue(check<0);

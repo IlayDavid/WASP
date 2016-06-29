@@ -24,7 +24,6 @@ namespace AccTests.Tests.ServerSide
         private Dictionary<Subforum, List<Post>> _posts = new Dictionary<Subforum, List<Post>>();
         private Dictionary<int, List<Post>> _postsByUser = new Dictionary<int, List<Post>>();
         private const int LOOPS = 10;
-        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]
         public void setUp()
@@ -45,7 +44,7 @@ namespace AccTests.Tests.ServerSide
                 _members[forum] = new List<User>();
                 var member = _proj.subscribeToForum(110+i,"mod_" + i + "_1", "mod" + i + "_1", "mod" + i + "_1@gmail.com",
                     "mod1234",
-                    forum.Id, arr, false);
+                    forum.Id);
                 _members[forum].Add(member);
                 var subforum = _proj.createSubForum(admin.Id,forum.Id, "subforum_" + i, "the " + i + "th subforum", member.Id,
                     DateTime.MaxValue);
@@ -55,7 +54,7 @@ namespace AccTests.Tests.ServerSide
                 _moderators[subforum].Add(member);
                 member = _proj.subscribeToForum(120+i,"mod_" + i + "_2", "mod" + i + "_2", "mod" + i + "_2@gmail.com",
                     "mod1234",
-                    forum.Id, arr, false);
+                    forum.Id);
                 _members[forum].Add(member);
                 _proj.addModerator(admin.Id,forum.Id, member.Id, subforum.Id, DateTime.MaxValue);
                 _moderators[subforum].Add(member);
@@ -69,7 +68,7 @@ namespace AccTests.Tests.ServerSide
                     prevMember = member;
                     member = _proj.subscribeToForum(130 + j + i * 10, "user_" + i + "_" + j, "user" + i + "_" + j,
                         "user" + i + "_" + j + "@gmail.com", "user1234",
-                        forum.Id, arr, false);
+                        forum.Id);
                     _members[forum].Add(member);
                     post = _proj.createReplyPost(prevMember.Id,forum.Id, "this is reply number " + i, post.Id);
                     _postsByUser[member.Id] = new List<Post>();

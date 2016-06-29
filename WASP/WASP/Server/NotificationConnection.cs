@@ -16,11 +16,16 @@ namespace WASP.Server
             connectionToHash.TryGetValue(connectionId, out hash);
             if (hash == null)
                 hash = "not logged in";
-            Groups.Add(connectionId, hash);
-            return Connection.Send(connectionId, hash);
+            return Groups.Add(connectionId, hash);
         }
         protected override Task OnReceived(IRequest request, string connectionId, string data)
         {
+            if (!Service.ServiceFacade.isLoggedIn(data))
+            {
+                return Connection.Send(connectionId, "User " + data + " not logged in!");
+            }
+
+
             if (data.ToLower().Equals("logout"))
             {
                 string hash;
@@ -28,18 +33,10 @@ namespace WASP.Server
                 if (hash != null)
                 {
                     connectionToHash.Remove(connectionId);
-                    Groups.Remove(NotificationServer.GetGroup(hash), hash);
-                    return Connection.Send(connectionId, "Logged out");
+                    return Groups.Remove(NotificationServer.GetGroup(hash), hash);
                 }
             }
-
-            if (!Service.ServiceFacade.isLoggedIn(data))
-            {
-                return Connection.Send(connectionId, "User " + data + " not logged in!");
-            }
-            connectionToHash.Add(connectionId, data);
-            Groups.Add(connectionId, NotificationServer.GetGroup(data));
-            return Connection.Send(connectionId, "Logged in!");
+            return Groups.Add(connectionId, NotificationServer.GetGroup(data));
         }
 
         protected override Task OnDisconnected(IRequest request, string connectionId, bool stopCalled)

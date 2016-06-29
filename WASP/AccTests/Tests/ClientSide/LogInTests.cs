@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WASP.Exceptions;
 using Client.DataClasses;
-using System.Collections.Generic;
 
 namespace AccTests.Tests
 {
@@ -23,7 +22,7 @@ namespace AccTests.Tests
         private string mempass = "123456";
         //private Subforum _subforum;
 
-
+        
         [TestInitialize]
         public void setUp()
         {
@@ -33,10 +32,10 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _member1 = _proj.subscribeToForum(20, "amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id, ClientFunctions.GetAnswers(), false);
-            _member2 = _proj.subscribeToForum(21, "edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id, ClientFunctions.GetAnswers(), false);
+            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id);
+            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id);
 
-            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
+            _proj.login(_admin.user.userName, adminpass, _forum.id,"");
             _proj.login(_member1.userName, mempass, _forum.id, "");
             _proj.login(_member2.userName, mempass, _forum.id, "");
         }
@@ -60,7 +59,7 @@ namespace AccTests.Tests
         public void logInTest2()
         {
             _proj.login("", "123456", _forum.id, "");
-
+            
         }
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest3()
         {
-
+            
             _proj.login("blah", "", _forum.id, "");
         }
         /// <summary>
@@ -81,7 +80,7 @@ namespace AccTests.Tests
         [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void logInTest4()
         {
-
+ 
             _proj.login("amitayaSh", "", _forum.id, "");
         }
         /// <summary>
@@ -92,9 +91,9 @@ namespace AccTests.Tests
         [TestMethod]
         public void logInTest5()
         {
-
+            
             _proj.login("", "123456", _forum.id, "");
-
+            
         }
         /// <summary>
         /// Negative Test: incorrent information
@@ -105,7 +104,7 @@ namespace AccTests.Tests
         public void logInTest6()
         {
             _proj.login("blah", "123456", _forum.id, "");
-
+            
         }
     }
 }

@@ -266,8 +266,9 @@ namespace WASP.TestSuits
             User user1 = BL.subscribeToForum(1, "edan", "habler", "habler@post.bgu.ac.il", "123", forum.Id, strarr, true);
             User user2 = BL.subscribeToForum(2, "ilay", "david", "eli@post.bgu.ac.il", "123", forum.Id, strarr, true);
             BL.sendMessage(user1.Id, forum.Id, user2.Id, "user1 sends msg to user 2");
-            Assert.AreEqual(1, user2.GetNewNotifications().Length, "message recived");
+            Assert.AreEqual(1, user2.GetNewNotifications().Length,"message recived");
             Assert.AreEqual(0, user1.GetNewNotifications().Length, "no new messages");
+            
         }
 
 

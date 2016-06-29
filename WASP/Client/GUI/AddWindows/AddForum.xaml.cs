@@ -40,9 +40,7 @@ namespace Client.GUI
                     bool emailVerification = chkbEmailVer.IsChecked.Value;
                     int seniority = int.Parse(txtModSen.Text);
                     int usersSameTime = int.Parse(txtUserSameTime.Text);
-
-                    questions = new List<string> { txtNewQuestion1.Text, txtNewQuestion2.Text };
-
+                    
                     Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime, 
                         questions.ToArray(), notificationSelecting());
 
@@ -72,14 +70,27 @@ namespace Client.GUI
         {
             int ret = 0;
             ret += chkbAdmin.IsChecked.Value ? Policy.admin : 0;
-            ret += chkbModerator.IsChecked.Value ? Policy.moderator : 0;
-            ret += chkbOwner.IsChecked.Value ? Policy.owner : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.moderator : 0;
+            ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
             return ret;
         }
 
         public Forum getForum()
         {
             return _forum;
+        }
+
+        private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            string newQ = txtNewQuestion.Text;
+            if (newQ.Equals(""))
+            {
+                MessageBox.Show("Enter a question.");
+                return;
+            }
+            questions.Add(newQ);
+            ListBoxItem item = new ListBoxItem() { Content = newQ };
+            lstBoxRestoreQuestion.Items.Add(item);
         }
     }
 }
