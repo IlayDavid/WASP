@@ -34,20 +34,20 @@ namespace WASP.DataClasses
         private Dictionary<int, User> friends = null;
         private string[] answers = new string[2];
 
-        public void initialize()
+        public User initialize()
         {
-            Object obj = this.NewNotifications;
-            obj = this.Notifications;
-            obj = this.Posts;
-            obj = this.Friends;
+            var obj = this.NewNotifications.Count;
+            obj = this.Notifications.Count;
+            obj = this.Posts.Count;
+            obj = this.Friends.Count;
+            return this;
         }
 
         public static User Get(int userId, int forumId)
         {
             if (Settings.UseCache())
                 return Settings.GetCache().GetUser(userId, forumId);
-            
-            return dal.GetUser(userId, forumId);
+            return dal.GetUser(userId, forumId).initialize();
         }
         public static User[] Get(int[] ids, int forumID)
         {
@@ -281,12 +281,24 @@ namespace WASP.DataClasses
 
             if (!this.Forum.Policy.NotifyOffline && this.OnlineCount == 0)
                 return;
-            
+            initialize();
             newNotification.Target = this;
-            var tmp = NewNotifications.Count;
             newNotification = newNotification.Create();
             NewNotifications.Add(newNotification.Id, newNotification);
+            Notifications.Add(newNotification.Id, newNotification);
             Config.Settings.NotificationMethod(Id, forum.Id);
+        }
+
+        public void AgeNewNotification(int id)
+        {
+            Notification notif;
+            NewNotifications.TryGetValue(id, out notif);
+            if(notif != null)
+            {
+                NewNotifications.Remove(id);
+                notif.IsNew = false;
+                notif.Update();
+            }
         }
 
         public Notification[] GetAllNotifications()

@@ -15,10 +15,14 @@ namespace AccTests.Tests
         private Forum _forum;
         private Subforum _subforum;
         private SuperUser _supervisor;
+        private String supass = "moshe123";
+        private String suusername = "SuperUser";
         private Admin _admin;
+        private String adminpass = "david123";
         private User _moderator;
+        private string modpass = "ilan123";
 
-      
+
         [TestInitialize]     //before each Test
         public void SetUp()
         {
@@ -30,12 +34,12 @@ namespace AccTests.Tests
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _proj.login(_admin.user.userName, _admin.user.password, _forum.id, "");
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
             _moderator = subforumAndModerator.Item2;
-            _proj.login(_moderator.userName, _moderator.password, _forum.id, "");
+            _proj.login(_moderator.userName, modpass, _forum.id, "");
            
 
         }
@@ -48,7 +52,7 @@ namespace AccTests.Tests
         public void OpenThreadTest1()
         {
             User member = ClientFunctions.SubscribeSpecMember(_proj, _forum);
-            _proj.login(member.userName, member.password, _forum.id, "");
+            _proj.login(member.userName, "ariel123", _forum.id, "");
             Post isOpenPost = _proj.createThread("webService for calander", "Someone know a good web service for Calander?",
                                    _subforum.id);
             Assert.IsNotNull(isOpenPost);
@@ -60,6 +64,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest2()
         {
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             Post isOpenPost = _proj.createThread("webService for calander", "Someone know a good web service for Calander?",
                                    _subforum.id);
             Assert.IsNotNull(isOpenPost);
@@ -71,6 +76,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void OpenThreadTest3()
         {
+            _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             Post isOpenPost = _proj.createThread("", "Someone know a good web service for Calander?",
                                    _subforum.id);
             Assert.IsNull(isOpenPost);

@@ -14,6 +14,7 @@ namespace Client.BusinessLogic
         //---------------------------Version 1 Use Cases Start------------------------------------
         public SuperUser initialize(string name, string userName, int ID, string email, string pass)
         {
+            _logger.writeToFile("initialize the system");
             string validStr = isUserValid(name, userName, ID, email, pass);
             if (validStr == null)
                 return _cl.initialize(name, userName, ID, email, sha256_hash(pass));
@@ -51,6 +52,8 @@ namespace Client.BusinessLogic
 
         public Forum createForum(string forumName, string description, int adminID, string adminUserName, string adminName, string email, string pass, Policy policy)
         {
+            _logger.writeToFile("creating new forum");
+
             string validStr = isUserValid(adminName, adminUserName, adminID, email, pass);
             if (validStr != null) throw new Exception(validStr);
             if (!IsStrValid(forumName)) throw new Exception("ERROR: Forum name is empty");
@@ -62,20 +65,24 @@ namespace Client.BusinessLogic
 
         public int defineForumPolicy(Policy policy)
         {
+            _logger.writeToFile("define/change policy");
             return _cl.defineForumPolicy(policy);
         }  
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online)
         {
+            _logger.writeToFile("Subscribe to forum");
             string errorMsg = isUserValid(name, userName, id, email, pass);
             if (targetForumID < 0) throw new Exception("ERROR: ID is illegal");
             if (errorMsg != null) throw new Exception(errorMsg);
 
-            return _cl.subscribeToForum(id, userName, name, email, sha256_hash(pass), targetForumID);
+            return _cl.subscribeToForum(id, userName, name, email, sha256_hash(pass), targetForumID, answers, online);
         }
 
         public Post createThread(string title, string content, int subForumID)
         {
+            _logger.writeToFile("create thread");
+
             if (subForumID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(title)) throw new Exception("ERROR: Post title is empty");
             if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
@@ -85,6 +92,8 @@ namespace Client.BusinessLogic
 
         public Post createReplyPost(string content, int replyToPost_ID)
         {
+            _logger.writeToFile("create reply post");
+
             if (replyToPost_ID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(content)) throw new Exception("ERROR: Post content is empty");
 
@@ -93,6 +102,8 @@ namespace Client.BusinessLogic
 
         public Subforum createSubForum(string name, string description, int moderatorID, DateTime term)
         {
+            _logger.writeToFile("create sub forum");
+
             if (moderatorID < 0) throw new Exception("ERROR: ID is illegal");
             if (!IsStrValid(name)) throw new Exception("ERROR: name is empty or illegal");
             if (!IsStrValid(description)) throw new Exception("ERROR: description is empty or illegal");

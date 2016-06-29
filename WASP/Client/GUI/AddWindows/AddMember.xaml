@@ -5,26 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.GUI.AddWindows"
         mc:Ignorable="d"
-        Title="AddMember" Height="247.819" Width="422.403"
+        Title="AddMember" Height="284.085" Width="426.029"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid Margin="10,10,0,-0.2" HorizontalAlignment="Left" Width="406">
-            <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"/>
-            <TextBox x:Name="txtID" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="89,11,0,0"/>
-            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,35,0,0"/>
-            <TextBox x:Name="txtName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="89,38,0,0"/>
-            <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,62,0,0"/>
-            <TextBox x:Name="txtUsername" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="89,65,0,0"/>
-            <Label Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,88,0,0"/>
-            <TextBox x:Name="txtmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,90,0,0" Width="120"/>
-            <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,113,0,0"/>
-            <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,115,0,0" Width="120"/>
-            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="172,172,0,0" Click="BtnCreate_Click"/>
+            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="176,215,0,0" Click="BtnCreate_Click"/>
         </Grid>
         <GroupBox x:Name="gBoxRestore" Header="Restore Password - QA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="232,10,0,0" Height="140" Width="175">
             <Grid HorizontalAlignment="Left" Margin="0,0,-3.4,-4.8" Width="165">
                 <Label x:Name="lblUserQusetion" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,25,0,0" FontWeight="Bold"/>
                 <ListBox x:Name="lstQuestions" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="165"/>
+            </Grid>
+        </GroupBox>
+        <Grid HorizontalAlignment="Left" Height="148" VerticalAlignment="Top" Width="217" Margin="10,10,0,0">
+            <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,8,0,0"/>
+            <TextBox x:Name="txtID" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="92,11,-112,0"/>
+            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,35,0,0"/>
+            <TextBox x:Name="txtName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="92,38,-112,0"/>
+            <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,62,0,0"/>
+            <TextBox x:Name="txtUsername" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="92,65,-112,0"/>
+            <Label Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,88,0,-14"/>
+            <TextBox x:Name="txtmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,90,-112,-8" Width="120"/>
+            <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,113,0,-39"/>
+            <PasswordBox x:Name= "passPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,115,-112,-33" Width="120"/>
+        </Grid>
+        <GroupBox x:Name="gridInteractivity" Header="Interactivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,158,0,0" Height="62" Width="97">
+            <Grid Margin="0,0,-2.2,-4.6">
+                <RadioButton x:Name="rdbOn" IsChecked="True" Content="Online" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                <RadioButton x:Name="rdbOff" Content="Offline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
             </Grid>
         </GroupBox>
     </Grid>

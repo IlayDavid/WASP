@@ -25,6 +25,11 @@ namespace AccTests
             throw new NotImplementedException();
         }
 
+        public void Clean()
+        {
+            _clientAPI.Clean();
+        }
+
         public int addFriend(int friendID)
         {
             return _clientAPI.addFriend(friendID);
@@ -206,9 +211,9 @@ namespace AccTests
             throw new NotImplementedException();
         }
 
-        public void restorePasswordbyAnswers(string username, int forum_id, List<string> answers, string newPassword)
+        public void restorePasswordbyAnswers(int userid, int forum_id, List<string> answers, string newPassword)
         {
-            throw new NotImplementedException();
+            _clientAPI.restorePasswordbyAnswers(userid, forum_id, answers, newPassword);
         }
 
         public int sendMessage(int targetUserID, string message)
@@ -226,9 +231,9 @@ namespace AccTests
             return _clientAPI.subForumTotalMessages(subForumID);
         }
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, List<string> answers, bool online)
         {
-            return _clientAPI.subscribeToForum(id, userName, name, email, pass, targetForumID);
+            return _clientAPI.subscribeToForum(id, userName, name, email, pass, targetForumID, answers,online);
         }
 
         public int totalForums()

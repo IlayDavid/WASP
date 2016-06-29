@@ -7,6 +7,7 @@ namespace AccTests.Tests
 {
     public class Functions
     {
+        private static string[] arr = { "shlomo", "moshe" };
         
         public static SuperUser InitialSystem(WASPBridge proj)
         {
@@ -25,7 +26,7 @@ namespace AccTests.Tests
         public static Tuple<Subforum, User> CreateSpecSubForum(WASPBridge proj, Admin admin, Forum forum)
         {
             var user = proj.subscribeToForum(2,"ilanB", "ilan", "ilanB@post.bgu.ac.il",
-                                        "ilan123",forum.Id);
+                                        "ilan123",forum.Id, arr, false);
             Subforum subforum =  proj.createSubForum(1, forum.Id, "sub1", "blah", 2, DateTime.Now.AddDays(100));
             var moderator = proj.login(user.Username, user.Password, forum.Id);
             return new Tuple<Subforum, User>(subforum, moderator);
@@ -33,7 +34,7 @@ namespace AccTests.Tests
 
         public static User SubscribeSpecMember(WASPBridge proj, Forum forum)
         {
-            return proj.subscribeToForum(3,"arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum.Id);
+            return proj.subscribeToForum(3,"arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum.Id, arr, false);
         }
 
         public static Tuple<Forum, Admin> CreateSpecForum2(WASPBridge proj, SuperUser supervisor)
@@ -49,7 +50,7 @@ namespace AccTests.Tests
         public static Tuple<Subforum, User> CreateSpecSubForum2(WASPBridge proj, Admin admin, Forum forum)
         {
             var user= proj.subscribeToForum(5,"amitB", "amit", "amitB@post.bgu.ac.il",
-                                        "amit123", forum.Id);
+                                        "amit123", forum.Id, arr, false);
             Subforum subforum = proj.createSubForum(4,forum.Id, "subbbbb2", "blah", 5, DateTime.Now.AddDays(100));
             var moderator = proj.login(user.Username, user.Password, forum.Id);
             return new Tuple<Subforum, User>(subforum, moderator);
@@ -57,7 +58,7 @@ namespace AccTests.Tests
 
         public static User SubscribeSpecMember2(WASPBridge proj, Forum forum)
         {
-            return proj.subscribeToForum(6,"shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum.Id);
+            return proj.subscribeToForum(6,"shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum.Id, arr, false);
         }
 
     }

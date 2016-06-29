@@ -155,6 +155,8 @@ namespace Client.GUI
         }
         public static void CloseAllWindows()
         {
+            if (user != null)
+                bl.logout();
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
                 try
                 {

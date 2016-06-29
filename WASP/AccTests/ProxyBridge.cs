@@ -54,9 +54,9 @@ namespace AccTests
             return 1;
         }
 
-        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID)
+        public User subscribeToForum(int id, string userName, string name, string email, string pass, int targetForumID, string [] arr, bool online)
         {
-            return ((WASP.Domain.IBL) proj).subscribeToForum(id, userName, name, email, pass, targetForumID);
+            return ((WASP.Domain.IBL) proj).subscribeToForum(id, userName, name, email, pass, targetForumID, arr, online);
         }
 
         public Post createThread(int userID, int forumID, string title, string content, int subForumID)
@@ -259,6 +259,11 @@ namespace AccTests
         public int defineForumPolicy(int userID, int forumID, string deletePost, TimeSpan passwordPeriod, bool emailVerification, TimeSpan minimumSeniority, int usersLoad, string[] questions, bool notifyOffline, bool superUser = false)
         {
             return ((WASP.Domain.IBL)proj).defineForumPolicy(userID, forumID, deletePost, passwordPeriod, emailVerification, minimumSeniority, usersLoad, questions, notifyOffline, superUser);
+        }
+
+        public int restorePasswordByAnswers(int userID, int forumID, string[] answers, string newPassword)
+        {
+            return ((WASP.Domain.IBL)proj).restorePasswordByAnswers(userID, forumID, answers, newPassword);
         }
     }
 }

@@ -36,16 +36,25 @@ namespace WASP.Service
         {
             return loggedIn[hash];
         }
+
+        public static string Clean(Dictionary<string, dynamic> data)
+        {
+            loggedIn = new Dictionary<string, LoginPair>();
+            bl.Clean();
+            return 1.ToString();
+        }
+
         public static string initialize(Dictionary<string, dynamic> data)
         {
             bl = new BLFacade();
+            loggedIn = new Dictionary<string, LoginPair>();
             SuperUser su = ServiceFacade.bl.initialize(data["name"], data["username"], data["id"], data["email"], data["password"]);
             string key = GenerateRandomHash();
-            su.Secret = key;
-            loggedIn.Add(key, new LoginPair(su.Id));
+            //su.Secret = key;
+            //loggedIn.Add(key, new LoginPair(su.Id));
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("auth", key);
+            result.Add("auth", "");
             result.Add("id", su.Id);
             result.Add("username", su.Username);
             result.Add("password", su.Password);
@@ -85,14 +94,21 @@ namespace WASP.Service
                 forumId = data["forum"];
                 superUser = true;
             }
-            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], data["notifiyoffline"], superUser);
+            string[] questions = new string[2];
+            questions[0] = data["questions"][0];
+            questions[1] = data["questions"][1];
+
+            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], questions, data["notifiyoffline"], superUser);
 
             return 1.ToString();
         }
 
         public static string subscribeToForum(Dictionary<string, dynamic> data)
         {
-            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"], data["answers"], data["wantnotifications"]);
+            string[] answers = new string[2];
+            answers[0] = data["answers"][0];
+            answers[1] = data["answers"][1];
+            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"], answers, data["wantnotifications"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("username", user.Username);
             result.Add("id", user.Id);
@@ -619,7 +635,12 @@ namespace WASP.Service
         public static string getAdmin(Dictionary<string, dynamic> data)
         {   //adminid
             LoginPair pair = loggedIn[data["auth"]];
-            Admin a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            Admin a;
+            if (pair.ForumId != -1)
+                a = bl.getAdmin(pair.UserId, pair.ForumId, data["adminid"]);
+            else
+                a = bl.getAdmin(pair.UserId, data["forumid"], data["adminid"]);
+
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             //username, id, password, email, name
             User u = a.User;
@@ -656,7 +677,10 @@ namespace WASP.Service
 
         public static string restorePasswordByAnswers(Dictionary<string, dynamic> data)
         {
-            bl.restorePasswordByAnswers(data["userid"], data["forumid"], data["answers"], data["newpassword"]);
+            string[] answers = new string[2];
+            answers[0] = data["answers"][0];
+            answers[1] = data["answers"][1];
+            bl.restorePasswordByAnswers(data["userid"], data["forumid"], answers, data["newpassword"]);
 
             return 1.ToString();
         }
@@ -676,6 +700,7 @@ namespace WASP.Service
                 if (user.OnlineCount == 0)
                     user.Secret = "";
             }
+            loggedIn.Remove(data["auth"]);
             return 1.ToString();
         }
 

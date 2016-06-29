@@ -16,7 +16,7 @@ namespace Client.DataClasses
         public List<User> friends;
         public string client_session;
         //QA for restoring password
-        public string question, answer;
+        public List<string> answers;
 
         public User() { }
         public User(int id, string name, string userName, string email, string pass)
@@ -30,8 +30,7 @@ namespace Client.DataClasses
             this.passCreateDate = joinDate;
             this.friends = new List<User>();
             client_session = "need to get from CL";
-            question = "";
-            answer = "";
+            answers = new List<string>();
         }
 
 

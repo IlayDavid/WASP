@@ -18,6 +18,7 @@ namespace AccTests.Tests
         private Admin _admin;
         private User _member1;
         private User _member2;
+        private string[] arr = { "shlomo", "moshe" };
 
         //private Subforum _subforum;
 
@@ -31,8 +32,8 @@ namespace AccTests.Tests
             var forumAndAdmin = Functions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2;
-            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.Id);
-            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id);
+            _member1 = _proj.subscribeToForum(20,"amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.Id, arr, false);
+            _member2 = _proj.subscribeToForum(21,"edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.Id, arr, false);
 
             _proj.login(_admin.User.Username, _admin.User.Password, _forum.Id);
             _proj.login(_member1.Username, _member1.Password, _forum.Id);

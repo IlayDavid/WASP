@@ -6,14 +6,19 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WASP.LoggerPC;
 
 namespace Client.BusinessLogic
 {
     public partial class BL : IBL
     {
+        private Logger _logger;
         private IBL _cl;
         public BL()
         {
+            _logger = new Logger("../../../LoggerOutput/bl_logger.txt");
+            _logger.writeToFile("create BL object");
+
             _cl = new CL();
             if (_cl is TCL)
                 initForTesting();
@@ -71,6 +76,8 @@ namespace Client.BusinessLogic
         }
         public User login(string userName, string password, int forumID, string session)
         {
+            _logger.writeToFile("login - not super user");
+
             if (!IsStrValid(userName)) throw new Exception("ERROR: username is empty or iilegal");
             if (!IsStrValid(password)) throw new Exception("ERROR: password is empty or iilegal");
             if (forumID < 0) throw new Exception("ERROR: forum id is iilegal");
@@ -79,6 +86,7 @@ namespace Client.BusinessLogic
 
         public SuperUser loginSU(string userName, string password)
         {
+            _logger.writeToFile("login of super user");
             if (IsStrValid(userName) && IsPasswordValid(password))
                 return _cl.loginSU(userName, sha256_hash(password));
             else
@@ -87,6 +95,7 @@ namespace Client.BusinessLogic
 
         public void logout()
         {
+            _logger.writeToFile("logout the system");
             _cl.logout();
         }
         private static String sha256_hash(String value)
@@ -107,17 +116,20 @@ namespace Client.BusinessLogic
         //---------------------------------Getters----------------------------------------------
         public List<Post> getThreads(int subForumID)
         {
+            _logger.writeToFile("get threads");
             if (subForumID < 0) throw new Exception("ERROR: id is illegal");
             return _cl.getThreads(subForumID);
         }
         public List<Post> getReplys(int postID)
         {
+            _logger.writeToFile("get replys");
             if (postID < 0) throw new Exception("ERROR: id is illegal");
             return _cl.getReplys(postID);
         }
 
         public Post getThread(int threadId)
         {
+            _logger.writeToFile("get thread");
             if (threadId >= 0)
                 return _cl.getThread(threadId);
             else
@@ -126,6 +138,7 @@ namespace Client.BusinessLogic
 
         public Forum getForum(int forumID)
         {
+            _logger.writeToFile("get forum");
             if (forumID >= 0)
                 return _cl.getForum(forumID);
             else
@@ -134,6 +147,7 @@ namespace Client.BusinessLogic
 
         public Subforum getSubforum(int subforumId)
         {
+            _logger.writeToFile("get sub forum");
             if (subforumId >= 0)
                 return _cl.getSubforum(subforumId);
             else
@@ -142,12 +156,14 @@ namespace Client.BusinessLogic
 
         public List<Moderator> getModerators(int subForumID)
         {
+            _logger.writeToFile("get moderator");
             if (subForumID < 0) throw new Exception("ERROR: id is illegal");
             return _cl.getModerators(subForumID);
         }
 
         public DateTime getModeratorTermTime(int moderatorID, int subforumID)
         {
+            _logger.writeToFile("get moderator term time");
             if (subforumID >= 0 && moderatorID >= 0)
                 return _cl.getModeratorTermTime(moderatorID, subforumID);
             else
@@ -156,12 +172,14 @@ namespace Client.BusinessLogic
 
         public List<Forum> getAllForums()
         {
+            _logger.writeToFile("get all forum");
             List<Forum> f = _cl.getAllForums();
             return f;
         }
 
         public List<Admin> getAdmins(int forumID)
         {
+            _logger.writeToFile("get admin");
             if (forumID >= 0)
                 return _cl.getAdmins(forumID);
             else
@@ -170,12 +188,14 @@ namespace Client.BusinessLogic
 
         public List<User> getMembers(int forumID)
         {
+            _logger.writeToFile("get members");
             if (forumID < 0) throw new Exception("ERROR: id is illegal");
             return _cl.getMembers(forumID);
         }
 
         public List<Subforum> getSubforums(int forumID)
         {
+            _logger.writeToFile("get sub forums");
             if (forumID >= 0)
                 return _cl.getSubforums(forumID);
             else
@@ -184,6 +204,7 @@ namespace Client.BusinessLogic
 
         public Admin getAdmin(int adminID, int forumID)
         {
+            _logger.writeToFile("get admins");
             if (adminID >= 0)
                 return _cl.getAdmin(adminID, forumID);
             else
@@ -192,6 +213,7 @@ namespace Client.BusinessLogic
 
         public Admin getAdmin(int adminID)
         {
+            _logger.writeToFile("get admin (not implemented error should be risen)");
             throw new NotImplementedException();
         }
 

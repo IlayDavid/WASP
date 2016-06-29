@@ -44,6 +44,7 @@ namespace WASP.DataClasses
             Username = userName;
             Password = password;
             OnlineCount = 0;
+            Secret = "";
         }
         public int Id { get; set; }
         public String Username { get; set; }

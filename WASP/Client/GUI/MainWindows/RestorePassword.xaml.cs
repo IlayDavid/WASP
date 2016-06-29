@@ -25,26 +25,27 @@ namespace Client.GUI.MainWindows
 
             if (Session.forum.policy.questions == null || Session.forum.policy.questions.Count() == 0)
             {
-                string question = Session.forum.policy.questions[0];
-                lblQuestion.Content = question;
+                string[] questions = Session.forum.policy.questions;
+                lblQuestion1.Content = questions[0];
+                lblQuestion2.Content = questions[1];
             }
         }
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
-            string answer = txtAnswer.Text;
-            List<string> answers = new List<string> { answer };
-            string username = txtUserName.Text;
-            string newpassword = txtNewpassword.Text;
-            if (answer.Equals("") || newpassword.Equals(""))
-            {
-                MessageBox.Show("Please enter answer and new password");
-                return;
-            }
+            List<string> answers = new List<string> { txtAnswer1.Text, txtAnswer2.Text };
             try
             {
-                Session.bl.restorePasswordbyAnswers(username, Session.forum.id,answers, newpassword);
+                int user_id = int.Parse(txtUserName.Text);
+                string newpassword = txtNewpassword.Text;
+                if (/*answers[0].Equals("") ||*/ newpassword.Equals(""))
+                {
+                    MessageBox.Show("Please enter answer and new password");
+                    return;
+                }
+                Session.bl.restorePasswordbyAnswers(user_id, Session.forum.id, answers, newpassword);
                 MessageBox.Show("Your new password is: " + newpassword, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             catch { }
         }
