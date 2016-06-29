@@ -33,7 +33,7 @@ namespace Client.GUI.MainWindows
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
             string answer = txtAnswer.Text;
-            List<string> answers = new List<string> { answer };
+            List<string> answers = new List<string> { answer, "" };
             try
             {
 

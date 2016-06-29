@@ -24,6 +24,10 @@ namespace Client.CommunicationLayer
         {
             NotificationComponent.Initialize(loginHash, _cl);
         }
+        public void Stop()
+        {
+            NotificationComponent.close();
+        }
 
     }
 }

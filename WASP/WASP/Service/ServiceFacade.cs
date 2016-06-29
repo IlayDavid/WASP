@@ -85,14 +85,20 @@ namespace WASP.Service
                 forumId = data["forum"];
                 superUser = true;
             }
-            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], data["questions"], data["notifiyoffline"], superUser);
+            string[] questions = new string[2];
+            questions[0] = data["questions"][0];
+            questions[1] = data["questions"][1];
+            bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], questions, data["notifiyoffline"], superUser);
 
             return 1.ToString();
         }
 
         public static string subscribeToForum(Dictionary<string, dynamic> data)
         {
-            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"], data["answers"], data["wantnotifications"]);
+            string[] answers = new string[2];
+            answers[0] = data["answers"][0];
+            answers[1] = data["answers"][1];
+            User user = bl.subscribeToForum(data["userid"], data["username"], data["name"], data["email"], data["password"], data["forumid"], answers, data["wantnotifications"]);
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
             result.Add("username", user.Username);
             result.Add("id", user.Id);
@@ -661,7 +667,10 @@ namespace WASP.Service
 
         public static string restorePasswordByAnswers(Dictionary<string, dynamic> data)
         {
-            bl.restorePasswordByAnswers(data["userid"], data["forumid"], data["answers"], data["newpassword"]);
+            string[] answers = new string[2];
+            answers[0] = data["answers"][0];
+            answers[1] = data["answers"][1];
+            bl.restorePasswordByAnswers(data["userid"], data["forumid"], answers, data["newpassword"]);
 
             return 1.ToString();
         }
@@ -681,6 +690,7 @@ namespace WASP.Service
                 if (user.OnlineCount == 0)
                     user.Secret = "";
             }
+            loggedIn.Remove(data["auth"]);
             return 1.ToString();
         }
 

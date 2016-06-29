@@ -34,7 +34,7 @@
 	console.log(param);
 	$.post("http://localhost:8080/login/", JSON.stringify(param), function(data, status){
 			   data=JSON.parse(data);
-                window.location.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+forumid+"&auth="+data['auth']+"&hash="+data['hash'];
+                window.location.href="http://localhost:8080/Web/HTML/getSubForum.html?id="+forumid+"&auth="+data['auth'];
             });
 	}
 	

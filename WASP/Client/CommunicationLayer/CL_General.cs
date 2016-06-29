@@ -20,6 +20,7 @@ namespace Client.CommunicationLayer
         public string _auth { get; set; }
         private ParseString parser;
         private Thread notifThread;
+        private NotifConnection ncon;
         //will set to the current forumID, which the user is loged to.
         //will be used only for functions that require log-in.
         private int forumID;
@@ -93,7 +94,7 @@ namespace Client.CommunicationLayer
             string json = "{\"username\":\"" + userName + "\"," + "\"password\":\"" + password + "\"," + "\"forumid\":" + forumID + "," + "\"auth\":\"" + session + "\"" + "}";
             string res = httpReq(json, "POST", _url + "/login/");
             User ans = parser.parseStringToUser(res, true, this);
-            NotifConnection ncon = new NotifConnection(_auth, this);
+            ncon = new NotifConnection(_auth, this);
             notifThread = new Thread(ncon.Run);
             notifThread.Start();
             return ans;
@@ -112,6 +113,7 @@ namespace Client.CommunicationLayer
             JavaScriptSerializer jss = new JavaScriptSerializer();
             dict.Add("auth", _auth);
             string json = jss.Serialize(dict);
+            ncon.Stop();
             string res = httpReq(json, "POST", _url + "/logout/");
 
         }
@@ -228,7 +230,7 @@ namespace Client.CommunicationLayer
             dict.Add("forumid", forum_id);
             dict.Add("newpassword", newPassword);
             string json = jss.Serialize(dict);
-            string res = httpReq(json, "POST", _url + "/restorePasswordbyAnswers/");
+            string res = httpReq(json, "POST", _url + "/restorePasswordByAnswers/");
         }
 
         public void addAnswers(int user_id, List<string> answers)

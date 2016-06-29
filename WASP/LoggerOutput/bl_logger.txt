@@ -587,3 +587,459 @@
 29/06/2016 01:18:59: get members
 29/06/2016 01:18:59: get forum
 29/06/2016 01:18:59: get admin
+29/06/2016 01:36:12: create BL object
+29/06/2016 01:36:15: initialize the system
+29/06/2016 01:36:16: get all forum
+29/06/2016 01:36:19: get members
+29/06/2016 01:36:19: get sub forums
+29/06/2016 01:36:19: get admin
+29/06/2016 01:36:19: get members
+29/06/2016 01:36:19: get forum
+29/06/2016 01:36:31: Subscribe to forum
+29/06/2016 01:40:08: create BL object
+29/06/2016 01:40:13: initialize the system
+29/06/2016 01:40:15: get all forum
+29/06/2016 01:40:27: login of super user
+29/06/2016 01:40:31: get members
+29/06/2016 01:40:31: get sub forums
+29/06/2016 01:40:31: get admin
+29/06/2016 01:40:31: get members
+29/06/2016 01:40:31: get forum
+29/06/2016 01:41:01: Subscribe to forum
+29/06/2016 01:41:04: Subscribe to forum
+29/06/2016 01:43:25: create BL object
+29/06/2016 01:43:31: initialize the system
+29/06/2016 01:43:32: get all forum
+29/06/2016 01:43:46: get members
+29/06/2016 01:43:46: get sub forums
+29/06/2016 01:43:46: get admin
+29/06/2016 01:43:46: get members
+29/06/2016 01:43:46: get forum
+29/06/2016 01:44:01: Subscribe to forum
+29/06/2016 01:44:11: get new notifications
+29/06/2016 01:45:22: get members
+29/06/2016 01:45:22: get sub forums
+29/06/2016 01:45:22: get admin
+29/06/2016 01:45:22: get members
+29/06/2016 01:45:22: get forum
+29/06/2016 01:47:21: create BL object
+29/06/2016 01:47:27: initialize the system
+29/06/2016 01:47:28: get all forum
+29/06/2016 01:47:31: get members
+29/06/2016 01:47:31: get sub forums
+29/06/2016 01:47:31: get admin
+29/06/2016 01:47:31: get members
+29/06/2016 01:47:31: get forum
+29/06/2016 01:47:42: Subscribe to forum
+29/06/2016 01:47:42: login - not super user
+29/06/2016 01:48:10: create BL object
+29/06/2016 01:48:10: get all forum
+29/06/2016 01:48:15: get members
+29/06/2016 01:48:15: get sub forums
+29/06/2016 01:48:15: get admin
+29/06/2016 01:48:15: get members
+29/06/2016 01:48:15: get forum
+29/06/2016 01:48:28: Subscribe to forum
+29/06/2016 01:48:28: login - not super user
+29/06/2016 01:50:36: create BL object
+29/06/2016 01:50:46: initialize the system
+29/06/2016 01:50:47: get all forum
+29/06/2016 01:50:50: get members
+29/06/2016 01:50:50: get sub forums
+29/06/2016 01:50:50: get admin
+29/06/2016 01:50:51: get members
+29/06/2016 01:50:51: get forum
+29/06/2016 01:51:19: Subscribe to forum
+29/06/2016 01:51:19: login - not super user
+29/06/2016 01:53:40: Subscribe to forum
+29/06/2016 01:53:40: login - not super user
+29/06/2016 01:58:18: create BL object
+29/06/2016 01:58:18: get all forum
+29/06/2016 01:58:22: get members
+29/06/2016 01:58:22: get sub forums
+29/06/2016 01:58:22: get admin
+29/06/2016 01:58:22: get members
+29/06/2016 01:58:22: get forum
+29/06/2016 01:58:30: Subscribe to forum
+29/06/2016 01:58:30: login - not super user
+29/06/2016 02:05:41: create BL object
+29/06/2016 02:06:03: initialize the system
+29/06/2016 02:06:05: get all forum
+29/06/2016 02:06:16: get members
+29/06/2016 02:06:16: get sub forums
+29/06/2016 02:06:16: get admin
+29/06/2016 02:06:16: get members
+29/06/2016 02:06:16: get forum
+29/06/2016 02:06:34: Subscribe to forum
+29/06/2016 02:07:00: login - not super user
+29/06/2016 02:08:07: create BL object
+29/06/2016 02:08:13: initialize the system
+29/06/2016 02:08:15: get all forum
+29/06/2016 02:08:20: get members
+29/06/2016 02:08:20: get sub forums
+29/06/2016 02:08:20: get admin
+29/06/2016 02:08:20: get members
+29/06/2016 02:08:20: get forum
+29/06/2016 02:08:33: Subscribe to forum
+29/06/2016 02:08:33: login - not super user
+29/06/2016 02:10:10: create BL object
+29/06/2016 02:10:17: initialize the system
+29/06/2016 02:10:18: get all forum
+29/06/2016 02:10:22: get members
+29/06/2016 02:10:22: get sub forums
+29/06/2016 02:10:22: get admin
+29/06/2016 02:10:22: get members
+29/06/2016 02:10:22: get forum
+29/06/2016 02:10:39: Subscribe to forum
+29/06/2016 02:10:39: login - not super user
+29/06/2016 02:12:39: create BL object
+29/06/2016 02:12:44: initialize the system
+29/06/2016 02:12:45: get all forum
+29/06/2016 02:12:48: get members
+29/06/2016 02:12:48: get sub forums
+29/06/2016 02:12:48: get admin
+29/06/2016 02:12:48: get members
+29/06/2016 02:12:48: get forum
+29/06/2016 02:13:01: Subscribe to forum
+29/06/2016 02:14:20: login - not super user
+29/06/2016 02:18:43: create BL object
+29/06/2016 02:18:49: initialize the system
+29/06/2016 02:18:50: get all forum
+29/06/2016 02:18:53: get members
+29/06/2016 02:18:53: get sub forums
+29/06/2016 02:18:53: get admin
+29/06/2016 02:18:53: get members
+29/06/2016 02:18:53: get forum
+29/06/2016 02:19:06: Subscribe to forum
+29/06/2016 02:19:06: login - not super user
+29/06/2016 02:19:06: get new notifications
+29/06/2016 02:19:06: get members
+29/06/2016 02:19:06: get sub forums
+29/06/2016 02:19:06: get admin
+29/06/2016 02:19:06: get members
+29/06/2016 02:19:06: get forum
+29/06/2016 02:19:08: get members
+29/06/2016 02:19:08: get admin
+29/06/2016 02:19:15: logout the system
+29/06/2016 02:19:20: login - not super user
+29/06/2016 02:19:20: get new notifications
+29/06/2016 02:19:20: get members
+29/06/2016 02:19:20: get sub forums
+29/06/2016 02:19:20: get admin
+29/06/2016 02:19:20: get members
+29/06/2016 02:19:20: get forum
+29/06/2016 02:19:20: get admin
+29/06/2016 02:19:25: logout the system
+29/06/2016 02:19:38: restore password by answers
+29/06/2016 02:19:48: login - not super user
+29/06/2016 02:19:53: login - not super user
+29/06/2016 02:19:54: get new notifications
+29/06/2016 02:19:54: get members
+29/06/2016 02:19:54: get sub forums
+29/06/2016 02:19:54: get admin
+29/06/2016 02:19:54: get members
+29/06/2016 02:19:54: get forum
+29/06/2016 02:19:54: get admin
+29/06/2016 02:19:58: logout the system
+29/06/2016 02:22:56: create BL object
+29/06/2016 02:23:02: initialize the system
+29/06/2016 02:23:03: get all forum
+29/06/2016 02:23:06: get members
+29/06/2016 02:23:06: get sub forums
+29/06/2016 02:23:06: get admin
+29/06/2016 02:23:06: get members
+29/06/2016 02:23:06: get forum
+29/06/2016 02:23:26: Subscribe to forum
+29/06/2016 02:23:46: login - not super user
+29/06/2016 02:23:59: get new notifications
+29/06/2016 02:23:59: get members
+29/06/2016 02:23:59: get sub forums
+29/06/2016 02:23:59: get admin
+29/06/2016 02:23:59: get members
+29/06/2016 02:23:59: get forum
+29/06/2016 02:24:01: get members
+29/06/2016 02:24:01: get admin
+29/06/2016 02:24:05: logout the system
+29/06/2016 02:24:18: restore password by answers
+29/06/2016 02:26:48: create BL object
+29/06/2016 02:26:52: initialize the system
+29/06/2016 02:26:52: get all forum
+29/06/2016 02:26:55: get members
+29/06/2016 02:26:55: get sub forums
+29/06/2016 02:26:55: get admin
+29/06/2016 02:26:55: get members
+29/06/2016 02:26:55: get forum
+29/06/2016 02:27:07: Subscribe to forum
+29/06/2016 02:27:07: login - not super user
+29/06/2016 02:27:07: get new notifications
+29/06/2016 02:27:07: get members
+29/06/2016 02:27:07: get sub forums
+29/06/2016 02:27:07: get admin
+29/06/2016 02:27:07: get members
+29/06/2016 02:27:07: get forum
+29/06/2016 02:27:08: get members
+29/06/2016 02:27:08: get admin
+29/06/2016 02:27:11: logout the system
+29/06/2016 02:27:20: restore password by answers
+29/06/2016 02:30:52: create BL object
+29/06/2016 02:31:00: initialize the system
+29/06/2016 02:31:02: get all forum
+29/06/2016 02:31:05: get members
+29/06/2016 02:31:05: get sub forums
+29/06/2016 02:31:05: get admin
+29/06/2016 02:31:05: get members
+29/06/2016 02:31:05: get forum
+29/06/2016 02:31:20: Subscribe to forum
+29/06/2016 02:31:20: login - not super user
+29/06/2016 02:31:34: get new notifications
+29/06/2016 02:31:34: get members
+29/06/2016 02:31:34: get sub forums
+29/06/2016 02:31:34: get admin
+29/06/2016 02:31:34: get members
+29/06/2016 02:31:34: get forum
+29/06/2016 02:31:39: get members
+29/06/2016 02:31:39: get admin
+29/06/2016 02:31:42: logout the system
+29/06/2016 02:31:59: restore password by answers
+29/06/2016 02:32:58: create BL object
+29/06/2016 02:33:02: initialize the system
+29/06/2016 02:33:03: get all forum
+29/06/2016 02:33:06: get members
+29/06/2016 02:33:06: get sub forums
+29/06/2016 02:33:06: get admin
+29/06/2016 02:33:06: get members
+29/06/2016 02:33:06: get forum
+29/06/2016 02:33:21: Subscribe to forum
+29/06/2016 02:33:21: login - not super user
+29/06/2016 02:33:29: get new notifications
+29/06/2016 02:33:29: get members
+29/06/2016 02:33:29: get sub forums
+29/06/2016 02:33:29: get admin
+29/06/2016 02:33:29: get members
+29/06/2016 02:33:29: get forum
+29/06/2016 02:33:31: get members
+29/06/2016 02:33:31: get admin
+29/06/2016 02:33:34: logout the system
+29/06/2016 02:33:47: restore password by answers
+29/06/2016 02:33:58: login - not super user
+29/06/2016 02:35:14: create BL object
+29/06/2016 02:35:19: initialize the system
+29/06/2016 02:35:21: get all forum
+29/06/2016 02:35:24: get members
+29/06/2016 02:35:24: get sub forums
+29/06/2016 02:35:24: get admin
+29/06/2016 02:35:24: get members
+29/06/2016 02:35:24: get forum
+29/06/2016 02:35:36: Subscribe to forum
+29/06/2016 02:35:36: login - not super user
+29/06/2016 02:35:36: get new notifications
+29/06/2016 02:35:36: get members
+29/06/2016 02:35:36: get sub forums
+29/06/2016 02:35:36: get admin
+29/06/2016 02:35:36: get members
+29/06/2016 02:35:36: get forum
+29/06/2016 02:35:37: get members
+29/06/2016 02:35:37: get admin
+29/06/2016 02:35:49: logout the system
+29/06/2016 02:36:01: restore password by answers
+29/06/2016 02:36:18: login - not super user
+29/06/2016 02:36:36: login - not super user
+29/06/2016 02:37:21: login - not super user
+29/06/2016 02:37:51: login - not super user
+29/06/2016 02:37:58: login - not super user
+29/06/2016 02:38:10: login - not super user
+29/06/2016 02:38:11: get new notifications
+29/06/2016 02:38:11: get members
+29/06/2016 02:38:11: get sub forums
+29/06/2016 02:38:11: get admin
+29/06/2016 02:38:11: get members
+29/06/2016 02:38:11: get forum
+29/06/2016 02:38:11: get admin
+29/06/2016 02:38:14: logout the system
+29/06/2016 02:38:22: login - not super user
+29/06/2016 02:38:22: get new notifications
+29/06/2016 02:38:22: get members
+29/06/2016 02:38:22: get sub forums
+29/06/2016 02:38:22: get admin
+29/06/2016 02:38:22: get members
+29/06/2016 02:38:22: get forum
+29/06/2016 02:38:22: get admin
+29/06/2016 02:38:27: logout the system
+29/06/2016 02:40:24: create BL object
+29/06/2016 02:40:29: initialize the system
+29/06/2016 02:40:29: get all forum
+29/06/2016 02:40:33: get members
+29/06/2016 02:40:33: get sub forums
+29/06/2016 02:40:33: get admin
+29/06/2016 02:40:33: get members
+29/06/2016 02:40:33: get forum
+29/06/2016 02:41:06: Subscribe to forum
+29/06/2016 02:41:07: login - not super user
+29/06/2016 02:41:07: get new notifications
+29/06/2016 02:41:07: get members
+29/06/2016 02:41:07: get sub forums
+29/06/2016 02:41:07: get admin
+29/06/2016 02:41:07: get members
+29/06/2016 02:41:07: get forum
+29/06/2016 02:41:07: get members
+29/06/2016 02:41:07: get admin
+29/06/2016 02:41:09: logout the system
+29/06/2016 02:41:42: Subscribe to forum
+29/06/2016 02:41:42: login - not super user
+29/06/2016 02:41:42: get new notifications
+29/06/2016 02:41:42: get members
+29/06/2016 02:41:42: get sub forums
+29/06/2016 02:41:42: get admin
+29/06/2016 02:41:42: get members
+29/06/2016 02:41:42: get forum
+29/06/2016 02:41:42: get members
+29/06/2016 02:41:42: get admin
+29/06/2016 02:41:45: logout the system
+29/06/2016 02:41:57: restore password by answers
+29/06/2016 02:42:19: login - not super user
+29/06/2016 02:46:23: login - not super user
+29/06/2016 02:47:14: login - not super user
+29/06/2016 02:48:59: create BL object
+29/06/2016 02:49:04: initialize the system
+29/06/2016 02:49:05: get all forum
+29/06/2016 02:49:08: get members
+29/06/2016 02:49:08: get sub forums
+29/06/2016 02:49:08: get admin
+29/06/2016 02:49:08: get members
+29/06/2016 02:49:08: get forum
+29/06/2016 02:49:18: Subscribe to forum
+29/06/2016 02:49:18: login - not super user
+29/06/2016 02:49:24: get new notifications
+29/06/2016 02:49:24: get members
+29/06/2016 02:49:24: get sub forums
+29/06/2016 02:49:24: get admin
+29/06/2016 02:49:24: get members
+29/06/2016 02:49:24: get forum
+29/06/2016 02:49:35: get members
+29/06/2016 02:49:35: get admin
+29/06/2016 02:49:39: logout the system
+29/06/2016 02:49:52: restore password by answers
+29/06/2016 02:50:18: login - not super user
+29/06/2016 02:53:04: get new notifications
+29/06/2016 02:53:43: create BL object
+29/06/2016 02:53:48: initialize the system
+29/06/2016 02:53:51: get all forum
+29/06/2016 02:53:57: get members
+29/06/2016 02:53:57: get sub forums
+29/06/2016 02:53:57: get admin
+29/06/2016 02:53:57: get members
+29/06/2016 02:53:57: get forum
+29/06/2016 02:54:07: Subscribe to forum
+29/06/2016 02:54:08: login - not super user
+29/06/2016 02:54:14: get new notifications
+29/06/2016 02:54:14: get members
+29/06/2016 02:54:14: get sub forums
+29/06/2016 02:54:14: get admin
+29/06/2016 02:54:14: get members
+29/06/2016 02:54:14: get forum
+29/06/2016 02:54:20: get members
+29/06/2016 02:54:20: get admin
+29/06/2016 02:54:24: logout the system
+29/06/2016 02:54:33: login - not super user
+29/06/2016 02:54:40: get new notifications
+29/06/2016 02:54:40: get members
+29/06/2016 02:54:40: get sub forums
+29/06/2016 02:54:40: get admin
+29/06/2016 02:54:40: get members
+29/06/2016 02:54:40: get forum
+29/06/2016 02:54:40: get admin
+29/06/2016 02:54:44: logout the system
+29/06/2016 02:54:50: login - not super user
+29/06/2016 02:54:58: get new notifications
+29/06/2016 02:54:58: get members
+29/06/2016 02:54:58: get sub forums
+29/06/2016 02:54:58: get admin
+29/06/2016 02:54:58: get members
+29/06/2016 02:54:58: get forum
+29/06/2016 02:54:58: get admin
+29/06/2016 02:55:10: logout the system
+29/06/2016 02:55:27: restore password by answers
+29/06/2016 02:56:03: restore password by answers
+29/06/2016 02:56:12: login - not super user
+29/06/2016 02:56:20: get new notifications
+29/06/2016 02:56:20: get members
+29/06/2016 02:56:20: get sub forums
+29/06/2016 02:56:20: get admin
+29/06/2016 02:56:20: get members
+29/06/2016 02:56:20: get forum
+29/06/2016 02:56:20: get admin
+29/06/2016 03:01:57: create BL object
+29/06/2016 03:02:02: initialize the system
+29/06/2016 03:02:03: get all forum
+29/06/2016 03:02:07: get members
+29/06/2016 03:02:07: get sub forums
+29/06/2016 03:02:07: get admin
+29/06/2016 03:02:07: get members
+29/06/2016 03:02:07: get forum
+29/06/2016 03:02:15: Subscribe to forum
+29/06/2016 03:02:15: login - not super user
+29/06/2016 03:02:27: get new notifications
+29/06/2016 03:02:27: get members
+29/06/2016 03:02:27: get sub forums
+29/06/2016 03:02:27: get admin
+29/06/2016 03:02:27: get members
+29/06/2016 03:02:27: get forum
+29/06/2016 03:02:35: get members
+29/06/2016 03:02:35: get admin
+29/06/2016 03:02:39: logout the system
+29/06/2016 03:05:02: create BL object
+29/06/2016 03:05:06: initialize the system
+29/06/2016 03:05:07: get all forum
+29/06/2016 03:05:10: get members
+29/06/2016 03:05:10: get sub forums
+29/06/2016 03:05:10: get admin
+29/06/2016 03:05:10: get members
+29/06/2016 03:05:10: get forum
+29/06/2016 03:05:21: Subscribe to forum
+29/06/2016 03:05:21: login - not super user
+29/06/2016 03:05:21: get new notifications
+29/06/2016 03:05:21: get members
+29/06/2016 03:05:21: get sub forums
+29/06/2016 03:05:21: get admin
+29/06/2016 03:05:21: get members
+29/06/2016 03:05:21: get forum
+29/06/2016 03:05:22: get members
+29/06/2016 03:05:22: get admin
+29/06/2016 03:05:29: logout the system
+29/06/2016 03:05:45: create BL object
+29/06/2016 03:05:45: get all forum
+29/06/2016 03:05:49: get members
+29/06/2016 03:05:49: get sub forums
+29/06/2016 03:05:49: get admin
+29/06/2016 03:05:49: get members
+29/06/2016 03:05:49: get forum
+29/06/2016 03:05:56: login - not super user
+29/06/2016 03:06:08: Subscribe to forum
+29/06/2016 03:06:08: login - not super user
+29/06/2016 03:06:08: get new notifications
+29/06/2016 03:06:08: get members
+29/06/2016 03:06:08: get sub forums
+29/06/2016 03:06:08: get admin
+29/06/2016 03:06:08: get members
+29/06/2016 03:06:08: get forum
+29/06/2016 03:06:09: get members
+29/06/2016 03:06:09: get admin
+29/06/2016 03:06:13: logout the system
+29/06/2016 03:10:44: create BL object
+29/06/2016 03:10:44: get all forum
+29/06/2016 03:10:49: get members
+29/06/2016 03:10:49: get sub forums
+29/06/2016 03:10:49: get admin
+29/06/2016 03:10:49: get members
+29/06/2016 03:10:49: get forum
+29/06/2016 03:10:58: Subscribe to forum
+29/06/2016 03:10:58: login - not super user
+29/06/2016 03:10:58: get new notifications
+29/06/2016 03:10:58: get members
+29/06/2016 03:10:58: get sub forums
+29/06/2016 03:10:58: get admin
+29/06/2016 03:10:58: get members
+29/06/2016 03:10:58: get forum
+29/06/2016 03:11:00: get members
+29/06/2016 03:11:00: get admin
+29/06/2016 03:11:04: logout the system

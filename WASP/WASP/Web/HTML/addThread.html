@@ -23,18 +23,19 @@
             var auth=get["auth"];
 
 
-                container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+                container.innerHTML=container.innerHTML+"your hash code is: "+get['auth']+"<br>";
             var button=document.createElement("button");
-            button.setAttribute("onclick","logout()");
+            button.setAttribute("onclick","logout(auth)");
             button.setAttribute("type","button");
             button.innerHTML="logout";
             container.appendChild(button);
             container.innerHTML=container.innerHTML+"<br>"
-            function logout(){
-                $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
-                window.location.href="http://localhost:8080/Web/HTML/getForums";
-                })
-            }
+            function logout(auth){
+        	var au={"auth":auth};
+            $.post("http://localhost:8080/logout/",JSON.stringify(au), function(data, status){
+            window.location.href="http://localhost:8080/Web/HTML/getForums.html";
+            })
+        }
 
         container.innerHTML=container.innerHTML+"		<form action=\"createThread\"> 		Title: <input type=\"text\" size=55 id=\"title\"><br>        Content: <textarea cols=50  rows=30 id=\"content\"></textarea><br><br><br>	";
 
@@ -48,7 +49,7 @@
 
             param['subforumid']=subforumid;
             $.post("http://localhost:8080/createThread/", JSON.stringify(param), function(data, status){
-                    window.location.href="http://localhost:8080/Web/HTML/getThreads.html?id="+i+"&auth="+auth+"&hash="+get['hash'];
+                    window.location.href="http://localhost:8080/Web/HTML/getThreads.html?id="+i+"&auth="+auth;
                 });
         }
 

@@ -61,7 +61,7 @@ namespace Client.GUI.AddWindows
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            try
+          //  try
             {
                 List<string> answers = new List<string>();
 
@@ -82,8 +82,8 @@ namespace Client.GUI.AddWindows
                 User user = Session.bl.subscribeToForum(int.Parse(txtID.Text), txtUsername.Text, txtName.Text,
                     txtmail.Text, passPassword.Password, Session.forum.id, answers, online);
 
+                Session.user = Session.bl.login(user.userName, passPassword.Password, Session.forum.id, "");
                 Session.AddNewNotifications();
-                Session.user = Session.bl.login(user.userName, user.password, Session.forum.id, "");
                 MessageBox.Show("Your client-session is: " + Session.user.client_session, "", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 if (Session.forum.policy.emailVerification)
@@ -94,9 +94,9 @@ namespace Client.GUI.AddWindows
                 }
                 this.Close();
             }
-            catch (Exception ee)
+           // catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+               // MessageBox.Show(ee.Message);
             }
         }
 

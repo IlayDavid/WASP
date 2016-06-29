@@ -20,16 +20,17 @@
     id['postid']=i;
         var auth=get["auth"];
 
-            container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+            container.innerHTML=container.innerHTML+"your hash code is: "+get['auth']+"<br>";
         var button=document.createElement("button");
-        button.setAttribute("onclick","logout()");
+        button.setAttribute("onclick","logout(auth)");
         button.setAttribute("type","button");
         button.innerHTML="logout";
         container.appendChild(button);
-        container.innerHTML=container.innerHTML+"<br>"
-        function logout(){
-            $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
-            window.location.href="http://localhost:8080/Web/HTML/getForums";
+        container.innerHTML=container.innerHTML+"<br>";
+        function logout(auth){
+        	var au={"auth":auth};
+            $.post("http://localhost:8080/logout/",JSON.stringify(au), function(data, status){
+            window.location.href="http://localhost:8080/Web/HTML/getForums.html";
             })
         }
             //data["name"], data["username"], data["id"], data["email"], data["password"]
@@ -41,8 +42,12 @@
                 console.log(data);
                 firstPost=JSON.parse(firstPost);
                 data=JSON.parse(data);
-
-            container.innerHTML=container.innerHTML + "<p>"+firstPost['title']+"<br>"+firstPost['content']+"<br><br><\p>";
+                var ptitle="";
+var title=firstPost['title'];
+if(title=="null"||title==null){
+	ptitle="";
+}
+            container.innerHTML=container.innerHTML + "<p>"+ptitle+"<br>"+firstPost['content']+"<br><br><\p>";
                         var button=document.createElement("button");
         button.setAttribute("onclick","addReply(i,auth)");
         button.setAttribute("type","button");
@@ -52,7 +57,7 @@
             data.forEach(subForumsToButtons);
 
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+"&hash="+get['hash']+"> Reply #"+count+"<br>"+item['content']+"<br><br><\a>";
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getPost.html?id="+item['postid']+"&auth="+auth+"> Reply #"+count+"<br>"+item['content']+"<br><br><\a>";
                 count=count+1;
                                         var button=document.createElement("button");
                                         console.log(item);

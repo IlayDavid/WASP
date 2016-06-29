@@ -41,6 +41,7 @@ namespace Client.CommunicationLayer
         public static void close()
         {
             connection.Send("logout").Wait();
+            //connection.Stop();
         }
     }
 }

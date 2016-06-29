@@ -21,16 +21,17 @@
     var auth=get["auth"];
         var container=document.getElementById("container");
 
-            container.innerHTML=container.innerHTML+"your hash code is: "+get['hash']+"<br>";
+            container.innerHTML=container.innerHTML+"your hash code is: "+get['auth']+"<br>";
         var button=document.createElement("button");
-        button.setAttribute("onclick","logout()");
+        button.setAttribute("onclick","logout(auth)");
         button.setAttribute("type","button");
         button.innerHTML="logout";
         container.appendChild(button);
         container.innerHTML=container.innerHTML+"<br>"
-        function logout(){
-            $.post("http://localhost:8080/logout/",JSON.stringify([]), function(data, status){
-            window.location.href="http://localhost:8080/Web/HTML/getForums";
+        function logout(auth){
+        	var au={"auth":auth};
+            $.post("http://localhost:8080/logout/",JSON.stringify(au), function(data, status){
+            window.location.href="http://localhost:8080/Web/HTML/getForums.html";
             })
         }
 
@@ -41,7 +42,7 @@
             data=JSON.parse(data);
             data.forEach(subForumsToButtons);
             function subForumsToButtons(item, index){
-                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getThreads.html?id="+item['subforumid']+"&auth="+auth+"&hash="+get['hash']+">"+item['name']+"<br>"+item['description']+"<br><br>";
+                container.innerHTML=container.innerHTML + "<a href=http://localhost:8080/Web/HTML/getThreads.html?id="+item['subforumid']+"&auth="+auth+">"+item['name']+"<br>"+item['description']+"<br><br>";
             }
 
             });
