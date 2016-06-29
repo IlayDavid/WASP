@@ -20,6 +20,7 @@ namespace WASP.Domain
         public void Clean()
         {
             dal.Clean();
+            initialized = false;
         }
 
         public void Restore()
@@ -210,19 +211,25 @@ namespace WASP.Domain
 
         public int deletePost(int userID, int forumID, int postID)
         {
-            // TODO:
             Forum forum = Forum.Get(forumID);
-            
+            Policy pl = forum.Policy;
             Post post = Post.Get(postID);
-
-            post.Delete();
+            bool owner = post.GetAuthor.Id == userID;
+            bool canDelete = false;
+            if (forum.IsAdmin(userID))
+                canDelete = canDelete || pl.CanDeletePost(Authority.Level.Admin, owner);
+            if(post.Subforum.IsModerator(userID))
+                canDelete = canDelete || pl.CanDeletePost(Authority.Level.Mod, owner);
+            if(post.GetAuthor.Id.Equals(userID))
+                canDelete = canDelete || pl.CanDeletePost(Authority.Level.User, owner);
+            if(canDelete)
+                post.Delete();
 
             return 1;
         }
 
         public int editPost(int userID, int forumID, int postID, string content)
         {
-            // TODO:
             User user = User.Get(userID, forumID);
             Post post = Post.Get(postID);
             Forum forum = Forum.Get(forumID);
@@ -437,11 +444,11 @@ namespace WASP.Domain
 
         public Notification[] getNewNotificationses(int userID, int forumID)
         {
-            Notification[] notifs = User.Get(userID, forumID).GetNewNotifications();
+            User user = User.Get(userID, forumID);
+            Notification[] notifs = user.GetNewNotifications();
             foreach(Notification notif in notifs)
             {
-                notif.IsNew = false;
-                notif.Update();
+                user.AgeNewNotification(notif.Id);
             }
             return notifs;
         }

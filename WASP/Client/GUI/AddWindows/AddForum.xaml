@@ -81,19 +81,19 @@
         </GroupBox>
         <Border BorderBrush="Black" BorderThickness="0,3,0,0" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="517" Margin="0,218,0,0"/>
         <Border BorderBrush="Black" BorderThickness="0,0,3,0" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="16" Margin="253,0,0,0"/>
-        <GroupBox x:Name="groupBox1" Header="Restore Questions" HorizontalAlignment="Left" Margin="214,337,0,0" VerticalAlignment="Top" Height="203" Width="175">
-            <Grid Margin="4,3,-3.4,-3">
-                <ListBox x:Name="lstBoxRestoreQuestion" Height="105" VerticalAlignment="Top" Margin="-2,0,2,0"/>
-                <TextBox x:Name="txtNewQuestion" Height="23" Margin="-1,130,2,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <Button x:Name="btnAddQuestion" Click="btnAddQuestion_Click" Content="Add Question" HorizontalAlignment="Left" Margin="61,158,0,0" VerticalAlignment="Top" Width="93"/>
-                <Label x:Name="label4" Content="Enter new Question" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,105,0,0"/>
-            </Grid>
-        </GroupBox>
         <GroupBox x:Name="groupBox_Copy3" Header="Interactivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,253,0,0" Height="97" Width="97">
             <Grid Margin="0,0,-2.2,-4.6">
                 <RadioButton x:Name="rdbOn" Content="Online" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0"/>
                 <RadioButton x:Name="rdbOff" Content="Offline" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0"/>
                 <RadioButton x:Name="rdbSelective" Content="Selective" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,54,0,0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox1" Header="Restore Questions" HorizontalAlignment="Left" Margin="214,348,0,0" VerticalAlignment="Top" Height="129" Width="175">
+            <Grid Margin="4,3,-3.4,-12.6">
+                <TextBox x:Name="txtNewQuestion1" Height="23" Margin="-1,20,10.2,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Label x:Name="label4" Content="Enter new Question" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,-5,0,0"/>
+                <TextBox x:Name="txtNewQuestion2" Height="23" Margin="-1,75,10.2,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Label x:Name="label4_Copy" Content="Enter new Question" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,50,0,0"/>
             </Grid>
         </GroupBox>
 

@@ -25,6 +25,11 @@ namespace AccTests
             throw new NotImplementedException();
         }
 
+        public void Clean()
+        {
+            _clientAPI.Clean();
+        }
+
         public int addFriend(int friendID)
         {
             return _clientAPI.addFriend(friendID);

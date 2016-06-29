@@ -244,5 +244,7 @@ namespace Client.BusinessLogic
         /* Pre-conditions: User is loged-in.
         * Purpose: add user with friendID to the loged-in user's friend list.*/
         int addFriend(int friendID);
+
+        void Clean();
     }
 }

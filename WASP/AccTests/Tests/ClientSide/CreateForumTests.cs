@@ -22,7 +22,7 @@ namespace AccTests.Tests
         {
             Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
-            
+            _proj.Clean();
             _supervisor = ClientFunctions.InitialSystem(_proj);
         }
 
@@ -33,6 +33,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreateForumTest1()
         {
+            _proj.loginSU(_supervisor.userName, "moshe123");
             Forum forum = ClientFunctions.CreateSpecForum(_proj, _supervisor).Item1;
             Assert.IsNotNull(forum); //checks that a forum is created
             var admins = _proj.getAdmins( forum.id);
@@ -50,6 +51,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void CreateForumTest2()
         {
+            _proj.loginSU(_supervisor.userName, "moshe123");
             Tuple<Forum, Admin> forumAndMember = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             Forum forum = forumAndMember.Item1;
             Admin admin = forumAndMember.Item2;
@@ -69,6 +71,7 @@ namespace AccTests.Tests
         public void CreateForumTest3()
         {
             int N = 500;
+            _proj.loginSU(_supervisor.userName, "moshe123");
             for (int i = 1; i <= N; i++)
             {
                 _proj.createForum("subject" + i.ToString(),

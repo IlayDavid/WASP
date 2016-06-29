@@ -16,7 +16,7 @@ namespace AccTests.Tests
         private WASPBridge _proj;
         private Forum _forum;
         private Admin _admin;
-        private string[] arr;
+        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]     //before each Test
         public void SetUp()

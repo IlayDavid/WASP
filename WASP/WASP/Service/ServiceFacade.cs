@@ -36,16 +36,25 @@ namespace WASP.Service
         {
             return loggedIn[hash];
         }
+
+        public static string Clean(Dictionary<string, dynamic> data)
+        {
+            loggedIn = new Dictionary<string, LoginPair>();
+            bl.Clean();
+            return 1.ToString();
+        }
+
         public static string initialize(Dictionary<string, dynamic> data)
         {
             bl = new BLFacade();
+            loggedIn = new Dictionary<string, LoginPair>();
             SuperUser su = ServiceFacade.bl.initialize(data["name"], data["username"], data["id"], data["email"], data["password"]);
             string key = GenerateRandomHash();
-            su.Secret = key;
-            loggedIn.Add(key, new LoginPair(su.Id));
+            //su.Secret = key;
+            //loggedIn.Add(key, new LoginPair(su.Id));
 
             Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
-            result.Add("auth", key);
+            result.Add("auth", "");
             result.Add("id", su.Id);
             result.Add("username", su.Username);
             result.Add("password", su.Password);

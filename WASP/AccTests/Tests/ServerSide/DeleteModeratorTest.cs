@@ -18,7 +18,7 @@ namespace AccTests.Tests
         private Subforum _subforum;
         private User _moderator;
         private User _moderator2;
-        private string[] arr;
+        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]
         public void setUp()

@@ -52,7 +52,11 @@ namespace WASP.Server
                             {
                                 string rstr = _responderMethod(ctx.Request);
                                 if (rstr.StartsWith("~ERROR: "))
+                                {
                                     ctx.Response.StatusCode = 400;
+                                    Console.WriteLine(rstr);
+                                }
+                                    
                                 byte[] buf = Encoding.UTF8.GetBytes(rstr);
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);

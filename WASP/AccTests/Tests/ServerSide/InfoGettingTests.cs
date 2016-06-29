@@ -24,7 +24,7 @@ namespace AccTests.Tests.ServerSide
         private Dictionary<Subforum, List<Post>> _posts = new Dictionary<Subforum, List<Post>>();
         private Dictionary<int, List<Post>> _postsByUser = new Dictionary<int, List<Post>>();
         private const int LOOPS = 10;
-        private string[] arr;
+        private string[] arr = { "shlomo", "moshe" };
 
         [TestInitialize]
         public void setUp()

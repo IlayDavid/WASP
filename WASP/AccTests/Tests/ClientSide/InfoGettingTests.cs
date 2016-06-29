@@ -45,7 +45,7 @@ namespace AccTests.Tests.ServerSide
                 _members[forum] = new List<User>();
                 var member = _proj.subscribeToForum(110 + i, "mod_" + i + "_1", "mod" + i + "_1", "mod" + i + "_1@gmail.com",
                     "mod1234",
-                    forum.id, new List<string>(), false);
+                    forum.id, ClientFunctions.GetAnswers(), false);
                 _members[forum].Add(member);
                 var subforum = _proj.createSubForum("subforum_" + i, "the " + i + "th subforum", member.id,
                     DateTime.MaxValue);
@@ -55,7 +55,7 @@ namespace AccTests.Tests.ServerSide
                 _moderators[subforum].Add(member);
                 member = _proj.subscribeToForum(120 + i, "mod_" + i + "_2", "mod" + i + "_2", "mod" + i + "_2@gmail.com",
                     "mod1234",
-                    forum.id, new List<string>(), false);
+                    forum.id, ClientFunctions.GetAnswers(), false);
                 _members[forum].Add(member);
                 _proj.addModerator(member.id, subforum.id, DateTime.MaxValue);
                 _moderators[subforum].Add(member);
@@ -69,7 +69,7 @@ namespace AccTests.Tests.ServerSide
                     prevMember = member;
                     member = _proj.subscribeToForum(130 + j + i * 10, "user_" + i + "_" + j, "user" + i + "_" + j,
                         "user" + i + "_" + j + "@gmail.com", "user1234",
-                        forum.id, new List<string>(), false);
+                        forum.id, ClientFunctions.GetAnswers(), false);
                     _members[forum].Add(member);
                     post = _proj.createReplyPost("this is reply number " + i, post.id);
                     _postsByUser[member.id] = new List<Post>();

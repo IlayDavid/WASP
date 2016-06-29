@@ -16,7 +16,7 @@ namespace AccTests.Tests
         private Forum _forum;
         private User _member1;
         private User _member2;
-        private string [] arr;
+        private string [] arr = { "shlomo", "moshe" };
 
         [TestInitialize]     //before each Test
         public void SetUp()

@@ -80,5 +80,12 @@ namespace Client.BusinessLogic
             return _cl.membersInDifferentForums();
         }
         //---------------------------Version 3 Use Cases End------------------------------------
+
+
+        public void Clean()
+        {
+            _cl.Clean();
+        }
+
     }
 }

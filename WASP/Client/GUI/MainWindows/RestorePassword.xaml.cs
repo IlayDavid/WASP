@@ -32,20 +32,19 @@ namespace Client.GUI.MainWindows
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
-            string answer = txtAnswer.Text;
-            List<string> answers = new List<string> { answer, "" };
+            List<string> answers = new List<string> { txtAnswer1.Text, txtAnswer2.Text };
             try
             {
-
                 int user_id = int.Parse(txtUserName.Text);
                 string newpassword = txtNewpassword.Text;
-                if (answer.Equals("") || newpassword.Equals(""))
+                if (/*answers[0].Equals("") ||*/ newpassword.Equals(""))
                 {
                     MessageBox.Show("Please enter answer and new password");
                     return;
                 }
                 Session.bl.restorePasswordbyAnswers(user_id, Session.forum.id, answers, newpassword);
                 MessageBox.Show("Your new password is: " + newpassword, "Password restored!", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             catch { }
         }

@@ -14,18 +14,19 @@ namespace WASP.DataClasses
         private Policy policy;
         private static DAL2 dal = WASP.Config.Settings.GetDal();
 
-        public void initialize()
+        public Forum initialize()
         {
             Object obj = this.Subforums;
             obj = this.Members;
             obj = this.Admins;
+            return this;
         }
 
         public static Forum Get(int id)
         {
             if (Settings.UseCache())
                 return WASP.Config.Settings.GetCache().GetForum(id);
-            return dal.GetForum(id);
+            return dal.GetForum(id).initialize();
         }
         public static Forum[] Get(int[] ids)
         {

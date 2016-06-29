@@ -226,6 +226,7 @@ namespace WASP
             routes.Add(basePrefix + "restorePasswordByAnswers/", ServiceFacade.restorePasswordByAnswers);
             routes.Add(basePrefix + "logout/", ServiceFacade.logout);
             routes.Add(basePrefix + "Web/", ServiceFacade.GetWebFile);
+            routes.Add(basePrefix + "Clean/", ServiceFacade.Clean);
 
 
             string[] prefixes = System.Linq.Enumerable.ToArray(routes.Keys);

@@ -29,8 +29,8 @@ namespace AccTests.Tests
             var forumAndMember = ClientFunctions.CreateSpecForum(_proj, _supervisor);
 
             _forum = forumAndMember.Item1;
-            _member1 = _proj.subscribeToForum(50, "amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id, new List<string>(), false);
-            _member2 = _proj.subscribeToForum(51, "edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id, new List<string>(), false);
+            _member1 = _proj.subscribeToForum(50, "amitayaSh", "amitay", "amitayaSh@post.bgu.ac.il", "123456", _forum.id, ClientFunctions.GetAnswers(), false);
+            _member2 = _proj.subscribeToForum(51, "edanHb", "edan", "edanHb@post.bgu.ac.il", "123456", _forum.id, ClientFunctions.GetAnswers(), false);
 
             
             _proj.login(_member1.userName, "123456", _forum.id, "");

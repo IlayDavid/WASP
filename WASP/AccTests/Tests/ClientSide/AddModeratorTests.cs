@@ -24,12 +24,14 @@ namespace AccTests.Tests
         private String modpass = "ilan123";
         private User _member1;
         private String mempass = "mem123";
+        
 
         [TestInitialize]
         public void setUp()
         {
             Driver.getBridge().Clean();
             _proj = ClientDriver.getBridge();
+            _proj.Clean();
             _supervisor = ClientFunctions.InitialSystem(_proj);
             /*if (_proj.isInitialize() == 0)
                 _supervisor = ClientFunctions.InitialSystem(_proj); //password is 
@@ -37,21 +39,24 @@ namespace AccTests.Tests
             {
                 _proj.loginSU(suusername, supass);
             }*/
+            _proj.loginSU(_supervisor.userName, supass);
             var forumAndAdmin = ClientFunctions.CreateSpecForum(_proj, _supervisor);
             _forum = forumAndAdmin.Item1;
             _admin = forumAndAdmin.Item2; //password is david123
+            _proj.logout();
             _proj.login(_admin.user.userName, adminpass, _forum.id, "");
-
 
 
             var subforumAndModerator = ClientFunctions.CreateSpecSubForum(_proj, _admin, _forum);
             _subforum = subforumAndModerator.Item1;
-            _moderator = subforumAndModerator.Item2; //password is ilan123
-            _proj.login(_moderator.userName, modpass, _forum.id, "");
-
-
-            _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, new List<string>(), false); //password is ilan123
-            _proj.login(_member1.userName, mempass, _forum.id, "");
+            _proj.logout();
+            _moderator = _proj.login("ilanB", "ilan123", _forum.id, "");
+            //_moderator = subforumAndModerator.Item2; //password is ilan123
+            //_proj.login(_moderator.userName, modpass, _forum.id, "");
+            _proj.logout();
+            
+            _member1 = _proj.subscribeToForum(7, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, ClientFunctions.GetAnswers(), false); //password is ilan123
+            //_proj.login(_member1.userName, mempass, _forum.id, "");
         }
 
 
@@ -62,6 +67,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void addModeratorAndUpdateTermTest1()
         {
+            _proj.logout();
 
             _proj.login(_admin.user.userName, adminpass, _forum.id, "");
             DateTime dt = DateTime.Now;
@@ -101,7 +107,6 @@ namespace AccTests.Tests
         ///     checks that another forum's admin cannot term a moderator for another subforum
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         public void addModeratorAndUpdateTermTest3()
         {
             _proj.loginSU(suusername, supass);
@@ -111,15 +116,15 @@ namespace AccTests.Tests
             Admin admin = _proj.getAdmin(8, forum.id);
             _proj.login(admin.user.userName, "haaron123", forum.id, "");
 
-            //another admin tries to add a moderator
-            var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));
-            Assert.IsNull(isModerator);
-
-            isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));
-            Assert.IsNotNull(isModerator);
-
-            int isModified = _proj.updateModeratorTerm(_member1.id, _subforum.id, DateTime.Now.AddDays(100));
-            Assert.IsTrue(isModified < 0);
+            //another admin tries to add a moderatorT]
+            try
+            {
+                var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));
+            }
+            catch (Exception e)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         /* edit name + RTM*/
@@ -128,18 +133,18 @@ namespace AccTests.Tests
         /// <summary>
         /// Nagative Test: invalid date time
         /// </summary>
-        [ExpectedException(typeof(WaspException), AllowDerivedTypes = true)]
         [TestMethod]
         public void addModeratorAndUpdateTermTest4()
         {
-            var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(-10));
-            var check = _proj.getModerators(_subforum.id).Count;
-            Assert.IsTrue(check == 1);
-
-            isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(200));
-            int isModified = _proj.updateModeratorTerm(_member1.id, _subforum.id, DateTime.Now.AddDays(-1));
-            Assert.IsTrue(isModified == 0);
-            Assert.AreEqual(_proj.getModeratorTermTime(_member1.id, _subforum.id).Date, DateTime.Now.AddDays(200).Date);
+            _proj.login(_admin.user.userName, adminpass,_forum.id, "");
+            try
+            {
+                var isModerator = _proj.addModerator(_member1.id, _subforum.id, DateTime.Now.AddDays(-10));
+            }
+            catch(Exception e)
+            {
+                Assert.IsTrue(e.Message.Contains("ERROR"));
+            }
         }
 
 

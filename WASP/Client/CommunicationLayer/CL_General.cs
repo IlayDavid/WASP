@@ -73,7 +73,7 @@ namespace Client.CommunicationLayer
             catch (WebException e)
             {
                 //MessageBox.Show(e.Message);
-                return "error";
+                return e.Message;
             }
 
         }
@@ -113,7 +113,8 @@ namespace Client.CommunicationLayer
             JavaScriptSerializer jss = new JavaScriptSerializer();
             dict.Add("auth", _auth);
             string json = jss.Serialize(dict);
-            ncon.Stop();
+            if(ncon != null)
+                ncon.Stop();
             string res = httpReq(json, "POST", _url + "/logout/");
 
         }
@@ -247,6 +248,16 @@ namespace Client.CommunicationLayer
         public Admin getAdmin(int AdminID)
         {
             throw new NotImplementedException();
+        }
+
+        public void Clean()
+        {
+            Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            dict.Add("userid", 1);
+            string json = jss.Serialize(dict);
+            string res = httpReq(json, "POST", _url + "/Clean/");
+
         }
     }
 }

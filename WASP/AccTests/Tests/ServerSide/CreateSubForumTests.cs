@@ -16,7 +16,7 @@ namespace AccTests.Tests
         private SuperUser _supervisor;
         private Forum _forum;
         private Admin _admin;
-        private string[] arr;
+        private string[] arr = { "shlomo", "moshe" };
 
         //private Subforum _subforum;
 

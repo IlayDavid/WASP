@@ -13,6 +13,12 @@ namespace AccTests.Tests
             return proj.initialize("Moshe", "SuperUser", 2, "moshe@post.bgu.ac.il", "moshe123");
         }
 
+        public static List<string> GetAnswers()
+        {
+            List<string> arr = new List<string>(new string[] { "shlomo", "moshe" });
+            return arr;
+        }
+
         public static Tuple<Forum, Admin> CreateSpecForum(WASPClientBridge proj, SuperUser supervisor)
         {
             string userName = "admin";
@@ -25,16 +31,16 @@ namespace AccTests.Tests
         public static Tuple<Subforum, User> CreateSpecSubForum(WASPClientBridge proj, Admin admin, Forum forum)
         {
             var user = proj.subscribeToForum(2, "ilanB", "ilan", "ilanB@post.bgu.ac.il",
-                                        "ilan123", forum.id, new List<string>(), false);
+                                        "ilan123", forum.id, GetAnswers(), false);
             Subforum subforum = proj.createSubForum("sub1", "blah", 2, DateTime.Now.AddDays(100));
-            var moderator = proj.login(user.userName, "ilan123", forum.id, "");
+            //var moderator = proj.login(user.userName, "ilan123", forum.id, "");
             //proj.logout();
-            return new Tuple<Subforum, User>(subforum, moderator);
+            return new Tuple<Subforum, User>(subforum, null);
         }
 
         public static User SubscribeSpecMember(WASPClientBridge proj, Forum forum)
         {
-            return proj.subscribeToForum(3, "arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum.id, new List<string>(), false);
+            return proj.subscribeToForum(3, "arielB", "ariel", "arielB@post.bgu.ac.il", "ariel123", forum.id, GetAnswers(), false);
         }
 
         public static Tuple<Forum, Admin> CreateSpecForum2(WASPClientBridge proj, SuperUser supervisor)
@@ -50,7 +56,7 @@ namespace AccTests.Tests
         public static Tuple<Subforum, User> CreateSpecSubForum2(WASPClientBridge proj, Admin admin, Forum forum)
         {
             var user = proj.subscribeToForum(5, "amitB", "amit", "amitB@post.bgu.ac.il",
-                                        "amit123", forum.id, new List<string>(), false);
+                                        "amit123", forum.id, GetAnswers(), false);
             Subforum subforum = proj.createSubForum("subbbbb2", "blah", 5, DateTime.Now.AddDays(100));
             var moderator = proj.login(user.userName, user.password, forum.id, "");
             //proj.logout();
@@ -59,7 +65,7 @@ namespace AccTests.Tests
 
         public static User SubscribeSpecMember2(WASPClientBridge proj, Forum forum)
         {
-            return proj.subscribeToForum(6, "shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum.id, new List<string>(), false);
+            return proj.subscribeToForum(6, "shlomeD", "shlome", "shlomeD@post.bgu.ac.il", "shlome123", forum.id, GetAnswers(), false);
         }
 
     }

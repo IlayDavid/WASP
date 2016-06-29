@@ -7,7 +7,7 @@ namespace AccTests.Tests
 {
     public class Functions
     {
-        private static string[] arr;
+        private static string[] arr = { "shlomo", "moshe" };
         
         public static SuperUser InitialSystem(WASPBridge proj)
         {

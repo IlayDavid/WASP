@@ -42,7 +42,7 @@ namespace AccTests.Tests
             //_proj.login(_moderator.userName, _moderator.password, _forum.id, "");
 
 
-            _moderator2 = _proj.subscribeToForum(16, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, new List<string>(), false);
+            _moderator2 = _proj.subscribeToForum(16, "mem1", "mem", "mem1@post.bgu.ac.il", "mem123", _forum.id, ClientFunctions.GetAnswers(), false);
             _proj.addModerator(_moderator2.id, _subforum.id, DateTime.MaxValue);
             //_proj.login(_moderator2.userName, mod2pass, _forum.id, "");
         }
@@ -68,7 +68,7 @@ namespace AccTests.Tests
         [TestMethod]
         public void deleteModerator2()
         {
-            var newAdminUser = _proj.subscribeToForum(17, "admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.id, new List<string>(), false);
+            var newAdminUser = _proj.subscribeToForum(17, "admin2", "admin2", "dmin@ds.ds", "zzzz222", _forum.id, ClientFunctions.GetAnswers(), false);
             _proj.loginSU(_supervisor.userName, supass);
             _proj.addAdmin(newAdminUser.id);
             _proj.login(_admin.user.userName, adminpass, _forum.id, "");

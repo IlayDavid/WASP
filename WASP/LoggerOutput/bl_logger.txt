@@ -1043,3 +1043,3258 @@
 29/06/2016 03:11:00: get members
 29/06/2016 03:11:00: get admin
 29/06/2016 03:11:04: logout the system
+29/06/2016 03:16:18: create BL object
+29/06/2016 03:16:30: create BL object
+29/06/2016 03:16:35: initialize the system
+29/06/2016 03:16:37: get all forum
+29/06/2016 03:16:39: get members
+29/06/2016 03:16:39: get sub forums
+29/06/2016 03:16:39: get admin
+29/06/2016 03:16:39: get members
+29/06/2016 03:16:39: get forum
+29/06/2016 03:16:45: login - not super user
+29/06/2016 03:16:55: login - not super user
+29/06/2016 03:16:56: get new notifications
+29/06/2016 03:16:56: get members
+29/06/2016 03:16:56: get sub forums
+29/06/2016 03:16:56: get admin
+29/06/2016 03:16:56: get members
+29/06/2016 03:16:56: get forum
+29/06/2016 03:16:56: get admin
+29/06/2016 03:17:03: logout the system
+29/06/2016 03:18:26: create BL object
+29/06/2016 03:18:33: initialize the system
+29/06/2016 03:18:34: get all forum
+29/06/2016 03:18:38: get members
+29/06/2016 03:18:38: get sub forums
+29/06/2016 03:18:38: get admin
+29/06/2016 03:18:38: get members
+29/06/2016 03:18:38: get forum
+29/06/2016 03:18:48: login - not super user
+29/06/2016 03:18:49: get new notifications
+29/06/2016 03:18:49: get members
+29/06/2016 03:18:49: get sub forums
+29/06/2016 03:18:49: get admin
+29/06/2016 03:18:49: get members
+29/06/2016 03:18:49: get forum
+29/06/2016 03:18:49: get admin
+29/06/2016 03:18:53: logout the system
+29/06/2016 03:19:53: create BL object
+29/06/2016 03:19:57: initialize the system
+29/06/2016 03:19:58: get all forum
+29/06/2016 03:20:01: get members
+29/06/2016 03:20:01: get sub forums
+29/06/2016 03:20:01: get admin
+29/06/2016 03:20:01: get members
+29/06/2016 03:20:01: get forum
+29/06/2016 03:20:11: Subscribe to forum
+29/06/2016 03:20:11: login - not super user
+29/06/2016 03:20:11: get new notifications
+29/06/2016 03:20:11: get members
+29/06/2016 03:20:11: get sub forums
+29/06/2016 03:20:11: get admin
+29/06/2016 03:20:11: get members
+29/06/2016 03:20:11: get forum
+29/06/2016 03:20:47: get members
+29/06/2016 03:20:47: get admin
+29/06/2016 03:20:51: logout the system
+29/06/2016 03:22:16: create BL object
+29/06/2016 03:22:16: get all forum
+29/06/2016 03:22:19: get members
+29/06/2016 03:22:19: get sub forums
+29/06/2016 03:22:19: get admin
+29/06/2016 03:22:19: get members
+29/06/2016 03:22:19: get forum
+29/06/2016 03:22:29: Subscribe to forum
+29/06/2016 03:22:29: login - not super user
+29/06/2016 03:22:29: get new notifications
+29/06/2016 03:22:29: get members
+29/06/2016 03:22:29: get sub forums
+29/06/2016 03:22:29: get admin
+29/06/2016 03:22:29: get members
+29/06/2016 03:22:29: get forum
+29/06/2016 03:22:38: get members
+29/06/2016 03:22:38: get admin
+29/06/2016 03:22:42: logout the system
+29/06/2016 03:24:17: create BL object
+29/06/2016 03:24:22: initialize the system
+29/06/2016 03:24:23: get all forum
+29/06/2016 03:24:26: get members
+29/06/2016 03:24:26: get sub forums
+29/06/2016 03:24:26: get admin
+29/06/2016 03:24:26: get members
+29/06/2016 03:24:26: get forum
+29/06/2016 03:24:34: login - not super user
+29/06/2016 03:24:48: get new notifications
+29/06/2016 03:24:48: get members
+29/06/2016 03:24:48: get sub forums
+29/06/2016 03:24:48: get admin
+29/06/2016 03:24:48: get members
+29/06/2016 03:24:48: get forum
+29/06/2016 03:24:48: get admin
+29/06/2016 03:24:52: logout the system
+29/06/2016 03:25:54: create BL object
+29/06/2016 03:25:58: initialize the system
+29/06/2016 03:25:59: get all forum
+29/06/2016 03:26:02: get members
+29/06/2016 03:26:02: get sub forums
+29/06/2016 03:26:02: get admin
+29/06/2016 03:26:02: get members
+29/06/2016 03:26:02: get forum
+29/06/2016 03:26:14: login - not super user
+29/06/2016 03:26:20: get new notifications
+29/06/2016 03:26:31: get members
+29/06/2016 03:26:31: get sub forums
+29/06/2016 03:26:31: get admin
+29/06/2016 03:26:31: get members
+29/06/2016 03:26:31: get forum
+29/06/2016 03:26:31: get admin
+29/06/2016 03:26:38: logout the system
+29/06/2016 03:27:51: login - not super user
+29/06/2016 03:27:56: get new notifications
+29/06/2016 03:28:03: get members
+29/06/2016 03:28:03: get sub forums
+29/06/2016 03:28:03: get admin
+29/06/2016 03:28:03: get members
+29/06/2016 03:28:03: get forum
+29/06/2016 03:28:03: get admin
+29/06/2016 03:28:11: logout the system
+29/06/2016 03:28:44: create BL object
+29/06/2016 03:28:49: initialize the system
+29/06/2016 03:28:50: get all forum
+29/06/2016 03:28:53: get members
+29/06/2016 03:28:53: get sub forums
+29/06/2016 03:28:53: get admin
+29/06/2016 03:28:53: get members
+29/06/2016 03:28:53: get forum
+29/06/2016 03:29:05: login - not super user
+29/06/2016 03:29:05: get new notifications
+29/06/2016 03:29:05: get members
+29/06/2016 03:29:05: get sub forums
+29/06/2016 03:29:05: get admin
+29/06/2016 03:29:05: get members
+29/06/2016 03:29:05: get forum
+29/06/2016 03:29:05: get admin
+29/06/2016 03:29:26: logout the system
+29/06/2016 03:32:18: create BL object
+29/06/2016 03:32:23: initialize the system
+29/06/2016 03:32:24: get all forum
+29/06/2016 03:32:26: get members
+29/06/2016 03:32:26: get sub forums
+29/06/2016 03:32:27: get admin
+29/06/2016 03:32:27: get members
+29/06/2016 03:32:27: get forum
+29/06/2016 03:32:34: login - not super user
+29/06/2016 03:32:35: get new notifications
+29/06/2016 03:32:35: get members
+29/06/2016 03:32:35: get sub forums
+29/06/2016 03:32:35: get admin
+29/06/2016 03:32:35: get members
+29/06/2016 03:32:35: get forum
+29/06/2016 03:32:35: get admin
+29/06/2016 03:32:39: logout the system
+29/06/2016 03:33:39: create BL object
+29/06/2016 03:33:39: get all forum
+29/06/2016 03:33:43: get members
+29/06/2016 03:33:43: get sub forums
+29/06/2016 03:33:43: get admin
+29/06/2016 03:33:43: get members
+29/06/2016 03:33:43: get forum
+29/06/2016 03:33:50: login - not super user
+29/06/2016 03:34:04: Subscribe to forum
+29/06/2016 03:34:04: login - not super user
+29/06/2016 03:34:04: get new notifications
+29/06/2016 03:34:04: get members
+29/06/2016 03:34:04: get sub forums
+29/06/2016 03:34:04: get admin
+29/06/2016 03:34:04: get members
+29/06/2016 03:34:04: get forum
+29/06/2016 03:34:06: get members
+29/06/2016 03:34:06: get admin
+29/06/2016 03:34:10: logout the system
+29/06/2016 03:35:47: create BL object
+29/06/2016 03:35:51: initialize the system
+29/06/2016 03:35:53: get all forum
+29/06/2016 03:35:56: get members
+29/06/2016 03:35:56: get sub forums
+29/06/2016 03:35:56: get admin
+29/06/2016 03:35:56: get members
+29/06/2016 03:35:56: get forum
+29/06/2016 03:36:06: login - not super user
+29/06/2016 03:36:07: get new notifications
+29/06/2016 03:36:07: get members
+29/06/2016 03:36:07: get sub forums
+29/06/2016 03:36:07: get admin
+29/06/2016 03:36:07: get members
+29/06/2016 03:36:07: get forum
+29/06/2016 03:36:07: get admin
+29/06/2016 03:36:12: logout the system
+29/06/2016 03:38:09: create BL object
+29/06/2016 03:38:13: initialize the system
+29/06/2016 03:38:15: get all forum
+29/06/2016 03:38:17: get members
+29/06/2016 03:38:17: get sub forums
+29/06/2016 03:38:17: get admin
+29/06/2016 03:38:17: get members
+29/06/2016 03:38:17: get forum
+29/06/2016 03:38:24: login - not super user
+29/06/2016 03:38:25: get new notifications
+29/06/2016 03:38:25: get members
+29/06/2016 03:38:25: get sub forums
+29/06/2016 03:38:25: get admin
+29/06/2016 03:38:25: get members
+29/06/2016 03:38:25: get forum
+29/06/2016 03:38:25: get admin
+29/06/2016 03:38:29: logout the system
+29/06/2016 03:40:46: create BL object
+29/06/2016 03:41:06: create BL object
+29/06/2016 03:41:10: initialize the system
+29/06/2016 03:41:11: get all forum
+29/06/2016 03:41:14: get members
+29/06/2016 03:41:15: get sub forums
+29/06/2016 03:41:15: get admin
+29/06/2016 03:41:15: get members
+29/06/2016 03:41:15: get forum
+29/06/2016 03:41:27: login - not super user
+29/06/2016 03:41:28: get new notifications
+29/06/2016 03:41:28: get members
+29/06/2016 03:41:28: get sub forums
+29/06/2016 03:41:28: get admin
+29/06/2016 03:41:28: get members
+29/06/2016 03:41:28: get forum
+29/06/2016 03:41:28: get admin
+29/06/2016 03:41:31: logout the system
+29/06/2016 03:42:41: create BL object
+29/06/2016 03:42:45: initialize the system
+29/06/2016 03:42:45: get all forum
+29/06/2016 03:42:48: get members
+29/06/2016 03:42:48: get sub forums
+29/06/2016 03:42:49: get admin
+29/06/2016 03:42:49: get members
+29/06/2016 03:42:49: get forum
+29/06/2016 03:42:55: login - not super user
+29/06/2016 03:42:56: get new notifications
+29/06/2016 03:42:56: get members
+29/06/2016 03:42:56: get sub forums
+29/06/2016 03:42:56: get admin
+29/06/2016 03:42:56: get members
+29/06/2016 03:42:56: get forum
+29/06/2016 03:42:56: get admin
+29/06/2016 03:43:00: logout the system
+29/06/2016 03:43:09: login - not super user
+29/06/2016 03:43:09: get new notifications
+29/06/2016 03:43:09: get members
+29/06/2016 03:43:09: get sub forums
+29/06/2016 03:43:09: get admin
+29/06/2016 03:43:09: get members
+29/06/2016 03:43:09: get forum
+29/06/2016 03:43:09: get admin
+29/06/2016 03:43:12: logout the system
+29/06/2016 03:43:25: login - not super user
+29/06/2016 03:43:25: get new notifications
+29/06/2016 03:43:25: get members
+29/06/2016 03:43:25: get sub forums
+29/06/2016 03:43:25: get admin
+29/06/2016 03:43:25: get members
+29/06/2016 03:43:25: get forum
+29/06/2016 03:43:25: get admin
+29/06/2016 03:43:28: logout the system
+29/06/2016 03:44:04: create BL object
+29/06/2016 03:44:04: get all forum
+29/06/2016 03:44:08: get members
+29/06/2016 03:44:08: get sub forums
+29/06/2016 03:44:08: get admin
+29/06/2016 03:44:08: get members
+29/06/2016 03:44:08: get forum
+29/06/2016 03:44:25: Subscribe to forum
+29/06/2016 03:44:26: login - not super user
+29/06/2016 03:44:26: get new notifications
+29/06/2016 03:44:26: get members
+29/06/2016 03:44:26: get sub forums
+29/06/2016 03:44:26: get admin
+29/06/2016 03:44:26: get members
+29/06/2016 03:44:26: get forum
+29/06/2016 03:44:27: get members
+29/06/2016 03:44:27: get admin
+29/06/2016 03:44:30: logout the system
+29/06/2016 03:48:25: create BL object
+29/06/2016 03:48:31: initialize the system
+29/06/2016 03:48:32: get all forum
+29/06/2016 03:48:34: get members
+29/06/2016 03:48:34: get sub forums
+29/06/2016 03:48:34: get admin
+29/06/2016 03:48:35: get members
+29/06/2016 03:48:35: get forum
+29/06/2016 03:48:41: login - not super user
+29/06/2016 03:48:42: get new notifications
+29/06/2016 03:48:42: get members
+29/06/2016 03:48:42: get sub forums
+29/06/2016 03:48:42: get admin
+29/06/2016 03:48:42: get members
+29/06/2016 03:48:42: get forum
+29/06/2016 03:48:42: get admin
+29/06/2016 03:48:44: logout the system
+29/06/2016 04:01:23: create BL object
+29/06/2016 04:01:23: get all forum
+29/06/2016 04:01:29: get members
+29/06/2016 04:01:29: get sub forums
+29/06/2016 04:01:29: get admin
+29/06/2016 04:01:29: get members
+29/06/2016 04:01:29: get forum
+29/06/2016 04:01:37: Subscribe to forum
+29/06/2016 04:01:38: login - not super user
+29/06/2016 04:01:38: get new notifications
+29/06/2016 04:01:38: get members
+29/06/2016 04:01:38: get sub forums
+29/06/2016 04:01:38: get admin
+29/06/2016 04:01:38: get members
+29/06/2016 04:01:38: get forum
+29/06/2016 04:01:38: get members
+29/06/2016 04:01:38: get admin
+29/06/2016 04:01:41: logout the system
+29/06/2016 04:01:48: login - not super user
+29/06/2016 04:01:49: get new notifications
+29/06/2016 04:01:49: get members
+29/06/2016 04:01:49: get sub forums
+29/06/2016 04:01:49: get admin
+29/06/2016 04:01:49: get members
+29/06/2016 04:01:49: get forum
+29/06/2016 04:01:49: get admin
+29/06/2016 04:01:53: logout the system
+29/06/2016 04:01:59: login - not super user
+29/06/2016 04:01:59: get new notifications
+29/06/2016 04:01:59: get members
+29/06/2016 04:01:59: get sub forums
+29/06/2016 04:01:59: get admin
+29/06/2016 04:01:59: get members
+29/06/2016 04:01:59: get forum
+29/06/2016 04:01:59: get admin
+29/06/2016 04:02:24: get admin
+29/06/2016 04:02:24: get moderator
+29/06/2016 04:02:24: get threads
+29/06/2016 04:02:57: get admin
+29/06/2016 04:02:57: get replys
+29/06/2016 04:03:15: get threads
+29/06/2016 04:03:15: get moderator
+29/06/2016 04:03:15: get threads
+29/06/2016 04:03:15: get admin
+29/06/2016 04:03:24: create thread
+29/06/2016 04:03:24: get new notifications
+29/06/2016 04:03:24: get moderator
+29/06/2016 04:03:24: get threads
+29/06/2016 04:03:24: get members
+29/06/2016 04:03:24: get sub forums
+29/06/2016 04:03:24: get admin
+29/06/2016 04:03:24: get members
+29/06/2016 04:03:24: get forum
+29/06/2016 04:04:29: get admin
+29/06/2016 04:04:29: get replys
+29/06/2016 04:04:36: delete post
+29/06/2016 04:04:38: get threads
+29/06/2016 04:04:38: get moderator
+29/06/2016 04:04:38: get threads
+29/06/2016 04:04:38: get admin
+29/06/2016 04:04:51: get admin
+29/06/2016 04:04:53: get admin
+29/06/2016 04:04:53: get moderator
+29/06/2016 04:04:53: get threads
+29/06/2016 04:04:56: get admin
+29/06/2016 04:04:56: get replys
+29/06/2016 04:04:59: delete post
+29/06/2016 04:05:01: get threads
+29/06/2016 04:05:01: get moderator
+29/06/2016 04:05:01: get threads
+29/06/2016 04:05:01: get admin
+29/06/2016 04:05:03: get admin
+29/06/2016 04:05:07: get admin
+29/06/2016 04:05:07: get members
+29/06/2016 04:05:07: get sub forums
+29/06/2016 04:05:07: get admin
+29/06/2016 04:05:07: get members
+29/06/2016 04:05:07: get forum
+29/06/2016 04:05:09: get admin
+29/06/2016 04:05:09: get moderator
+29/06/2016 04:05:09: get threads
+29/06/2016 04:05:16: logout the system
+29/06/2016 04:05:27: get replys
+29/06/2016 04:20:32: create BL object
+29/06/2016 04:20:46: initialize the system
+29/06/2016 04:20:47: get all forum
+29/06/2016 04:20:50: get members
+29/06/2016 04:20:50: get sub forums
+29/06/2016 04:20:50: get admin
+29/06/2016 04:20:50: get members
+29/06/2016 04:20:50: get forum
+29/06/2016 04:20:58: login - not super user
+29/06/2016 04:20:58: get new notifications
+29/06/2016 04:20:58: get members
+29/06/2016 04:20:58: get sub forums
+29/06/2016 04:20:58: get admin
+29/06/2016 04:20:59: get members
+29/06/2016 04:20:59: get forum
+29/06/2016 04:20:59: get admin
+29/06/2016 04:21:02: get admin
+29/06/2016 04:21:02: get moderator
+29/06/2016 04:21:02: get threads
+29/06/2016 04:21:09: create thread
+29/06/2016 04:21:09: get new notifications
+29/06/2016 04:21:09: get moderator
+29/06/2016 04:21:09: get threads
+29/06/2016 04:21:09: get members
+29/06/2016 04:21:09: get sub forums
+29/06/2016 04:21:09: get admin
+29/06/2016 04:21:09: get members
+29/06/2016 04:21:09: get forum
+29/06/2016 04:21:45: get admin
+29/06/2016 04:21:45: get replys
+29/06/2016 04:21:48: delete post
+29/06/2016 04:21:50: get threads
+29/06/2016 04:21:50: get moderator
+29/06/2016 04:21:50: get threads
+29/06/2016 04:21:50: get admin
+29/06/2016 04:21:57: get moderator
+29/06/2016 04:22:14: get moderator
+29/06/2016 04:22:26: logout the system
+29/06/2016 04:22:48: login - not super user
+29/06/2016 04:22:49: get new notifications
+29/06/2016 04:22:49: get moderator
+29/06/2016 04:22:49: get threads
+29/06/2016 04:22:49: get members
+29/06/2016 04:22:49: get sub forums
+29/06/2016 04:22:49: get admin
+29/06/2016 04:22:49: get members
+29/06/2016 04:22:49: get forum
+29/06/2016 04:22:49: get admin
+29/06/2016 04:23:15: logout the system
+29/06/2016 04:23:27: login - not super user
+29/06/2016 04:23:28: get new notifications
+29/06/2016 04:23:28: get moderator
+29/06/2016 04:23:28: get threads
+29/06/2016 04:23:28: get members
+29/06/2016 04:23:28: get sub forums
+29/06/2016 04:23:28: get admin
+29/06/2016 04:23:28: get members
+29/06/2016 04:23:28: get forum
+29/06/2016 04:23:28: get admin
+29/06/2016 04:24:21: logout the system
+29/06/2016 04:29:44: create BL object
+29/06/2016 04:29:47: initialize the system
+29/06/2016 04:29:48: get all forum
+29/06/2016 04:29:52: get members
+29/06/2016 04:29:52: get sub forums
+29/06/2016 04:29:52: get admin
+29/06/2016 04:29:52: get members
+29/06/2016 04:29:52: get forum
+29/06/2016 04:29:53: get moderator
+29/06/2016 04:29:53: get threads
+29/06/2016 04:30:04: login - not super user
+29/06/2016 04:30:05: get new notifications
+29/06/2016 04:30:05: get moderator
+29/06/2016 04:30:05: get threads
+29/06/2016 04:30:05: get members
+29/06/2016 04:30:05: get sub forums
+29/06/2016 04:30:05: get admin
+29/06/2016 04:30:05: get members
+29/06/2016 04:30:05: get forum
+29/06/2016 04:30:05: get admin
+29/06/2016 04:30:12: create thread
+29/06/2016 04:30:12: get new notifications
+29/06/2016 04:30:12: get moderator
+29/06/2016 04:30:12: get threads
+29/06/2016 04:30:12: get members
+29/06/2016 04:30:12: get sub forums
+29/06/2016 04:30:12: get admin
+29/06/2016 04:30:12: get members
+29/06/2016 04:30:12: get forum
+29/06/2016 04:30:21: get admin
+29/06/2016 04:30:24: get admin
+29/06/2016 04:30:24: get moderator
+29/06/2016 04:30:24: get threads
+29/06/2016 04:30:35: create thread
+29/06/2016 04:30:35: get new notifications
+29/06/2016 04:30:35: get moderator
+29/06/2016 04:30:35: get threads
+29/06/2016 04:30:36: get members
+29/06/2016 04:30:36: get sub forums
+29/06/2016 04:30:36: get admin
+29/06/2016 04:30:36: get members
+29/06/2016 04:30:36: get forum
+29/06/2016 04:32:42: create BL object
+29/06/2016 04:32:46: initialize the system
+29/06/2016 04:32:47: get all forum
+29/06/2016 04:32:51: get members
+29/06/2016 04:32:51: get sub forums
+29/06/2016 04:32:51: get admin
+29/06/2016 04:32:51: get members
+29/06/2016 04:32:51: get forum
+29/06/2016 04:32:59: login - not super user
+29/06/2016 04:32:59: get new notifications
+29/06/2016 04:33:49: get members
+29/06/2016 04:33:49: get sub forums
+29/06/2016 04:33:49: get admin
+29/06/2016 04:33:49: get members
+29/06/2016 04:33:49: get forum
+29/06/2016 04:33:49: get admin
+29/06/2016 04:33:57: get admin
+29/06/2016 04:33:57: get moderator
+29/06/2016 04:33:57: get threads
+29/06/2016 04:34:03: create thread
+29/06/2016 04:34:09: create thread
+29/06/2016 04:34:15: get admin
+29/06/2016 04:34:15: get replys
+29/06/2016 04:34:20: get threads
+29/06/2016 04:34:20: get moderator
+29/06/2016 04:34:20: get threads
+29/06/2016 04:34:20: get admin
+29/06/2016 04:34:28: create thread
+29/06/2016 04:34:28: get new notifications
+29/06/2016 04:36:27: create BL object
+29/06/2016 04:36:32: initialize the system
+29/06/2016 04:36:33: get all forum
+29/06/2016 04:36:36: get members
+29/06/2016 04:36:36: get sub forums
+29/06/2016 04:36:36: get admin
+29/06/2016 04:36:36: get members
+29/06/2016 04:36:36: get forum
+29/06/2016 04:36:43: login - not super user
+29/06/2016 04:36:43: get new notifications
+29/06/2016 04:36:43: get members
+29/06/2016 04:36:43: get sub forums
+29/06/2016 04:36:43: get admin
+29/06/2016 04:36:44: get members
+29/06/2016 04:36:44: get forum
+29/06/2016 04:36:44: get admin
+29/06/2016 04:36:46: get admin
+29/06/2016 04:36:46: get moderator
+29/06/2016 04:36:46: get threads
+29/06/2016 04:36:50: create thread
+29/06/2016 04:36:59: create thread
+29/06/2016 04:37:01: create thread
+29/06/2016 04:37:01: get new notifications
+29/06/2016 04:37:01: get moderator
+29/06/2016 04:37:01: get threads
+29/06/2016 04:37:01: get members
+29/06/2016 04:37:01: get sub forums
+29/06/2016 04:37:01: get admin
+29/06/2016 04:37:01: get members
+29/06/2016 04:37:01: get forum
+29/06/2016 04:37:04: get admin
+29/06/2016 04:37:04: get replys
+29/06/2016 04:37:07: get threads
+29/06/2016 04:37:07: get moderator
+29/06/2016 04:37:07: get threads
+29/06/2016 04:37:07: get admin
+29/06/2016 04:37:13: create thread
+29/06/2016 04:37:13: get new notifications
+29/06/2016 04:37:13: get moderator
+29/06/2016 04:37:13: get threads
+29/06/2016 04:37:13: get members
+29/06/2016 04:37:13: get sub forums
+29/06/2016 04:37:13: get admin
+29/06/2016 04:37:14: get members
+29/06/2016 04:37:14: get forum
+29/06/2016 04:37:35: create thread
+29/06/2016 04:37:35: get new notifications
+29/06/2016 04:37:35: get moderator
+29/06/2016 04:37:35: get threads
+29/06/2016 04:37:35: get members
+29/06/2016 04:37:35: get sub forums
+29/06/2016 04:37:35: get admin
+29/06/2016 04:37:35: get members
+29/06/2016 04:37:35: get forum
+29/06/2016 04:37:52: create thread
+29/06/2016 04:37:52: get new notifications
+29/06/2016 04:40:02: create BL object
+29/06/2016 04:40:06: initialize the system
+29/06/2016 04:40:07: get all forum
+29/06/2016 04:40:10: get members
+29/06/2016 04:40:10: get sub forums
+29/06/2016 04:40:10: get admin
+29/06/2016 04:40:10: get members
+29/06/2016 04:40:10: get forum
+29/06/2016 04:40:17: login - not super user
+29/06/2016 04:40:18: get new notifications
+29/06/2016 04:40:31: get members
+29/06/2016 04:40:31: get sub forums
+29/06/2016 04:40:31: get admin
+29/06/2016 04:40:31: get members
+29/06/2016 04:40:31: get forum
+29/06/2016 04:40:31: get admin
+29/06/2016 04:40:36: get admin
+29/06/2016 04:40:36: get moderator
+29/06/2016 04:40:36: get threads
+29/06/2016 04:40:38: get admin
+29/06/2016 04:40:40: get admin
+29/06/2016 04:40:40: get moderator
+29/06/2016 04:40:40: get threads
+29/06/2016 04:40:46: create thread
+29/06/2016 04:41:01: create thread
+29/06/2016 04:41:07: get admin
+29/06/2016 04:41:07: get replys
+29/06/2016 04:41:09: get threads
+29/06/2016 04:41:09: get moderator
+29/06/2016 04:41:09: get threads
+29/06/2016 04:41:09: get admin
+29/06/2016 04:41:12: get admin
+29/06/2016 04:41:14: get admin
+29/06/2016 04:41:14: get moderator
+29/06/2016 04:41:14: get threads
+29/06/2016 04:41:19: create thread
+29/06/2016 04:44:38: create thread
+29/06/2016 04:51:45: create BL object
+29/06/2016 04:51:50: initialize the system
+29/06/2016 04:51:51: get all forum
+29/06/2016 04:51:57: get members
+29/06/2016 04:51:57: get sub forums
+29/06/2016 04:51:57: get admin
+29/06/2016 04:51:57: get members
+29/06/2016 04:51:57: get forum
+29/06/2016 04:52:04: login - not super user
+29/06/2016 04:52:05: get new notifications
+29/06/2016 04:52:05: get members
+29/06/2016 04:52:05: get sub forums
+29/06/2016 04:52:05: get admin
+29/06/2016 04:52:05: get members
+29/06/2016 04:52:05: get forum
+29/06/2016 04:52:05: get admin
+29/06/2016 04:52:08: get admin
+29/06/2016 04:52:08: get moderator
+29/06/2016 04:52:08: get threads
+29/06/2016 04:52:16: create thread
+29/06/2016 04:55:32: create BL object
+29/06/2016 04:55:38: initialize the system
+29/06/2016 04:55:39: get all forum
+29/06/2016 04:55:43: get members
+29/06/2016 04:55:43: get sub forums
+29/06/2016 04:55:43: get admin
+29/06/2016 04:55:43: get members
+29/06/2016 04:55:43: get forum
+29/06/2016 04:55:52: login - not super user
+29/06/2016 04:55:52: get new notifications
+29/06/2016 04:55:52: get members
+29/06/2016 04:55:52: get sub forums
+29/06/2016 04:55:52: get admin
+29/06/2016 04:55:52: get members
+29/06/2016 04:55:52: get forum
+29/06/2016 04:55:52: get admin
+29/06/2016 04:55:56: get admin
+29/06/2016 04:55:56: get moderator
+29/06/2016 04:55:56: get threads
+29/06/2016 04:56:01: create thread
+29/06/2016 04:57:56: create BL object
+29/06/2016 04:58:01: initialize the system
+29/06/2016 04:58:02: get all forum
+29/06/2016 04:58:07: get members
+29/06/2016 04:58:07: get sub forums
+29/06/2016 04:58:07: get admin
+29/06/2016 04:58:07: get members
+29/06/2016 04:58:07: get forum
+29/06/2016 04:58:14: login - not super user
+29/06/2016 04:58:14: get new notifications
+29/06/2016 04:58:14: get members
+29/06/2016 04:58:14: get sub forums
+29/06/2016 04:58:14: get admin
+29/06/2016 04:58:14: get members
+29/06/2016 04:58:14: get forum
+29/06/2016 04:58:14: get admin
+29/06/2016 04:58:16: get admin
+29/06/2016 04:58:16: get moderator
+29/06/2016 04:58:16: get threads
+29/06/2016 04:58:22: create thread
+29/06/2016 04:58:59: create BL object
+29/06/2016 04:59:08: create BL object
+29/06/2016 04:59:36: create BL object
+29/06/2016 04:59:40: initialize the system
+29/06/2016 04:59:41: get all forum
+29/06/2016 04:59:45: get members
+29/06/2016 04:59:45: get sub forums
+29/06/2016 04:59:45: get admin
+29/06/2016 04:59:45: get members
+29/06/2016 04:59:45: get forum
+29/06/2016 04:59:54: login - not super user
+29/06/2016 04:59:55: get new notifications
+29/06/2016 04:59:55: get members
+29/06/2016 04:59:55: get sub forums
+29/06/2016 04:59:55: get admin
+29/06/2016 04:59:55: get members
+29/06/2016 04:59:55: get forum
+29/06/2016 04:59:55: get admin
+29/06/2016 04:59:58: get admin
+29/06/2016 04:59:58: get moderator
+29/06/2016 04:59:58: get threads
+29/06/2016 05:00:03: create thread
+29/06/2016 05:00:16: get new notifications
+29/06/2016 05:00:16: get moderator
+29/06/2016 05:00:16: get threads
+29/06/2016 05:00:16: get members
+29/06/2016 05:00:16: get sub forums
+29/06/2016 05:00:16: get admin
+29/06/2016 05:00:16: get members
+29/06/2016 05:00:16: get forum
+29/06/2016 05:02:11: get admin
+29/06/2016 05:02:26: create BL object
+29/06/2016 05:02:31: initialize the system
+29/06/2016 05:02:32: get all forum
+29/06/2016 05:02:34: get members
+29/06/2016 05:02:34: get sub forums
+29/06/2016 05:02:34: get admin
+29/06/2016 05:02:34: get members
+29/06/2016 05:02:34: get forum
+29/06/2016 05:03:21: login - not super user
+29/06/2016 05:03:26: login - not super user
+29/06/2016 05:03:29: get new notifications
+29/06/2016 05:03:30: get members
+29/06/2016 05:03:30: get sub forums
+29/06/2016 05:03:30: get admin
+29/06/2016 05:03:30: get members
+29/06/2016 05:03:30: get forum
+29/06/2016 05:03:30: get admin
+29/06/2016 05:03:43: get new notifications
+29/06/2016 05:03:43: get members
+29/06/2016 05:03:43: get sub forums
+29/06/2016 05:03:43: get admin
+29/06/2016 05:03:43: get members
+29/06/2016 05:03:43: get forum
+29/06/2016 05:03:53: get admin
+29/06/2016 05:03:53: get moderator
+29/06/2016 05:03:53: get threads
+29/06/2016 05:04:06: get new notifications
+29/06/2016 05:04:06: get moderator
+29/06/2016 05:04:06: get threads
+29/06/2016 05:04:06: get members
+29/06/2016 05:04:06: get sub forums
+29/06/2016 05:04:06: get admin
+29/06/2016 05:04:06: get members
+29/06/2016 05:04:06: get forum
+29/06/2016 05:04:27: get new notifications
+29/06/2016 05:04:27: get moderator
+29/06/2016 05:04:27: get threads
+29/06/2016 05:04:27: get members
+29/06/2016 05:04:27: get sub forums
+29/06/2016 05:04:27: get admin
+29/06/2016 05:04:27: get members
+29/06/2016 05:04:27: get forum
+29/06/2016 05:04:46: get new notifications
+29/06/2016 05:04:46: get moderator
+29/06/2016 05:04:46: get threads
+29/06/2016 05:04:46: get members
+29/06/2016 05:04:46: get sub forums
+29/06/2016 05:04:46: get admin
+29/06/2016 05:04:46: get members
+29/06/2016 05:04:47: get forum
+29/06/2016 05:05:48: get admin
+29/06/2016 05:05:49: get admin
+29/06/2016 05:05:49: get moderator
+29/06/2016 05:05:49: get threads
+29/06/2016 05:05:51: get admin
+29/06/2016 05:05:51: get replys
+29/06/2016 05:06:15: get threads
+29/06/2016 05:06:15: get moderator
+29/06/2016 05:06:15: get threads
+29/06/2016 05:06:15: get admin
+29/06/2016 05:06:18: get admin
+29/06/2016 05:06:18: get replys
+29/06/2016 05:06:45: create reply post
+29/06/2016 05:06:45: get new notifications
+29/06/2016 05:06:45: get replys
+29/06/2016 05:06:45: get moderator
+29/06/2016 05:06:45: get threads
+29/06/2016 05:06:45: get members
+29/06/2016 05:06:45: get sub forums
+29/06/2016 05:06:45: get admin
+29/06/2016 05:06:45: get members
+29/06/2016 05:06:45: get forum
+29/06/2016 05:06:59: create reply post
+29/06/2016 05:06:59: get new notifications
+29/06/2016 05:06:59: get replys
+29/06/2016 05:06:59: get moderator
+29/06/2016 05:06:59: get threads
+29/06/2016 05:06:59: get members
+29/06/2016 05:06:59: get sub forums
+29/06/2016 05:06:59: get admin
+29/06/2016 05:06:59: get members
+29/06/2016 05:06:59: get forum
+29/06/2016 05:07:06: get replys
+29/06/2016 05:07:10: get replys
+29/06/2016 05:07:12: get replys
+29/06/2016 05:07:13: get replys
+29/06/2016 05:07:15: get replys
+29/06/2016 05:07:18: get replys
+29/06/2016 05:07:19: get replys
+29/06/2016 05:07:20: get replys
+29/06/2016 05:07:29: get new notifications
+29/06/2016 05:07:29: get replys
+29/06/2016 05:07:29: get moderator
+29/06/2016 05:07:29: get threads
+29/06/2016 05:07:29: get members
+29/06/2016 05:07:29: get sub forums
+29/06/2016 05:07:29: get admin
+29/06/2016 05:07:29: get members
+29/06/2016 05:07:29: get forum
+29/06/2016 05:07:35: get replys
+29/06/2016 05:07:39: get replys
+29/06/2016 05:07:41: get replys
+29/06/2016 05:07:57: get threads
+29/06/2016 05:07:57: get moderator
+29/06/2016 05:07:57: get threads
+29/06/2016 05:07:57: get admin
+29/06/2016 05:07:59: get admin
+29/06/2016 05:07:59: get replys
+29/06/2016 05:08:06: get replys
+29/06/2016 05:08:12: get replys
+29/06/2016 05:08:14: get replys
+29/06/2016 05:08:24: delete post
+29/06/2016 05:08:26: delete post
+29/06/2016 05:08:26: get new notifications
+29/06/2016 05:08:26: get replys
+29/06/2016 05:08:26: get moderator
+29/06/2016 05:08:26: get threads
+29/06/2016 05:08:26: get members
+29/06/2016 05:08:26: get sub forums
+29/06/2016 05:08:26: get admin
+29/06/2016 05:08:26: get members
+29/06/2016 05:08:26: get forum
+29/06/2016 05:08:33: get replys
+29/06/2016 05:08:37: delete post
+29/06/2016 05:08:39: delete post
+29/06/2016 05:08:39: get new notifications
+29/06/2016 05:08:39: get replys
+29/06/2016 05:08:39: get moderator
+29/06/2016 05:08:39: get threads
+29/06/2016 05:08:39: get members
+29/06/2016 05:08:39: get sub forums
+29/06/2016 05:08:39: get admin
+29/06/2016 05:08:39: get members
+29/06/2016 05:08:39: get forum
+29/06/2016 05:08:43: get replys
+29/06/2016 05:08:46: delete post
+29/06/2016 05:08:50: get replys
+29/06/2016 05:08:53: get threads
+29/06/2016 05:08:53: get moderator
+29/06/2016 05:08:53: get threads
+29/06/2016 05:08:53: get admin
+29/06/2016 05:08:55: get admin
+29/06/2016 05:08:55: get replys
+29/06/2016 05:08:59: get replys
+29/06/2016 05:09:01: delete post
+29/06/2016 05:09:01: get new notifications
+29/06/2016 05:09:01: get replys
+29/06/2016 05:09:01: get moderator
+29/06/2016 05:09:01: get threads
+29/06/2016 05:09:01: get members
+29/06/2016 05:09:01: get sub forums
+29/06/2016 05:09:01: get admin
+29/06/2016 05:09:01: get members
+29/06/2016 05:09:01: get forum
+29/06/2016 05:09:09: get threads
+29/06/2016 05:09:09: get moderator
+29/06/2016 05:09:09: get threads
+29/06/2016 05:09:09: get admin
+29/06/2016 05:09:10: get admin
+29/06/2016 05:09:10: get replys
+29/06/2016 05:09:17: get replys
+29/06/2016 05:09:25: delete post
+29/06/2016 05:09:25: get new notifications
+29/06/2016 05:09:26: get replys
+29/06/2016 05:09:26: get moderator
+29/06/2016 05:09:26: get threads
+29/06/2016 05:09:26: get members
+29/06/2016 05:09:26: get sub forums
+29/06/2016 05:09:26: get admin
+29/06/2016 05:09:26: get members
+29/06/2016 05:09:26: get forum
+29/06/2016 05:09:38: get replys
+29/06/2016 05:09:40: get replys
+29/06/2016 05:09:46: get threads
+29/06/2016 05:09:46: get moderator
+29/06/2016 05:09:46: get threads
+29/06/2016 05:09:46: get admin
+29/06/2016 05:09:48: get admin
+29/06/2016 05:09:48: get replys
+29/06/2016 05:09:51: get replys
+29/06/2016 05:09:53: get replys
+29/06/2016 05:10:05: get replys
+29/06/2016 05:10:07: get replys
+29/06/2016 05:13:10: create BL object
+29/06/2016 05:13:14: initialize the system
+29/06/2016 05:13:15: get all forum
+29/06/2016 05:13:18: get members
+29/06/2016 05:13:18: get sub forums
+29/06/2016 05:13:18: get admin
+29/06/2016 05:13:18: get members
+29/06/2016 05:13:18: get forum
+29/06/2016 05:13:58: login - not super user
+29/06/2016 05:13:59: get new notifications
+29/06/2016 05:13:59: get members
+29/06/2016 05:13:59: get sub forums
+29/06/2016 05:13:59: get admin
+29/06/2016 05:13:59: get members
+29/06/2016 05:13:59: get forum
+29/06/2016 05:13:59: get admin
+29/06/2016 05:14:01: get admin
+29/06/2016 05:14:01: get moderator
+29/06/2016 05:14:01: get threads
+29/06/2016 05:14:10: create thread
+29/06/2016 05:14:10: get new notifications
+29/06/2016 05:14:10: get moderator
+29/06/2016 05:14:10: get threads
+29/06/2016 05:14:10: get members
+29/06/2016 05:14:10: get sub forums
+29/06/2016 05:14:10: get admin
+29/06/2016 05:14:10: get members
+29/06/2016 05:14:10: get forum
+29/06/2016 05:14:12: get admin
+29/06/2016 05:14:12: get replys
+29/06/2016 05:14:22: create reply post
+29/06/2016 05:14:22: get new notifications
+29/06/2016 05:14:23: get replys
+29/06/2016 05:14:23: get moderator
+29/06/2016 05:14:23: get threads
+29/06/2016 05:14:23: get members
+29/06/2016 05:14:23: get sub forums
+29/06/2016 05:14:23: get admin
+29/06/2016 05:14:23: get members
+29/06/2016 05:14:23: get forum
+29/06/2016 05:14:29: delete post
+29/06/2016 05:14:31: get threads
+29/06/2016 05:14:31: get moderator
+29/06/2016 05:14:31: get threads
+29/06/2016 05:14:31: get admin
+29/06/2016 05:14:32: get admin
+29/06/2016 05:14:32: get replys
+29/06/2016 05:14:35: get replys
+29/06/2016 05:15:27: create reply post
+29/06/2016 05:15:27: get new notifications
+29/06/2016 05:15:27: get replys
+29/06/2016 05:15:27: get moderator
+29/06/2016 05:15:27: get threads
+29/06/2016 05:15:27: get members
+29/06/2016 05:15:27: get sub forums
+29/06/2016 05:15:27: get admin
+29/06/2016 05:15:27: get members
+29/06/2016 05:15:27: get forum
+29/06/2016 05:15:40: create reply post
+29/06/2016 05:15:41: get new notifications
+29/06/2016 05:15:41: get replys
+29/06/2016 05:15:41: get moderator
+29/06/2016 05:15:41: get threads
+29/06/2016 05:15:41: get members
+29/06/2016 05:15:41: get sub forums
+29/06/2016 05:15:41: get admin
+29/06/2016 05:15:41: get members
+29/06/2016 05:15:41: get forum
+29/06/2016 05:15:53: get replys
+29/06/2016 05:15:56: delete post
+29/06/2016 05:15:56: get new notifications
+29/06/2016 05:15:56: get replys
+29/06/2016 05:15:56: get moderator
+29/06/2016 05:15:56: get threads
+29/06/2016 05:15:56: get members
+29/06/2016 05:15:56: get sub forums
+29/06/2016 05:15:56: get admin
+29/06/2016 05:15:56: get members
+29/06/2016 05:15:56: get forum
+29/06/2016 05:16:27: edit post
+29/06/2016 05:16:31: get threads
+29/06/2016 05:16:31: get moderator
+29/06/2016 05:16:31: get threads
+29/06/2016 05:16:31: get admin
+29/06/2016 05:16:33: get admin
+29/06/2016 05:16:33: get replys
+29/06/2016 05:16:58: get threads
+29/06/2016 05:16:58: get moderator
+29/06/2016 05:16:58: get threads
+29/06/2016 05:16:58: get admin
+29/06/2016 05:17:04: get admin
+29/06/2016 05:17:10: get admin
+29/06/2016 05:17:10: get members
+29/06/2016 05:17:10: get sub forums
+29/06/2016 05:17:10: get admin
+29/06/2016 05:17:10: get members
+29/06/2016 05:17:10: get forum
+29/06/2016 05:17:13: logout the system
+29/06/2016 05:17:21: login of super user
+29/06/2016 05:17:27: login of super user
+29/06/2016 05:23:31: create BL object
+29/06/2016 05:23:36: initialize the system
+29/06/2016 05:23:37: get all forum
+29/06/2016 05:23:42: login of super user
+29/06/2016 05:26:06: create BL object
+29/06/2016 05:26:20: create BL object
+29/06/2016 05:26:24: initialize the system
+29/06/2016 05:26:25: get all forum
+29/06/2016 05:26:29: get members
+29/06/2016 05:26:29: get sub forums
+29/06/2016 05:26:29: get admin
+29/06/2016 05:26:29: get members
+29/06/2016 05:26:29: get forum
+29/06/2016 05:26:37: login of super user
+29/06/2016 05:28:16: create BL object
+29/06/2016 05:28:20: initialize the system
+29/06/2016 05:28:21: get all forum
+29/06/2016 05:28:27: login of super user
+29/06/2016 05:29:07: create BL object
+29/06/2016 05:29:10: initialize the system
+29/06/2016 05:29:12: get all forum
+29/06/2016 05:29:17: login of super user
+29/06/2016 05:30:27: create BL object
+29/06/2016 05:30:30: initialize the system
+29/06/2016 05:30:31: get all forum
+29/06/2016 05:30:35: get members
+29/06/2016 05:30:35: get sub forums
+29/06/2016 05:30:35: get admin
+29/06/2016 05:30:35: get members
+29/06/2016 05:30:35: get forum
+29/06/2016 05:30:44: login of super user
+29/06/2016 05:30:52: get new notifications
+29/06/2016 05:31:49: get admin
+29/06/2016 05:31:49: get members
+29/06/2016 05:31:49: get sub forums
+29/06/2016 05:31:49: get admin
+29/06/2016 05:31:49: get members
+29/06/2016 05:31:49: get forum
+29/06/2016 05:32:07: define/change policy
+29/06/2016 05:33:58: create BL object
+29/06/2016 05:33:59: initialize the system
+29/06/2016 05:34:01: create BL object
+29/06/2016 05:34:01: initialize the system
+29/06/2016 05:34:01: create BL object
+29/06/2016 05:34:01: initialize the system
+29/06/2016 05:34:01: create BL object
+29/06/2016 05:34:01: initialize the system
+29/06/2016 05:34:03: create BL object
+29/06/2016 05:34:03: initialize the system
+29/06/2016 05:34:06: create BL object
+29/06/2016 05:34:06: initialize the system
+29/06/2016 05:34:08: create BL object
+29/06/2016 05:34:08: initialize the system
+29/06/2016 05:34:10: create BL object
+29/06/2016 05:34:10: initialize the system
+29/06/2016 05:34:12: create BL object
+29/06/2016 05:34:12: initialize the system
+29/06/2016 05:34:14: create BL object
+29/06/2016 05:34:14: initialize the system
+29/06/2016 05:34:16: create BL object
+29/06/2016 05:34:16: initialize the system
+29/06/2016 05:34:18: create BL object
+29/06/2016 05:34:18: initialize the system
+29/06/2016 05:34:20: create BL object
+29/06/2016 05:34:20: initialize the system
+29/06/2016 05:34:22: create BL object
+29/06/2016 05:34:22: initialize the system
+29/06/2016 05:34:24: create BL object
+29/06/2016 05:34:24: initialize the system
+29/06/2016 05:34:26: create BL object
+29/06/2016 05:34:26: initialize the system
+29/06/2016 05:34:28: create BL object
+29/06/2016 05:34:28: initialize the system
+29/06/2016 05:34:30: create BL object
+29/06/2016 05:34:30: initialize the system
+29/06/2016 05:34:32: create BL object
+29/06/2016 05:34:32: initialize the system
+29/06/2016 05:34:34: create BL object
+29/06/2016 05:34:34: initialize the system
+29/06/2016 05:34:36: create BL object
+29/06/2016 05:34:36: initialize the system
+29/06/2016 05:34:38: create BL object
+29/06/2016 05:34:38: initialize the system
+29/06/2016 05:34:40: create BL object
+29/06/2016 05:34:40: initialize the system
+29/06/2016 05:34:42: create BL object
+29/06/2016 05:34:42: initialize the system
+29/06/2016 05:34:44: create BL object
+29/06/2016 05:34:44: initialize the system
+29/06/2016 05:34:46: create BL object
+29/06/2016 05:34:46: initialize the system
+29/06/2016 05:34:48: create BL object
+29/06/2016 05:34:48: initialize the system
+29/06/2016 05:34:50: create BL object
+29/06/2016 05:34:50: initialize the system
+29/06/2016 05:34:52: create BL object
+29/06/2016 05:34:52: initialize the system
+29/06/2016 05:34:54: create BL object
+29/06/2016 05:34:54: initialize the system
+29/06/2016 05:34:56: create BL object
+29/06/2016 05:34:56: initialize the system
+29/06/2016 05:34:58: create BL object
+29/06/2016 05:34:58: initialize the system
+29/06/2016 05:35:00: create BL object
+29/06/2016 05:35:00: initialize the system
+29/06/2016 05:35:02: create BL object
+29/06/2016 05:35:02: initialize the system
+29/06/2016 05:35:04: create BL object
+29/06/2016 05:35:04: initialize the system
+29/06/2016 05:35:06: create BL object
+29/06/2016 05:35:06: initialize the system
+29/06/2016 05:35:08: create BL object
+29/06/2016 05:35:08: initialize the system
+29/06/2016 05:37:37: create BL object
+29/06/2016 05:37:37: initialize the system
+29/06/2016 05:39:41: create BL object
+29/06/2016 05:39:41: initialize the system
+29/06/2016 05:39:41: creating new forum
+29/06/2016 05:43:12: create BL object
+29/06/2016 05:43:13: initialize the system
+29/06/2016 05:43:15: create BL object
+29/06/2016 05:43:15: initialize the system
+29/06/2016 05:43:15: create BL object
+29/06/2016 05:43:15: initialize the system
+29/06/2016 05:43:15: create BL object
+29/06/2016 05:43:15: initialize the system
+29/06/2016 05:43:17: create BL object
+29/06/2016 05:43:17: initialize the system
+29/06/2016 05:43:19: create BL object
+29/06/2016 05:43:19: initialize the system
+29/06/2016 05:43:21: create BL object
+29/06/2016 05:43:21: initialize the system
+29/06/2016 05:43:23: create BL object
+29/06/2016 05:43:23: initialize the system
+29/06/2016 05:43:25: create BL object
+29/06/2016 05:43:25: initialize the system
+29/06/2016 05:43:27: create BL object
+29/06/2016 05:43:27: initialize the system
+29/06/2016 05:43:29: create BL object
+29/06/2016 05:43:29: initialize the system
+29/06/2016 05:43:31: create BL object
+29/06/2016 05:43:31: initialize the system
+29/06/2016 05:43:33: create BL object
+29/06/2016 05:43:33: initialize the system
+29/06/2016 05:43:35: create BL object
+29/06/2016 05:43:35: initialize the system
+29/06/2016 05:43:37: create BL object
+29/06/2016 05:43:37: initialize the system
+29/06/2016 05:43:39: create BL object
+29/06/2016 05:43:39: initialize the system
+29/06/2016 05:43:41: create BL object
+29/06/2016 05:43:41: initialize the system
+29/06/2016 05:43:43: create BL object
+29/06/2016 05:43:43: initialize the system
+29/06/2016 05:43:45: create BL object
+29/06/2016 05:43:45: initialize the system
+29/06/2016 05:43:47: create BL object
+29/06/2016 05:43:47: initialize the system
+29/06/2016 05:43:49: create BL object
+29/06/2016 05:43:49: initialize the system
+29/06/2016 05:51:23: create BL object
+29/06/2016 05:51:24: initialize the system
+29/06/2016 05:51:26: create BL object
+29/06/2016 05:51:26: initialize the system
+29/06/2016 05:51:26: create BL object
+29/06/2016 05:51:26: initialize the system
+29/06/2016 05:51:26: create BL object
+29/06/2016 05:51:26: initialize the system
+29/06/2016 05:51:28: create BL object
+29/06/2016 05:51:28: initialize the system
+29/06/2016 05:51:30: create BL object
+29/06/2016 05:51:30: initialize the system
+29/06/2016 05:51:32: create BL object
+29/06/2016 05:51:32: initialize the system
+29/06/2016 05:51:34: create BL object
+29/06/2016 05:51:34: initialize the system
+29/06/2016 05:51:36: create BL object
+29/06/2016 05:51:36: initialize the system
+29/06/2016 05:51:38: create BL object
+29/06/2016 05:51:38: initialize the system
+29/06/2016 05:51:40: create BL object
+29/06/2016 05:51:40: initialize the system
+29/06/2016 05:51:42: create BL object
+29/06/2016 05:51:42: initialize the system
+29/06/2016 05:51:44: create BL object
+29/06/2016 05:51:44: initialize the system
+29/06/2016 05:51:46: create BL object
+29/06/2016 05:51:46: initialize the system
+29/06/2016 05:51:48: create BL object
+29/06/2016 05:51:48: initialize the system
+29/06/2016 05:51:50: create BL object
+29/06/2016 05:51:50: initialize the system
+29/06/2016 05:51:52: create BL object
+29/06/2016 05:51:52: initialize the system
+29/06/2016 05:51:54: create BL object
+29/06/2016 05:51:54: initialize the system
+29/06/2016 05:51:56: create BL object
+29/06/2016 05:51:56: initialize the system
+29/06/2016 05:51:58: create BL object
+29/06/2016 05:51:58: initialize the system
+29/06/2016 05:52:00: create BL object
+29/06/2016 05:52:00: initialize the system
+29/06/2016 05:52:02: create BL object
+29/06/2016 05:52:02: initialize the system
+29/06/2016 05:52:04: create BL object
+29/06/2016 05:52:04: initialize the system
+29/06/2016 05:52:06: create BL object
+29/06/2016 05:52:06: initialize the system
+29/06/2016 05:52:08: create BL object
+29/06/2016 05:52:08: initialize the system
+29/06/2016 05:52:10: create BL object
+29/06/2016 05:52:10: initialize the system
+29/06/2016 05:52:12: create BL object
+29/06/2016 05:52:12: initialize the system
+29/06/2016 05:52:14: create BL object
+29/06/2016 05:52:14: initialize the system
+29/06/2016 05:52:16: create BL object
+29/06/2016 05:52:16: initialize the system
+29/06/2016 05:52:18: create BL object
+29/06/2016 05:52:18: initialize the system
+29/06/2016 05:52:20: create BL object
+29/06/2016 05:52:20: initialize the system
+29/06/2016 05:52:22: create BL object
+29/06/2016 05:52:22: initialize the system
+29/06/2016 05:52:25: create BL object
+29/06/2016 05:52:25: initialize the system
+29/06/2016 05:52:27: create BL object
+29/06/2016 05:52:27: initialize the system
+29/06/2016 05:52:29: create BL object
+29/06/2016 05:52:29: initialize the system
+29/06/2016 05:52:31: create BL object
+29/06/2016 05:52:31: initialize the system
+29/06/2016 05:52:33: create BL object
+29/06/2016 05:52:33: initialize the system
+29/06/2016 06:02:17: create BL object
+29/06/2016 06:02:19: initialize the system
+29/06/2016 06:02:21: create BL object
+29/06/2016 06:02:21: initialize the system
+29/06/2016 06:02:21: create BL object
+29/06/2016 06:02:21: initialize the system
+29/06/2016 06:02:21: create BL object
+29/06/2016 06:02:21: initialize the system
+29/06/2016 06:02:23: create BL object
+29/06/2016 06:02:23: initialize the system
+29/06/2016 06:02:26: create BL object
+29/06/2016 06:02:26: initialize the system
+29/06/2016 06:02:28: create BL object
+29/06/2016 06:02:28: initialize the system
+29/06/2016 06:02:30: create BL object
+29/06/2016 06:02:30: initialize the system
+29/06/2016 06:02:32: create BL object
+29/06/2016 06:02:32: initialize the system
+29/06/2016 06:02:34: create BL object
+29/06/2016 06:02:34: initialize the system
+29/06/2016 06:02:36: create BL object
+29/06/2016 06:02:36: initialize the system
+29/06/2016 06:02:38: create BL object
+29/06/2016 06:02:38: initialize the system
+29/06/2016 06:02:40: create BL object
+29/06/2016 06:02:40: initialize the system
+29/06/2016 06:02:42: create BL object
+29/06/2016 06:02:42: initialize the system
+29/06/2016 06:02:44: create BL object
+29/06/2016 06:02:44: initialize the system
+29/06/2016 06:02:46: create BL object
+29/06/2016 06:02:46: initialize the system
+29/06/2016 06:02:48: create BL object
+29/06/2016 06:02:48: initialize the system
+29/06/2016 06:02:50: create BL object
+29/06/2016 06:02:50: initialize the system
+29/06/2016 06:02:52: create BL object
+29/06/2016 06:02:52: initialize the system
+29/06/2016 06:03:42: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: create BL object
+29/06/2016 06:03:43: initialize the system
+29/06/2016 06:03:43: creating new forum
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:03:44: create BL object
+29/06/2016 06:03:44: initialize the system
+29/06/2016 06:08:25: create BL object
+29/06/2016 06:08:25: initialize the system
+29/06/2016 06:08:25: create BL object
+29/06/2016 06:08:25: initialize the system
+29/06/2016 06:08:25: create BL object
+29/06/2016 06:08:25: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:26: create BL object
+29/06/2016 06:08:26: initialize the system
+29/06/2016 06:08:27: create BL object
+29/06/2016 06:08:27: initialize the system
+29/06/2016 06:08:27: create BL object
+29/06/2016 06:08:27: initialize the system
+29/06/2016 06:12:22: create BL object
+29/06/2016 06:12:22: initialize the system
+29/06/2016 06:12:49: create BL object
+29/06/2016 06:12:50: initialize the system
+29/06/2016 06:16:38: create BL object
+29/06/2016 06:17:00: initialize the system
+29/06/2016 06:25:27: create BL object
+29/06/2016 06:25:39: initialize the system
+29/06/2016 06:26:53: creating new forum
+29/06/2016 06:28:31: create BL object
+29/06/2016 06:28:49: initialize the system
+29/06/2016 06:31:11: creating new forum
+29/06/2016 06:36:04: create BL object
+29/06/2016 06:36:06: initialize the system
+29/06/2016 06:36:31: login of super user
+29/06/2016 06:36:32: creating new forum
+29/06/2016 06:36:33: get admins
+29/06/2016 06:36:36: login - not super user
+29/06/2016 06:36:37: Subscribe to forum
+29/06/2016 06:39:27: create BL object
+29/06/2016 06:39:27: initialize the system
+29/06/2016 06:39:32: login of super user
+29/06/2016 06:39:32: creating new forum
+29/06/2016 06:39:32: get admins
+29/06/2016 06:39:32: login - not super user
+29/06/2016 06:39:32: Subscribe to forum
+29/06/2016 06:42:19: create BL object
+29/06/2016 06:42:19: initialize the system
+29/06/2016 06:42:46: create BL object
+29/06/2016 06:42:46: initialize the system
+29/06/2016 06:42:50: login of super user
+29/06/2016 06:42:50: creating new forum
+29/06/2016 06:42:51: get admins
+29/06/2016 06:42:51: login - not super user
+29/06/2016 06:42:51: Subscribe to forum
+29/06/2016 06:42:51: create sub forum
+29/06/2016 06:42:51: login - not super user
+29/06/2016 06:42:51: login - not super user
+29/06/2016 06:45:55: create BL object
+29/06/2016 06:45:55: initialize the system
+29/06/2016 06:56:29: create BL object
+29/06/2016 06:56:29: initialize the system
+29/06/2016 06:56:29: login of super user
+29/06/2016 06:56:29: creating new forum
+29/06/2016 06:56:29: get admins
+29/06/2016 06:56:29: login - not super user
+29/06/2016 06:56:29: Subscribe to forum
+29/06/2016 06:56:29: create sub forum
+29/06/2016 06:56:30: login - not super user
+29/06/2016 06:56:30: login - not super user
+29/06/2016 06:59:19: create BL object
+29/06/2016 06:59:19: initialize the system
+29/06/2016 06:59:20: login of super user
+29/06/2016 06:59:20: creating new forum
+29/06/2016 06:59:20: get admins
+29/06/2016 06:59:20: login - not super user
+29/06/2016 06:59:34: Subscribe to forum
+29/06/2016 06:59:34: create sub forum
+29/06/2016 06:59:34: login - not super user
+29/06/2016 06:59:36: login - not super user
+29/06/2016 07:03:25: create BL object
+29/06/2016 07:04:16: create BL object
+29/06/2016 07:04:16: initialize the system
+29/06/2016 07:04:17: login of super user
+29/06/2016 07:04:17: creating new forum
+29/06/2016 07:04:17: get admins
+29/06/2016 07:04:17: login - not super user
+29/06/2016 07:04:21: Subscribe to forum
+29/06/2016 07:04:21: create sub forum
+29/06/2016 07:04:21: login - not super user
+29/06/2016 07:04:21: Subscribe to forum
+29/06/2016 07:04:21: login - not super user
+29/06/2016 07:04:21: login - not super user
+29/06/2016 07:09:40: create BL object
+29/06/2016 07:09:40: initialize the system
+29/06/2016 07:10:21: create BL object
+29/06/2016 07:10:22: initialize the system
+29/06/2016 07:11:11: create BL object
+29/06/2016 07:11:11: initialize the system
+29/06/2016 07:11:54: create BL object
+29/06/2016 07:11:55: initialize the system
+29/06/2016 07:11:55: login of super user
+29/06/2016 07:11:55: creating new forum
+29/06/2016 07:11:55: get admins
+29/06/2016 07:11:55: login - not super user
+29/06/2016 07:11:55: Subscribe to forum
+29/06/2016 07:11:55: create sub forum
+29/06/2016 07:11:55: logout the system
+29/06/2016 07:14:31: create BL object
+29/06/2016 07:14:32: initialize the system
+29/06/2016 07:14:32: login of super user
+29/06/2016 07:14:32: creating new forum
+29/06/2016 07:14:32: get admins
+29/06/2016 07:14:32: login - not super user
+29/06/2016 07:14:32: Subscribe to forum
+29/06/2016 07:14:32: create sub forum
+29/06/2016 07:14:32: logout the system
+29/06/2016 07:17:19: create BL object
+29/06/2016 07:17:20: initialize the system
+29/06/2016 07:19:19: create BL object
+29/06/2016 07:19:19: initialize the system
+29/06/2016 07:20:50: create BL object
+29/06/2016 07:20:51: initialize the system
+29/06/2016 07:20:51: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:52: create BL object
+29/06/2016 07:20:52: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 07:20:53: create BL object
+29/06/2016 07:20:53: initialize the system
+29/06/2016 08:34:42: create BL object
+29/06/2016 08:34:43: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: login of super user
+29/06/2016 08:34:44: logout the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:44: create BL object
+29/06/2016 08:34:44: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:34:45: create BL object
+29/06/2016 08:34:45: initialize the system
+29/06/2016 08:40:43: create BL object
+29/06/2016 08:40:44: initialize the system
+29/06/2016 08:40:44: create BL object
+29/06/2016 08:40:44: initialize the system
+29/06/2016 08:40:44: create BL object
+29/06/2016 08:40:44: initialize the system
+29/06/2016 08:40:44: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:45: create BL object
+29/06/2016 08:40:45: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:40:46: create BL object
+29/06/2016 08:40:46: initialize the system
+29/06/2016 08:41:48: create BL object
+29/06/2016 08:41:49: initialize the system
+29/06/2016 08:41:49: create BL object
+29/06/2016 08:41:49: initialize the system
+29/06/2016 08:41:49: create BL object
+29/06/2016 08:41:49: initialize the system
+29/06/2016 08:41:49: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: login of super user
+29/06/2016 08:41:50: logout the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:50: create BL object
+29/06/2016 08:41:50: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:41:51: create BL object
+29/06/2016 08:41:51: initialize the system
+29/06/2016 08:42:39: create BL object
+29/06/2016 08:42:40: initialize the system
+29/06/2016 08:42:40: create BL object
+29/06/2016 08:42:40: initialize the system
+29/06/2016 08:42:40: create BL object
+29/06/2016 08:42:40: initialize the system
+29/06/2016 08:42:40: create BL object
+29/06/2016 08:42:40: initialize the system
+29/06/2016 08:42:40: create BL object
+29/06/2016 08:42:40: initialize the system
+29/06/2016 08:42:40: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:42:41: create BL object
+29/06/2016 08:42:41: initialize the system
+29/06/2016 08:46:41: create BL object
+29/06/2016 08:46:41: initialize the system
+29/06/2016 08:47:21: create BL object
+29/06/2016 08:47:33: initialize the system
+29/06/2016 08:48:52: create BL object
+29/06/2016 08:48:52: initialize the system
+29/06/2016 08:49:52: create BL object
+29/06/2016 08:49:52: initialize the system
+29/06/2016 08:52:21: create BL object
+29/06/2016 08:52:21: initialize the system
+29/06/2016 08:52:47: login of super user
+29/06/2016 08:55:27: create BL object
+29/06/2016 08:55:27: initialize the system
+29/06/2016 08:57:43: create BL object
+29/06/2016 08:57:44: initialize the system
+29/06/2016 08:58:40: create BL object
+29/06/2016 09:00:00: initialize the system
+29/06/2016 09:07:17: create BL object
+29/06/2016 09:07:23: initialize the system
+29/06/2016 09:07:24: login of super user
+29/06/2016 09:07:24: logout the system
+29/06/2016 09:07:24: create BL object
+29/06/2016 09:07:26: initialize the system
+29/06/2016 09:07:27: login of super user
+29/06/2016 09:07:27: logout the system
+29/06/2016 09:07:27: create BL object
+29/06/2016 09:07:28: initialize the system
+29/06/2016 09:07:28: login of super user
+29/06/2016 09:07:28: logout the system
+29/06/2016 09:07:28: create BL object
+29/06/2016 09:07:29: initialize the system
+29/06/2016 09:07:30: login of super user
+29/06/2016 09:07:30: logout the system
+29/06/2016 09:07:30: create BL object
+29/06/2016 09:07:31: initialize the system
+29/06/2016 09:07:38: login of super user
+29/06/2016 09:07:38: logout the system
+29/06/2016 09:07:38: create BL object
+29/06/2016 09:07:38: initialize the system
+29/06/2016 09:07:38: login of super user
+29/06/2016 09:07:38: creating new forum
+29/06/2016 09:07:38: get admins
+29/06/2016 09:07:38: get admin
+29/06/2016 09:07:38: get admin
+29/06/2016 09:07:38: create BL object
+29/06/2016 09:07:38: initialize the system
+29/06/2016 09:07:38: creating new forum
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: creating new forum
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:39: create BL object
+29/06/2016 09:07:39: initialize the system
+29/06/2016 09:07:51: create BL object
+29/06/2016 09:07:52: initialize the system
+29/06/2016 09:07:52: create BL object
+29/06/2016 09:07:52: initialize the system
+29/06/2016 09:07:52: create BL object
+29/06/2016 09:07:52: initialize the system
+29/06/2016 09:07:52: create BL object
+29/06/2016 09:07:52: initialize the system
+29/06/2016 09:07:52: login of super user
+29/06/2016 09:07:52: logout the system
+29/06/2016 09:07:52: create BL object
+29/06/2016 09:07:52: initialize the system
+29/06/2016 09:07:52: login of super user
+29/06/2016 09:07:52: logout the system
+29/06/2016 09:07:52: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: login of super user
+29/06/2016 09:07:53: logout the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: login of super user
+29/06/2016 09:07:53: logout the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: login of super user
+29/06/2016 09:07:53: logout the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: login of super user
+29/06/2016 09:07:53: creating new forum
+29/06/2016 09:07:53: get admins
+29/06/2016 09:07:53: get admin
+29/06/2016 09:07:53: get admin
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: creating new forum
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: creating new forum
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:53: create BL object
+29/06/2016 09:07:53: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:07:54: create BL object
+29/06/2016 09:07:54: initialize the system
+29/06/2016 09:09:26: create BL object
+29/06/2016 09:09:26: initialize the system
+29/06/2016 09:09:26: login of super user
+29/06/2016 09:09:26: logout the system
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:27: login of super user
+29/06/2016 09:09:27: logout the system
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:27: login of super user
+29/06/2016 09:09:27: logout the system
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:27: login of super user
+29/06/2016 09:09:27: logout the system
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:27: login of super user
+29/06/2016 09:09:27: logout the system
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:27: login of super user
+29/06/2016 09:09:27: creating new forum
+29/06/2016 09:09:27: get admins
+29/06/2016 09:09:27: create BL object
+29/06/2016 09:09:27: initialize the system
+29/06/2016 09:09:28: login of super user
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:28: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:29: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:30: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:31: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:32: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:33: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:34: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:35: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:36: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:37: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:38: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:39: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:40: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:41: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:42: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:43: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:44: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:45: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:46: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:47: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:48: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:49: creating new forum
+29/06/2016 09:09:50: creating new forum
+29/06/2016 09:09:50: creating new forum
+29/06/2016 09:09:50: creating new forum
+29/06/2016 09:09:50: creating new forum
+29/06/2016 09:09:51: creating new forum
+29/06/2016 09:09:51: creating new forum
+29/06/2016 09:09:51: creating new forum
+29/06/2016 09:09:51: creating new forum
+29/06/2016 09:09:51: creating new forum
+29/06/2016 09:09:52: creating new forum
+29/06/2016 09:09:52: creating new forum
+29/06/2016 09:09:52: creating new forum
+29/06/2016 09:09:52: creating new forum
+29/06/2016 09:09:52: creating new forum
+29/06/2016 09:09:53: creating new forum
+29/06/2016 09:09:53: creating new forum
+29/06/2016 09:09:53: creating new forum
+29/06/2016 09:09:53: creating new forum
+29/06/2016 09:09:53: creating new forum
+29/06/2016 09:09:54: creating new forum
+29/06/2016 09:09:54: creating new forum
+29/06/2016 09:09:54: creating new forum
+29/06/2016 09:09:54: creating new forum
+29/06/2016 09:09:54: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:55: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:56: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:57: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:58: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:09:59: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:00: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:01: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:02: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:03: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:04: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:05: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:06: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:07: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:08: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:09: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:10: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:11: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:12: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:13: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:14: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:15: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:16: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:17: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:18: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:19: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:20: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:21: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:22: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:23: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:24: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:25: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:26: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:27: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:28: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:29: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:30: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:31: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:32: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:33: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:34: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:35: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:36: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:37: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:38: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:39: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:40: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:41: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:42: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:43: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:44: creating new forum
+29/06/2016 09:10:45: get all forum
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:10:46: create BL object
+29/06/2016 09:10:46: initialize the system
+29/06/2016 09:13:01: create BL object
+29/06/2016 09:13:01: initialize the system
+29/06/2016 09:13:02: login of super user
+29/06/2016 09:13:02: creating new forum
+29/06/2016 09:13:02: get admins
+29/06/2016 09:13:02: logout the system
+29/06/2016 09:13:02: create BL object
+29/06/2016 09:13:02: initialize the system
+29/06/2016 09:13:02: login of super user
+29/06/2016 09:13:02: creating new forum
+29/06/2016 09:13:02: get admins
+29/06/2016 09:13:02: logout the system
+29/06/2016 09:13:02: create BL object
+29/06/2016 09:13:02: initialize the system
+29/06/2016 09:13:02: login of super user
+29/06/2016 09:13:02: creating new forum
+29/06/2016 09:13:02: get admins
+29/06/2016 09:13:02: logout the system
+29/06/2016 09:13:02: create BL object
+29/06/2016 09:13:02: initialize the system
+29/06/2016 09:13:02: login of super user
+29/06/2016 09:13:02: creating new forum
+29/06/2016 09:13:03: get admins
+29/06/2016 09:13:03: logout the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: login of super user
+29/06/2016 09:13:03: creating new forum
+29/06/2016 09:13:03: get admins
+29/06/2016 09:13:03: logout the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:13:03: create BL object
+29/06/2016 09:13:03: initialize the system
+29/06/2016 09:14:48: create BL object
+29/06/2016 09:14:48: initialize the system
+29/06/2016 09:15:42: login of super user
+29/06/2016 09:15:54: creating new forum
+29/06/2016 09:15:54: get admins
+29/06/2016 09:16:12: logout the system
+29/06/2016 09:17:28: create BL object
+29/06/2016 09:17:29: initialize the system
+29/06/2016 09:17:29: login of super user
+29/06/2016 09:17:29: creating new forum
+29/06/2016 09:17:29: get admins
+29/06/2016 09:17:29: logout the system
+29/06/2016 09:17:29: login - not super user
+29/06/2016 09:17:29: Subscribe to forum
+29/06/2016 09:17:29: create sub forum
+29/06/2016 09:17:29: logout the system
+29/06/2016 09:17:29: create BL object
+29/06/2016 09:17:29: initialize the system
+29/06/2016 09:17:29: login of super user
+29/06/2016 09:17:29: creating new forum
+29/06/2016 09:17:30: get admins
+29/06/2016 09:17:30: logout the system
+29/06/2016 09:17:30: login - not super user
+29/06/2016 09:17:30: Subscribe to forum
+29/06/2016 09:17:30: create sub forum
+29/06/2016 09:17:30: logout the system
+29/06/2016 09:17:30: create BL object
+29/06/2016 09:17:30: initialize the system
+29/06/2016 09:17:30: login of super user
+29/06/2016 09:17:30: creating new forum
+29/06/2016 09:17:30: get admins
+29/06/2016 09:17:30: logout the system
+29/06/2016 09:17:30: login - not super user
+29/06/2016 09:17:30: Subscribe to forum
+29/06/2016 09:17:30: create sub forum
+29/06/2016 09:17:30: logout the system
+29/06/2016 09:17:30: create BL object
+29/06/2016 09:17:30: initialize the system
+29/06/2016 09:17:30: login of super user
+29/06/2016 09:17:30: creating new forum
+29/06/2016 09:17:30: get admins
+29/06/2016 09:17:30: logout the system
+29/06/2016 09:17:30: login - not super user
+29/06/2016 09:17:30: Subscribe to forum
+29/06/2016 09:17:31: create sub forum
+29/06/2016 09:17:31: logout the system
+29/06/2016 09:17:31: login - not super user
+29/06/2016 09:17:31: logout the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: login of super user
+29/06/2016 09:17:31: creating new forum
+29/06/2016 09:17:31: get admins
+29/06/2016 09:17:31: logout the system
+29/06/2016 09:17:31: login - not super user
+29/06/2016 09:17:31: Subscribe to forum
+29/06/2016 09:17:31: create sub forum
+29/06/2016 09:17:31: logout the system
+29/06/2016 09:17:31: login - not super user
+29/06/2016 09:17:31: logout the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:31: create BL object
+29/06/2016 09:17:31: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:17:32: create BL object
+29/06/2016 09:17:32: initialize the system
+29/06/2016 09:18:55: create BL object
+29/06/2016 09:18:55: initialize the system
+29/06/2016 09:18:55: login of super user
+29/06/2016 09:18:55: creating new forum
+29/06/2016 09:18:56: get admins
+29/06/2016 09:18:56: logout the system
+29/06/2016 09:18:56: login - not super user
+29/06/2016 09:18:56: Subscribe to forum
+29/06/2016 09:18:56: create sub forum
+29/06/2016 09:18:56: logout the system
+29/06/2016 09:18:56: create BL object
+29/06/2016 09:18:56: initialize the system
+29/06/2016 09:18:56: login of super user
+29/06/2016 09:18:56: creating new forum
+29/06/2016 09:18:56: get admins
+29/06/2016 09:18:56: logout the system
+29/06/2016 09:18:56: login - not super user
+29/06/2016 09:18:56: Subscribe to forum
+29/06/2016 09:18:56: create sub forum
+29/06/2016 09:18:56: logout the system
+29/06/2016 09:18:56: login - not super user
+29/06/2016 09:18:56: logout the system
+29/06/2016 09:18:56: create BL object
+29/06/2016 09:18:56: initialize the system
+29/06/2016 09:18:56: login of super user
+29/06/2016 09:18:56: creating new forum
+29/06/2016 09:18:57: get admins
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: login - not super user
+29/06/2016 09:18:57: Subscribe to forum
+29/06/2016 09:18:57: create sub forum
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: login - not super user
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: create BL object
+29/06/2016 09:18:57: initialize the system
+29/06/2016 09:18:57: login of super user
+29/06/2016 09:18:57: creating new forum
+29/06/2016 09:18:57: get admins
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: login - not super user
+29/06/2016 09:18:57: Subscribe to forum
+29/06/2016 09:18:57: create sub forum
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: login - not super user
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: create BL object
+29/06/2016 09:18:57: initialize the system
+29/06/2016 09:18:57: login of super user
+29/06/2016 09:18:57: creating new forum
+29/06/2016 09:18:57: get admins
+29/06/2016 09:18:57: logout the system
+29/06/2016 09:18:57: login - not super user
+29/06/2016 09:18:57: Subscribe to forum
+29/06/2016 09:18:58: create sub forum
+29/06/2016 09:18:58: logout the system
+29/06/2016 09:18:58: login - not super user
+29/06/2016 09:18:58: logout the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:18:58: create BL object
+29/06/2016 09:18:58: initialize the system
+29/06/2016 09:21:25: create BL object
+29/06/2016 09:21:26: initialize the system
+29/06/2016 09:21:26: login of super user
+29/06/2016 09:21:26: creating new forum
+29/06/2016 09:21:26: get admins
+29/06/2016 09:21:26: logout the system
+29/06/2016 09:21:26: login - not super user
+29/06/2016 09:21:26: Subscribe to forum
+29/06/2016 09:21:26: create sub forum
+29/06/2016 09:21:27: logout the system
+29/06/2016 09:21:27: create BL object
+29/06/2016 09:21:27: initialize the system
+29/06/2016 09:21:27: login of super user
+29/06/2016 09:21:27: creating new forum
+29/06/2016 09:21:27: get admins
+29/06/2016 09:21:27: logout the system
+29/06/2016 09:21:27: login - not super user
+29/06/2016 09:21:27: Subscribe to forum
+29/06/2016 09:21:27: create sub forum
+29/06/2016 09:21:27: logout the system
+29/06/2016 09:21:27: login - not super user
+29/06/2016 09:21:27: logout the system
+29/06/2016 09:21:27: create BL object
+29/06/2016 09:21:27: initialize the system
+29/06/2016 09:21:27: login of super user
+29/06/2016 09:21:27: creating new forum
+29/06/2016 09:21:27: get admins
+29/06/2016 09:21:27: logout the system
+29/06/2016 09:21:27: login - not super user
+29/06/2016 09:21:27: Subscribe to forum
+29/06/2016 09:21:27: create sub forum
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: login - not super user
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:28: login of super user
+29/06/2016 09:21:28: creating new forum
+29/06/2016 09:21:28: get admins
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: login - not super user
+29/06/2016 09:21:28: Subscribe to forum
+29/06/2016 09:21:28: create sub forum
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: login - not super user
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:28: login of super user
+29/06/2016 09:21:28: creating new forum
+29/06/2016 09:21:28: get admins
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: login - not super user
+29/06/2016 09:21:28: Subscribe to forum
+29/06/2016 09:21:28: create sub forum
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: login - not super user
+29/06/2016 09:21:28: logout the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:28: create BL object
+29/06/2016 09:21:28: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:29: create BL object
+29/06/2016 09:21:29: initialize the system
+29/06/2016 09:21:47: create BL object
+29/06/2016 09:21:47: initialize the system
+29/06/2016 09:21:58: login of super user
+29/06/2016 09:21:58: creating new forum
+29/06/2016 09:21:58: get admins
+29/06/2016 09:21:58: logout the system
+29/06/2016 09:21:58: login - not super user
+29/06/2016 09:21:58: Subscribe to forum
+29/06/2016 09:21:58: create sub forum
+29/06/2016 09:21:58: logout the system
+29/06/2016 09:23:59: create BL object
+29/06/2016 09:23:59: initialize the system
+29/06/2016 09:23:59: login of super user
+29/06/2016 09:23:59: creating new forum
+29/06/2016 09:24:00: get admins
+29/06/2016 09:24:00: logout the system
+29/06/2016 09:24:00: login - not super user
+29/06/2016 09:24:00: Subscribe to forum
+29/06/2016 09:24:00: create sub forum
+29/06/2016 09:24:00: logout the system
+29/06/2016 09:24:00: login - not super user
+29/06/2016 09:24:00: logout the system
+29/06/2016 09:24:00: Subscribe to forum
+29/06/2016 09:24:00: logout the system
+29/06/2016 09:24:00: login - not super user
+29/06/2016 09:24:00: add moderator
+29/06/2016 09:24:00: get moderator
+29/06/2016 09:24:00: update moderator term
+29/06/2016 09:24:00: get moderator term time
+29/06/2016 09:24:00: delete moderator
+29/06/2016 09:24:00: get moderator
+29/06/2016 09:24:00: create BL object
+29/06/2016 09:24:00: initialize the system
+29/06/2016 09:24:00: login of super user
+29/06/2016 09:24:00: creating new forum
+29/06/2016 09:24:01: get admins
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: login - not super user
+29/06/2016 09:24:01: Subscribe to forum
+29/06/2016 09:24:01: create sub forum
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: login - not super user
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: Subscribe to forum
+29/06/2016 09:24:01: login - not super user
+29/06/2016 09:24:01: add moderator
+29/06/2016 09:24:01: get moderator
+29/06/2016 09:24:01: update moderator term
+29/06/2016 09:24:01: get moderator term time
+29/06/2016 09:24:01: delete moderator
+29/06/2016 09:24:01: create BL object
+29/06/2016 09:24:01: initialize the system
+29/06/2016 09:24:01: login of super user
+29/06/2016 09:24:01: creating new forum
+29/06/2016 09:24:01: get admins
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: login - not super user
+29/06/2016 09:24:01: Subscribe to forum
+29/06/2016 09:24:01: create sub forum
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: login - not super user
+29/06/2016 09:24:01: logout the system
+29/06/2016 09:24:01: Subscribe to forum
+29/06/2016 09:24:01: login of super user
+29/06/2016 09:24:01: creating new forum
+29/06/2016 09:24:02: get admins
+29/06/2016 09:24:02: login - not super user
+29/06/2016 09:24:02: add moderator
+29/06/2016 09:24:02: create BL object
+29/06/2016 09:24:02: initialize the system
+29/06/2016 09:24:02: login of super user
+29/06/2016 09:24:02: creating new forum
+29/06/2016 09:24:02: get admins
+29/06/2016 09:24:02: logout the system
+29/06/2016 09:24:02: login - not super user
+29/06/2016 09:24:02: Subscribe to forum
+29/06/2016 09:24:02: create sub forum
+29/06/2016 09:24:02: logout the system
+29/06/2016 09:24:02: login - not super user
+29/06/2016 09:24:02: logout the system
+29/06/2016 09:24:02: Subscribe to forum
+29/06/2016 09:24:02: add moderator
+29/06/2016 09:24:02: create BL object
+29/06/2016 09:24:02: initialize the system
+29/06/2016 09:24:02: login of super user
+29/06/2016 09:24:02: creating new forum
+29/06/2016 09:24:02: get admins
+29/06/2016 09:24:02: logout the system
+29/06/2016 09:24:02: login - not super user
+29/06/2016 09:24:02: Subscribe to forum
+29/06/2016 09:24:03: create sub forum
+29/06/2016 09:24:03: logout the system
+29/06/2016 09:24:03: login - not super user
+29/06/2016 09:24:03: logout the system
+29/06/2016 09:24:03: Subscribe to forum
+29/06/2016 09:24:03: add moderator
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:24:03: create BL object
+29/06/2016 09:24:03: initialize the system
+29/06/2016 09:25:04: create BL object
+29/06/2016 09:25:04: initialize the system
+29/06/2016 09:25:04: login of super user
+29/06/2016 09:25:04: creating new forum
+29/06/2016 09:25:05: get admins
+29/06/2016 09:25:05: logout the system
+29/06/2016 09:25:05: login - not super user
+29/06/2016 09:25:05: Subscribe to forum
+29/06/2016 09:25:05: create sub forum
+29/06/2016 09:25:05: logout the system
+29/06/2016 09:25:05: login - not super user
+29/06/2016 09:25:05: logout the system
+29/06/2016 09:25:05: Subscribe to forum
+29/06/2016 09:25:05: login of super user
+29/06/2016 09:25:05: creating new forum
+29/06/2016 09:25:05: get admins
+29/06/2016 09:25:05: login - not super user
+29/06/2016 09:25:05: add moderator
+29/06/2016 09:28:51: create BL object
+29/06/2016 09:28:51: initialize the system
+29/06/2016 09:28:51: login of super user
+29/06/2016 09:28:51: creating new forum
+29/06/2016 09:28:51: get admins
+29/06/2016 09:28:51: logout the system
+29/06/2016 09:28:51: login - not super user
+29/06/2016 09:28:52: Subscribe to forum
+29/06/2016 09:28:52: create sub forum
+29/06/2016 09:28:52: logout the system
+29/06/2016 09:28:52: login - not super user
+29/06/2016 09:28:52: logout the system
+29/06/2016 09:28:52: Subscribe to forum
+29/06/2016 09:28:52: login of super user
+29/06/2016 09:28:52: creating new forum
+29/06/2016 09:28:52: get admins
+29/06/2016 09:28:52: login - not super user
+29/06/2016 09:28:52: add moderator
+29/06/2016 09:30:10: create BL object
+29/06/2016 09:30:11: initialize the system
+29/06/2016 09:30:11: login of super user
+29/06/2016 09:30:11: creating new forum
+29/06/2016 09:30:11: get admins
+29/06/2016 09:30:11: logout the system
+29/06/2016 09:30:11: login - not super user
+29/06/2016 09:30:11: Subscribe to forum
+29/06/2016 09:30:11: create sub forum
+29/06/2016 09:30:11: logout the system
+29/06/2016 09:30:50: login - not super user
+29/06/2016 09:30:50: logout the system
+29/06/2016 09:30:50: Subscribe to forum
+29/06/2016 09:30:51: login of super user
+29/06/2016 09:30:51: creating new forum
+29/06/2016 09:30:51: get admins
+29/06/2016 09:30:51: login - not super user
+29/06/2016 09:30:51: add moderator
+29/06/2016 09:35:15: create BL object
+29/06/2016 09:35:15: initialize the system
+29/06/2016 09:35:15: login of super user
+29/06/2016 09:35:15: creating new forum
+29/06/2016 09:35:15: get admins
+29/06/2016 09:35:15: logout the system
+29/06/2016 09:35:15: login - not super user
+29/06/2016 09:35:15: Subscribe to forum
+29/06/2016 09:35:15: create sub forum
+29/06/2016 09:35:16: logout the system
+29/06/2016 09:35:16: login - not super user
+29/06/2016 09:35:16: logout the system
+29/06/2016 09:35:16: Subscribe to forum
+29/06/2016 09:35:16: login - not super user
+29/06/2016 09:35:16: add moderator
+29/06/2016 09:35:32: create BL object
+29/06/2016 09:35:32: initialize the system
+29/06/2016 09:35:33: login of super user
+29/06/2016 09:35:33: creating new forum
+29/06/2016 09:35:33: get admins
+29/06/2016 09:35:33: logout the system
+29/06/2016 09:35:33: login - not super user
+29/06/2016 09:35:33: Subscribe to forum
+29/06/2016 09:35:33: create sub forum
+29/06/2016 09:35:33: logout the system
+29/06/2016 09:35:33: login - not super user
+29/06/2016 09:35:33: logout the system
+29/06/2016 09:35:33: Subscribe to forum
+29/06/2016 09:35:33: login - not super user
+29/06/2016 09:35:33: add moderator
+29/06/2016 09:36:50: create BL object
+29/06/2016 09:36:51: initialize the system
+29/06/2016 09:36:51: login of super user
+29/06/2016 09:36:51: creating new forum
+29/06/2016 09:36:51: get admins
+29/06/2016 09:36:51: logout the system
+29/06/2016 09:36:51: login - not super user
+29/06/2016 09:36:51: Subscribe to forum
+29/06/2016 09:36:51: create sub forum
+29/06/2016 09:36:51: logout the system
+29/06/2016 09:36:51: login - not super user
+29/06/2016 09:36:51: logout the system
+29/06/2016 09:36:51: Subscribe to forum
+29/06/2016 09:36:51: login - not super user
+29/06/2016 09:36:51: add moderator

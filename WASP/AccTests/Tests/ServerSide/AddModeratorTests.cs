@@ -20,7 +20,7 @@ namespace AccTests.Tests
         private Subforum _subforum;
         private User _moderator;
         private User _member1;
-        private string[] arr;
+        private string[] arr= { "shlomo", "banana" };
 
     
         [TestInitialize]

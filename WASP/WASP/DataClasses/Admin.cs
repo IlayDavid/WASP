@@ -17,16 +17,17 @@ namespace WASP.DataClasses
         private Dictionary<int, Moderator> appointedMods = null;
         private Forum myForum;
 
-        public void initialize()
+        public Admin initialize()
         {
             Object obj = this.AppointedMods;
+            return this;
         }
 
         public static Admin Get(int adminId, int forumId)
         {
             if (Settings.UseCache())
                 return Settings.GetCache().GetAdmin(adminId, forumId);
-             return dal.GetAdmin(adminId, forumId);
+             return dal.GetAdmin(adminId, forumId).initialize();
         }
         public static Admin[] Get(int[] ids, int forumId)
         {

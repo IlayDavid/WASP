@@ -171,6 +171,11 @@ namespace AccTests
             return proj.initialize(name, userName, ID, email, pass);
         }
 
+        public void Clean()
+        {
+            proj.Clean();
+        }
+
         public int isInitialize()
         {
             return proj.isInitialize();
