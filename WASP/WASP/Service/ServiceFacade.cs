@@ -97,6 +97,7 @@ namespace WASP.Service
             string[] questions = new string[2];
             questions[0] = data["questions"][0];
             questions[1] = data["questions"][1];
+
             bl.defineForumPolicy(pair.UserId, forumId, data["deletepost"], data["passperiod"], data["emailverf"], data["seniority"], data["usersload"], questions, data["notifiyoffline"], superUser);
 
             return 1.ToString();

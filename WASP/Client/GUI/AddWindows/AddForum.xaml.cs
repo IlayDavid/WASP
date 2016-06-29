@@ -72,8 +72,8 @@ namespace Client.GUI
         {
             int ret = 0;
             ret += chkbAdmin.IsChecked.Value ? Policy.admin : 0;
-            ret += chkbAdmin.IsChecked.Value ? Policy.moderator : 0;
-            ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
+            ret += chkbModerator.IsChecked.Value ? Policy.moderator : 0;
+            ret += chkbOwner.IsChecked.Value ? Policy.owner : 0;
             return ret;
         }
 

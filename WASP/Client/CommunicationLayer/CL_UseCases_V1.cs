@@ -58,7 +58,7 @@ namespace Client.CommunicationLayer
             dict.Add("passperiod", password);
             dict.Add("seniority", seniority);
             //TODO: add the field of 'online offline'
-            dict.Add("notifSetting", policy.notification.ToString());
+            dict.Add("notifiyoffline", (policy.notification == Policy.NOTIFICATION.online ? true:false));
             string json = jss.Serialize(dict);
             string res = httpReq(json, "POST", _url + "/defineForumPolicy/");
             return parser.parseStringToNum(res);

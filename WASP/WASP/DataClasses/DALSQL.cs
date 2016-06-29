@@ -378,7 +378,7 @@ namespace WASP.DataClasses
                 db.IUsers.InsertOnSubmit(_user);
                 db.SubmitChanges();
 
-                //_cache.AddUser(user.initialize());
+                _cache.AddUser(user);
                 _logger.writeToFile("create user");
                 return user;
             }
@@ -398,7 +398,7 @@ namespace WASP.DataClasses
 
                 db.IAdmins.InsertOnSubmit(_admin);
                 db.SubmitChanges();
-                //_cache.AddAdmin(admin.initialize());
+                _cache.AddAdmin(admin);
                 _logger.writeToFile("create admin");
                 return admin;
             }
@@ -428,7 +428,7 @@ namespace WASP.DataClasses
                 db.IModerators.InsertOnSubmit(_mod);
                 db.SubmitChanges();
 
-                //_cache.AddModerator(mod);
+                _cache.AddModerator(mod);
                 _logger.writeToFile("create moderator");
                 return mod;
             }
@@ -452,7 +452,7 @@ namespace WASP.DataClasses
 
                 forum.Id = _forum.id;
 
-                //_cache.AddForum(forum.initialize());
+                _cache.AddForum(forum);
                 _logger.writeToFile("create forum");
 
                 return forum;
@@ -472,7 +472,7 @@ namespace WASP.DataClasses
                 db.SubmitChanges();
                 sf.Id = _subf.id;
                 _logger.writeToFile("create sub-forum");
-                //_cache.AddSubforum(sf.initialize());
+                _cache.AddSubforum(sf);
 
                 return sf;
             }
@@ -501,7 +501,7 @@ namespace WASP.DataClasses
                 db.SubmitChanges();
                 post.Id = ipost.id;
 
-                //_cache.AddPost(post.initialize());
+                _cache.AddPost(post);
 
 
                 return post;
@@ -742,7 +742,7 @@ namespace WASP.DataClasses
                     if (iforum.policyId != null)
                         forum.Policy = GetPolicy((int)iforum.policyId);
                     _cache.AddForum(forum);
-                    return forum.initialize();
+                    return forum;
 
                 }
                 throw new GetException(string.Format("forum {0} wasn't found", id));
@@ -763,7 +763,7 @@ namespace WASP.DataClasses
                 {
                     Subforum sf = new Subforum(isf.id, isf.subject, isf.description, GetForum(isf.forumId), this);
                     _cache.AddSubforum(sf);
-                    return sf.initialize();
+                    return sf;
                 }
                 throw new GetException(string.Format("sub-forum {0} wasn't found", sfId));
             }
@@ -784,7 +784,7 @@ namespace WASP.DataClasses
                     string[] answers = { iuser.answer1, iuser.answer2 };
                     User user = new User(iuser.id, iuser.name, iuser.userName, iuser.email, iuser.password, forum, iuser.StartDate, iuser.PasswordChangeDate, answers, iuser.wantNotifications);
                     _cache.AddUser(user);
-                    return user.initialize();
+                    return user;
                 }
                 throw new GetException(string.Format("user {0} wasn't found", id));
             }
@@ -828,7 +828,7 @@ namespace WASP.DataClasses
                     User user = GetUser(adminId, forumId);
                     Admin admin = new Admin(user, forum, this);
                     _cache.AddAdmin(admin);
-                    return admin.initialize();
+                    return admin;
                 }
                 throw new GetException(string.Format("admin {0} wasn't found", adminId));
             }
@@ -851,7 +851,7 @@ namespace WASP.DataClasses
                        replyTo, GetSubForum(ipost.subforumId), ipost.editAt, this);
 
                     _cache.AddPost(post);
-                    return post.initialize();
+                    return post;
                 }
                 throw new GetException(string.Format("post {0} wasn't found", postId));
             }

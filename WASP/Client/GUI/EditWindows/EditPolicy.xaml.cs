@@ -56,20 +56,17 @@ namespace Client.GUI.EditWindows
         {
             try
             {
-                if (Session.user is SuperUser)
-                {
-                    int deletePost = deletePostPermission();
-                    int passwordPeriod = int.Parse(txtPassPeriod.Text);
-                    bool emailVerification = chkbEmailVer.IsChecked.Value;
-                    int seniority = int.Parse(txtModSen.Text);
-                    int usersSameTime = int.Parse(txtUserSameTime.Text);
+                int deletePost = deletePostPermission();
+                int passwordPeriod = int.Parse(txtPassPeriod.Text);
+                bool emailVerification = chkbEmailVer.IsChecked.Value;
+                int seniority = int.Parse(txtModSen.Text);
+                int usersSameTime = int.Parse(txtUserSameTime.Text);
 
-                    questions = new List<string>{ txtNewQuestion1.Text, txtNewQuestion2.Text};
+                questions = new List<string> { txtNewQuestion1.Text, txtNewQuestion2.Text };
 
-                    Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime,
-                        questions.ToArray(), notificationSelecting());
-                    Session.bl.defineForumPolicy(policy);
-                }
+                Policy policy = new Policy(deletePost, passwordPeriod, emailVerification, seniority, usersSameTime,
+                    questions.ToArray(), notificationSelecting());
+                Session.bl.defineForumPolicy(policy);
                 this.Close();
             }
             catch (Exception ee)
@@ -92,8 +89,8 @@ namespace Client.GUI.EditWindows
         {
             int ret = 0;
             ret += chkbAdmin.IsChecked.Value ? Policy.admin : 0;
-            ret += chkbAdmin.IsChecked.Value ? Policy.moderator : 0;
-            ret += chkbAdmin.IsChecked.Value ? Policy.owner : 0;
+            ret += chkbModerator.IsChecked.Value ? Policy.moderator : 0;
+            ret += chkbOwner.IsChecked.Value ? Policy.owner : 0;
             return ret;
         }
 

@@ -4319,3 +4319,974 @@
 29/06/2016 10:12:18: get forum
 29/06/2016 10:12:21: get members
 29/06/2016 10:12:21: get admin
+29/06/2016 10:13:36: create BL object
+29/06/2016 10:13:39: initialize the system
+29/06/2016 10:13:41: get all forum
+29/06/2016 10:13:43: get members
+29/06/2016 10:13:43: get sub forums
+29/06/2016 10:13:43: get admin
+29/06/2016 10:13:43: get members
+29/06/2016 10:13:43: get forum
+29/06/2016 10:13:50: Subscribe to forum
+29/06/2016 10:13:50: login - not super user
+29/06/2016 10:13:50: get new notifications
+29/06/2016 10:13:50: get members
+29/06/2016 10:13:50: get sub forums
+29/06/2016 10:13:50: get admin
+29/06/2016 10:13:50: get members
+29/06/2016 10:13:50: get forum
+29/06/2016 10:13:51: get members
+29/06/2016 10:13:51: get admin
+29/06/2016 10:13:54: logout the system
+29/06/2016 10:14:01: restore password by answers
+29/06/2016 10:14:05: login - not super user
+29/06/2016 10:16:05: create BL object
+29/06/2016 10:16:14: initialize the system
+29/06/2016 10:16:15: get all forum
+29/06/2016 10:16:18: get members
+29/06/2016 10:16:18: get sub forums
+29/06/2016 10:16:18: get admin
+29/06/2016 10:16:18: get members
+29/06/2016 10:16:18: get forum
+29/06/2016 10:16:27: login - not super user
+29/06/2016 10:16:28: get new notifications
+29/06/2016 10:16:28: get members
+29/06/2016 10:16:28: get sub forums
+29/06/2016 10:16:28: get admin
+29/06/2016 10:16:28: get members
+29/06/2016 10:16:28: get forum
+29/06/2016 10:16:28: get admin
+29/06/2016 10:16:34: logout the system
+29/06/2016 10:17:29: restore password by answers
+29/06/2016 10:18:15: create BL object
+29/06/2016 10:18:19: initialize the system
+29/06/2016 10:18:20: get all forum
+29/06/2016 10:18:24: get members
+29/06/2016 10:18:24: get sub forums
+29/06/2016 10:18:24: get admin
+29/06/2016 10:18:24: get members
+29/06/2016 10:18:24: get forum
+29/06/2016 10:18:36: Subscribe to forum
+29/06/2016 10:18:36: login - not super user
+29/06/2016 10:18:36: get new notifications
+29/06/2016 10:18:36: get members
+29/06/2016 10:18:36: get sub forums
+29/06/2016 10:18:36: get admin
+29/06/2016 10:18:36: get members
+29/06/2016 10:18:36: get forum
+29/06/2016 10:18:38: get members
+29/06/2016 10:18:38: get admin
+29/06/2016 10:18:41: logout the system
+29/06/2016 10:18:56: restore password by answers
+29/06/2016 10:20:32: login - not super user
+29/06/2016 10:21:00: login - not super user
+29/06/2016 10:23:21: create BL object
+29/06/2016 10:23:26: initialize the system
+29/06/2016 10:23:27: get all forum
+29/06/2016 10:23:31: get members
+29/06/2016 10:23:31: get sub forums
+29/06/2016 10:23:31: get admin
+29/06/2016 10:23:31: get members
+29/06/2016 10:23:31: get forum
+29/06/2016 10:23:40: Subscribe to forum
+29/06/2016 10:23:40: login - not super user
+29/06/2016 10:24:20: get new notifications
+29/06/2016 10:24:21: get members
+29/06/2016 10:24:21: get sub forums
+29/06/2016 10:24:21: get admin
+29/06/2016 10:24:21: get members
+29/06/2016 10:24:21: get forum
+29/06/2016 10:24:35: get members
+29/06/2016 10:24:35: get admin
+29/06/2016 10:24:37: logout the system
+29/06/2016 10:27:50: get moderator
+29/06/2016 10:29:43: create BL object
+29/06/2016 10:29:50: initialize the system
+29/06/2016 10:29:51: get all forum
+29/06/2016 10:30:16: create BL object
+29/06/2016 10:30:16: get all forum
+29/06/2016 10:31:05: create BL object
+29/06/2016 10:31:09: initialize the system
+29/06/2016 10:31:09: get all forum
+29/06/2016 10:31:33: create BL object
+29/06/2016 10:31:33: get all forum
+29/06/2016 10:32:11: create BL object
+29/06/2016 10:32:11: get all forum
+29/06/2016 10:39:42: create BL object
+29/06/2016 10:39:49: initialize the system
+29/06/2016 10:39:50: get all forum
+29/06/2016 10:54:31: create BL object
+29/06/2016 10:54:32: initialize the system
+29/06/2016 10:54:34: create BL object
+29/06/2016 10:54:34: initialize the system
+29/06/2016 10:54:34: create BL object
+29/06/2016 10:54:34: initialize the system
+29/06/2016 10:54:34: create BL object
+29/06/2016 10:54:36: create BL object
+29/06/2016 10:54:38: create BL object
+29/06/2016 10:54:40: create BL object
+29/06/2016 10:54:42: create BL object
+29/06/2016 10:54:44: create BL object
+29/06/2016 10:54:46: create BL object
+29/06/2016 10:54:48: create BL object
+29/06/2016 10:54:50: create BL object
+29/06/2016 10:54:50: initialize the system
+29/06/2016 10:54:52: create BL object
+29/06/2016 10:54:52: initialize the system
+29/06/2016 10:54:54: create BL object
+29/06/2016 10:54:54: initialize the system
+29/06/2016 10:54:56: create BL object
+29/06/2016 10:54:56: initialize the system
+29/06/2016 10:54:58: create BL object
+29/06/2016 10:54:58: initialize the system
+29/06/2016 10:55:00: create BL object
+29/06/2016 10:55:00: initialize the system
+29/06/2016 10:55:02: create BL object
+29/06/2016 10:55:02: initialize the system
+29/06/2016 10:55:04: create BL object
+29/06/2016 10:55:04: initialize the system
+29/06/2016 10:55:06: create BL object
+29/06/2016 10:55:06: initialize the system
+29/06/2016 10:55:08: create BL object
+29/06/2016 10:55:08: initialize the system
+29/06/2016 10:55:10: create BL object
+29/06/2016 10:55:10: initialize the system
+29/06/2016 10:55:12: create BL object
+29/06/2016 10:55:12: initialize the system
+29/06/2016 10:55:14: create BL object
+29/06/2016 10:55:14: initialize the system
+29/06/2016 10:55:16: create BL object
+29/06/2016 10:55:16: initialize the system
+29/06/2016 10:55:18: create BL object
+29/06/2016 10:55:18: initialize the system
+29/06/2016 10:55:20: create BL object
+29/06/2016 10:55:20: initialize the system
+29/06/2016 10:55:22: create BL object
+29/06/2016 10:55:22: initialize the system
+29/06/2016 10:55:24: create BL object
+29/06/2016 10:55:24: initialize the system
+29/06/2016 10:55:26: create BL object
+29/06/2016 10:55:26: initialize the system
+29/06/2016 10:55:28: create BL object
+29/06/2016 10:55:28: initialize the system
+29/06/2016 10:55:30: create BL object
+29/06/2016 10:55:30: initialize the system
+29/06/2016 10:55:32: create BL object
+29/06/2016 10:55:32: initialize the system
+29/06/2016 10:55:34: create BL object
+29/06/2016 10:55:34: initialize the system
+29/06/2016 10:55:36: create BL object
+29/06/2016 10:55:36: initialize the system
+29/06/2016 10:59:09: create BL object
+29/06/2016 10:59:10: initialize the system
+29/06/2016 10:59:10: create BL object
+29/06/2016 10:59:10: initialize the system
+29/06/2016 10:59:10: create BL object
+29/06/2016 10:59:10: initialize the system
+29/06/2016 10:59:11: create BL object
+29/06/2016 10:59:11: initialize the system
+29/06/2016 10:59:11: login of super user
+29/06/2016 10:59:11: creating new forum
+29/06/2016 10:59:11: get admins
+29/06/2016 10:59:11: logout the system
+29/06/2016 10:59:11: login - not super user
+29/06/2016 10:59:11: Subscribe to forum
+29/06/2016 10:59:11: create sub forum
+29/06/2016 10:59:11: logout the system
+29/06/2016 10:59:11: login - not super user
+29/06/2016 10:59:11: logout the system
+29/06/2016 10:59:11: Subscribe to forum
+29/06/2016 10:59:11: logout the system
+29/06/2016 10:59:11: login - not super user
+29/06/2016 10:59:11: add moderator
+29/06/2016 10:59:11: get moderator
+29/06/2016 10:59:11: update moderator term
+29/06/2016 10:59:11: get moderator term time
+29/06/2016 10:59:11: delete moderator
+29/06/2016 10:59:11: get moderator
+29/06/2016 10:59:12: create BL object
+29/06/2016 10:59:12: initialize the system
+29/06/2016 10:59:12: login of super user
+29/06/2016 10:59:12: creating new forum
+29/06/2016 10:59:12: get admins
+29/06/2016 10:59:12: logout the system
+29/06/2016 10:59:12: login - not super user
+29/06/2016 10:59:12: Subscribe to forum
+29/06/2016 10:59:12: create sub forum
+29/06/2016 10:59:12: logout the system
+29/06/2016 10:59:12: login - not super user
+29/06/2016 10:59:12: logout the system
+29/06/2016 10:59:12: Subscribe to forum
+29/06/2016 10:59:12: login - not super user
+29/06/2016 10:59:12: add moderator
+29/06/2016 10:59:12: get moderator
+29/06/2016 10:59:12: update moderator term
+29/06/2016 10:59:12: get moderator term time
+29/06/2016 10:59:12: delete moderator
+29/06/2016 10:59:12: create BL object
+29/06/2016 10:59:12: initialize the system
+29/06/2016 10:59:12: login of super user
+29/06/2016 10:59:12: creating new forum
+29/06/2016 10:59:12: get admins
+29/06/2016 10:59:12: logout the system
+29/06/2016 10:59:12: login - not super user
+29/06/2016 10:59:12: Subscribe to forum
+29/06/2016 10:59:12: create sub forum
+29/06/2016 10:59:13: logout the system
+29/06/2016 10:59:13: login - not super user
+29/06/2016 10:59:13: logout the system
+29/06/2016 10:59:13: Subscribe to forum
+29/06/2016 10:59:13: login of super user
+29/06/2016 10:59:13: creating new forum
+29/06/2016 10:59:13: get admins
+29/06/2016 10:59:13: login - not super user
+29/06/2016 10:59:13: add moderator
+29/06/2016 10:59:13: create BL object
+29/06/2016 10:59:13: initialize the system
+29/06/2016 10:59:13: login of super user
+29/06/2016 10:59:13: creating new forum
+29/06/2016 10:59:13: get admins
+29/06/2016 10:59:13: logout the system
+29/06/2016 10:59:13: login - not super user
+29/06/2016 10:59:13: Subscribe to forum
+29/06/2016 10:59:13: create sub forum
+29/06/2016 10:59:13: logout the system
+29/06/2016 10:59:13: login - not super user
+29/06/2016 10:59:13: logout the system
+29/06/2016 10:59:13: Subscribe to forum
+29/06/2016 10:59:13: login - not super user
+29/06/2016 10:59:13: add moderator
+29/06/2016 10:59:13: create BL object
+29/06/2016 10:59:13: initialize the system
+29/06/2016 10:59:13: login of super user
+29/06/2016 10:59:13: creating new forum
+29/06/2016 10:59:14: get admins
+29/06/2016 10:59:14: logout the system
+29/06/2016 10:59:14: login - not super user
+29/06/2016 10:59:14: Subscribe to forum
+29/06/2016 10:59:14: create sub forum
+29/06/2016 10:59:14: logout the system
+29/06/2016 10:59:14: login - not super user
+29/06/2016 10:59:14: logout the system
+29/06/2016 10:59:14: Subscribe to forum
+29/06/2016 10:59:14: add moderator
+29/06/2016 10:59:14: create BL object
+29/06/2016 10:59:14: initialize the system
+29/06/2016 10:59:14: login of super user
+29/06/2016 10:59:14: creating new forum
+29/06/2016 10:59:14: get admins
+29/06/2016 10:59:14: get admin
+29/06/2016 10:59:14: get admin
+29/06/2016 10:59:14: create BL object
+29/06/2016 10:59:14: initialize the system
+29/06/2016 10:59:14: login of super user
+29/06/2016 10:59:14: creating new forum
+29/06/2016 10:59:14: get admins
+29/06/2016 10:59:14: create BL object
+29/06/2016 10:59:14: initialize the system
+29/06/2016 10:59:14: login of super user
+29/06/2016 10:59:14: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:15: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:16: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:17: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:18: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:19: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:20: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:21: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:22: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:23: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:24: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:25: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:26: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:27: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:28: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:29: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:30: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:31: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:32: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:33: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:34: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:35: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:36: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:37: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:38: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:39: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:40: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:41: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:42: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:43: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:44: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:45: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:46: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:47: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:48: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:49: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:50: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:51: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:52: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:53: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:54: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:55: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:56: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:57: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:58: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 10:59:59: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:00: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:01: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:02: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:03: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:04: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:05: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:06: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:07: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:08: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:09: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:10: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:11: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:12: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:13: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:14: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:15: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:16: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:17: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: creating new forum
+29/06/2016 11:00:18: get all forum
+29/06/2016 11:00:19: create BL object
+29/06/2016 11:00:19: initialize the system
+29/06/2016 11:00:19: create BL object
+29/06/2016 11:00:19: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:00:20: create BL object
+29/06/2016 11:00:20: initialize the system
+29/06/2016 11:01:35: create BL object
+29/06/2016 11:01:35: get all forum
+29/06/2016 11:01:55: create BL object
+29/06/2016 11:02:01: initialize the system
+29/06/2016 11:02:03: get all forum
+29/06/2016 11:02:06: get members
+29/06/2016 11:02:07: get sub forums
+29/06/2016 11:02:07: get admin
+29/06/2016 11:02:07: get members
+29/06/2016 11:02:07: get forum
+29/06/2016 11:02:17: Subscribe to forum
+29/06/2016 11:02:17: login - not super user
+29/06/2016 11:02:17: get new notifications
+29/06/2016 11:02:17: get members
+29/06/2016 11:02:17: get sub forums
+29/06/2016 11:02:17: get admin
+29/06/2016 11:02:17: get members
+29/06/2016 11:02:17: get forum
+29/06/2016 11:02:18: get members
+29/06/2016 11:02:18: get admin
+29/06/2016 11:02:21: logout the system
+29/06/2016 11:02:30: restore password by answers
+29/06/2016 11:02:35: login - not super user
+29/06/2016 11:02:36: get new notifications
+29/06/2016 11:02:36: get members
+29/06/2016 11:02:36: get sub forums
+29/06/2016 11:02:36: get admin
+29/06/2016 11:02:36: get members
+29/06/2016 11:02:36: get forum
+29/06/2016 11:02:36: get admin
+29/06/2016 11:02:54: logout the system
+29/06/2016 11:03:19: login - not super user
+29/06/2016 11:03:19: get new notifications
+29/06/2016 11:03:19: get members
+29/06/2016 11:03:19: get sub forums
+29/06/2016 11:03:19: get admin
+29/06/2016 11:03:19: get members
+29/06/2016 11:03:19: get forum
+29/06/2016 11:03:19: get admin
+29/06/2016 11:06:03: create BL object
+29/06/2016 11:06:06: initialize the system
+29/06/2016 11:06:07: get all forum
+29/06/2016 11:06:09: get members
+29/06/2016 11:06:09: get sub forums
+29/06/2016 11:06:09: get admin
+29/06/2016 11:06:09: get members
+29/06/2016 11:06:09: get forum
+29/06/2016 11:06:18: login - not super user
+29/06/2016 11:06:18: get new notifications
+29/06/2016 11:06:18: get members
+29/06/2016 11:06:18: get sub forums
+29/06/2016 11:06:18: get admin
+29/06/2016 11:06:18: get members
+29/06/2016 11:06:18: get forum
+29/06/2016 11:06:18: get admin
+29/06/2016 11:06:32: define/change policy
+29/06/2016 11:09:02: logout the system
+29/06/2016 11:10:20: create BL object
+29/06/2016 11:10:20: get all forum
+29/06/2016 11:10:23: get members
+29/06/2016 11:10:23: get sub forums
+29/06/2016 11:10:23: get admin
+29/06/2016 11:10:23: get members
+29/06/2016 11:10:23: get forum
+29/06/2016 11:10:39: login - not super user
+29/06/2016 11:10:39: get new notifications
+29/06/2016 11:10:39: get members
+29/06/2016 11:10:39: get sub forums
+29/06/2016 11:10:39: get admin
+29/06/2016 11:10:39: get members
+29/06/2016 11:10:39: get forum
+29/06/2016 11:10:40: get admin
+29/06/2016 11:10:43: define/change policy
+29/06/2016 11:10:58: logout the system
+29/06/2016 11:14:04: create BL object
+29/06/2016 11:14:04: get all forum
+29/06/2016 11:14:07: get members
+29/06/2016 11:14:07: get sub forums
+29/06/2016 11:14:07: get admin
+29/06/2016 11:14:07: get members
+29/06/2016 11:14:07: get forum
+29/06/2016 11:14:16: login - not super user
+29/06/2016 11:14:17: get new notifications
+29/06/2016 11:14:17: get members
+29/06/2016 11:14:17: get sub forums
+29/06/2016 11:14:17: get admin
+29/06/2016 11:14:17: get members
+29/06/2016 11:14:17: get forum
+29/06/2016 11:14:17: get admin
+29/06/2016 11:14:21: define/change policy
+29/06/2016 11:15:09: logout the system
+29/06/2016 11:15:19: create BL object
+29/06/2016 11:15:34: create BL object
+29/06/2016 11:15:38: initialize the system
+29/06/2016 11:15:40: get all forum
+29/06/2016 11:15:42: get members
+29/06/2016 11:15:42: get sub forums
+29/06/2016 11:15:42: get admin
+29/06/2016 11:15:42: get members
+29/06/2016 11:15:42: get forum
+29/06/2016 11:15:51: login - not super user
+29/06/2016 11:15:52: get new notifications
+29/06/2016 11:15:52: get members
+29/06/2016 11:15:52: get sub forums
+29/06/2016 11:15:52: get admin
+29/06/2016 11:15:52: get members
+29/06/2016 11:15:52: get forum
+29/06/2016 11:15:52: get admin
+29/06/2016 11:16:33: define/change policy
+29/06/2016 11:20:42: define/change policy
+29/06/2016 11:23:54: create BL object
+29/06/2016 11:23:54: get all forum
+29/06/2016 11:23:55: get members
+29/06/2016 11:23:55: get sub forums
+29/06/2016 11:23:55: get admin
+29/06/2016 11:23:56: get members
+29/06/2016 11:23:56: get forum
+29/06/2016 11:24:05: login - not super user
+29/06/2016 11:24:19: login - not super user
+29/06/2016 11:24:36: create BL object
+29/06/2016 11:24:39: initialize the system
+29/06/2016 11:24:40: get all forum
+29/06/2016 11:24:42: get members
+29/06/2016 11:24:42: get sub forums
+29/06/2016 11:24:42: get admin
+29/06/2016 11:24:42: get members
+29/06/2016 11:24:42: get forum
+29/06/2016 11:24:53: login - not super user
+29/06/2016 11:24:53: get new notifications
+29/06/2016 11:24:53: get members
+29/06/2016 11:24:53: get sub forums
+29/06/2016 11:24:53: get admin
+29/06/2016 11:24:53: get members
+29/06/2016 11:24:53: get forum
+29/06/2016 11:24:53: get admin
+29/06/2016 11:24:56: define/change policy
+29/06/2016 11:28:00: logout the system
+29/06/2016 11:28:36: create BL object
+29/06/2016 11:28:39: initialize the system
+29/06/2016 11:28:39: get all forum
+29/06/2016 11:28:41: get members
+29/06/2016 11:28:41: get sub forums
+29/06/2016 11:28:41: get admin
+29/06/2016 11:28:41: get members
+29/06/2016 11:28:41: get forum
+29/06/2016 11:28:59: login - not super user
+29/06/2016 11:29:00: get new notifications
+29/06/2016 11:29:00: get members
+29/06/2016 11:29:00: get sub forums
+29/06/2016 11:29:00: get admin
+29/06/2016 11:29:00: get members
+29/06/2016 11:29:00: get forum
+29/06/2016 11:29:00: get admin
+29/06/2016 11:29:02: define/change policy
+29/06/2016 11:30:06: define/change policy
+29/06/2016 11:32:53: logout the system
